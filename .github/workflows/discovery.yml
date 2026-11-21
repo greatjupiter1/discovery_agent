@@ -49,9 +49,15 @@ on:
         required: false
         default: ""
         type: string
+      llm_provider:
+        description: "LLM provider override: gemini | github (empty = repo variable LLM_PROVIDER, else gemini)"
+        required: false
+        default: ""
+        type: string
 
 permissions:
   contents: write
+  models: read
 
 concurrency:
   group: discovery-article
@@ -80,6 +86,9 @@ jobs:
           ARTICLE_CHAT_ID: ${{ inputs.chat_id }}
           ARTICLE_CATEGORY: ${{ inputs.article_category }}
           ARTICLE_TYPE: ${{ inputs.article_type }}
+          LLM_PROVIDER: ${{ inputs.llm_provider || vars.LLM_PROVIDER || 'gemini' }}
+          GH_MODELS_TOKEN: ${{ secrets.GH_MODELS_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python build_article.py
 
       - name: Generate topic proposals (mode=propose, fail-closed)
@@ -91,6 +100,9 @@ jobs:
           CHAT_ID: ${{ inputs.chat_id }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          LLM_PROVIDER: ${{ inputs.llm_provider || vars.LLM_PROVIDER || 'gemini' }}
+          GH_MODELS_TOKEN: ${{ secrets.GH_MODELS_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python propose_topics.py
 
       - name: Save progress (record the production in state.json)
