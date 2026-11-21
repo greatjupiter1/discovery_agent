@@ -39,6 +39,16 @@ on:
         required: false
         default: ""
         type: string
+      article_category:
+        description: "Article category: ir | intl (review mode)"
+        required: false
+        default: ""
+        type: string
+      article_type:
+        description: "Article type code: isc|res|promo|conf|review|isi|scopus|pubmed|ieee|intlconf (review mode)"
+        required: false
+        default: ""
+        type: string
 
 permissions:
   contents: write
@@ -68,6 +78,8 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           CHAT_ID: ${{ secrets.CHAT_ID }}
           ARTICLE_CHAT_ID: ${{ inputs.chat_id }}
+          ARTICLE_CATEGORY: ${{ inputs.article_category }}
+          ARTICLE_TYPE: ${{ inputs.article_type }}
         run: python build_article.py
 
       - name: Generate topic proposals (mode=propose, fail-closed)
