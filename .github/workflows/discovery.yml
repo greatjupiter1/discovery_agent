@@ -89,6 +89,8 @@ jobs:
           LLM_PROVIDER: ${{ inputs.llm_provider || vars.LLM_PROVIDER || 'gemini' }}
           GH_MODELS_TOKEN: ${{ secrets.GH_MODELS_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GLM_API_KEY: ${{ secrets.GLM_API_KEY }}
+          GLM_MODEL: ${{ vars.GLM_MODEL }}
         run: python build_article.py
 
       - name: Generate topic proposals (mode=propose, fail-closed)
@@ -103,6 +105,8 @@ jobs:
           LLM_PROVIDER: ${{ inputs.llm_provider || vars.LLM_PROVIDER || 'gemini' }}
           GH_MODELS_TOKEN: ${{ secrets.GH_MODELS_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GLM_API_KEY: ${{ secrets.GLM_API_KEY }}
+          GLM_MODEL: ${{ vars.GLM_MODEL }}
         run: python propose_topics.py
 
       - name: Save progress (record the production in state.json)
