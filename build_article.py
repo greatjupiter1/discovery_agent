@@ -4,8 +4,9 @@
 One production run:
   1. Read state.json; refuse to duplicate an existing (field, topic, language).
   2. Retrieve candidate works from FREE indexes only (OpenAlex, Crossref,
-     Internet Archive, Google Books, DOAJ, arXiv, Semantic Scholar —
-     no API keys).
+     OpenAIRE, HAL, zbMATH, Europe PMC, Internet Archive, Google Books,
+     DOAJ, arXiv, Semantic Scholar, Anna's Archive — no API keys, no
+     registration).
   3. VERIFICATION LAW: a reference is kept only if its DOI resolves through
      Crossref, or its arXiv page exists, or its publisher landing page
      answers HTTP 200. Anything unverifiable is discarded. Nothing is ever
@@ -42,16 +43,21 @@ Secrets (names only, set in the repo's Actions secrets):
 """
 
 import email.utils
+import html as html_lib
 import json
 import os
 import re
+import shutil
+import subprocess
 import sys
+import tempfile
 import time
 import urllib.error
 import urllib.parse
 import urllib.request
 import uuid
 import xml.etree.ElementTree as ET
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
 
 STATE_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "state.json")
@@ -187,8 +193,10 @@ def reconstruct_abstract(inverted):
 
 def search_openalex(query):
     out = []
+    # mailto puts us in OpenAlex's polite pool (higher, steadier limits).
     url = ("https://api.openalex.org/works?per-page=25&search="
-           + urllib.parse.quote(query))
+           + urllib.parse.quote(query)
+           + "&mailto=" + CROSSREF_MAILTO)
     data = http_json(url)
     for w in data.get("results", []):
         authors = [a.get("author", {}).get("display_name", "")
@@ -391,8 +399,373 @@ def search_doaj(query):
     return out
 
 
-SEARCHERS = [search_openalex, search_crossref, search_internet_archive,
-             search_google_books, search_doaj, search_arxiv,
+def _openaire_text(node):
+    """OpenAIRE wraps scalars as {"$": value} and repeats elements as
+    lists; return the first plain string found."""
+    if isinstance(node, str):
+        return node
+    if isinstance(node, dict):
+        v = node.get("$")
+        return v if isinstance(v, str) else ""
+    if isinstance(node, list):
+        for item in node:
+            t = _openaire_text(item)
+            if t:
+                return t
+    return ""
+
+
+def _openaire_texts(node):
+    """All plain strings in an OpenAIRE wrapped node (e.g. creators)."""
+    if isinstance(node, str):
+        return [node] if node.strip() else []
+    if isinstance(node, dict):
+        v = node.get("$")
+        return [v] if isinstance(v, str) and v.strip() else []
+    if isinstance(node, list):
+        out = []
+        for item in node:
+            out.extend(_openaire_texts(item))
+        return out
+    return []
+
+
+def search_openaire(query):
+    """OpenAIRE — the EU's open-access index (no key, no registration).
+    Broad coverage of repository-held books and papers that the journal
+    indexes miss."""
+    out = []
+    url = ("https://api.openaire.eu/search/publications?format=json"
+           "&size=25&page=1&title=" + urllib.parse.quote(query))
+    data = http_json(url)
+    results = (((data.get("response") or {}).get("results") or {})
+               .get("result")) or []
+    if isinstance(results, dict):
+        results = [results]
+    for r in results:
+        md = (((r.get("metadata") or {}).get("oaf:entity") or {})
+              .get("oaf:result")) or {}
+        if not md:
+            continue
+        pids = md.get("pid") or []
+        if isinstance(pids, dict):
+            pids = [pids]
+        doi = None
+        for pid in pids:
+            if (isinstance(pid, dict)
+                    and (pid.get("@classid") or "").lower() == "doi"):
+                doi = (pid.get("$") or "").replace(
+                    "https://doi.org/", "").strip() or None
+                if doi:
+                    break
+        fulltexts = md.get("fulltext") or []
+        if isinstance(fulltexts, dict):
+            fulltexts = [fulltexts]
+        landing = ""
+        for ft in fulltexts:
+            u = _openaire_text(ft)
+            if u.startswith("http"):
+                landing = u
+                break
+        if not landing and doi:
+            landing = "https://doi.org/" + doi
+        date = _openaire_text(md.get("dateofacceptance"))
+        out.append({
+            "title": _openaire_text(md.get("title")).strip(),
+            "authors": [a.strip() for a in
+                        _openaire_texts(md.get("creator")) if a.strip()],
+            "year": int(date[:4]) if date[:4].isdigit() else None,
+            "venue": _openaire_text(md.get("publisher")).strip() or "OpenAIRE",
+            "doi": doi,
+            "url": landing,
+            "abstract": _openaire_text(md.get("description")).strip(),
+            "arxiv_id": None,
+            "index": "OpenAIRE",
+        })
+    return out
+
+
+def search_europe_pmc(query):
+    """Europe PMC — the EBI's life-sciences index (no key, no
+    registration); the natural home of PubMed-indexed work."""
+    out = []
+    url = ("https://www.ebi.ac.uk/europepmc/webservices/rest/search"
+           "?format=json&resultType=core&pageSize=25&query="
+           + urllib.parse.quote('TITLE:"' + query.replace('"', "") + '"'))
+    data = http_json(url)
+    for r in (data.get("resultList") or {}).get("result", []) or []:
+        authors = [a.get("fullName", "") for a in
+                   ((r.get("authorList") or {}).get("author") or [])
+                   if a.get("fullName")]
+        if not authors and r.get("authorString"):
+            authors = [r["authorString"]]
+        year = r.get("pubYear")
+        try:
+            year = int(year) if year else None
+        except (TypeError, ValueError):
+            year = None
+        rid = r.get("id") or ""
+        journal = ((r.get("journalInfo") or {}).get("journal") or {}).get(
+            "title") or ""
+        out.append({
+            "title": (r.get("title") or "").strip(),
+            "authors": authors,
+            "year": year,
+            "venue": journal or "Europe PMC",
+            "doi": (r.get("doi") or "").strip() or None,
+            "url": (f"https://europepmc.org/article/{r.get('source') or 'MED'}"
+                    f"/{rid}") if rid else "",
+            "abstract": r.get("abstractText") or "",
+            "arxiv_id": None,
+            "index": "Europe PMC",
+        })
+    return out
+
+
+def search_hal(query):
+    """HAL — the French national open archive (no key, no registration);
+    strong for European scholarship and history of science."""
+    out = []
+    url = ("https://api.archives-ouvertes.fr/search/?wt=json&rows=25&q="
+           + urllib.parse.quote(query)
+           + "&fl=title_s,authFullName_s,producedDateY_i,doiId_s,uri_s")
+    data = http_json(url)
+    for doc in (data.get("response") or {}).get("docs", []) or []:
+        titles = doc.get("title_s") or []
+        year = doc.get("producedDateY_i")
+        out.append({
+            "title": (titles[0] if titles else "").strip(),
+            "authors": [a for a in doc.get("authFullName_s", []) if a],
+            "year": year if isinstance(year, int) else None,
+            "venue": "HAL",
+            "doi": (doc.get("doiId_s") or "").strip() or None,
+            "url": doc.get("uri_s") or "",
+            "abstract": "",
+            "arxiv_id": None,
+            "index": "HAL",
+        })
+    return out
+
+
+def search_zbmath(query):
+    """zbMATH Open — the mathematics reviewing index (no key, no
+    registration); the natural home for mathematics and the history of
+    mathematics. (The live route is the singular /document/_search.)"""
+    out = []
+    url = ("https://api.zbmath.org/v1/document/_search?page=0"
+           "&results_per_page=25&search_string="
+           + urllib.parse.quote(query))
+    data = http_json(url)
+    for r in data.get("result") or []:
+        title_node = r.get("title") or {}
+        if isinstance(title_node, dict):
+            title = title_node.get("title") or ""
+            subtitle = title_node.get("subtitle")
+            if subtitle:
+                title = (title + " " + subtitle).strip()
+        else:
+            title = str(title_node)
+        contributors = r.get("contributors") or {}
+        authors = [a.get("name", "") for a in
+                   contributors.get("authors", []) if a.get("name")]
+        if not authors:
+            authors = [a.get("name", "") for a in
+                       contributors.get("editors", []) if a.get("name")]
+        doi = None
+        for lnk in r.get("links") or []:
+            if ((lnk.get("type") or "").lower() == "doi"
+                    and lnk.get("identifier")):
+                doi = str(lnk["identifier"]).replace(
+                    "https://doi.org/", "") or None
+                break
+        year = r.get("year")
+        try:
+            year = int(year) if year else None
+        except (TypeError, ValueError):
+            year = None
+        venue = ((r.get("source") or {}).get("source") or "").strip()
+        out.append({
+            "title": title.strip(),
+            "authors": authors,
+            "year": year,
+            "venue": venue[:200] or "zbMATH",
+            "doi": doi,
+            "url": r.get("zbmath_url") or "",
+            "abstract": "",
+            "arxiv_id": None,
+            "index": "zbMATH",
+        })
+    return out
+
+
+# ---------------------------------------------------------------------------
+# Anna's Archive — book index with strong Persian/Arabic coverage (no key).
+# FAIL-SOFT BY LAW: domains rotate and mirrors come and go, so this source
+# must never fail or stall a run — total mirror failure logs one line and
+# returns []. Metadata candidates only; NO file downloading here.
+# ---------------------------------------------------------------------------
+
+ANNAS_ARCHIVE_MIRRORS = ["annas-archive.org", "annas-archive.li",
+                         "annas-archive.se", "annas-archive.gl",
+                         "annas-archive.pm"]
+AA_MAX_RESULTS = 25
+AA_TIMEOUT = 30
+
+_AA_TITLE_RE = re.compile(
+    r'<a\b([^>]*href="/md5/([0-9a-f]{32})"[^>]*)>(.*?)</a>', re.S)
+_AA_SEARCH_LINK_RE = re.compile(
+    r'<a\b[^>]*href="/search\?q=[^"]*"[^>]*>(.*?)</a>', re.S)
+_AA_BOTTOM_ROW_RE = re.compile(
+    r'<div class="[^"]*font-semibold text-sm[^"]*">(.*?)</div>', re.S)
+_AA_DOI_RE = re.compile(r'10\.\d{4,9}/[^\s"\'<>\]]+')
+_AA_YEAR_RE = re.compile(r'^(1\d\d\d|20\d\d)$')
+_AA_MONO_RE = re.compile(r'<div class="[^"]*font-mono[^"]*">(.*?)</div>',
+                         re.S)
+_AA_FILE_EXT_RE = re.compile(r'\.(pdf|epub|djvu|mobi|azw3|zip)$', re.I)
+
+
+def _aa_strip_tags(fragment):
+    text = re.sub(r"<[^>]+>", " ", fragment or "")
+    return re.sub(r"\s+", " ", html_lib.unescape(text)).strip()
+
+
+def _aa_get(url):
+    """One bounded fetch for Anna's Archive: 30s read timeout, at most 2
+    attempts, so a sick mirror fails over fast instead of eating the
+    run's time budget the way the full retry law would."""
+    for attempt in range(2):
+        try:
+            req = urllib.request.Request(url)
+            req.add_header(
+                "User-Agent",
+                "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
+                "(KHTML, like Gecko) Chrome/126.0 Safari/537.36")
+            with urllib.request.urlopen(req, timeout=AA_TIMEOUT) as resp:
+                if resp.status == 200:
+                    return resp.read().decode("utf-8", "replace")
+                return None
+        except Exception:
+            if attempt == 0:
+                time.sleep(3)
+    return None
+
+
+def _parse_annas_archive(page, domain):
+    """Parse AA search-results HTML (list mode) into candidates. Rows are
+    anchored on the title link (class js-vim-focus, href /md5/<hash>);
+    author and publisher/year live in the /search?q= links that follow
+    it, marked by mdi--user-edit / mdi--company icons; the bottom row is
+    a '·'-separated metadata string that may carry the year. Rows served
+    inside HTML comments (AA's lazy-render mode) are found too, because
+    the scan runs over the raw page text."""
+    out, seen_md5 = [], set()
+    matches = [m for m in _AA_TITLE_RE.finditer(page)
+               if "js-vim-focus" in m.group(1)]
+    for i, m in enumerate(matches):
+        md5 = m.group(2)
+        if md5 in seen_md5:
+            continue
+        seen_md5.add(md5)
+        title = _aa_strip_tags(m.group(3))
+        if not title:
+            continue
+        # The row's own segment ends at the next row's furniture (its
+        # title link, filename line or row container), so metadata from
+        # neighbouring rows can never leak into this one.
+        cut = min(len(page), m.end() + 6000)
+        for marker in ("js-vim-focus", "font-mono", "pt-3 pb-3"):
+            j = page.find(marker, m.end())
+            if j != -1:
+                cut = min(cut, j)
+        segment = page[m.end():cut]
+        authors, venue, year = [], "", None
+        for link in _AA_SEARCH_LINK_RE.finditer(segment):
+            inner = link.group(1)
+            text = _aa_strip_tags(inner)
+            if not text:
+                continue
+            if "mdi--user-edit" in inner:
+                if not authors:
+                    authors = [text]
+            elif "mdi--company" in inner:
+                ym = re.search(r'(1\d\d\d|20\d\d)\s*$', text)
+                if ym:
+                    year = int(ym.group(1))
+                    venue = text[:ym.start()].rstrip(", ").strip()
+                else:
+                    venue = text
+        bottom_text = ""
+        bottom = _AA_BOTTOM_ROW_RE.search(segment)
+        if bottom:
+            bottom_text = _aa_strip_tags(bottom.group(1))
+            if year is None:
+                for token in bottom_text.split("·"):
+                    token = token.strip()
+                    if _AA_YEAR_RE.match(token):
+                        year = int(token)
+                        break
+        # A DOI counts only when THIS row exposes it: in the row's own
+        # segment, or in its filename line (printed just BEFORE the
+        # title link, so it sits in the text since the previous row's
+        # title link — take the last font-mono div there).
+        doi = None
+        dm = _AA_DOI_RE.search(_aa_strip_tags(segment))
+        if not dm:
+            prev_end = matches[i - 1].end() if i else 0
+            mono = list(_AA_MONO_RE.finditer(page[prev_end:m.start()]))
+            if mono:
+                dm = _AA_DOI_RE.search(_aa_strip_tags(mono[-1].group(1)))
+        if dm:
+            doi = _AA_FILE_EXT_RE.sub("", dm.group(0).rstrip(".,;)")) or None
+        ext = ""
+        for token in bottom_text.split("·"):
+            t = token.strip().lower()
+            if t in ("pdf", "epub", "djvu", "mobi", "azw3", "fb2", "txt",
+                     "rtf", "doc", "docx", "chm"):
+                ext = t
+                break
+        out.append({
+            "title": title,
+            "authors": authors,
+            "year": year,
+            "venue": venue or "Anna's Archive",
+            "doi": doi,
+            "url": f"https://{domain}/md5/{md5}",
+            "abstract": "",
+            "arxiv_id": None,
+            "index": "annas_archive",
+            # Internal fields for the LibGen bridge — never cited.
+            "md5": md5,
+            "ext": ext,
+        })
+        if len(out) >= AA_MAX_RESULTS:
+            break
+    return out
+
+
+def search_annas_archive(query):
+    """Try each mirror in order; the first that serves a real results
+    page wins. All mirrors down/blocked -> log and return [] (the run
+    continues without this source)."""
+    for domain in ANNAS_ARCHIVE_MIRRORS:
+        try:
+            page = _aa_get(f"https://{domain}/search?q="
+                           + urllib.parse.quote(query))
+        except Exception:
+            page = None
+        if not page:
+            continue
+        if "js-aarecord-list-outer" not in page and "/md5/" not in page:
+            continue  # parked or block page — not the real index
+        return _parse_annas_archive(page, domain)
+    print("annas_archive: unreachable (all mirrors failed)")
+    return []
+
+
+SEARCHERS = [search_openalex, search_crossref, search_openaire,
+             search_hal, search_zbmath, search_europe_pmc,
+             search_internet_archive, search_google_books,
+             search_annas_archive, search_doaj, search_arxiv,
              search_semantic_scholar]
 
 
@@ -407,40 +780,200 @@ def _counts_line(label, found, kept):
     return f"{label} " + ("; ".join(parts) if parts else "(none)")
 
 
-def retrieve(field, topic, queries):
-    candidates, seen = [], set()
+# --------------------------------------------------------------------------
+# Speed pass: parallel retrieval waves + parallel verification.
+# - One wave = one query x all active sources, run concurrently; results
+#   merge deterministically (SEARCHERS order, then the source's own
+#   ranking), so outputs stay reproducible.
+# - Per-source time budget: a source whose cumulative in-run time passes
+#   SOURCE_TIME_BUDGET is benched for the rest of the run.
+# - Early stop: once the verified pool reaches EARLY_STOP_VERIFIED, no
+#   new waves are launched.
+# --------------------------------------------------------------------------
+
+RETRIEVAL_WORKERS = 8
+VERIFY_WORKERS = 10
+SOURCE_TIME_BUDGET = 90  # seconds per source per run
+EARLY_STOP_VERIFIED = 15
+SEARCHER_LABEL = {
+    "search_openalex": "OpenAlex", "search_crossref": "Crossref",
+    "search_openaire": "OpenAIRE", "search_hal": "HAL",
+    "search_zbmath": "zbMATH", "search_europe_pmc": "Europe PMC",
+    "search_internet_archive": "Internet Archive",
+    "search_google_books": "Google Books",
+    "search_annas_archive": "annas_archive", "search_doaj": "DOAJ",
+    "search_arxiv": "arXiv", "search_semantic_scholar": "Semantic Scholar",
+}
+
+VERIFY_CACHE_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                 "verify_cache.json")
+VERIFY_CACHE_MAX_AGE_DAYS = 180
+
+
+def load_verify_cache():
+    try:
+        with open(VERIFY_CACHE_FILE, encoding="utf-8") as f:
+            data = json.load(f)
+        return data if isinstance(data, dict) else {}
+    except Exception:
+        return {}
+
+
+def save_verify_cache(cache):
+    try:
+        with open(VERIFY_CACHE_FILE, "w", encoding="utf-8") as f:
+            json.dump(cache, f, ensure_ascii=False, indent=1)
+    except OSError as e:
+        print(f"WARNING: verify cache save failed: {e}")
+
+
+def _cache_lookup(cache, doi):
+    """Fresh Crossref-confirmed cache entry for this DOI, or None.
+    Entries older than VERIFY_CACHE_MAX_AGE_DAYS count as absent (they
+    are re-verified live)."""
+    if not doi:
+        return None
+    entry = cache.get(doi.lower())
+    if not entry:
+        return None
+    try:
+        when = datetime.strptime(entry["verified_at"],
+                                 "%Y-%m-%d").date()
+    except Exception:
+        return None
+    age = (datetime.now(timezone.utc).date() - when).days
+    return entry if age <= VERIFY_CACHE_MAX_AGE_DAYS else None
+
+
+def _run_searcher(searcher, query):
+    t0 = time.monotonic()
+    try:
+        return searcher(query), time.monotonic() - t0, None
+    except Fail as e:
+        return [], time.monotonic() - t0, e
+    except Exception as e:  # a searcher must never kill the wave
+        return [], time.monotonic() - t0, Fail(str(e))
+
+
+def _verify_one(candidate, cache):
+    """(ok, via) for one candidate: fresh cache hit first (no network),
+    else the live verification law. Crossref confirmations are written
+    back into the cache."""
+    doi = candidate.get("doi")
+    if doi and _cache_lookup(cache, doi):
+        return True, "cache"
+    try:
+        ok, via = verify_detailed(candidate)
+    except Fail as e:
+        print(f"WARNING: verification error for "
+              f"{candidate['title'][:60]!r}: {e}")
+        return False, None
+    if ok and via == "crossref" and doi:
+        cache[doi.lower()] = {
+            "title": candidate.get("title", ""),
+            "authors": candidate.get("authors", []),
+            "year": candidate.get("year"),
+            "verified_at": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
+        }
+    return ok, via
+
+
+def collect_verified(queries):
+    """Waves of parallel retrieval + parallel verification until the
+    pool is full (MAX_VERIFIED), the early-stop bar is reached, the
+    candidate cap is hit, or the queries run out."""
+    seen = set()
+    verified, verified_by = [], {}
     found_by, kept_by = {}, {}
+    source_time, benched = {}, set()
+    cache = load_verify_cache()
+    total_candidates = 0
+    retrieval_t = verification_t = 0.0
     for query in queries:
-        for searcher in SEARCHERS:
-            try:
-                results = searcher(query)
-            except Fail as e:
-                print(f"WARNING: {searcher.__name__} failed for query {query!r}: {e}")
+        if len(verified) >= EARLY_STOP_VERIFIED:
+            break
+        if total_candidates >= MAX_CANDIDATES:
+            break
+        active = [s for s in SEARCHERS if s.__name__ not in benched]
+        wave_results = {}
+        t0 = time.monotonic()
+        if active:
+            with ThreadPoolExecutor(max_workers=RETRIEVAL_WORKERS) as ex:
+                fut_map = {ex.submit(_run_searcher, s, query): s
+                           for s in active}
+                for fut in as_completed(fut_map):
+                    s = fut_map[fut]
+                    res, dt, err = fut.result()
+                    wave_results[s.__name__] = (res, err)
+                    source_time[s.__name__] = \
+                        source_time.get(s.__name__, 0.0) + dt
+                    if (source_time[s.__name__] > SOURCE_TIME_BUDGET
+                            and s.__name__ not in benched):
+                        benched.add(s.__name__)
+                        print(f"source benched: "
+                              f"{SEARCHER_LABEL.get(s.__name__, s.__name__)}")
+        retrieval_t += time.monotonic() - t0
+        wave_candidates = []
+        for s in SEARCHERS:  # deterministic merge: source priority order
+            if s.__name__ not in wave_results:
                 continue
-            for c in results:
-                idx = c.get("index") or searcher.__name__
+            res, err = wave_results[s.__name__]
+            if err is not None:
+                print(f"WARNING: {s.__name__} failed for query "
+                      f"{query!r}: {err}")
+                continue
+            for c in res:
+                idx = c.get("index") or s.__name__
                 found_by[idx] = found_by.get(idx, 0) + 1
                 if not c["title"]:
                     continue
-                key = (c["doi"].lower() if c["doi"] else None) or normalise_title(c["title"])
+                key = (c["doi"].lower() if c["doi"] else None) \
+                    or normalise_title(c["title"])
                 if key in seen:
                     continue
                 seen.add(key)
                 kept_by[idx] = kept_by.get(idx, 0) + 1
-                candidates.append(c)
-                if len(candidates) >= MAX_CANDIDATES:
-                    print(_counts_line("Candidates by source:", found_by, kept_by))
-                    return candidates
+                wave_candidates.append(c)
+                total_candidates += 1
+                if total_candidates >= MAX_CANDIDATES:
+                    break
+            if total_candidates >= MAX_CANDIDATES:
+                break
+        t0 = time.monotonic()
+        if wave_candidates:
+            with ThreadPoolExecutor(max_workers=VERIFY_WORKERS) as ex:
+                outcomes = list(ex.map(
+                    lambda c: _verify_one(c, cache), wave_candidates))
+            for c, (ok, _via) in zip(wave_candidates, outcomes):
+                if not ok:
+                    continue
+                if len(verified) >= MAX_VERIFIED:
+                    break
+                verified.append(c)
+                idx = c.get("index") or "?"
+                verified_by[idx] = verified_by.get(idx, 0) + 1
+                print(f"  verified [{len(verified)}] {c['title'][:80]}")
+        verification_t += time.monotonic() - t0
+    save_verify_cache(cache)
     print(_counts_line("Candidates by source:", found_by, kept_by))
-    return candidates
+    print(f"Candidates collected: {total_candidates}")
+    print(f"Verified sources: {len(verified)}")
+    print("Verified by source: " + ("; ".join(
+        f"{name}={n}" for name, n in sorted(verified_by.items())) or "(none)"))
+    print(f"timing: retrieval {retrieval_t:.1f}s")
+    print(f"timing: verification {verification_t:.1f}s")
+    return verified
 
 
 # --------------------------------------------------------------------------
 # Verification law
 # --------------------------------------------------------------------------
 
-def verify(candidate):
-    """A reference survives ONLY with independent proof it exists."""
+def verify_detailed(candidate):
+    """(ok, via): a reference survives ONLY with independent proof it
+    exists — its DOI resolving through Crossref directly (one call, no
+    doi.org redirect chain), its arXiv page existing, or its landing
+    page answering 2xx/3xx. via names the proof that worked."""
     doi = candidate.get("doi")
     if doi:
         status, _ = http_request(
@@ -448,16 +981,322 @@ def verify(candidate):
             + "?mailto=" + CROSSREF_MAILTO,
             timeout=60)
         if status == 200:
-            return True
+            return True, "crossref"
         # DOI present but Crossref has no record: fall through to page check.
     if candidate.get("arxiv_id"):
         if page_exists(f"https://arxiv.org/abs/{candidate['arxiv_id']}"):
-            return True
+            return True, "arxiv"
     url = candidate.get("url") or ""
     if url.startswith("http") and "openalex.org" not in url:
         if page_exists(url):
-            return True
-    return False
+            return True, "page"
+    return False, None
+
+
+def verify(candidate):
+    return verify_detailed(candidate)[0]
+
+
+# --------------------------------------------------------------------------
+# Full-text bridge — grounding excerpts for VERIFIED books only.
+# Route order (first success wins, every step fail-soft):
+#   (a) Internet Archive ready-extracted text (<id>_djvu.txt) — a plain
+#       text file, never the book itself;
+#   (b) LibGen download — ONLY into a temp file in the runner workspace,
+#       extracted, then deleted. Book files are NEVER stored or
+#       committed anywhere; the only thing kept is the capped extracted
+#       text, cached under fulltext/<md5-or-ia-id>.txt (committed back).
+# --------------------------------------------------------------------------
+
+FULLTEXT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                            "fulltext")
+FULLTEXT_MAX_BOOKS = 3
+FULLTEXT_EXCERPT_CHARS = 120_000
+FULLTEXT_CARD_CHARS = 12_000
+FULLTEXT_CACHE_BYTES = 200 * 1024
+LIBGEN_MAX_BYTES = 60 * 1024 * 1024
+IA_TEXT_MAX_BYTES = 2 * 1024 * 1024
+LIBGEN_PAGE_MIRRORS = ["library.lol"]
+LIBGEN_GET_MIRRORS = ["libgen.is", "libgen.rs", "libgen.st", "libgen.gs"]
+_LG_HREF_RE = re.compile(r'href="([^"]+)"')
+
+
+def _fetch_capped(url, cap, timeout=60):
+    """GET up to cap bytes; None on any failure. Never raises."""
+    try:
+        req = urllib.request.Request(url)
+        req.add_header(
+            "User-Agent",
+            "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
+            "(KHTML, like Gecko) Chrome/126.0 Safari/537.36")
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            if resp.status != 200:
+                return None
+            return resp.read(cap + 1)[:cap]
+    except Exception:
+        return None
+
+
+def _download_capped(url, path, cap, timeout=60):
+    """Stream url to path, aborting past cap. (ok, reason); never raises."""
+    try:
+        req = urllib.request.Request(url)
+        req.add_header(
+            "User-Agent",
+            "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
+            "(KHTML, like Gecko) Chrome/126.0 Safari/537.36")
+        total = 0
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            if resp.status != 200:
+                return False, f"HTTP {resp.status}"
+            with open(path, "wb") as f:
+                while True:
+                    chunk = resp.read(262144)
+                    if not chunk:
+                        break
+                    total += len(chunk)
+                    if total > cap:
+                        return False, f"over size cap ({cap} bytes)"
+                    f.write(chunk)
+        return True, ""
+    except Exception as e:
+        return False, f"{type(e).__name__}: {e}"[:120]
+
+
+def _cache_file(key):
+    safe = re.sub(r"[^A-Za-z0-9._-]+", "_", str(key))[:120]
+    return os.path.join(FULLTEXT_DIR, safe + ".txt")
+
+
+def _read_cache(key):
+    try:
+        p = _cache_file(key)
+        if os.path.exists(p):
+            with open(p, encoding="utf-8", errors="replace") as f:
+                t = f.read()
+            if len(t.strip()) >= 200:
+                return t
+    except OSError:
+        pass
+    return None
+
+
+def _write_cache(key, text):
+    try:
+        os.makedirs(FULLTEXT_DIR, exist_ok=True)
+        data = text.encode("utf-8")
+        if len(data) > FULLTEXT_CACHE_BYTES:
+            text = data[:FULLTEXT_CACHE_BYTES].decode("utf-8", "ignore")
+        with open(_cache_file(key), "w", encoding="utf-8") as f:
+            f.write(text)
+    except OSError as e:
+        print(f"fulltext: cache write failed: {e}")
+
+
+def _ia_id_from_url(url):
+    m = re.search(r"archive\.org/details/([^/?#]+)", url or "")
+    return m.group(1) if m else None
+
+
+def _ia_find_by_title(title):
+    """Strong-title-match lookup on Internet Archive (mediatype:texts)."""
+    try:
+        q = ("title:(" + title.replace(")", " ") + ")"
+             " AND mediatype:texts")
+        url = ("https://archive.org/advancedsearch.php?q="
+               + urllib.parse.quote(q)
+               + "&fl%5B%5D=identifier&fl%5B%5D=title&rows=5&output=json")
+        data = http_json(url)
+        want = normalise_title(title)
+        for doc in (data.get("response") or {}).get("docs", []) or []:
+            if (normalise_title(doc.get("title", "")) == want
+                    and doc.get("identifier")):
+                return doc["identifier"]
+    except Exception as e:
+        print(f"fulltext: IA title lookup failed: {e}"[:140])
+    return None
+
+
+def _ia_djvu_text(ia_id):
+    """The item's ready-extracted full text, or None (a miss — e.g.
+    lending-restricted items — is never an error). The real file name
+    comes from the metadata API; it is not always <id>_djvu.txt."""
+    fname = None
+    try:
+        meta = http_json("https://archive.org/metadata/"
+                         + urllib.parse.quote(ia_id, safe=""))
+        for f in meta.get("files", []) or []:
+            if (f.get("name") or "").endswith("_djvu.txt"):
+                fname = f["name"]
+                break
+    except Exception:
+        fname = None
+    if not fname:
+        fname = ia_id + "_djvu.txt"
+    url = ("https://archive.org/download/"
+           + urllib.parse.quote(ia_id, safe="") + "/"
+           + urllib.parse.quote(fname))
+    data = _fetch_capped(url, IA_TEXT_MAX_BYTES, timeout=60)
+    if not data:
+        return None
+    text = data.decode("utf-8", "replace")
+    if len(text.strip()) < 200 or "<html" in text[:300].lower():
+        return None
+    return text
+
+
+def _extract_epub(path):
+    import zipfile
+    texts = []
+    with zipfile.ZipFile(path) as z:
+        for n in z.namelist():
+            if n.lower().endswith((".xhtml", ".html", ".htm")):
+                raw = z.read(n).decode("utf-8", "replace")
+                t = _aa_strip_tags(raw)
+                if t:
+                    texts.append(t)
+    return "\n".join(texts)
+
+
+def _extract_pdf(path, md5):
+    exe = shutil.which("pdftotext")
+    if not exe:
+        print(f"libgen: {md5} pdftotext not available; PDF skipped")
+        return None
+    try:
+        r = subprocess.run([exe, "-q", path, "-"], capture_output=True,
+                           timeout=180)
+    except Exception as e:
+        print(f"libgen: {md5} pdftotext failed: {e}"[:140])
+        return None
+    if r.returncode != 0:
+        return None
+    return r.stdout.decode("utf-8", "replace")
+
+
+def _extract_book_text(path, ext, md5):
+    with open(path, "rb") as f:
+        magic = f.read(12)
+    if magic.startswith(b"%PDF"):
+        return _extract_pdf(path, md5)
+    if magic.startswith(b"PK"):
+        try:
+            return _extract_epub(path)
+        except Exception as e:
+            print(f"libgen: {md5} epub extraction failed: {e}"[:140])
+            return None
+    if ext == "djvu" or magic[8:12] == b"DJVU":
+        print(f"libgen: {md5} djvu — extraction skipped")
+        return None
+    print(f"libgen: {md5} unrecognised file type — extraction skipped")
+    return None
+
+
+def _libgen_get_link(md5):
+    """The GET (download) link from the library.lol record page."""
+    for mirror in LIBGEN_PAGE_MIRRORS:
+        page = _aa_get(f"https://{mirror}/main/{md5}")
+        if not page:
+            continue
+        for href in _LG_HREF_RE.findall(page):
+            if "get.php?md5=" in href or "/ipfs/" in href:
+                return href
+    return None
+
+
+def _libgen_text(md5, ext):
+    """Download via LibGen into a TEMP file, extract, delete the file.
+    Returns the text or None; every failure is logged and soft."""
+    tmp = None
+    try:
+        fd, tmp = tempfile.mkstemp(prefix="libgen-", suffix=".book")
+        os.close(fd)
+        ok, reason = False, "no GET link found"
+        link = _libgen_get_link(md5)
+        if link:
+            ok, reason = _download_capped(link, tmp, LIBGEN_MAX_BYTES)
+        if not ok:
+            for mirror in LIBGEN_GET_MIRRORS:
+                ok, reason = _download_capped(
+                    f"https://{mirror}/get.php?md5={md5}", tmp,
+                    LIBGEN_MAX_BYTES)
+                if ok:
+                    break
+        if not ok:
+            print(f"libgen: {md5} download failed ({reason})")
+            return None
+        text = _extract_book_text(tmp, ext, md5)
+        if not text or len(text.strip()) < 200:
+            print(f"libgen: {md5} no usable text extracted")
+            return None
+        return text
+    except Exception as e:
+        print(f"libgen: {md5} {type(e).__name__}: {e}"[:160])
+        return None
+    finally:
+        if tmp and os.path.exists(tmp):
+            try:
+                os.remove(tmp)
+            except OSError:
+                pass
+
+
+def attach_fulltexts(verified):
+    """Attach a grounding excerpt to the top verified BOOK records.
+    Fail-soft throughout: if nothing can be fetched, the records are
+    exactly as before. Only extracted text is ever cached/committed."""
+    selected = []
+    for s in verified:
+        md5 = s.get("md5") or None
+        ia_id = (_ia_id_from_url(s.get("url", ""))
+                 if s.get("index") == "Internet Archive" else None)
+        if not md5 and not ia_id:
+            continue
+        ext = s.get("ext") or ""
+        if ext and ext not in ("pdf", "epub", "djvu"):
+            continue  # known non-book format (e.g. azw3)
+        selected.append(s)
+        if len(selected) >= FULLTEXT_MAX_BOOKS:
+            break
+    fetched = cached = 0
+    for s in selected:
+        md5 = s.get("md5") or None
+        ia_id = (_ia_id_from_url(s.get("url", ""))
+                 if s.get("index") == "Internet Archive" else None)
+        text = route = None
+        from_cache = False
+        for key in (md5, ia_id):
+            if key and text is None:
+                t = _read_cache(key)
+                if t:
+                    text, route, from_cache = t, "cache", True
+        if text is None:
+            if ia_id is None:
+                ia_id = _ia_find_by_title(s["title"])
+            if ia_id:
+                t = _read_cache(ia_id)
+                if t:
+                    text, route, from_cache = t, "cache", True
+                else:
+                    t = _ia_djvu_text(ia_id)
+                    if t:
+                        text, route = t, "ia-text"
+        if text is None and md5:
+            t = _libgen_text(md5, s.get("ext") or "")
+            if t:
+                text, route = t, "libgen"
+        if text:
+            if not from_cache:
+                _write_cache(md5 or ia_id, text)
+            s["fulltext_excerpt"] = text[:FULLTEXT_EXCERPT_CHARS]
+            fetched += 1
+            if from_cache:
+                cached += 1
+            print(f"fulltext route: {route}")
+        else:
+            print(f"fulltext: no text for {s['title'][:60]!r}")
+    print(f"libgen: fetched {fetched}/{len(selected)} books "
+          f"({cached} from cache)")
 
 
 # --------------------------------------------------------------------------
@@ -666,12 +1505,17 @@ def source_cards_text(sources):
     lines = []
     for i, s in enumerate(sources, 1):
         authors = ", ".join(s["authors"][:6]) or "Unknown authors"
-        lines.append(
+        card = (
             f"[{i}] {s['title']}\n"
             f"    Authors: {authors}\n"
             f"    Year: {s['year'] or 'n.d.'} | Venue: {s['venue'] or 'n/a'} | "
             f"DOI: {s['doi'] or 'none'} | URL: {s['url']}\n"
             f"    Abstract: {(s['abstract'] or '(no abstract available)')[:1500]}")
+        if s.get("fulltext_excerpt"):
+            card += (f"\n    Full-text excerpt from this verified source "
+                     f"itself (grounding for [{i}]):\n"
+                     + s["fulltext_excerpt"][:FULLTEXT_CARD_CHARS])
+        lines.append(card)
     return "\n\n".join(lines)
 
 
@@ -1006,27 +1850,8 @@ def main():
     print(f"Queries: {queries}")
 
     progress_start(os.environ.get("ARTICLE_CHAT_ID", ""), tg_token)
-    candidates = retrieve(field, topic, queries)
-    print(f"Candidates collected: {len(candidates)}")
     progress_update(15, "🔎 جست‌وجوی منابع")
-
-    verified, verified_by = [], {}
-    for c in candidates:
-        if len(verified) >= MAX_VERIFIED:
-            break
-        try:
-            ok = verify(c)
-        except Fail as e:
-            print(f"WARNING: verification error for {c['title'][:60]!r}: {e}")
-            ok = False
-        if ok:
-            verified.append(c)
-            idx = c.get("index") or "?"
-            verified_by[idx] = verified_by.get(idx, 0) + 1
-            print(f"  verified [{len(verified)}] {c['title'][:80]}")
-    print(f"Verified sources: {len(verified)}")
-    print("Verified by source: " + ("; ".join(
-        f"{name}={n}" for name, n in sorted(verified_by.items())) or "(none)"))
+    verified = collect_verified(queries)
     progress_update(35, "📚 راستی‌آزمایی منابع")
     if len(verified) < MIN_SOURCES:
         raise Fail(
@@ -1034,9 +1859,16 @@ def main():
             f"'{topic}' (minimum {MIN_SOURCES}). Refusing to write an article "
             "on unverified material. Try a broader or different topic.")
 
+    try:
+        attach_fulltexts(verified)
+    except Exception as e:
+        print(f"WARNING: full-text bridge failed (continuing without): {e}")
+
+    _t0 = time.monotonic()
     title, article = write_article(field, topic, language, verified,
                                    api_key, model,
                                    guide=TYPE_GUIDE[article_type])
+    print(f"timing: writing {time.monotonic() - _t0:.1f}s")
 
     header = (f"📚 Scientific Discovery Agent — new article\n"
               f"Field: {field}\nTopic: {topic}\nLanguage: {language}\n"
