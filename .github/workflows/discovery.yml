@@ -10,8 +10,9 @@ on:
         required: true
         type: string
       topic:
-        description: "Article topic (any language)"
-        required: true
+        description: "Article topic (any language; unused in mode=propose)"
+        required: false
+        default: ""
         type: string
       language:
         description: "Output language code (fa, en, ar, ...)"
