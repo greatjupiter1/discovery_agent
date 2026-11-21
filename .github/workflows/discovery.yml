@@ -96,6 +96,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GLM_API_KEY: ${{ secrets.GLM_API_KEY }}
           GLM_MODEL: ${{ vars.GLM_MODEL }}
+          GLM_MAX_TOKENS: ${{ vars.GLM_MAX_TOKENS }}
         run: python build_article.py
 
       - name: Generate topic proposals (mode=propose, fail-closed)
@@ -112,6 +113,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GLM_API_KEY: ${{ secrets.GLM_API_KEY }}
           GLM_MODEL: ${{ vars.GLM_MODEL }}
+          GLM_MAX_TOKENS: ${{ vars.GLM_MAX_TOKENS }}
         run: python propose_topics.py
 
       - name: Save progress (record the production in state.json)
