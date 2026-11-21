@@ -6,9 +6,10 @@ One propose run:
   2. Collect every proposal title already sent to this user (all
      requests/<chat_id>-b*.json files in the repo checkout) — the new
      batch must never repeat one.
-  3. Grounding: a quick retrieval on OpenAlex + Crossref (what already
-     exists around the idea) is digested and fed to the model, so the
-     proposals aim at real gaps instead of reinventing published work.
+  3. Grounding: a quick retrieval on OpenAlex + Crossref + OpenAIRE +
+     Europe PMC (what already exists around the idea) is digested and
+     fed to the model, so the proposals aim at real gaps instead of
+     reinventing published work.
   4. Gemini produces EXACTLY 10 proposals in three tiers (4 safe/close,
      3 angled/new-combination, 3 bold/frontier), strict JSON, validated;
      invalid output is retried with the validation error fed back
@@ -103,9 +104,14 @@ def http_json(url, **kw):
 # Retrieval (grounding + novelty screen) — free indexes only
 # --------------------------------------------------------------------------
 
+POLITE_MAILTO = "discoverybot@users.noreply.github.com"
+
+
 def search_openalex(query, per_page=25):
+    # mailto puts us in OpenAlex's polite pool (higher, steadier limits).
     url = ("https://api.openalex.org/works?per-page=" + str(per_page)
-           + "&search=" + urllib.parse.quote(query))
+           + "&search=" + urllib.parse.quote(query)
+           + "&mailto=" + POLITE_MAILTO)
     data = http_json(url)
     out = []
     for w in data.get("results", []):
@@ -128,6 +134,65 @@ def search_crossref(query, rows=25):
     return out
 
 
+def _openaire_text(node):
+    """OpenAIRE wraps scalars as {"$": value} and repeats elements as
+    lists; return the first plain string found."""
+    if isinstance(node, str):
+        return node
+    if isinstance(node, dict):
+        v = node.get("$")
+        return v if isinstance(v, str) else ""
+    if isinstance(node, list):
+        for item in node:
+            t = _openaire_text(item)
+            if t:
+                return t
+    return ""
+
+
+def search_openaire(query):
+    """OpenAIRE grounding (no key, no registration)."""
+    url = ("https://api.openaire.eu/search/publications?format=json"
+           "&size=25&page=1&title=" + urllib.parse.quote(query))
+    data = http_json(url)
+    results = (((data.get("response") or {}).get("results") or {})
+               .get("result")) or []
+    if isinstance(results, dict):
+        results = [results]
+    out = []
+    for r in results:
+        md = (((r.get("metadata") or {}).get("oaf:entity") or {})
+              .get("oaf:result")) or {}
+        if not md:
+            continue
+        title = _openaire_text(md.get("title")).strip()
+        date = _openaire_text(md.get("dateofacceptance"))
+        if title:
+            out.append({"title": title,
+                        "year": int(date[:4]) if date[:4].isdigit() else None})
+    return out
+
+
+def search_europe_pmc(query):
+    """Europe PMC grounding (no key, no registration)."""
+    url = ("https://www.ebi.ac.uk/europepmc/webservices/rest/search"
+           "?format=json&resultType=core&pageSize=25&query="
+           + urllib.parse.quote('TITLE:"' + query.replace('"', "") + '"'))
+    data = http_json(url)
+    out = []
+    for r in (data.get("resultList") or {}).get("result", []) or []:
+        title = (r.get("title") or "").strip()
+        if not title:
+            continue
+        year = r.get("pubYear")
+        try:
+            year = int(year) if year else None
+        except (TypeError, ValueError):
+            year = None
+        out.append({"title": title, "year": year})
+    return out
+
+
 def grounding_digest(field, idea, api_key, model):
     """Titles of what already exists around the idea (best effort)."""
     queries = []
@@ -140,7 +205,8 @@ def grounding_digest(field, idea, api_key, model):
             queries.append(english_q)
     seen, titles = set(), []
     for q in queries:
-        for searcher in (search_openalex, search_crossref):
+        for searcher in (search_openalex, search_crossref,
+                         search_openaire, search_europe_pmc):
             try:
                 results = searcher(q)
             except Fail as e:
