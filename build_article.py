@@ -385,6 +385,7 @@ def write_article(field, topic, language, sources, api_key, model):
         "4) '## Introduction' — a funnel: broad context, narrowing to the "
         "specific topic, the gap visible in these sources, and this review's aim.",
         api_key, model)
+    progress_update(55, "✍️ نگارش بخش اول")
     part2 = gemini(common +
         "\nWrite PART 2 of the same review article: the body. Organise the "
         "synthesis into 3 to 5 thematic sections, each with a '## ' heading. "
@@ -392,6 +393,7 @@ def write_article(field, topic, language, sources, api_key, model):
         "contradictions, and keep every claim cited as [n]. Do NOT repeat the "
         "title, abstract or introduction.",
         api_key, model)
+    progress_update(75, "✍️ نگارش بخش دوم")
     part3 = gemini(common +
         "\nWrite PART 3 of the same review article:\n"
         "1) '## Discussion' — what the combined evidence means, and how it "
@@ -401,6 +403,7 @@ def write_article(field, topic, language, sources, api_key, model):
         "abstract-level, free-access only, etc.).\n"
         "Do NOT write a reference list; it is added separately.",
         api_key, model)
+    progress_update(90, "✍️ نگارش بخش پایانی")
 
     title = ""
     m = re.search(r"TITLE:\s*(.+)", part1)
@@ -413,6 +416,74 @@ def write_article(field, topic, language, sources, api_key, model):
     article = (f"# {title}\n\n{part1}\n\n{part2}\n\n{part3}\n\n"
                f"## References\n\n{references}\n")
     return title, article
+
+
+# --------------------------------------------------------------------------
+# Production progress (§13) — fail-soft: progress reporting must NEVER
+# fail the build. If ARTICLE_CHAT_ID is set (the requesting user's chat,
+# passed by the Worker through the workflow), one message in that chat is
+# edited in place with monotonic percents + a Persian stage label.
+# --------------------------------------------------------------------------
+
+_progress = {"chat_id": "", "token": "", "message_id": None,
+             "pct": -1, "stage": "شروع"}
+
+
+def _progress_text(pct, stage):
+    if pct >= 100:
+        return "✅ مقاله در کانال Discovery منتشر شد\nپیشرفت تولید: 100%"
+    return f"⏳ تولید مقاله\nمرحله: {stage}\nپیشرفت تولید: {pct}%"
+
+
+def _progress_send_or_edit(pct, stage):
+    """Best-effort: first call sends the message, later calls edit it.
+    Monotonic: a percent never goes down. Never raises."""
+    try:
+        if not _progress["chat_id"] or not _progress["token"]:
+            return
+        if pct <= _progress["pct"]:
+            return
+        _progress["pct"] = pct
+        _progress["stage"] = stage
+        text = _progress_text(pct, stage)
+        if _progress["message_id"] is None:
+            r = tg_call("sendMessage", _progress["token"],
+                        {"chat_id": _progress["chat_id"], "text": text})
+            _progress["message_id"] = r["message_id"]
+        else:
+            tg_call("editMessageText", _progress["token"], {
+                "chat_id": _progress["chat_id"],
+                "message_id": _progress["message_id"],
+                "text": text,
+            })
+    except Exception as e:
+        print(f"WARNING: progress update {pct}% failed (ignored): {e}")
+
+
+def progress_start(chat_id, token):
+    _progress["chat_id"] = (chat_id or "").strip()
+    _progress["token"] = (token or "").strip()
+    if _progress["chat_id"]:
+        print(f"Progress reporting on for chat {_progress['chat_id']}")
+        _progress_send_or_edit(0, "شروع")
+
+
+def progress_update(pct, stage):
+    _progress_send_or_edit(pct, stage)
+
+
+def progress_fail():
+    """Best-effort: mark the progress message as stopped. Never raises."""
+    try:
+        if not _progress["chat_id"] or _progress["message_id"] is None:
+            return
+        tg_call("editMessageText", _progress["token"], {
+            "chat_id": _progress["chat_id"],
+            "message_id": _progress["message_id"],
+            "text": f"❌ تولید متوقف شد — مرحله: {_progress['stage']}",
+        })
+    except Exception as e:
+        print(f"WARNING: progress fail-mark failed (ignored): {e}")
 
 
 # --------------------------------------------------------------------------
@@ -542,8 +613,10 @@ def main():
             queries.append(english_q)
     print(f"Queries: {queries}")
 
+    progress_start(os.environ.get("ARTICLE_CHAT_ID", ""), tg_token)
     candidates = retrieve(field, topic, queries)
     print(f"Candidates collected: {len(candidates)}")
+    progress_update(15, "🔎 جست‌وجوی منابع")
 
     verified = []
     for c in candidates:
@@ -558,6 +631,7 @@ def main():
             verified.append(c)
             print(f"  verified [{len(verified)}] {c['title'][:80]}")
     print(f"Verified sources: {len(verified)}")
+    progress_update(35, "📚 راستی‌آزمایی منابع")
     if len(verified) < MIN_SOURCES:
         raise Fail(
             f"Only {len(verified)} verifiable sources found for "
@@ -589,6 +663,7 @@ def main():
         "message_ids": message_ids,
     })
     save_state(state)
+    progress_update(100, "انتشار در کانال")
     print(f"Done. Article delivered, message_ids={message_ids}")
     return 0
 
@@ -597,5 +672,9 @@ if __name__ == "__main__":
     try:
         sys.exit(main())
     except Fail as e:
+        progress_fail()
         print(f"FAILED (fail-closed): {e}", file=sys.stderr)
         sys.exit(1)
+    except Exception:
+        progress_fail()
+        raise
