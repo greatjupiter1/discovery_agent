@@ -33,6 +33,7 @@ Inputs come from the environment (set by .github/workflows/discovery.yml):
   "glm" selects GLM on z.ai),
   GH_MODELS_MODEL (default "openai/gpt-4o"),
   GLM_MODEL (default "glm-4.7-flash", the free z.ai Flash model)
+  GLM_MAX_TOKENS (default 8000, the GLM path's output budget)
 Secrets (names only): GEMINI_API_KEY, TELEGRAM_BOT_TOKEN
   GH_MODELS_TOKEN (optional; the GitHub path falls back to GITHUB_TOKEN)
   GLM_API_KEY (the GLM path's key, from z.ai)
@@ -283,7 +284,7 @@ GH_MODELS_MAX_TOKENS = 4000
 
 GLM_URL = "https://api.z.ai/api/paas/v4/chat/completions"
 GLM_DEFAULT_MODEL = "glm-4.7-flash"
-GLM_MAX_TOKENS = 4000
+GLM_DEFAULT_MAX_TOKENS = 8000
 
 
 def llm_provider():
@@ -351,24 +352,51 @@ def github_models(prompt, temperature=0.4, json_mode=False):
                f"({last_error})")
 
 
+def glm_max_tokens():
+    """The GLM path's output budget: env GLM_MAX_TOKENS overrides the
+    8000-token default (an invalid value falls back to the default).
+    glm-4.7-flash is a reasoning model whose hidden thinking shares
+    this budget; thinking is disabled on our calls (see glm()), but
+    long structured outputs still need more than the old 4000."""
+    raw = (os.environ.get("GLM_MAX_TOKENS") or "").strip()
+    if raw:
+        try:
+            value = int(raw)
+        except ValueError:
+            value = 0
+        if value > 0:
+            return value
+        print(f"WARNING: ignoring invalid GLM_MAX_TOKENS {raw!r}; "
+              f"using {GLM_DEFAULT_MAX_TOKENS}")
+    return GLM_DEFAULT_MAX_TOKENS
+
+
 def glm(prompt, temperature=0.4, json_mode=False):
     """One GLM (z.ai) chat completion, under the run's retry law.
     Endpoint and auth verified against the official docs (docs.z.ai):
     POST https://api.z.ai/api/paas/v4/chat/completions with an
     "Authorization: Bearer <key>" header. Key: GLM_API_KEY — fail-closed
     if it is not available. The default model glm-4.7-flash is z.ai's
-    free tier (GLM_MODEL overrides it). A truncated reply
+    free tier (GLM_MODEL overrides it). Deep thinking is DISABLED on
+    every call ("thinking": {"type": "disabled"} — the docs.z.ai Deep
+    Thinking page supports the GLM-4.7 series and reserves the
+    disabled-rejection for GLM-5.3 / GLM-5.3-FLASH only): all our call
+    sites are structured generation/extraction, where the reasoning
+    model's hidden thinking only burns the shared output budget and
+    truncates the visible reply. A truncated reply
     (finish_reason "length") is treated as a failed attempt and retried
     with the same backoff."""
     api_key = (os.environ.get("GLM_API_KEY") or "").strip()
     if not api_key:
         raise Fail("LLM_PROVIDER=glm but GLM_API_KEY is not available: "
                    "set the GLM_API_KEY repo secret.")
+    max_tokens = glm_max_tokens()
     body = json.dumps({
         "model": llm_model(),
         "messages": [{"role": "user", "content": prompt}],
         "temperature": temperature,
-        "max_tokens": GLM_MAX_TOKENS,
+        "max_tokens": max_tokens,
+        "thinking": {"type": "disabled"},
         **({"response_format": {"type": "json_object"}} if json_mode else {}),
     }).encode("utf-8")
     last_error = None
@@ -391,7 +419,7 @@ def glm(prompt, temperature=0.4, json_mode=False):
         except Exception:
             raise Fail(f"GLM returned an unexpected shape: {raw[:300]!r}")
         if finish == "length":
-            last_error = (f"reply truncated at {GLM_MAX_TOKENS} "
+            last_error = (f"reply truncated at {max_tokens} "
                           "tokens (finish_reason=length)")
             print(f"WARNING: GLM {last_error}; treating as a "
                   f"failed attempt ({attempt}/{MAX_ATTEMPTS})")
