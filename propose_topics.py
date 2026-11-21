@@ -28,10 +28,13 @@ attempts, with a 180-second read timeout.
 
 Inputs come from the environment (set by .github/workflows/discovery.yml):
   FIELD, IDEA, BATCH, CHAT_ID, GEMINI_MODEL (default "gemini-3.8-flash")
-  LLM_PROVIDER (default "gemini"; "github" selects GitHub Models),
-  GH_MODELS_MODEL (default "openai/gpt-4o")
+  LLM_PROVIDER (default "gemini"; "github" selects GitHub Models,
+  "glm" selects GLM on z.ai),
+  GH_MODELS_MODEL (default "openai/gpt-4o"),
+  GLM_MODEL (default "glm-4.7-flash", the free z.ai Flash model)
 Secrets (names only): GEMINI_API_KEY, TELEGRAM_BOT_TOKEN
   GH_MODELS_TOKEN (optional; the GitHub path falls back to GITHUB_TOKEN)
+  GLM_API_KEY (the GLM path's key, from z.ai)
 """
 
 import glob
@@ -201,15 +204,20 @@ def gemini_text(prompt, api_key, model):
 
 
 # --------------------------------------------------------------------------
-# LLM providers — Gemini (default) or GitHub Models (OpenAI-compatible),
-# selected by env LLM_PROVIDER. EVERY model call goes through call_llm:
-# json_mode=True maps to gemini() (JSON mode, temperature 0.7) on the
-# Gemini path, json_mode=False maps to gemini_text() (temperature 0.2).
+# LLM providers — Gemini (default), GitHub Models or GLM / z.ai (both
+# OpenAI-compatible), selected by env LLM_PROVIDER. EVERY model call
+# goes through call_llm: json_mode=True maps to gemini() (JSON mode,
+# temperature 0.7) on the Gemini path, json_mode=False maps to
+# gemini_text() (temperature 0.2).
 # --------------------------------------------------------------------------
 
 GH_MODELS_URL = "https://models.github.ai/inference/chat/completions"
 GH_MODELS_DEFAULT_MODEL = "openai/gpt-4o"
 GH_MODELS_MAX_TOKENS = 4000
+
+GLM_URL = "https://api.z.ai/api/paas/v4/chat/completions"
+GLM_DEFAULT_MODEL = "glm-4.7-flash"
+GLM_MAX_TOKENS = 4000
 
 
 def llm_provider():
@@ -217,6 +225,9 @@ def llm_provider():
 
 
 def llm_model():
+    if llm_provider() == "glm":
+        return (os.environ.get("GLM_MODEL")
+                or GLM_DEFAULT_MODEL).strip()
     if llm_provider() == "github":
         return (os.environ.get("GH_MODELS_MODEL")
                 or GH_MODELS_DEFAULT_MODEL).strip()
@@ -274,18 +285,74 @@ def github_models(prompt, temperature=0.4, json_mode=False):
                f"({last_error})")
 
 
+def glm(prompt, temperature=0.4, json_mode=False):
+    """One GLM (z.ai) chat completion, under the run's retry law.
+    Endpoint and auth verified against the official docs (docs.z.ai):
+    POST https://api.z.ai/api/paas/v4/chat/completions with an
+    "Authorization: Bearer <key>" header. Key: GLM_API_KEY — fail-closed
+    if it is not available. The default model glm-4.7-flash is z.ai's
+    free tier (GLM_MODEL overrides it). A truncated reply
+    (finish_reason "length") is treated as a failed attempt and retried
+    with the same backoff."""
+    api_key = (os.environ.get("GLM_API_KEY") or "").strip()
+    if not api_key:
+        raise Fail("LLM_PROVIDER=glm but GLM_API_KEY is not available: "
+                   "set the GLM_API_KEY repo secret.")
+    body = json.dumps({
+        "model": llm_model(),
+        "messages": [{"role": "user", "content": prompt}],
+        "temperature": temperature,
+        "max_tokens": GLM_MAX_TOKENS,
+        **({"response_format": {"type": "json_object"}} if json_mode else {}),
+    }).encode("utf-8")
+    last_error = None
+    for attempt in range(1, MAX_ATTEMPTS + 1):
+        status, raw = http_request(GLM_URL, method="POST", data=body,
+                                   headers={
+                                       "Content-Type": "application/json",
+                                       "Authorization": f"Bearer {api_key}"})
+        if status != 200:
+            raise Fail(f"GLM HTTP {status}: {raw[:300]!r}")
+        try:
+            data = json.loads(raw.decode("utf-8", "replace"))
+        except Exception:
+            raise Fail(f"GLM returned a non-JSON body "
+                       f"(HTTP {status}): {raw[:300]!r}")
+        try:
+            choice = data["choices"][0]
+            text = (choice["message"]["content"] or "").strip()
+            finish = choice.get("finish_reason")
+        except Exception:
+            raise Fail(f"GLM returned an unexpected shape: {raw[:300]!r}")
+        if finish == "length":
+            last_error = (f"reply truncated at {GLM_MAX_TOKENS} "
+                          "tokens (finish_reason=length)")
+            print(f"WARNING: GLM {last_error}; treating as a "
+                  f"failed attempt ({attempt}/{MAX_ATTEMPTS})")
+            if attempt < MAX_ATTEMPTS:
+                time.sleep(30 * attempt)
+            continue
+        if not text:
+            raise Fail("GLM returned empty text")
+        return text
+    raise Fail(f"GLM call failed after {MAX_ATTEMPTS} attempts "
+               f"({last_error})")
+
+
 def call_llm(prompt, api_key, model, temperature=0.4, json_mode=False):
     """Dispatch one LLM call to the provider selected by LLM_PROVIDER.
     The Gemini path is the original gemini()/gemini_text() above,
-    unchanged (their temperatures are built in); the GitHub Models path
-    honours the temperature / json_mode of the call site."""
+    unchanged (their temperatures are built in); the GitHub Models and
+    GLM paths honour the temperature / json_mode of the call site."""
     provider = llm_provider()
     if provider == "github":
         return github_models(prompt, temperature=temperature,
                              json_mode=json_mode)
+    if provider == "glm":
+        return glm(prompt, temperature=temperature, json_mode=json_mode)
     if provider != "gemini":
         raise Fail(f"Unknown LLM_PROVIDER {provider!r} "
-                   "(expected 'gemini' or 'github')")
+                   "(expected 'gemini', 'github' or 'glm')")
     if json_mode:
         return gemini(prompt, api_key, model)
     return gemini_text(prompt, api_key, model)
@@ -593,6 +660,11 @@ def main():
                 or (os.environ.get("GITHUB_TOKEN") or "").strip()):
             raise Fail("LLM_PROVIDER=github but no model token is available: "
                        "set the GH_MODELS_TOKEN repo secret or pass GITHUB_TOKEN.")
+        missing = [n for n, v in [("TELEGRAM_BOT_TOKEN", tg_token)] if not v]
+    elif provider == "glm":
+        if not (os.environ.get("GLM_API_KEY") or "").strip():
+            raise Fail("LLM_PROVIDER=glm but GLM_API_KEY is not available: "
+                       "set the GLM_API_KEY repo secret.")
         missing = [n for n, v in [("TELEGRAM_BOT_TOKEN", tg_token)] if not v]
     else:
         missing = [n for n, v in [("GEMINI_API_KEY", api_key),
