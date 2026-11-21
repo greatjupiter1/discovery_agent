@@ -291,65 +291,64 @@ def llm_provider():
     return (os.environ.get("LLM_PROVIDER") or "gemini").strip().lower()
 
 
-def llm_model():
-    if llm_provider() == "glm":
+def _brain_model(name):
+    """The model brain `name` calls with: its own env override, else
+    its default. Each brain resolves its OWN model, so a backup brain
+    never receives the primary brain's model name."""
+    if name == "glm":
         return (os.environ.get("GLM_MODEL")
                 or GLM_DEFAULT_MODEL).strip()
-    if llm_provider() == "github":
+    if name == "github":
         return (os.environ.get("GH_MODELS_MODEL")
                 or GH_MODELS_DEFAULT_MODEL).strip()
     return (os.environ.get("GEMINI_MODEL") or "gemini-3.8-flash").strip()
 
 
-def github_models(prompt, temperature=0.4, json_mode=False):
-    """One GitHub Models chat completion, under the run's retry law.
-    Token: GH_MODELS_TOKEN if set, else GITHUB_TOKEN — fail-closed if
-    neither is available. A truncated reply (finish_reason "length") is
-    treated as a failed attempt and retried with the same backoff."""
+def llm_model():
+    return _brain_model(llm_provider())
+
+
+def _github_models_once(prompt, temperature=0.4, json_mode=False):
+    """One single GitHub Models chat completion attempt (no retries —
+    call_llm's brain chain owns retrying and failover). Token:
+    GH_MODELS_TOKEN if set, else GITHUB_TOKEN. A truncated reply
+    (finish_reason "length") raises Fail like any other failed
+    attempt: truncated text never silently enters an article."""
     token = (os.environ.get("GH_MODELS_TOKEN") or "").strip() \
         or (os.environ.get("GITHUB_TOKEN") or "").strip()
     if not token:
-        raise Fail("LLM_PROVIDER=github but no model token is available: "
+        raise Fail("GitHub Models brain has no model token available: "
                    "set the GH_MODELS_TOKEN repo secret or pass GITHUB_TOKEN.")
     body = json.dumps({
-        "model": llm_model(),
+        "model": _brain_model("github"),
         "messages": [{"role": "user", "content": prompt}],
         "temperature": temperature,
         "max_tokens": GH_MODELS_MAX_TOKENS,
         **({"response_format": {"type": "json_object"}} if json_mode else {}),
     }).encode("utf-8")
-    last_error = None
-    for attempt in range(1, MAX_ATTEMPTS + 1):
-        status, raw = http_request(GH_MODELS_URL, method="POST", data=body,
-                                   headers={
-                                       "Content-Type": "application/json",
-                                       "Authorization": f"Bearer {token}"})
-        if status != 200:
-            raise Fail(f"GitHub Models HTTP {status}: {raw[:300]!r}")
-        try:
-            data = json.loads(raw.decode("utf-8", "replace"))
-        except Exception:
-            raise Fail(f"GitHub Models returned a non-JSON body "
-                       f"(HTTP {status}): {raw[:300]!r}")
-        try:
-            choice = data["choices"][0]
-            text = (choice["message"]["content"] or "").strip()
-            finish = choice.get("finish_reason")
-        except Exception:
-            raise Fail(f"GitHub Models returned an unexpected shape: {raw[:300]!r}")
-        if finish == "length":
-            last_error = (f"reply truncated at {GH_MODELS_MAX_TOKENS} "
-                          "tokens (finish_reason=length)")
-            print(f"WARNING: GitHub Models {last_error}; treating as a "
-                  f"failed attempt ({attempt}/{MAX_ATTEMPTS})")
-            if attempt < MAX_ATTEMPTS:
-                time.sleep(30 * attempt)
-            continue
-        if not text:
-            raise Fail("GitHub Models returned empty text")
-        return text
-    raise Fail(f"GitHub Models call failed after {MAX_ATTEMPTS} attempts "
-               f"({last_error})")
+    status, raw = http_request(GH_MODELS_URL, method="POST", data=body,
+                               headers={
+                                   "Content-Type": "application/json",
+                                   "Authorization": f"Bearer {token}"})
+    if status != 200:
+        raise Fail(f"GitHub Models HTTP {status}: {raw[:300]!r}")
+    try:
+        data = json.loads(raw.decode("utf-8", "replace"))
+    except Exception:
+        raise Fail(f"GitHub Models returned a non-JSON body "
+                   f"(HTTP {status}): {raw[:300]!r}")
+    try:
+        choice = data["choices"][0]
+        text = (choice["message"]["content"] or "").strip()
+        finish = choice.get("finish_reason")
+    except Exception:
+        raise Fail(f"GitHub Models returned an unexpected shape: {raw[:300]!r}")
+    if finish == "length":
+        raise Fail(f"GitHub Models reply truncated at "
+                   f"{GH_MODELS_MAX_TOKENS} tokens (finish_reason=length)")
+    if not text:
+        raise Fail("GitHub Models returned empty text")
+    return text
 
 
 def glm_max_tokens():
@@ -371,85 +370,167 @@ def glm_max_tokens():
     return GLM_DEFAULT_MAX_TOKENS
 
 
-def glm(prompt, temperature=0.4, json_mode=False):
-    """One GLM (z.ai) chat completion, under the run's retry law.
-    Endpoint and auth verified against the official docs (docs.z.ai):
-    POST https://api.z.ai/api/paas/v4/chat/completions with an
-    "Authorization: Bearer <key>" header. Key: GLM_API_KEY — fail-closed
-    if it is not available. The default model glm-4.7-flash is z.ai's
-    free tier (GLM_MODEL overrides it). Deep thinking is DISABLED on
-    every call ("thinking": {"type": "disabled"} — the docs.z.ai Deep
-    Thinking page supports the GLM-4.7 series and reserves the
-    disabled-rejection for GLM-5.3 / GLM-5.3-FLASH only): all our call
-    sites are structured generation/extraction, where the reasoning
-    model's hidden thinking only burns the shared output budget and
-    truncates the visible reply. A truncated reply
-    (finish_reason "length") is treated as a failed attempt and retried
-    with the same backoff."""
+def _glm_once(prompt, temperature=0.4, json_mode=False):
+    """One single GLM (z.ai) chat completion attempt (no retries —
+    call_llm's brain chain owns retrying and failover). Endpoint and
+    auth verified against the official docs (docs.z.ai): POST
+    https://api.z.ai/api/paas/v4/chat/completions with an
+    "Authorization: Bearer <key>" header. Key: GLM_API_KEY. The default
+    model glm-4.7-flash is z.ai's free tier (GLM_MODEL overrides it).
+    Deep thinking is DISABLED on every call ("thinking":
+    {"type": "disabled"} — the docs.z.ai Deep Thinking page supports
+    the GLM-4.7 series and reserves the disabled-rejection for
+    GLM-5.3 / GLM-5.3-FLASH only): all our call sites are structured
+    generation/extraction, where the reasoning model's hidden thinking
+    only burns the shared output budget and truncates the visible
+    reply. A truncated reply (finish_reason "length") raises Fail like
+    any other failed attempt: truncated text never silently enters an
+    article."""
     api_key = (os.environ.get("GLM_API_KEY") or "").strip()
     if not api_key:
-        raise Fail("LLM_PROVIDER=glm but GLM_API_KEY is not available: "
+        raise Fail("GLM brain has no GLM_API_KEY available: "
                    "set the GLM_API_KEY repo secret.")
     max_tokens = glm_max_tokens()
     body = json.dumps({
-        "model": llm_model(),
+        "model": _brain_model("glm"),
         "messages": [{"role": "user", "content": prompt}],
         "temperature": temperature,
         "max_tokens": max_tokens,
         "thinking": {"type": "disabled"},
         **({"response_format": {"type": "json_object"}} if json_mode else {}),
     }).encode("utf-8")
-    last_error = None
-    for attempt in range(1, MAX_ATTEMPTS + 1):
-        status, raw = http_request(GLM_URL, method="POST", data=body,
-                                   headers={
-                                       "Content-Type": "application/json",
-                                       "Authorization": f"Bearer {api_key}"})
-        if status != 200:
-            raise Fail(f"GLM HTTP {status}: {raw[:300]!r}")
-        try:
-            data = json.loads(raw.decode("utf-8", "replace"))
-        except Exception:
-            raise Fail(f"GLM returned a non-JSON body "
-                       f"(HTTP {status}): {raw[:300]!r}")
-        try:
-            choice = data["choices"][0]
-            text = (choice["message"]["content"] or "").strip()
-            finish = choice.get("finish_reason")
-        except Exception:
-            raise Fail(f"GLM returned an unexpected shape: {raw[:300]!r}")
-        if finish == "length":
-            last_error = (f"reply truncated at {max_tokens} "
-                          "tokens (finish_reason=length)")
-            print(f"WARNING: GLM {last_error}; treating as a "
-                  f"failed attempt ({attempt}/{MAX_ATTEMPTS})")
-            if attempt < MAX_ATTEMPTS:
-                time.sleep(30 * attempt)
-            continue
-        if not text:
-            raise Fail("GLM returned empty text")
-        return text
-    raise Fail(f"GLM call failed after {MAX_ATTEMPTS} attempts "
-               f"({last_error})")
+    status, raw = http_request(GLM_URL, method="POST", data=body,
+                               headers={
+                                   "Content-Type": "application/json",
+                                   "Authorization": f"Bearer {api_key}"})
+    if status != 200:
+        raise Fail(f"GLM HTTP {status}: {raw[:300]!r}")
+    try:
+        data = json.loads(raw.decode("utf-8", "replace"))
+    except Exception:
+        raise Fail(f"GLM returned a non-JSON body "
+                   f"(HTTP {status}): {raw[:300]!r}")
+    try:
+        choice = data["choices"][0]
+        text = (choice["message"]["content"] or "").strip()
+        finish = choice.get("finish_reason")
+    except Exception:
+        raise Fail(f"GLM returned an unexpected shape: {raw[:300]!r}")
+    if finish == "length":
+        raise Fail(f"GLM reply truncated at {max_tokens} tokens "
+                   "(finish_reason=length)")
+    if not text:
+        raise Fail("GLM returned empty text")
+    return text
+
+# ----------------------------------------------------------------------
+# Brain chain: every logical LLM call walks an ordered list of brains
+# (env LLM_CHAIN, comma-separated; default: LLM_PROVIDER, then glm,
+# then gemini — the retired "github" service is never in the default
+# chain). Each brain gets CHAIN_ATTEMPTS attempts with a
+# CHAIN_BACKOFF_SECONDS x attempt pause between them; a brain whose
+# key is missing is skipped. Only when every brain is skipped or
+# exhausted does the call fail — fail-closed, as before.
+# ----------------------------------------------------------------------
+
+CHAIN_ATTEMPTS = 3
+CHAIN_BACKOFF_SECONDS = 15
+KNOWN_BRAINS = ("glm", "gemini", "github")
 
 
-def call_llm(prompt, api_key, model, temperature=0.4, json_mode=False):
-    """Dispatch one LLM call to the provider selected by LLM_PROVIDER.
-    The Gemini path is the original gemini()/gemini_text() above,
-    unchanged (their temperatures are built in); the GitHub Models and
-    GLM paths honour the temperature / json_mode of the call site."""
-    provider = llm_provider()
-    if provider == "github":
-        return github_models(prompt, temperature=temperature,
-                             json_mode=json_mode)
-    if provider == "glm":
-        return glm(prompt, temperature=temperature, json_mode=json_mode)
-    if provider != "gemini":
-        raise Fail(f"Unknown LLM_PROVIDER {provider!r} "
-                   "(expected 'gemini', 'github' or 'glm')")
+def llm_chain():
+    """The ordered brain chain for this run. LLM_CHAIN (e.g.
+    "glm,gemini") wins when set; otherwise the chain is LLM_PROVIDER
+    (when set) followed by glm and gemini, deduplicated, order
+    preserved. "github" is excluded from the DEFAULT chain (GitHub
+    Models is retired); it is honoured only when named explicitly in
+    LLM_CHAIN."""
+    raw = (os.environ.get("LLM_CHAIN") or "").strip()
+    if raw:
+        names = [n.strip().lower() for n in raw.split(",") if n.strip()]
+    else:
+        names = []
+        primary = (os.environ.get("LLM_PROVIDER") or "").strip().lower()
+        if primary and primary != "github":
+            names.append(primary)
+        names.extend(["glm", "gemini"])
+    chain = []
+    for name in names:
+        if name not in chain:
+            chain.append(name)
+    return chain
+
+
+def _brain_key_available(name, api_key):
+    """True when brain `name` has the credential it needs. The Gemini
+    key is the api_key argument call_llm already receives (with the
+    GEMINI_API_KEY env var as fallback)."""
+    if name == "glm":
+        return bool((os.environ.get("GLM_API_KEY") or "").strip())
+    if name == "gemini":
+        return bool((api_key or "").strip()
+                    or (os.environ.get("GEMINI_API_KEY") or "").strip())
+    if name == "github":
+        return bool((os.environ.get("GH_MODELS_TOKEN") or "").strip()
+                    or (os.environ.get("GITHUB_TOKEN") or "").strip())
+    return False
+
+
+def _call_brain(name, prompt, api_key, model, temperature, json_mode):
+    """One single attempt on brain `name`. The Gemini path is the
+    original gemini()/gemini_text() above, unchanged (their
+    temperatures are built in); the GitHub Models and GLM paths honour
+    the temperature / json_mode of the call site."""
+    if name == "glm":
+        return _glm_once(prompt, temperature=temperature,
+                         json_mode=json_mode)
+    if name == "github":
+        return _github_models_once(prompt, temperature=temperature,
+                                   json_mode=json_mode)
     if json_mode:
         return gemini(prompt, api_key, model)
     return gemini_text(prompt, api_key, model)
+
+
+def call_llm(prompt, api_key, model, temperature=0.4, json_mode=False):
+    """One logical LLM call, served by the brain chain (llm_chain()):
+    brains are tried in order, each for up to CHAIN_ATTEMPTS attempts
+    with a CHAIN_BACKOFF_SECONDS x attempt pause between attempts.
+    Truncation, HTTP errors, transport errors and empty replies all
+    count as failed attempts. A brain whose key is missing is skipped.
+    The call raises Fail only when every brain in the chain was
+    skipped or exhausted — fail-closed, exactly as the single-brain
+    path was."""
+    chain = llm_chain()
+    failures = []
+    for name in chain:
+        if name not in KNOWN_BRAINS:
+            raise Fail(f"Unknown LLM provider {name!r} in chain "
+                       f"{chain} (expected one of: "
+                       f"{', '.join(KNOWN_BRAINS)})")
+        if not _brain_key_available(name, api_key):
+            print(f"brain skipped: {name} (no key)")
+            failures.append(f"{name} (no key)")
+            continue
+        last_error = None
+        for attempt in range(1, CHAIN_ATTEMPTS + 1):
+            try:
+                text = _call_brain(name, prompt, api_key, model,
+                                   temperature, json_mode)
+            except Exception as e:
+                last_error = e
+                print(f"WARNING: brain {name} failed attempt "
+                      f"({attempt}/{CHAIN_ATTEMPTS}): {e}")
+                if attempt < CHAIN_ATTEMPTS:
+                    time.sleep(CHAIN_BACKOFF_SECONDS * attempt)
+                continue
+            print(f"brain ok: {name}")
+            return text
+        print(f"brain switch: {name} failed after {CHAIN_ATTEMPTS} "
+              "attempts -> next brain")
+        failures.append(f"{name} ({last_error})")
+    raise Fail(f"All brains failed: chain {chain} exhausted — "
+               + "; ".join(failures))
 
 
 def translate_query_to_english(text, api_key, model):
@@ -737,7 +818,9 @@ def main():
     api_key = os.environ.get("GEMINI_API_KEY", "").strip()
     tg_token = os.environ.get("TELEGRAM_BOT_TOKEN", "").strip()
     provider = llm_provider()
-    print(f"LLM provider: {provider} (model {llm_model()})")
+    chain = llm_chain()
+    print(f"LLM provider: {provider} (model {llm_model()}); "
+          f"brain chain: {chain}")
 
     if not field or not idea:
         raise Fail("FIELD and IDEA inputs are required.")
@@ -749,20 +832,11 @@ def main():
         raise Fail(f"BATCH must be 1..5, got {batch}.")
     if not chat_id:
         raise Fail("CHAT_ID (the requesting user's chat) is required.")
-    if provider == "github":
-        if not ((os.environ.get("GH_MODELS_TOKEN") or "").strip()
-                or (os.environ.get("GITHUB_TOKEN") or "").strip()):
-            raise Fail("LLM_PROVIDER=github but no model token is available: "
-                       "set the GH_MODELS_TOKEN repo secret or pass GITHUB_TOKEN.")
-        missing = [n for n, v in [("TELEGRAM_BOT_TOKEN", tg_token)] if not v]
-    elif provider == "glm":
-        if not (os.environ.get("GLM_API_KEY") or "").strip():
-            raise Fail("LLM_PROVIDER=glm but GLM_API_KEY is not available: "
-                       "set the GLM_API_KEY repo secret.")
-        missing = [n for n, v in [("TELEGRAM_BOT_TOKEN", tg_token)] if not v]
-    else:
-        missing = [n for n, v in [("GEMINI_API_KEY", api_key),
-                                  ("TELEGRAM_BOT_TOKEN", tg_token)] if not v]
+    if not any(_brain_key_available(name, api_key) for name in chain):
+        raise Fail("No usable LLM brain: chain " + ", ".join(chain)
+                   + " — none of its providers has its key available "
+                   "(GLM_API_KEY / GEMINI_API_KEY / GH_MODELS_TOKEN).")
+    missing = [n for n, v in [("TELEGRAM_BOT_TOKEN", tg_token)] if not v]
     if missing:
         raise Fail("Missing required Actions secret(s): " + ", ".join(missing))
 
