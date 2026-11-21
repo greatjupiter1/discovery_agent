@@ -359,7 +359,37 @@ def format_reference(i, s):
     return ref
 
 
-def write_article(field, topic, language, sources, api_key, model):
+# Article category/type (§14). Absent env (manual dispatch) defaults to
+# intl/isi. TYPE_GUIDE lines are injected into the writing prompts;
+# TYPE_LABELS are shown in the channel header.
+TYPE_GUIDE = {
+    "isc": "Target standard: ISC journal article — Persian body, extended English abstract, Persian references style",
+    "isi": "Target standard: ISI (Web of Science) journal article — IMRaD structure, structured abstract",
+    "scopus": "Target standard: Scopus-indexed journal article — IMRaD structure, structured abstract, international references style",
+    "pubmed": "Target standard: PubMed-indexed biomedical journal article — IMRaD structure, structured abstract, MeSH-style keywords",
+    "ieee": "Target standard: IEEE journal article — IEEE structure and IEEE references style, concise technical English",
+    "res": "Target standard: Iranian scientific-research journal article (وزارت علوم) — Persian, IMRaD",
+    "promo": "Target standard: Iranian scientific-promotional (علمی‌ترویجی) article — Persian, accessible scholarly style",
+    "conf": "Target standard: Iranian conference paper — Persian, conference format, shorter",
+    "review": "Target standard: Review article (مروری) — thematic synthesis",
+    "intlconf": "Target standard: International conference paper — English, conference format",
+}
+
+TYPE_LABELS = {
+    "isc": "ISC",
+    "res": "علمی‌پژوهشی",
+    "promo": "علمی‌ترویجی",
+    "conf": "همایشی",
+    "review": "مروری",
+    "isi": "ISI (Web of Science)",
+    "scopus": "Scopus",
+    "pubmed": "PubMed",
+    "ieee": "IEEE",
+    "intlconf": "همایشی بین‌المللی",
+}
+
+
+def write_article(field, topic, language, sources, api_key, model, guide=""):
     lang_name = LANGUAGE_NAMES.get(language.lower(), language)
     cards = source_cards_text(sources)
     hard_rules = (
@@ -373,7 +403,8 @@ def write_article(field, topic, language, sources, api_key, model):
         "filling the gap.\n"
         f"- Write the ENTIRE output in {lang_name}.\n")
     common = (f"Field: {field}\nTopic: {topic}\n\n{hard_rules}\n"
-              f"THE ONLY SOURCES YOU MAY USE:\n{cards}\n")
+              + (f"{guide}\n" if guide else "")
+              + f"THE ONLY SOURCES YOU MAY USE:\n{cards}\n")
 
     part1 = gemini(common +
         "\nWrite PART 1 of a scholarly review article:\n"
@@ -575,6 +606,12 @@ def norm(s):
 def main():
     field = os.environ.get("FIELD", "").strip()
     topic = os.environ.get("TOPIC", "").strip()
+    category = (os.environ.get("ARTICLE_CATEGORY") or "intl").strip().lower()
+    if category not in ("ir", "intl"):
+        category = "intl"
+    article_type = (os.environ.get("ARTICLE_TYPE") or "isi").strip().lower()
+    if article_type not in TYPE_GUIDE:
+        article_type = "isi"
     language = (os.environ.get("LANGUAGE") or "fa").strip()
     mode = (os.environ.get("MODE") or "review").strip().lower()
     model = (os.environ.get("GEMINI_MODEL") or "gemini-3.8-flash").strip()
@@ -594,7 +631,9 @@ def main():
 
     state = load_state()
     for p in state.get("productions", []):
-        if (norm(p.get("field")) == norm(field)
+        if (norm(p.get("category") or "intl") == norm(category)
+                and norm(p.get("type") or "isi") == norm(article_type)
+                and norm(p.get("field")) == norm(field)
                 and norm(p.get("topic")) == norm(topic)
                 and norm(p.get("language")) == norm(language)):
             print(f"NOTE: '{topic}' ({field}, {language}) is already in "
@@ -638,11 +677,14 @@ def main():
             f"'{topic}' (minimum {MIN_SOURCES}). Refusing to write an article "
             "on unverified material. Try a broader or different topic.")
 
-    title, article = write_article(field, topic, language, verified, api_key, model)
+    title, article = write_article(field, topic, language, verified,
+                                   api_key, model,
+                                   guide=TYPE_GUIDE[article_type])
 
     header = (f"📚 Scientific Discovery Agent — new article\n"
               f"Field: {field}\nTopic: {topic}\nLanguage: {language}\n"
-              f"Mode: {mode}\nVerified sources: {len(verified)}\n\n{title}")
+              f"Mode: {mode}\nVerified sources: {len(verified)}\n"
+              f"نوع مقاله: {TYPE_LABELS[article_type]}\n\n{title}")
     message_ids = []
     r = tg_call("sendMessage", tg_token, {"chat_id": chat_id, "text": header})
     message_ids.append(r["message_id"])
@@ -656,6 +698,7 @@ def main():
     message_ids.append(r["message_id"])
 
     state.setdefault("productions", []).append({
+        "category": category, "type": article_type,
         "field": field, "topic": topic, "language": language, "mode": mode,
         "title": title,
         "date": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
