@@ -4,7 +4,8 @@
 One production run:
   1. Read state.json; refuse to duplicate an existing (field, topic, language).
   2. Retrieve candidate works from FREE indexes only (OpenAlex, Crossref,
-     arXiv, Semantic Scholar — no API keys).
+     Internet Archive, Google Books, DOAJ, arXiv, Semantic Scholar —
+     no API keys).
   3. VERIFICATION LAW: a reference is kept only if its DOI resolves through
      Crossref, or its arXiv page exists, or its publisher landing page
      answers HTTP 200. Anything unverifiable is discarded. Nothing is ever
@@ -34,6 +35,7 @@ Secrets (names only, set in the repo's Actions secrets):
   GEMINI_API_KEY, TELEGRAM_BOT_TOKEN, CHAT_ID
 """
 
+import email.utils
 import json
 import os
 import re
@@ -68,14 +70,61 @@ class Fail(Exception):
 # HTTP with the full retry law
 # --------------------------------------------------------------------------
 
+# Pacing: at least this many seconds between successive calls to one host.
+HOST_PACE_SECONDS = 0.5
+_HOST_LAST_CALL = {}
+
+
+def _pace(host):
+    """Sleep just enough that calls to the same host stay >=0.5s apart."""
+    if not host:
+        return
+    now = time.monotonic()
+    last = _HOST_LAST_CALL.get(host)
+    if last is not None:
+        wait = HOST_PACE_SECONDS - (now - last)
+        if wait > 0:
+            time.sleep(wait)
+    _HOST_LAST_CALL[host] = time.monotonic()
+
+
+def _retry_after_seconds(headers):
+    """Parse a Retry-After header (seconds or HTTP-date); None if absent
+    or unparseable."""
+    if headers is None:
+        return None
+    raw = headers.get("Retry-After")
+    if not raw:
+        return None
+    raw = str(raw).strip()
+    try:
+        return max(0.0, float(raw))
+    except ValueError:
+        pass
+    try:
+        dt = email.utils.parsedate_to_datetime(raw)
+        if dt is not None:
+            if dt.tzinfo is None:
+                dt = dt.replace(tzinfo=timezone.utc)
+            return max(0.0, (dt - datetime.now(timezone.utc)).total_seconds())
+    except Exception:
+        pass
+    return None
+
+
 def http_request(url, method="GET", data=None, headers=None, timeout=READ_TIMEOUT):
-    """One logical HTTP request with retries on ALL transient failures."""
+    """One logical HTTP request with retries on ALL transient failures.
+    Honours Retry-After (capped at 120s) when the server sends one, and
+    paces successive calls to the same host ~0.5s apart."""
     last_error = None
+    host = urllib.parse.urlparse(url).netloc
     for attempt in range(1, MAX_ATTEMPTS + 1):
+        _pace(host)
         req = urllib.request.Request(url, data=data, method=method)
         req.add_header("User-Agent", "discovery-agent/1.0 (research; mailto:research@example.org)")
         for k, v in (headers or {}).items():
             req.add_header(k, v)
+        wait = 30 * attempt
         try:
             with urllib.request.urlopen(req, timeout=timeout) as resp:
                 return resp.status, resp.read()
@@ -83,13 +132,18 @@ def http_request(url, method="GET", data=None, headers=None, timeout=READ_TIMEOU
             body = e.read() if hasattr(e, "read") else b""
             if e.code == 429 or 500 <= e.code < 600:
                 last_error = Fail(f"HTTP {e.code} from {url.split('?')[0]}: {body[:200]!r}")
+                ra = _retry_after_seconds(getattr(e, "headers", None))
+                if ra is not None:
+                    wait = min(ra, 120)
+                    print(f"NOTE: {host} sent Retry-After; sleeping "
+                          f"{wait:.0f}s before attempt {attempt + 1}")
             else:
                 # A definitive answer (e.g. 404) is not transient: return it.
                 return e.code, body
         except Exception as e:  # timeouts, DNS, resets — all transient
             last_error = e
         if attempt < MAX_ATTEMPTS:
-            time.sleep(30 * attempt)
+            time.sleep(wait)
     raise Fail(f"request failed after {MAX_ATTEMPTS} attempts: {url.split('?')[0]} ({last_error})")
 
 
@@ -151,10 +205,13 @@ def search_openalex(query):
     return out
 
 
+CROSSREF_MAILTO = "discoverybot@users.noreply.github.com"
+
+
 def search_crossref(query):
     out = []
-    url = ("https://api.crossref.org/works?rows=25&query="
-           + urllib.parse.quote(query))
+    url = ("https://api.crossref.org/works?rows=25&mailto=" + CROSSREF_MAILTO
+           + "&query=" + urllib.parse.quote(query))
     data = http_json(url)
     for it in data.get("message", {}).get("items", []):
         titles = it.get("title") or []
@@ -238,15 +295,115 @@ def search_semantic_scholar(query):
     return out
 
 
-SEARCHERS = [search_openalex, search_crossref, search_arxiv, search_semantic_scholar]
+def search_internet_archive(query):
+    """Internet Archive advancedsearch — especially valuable for classical
+    Arabic/Persian books that the journal indexes barely cover."""
+    out = []
+    url = ("https://archive.org/advancedsearch.php?q=" + urllib.parse.quote(query)
+           + "&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=creator&fl%5B%5D=date"
+           + "&rows=10&page=1&output=json")
+    data = http_json(url)
+    for doc in (data.get("response") or {}).get("docs", []) or []:
+        ident = str(doc.get("identifier") or "").strip()
+        if not ident:
+            continue
+        creator = doc.get("creator") or []
+        if isinstance(creator, str):
+            creator = [creator]
+        date = str(doc.get("date") or "")
+        out.append({
+            "title": str(doc.get("title") or "").strip(),
+            "authors": [str(a).strip() for a in creator if str(a).strip()],
+            "year": int(date[:4]) if date[:4].isdigit() else None,
+            "venue": "Internet Archive",
+            "doi": None,
+            "url": f"https://archive.org/details/{ident}",
+            "abstract": "",
+            "arxiv_id": None,
+            "index": "Internet Archive",
+        })
+    return out
+
+
+def search_google_books(query):
+    out = []
+    url = ("https://www.googleapis.com/books/v1/volumes?maxResults=10&q="
+           + urllib.parse.quote(query))
+    data = http_json(url)
+    for item in data.get("items", []) or []:
+        info = item.get("volumeInfo") or {}
+        published = str(info.get("publishedDate") or "")
+        out.append({
+            "title": (info.get("title") or "").strip(),
+            "authors": [a for a in info.get("authors", []) if a],
+            "year": int(published[:4]) if published[:4].isdigit() else None,
+            "venue": info.get("publisher") or "Google Books",
+            "doi": None,
+            "url": info.get("infoLink") or item.get("selfLink") or "",
+            "abstract": (info.get("description") or "")[:1500],
+            "arxiv_id": None,
+            "index": "Google Books",
+        })
+    return out
+
+
+def search_doaj(query):
+    out = []
+    url = ("https://doaj.org/api/search/articles/"
+           + urllib.parse.quote(query, safe="") + "?pageSize=10")
+    data = http_json(url)
+    for r in data.get("results", []) or []:
+        bib = r.get("bibjson") or {}
+        doi = None
+        for ident in bib.get("identifier", []) or []:
+            if (ident.get("type") or "").lower() == "doi" and ident.get("id"):
+                doi = str(ident["id"]).replace("https://doi.org/", "") or None
+                break
+        link = ""
+        for lnk in bib.get("link", []) or []:
+            if lnk.get("url"):
+                link = lnk["url"]
+                if (lnk.get("type") or "").lower() == "fulltext":
+                    break
+        year = bib.get("year")
+        try:
+            year = int(year) if year else None
+        except (TypeError, ValueError):
+            year = None
+        out.append({
+            "title": (bib.get("title") or "").strip(),
+            "authors": [a.get("name", "") for a in bib.get("author", [])
+                        if a.get("name")],
+            "year": year,
+            "venue": (bib.get("journal") or {}).get("title") or "DOAJ",
+            "doi": doi,
+            "url": link,
+            "abstract": bib.get("abstract") or "",
+            "arxiv_id": None,
+            "index": "DOAJ",
+        })
+    return out
+
+
+SEARCHERS = [search_openalex, search_crossref, search_internet_archive,
+             search_google_books, search_doaj, search_arxiv,
+             search_semantic_scholar]
 
 
 def normalise_title(t):
     return re.sub(r"[^a-z0-9\u0600-\u06FF]+", " ", (t or "").lower()).strip()
 
 
+def _counts_line(label, found, kept):
+    parts = []
+    for name in sorted(set(found) | set(kept)):
+        parts.append(f"{name}: found={found.get(name, 0)} kept={kept.get(name, 0)}")
+    return f"{label} " + ("; ".join(parts) if parts else "(none)")
+
+
 def retrieve(field, topic, queries):
     candidates, seen = [], set()
+    found_by, kept_by = {}, {}
     for query in queries:
         for searcher in SEARCHERS:
             try:
@@ -255,15 +412,20 @@ def retrieve(field, topic, queries):
                 print(f"WARNING: {searcher.__name__} failed for query {query!r}: {e}")
                 continue
             for c in results:
+                idx = c.get("index") or searcher.__name__
+                found_by[idx] = found_by.get(idx, 0) + 1
                 if not c["title"]:
                     continue
                 key = (c["doi"].lower() if c["doi"] else None) or normalise_title(c["title"])
                 if key in seen:
                     continue
                 seen.add(key)
+                kept_by[idx] = kept_by.get(idx, 0) + 1
                 candidates.append(c)
                 if len(candidates) >= MAX_CANDIDATES:
+                    print(_counts_line("Candidates by source:", found_by, kept_by))
                     return candidates
+    print(_counts_line("Candidates by source:", found_by, kept_by))
     return candidates
 
 
@@ -276,7 +438,8 @@ def verify(candidate):
     doi = candidate.get("doi")
     if doi:
         status, _ = http_request(
-            "https://api.crossref.org/works/" + urllib.parse.quote(doi, safe=""),
+            "https://api.crossref.org/works/" + urllib.parse.quote(doi, safe="")
+            + "?mailto=" + CROSSREF_MAILTO,
             timeout=60)
         if status == 200:
             return True
@@ -316,17 +479,28 @@ def gemini(prompt, api_key, model):
     return text
 
 
-def translate_query_to_english(text, api_key, model):
-    """Best-effort: an English search query for the indexes. Never fatal."""
+def translate_query(text, api_key, model, target_language):
+    """Best-effort: a search query for `text` in another language, via the
+    Gemini call path (with its retries). Never fatal — returns None."""
     try:
         out = gemini(
-            "Translate this research topic into a short English search query "
-            "(keywords only, no quotes, no explanation):\n" + text,
+            f"Translate this research topic into a short {target_language} "
+            "search query (keywords only, no quotes, no explanation):\n" + text,
             api_key, model)
-        return out.strip().strip('"')[:200]
-    except Exception as e:
-        print(f"WARNING: query translation failed ({e}); continuing without it")
+        q = out.strip().strip('"')[:200]
+        if q:
+            print(f"Query variant ({target_language}): {q!r}")
+            return q
         return None
+    except Exception as e:
+        print(f"WARNING: query translation to {target_language} failed "
+              f"({e}); continuing without it")
+        return None
+
+
+def translate_query_to_english(text, api_key, model):
+    """Best-effort: an English search query for the indexes. Never fatal."""
+    return translate_query(text, api_key, model, "English")
 
 
 def source_cards_text(sources):
@@ -640,16 +814,20 @@ def main():
                   "state.json — refusing to duplicate. Exiting cleanly.")
             return 0
 
-    # Queries: the topic as given (its own language) + field+topic, plus a
-    # best-effort English query for the global indexes.
+    # Queries: up to 3 variants of the topic — as given, an Arabic
+    # translation, an English translation (translations are best-effort via
+    # Gemini; a failed translation never fails the run) — plus the existing
+    # field+topic combined query.
     queries = []
-    for q in (topic, f"{field} {topic}"):
-        if q not in queries:
+
+    def add_query(q):
+        if q and q not in queries:
             queries.append(q)
-    if any(ord(ch) > 127 for ch in topic):
-        english_q = translate_query_to_english(f"{field} {topic}", api_key, model)
-        if english_q and english_q not in queries:
-            queries.append(english_q)
+
+    add_query(topic)
+    add_query(f"{field} {topic}")
+    add_query(translate_query(topic, api_key, model, "Arabic"))
+    add_query(translate_query_to_english(topic, api_key, model))
     print(f"Queries: {queries}")
 
     progress_start(os.environ.get("ARTICLE_CHAT_ID", ""), tg_token)
@@ -657,7 +835,7 @@ def main():
     print(f"Candidates collected: {len(candidates)}")
     progress_update(15, "🔎 جست‌وجوی منابع")
 
-    verified = []
+    verified, verified_by = [], {}
     for c in candidates:
         if len(verified) >= MAX_VERIFIED:
             break
@@ -668,8 +846,12 @@ def main():
             ok = False
         if ok:
             verified.append(c)
+            idx = c.get("index") or "?"
+            verified_by[idx] = verified_by.get(idx, 0) + 1
             print(f"  verified [{len(verified)}] {c['title'][:80]}")
     print(f"Verified sources: {len(verified)}")
+    print("Verified by source: " + ("; ".join(
+        f"{name}={n}" for name, n in sorted(verified_by.items())) or "(none)"))
     progress_update(35, "📚 راستی‌آزمایی منابع")
     if len(verified) < MIN_SOURCES:
         raise Fail(
