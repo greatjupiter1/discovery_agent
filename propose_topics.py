@@ -248,7 +248,11 @@ def github_models(prompt, temperature=0.4, json_mode=False):
                                        "Authorization": f"Bearer {token}"})
         if status != 200:
             raise Fail(f"GitHub Models HTTP {status}: {raw[:300]!r}")
-        data = json.loads(raw.decode("utf-8", "replace"))
+        try:
+            data = json.loads(raw.decode("utf-8", "replace"))
+        except Exception:
+            raise Fail(f"GitHub Models returned a non-JSON body "
+                       f"(HTTP {status}): {raw[:300]!r}")
         try:
             choice = data["choices"][0]
             text = (choice["message"]["content"] or "").strip()
