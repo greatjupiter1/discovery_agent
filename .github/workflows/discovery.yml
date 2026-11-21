@@ -1,0 +1,62 @@
+name: Build Discovery article
+
+# On-demand only (no schedule): run it from the Actions tab, or dispatch it
+# through the API. Inputs mirror build_article.py's environment.
+on:
+  workflow_dispatch:
+    inputs:
+      field:
+        description: "Field / discipline (e.g. Medicine, Mathematics, History)"
+        required: true
+        type: string
+      topic:
+        description: "Article topic (any language)"
+        required: true
+        type: string
+      language:
+        description: "Output language code (fa, en, ar, ...)"
+        required: false
+        default: "fa"
+        type: string
+      mode:
+        description: "Production mode (v1 supports: review)"
+        required: false
+        default: "review"
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: discovery-article
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Build and deliver the article (fail-closed)
+        env:
+          FIELD: ${{ inputs.field }}
+          TOPIC: ${{ inputs.topic }}
+          LANGUAGE: ${{ inputs.language }}
+          MODE: ${{ inputs.mode }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          CHAT_ID: ${{ secrets.CHAT_ID }}
+        run: python build_article.py
+
+      - name: Save progress (record the production in state.json)
+        if: success()
+        run: |
+          git config user.name "discovery-agent"
+          git config user.email "discovery-agent@users.noreply.github.com"
+          git add state.json
+          git diff --cached --quiet || git commit -m "record production: ${{ inputs.topic }}"
+          git push
