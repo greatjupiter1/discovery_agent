@@ -19,9 +19,24 @@ on:
         default: "fa"
         type: string
       mode:
-        description: "Production mode (v1 supports: review)"
+        description: "Production mode (review = article, propose = topic proposals)"
         required: false
         default: "review"
+        type: string
+      idea:
+        description: "Idea / area description for topic proposals (mode=propose)"
+        required: false
+        default: ""
+        type: string
+      batch:
+        description: "Proposal batch number 1..5 (mode=propose)"
+        required: false
+        default: "1"
+        type: string
+      chat_id:
+        description: "Requesting user's Telegram chat id (mode=propose)"
+        required: false
+        default: ""
         type: string
 
 permissions:
@@ -42,6 +57,7 @@ jobs:
           python-version: "3.12"
 
       - name: Build and deliver the article (fail-closed)
+        if: ${{ inputs.mode != 'propose' }}
         env:
           FIELD: ${{ inputs.field }}
           TOPIC: ${{ inputs.topic }}
@@ -52,11 +68,31 @@ jobs:
           CHAT_ID: ${{ secrets.CHAT_ID }}
         run: python build_article.py
 
+      - name: Generate topic proposals (mode=propose, fail-closed)
+        if: ${{ inputs.mode == 'propose' }}
+        env:
+          FIELD: ${{ inputs.field }}
+          IDEA: ${{ inputs.idea }}
+          BATCH: ${{ inputs.batch }}
+          CHAT_ID: ${{ inputs.chat_id }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python propose_topics.py
+
       - name: Save progress (record the production in state.json)
-        if: success()
+        if: ${{ success() && inputs.mode != 'propose' }}
         run: |
           git config user.name "discovery-agent"
           git config user.email "discovery-agent@users.noreply.github.com"
           git add state.json
           git diff --cached --quiet || git commit -m "record production: ${{ inputs.topic }}"
+          git push
+
+      - name: Save proposals (record the batch in requests/)
+        if: ${{ success() && inputs.mode == 'propose' }}
+        run: |
+          git config user.name "discovery-agent"
+          git config user.email "discovery-agent@users.noreply.github.com"
+          git add requests
+          git diff --cached --quiet || git commit -m "record proposals: batch ${{ inputs.batch }} for ${{ inputs.chat_id }}"
           git push
