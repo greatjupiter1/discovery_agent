@@ -67,6 +67,7 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           CHAT_ID: ${{ secrets.CHAT_ID }}
+          ARTICLE_CHAT_ID: ${{ inputs.chat_id }}
         run: python build_article.py
 
       - name: Generate topic proposals (mode=propose, fail-closed)
