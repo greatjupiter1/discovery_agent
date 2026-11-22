@@ -939,6 +939,19 @@ SEARCHERS = [search_openalex, search_crossref, search_openaire,
              search_annas_archive, search_doaj, search_arxiv,
              search_semantic_scholar]
 
+# English-first retrieval (§18): wave 1 queries the abstract-rich
+# indexes ONLY — Crossref is held back because, queried with a
+# non-English topic, it floods the candidate pool with keyword noise
+# (Persian/Afghan matches) that crowds out the genuine EN/FR/DE
+# scholarship before the relevance screen ever sees it. Crossref runs
+# as a top-up only when wave 1 yields too few verified candidates.
+WAVE1_SEARCHERS = [search_openalex, search_europe_pmc, search_hal,
+                   search_openaire, search_semantic_scholar, search_doaj,
+                   search_zbmath, search_internet_archive,
+                   search_google_books, search_arxiv,
+                   search_annas_archive]
+CROSSREF_SEARCHERS = [search_crossref]
+
 
 def normalise_title(t):
     return re.sub(r"[^a-z0-9\u0600-\u06FF]+", " ", (t or "").lower()).strip()
@@ -1049,6 +1062,52 @@ def _verify_one(candidate, cache):
     return ok, via
 
 
+# --------------------------------------------------------------------------
+# Language gate at intake (§18): Persian/Arabic candidates are dropped
+# BEFORE verification — the SOURCE LAW admits credible scholarship in
+# English, French or German only, and the Persian/Afghan keyword noise
+# was consuming the whole candidate cap + verification budget. The one
+# exception is a primary text in a scholarly edition / translation of
+# the EN/FR/DE tradition (e.g. a critical edition of Biruni's own
+# works). The gate never admits anything by itself: survivors still
+# face the unchanged verification + relevance + content laws.
+# --------------------------------------------------------------------------
+
+_GATE_LANGUAGES = {"fa", "fas", "per", "ar", "ara", "ur", "urd"}
+_EDITION_MARKERS = ("critical edition", "scholarly edition",
+                    "édition critique", "kritische ausgabe",
+                    "translated by", "translated from",
+                    "english translation", "french translation",
+                    "german translation", "translation of",
+                    "edited by", "ed. and tr", "éd. critique")
+
+
+def _arabic_script_ratio(text):
+    letters = [ch for ch in (text or "") if ch.isalpha()]
+    if not letters:
+        return 0.0
+    arab = sum(1 for ch in letters if "\u0600" <= ch <= "\u06FF")
+    return arab / len(letters)
+
+
+def _is_scholarly_edition(candidate):
+    title = (candidate.get("title") or "").lower()
+    return any(marker in title for marker in _EDITION_MARKERS)
+
+
+def language_gate_drop(candidate):
+    """True when the §18 intake language gate drops this candidate:
+    its metadata language is Persian/Arabic/Urdu, or its title is
+    Arabic-script dominant — unless it is a primary text in a
+    scholarly edition/translation."""
+    lang = (candidate.get("language") or "").strip().lower()
+    if lang in _GATE_LANGUAGES:
+        return not _is_scholarly_edition(candidate)
+    if _arabic_script_ratio(candidate.get("title")) >= 0.5:
+        return not _is_scholarly_edition(candidate)
+    return False
+
+
 def _new_retrieval_state():
     """Shared retrieval machinery state for collect_verified(): the
     dedupe set, the per-source time budgets / bench set, the verify
@@ -1056,7 +1115,8 @@ def _new_retrieval_state():
     to a second call (wave 2, §16.2) makes that call respect wave 1's
     bench decisions and never re-fetch a wave-1 candidate."""
     return {"seen": set(), "source_time": {}, "benched": set(),
-            "cache": None, "total_candidates": 0}
+            "cache": None, "total_candidates": 0,
+            "lang_gate_dropped": 0}
 
 
 def collect_verified(queries, state=None, searcher_order=None):
@@ -1116,6 +1176,10 @@ def collect_verified(queries, state=None, searcher_order=None):
                 found_by[idx] = found_by.get(idx, 0) + 1
                 if not c["title"]:
                     continue
+                if language_gate_drop(c):
+                    state["lang_gate_dropped"] = \
+                        state.get("lang_gate_dropped", 0) + 1
+                    continue
                 key = (c["doi"].lower() if c["doi"] else None) \
                     or normalise_title(c["title"])
                 if key in seen:
@@ -1145,6 +1209,9 @@ def collect_verified(queries, state=None, searcher_order=None):
         verification_t += time.monotonic() - t0
     state["total_candidates"] = total_candidates
     save_verify_cache(cache)
+    print(f"language gate (§18): dropped "
+          f"{state.get('lang_gate_dropped', 0)} Persian/Arabic "
+          "candidates at intake so far (scholarly editions excepted)")
     print(_counts_line("Candidates by source:", found_by, kept_by))
     print(f"Candidates collected: {total_candidates}")
     print(f"Verified sources: {len(verified)}")
@@ -1152,6 +1219,26 @@ def collect_verified(queries, state=None, searcher_order=None):
         f"{name}={n}" for name, n in sorted(verified_by.items())) or "(none)"))
     print(f"timing: retrieval {retrieval_t:.1f}s")
     print(f"timing: verification {verification_t:.1f}s")
+    return verified
+
+
+def retrieve_wave1(queries, rstate):
+    """Wave 1 (§18): the abstract-rich indexes with the English-first
+    queries, Crossref EXCLUDED. Crossref runs afterwards as a top-up
+    ONLY when wave 1 produced fewer than EARLY_STOP_VERIFIED verified
+    candidates. Both calls share `rstate`, so the top-up respects
+    wave 1's dedupe set, bench decisions and language-gate count."""
+    verified = collect_verified(queries, state=rstate,
+                                searcher_order=WAVE1_SEARCHERS)
+    if len(verified) < EARLY_STOP_VERIFIED:
+        print(f"wave 1 (§18): {len(verified)} verified from the "
+              f"abstract-rich indexes (< {EARLY_STOP_VERIFIED}) — "
+              "Crossref top-up now runs with the same queries")
+        verified = verified + collect_verified(
+            queries, state=rstate, searcher_order=CROSSREF_SEARCHERS)
+    else:
+        print(f"wave 1 (§18): {len(verified)} verified — Crossref "
+              "top-up not needed")
     return verified
 
 
@@ -1951,6 +2038,70 @@ def translate_query_to_english(text, api_key, model):
     return translate_query(text, api_key, model, "English")
 
 
+def english_first_queries(field, topic, api_key, model):
+    """English-first query expansion (§18): ONE brain-chain call turns
+    the (often Persian) field+topic into 3–5 precise ENGLISH scholarly
+    search queries — Latin-script name variants (al-Biruni / Biruni /
+    Abu Rayhan), the narrow topic's technical terms, the named work —
+    plus, for a historical scholarly figure, one French and one German
+    query. These queries drive wave 1, so the abstract-rich indexes
+    search the EN/FR/DE literature directly instead of matching
+    Persian keywords. Best-effort: ANY failure returns [] and the
+    caller falls back to the legacy query behaviour — never fatal."""
+    prompt = (
+        "You build search queries for scholarly literature indexes "
+        "(OpenAlex, HAL, Europe PMC, Semantic Scholar).\n"
+        f"Field: {field}\nTopic: {topic}\n\n"
+        "Write 3 to 5 PRECISE search queries IN ENGLISH that would "
+        "find the genuine scholarly literature on this exact narrow "
+        "topic. Rules:\n"
+        "- Use Latin-script name variants for historical figures "
+        "(e.g. al-Biruni, Biruni, Abu Rayhan) and the standard "
+        "English titles/transliterations of their works.\n"
+        "- Include the specific technical terms of the topic "
+        "(methods, instruments, tables, places) — not broad field "
+        "words alone.\n"
+        "- Each query: 3–9 words, keywords only, no quotes, no "
+        "Boolean operators.\n"
+        "If the topic concerns a historical scholarly figure, ALSO "
+        "give one French and one German query (same precision); "
+        "otherwise set them to null.\n"
+        "Reply with JSON only, like: "
+        '{"queries": ["...", "..."], "french": "...", '
+        '"german": "..."}')
+    try:
+        raw = call_llm(prompt, api_key, model, temperature=0.2,
+                       json_mode=True)
+        data = _parse_json_value(raw)
+        items = []
+        if isinstance(data, dict):
+            items = list(data.get("queries") or [])
+            for key in ("french", "german", "fr", "de"):
+                extra = data.get(key)
+                if isinstance(extra, str) and extra.strip():
+                    items.append(extra)
+                elif isinstance(extra, list):
+                    items.extend(extra)
+        elif isinstance(data, list):
+            items = list(data)
+        queries = []
+        for q in items:
+            q = str(q).strip().strip('"')[:200]
+            if q and q not in queries:
+                queries.append(q)
+        queries = queries[:7]
+        if queries:
+            print(f"English-first queries (§18): {queries}")
+        else:
+            print("WARNING: English-first expansion returned no "
+                  "queries; falling back to legacy queries")
+        return queries
+    except Exception as e:
+        print(f"WARNING: English-first query expansion failed ({e}); "
+              "falling back to legacy queries")
+        return []
+
+
 def source_cards_text(sources):
     lines = []
     for i, s in enumerate(sources, 1):
@@ -2405,6 +2556,8 @@ def build_funnel_text(topic, funnel, success, stage=None,
              f"{funnel.get('registry_matched', 0)}",
              "",
              "حذف‌شده‌ها:",
+             "• دروازهٔ زبان در ورودی (فارسی/عربی): "
+             f"{funnel.get('drop_language_gate', 0)}",
              f"• نامرتبط: {funnel.get('drop_irrelevant', 0)}",
              f"• بدون محتوا: {funnel.get('drop_no_content', 0)}",
              "• خارج از سنت پژوهشی مجاز (انگلیسی/فرانسوی/آلمانی): "
@@ -2827,26 +2980,30 @@ def main():
                   "state.json — refusing to duplicate. Exiting cleanly.")
             return 0
 
-    # Queries: up to 3 variants of the topic — as given, an Arabic
-    # translation, an English translation (translations are best-effort via
-    # Gemini; a failed translation never fails the run) — plus the existing
-    # field+topic combined query.
-    queries = []
+    # Queries (§18 English-first): the brain chain expands the topic
+    # into precise ENGLISH scholarly queries (plus FR/DE variants for
+    # historical figures) and wave 1 runs those against the
+    # abstract-rich indexes with Crossref held back. If the expansion
+    # fails, fall back to the legacy behaviour — up to 3 variants of
+    # the topic (as given, an Arabic translation, an English
+    # translation; translations are best-effort and never fatal) plus
+    # the field+topic combined query.
+    queries = english_first_queries(field, topic, api_key, model)
+    if not queries:
+        def add_query(q):
+            if q and q not in queries:
+                queries.append(q)
 
-    def add_query(q):
-        if q and q not in queries:
-            queries.append(q)
-
-    add_query(topic)
-    add_query(f"{field} {topic}")
-    add_query(translate_query(topic, api_key, model, "Arabic"))
-    add_query(translate_query_to_english(topic, api_key, model))
+        add_query(topic)
+        add_query(f"{field} {topic}")
+        add_query(translate_query(topic, api_key, model, "Arabic"))
+        add_query(translate_query_to_english(topic, api_key, model))
     print(f"Queries: {queries}")
 
     progress_start(os.environ.get("ARTICLE_CHAT_ID", ""), tg_token)
     progress_update(15, "🔎 جست‌وجوی منابع")
     rstate = _new_retrieval_state()
-    verified = collect_verified(queries, state=rstate)
+    verified = retrieve_wave1(queries, rstate)
     progress_update(35, "📚 راستی‌آزمایی منابع")
 
     # Quality laws (§15): only genuinely relevant, content-bearing
@@ -2854,7 +3011,8 @@ def main():
     funnel = {"candidates": 0, "verified": 0, "with_content": 0,
               "relevant": 0, "counted": 0, "drop_irrelevant": 0,
               "drop_tradition": 0, "drop_disagreement": 0,
-              "drop_no_content": 0, "registry_matched": 0}
+              "drop_no_content": 0, "registry_matched": 0,
+              "drop_language_gate": 0}
     counted, sstats = _quality_pipeline(field, topic, verified,
                                         api_key, model)
     _merge_funnel(funnel, sstats)
@@ -2866,7 +3024,8 @@ def main():
         # -> screen pipeline, sharing wave 1's dedupe/bench machinery,
         # before the run is allowed to fail.
         before_candidates = rstate["total_candidates"]
-        w2_queries = _wave2_queries(field, topic, api_key, model)
+        w2_queries = list(queries) + [q for q in _wave2_queries(
+            field, topic, api_key, model) if q not in queries]
         print(f"wave 2: only {len(counted)} counted after wave 1 "
               f"(< {MIN_SOURCES}); broader retrieval, queries: "
               f"{w2_queries}")
@@ -2886,6 +3045,7 @@ def main():
               f"+{len(counted2)} counted")
         progress_update(48, "🎯 موج دوم گزینش منابع")
     funnel["candidates"] = rstate["total_candidates"]
+    funnel["drop_language_gate"] = rstate.get("lang_gate_dropped", 0)
 
     if len(counted) < MIN_SOURCES:
         send_funnel_dm(tg_token, os.environ.get("ARTICLE_CHAT_ID", ""),
