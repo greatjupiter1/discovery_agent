@@ -1,0 +1,8291 @@
+[
+ {
+  "name": "OpenAlex",
+  "url": "https://openalex.org",
+  "type": "index",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": "https://api.openalex.org",
+  "notes": "Index of 250M+ scholarly works, free API.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Crossref",
+  "url": "https://www.crossref.org",
+  "type": "index",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": "https://api.crossref.org",
+  "notes": "DOI metadata registry for scholarly works.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "OpenAIRE",
+  "url": "https://explore.openaire.eu",
+  "type": "index",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": "https://api.openaire.eu",
+  "notes": "European index of open-access research outputs.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Semantic Scholar",
+  "url": "https://www.semanticscholar.org",
+  "type": "index",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": "https://api.semanticscholar.org/graph/v1",
+  "notes": "AI-powered index of scholarly papers.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "PubMed",
+  "url": "https://pubmed.ncbi.nlm.nih.gov",
+  "type": "index",
+  "fields": [
+   "medicine"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils",
+  "notes": "US National Library of Medicine citation index.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "INSPIRE-HEP",
+  "url": "https://inspirehep.net",
+  "type": "index",
+  "fields": [
+   "physics"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": "https://inspirehep.net/api",
+  "notes": "High-energy physics literature database.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "NASA Astrophysics Data System",
+  "url": "https://ui.adsabs.harvard.edu",
+  "type": "index",
+  "fields": [
+   "physics",
+   "astronomy"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Astrophysics and physics literature index.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "ERIC",
+  "url": "https://eric.ed.gov",
+  "type": "index",
+  "fields": [
+   "education"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Education research literature index (US Dept. of Education).",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "AGRIS",
+  "url": "https://agris.fao.org",
+  "type": "index",
+  "fields": [
+   "agriculture"
+  ],
+  "languages": [
+   "English",
+   "French",
+   "Spanish"
+  ],
+  "api": null,
+  "notes": "FAO index of agricultural science literature.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Latindex",
+  "url": "https://www.latindex.org",
+  "type": "index",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "Portuguese"
+  ],
+  "api": null,
+  "notes": "Index of Ibero-American scholarly journals.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "African Journals Online (AJOL)",
+  "url": "https://www.ajol.info",
+  "type": "index",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English",
+   "French"
+  ],
+  "api": null,
+  "notes": "African scholarly journals platform, many open access.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "arXiv",
+  "url": "https://arxiv.org",
+  "type": "repository",
+  "fields": [
+   "physics",
+   "mathematics",
+   "computer science"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": "https://export.arxiv.org/api/query",
+  "notes": "Preprint repository for physics, maths and CS.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "bioRxiv",
+  "url": "https://www.biorxiv.org",
+  "type": "repository",
+  "fields": [
+   "biology"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": "https://api.biorxiv.org",
+  "notes": "Preprint server for biology.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "medRxiv",
+  "url": "https://www.medrxiv.org",
+  "type": "repository",
+  "fields": [
+   "medicine"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": "https://api.biorxiv.org",
+  "notes": "Preprint server for medical research.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "EarthArXiv",
+  "url": "https://eartharxiv.org",
+  "type": "repository",
+  "fields": [
+   "earth sciences"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Preprint server for earth sciences.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "PsyArXiv",
+  "url": "https://psyarxiv.com",
+  "type": "repository",
+  "fields": [
+   "psychology",
+   "social sciences"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Preprint server for psychology.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "HAL",
+  "url": "https://hal.science",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "French",
+   "English"
+  ],
+  "api": "https://api.archives-ouvertes.fr/search",
+  "notes": "French national open archive of research.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "HAL Thèses",
+  "url": "https://theses.hal.science",
+  "type": "thesis_archive",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "French",
+   "English"
+  ],
+  "api": "https://api.archives-ouvertes.fr/search",
+  "notes": "French doctoral theses in HAL.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "PubMed Central",
+  "url": "https://pmc.ncbi.nlm.nih.gov",
+  "type": "repository",
+  "fields": [
+   "medicine",
+   "biology"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": "https://www.ncbi.nlm.nih.gov/pmc/utils/oa/oa.fcgi",
+  "notes": "Free full-text archive of biomedical literature.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "IDEAS (RePEc)",
+  "url": "https://ideas.repec.org",
+  "type": "repository",
+  "fields": [
+   "economics"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Largest bibliographic database of economics.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "PhilSci-Archive",
+  "url": "https://philsci-archive.pitt.edu",
+  "type": "repository",
+  "fields": [
+   "philosophy",
+   "history of science"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Preprints in philosophy of science.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "CERN Document Server",
+  "url": "https://cds.cern.ch",
+  "type": "repository",
+  "fields": [
+   "physics"
+  ],
+  "languages": [
+   "English",
+   "French"
+  ],
+  "api": null,
+  "notes": "CERN research documents and preprints.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "OSTI.GOV",
+  "url": "https://www.osti.gov",
+  "type": "repository",
+  "fields": [
+   "physics",
+   "engineering",
+   "energy"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "US Dept. of Energy research outputs.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "SSOAR",
+  "url": "https://www.ssoar.info",
+  "type": "repository",
+  "fields": [
+   "social sciences"
+  ],
+  "languages": [
+   "German",
+   "English"
+  ],
+  "api": null,
+  "notes": "German social-science open-access repository (GESIS).",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "EconStor",
+  "url": "https://www.econstor.eu",
+  "type": "repository",
+  "fields": [
+   "economics"
+  ],
+  "languages": [
+   "German",
+   "English"
+  ],
+  "api": null,
+  "notes": "ZBW open-access economics publications.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "pedocs",
+  "url": "https://www.pedocs.de",
+  "type": "repository",
+  "fields": [
+   "education"
+  ],
+  "languages": [
+   "German"
+  ],
+  "api": null,
+  "notes": "German education research repository (DIPF).",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "SciELO",
+  "url": "https://scielo.org",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "Portuguese",
+   "English"
+  ],
+  "api": null,
+  "notes": "Latin-American open-access journal network.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Redalyc",
+  "url": "https://www.redalyc.org",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "Portuguese"
+  ],
+  "api": null,
+  "notes": "Ibero-American open-access journal platform.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "OpenEdition",
+  "url": "https://www.openedition.org",
+  "type": "repository",
+  "fields": [
+   "humanities",
+   "social sciences"
+  ],
+  "languages": [
+   "French",
+   "English"
+  ],
+  "api": null,
+  "notes": "French humanities and social-science platform.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Érudit",
+  "url": "https://www.erudit.org",
+  "type": "repository",
+  "fields": [
+   "humanities",
+   "social sciences"
+  ],
+  "languages": [
+   "French",
+   "English"
+  ],
+  "api": null,
+  "notes": "Quebec scholarly journals platform, largely open.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Persée",
+  "url": "https://www.persee.fr",
+  "type": "digital_library",
+  "fields": [
+   "humanities",
+   "social sciences"
+  ],
+  "languages": [
+   "French"
+  ],
+  "api": null,
+  "notes": "French archive of humanities journal back-runs.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Internet Archive",
+  "url": "https://archive.org",
+  "type": "digital_library",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": "https://archive.org/advancedsearch.php",
+  "notes": "Massive digital library with open texts and metadata API.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Deutsche Digitale Bibliothek",
+  "url": "https://www.deutsche-digitale-bibliothek.de",
+  "type": "digital_library",
+  "fields": [
+   "humanities",
+   "history"
+  ],
+  "languages": [
+   "German"
+  ],
+  "api": null,
+  "notes": "German cultural heritage digital library.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Google Books",
+  "url": "https://books.google.com",
+  "type": "digital_library",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": "https://www.googleapis.com/books/v1",
+  "notes": "Book index with many public-domain full views.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Open Library",
+  "url": "https://openlibrary.org",
+  "type": "digital_library",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": "https://openlibrary.org/search.json",
+  "notes": "Internet Archive's open book catalogue.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Münchener DigitalisierungsZentrum (MDZ)",
+  "url": "https://www.digitale-sammlungen.de",
+  "type": "digital_library",
+  "fields": [
+   "history",
+   "humanities"
+  ],
+  "languages": [
+   "German"
+  ],
+  "api": null,
+  "notes": "Bavarian State Library digitised collections.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "e-rara",
+  "url": "https://www.e-rara.ch",
+  "type": "digital_library",
+  "fields": [
+   "history of science",
+   "history"
+  ],
+  "languages": [
+   "German",
+   "French"
+  ],
+  "api": null,
+  "notes": "Swiss platform for digitised rare books.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Library of Congress Digital Collections",
+  "url": "https://www.loc.gov",
+  "type": "digital_library",
+  "fields": [
+   "history",
+   "humanities"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "US national library digital collections.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Trove (National Library of Australia)",
+  "url": "https://trove.nla.gov.au",
+  "type": "digital_library",
+  "fields": [
+   "history",
+   "humanities"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Australian books, newspapers and archives.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Canadiana",
+  "url": "https://www.canadiana.ca",
+  "type": "digital_library",
+  "fields": [
+   "history"
+  ],
+  "languages": [
+   "English",
+   "French"
+  ],
+  "api": null,
+  "notes": "Canadian documentary heritage online.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Polona",
+  "url": "https://polona.pl",
+  "type": "digital_library",
+  "fields": [
+   "history",
+   "literature"
+  ],
+  "languages": [
+   "Polish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Polish National Library digital collections.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "National Diet Library Digital Collections",
+  "url": "https://dl.ndl.go.jp",
+  "type": "digital_library",
+  "fields": [
+   "history",
+   "humanities"
+  ],
+  "languages": [
+   "Japanese",
+   "English"
+  ],
+  "api": null,
+  "notes": "Japanese national library digitised books.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Digital Library of the Middle East",
+  "url": "https://dlme.clir.org",
+  "type": "digital_library",
+  "fields": [
+   "Islamic studies",
+   "history"
+  ],
+  "languages": [
+   "English",
+   "Arabic"
+  ],
+  "api": null,
+  "notes": "Aggregated Middle-Eastern digital collections.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Muslim Heritage (FSTC)",
+  "url": "https://muslimheritage.com",
+  "type": "digital_library",
+  "fields": [
+   "history of science",
+   "Islamic studies"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Articles and sources on science in Islamic civilisation.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Noor Digital Library",
+  "url": "https://noorlib.ir",
+  "type": "digital_library",
+  "fields": [
+   "Islamic studies",
+   "religion"
+  ],
+  "languages": [
+   "Persian",
+   "Arabic"
+  ],
+  "api": null,
+  "notes": "Islamic texts digital library (Qom).",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "OAPEN Library",
+  "url": "https://www.oapen.org",
+  "type": "digital_library",
+  "fields": [
+   "humanities",
+   "social sciences"
+  ],
+  "languages": [
+   "English",
+   "German",
+   "French"
+  ],
+  "api": null,
+  "notes": "Open-access academic books library.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Directory of Open Access Books (DOAB)",
+  "url": "https://www.doabooks.org",
+  "type": "index",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Directory of peer-reviewed open-access books.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "NDLTD",
+  "url": "https://www.ndltd.org",
+  "type": "thesis_archive",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Networked Digital Library of Theses and Dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "theses.fr",
+  "url": "https://theses.fr",
+  "type": "thesis_archive",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "French"
+  ],
+  "api": null,
+  "notes": "French national register of doctoral theses (ABES).",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Shodhganga",
+  "url": "https://shodhganga.inflibnet.ac.in",
+  "type": "thesis_archive",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English",
+   "Hindi"
+  ],
+  "api": null,
+  "notes": "Indian doctoral theses archive (INFLIBNET/UGC).",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "DiVA Portal",
+  "url": "https://www.diva-portal.org",
+  "type": "thesis_archive",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English",
+   "Swedish"
+  ],
+  "api": null,
+  "notes": "Nordic universities' publications and theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Frontiers",
+  "url": "https://www.frontiersin.org",
+  "type": "publisher_oa",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal publisher.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "eLife",
+  "url": "https://elifesciences.org",
+  "type": "publisher_oa",
+  "fields": [
+   "biology",
+   "medicine"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access life-science journal and publisher.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "PeerJ",
+  "url": "https://peerj.org",
+  "type": "publisher_oa",
+  "fields": [
+   "biology",
+   "medicine",
+   "computer science"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access publisher.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Open Library of Humanities",
+  "url": "https://www.openlibhums.org",
+  "type": "publisher_oa",
+  "fields": [
+   "humanities"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Non-profit open-access humanities publisher.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Copernicus Publications",
+  "url": "https://www.copernicus.org",
+  "type": "publisher_oa",
+  "fields": [
+   "earth sciences",
+   "atmospheric science"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access geosciences publisher.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "EDP Sciences",
+  "url": "https://www.edpsciences.org",
+  "type": "publisher_oa",
+  "fields": [
+   "physics",
+   "mathematics",
+   "medicine"
+  ],
+  "languages": [
+   "French",
+   "English"
+  ],
+  "api": null,
+  "notes": "French scholarly publisher with many OA journals.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "SpringerOpen",
+  "url": "https://www.springeropen.com",
+  "type": "publisher_oa",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Springer's open-access journal portfolio.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "BioMed Central",
+  "url": "https://www.biomedcentral.com",
+  "type": "publisher_oa",
+  "fields": [
+   "medicine",
+   "biology"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access biomedical publisher.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "IntechOpen",
+  "url": "https://www.intechopen.com",
+  "type": "publisher_oa",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access books and journals publisher.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "AOSIS",
+  "url": "https://aosis.co.za",
+  "type": "publisher_oa",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "South-African open-access publisher.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "SciELO Books",
+  "url": "https://books.scielo.org",
+  "type": "publisher_oa",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Portuguese",
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access academic books (SciELO).",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Indian Academy of Sciences Journals",
+  "url": "https://www.ias.ac.in",
+  "type": "publisher_oa",
+  "fields": [
+   "science",
+   "mathematics",
+   "physics"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Indian Academy of Sciences open-access journals.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "CSIR-NIScPR",
+  "url": "https://www.niscpr.res.in",
+  "type": "publisher_oa",
+  "fields": [
+   "science"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Indian national science communication institute.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Lisanuna: Jurnal Ilmu Bahasa Arab dan Pembelajarannya",
+  "url": "http://jurnal.ar-raniry.ac.id/index.php/lisanuna/index",
+  "type": "journal",
+  "fields": [
+   "Islamic studies",
+   "education",
+   "language and literature"
+  ],
+  "languages": [
+   "Indonesian",
+   "English",
+   "Arabic"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Agroalimentaria",
+  "url": "http://erevistas.saber.ula.ve/index.php/agroalimentaria/index",
+  "type": "journal",
+  "fields": [
+   "agriculture",
+   "social sciences",
+   "economics"
+  ],
+  "languages": [
+   "French",
+   "English",
+   "Spanish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "مسکن و محیط روستا",
+  "url": "https://jhre.ir/index.php?slc_lang=en&slc_sid=1",
+  "type": "journal",
+  "fields": [
+   "arts"
+  ],
+  "languages": [
+   "Persian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Radovi Šumarskog Fakulteta Univerziteta u Sarajevu",
+  "url": "https://radovi.sfsa.unsa.ba/en/",
+  "type": "journal",
+  "fields": [
+   "biology",
+   "agriculture",
+   "economics"
+  ],
+  "languages": [
+   "Bosnian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Apuntes Contables",
+  "url": "https://revistas.uexternado.edu.co/index.php/contad",
+  "type": "journal",
+  "fields": [
+   "computer science",
+   "social sciences",
+   "economics"
+  ],
+  "languages": [
+   "Spanish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Revista Facultad de Jurisprudencia",
+  "url": "http://www.revistarfjpuce.edu.ec/index.php/rfj",
+  "type": "journal",
+  "fields": [
+   "economics",
+   "law"
+  ],
+  "languages": [
+   "Spanish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Journal of Learning Development in Higher Education",
+  "url": "https://journal.aldinhe.ac.uk/index.php/jldhe/index",
+  "type": "journal",
+  "fields": [
+   "education"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Ngarsa",
+  "url": "https://ngarsa.uinkhas.ac.id/index.php/ngarsa/about",
+  "type": "journal",
+  "fields": [
+   "general works"
+  ],
+  "languages": [
+   "Indonesian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Museologica Brunensia",
+  "url": "https://journals.phil.muni.cz/museologica-brunensia",
+  "type": "journal",
+  "fields": [
+   "general works: museums"
+  ],
+  "languages": [
+   "Czech",
+   "English",
+   "Slovak"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Journal of European Periodical Studies",
+  "url": "https://openjournals.ugent.be/jeps/",
+  "type": "journal",
+  "fields": [
+   "general works: periodicals"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Akroterion",
+  "url": "http://akroterion.journals.ac.za",
+  "type": "journal",
+  "fields": [
+   "history",
+   "language and literature"
+  ],
+  "languages": [
+   "Afrikaans",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Linguagem em Foco",
+  "url": "https://revistas.uece.br/index.php/linguagememfoco",
+  "type": "journal",
+  "fields": [
+   "language and literature"
+  ],
+  "languages": [
+   "Portuguese",
+   "English",
+   "Spanish",
+   "French"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Bond Law Review",
+  "url": "https://blr.scholasticahq.com/",
+  "type": "journal",
+  "fields": [
+   "law"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Дифференциальная геометрия многообразий фигур",
+  "url": "https://journals.kantiana.ru/eng/geometry/",
+  "type": "journal",
+  "fields": [
+   "mathematics"
+  ],
+  "languages": [
+   "Russian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "مجله دامپزشکی ایران.",
+  "url": "http://www.ivj.ir/?lang=en",
+  "type": "journal",
+  "fields": [
+   "medicine",
+   "agriculture"
+  ],
+  "languages": [
+   "English",
+   "Persian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "مطالعات بین‌رشته‌ای دانش راهبردی",
+  "url": "https://smsnds.sndu.ac.ir/",
+  "type": "journal",
+  "fields": [
+   "military science"
+  ],
+  "languages": [
+   "Persian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "TransNav",
+  "url": "https://www.transnav.eu/",
+  "type": "journal",
+  "fields": [
+   "naval science"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Al-TA'DIB: Jurnal Kajian Ilmu Kependidikan",
+  "url": "https://ejournal.iainkendari.ac.id/al-tadib/index",
+  "type": "journal",
+  "fields": [
+   "philosophy",
+   "religion",
+   "Islamic studies"
+  ],
+  "languages": [
+   "English",
+   "Indonesian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Геология и геофизика Юга России",
+  "url": "http://geosouth.ru",
+  "type": "journal",
+  "fields": [
+   "physics",
+   "biology",
+   "earth sciences"
+  ],
+  "languages": [
+   "Russian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Acta Informatica Malaysia",
+  "url": "https://actainformaticamalaysia.com/",
+  "type": "journal",
+  "fields": [
+   "religion",
+   "economics"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Ethiopian Journal of Science and Sustainable Development",
+  "url": "https://ejssd.astu.edu.et/index.php/EJSSD",
+  "type": "journal",
+  "fields": [
+   "science"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Chinese Journal of Physiology",
+  "url": "https://www.cjphysiology.org/",
+  "type": "journal",
+  "fields": [
+   "science: physiology"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Science Editing",
+  "url": "http://www.escienceediting.org/",
+  "type": "journal",
+  "fields": [
+   "science: science (general)"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "پدافند الکترونیکی و سایبری",
+  "url": "https://ecdj.ihu.ac.ir/?lang=en",
+  "type": "journal",
+  "fields": [
+   "science: science (general): cybernetics"
+  ],
+  "languages": [
+   "Persian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Metaheuristic Optimization Review",
+  "url": "https://www.americaspg.com/journal/41",
+  "type": "journal",
+  "fields": [
+   "science: science (general): cybernetics: information theory"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Український соціум",
+  "url": "https://ukr-socium.org.ua/",
+  "type": "journal",
+  "fields": [
+   "social sciences",
+   "economics"
+  ],
+  "languages": [
+   "Ukrainian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Agricultural Economics (AGRICECON)",
+  "url": "https://agricecon.agriculturejournals.cz/",
+  "type": "journal",
+  "fields": [
+   "agriculture",
+   "social sciences",
+   "economics"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "OuvirOUver",
+  "url": "http://www.seer.ufu.br/index.php/ouvirouver/index",
+  "type": "journal",
+  "fields": [
+   "arts"
+  ],
+  "languages": [
+   "Portuguese"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Shuichan Xuebao",
+  "url": "http://en.china-fishery.cn/",
+  "type": "journal",
+  "fields": [
+   "biology",
+   "earth sciences",
+   "agriculture"
+  ],
+  "languages": [
+   "Chinese"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Bulletin of the Geological Society of Malaysia",
+  "url": "https://gsm.org.my/bulletin-of-the-geological-society-of-malaysia/",
+  "type": "journal",
+  "fields": [
+   "chemistry",
+   "earth sciences"
+  ],
+  "languages": [
+   "Malay (macrolanguage)",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Geological Behavior",
+  "url": "https://geologicalbehavior.com/",
+  "type": "journal",
+  "fields": [
+   "earth sciences",
+   "arts"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "آینده‌پژوهی دفاعی",
+  "url": "http://www.dfsr.ir/?lang=fa",
+  "type": "journal",
+  "fields": [
+   "economics"
+  ],
+  "languages": [
+   "English",
+   "Persian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "ELT Echo: The Journal of English Language Teaching in Foreign Language Context",
+  "url": "http://www.syekhnurjati.ac.id/jurnal/index.php/eltecho",
+  "type": "journal",
+  "fields": [
+   "education",
+   "language and literature"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Midas: Museus e Estudos Interdisciplinares",
+  "url": "https://journals.openedition.org/midas/",
+  "type": "journal",
+  "fields": [
+   "general works: museums"
+  ],
+  "languages": [
+   "English",
+   "French",
+   "Portuguese",
+   "Spanish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Revista Educação, Pesquisa e Inclusão",
+  "url": "https://revista.ufrr.br/repi/index",
+  "type": "journal",
+  "fields": [
+   "history",
+   "philosophy",
+   "education"
+  ],
+  "languages": [
+   "Portuguese"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Revue d'anthropologie des connaissances",
+  "url": "https://journals.openedition.org/rac",
+  "type": "journal",
+  "fields": [
+   "history of science",
+   "social sciences"
+  ],
+  "languages": [
+   "French"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "inTRAlinea: Online Translation Journal",
+  "url": "http://www.intralinea.org",
+  "type": "journal",
+  "fields": [
+   "language and literature"
+  ],
+  "languages": [
+   "English",
+   "French",
+   "German",
+   "Italian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Revista de Derecho Público",
+  "url": "http://www.revistaderechopublico.uchile.cl/",
+  "type": "journal",
+  "fields": [
+   "law"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Fondatia : Jurnal Pendidikan Dasar",
+  "url": "https://ejournal.stitpn.ac.id/index.php/fondatia",
+  "type": "journal",
+  "fields": [
+   "mathematics",
+   "education"
+  ],
+  "languages": [
+   "English",
+   "Indonesian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Youth in Central and Eastern Europe",
+  "url": "https://ycee.up.krakow.pl/index.php/sociological-studies/",
+  "type": "journal",
+  "fields": [
+   "medicine",
+   "social sciences",
+   "education"
+  ],
+  "languages": [
+   "Polish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Scientia Militaria",
+  "url": "http://scientiamilitaria.journals.ac.za",
+  "type": "journal",
+  "fields": [
+   "military science"
+  ],
+  "languages": [
+   "Afrikaans",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Derrotero",
+  "url": "https://revistasescuelanaval.com/derrotero/",
+  "type": "journal",
+  "fields": [
+   "naval science"
+  ],
+  "languages": [
+   "Spanish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Characteristica Universalis Journal",
+  "url": "https://cujournal.com.ar/index.php/home/index",
+  "type": "journal",
+  "fields": [
+   "philosophy",
+   "religion",
+   "social sciences"
+  ],
+  "languages": [
+   "English",
+   "German",
+   "Spanish",
+   "Italian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Neurons, Behavior, Data Analysis, and Theory",
+  "url": "https://nbdt.scholasticahq.com",
+  "type": "journal",
+  "fields": [
+   "science"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Journal of Exercise & Organ Cross Talk",
+  "url": "https://www.jeoct.com/",
+  "type": "journal",
+  "fields": [
+   "science: physiology"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "SURE Journal: (Science Undergraduate Research Experience Journal)",
+  "url": "https://arrow.tudublin.ie/sure_j/",
+  "type": "journal",
+  "fields": [
+   "science: science (general)"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Internet Policy Review",
+  "url": "https://policyreview.info",
+  "type": "journal",
+  "fields": [
+   "science: science (general): cybernetics: information theory"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Applied Linguistics Journal",
+  "url": "https://brill.com/view/journals/alj/alj-overview.xml?contents=journaltoc",
+  "type": "journal",
+  "fields": [
+   "Islamic studies",
+   "language and literature"
+  ],
+  "languages": [
+   "Arabic",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "农业大数据学报",
+  "url": "http://agbigdata.aiijournal.com/EN/2096-6369/home.shtml",
+  "type": "journal",
+  "fields": [
+   "agriculture",
+   "economics",
+   "arts"
+  ],
+  "languages": [
+   "Chinese"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "AusArt",
+  "url": "http://www.ehu.eus/ojs/index.php/ausart",
+  "type": "journal",
+  "fields": [
+   "arts"
+  ],
+  "languages": [
+   "Basque",
+   "English",
+   "Spanish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Indonesian Food and Nutrition Progress",
+  "url": "https://journal.ugm.ac.id/ifnp",
+  "type": "journal",
+  "fields": [
+   "biology",
+   "engineering",
+   "agriculture"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Biologica Nyssana",
+  "url": "http://journal.pmf.ni.ac.rs/bionys/index.php/bionys/index",
+  "type": "journal",
+  "fields": [
+   "chemistry",
+   "biology"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "International Journal of Management, Knowledge and Learning",
+  "url": "https://toknowpress.net/submission/index.php/ijmkl/index",
+  "type": "journal",
+  "fields": [
+   "computer science",
+   "social sciences",
+   "economics"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UMT Education Review",
+  "url": "https://journals.umt.edu.pk/index.php/uer",
+  "type": "journal",
+  "fields": [
+   "economics",
+   "education"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Jurnal Visi Ilmu Pendidikan",
+  "url": "http://jurnal.untan.ac.id/index.php/jvip",
+  "type": "journal",
+  "fields": [
+   "education"
+  ],
+  "languages": [
+   "Indonesian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Jurnal Wawasan Yuridika",
+  "url": "http://ejournal.sthb.ac.id/index.php/jwy",
+  "type": "journal",
+  "fields": [
+   "engineering",
+   "religion",
+   "Islamic studies"
+  ],
+  "languages": [
+   "Indonesian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Liminar: Estudios Sociales y Humanísticos",
+  "url": "http://liminar.cesmeca.mx",
+  "type": "journal",
+  "fields": [
+   "history",
+   "social sciences",
+   "education"
+  ],
+  "languages": [
+   "Spanish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Comunicación y Medios",
+  "url": "http://www.comunicacionymedios.uchile.cl/",
+  "type": "journal",
+  "fields": [
+   "language and literature"
+  ],
+  "languages": [
+   "Spanish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Societas et Iurisprudentia",
+  "url": "http://sei.iuridica.truni.sk/international-scientific-journal/",
+  "type": "journal",
+  "fields": [
+   "law"
+  ],
+  "languages": [
+   "English",
+   "Slovak",
+   "Czech"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Elementary Mathematics Education Journal",
+  "url": "http://emejournal.upol.cz/",
+  "type": "journal",
+  "fields": [
+   "mathematics",
+   "education"
+  ],
+  "languages": [
+   "English",
+   "Czech",
+   "Slovak",
+   "Polish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Pharmaceutical Sciences and Research",
+  "url": "https://scholarhub.ui.ac.id/psr/",
+  "type": "journal",
+  "fields": [
+   "medicine",
+   "chemistry",
+   "engineering"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Jurnal Ilmiah Ilmu Ushuluddin",
+  "url": "http://jurnal.uin-antasari.ac.id/index.php/ushuluddin",
+  "type": "journal",
+  "fields": [
+   "philosophy",
+   "religion",
+   "Islamic studies"
+  ],
+  "languages": [
+   "Arabic",
+   "English",
+   "Indonesian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Revista Eletrônica da Associação dos Geógrafos Brasileiros, Seção Três Lagoas",
+  "url": "https://periodicos.ufms.br/index.php/RevAGB/",
+  "type": "journal",
+  "fields": [
+   "physics",
+   "earth sciences",
+   "social sciences"
+  ],
+  "languages": [
+   "French",
+   "Spanish",
+   "English",
+   "Portuguese"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "The International Journal of Information, Diversity, & Inclusion",
+  "url": "https://jps.library.utoronto.ca/index.php/ijidi/index",
+  "type": "journal",
+  "fields": [
+   "religion",
+   "social sciences"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "International Scholastic Journal of Science",
+  "url": "http://www.isjos.org",
+  "type": "journal",
+  "fields": [
+   "science: science (general)"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Revista MERCOSUR de Políticas Sociales",
+  "url": "http://revista.ismercosur.org/index.php/revista",
+  "type": "journal",
+  "fields": [
+   "social sciences"
+  ],
+  "languages": [
+   "Portuguese",
+   "Spanish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Asalibuna",
+  "url": "https://jurnalfaktarbiyah.iainkediri.ac.id/index.php/asalibuna",
+  "type": "journal",
+  "fields": [
+   "Islamic studies",
+   "education",
+   "language and literature"
+  ],
+  "languages": [
+   "Indonesian",
+   "English",
+   "Arabic"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "روستا و توسعه",
+  "url": "http://rvt.agri-peri.ac.ir",
+  "type": "journal",
+  "fields": [
+   "agriculture",
+   "social sciences",
+   "economics"
+  ],
+  "languages": [
+   "Persian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Joelho",
+  "url": "https://impactum-journals.uc.pt/joelho/index",
+  "type": "journal",
+  "fields": [
+   "arts"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Acta Biologica Sibirica",
+  "url": "http://journal.asu.ru/biol/index",
+  "type": "journal",
+  "fields": [
+   "biology",
+   "earth sciences"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Iranian Journal of Wood and Paper Industries",
+  "url": "http://ijwp.ir/",
+  "type": "journal",
+  "fields": [
+   "chemistry",
+   "biology",
+   "agriculture"
+  ],
+  "languages": [
+   "Persian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Jurnal Ilmiah Wahana Akuntansi",
+  "url": "http://journal.unj.ac.id/unj/index.php/wahana-akuntansi/",
+  "type": "journal",
+  "fields": [
+   "computer science",
+   "social sciences",
+   "economics"
+  ],
+  "languages": [
+   "Indonesian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Revista de Etnologie şi Culturologie",
+  "url": "https://ethnology.ich.md/",
+  "type": "journal",
+  "fields": [
+   "earth sciences",
+   "history",
+   "social sciences"
+  ],
+  "languages": [
+   "Russian",
+   "Romanian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Проблеми інженерно-педагогічної освіти",
+  "url": "https://periodicals.karazin.ua/education/",
+  "type": "journal",
+  "fields": [
+   "economics",
+   "education"
+  ],
+  "languages": [
+   "English",
+   "Ukrainian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "PRISM",
+  "url": "https://openjournals.ljmu.ac.uk/index.php/prism/",
+  "type": "journal",
+  "fields": [
+   "education"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Ingenio Tecnológico",
+  "url": "http://ingenio.frlp.utn.edu.ar/index.php/ingenio",
+  "type": "journal",
+  "fields": [
+   "engineering",
+   "computer science"
+  ],
+  "languages": [
+   "Portuguese",
+   "Spanish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UC Merced Undergraduate Research Journal",
+  "url": "http://escholarship.org/uc/ucm_mwp_ucmurj",
+  "type": "journal",
+  "fields": [
+   "general works"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Revista Brasileira de Estudos Regionais e Urbanos",
+  "url": "https://revistaaber.org.br/rberu",
+  "type": "journal",
+  "fields": [
+   "mathematics",
+   "earth sciences",
+   "computer science"
+  ],
+  "languages": [
+   "English",
+   "Portuguese"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Anaesthesia, Pain & Intensive Care",
+  "url": "http://www.apicareonline.com/index.php/",
+  "type": "journal",
+  "fields": [
+   "medicine",
+   "economics"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "مطالعات مدیریت راهبردی دفاع ملی",
+  "url": "https://issk.sndu.ac.ir/",
+  "type": "journal",
+  "fields": [
+   "military science"
+  ],
+  "languages": [
+   "Persian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "International Journal on Responsibility",
+  "url": "https://commons.lib.jmu.edu/ijr/",
+  "type": "journal",
+  "fields": [
+   "philosophy",
+   "social sciences"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Zhongguo Fenti Jishu",
+  "url": "https://ftjs.ujn.edu.cn/English/Home.htm",
+  "type": "journal",
+  "fields": [
+   "physics",
+   "engineering"
+  ],
+  "languages": [
+   "Chinese"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Perspectivas em Ciência da Informação",
+  "url": "http://www.scielo.br/pci",
+  "type": "journal",
+  "fields": [
+   "religion"
+  ],
+  "languages": [
+   "Portuguese"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Passer Journal",
+  "url": "https://passer.garmian.edu.krd/",
+  "type": "journal",
+  "fields": [
+   "science"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Journal of Bangladesh Society of Physiologists",
+  "url": "http://www.banglajol.info/index.php/JBSP",
+  "type": "journal",
+  "fields": [
+   "science: physiology"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Review of Economics and Development Studies",
+  "url": "http://reads.spcrd.org/index.php/reads",
+  "type": "journal",
+  "fields": [
+   "social sciences",
+   "economics"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Journal of Arabic Language Learning and Teaching",
+  "url": "https://ejournal.iain-palangkaraya.ac.id/index.php/jallt",
+  "type": "journal",
+  "fields": [
+   "Islamic studies",
+   "education",
+   "language and literature"
+  ],
+  "languages": [
+   "English",
+   "Arabic"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Temas Agrarios",
+  "url": "http://revistas.unicordoba.edu.co/index.php/temasagrarios/index",
+  "type": "journal",
+  "fields": [
+   "agriculture"
+  ],
+  "languages": [
+   "Portuguese",
+   "English",
+   "Spanish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Enquiry: The ARCC Journal of Architectural Research",
+  "url": "https://www.arcc-journal.org/index.php/arccjournal",
+  "type": "journal",
+  "fields": [
+   "arts"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Profita",
+  "url": "http://publikasi.mercubuana.ac.id/index.php/profita/",
+  "type": "journal",
+  "fields": [
+   "computer science",
+   "social sciences",
+   "economics"
+  ],
+  "languages": [
+   "English",
+   "Indonesian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "جغرافیا و برنامه‌ریزی محیطی",
+  "url": "https://gep.ui.ac.ir/?lang=en",
+  "type": "journal",
+  "fields": [
+   "earth sciences",
+   "social sciences"
+  ],
+  "languages": [
+   "Persian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Journal of Research in Music",
+  "url": "https://jrm.sljol.info",
+  "type": "journal",
+  "fields": [
+   "economics",
+   "language and literature",
+   "arts"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Tiedao biaozhun sheji",
+  "url": "http://tdbs.publish.founderss.cn/homeNav?lang=en",
+  "type": "journal",
+  "fields": [
+   "engineering",
+   "law"
+  ],
+  "languages": [
+   "Chinese"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Fields",
+  "url": "https://www.fieldsjournal.org.uk/",
+  "type": "journal",
+  "fields": [
+   "general works"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Mediterranea",
+  "url": "http://www.uco.es/ucopress/ojs/index.php/mediterranea",
+  "type": "journal",
+  "fields": [
+   "history",
+   "philosophy",
+   "religion"
+  ],
+  "languages": [
+   "English",
+   "French",
+   "Italian",
+   "Spanish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Computational Methods in Social Sciences",
+  "url": "http://cmss.univnt.ro",
+  "type": "journal",
+  "fields": [
+   "mathematics",
+   "engineering",
+   "computer science"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Revista Ciência Plural",
+  "url": "https://periodicos.ufrn.br/rcp",
+  "type": "journal",
+  "fields": [
+   "medicine"
+  ],
+  "languages": [
+   "Portuguese"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Zhanshu daodan jishu",
+  "url": "https://zsdd.cbpt.cnki.net/",
+  "type": "journal",
+  "fields": [
+   "military science"
+  ],
+  "languages": [
+   "Chinese"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Methis: Studia Humaniora Estonica",
+  "url": "http://www.methis.ee",
+  "type": "journal",
+  "fields": [
+   "philosophy",
+   "religion",
+   "social sciences"
+  ],
+  "languages": [
+   "English",
+   "Estonian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Zhongguo kongjian kexue jishu",
+  "url": "https://journal26.magtechjournal.com/kjkxjs/",
+  "type": "journal",
+  "fields": [
+   "physics",
+   "engineering"
+  ],
+  "languages": [
+   "Chinese",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "مجلة بيت المشورة",
+  "url": "https://www.mashurajournal.com",
+  "type": "journal",
+  "fields": [
+   "religion",
+   "Islamic studies",
+   "social sciences"
+  ],
+  "languages": [
+   "English",
+   "Arabic"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Journal of Nonsmooth Analysis and Optimization",
+  "url": "https://jnsao.episciences.org/",
+  "type": "journal",
+  "fields": [
+   "science"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "مجلة الرافدين للعلوم الرياضية",
+  "url": "https://rsprs.uomosul.edu.iq/",
+  "type": "journal",
+  "fields": [
+   "science: physiology"
+  ],
+  "languages": [
+   "English",
+   "Arabic"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Hoplos",
+  "url": "https://periodicos.uff.br/hoplos",
+  "type": "journal",
+  "fields": [
+   "social sciences"
+  ],
+  "languages": [
+   "Portuguese"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Bulgarian Journal of Soil Science",
+  "url": "http://www.bsss.bg/Journal.html",
+  "type": "journal",
+  "fields": [
+   "agriculture"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "And",
+  "url": "https://www.and-architettura.it",
+  "type": "journal",
+  "fields": [
+   "arts"
+  ],
+  "languages": [
+   "Italian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Botanica Pacifica",
+  "url": "http://www.geobotanica.ru/bp/",
+  "type": "journal",
+  "fields": [
+   "biology",
+   "agriculture"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Jurnal AKSI (Akuntansi dan Sistem Informasi)",
+  "url": "https://journal.pnm.ac.id/index.php/aksi/index",
+  "type": "journal",
+  "fields": [
+   "computer science",
+   "social sciences",
+   "economics"
+  ],
+  "languages": [
+   "English",
+   "Indonesian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Communicator Sphere",
+  "url": "https://communicatorsphere.org/index.php/communicatorsphere/index",
+  "type": "journal",
+  "fields": [
+   "economics",
+   "language and literature"
+  ],
+  "languages": [
+   "English",
+   "Indonesian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Edukacja Ustawiczna Dorosłych",
+  "url": "https://edukacjaustawicznadoroslych.eu/index.php/en/",
+  "type": "journal",
+  "fields": [
+   "education"
+  ],
+  "languages": [
+   "German",
+   "Polish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Ege Eğitim Dergisi",
+  "url": "https://dergipark.org.tr/en/pub/egeefd",
+  "type": "journal",
+  "fields": [
+   "engineering",
+   "education"
+  ],
+  "languages": [
+   "English",
+   "Turkish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Culture Unbound: Journal of Current Cultural Research",
+  "url": "https://cultureunbound.ep.liu.se/",
+  "type": "journal",
+  "fields": [
+   "general works"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Roczniki Biblioteczne",
+  "url": "https://wuwr.pl/rbibl",
+  "type": "journal",
+  "fields": [
+   "history",
+   "religion",
+   "language and literature"
+  ],
+  "languages": [
+   "English",
+   "Polish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Signifiances (Signifying)",
+  "url": "https://revues.polen.uca.fr/index.php/Signifiances/index",
+  "type": "journal",
+  "fields": [
+   "language and literature"
+  ],
+  "languages": [
+   "French",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Tribunal",
+  "url": "https://revistatribunal.org/index.php/tribunal/index",
+  "type": "journal",
+  "fields": [
+   "law",
+   "education"
+  ],
+  "languages": [
+   "Spanish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Al Khawarizmi",
+  "url": "https://jurnal.ar-raniry.ac.id/index.php/alkhawarizmi/",
+  "type": "journal",
+  "fields": [
+   "mathematics",
+   "education"
+  ],
+  "languages": [
+   "English",
+   "Indonesian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Space and Defense",
+  "url": "https://digitalcommons.unomaha.edu/spaceanddefense/",
+  "type": "journal",
+  "fields": [
+   "military science"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Relaciones de la Sociedad Argentina de Antropología",
+  "url": "https://revistas.unlp.edu.ar/relaciones/index",
+  "type": "journal",
+  "fields": [
+   "physics",
+   "earth sciences",
+   "history"
+  ],
+  "languages": [
+   "Spanish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Palabra Clave [La Plata]",
+  "url": "https://www.palabraclave.fahce.unlp.edu.ar/",
+  "type": "journal",
+  "fields": [
+   "religion"
+  ],
+  "languages": [
+   "Spanish",
+   "Portuguese"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Scientific Data",
+  "url": "https://www.nature.com/sdata/",
+  "type": "journal",
+  "fields": [
+   "science"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Ágora de Heterodoxias",
+  "url": "https://revistas.uclave.org/index.php/agora",
+  "type": "journal",
+  "fields": [
+   "social sciences"
+  ],
+  "languages": [
+   "Spanish",
+   "English",
+   "Portuguese"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "پژوهش‌های ترجمه در زبان و ادبیات عربی",
+  "url": "https://rctall.atu.ac.ir/?lang=en",
+  "type": "journal",
+  "fields": [
+   "Islamic studies",
+   "language and literature"
+  ],
+  "languages": [
+   "Persian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Horticultural Science",
+  "url": "https://hortsci.agriculturejournals.cz/",
+  "type": "journal",
+  "fields": [
+   "agriculture"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Художественная культура",
+  "url": "http://artculturestudies.sias.ru/en/about_journal.php",
+  "type": "journal",
+  "fields": [
+   "arts"
+  ],
+  "languages": [
+   "English",
+   "Russian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Inventum Ingeniería, Tecnología e Investigación",
+  "url": "http://revistas.uniminuto.edu/index.php/Inventum/about",
+  "type": "journal",
+  "fields": [
+   "biology",
+   "engineering"
+  ],
+  "languages": [
+   "Spanish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Kemija u Industriji",
+  "url": "http://www.hdki.hr/kui",
+  "type": "journal",
+  "fields": [
+   "chemistry",
+   "engineering"
+  ],
+  "languages": [
+   "English",
+   "Croatian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "İzmir İktisat Dergisi",
+  "url": "https://dergipark.org.tr/en/pub/ije",
+  "type": "journal",
+  "fields": [
+   "computer science",
+   "social sciences",
+   "economics"
+  ],
+  "languages": [
+   "English",
+   "French",
+   "Turkish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Journal of Highway and Transportation Research and Development",
+  "url": "https://www.sciopen.com/journal/2095-6215",
+  "type": "journal",
+  "fields": [
+   "earth sciences",
+   "engineering"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Ex Chordis",
+  "url": "https://riviste.unimi.it/index.php/exchordis/",
+  "type": "journal",
+  "fields": [
+   "education",
+   "language and literature",
+   "arts"
+  ],
+  "languages": [
+   "Italian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Dyna",
+  "url": "https://revistas.unal.edu.co/index.php/dyna/index",
+  "type": "journal",
+  "fields": [
+   "engineering"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Cuadernos de investigación UNED",
+  "url": "https://revistas.uned.ac.cr/index.php/cuadernos/index",
+  "type": "journal",
+  "fields": [
+   "general works"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Platform Modernisering Strafvordering",
+  "url": "http://www.moderniseringstrafvordering.nl/home",
+  "type": "journal",
+  "fields": [
+   "law"
+  ],
+  "languages": [
+   "Dutch"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Kreano: Jurnal Matematika Kreatif-Inovatif",
+  "url": "https://journal.unnes.ac.id/journals/kreano",
+  "type": "journal",
+  "fields": [
+   "mathematics",
+   "education",
+   "arts"
+  ],
+  "languages": [
+   "English",
+   "Indonesian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Evidencia. Actualización en la Práctica Ambulatoria",
+  "url": "http://www.evidencia.org.ar/",
+  "type": "journal",
+  "fields": [
+   "medicine"
+  ],
+  "languages": [
+   "Spanish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Wiedza Obronna",
+  "url": "http://wiedzaobronna.edu.pl",
+  "type": "journal",
+  "fields": [
+   "military science"
+  ],
+  "languages": [
+   "Polish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Российский сейсмологический журнал",
+  "url": "http://www.gsras.ru/rjs/eng/main.html",
+  "type": "journal",
+  "fields": [
+   "physics",
+   "earth sciences"
+  ],
+  "languages": [
+   "Russian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Jurnal Akuntansi: Kajian Ilmiah Akuntansi",
+  "url": "http://e-jurnal.lppmunsera.org/index.php/Akuntansi/index",
+  "type": "journal",
+  "fields": [
+   "religion",
+   "Islamic studies",
+   "social sciences"
+  ],
+  "languages": [
+   "English",
+   "Indonesian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Journal of Science International School Bangkok",
+  "url": "https://isjos.org/index.php",
+  "type": "journal",
+  "fields": [
+   "science: science (general)"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "G|A|M|E The Italian Journal of Game Studies",
+  "url": "http://www.gamejournal.it/",
+  "type": "journal",
+  "fields": [
+   "social sciences",
+   "language and literature"
+  ],
+  "languages": [
+   "English",
+   "Italian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Tarling",
+  "url": "http://ejournal.uinsaizu.ac.id/index.php/tarling/index",
+  "type": "journal",
+  "fields": [
+   "Islamic studies",
+   "education",
+   "language and literature"
+  ],
+  "languages": [
+   "Arabic",
+   "English",
+   "Indonesian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Pastura: Journal of Tropical Forage Science",
+  "url": "http://ojs.unud.ac.id/index.php/pastura/index",
+  "type": "journal",
+  "fields": [
+   "agriculture"
+  ],
+  "languages": [
+   "Indonesian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "صفه",
+  "url": "https://soffeh.sbu.ac.ir/?lang=en",
+  "type": "journal",
+  "fields": [
+   "arts"
+  ],
+  "languages": [
+   "Persian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Czech Journal of Genetics and Plant Breeding",
+  "url": "https://cjgpb.agriculturejournals.cz/",
+  "type": "journal",
+  "fields": [
+   "biology",
+   "engineering",
+   "agriculture"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "He huaxue yu fangshe huaxue",
+  "url": "https://jnrc.xml-journal.net/",
+  "type": "journal",
+  "fields": [
+   "chemistry",
+   "earth sciences",
+   "engineering"
+  ],
+  "languages": [
+   "Chinese"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "International Journal of Digital Law",
+  "url": "https://journal.nuped.com.br/index.php/revista/index",
+  "type": "journal",
+  "fields": [
+   "computer science",
+   "law",
+   "arts"
+  ],
+  "languages": [
+   "Italian",
+   "Spanish",
+   "English",
+   "Portuguese"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "NYS TESOL Journal",
+  "url": "http://journal.nystesol.org",
+  "type": "journal",
+  "fields": [
+   "education",
+   "language and literature"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Historia de la Educación Anuario",
+  "url": "https://www.saiehe.org.ar/anuario/revista/",
+  "type": "journal",
+  "fields": [
+   "history",
+   "education"
+  ],
+  "languages": [
+   "Portuguese",
+   "Spanish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Esferas",
+  "url": "https://portalrevistas.ucb.br/index.php/esf/index",
+  "type": "journal",
+  "fields": [
+   "language and literature"
+  ],
+  "languages": [
+   "Portuguese"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Case Reports",
+  "url": "https://revistas.unal.edu.co/index.php/care/index",
+  "type": "journal",
+  "fields": [
+   "medicine"
+  ],
+  "languages": [
+   "English",
+   "Spanish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Sodobni Vojaški Izzivi",
+  "url": "https://reference-global.com/journal/CMC",
+  "type": "journal",
+  "fields": [
+   "military science"
+  ],
+  "languages": [
+   "Slovenian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Palabra y Razón",
+  "url": "https://revistapyr.ucm.cl/",
+  "type": "journal",
+  "fields": [
+   "philosophy",
+   "religion",
+   "social sciences"
+  ],
+  "languages": [
+   "French",
+   "Italian",
+   "Portuguese",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Qixiang keji",
+  "url": "http://www.qxkj.net.cn/qxkjen/home",
+  "type": "journal",
+  "fields": [
+   "physics",
+   "earth sciences"
+  ],
+  "languages": [
+   "Chinese"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Turkish Journal of Islamic Economics",
+  "url": "https://tujise.org",
+  "type": "journal",
+  "fields": [
+   "religion",
+   "Islamic studies",
+   "social sciences"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Revista Jurídica Portucalense",
+  "url": "https://revistas.rcaap.pt/juridica/",
+  "type": "journal",
+  "fields": [
+   "social sciences",
+   "law"
+  ],
+  "languages": [
+   "Portuguese",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "اللّوح",
+  "url": "https://allauh.pk/",
+  "type": "journal",
+  "fields": [
+   "Islamic studies",
+   "language and literature"
+  ],
+  "languages": [
+   "Arabic",
+   "English",
+   "Urdu"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Arquivos do Instituto Biológico",
+  "url": "https://www.scielo.br/j/aib/",
+  "type": "journal",
+  "fields": [
+   "agriculture"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Resgate",
+  "url": "http://periodicos.sbu.unicamp.br/ojs/index.php/resgate",
+  "type": "journal",
+  "fields": [
+   "arts"
+  ],
+  "languages": [
+   "Portuguese"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Arsitektura: Jurnal Ilmiah Arsitektur dan Lingkungan Binaan",
+  "url": "https://jurnal.uns.ac.id/Arsitektura/index",
+  "type": "journal",
+  "fields": [
+   "biology",
+   "philosophy",
+   "arts"
+  ],
+  "languages": [
+   "English",
+   "Indonesian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "مهندسی زراعی",
+  "url": "https://agrieng.scu.ac.ir/?lang=en",
+  "type": "journal",
+  "fields": [
+   "chemistry",
+   "biology",
+   "engineering"
+  ],
+  "languages": [
+   "Persian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Revue COSSI",
+  "url": "https://revue-cossi.numerev.com/",
+  "type": "journal",
+  "fields": [
+   "computer science",
+   "religion",
+   "social sciences"
+  ],
+  "languages": [
+   "French"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Ambiente",
+  "url": "https://periodicos.uerr.edu.br/index.php/ambiente/index",
+  "type": "journal",
+  "fields": [
+   "earth sciences",
+   "social sciences",
+   "education"
+  ],
+  "languages": [
+   "Portuguese"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Maliye Çalışmaları Dergisi",
+  "url": "https://iupress.istanbul.edu.tr/en/journal/jpfs/home",
+  "type": "journal",
+  "fields": [
+   "economics",
+   "law"
+  ],
+  "languages": [
+   "English",
+   "Turkish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Journal of Philology and Educational Sciences",
+  "url": "https://engiscience.com/index.php/jpes",
+  "type": "journal",
+  "fields": [
+   "education",
+   "language and literature"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Legal Issues in the Digital Age",
+  "url": "https://lida.hse.ru/index",
+  "type": "journal",
+  "fields": [
+   "engineering",
+   "computer science",
+   "law"
+  ],
+  "languages": [
+   "English",
+   "Russian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Ubiquity Proceedings",
+  "url": "https://ubiquityproceedings.com/",
+  "type": "journal",
+  "fields": [
+   "general works"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Fajar Historia: Jurnal Ilmu Sejarah dan Pendidikan",
+  "url": "http://e-journal.hamzanwadi.ac.id/index.php/fhs",
+  "type": "journal",
+  "fields": [
+   "history",
+   "religion",
+   "social sciences"
+  ],
+  "languages": [
+   "Indonesian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Francigena",
+  "url": "http://www.francigena-unipd.com/index.php/francigena/index",
+  "type": "journal",
+  "fields": [
+   "language and literature"
+  ],
+  "languages": [
+   "English",
+   "Italian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Croatian Yearbook of European Law and Policy",
+  "url": "https://www.cyelp.com",
+  "type": "journal",
+  "fields": [
+   "law"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Pelitutkimuksen vuosikirja",
+  "url": "https://pelitutkimus.journal.fi/",
+  "type": "journal",
+  "fields": [
+   "mathematics",
+   "earth sciences",
+   "engineering"
+  ],
+  "languages": [
+   "Finnish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Open Health",
+  "url": "https://www.degruyter.com/journal/key/ohe/html#overview",
+  "type": "journal",
+  "fields": [
+   "medicine",
+   "economics"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Market Forces",
+  "url": "https://kiet.edu.pk/marketforces",
+  "type": "journal",
+  "fields": [
+   "philosophy",
+   "social sciences",
+   "economics"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "پژوهش‌های ژئوفیزیک کاربردی",
+  "url": "http://jrag.shahroodut.ac.ir",
+  "type": "journal",
+  "fields": [
+   "physics",
+   "engineering"
+  ],
+  "languages": [
+   "Persian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Anjasmoro",
+  "url": "https://e-journal.bustanul-ulum.id/index.php/anjasmoro/index",
+  "type": "journal",
+  "fields": [
+   "religion",
+   "Islamic studies",
+   "social sciences"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "African Science Frontiers Initiatives Research Journal ASFIRJ",
+  "url": "https://asfirj.org/",
+  "type": "journal",
+  "fields": [
+   "science"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Archiwum Kryminologii",
+  "url": "http://czasopisma.inp.pan.pl/index.php/ak",
+  "type": "journal",
+  "fields": [
+   "social sciences",
+   "law"
+  ],
+  "languages": [
+   "Polish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Әл-Фараби Атындағы Қазақ Ұлттық Университеті хабаршы шығыстану сериясы",
+  "url": "https://bulletin-orientalism.kaznu.kz/index.php/1-vostok/index",
+  "type": "journal",
+  "fields": [
+   "Islamic studies",
+   "social sciences"
+  ],
+  "languages": [
+   "Kazakh",
+   "Russian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Sepa",
+  "url": "https://jurnal.uns.ac.id/sepa",
+  "type": "journal",
+  "fields": [
+   "agriculture",
+   "economics"
+  ],
+  "languages": [
+   "English",
+   "Indonesian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Журнал микробиологии, эпидемиологии и иммунобиологии",
+  "url": "https://microbiol.crie.ru/jour",
+  "type": "journal",
+  "fields": [
+   "biology"
+  ],
+  "languages": [
+   "Russian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "فرآوری و نگهداری مواد غذایی",
+  "url": "https://fppj.gau.ac.ir/?lang=en",
+  "type": "journal",
+  "fields": [
+   "chemistry",
+   "biology",
+   "engineering"
+  ],
+  "languages": [
+   "Persian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Российский технологический журнал",
+  "url": "https://www.rtj-mirea.ru",
+  "type": "journal",
+  "fields": [
+   "computer science"
+  ],
+  "languages": [
+   "Russian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Revista Movimentos Sociais e Dinâmicas Espaciais",
+  "url": "https://periodicos.ufpe.br/revistas/revistamseu/index",
+  "type": "journal",
+  "fields": [
+   "earth sciences",
+   "social sciences"
+  ],
+  "languages": [
+   "Portuguese"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Sound Stage Screen",
+  "url": "https://riviste.unimi.it/index.php/sss/index",
+  "type": "journal",
+  "fields": [
+   "economics",
+   "language and literature",
+   "arts"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Teaching English Language",
+  "url": "http://www.teljournal.org/",
+  "type": "journal",
+  "fields": [
+   "education",
+   "language and literature"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Research for All",
+  "url": "https://journals.uclpress.co.uk/r4a/",
+  "type": "journal",
+  "fields": [
+   "general works"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Beiträge zur Allgemeinen und Vergleichenden Sprachwissenschaft",
+  "url": "https://beitraege-contributions.pl/en/about",
+  "type": "journal",
+  "fields": [
+   "language and literature"
+  ],
+  "languages": [
+   "German",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Opinión Jurídica",
+  "url": "http://revistas.udem.edu.co/index.php/opinion",
+  "type": "journal",
+  "fields": [
+   "law"
+  ],
+  "languages": [
+   "English",
+   "French",
+   "Portuguese",
+   "Spanish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Jurnal Manajemen dan Pelayanan Farmasi",
+  "url": "https://jurnal.ugm.ac.id/jmpf",
+  "type": "journal",
+  "fields": [
+   "medicine",
+   "social sciences",
+   "economics"
+  ],
+  "languages": [
+   "Indonesian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Revista de Segurança, Desenvolvimento e Defesa",
+  "url": "https://rsdd.esd.gov.br/index.php/rsdd/index",
+  "type": "journal",
+  "fields": [
+   "military science"
+  ],
+  "languages": [
+   "Portuguese",
+   "English",
+   "Spanish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Qalamuna",
+  "url": "https://ejournal.insuriponorogo.ac.id/index.php/qalamuna/index",
+  "type": "journal",
+  "fields": [
+   "philosophy",
+   "religion",
+   "Islamic studies"
+  ],
+  "languages": [
+   "Indonesian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Advanced Photonics Nexus",
+  "url": "https://www.spiedigitallibrary.org/journals/advanced-photonics-nexus#_=_",
+  "type": "journal",
+  "fields": [
+   "physics",
+   "engineering"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "ორბელიანი",
+  "url": "https://journals.sabauni.edu.ge/index.php/jo/about",
+  "type": "journal",
+  "fields": [
+   "religion",
+   "social sciences",
+   "economics"
+  ],
+  "languages": [
+   "Modern Greek (1453-)",
+   "Italian",
+   "French",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Cendekia: Jurnal Pengabdian Masyarakat",
+  "url": "https://ejournal.uniska-kediri.ac.id/index.php/CENDEKIA",
+  "type": "journal",
+  "fields": [
+   "science"
+  ],
+  "languages": [
+   "Indonesian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Faces de Eva",
+  "url": "http://scielo.pt/scielo.php?script=sci_serial&pid=0874-6885&lng=en&nrm=iso",
+  "type": "journal",
+  "fields": [
+   "social sciences",
+   "language and literature",
+   "arts"
+  ],
+  "languages": [
+   "Spanish",
+   "French",
+   "English",
+   "Portuguese"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "An Nabighoh",
+  "url": "http://e-journal.metrouniv.ac.id/index.php/an-nabighoh",
+  "type": "journal",
+  "fields": [
+   "Islamic studies",
+   "education",
+   "language and literature"
+  ],
+  "languages": [
+   "Indonesian",
+   "Arabic"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Arte, Individuo y Sociedad",
+  "url": "http://revistas.ucm.es/index.php/ARIS/",
+  "type": "journal",
+  "fields": [
+   "arts"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Вопросы вирусологии",
+  "url": "https://virusjour.crie.ru/",
+  "type": "journal",
+  "fields": [
+   "biology"
+  ],
+  "languages": [
+   "English",
+   "Russian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Journal of Data Mining and Digital Humanities",
+  "url": "https://jdmdh.episciences.org/",
+  "type": "journal",
+  "fields": [
+   "computer science",
+   "history",
+   "religion"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "GIS - Gesto, Imagem e Som - Revista de Antropologia",
+  "url": "http://www.revistas.usp.br/gis",
+  "type": "journal",
+  "fields": [
+   "earth sciences",
+   "social sciences",
+   "arts"
+  ],
+  "languages": [
+   "English",
+   "Portuguese"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Competência",
+  "url": "http://seer.senacrs.com.br/index.php/RC",
+  "type": "journal",
+  "fields": [
+   "economics",
+   "education"
+  ],
+  "languages": [
+   "Portuguese",
+   "Spanish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "JTRM",
+  "url": "https://jtrm.polman-bandung.ac.id/",
+  "type": "journal",
+  "fields": [
+   "engineering",
+   "economics",
+   "arts"
+  ],
+  "languages": [
+   "English",
+   "Indonesian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Márgenes",
+  "url": "https://revistas.uniss.edu.cu/margenes/index",
+  "type": "journal",
+  "fields": [
+   "general works"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Dios y el Hombre",
+  "url": "https://revistas.unlp.edu.ar/DyH/index",
+  "type": "journal",
+  "fields": [
+   "history",
+   "philosophy",
+   "religion"
+  ],
+  "languages": [
+   "Spanish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Między Oryginałem a Przekładem",
+  "url": "https://journals.akademicka.pl/moap",
+  "type": "journal",
+  "fields": [
+   "language and literature"
+  ],
+  "languages": [
+   "Polish",
+   "English",
+   "French"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Legal Education Review",
+  "url": "https://ler.scholasticahq.com/",
+  "type": "journal",
+  "fields": [
+   "law",
+   "education"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Sağlık Bilimleri Üniversitesi Hemşirelik Dergisi",
+  "url": "https://dergipark.org.tr/en/pub/sbuhemsirelik",
+  "type": "journal",
+  "fields": [
+   "medicine"
+  ],
+  "languages": [
+   "English",
+   "Turkish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "National Security and the Future",
+  "url": "https://nsf-journal.hr/",
+  "type": "journal",
+  "fields": [
+   "military science"
+  ],
+  "languages": [
+   "English",
+   "Croatian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Jurnal Pemikiran Islam",
+  "url": "https://jurnal.ar-raniry.ac.id/index.php/jpi/index",
+  "type": "journal",
+  "fields": [
+   "philosophy",
+   "religion",
+   "Islamic studies"
+  ],
+  "languages": [
+   "Indonesian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "College and Research Libraries",
+  "url": "https://crl.acrl.org/",
+  "type": "journal",
+  "fields": [
+   "religion",
+   "education"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Journal of Holography Applications in Physics",
+  "url": "https://jhap.du.ac.ir/",
+  "type": "journal",
+  "fields": [
+   "science"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "La Colmena",
+  "url": "https://revistas.pucp.edu.pe/index.php/lacolmena",
+  "type": "journal",
+  "fields": [
+   "social sciences"
+  ],
+  "languages": [
+   "Spanish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "دراسات في اللغة العربيّة وآدابها",
+  "url": "https://lasem.semnan.ac.ir/?lang=en",
+  "type": "journal",
+  "fields": [
+   "Islamic studies",
+   "language and literature"
+  ],
+  "languages": [
+   "Arabic"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Jurnal Ketahanan Nasional",
+  "url": "https://jurnal.ugm.ac.id/jkn",
+  "type": "journal",
+  "fields": [
+   "agriculture",
+   "social sciences"
+  ],
+  "languages": [
+   "Indonesian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Glasnik Hrvatskog Botaničkog Društva",
+  "url": "https://hrcak.srce.hr/glasnik-hbod",
+  "type": "journal",
+  "fields": [
+   "biology",
+   "agriculture"
+  ],
+  "languages": [
+   "English",
+   "Croatian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Hydrogen, Fuel Cell & Energy Storage",
+  "url": "https://hfe.irost.ir",
+  "type": "journal",
+  "fields": [
+   "chemistry",
+   "engineering"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "L’Intelligence Artificielle et du Développement Territorial Durable «RIADD»",
+  "url": "https://journals.imist.ma/index.php/riadd/",
+  "type": "journal",
+  "fields": [
+   "computer science",
+   "economics",
+   "law"
+  ],
+  "languages": [
+   "Arabic",
+   "English",
+   "French"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Studia Praehistorica",
+  "url": "https://publications.naim.bg/index.php/stprae/",
+  "type": "journal",
+  "fields": [
+   "earth sciences",
+   "history",
+   "philosophy"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "河南理工大学学报. 自然科学版",
+  "url": "https://xuebao.hpu.edu.cn/English.htm",
+  "type": "journal",
+  "fields": [
+   "engineering",
+   "computer science"
+  ],
+  "languages": [
+   "Chinese"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Spectrum",
+  "url": "https://spectrumjournal.ca/",
+  "type": "journal",
+  "fields": [
+   "general works"
+  ],
+  "languages": [
+   "English",
+   "French"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Artifex Novus",
+  "url": "https://czasopisma.uksw.edu.pl/index.php/an",
+  "type": "journal",
+  "fields": [
+   "history",
+   "arts"
+  ],
+  "languages": [
+   "Polish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Recherches en Langue et Littérature Françaises",
+  "url": "http://france.tabrizu.ac.ir/",
+  "type": "journal",
+  "fields": [
+   "language and literature"
+  ],
+  "languages": [
+   "French"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Review of European and Comparative Law",
+  "url": "https://czasopisma.kul.pl/recl/",
+  "type": "journal",
+  "fields": [
+   "law"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Electronic Proceedings in Theoretical Computer Science",
+  "url": "http://eptcs.org/",
+  "type": "journal",
+  "fields": [
+   "mathematics",
+   "engineering",
+   "computer science"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "The Asia Pacific Scholar",
+  "url": "https://medicine.nus.edu.sg/taps/",
+  "type": "journal",
+  "fields": [
+   "medicine",
+   "education"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Zhihui kongzhi yu fangzhen",
+  "url": "https://www.zhkzyfz.cn/EN/home",
+  "type": "journal",
+  "fields": [
+   "military science"
+  ],
+  "languages": [
+   "Chinese"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Digital Press Social Sciences and Humanities",
+  "url": "https://digitalpress.ugm.ac.id/explore/social-sciences-and-humanities",
+  "type": "journal",
+  "fields": [
+   "philosophy",
+   "religion",
+   "social sciences"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Revista de Geología Aplicada a la Ingeniería y al Ambiente",
+  "url": "https://revistas.unc.edu.ar/index.php/revista-asagai/index",
+  "type": "journal",
+  "fields": [
+   "physics",
+   "earth sciences",
+   "engineering"
+  ],
+  "languages": [
+   "Spanish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Recherches et Applications en Finance Islamique",
+  "url": "https://revues.imist.ma/index.php/RAFI/index",
+  "type": "journal",
+  "fields": [
+   "religion",
+   "Islamic studies",
+   "social sciences"
+  ],
+  "languages": [
+   "English",
+   "French",
+   "Arabic"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "مجله زبان و ادبیات عربی",
+  "url": "https://jall.um.ac.ir/?lang=en",
+  "type": "journal",
+  "fields": [
+   "Islamic studies",
+   "language and literature"
+  ],
+  "languages": [
+   "Persian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Jurnal Peternakan Indonesia",
+  "url": "http://jpi.faterna.unand.ac.id",
+  "type": "journal",
+  "fields": [
+   "agriculture",
+   "economics"
+  ],
+  "languages": [
+   "Indonesian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "SOBRE. Prácticas artísticas y políticas de la edición",
+  "url": "https://revistaseug.ugr.es/index.php/sobre",
+  "type": "journal",
+  "fields": [
+   "arts"
+  ],
+  "languages": [
+   "English",
+   "Spanish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "تغذیه آبزیان",
+  "url": "https://janb.guilan.ac.ir/",
+  "type": "journal",
+  "fields": [
+   "biology",
+   "engineering",
+   "agriculture"
+  ],
+  "languages": [
+   "Persian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Future Business Journal",
+  "url": "https://fbj.springeropen.com/",
+  "type": "journal",
+  "fields": [
+   "computer science",
+   "social sciences",
+   "economics"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "International Journal of Development and Sustainability",
+  "url": "http://isdsnet.com/ijds",
+  "type": "journal",
+  "fields": [
+   "earth sciences",
+   "social sciences",
+   "economics"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Rocky Mountain Law Journal",
+  "url": "https://www.rockymountainlawjournal.org",
+  "type": "journal",
+  "fields": [
+   "economics",
+   "law"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Journal of Industrial Engineering and Halal Industries",
+  "url": "http://ejournal.uin-suka.ac.id/saintek/JIEHIS/index",
+  "type": "journal",
+  "fields": [
+   "engineering",
+   "economics",
+   "arts"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Crossing Borders: A Multidisciplinary Journal of Undergraduate Scholarship",
+  "url": "https://newprairiepress.org/crossingborders/",
+  "type": "journal",
+  "fields": [
+   "general works"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Brasiliana: Journal for Brazilian Studies",
+  "url": "https://tidsskrift.dk/index.php/bras/",
+  "type": "journal",
+  "fields": [
+   "history",
+   "social sciences",
+   "education"
+  ],
+  "languages": [
+   "Spanish",
+   "Portuguese",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Jezik",
+  "url": "https://hrcak.srce.hr/en/jezik",
+  "type": "journal",
+  "fields": [
+   "language and literature"
+  ],
+  "languages": [
+   "Croatian",
+   "German"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Research Results in Pharmacology",
+  "url": "https://rrpharmacology.ru/",
+  "type": "journal",
+  "fields": [
+   "medicine",
+   "chemistry"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Strategos",
+  "url": "https://strategos.morh.hr/",
+  "type": "journal",
+  "fields": [
+   "military science"
+  ],
+  "languages": [
+   "English",
+   "Croatian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Estudos Kantianos",
+  "url": "https://revistas.marilia.unesp.br/index.php/ek/index",
+  "type": "journal",
+  "fields": [
+   "philosophy",
+   "religion",
+   "social sciences"
+  ],
+  "languages": [
+   "Portuguese",
+   "English",
+   "German",
+   "Spanish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Movimento",
+  "url": "https://www.seer.ufrgs.br/Movimento/index",
+  "type": "journal",
+  "fields": [
+   "physics",
+   "earth sciences",
+   "social sciences"
+  ],
+  "languages": [
+   "Portuguese"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Asian Journal for Public Opinion Research",
+  "url": "http://ajpor.org",
+  "type": "journal",
+  "fields": [
+   "social sciences"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "AM: Art + Media",
+  "url": "https://fmkjournals.fmk.edu.rs/index.php/AM",
+  "type": "journal",
+  "fields": [
+   "arts"
+  ],
+  "languages": [
+   "English",
+   "Serbian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Annals of Clinical Microbiology",
+  "url": "https://www.acm.or.kr/",
+  "type": "journal",
+  "fields": [
+   "biology"
+  ],
+  "languages": [
+   "English",
+   "Korean"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Bosniaca",
+  "url": "https://bosniaca.nub.ba/index.php/bosniaca/index",
+  "type": "journal",
+  "fields": [
+   "computer science",
+   "history",
+   "religion"
+  ],
+  "languages": [
+   "Bosnian",
+   "Croatian",
+   "Serbian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Saberes y Prácticas: Revista de Filosofía y Educación",
+  "url": "https://revistas.uncu.edu.ar/ojs3/index.php/saberesypracticas/about",
+  "type": "journal",
+  "fields": [
+   "earth sciences",
+   "philosophy",
+   "social sciences"
+  ],
+  "languages": [
+   "Spanish",
+   "Portuguese",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "مدیریت و چشم انداز آموزش",
+  "url": "https://www.jmep.ir/?lang=en",
+  "type": "journal",
+  "fields": [
+   "economics",
+   "education"
+  ],
+  "languages": [
+   "Persian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Lite: Jurnal Bahasa, Sastra, dan Budaya",
+  "url": "http://publikasi.dinus.ac.id/index.php/lite/index",
+  "type": "journal",
+  "fields": [
+   "education",
+   "language and literature"
+  ],
+  "languages": [
+   "Indonesian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "مجله آب و خاک",
+  "url": "https://jsw.um.ac.ir/?lang=en",
+  "type": "journal",
+  "fields": [
+   "engineering",
+   "agriculture"
+  ],
+  "languages": [
+   "Persian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Masyarakat",
+  "url": "https://jurnal.smpharapanananda.sch.id/index.php/m-jp/",
+  "type": "journal",
+  "fields": [
+   "general works"
+  ],
+  "languages": [
+   "English",
+   "Indonesian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Argumentos",
+  "url": "https://revistaargumentos.iep.org.pe/",
+  "type": "journal",
+  "fields": [
+   "history",
+   "social sciences",
+   "education"
+  ],
+  "languages": [
+   "Portuguese",
+   "English",
+   "Spanish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Journal of Breast Cancer",
+  "url": "https://ejbc.kr/index.php",
+  "type": "journal",
+  "fields": [
+   "medicine",
+   "biology"
+  ],
+  "languages": [
+   "English",
+   "Korean"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Humanika: Kajian Ilmiah Mata Kuliah Umum",
+  "url": "https://journal.uny.ac.id/index.php/humanika/index",
+  "type": "journal",
+  "fields": [
+   "philosophy",
+   "religion",
+   "social sciences"
+  ],
+  "languages": [
+   "English",
+   "Indonesian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Positron",
+  "url": "http://jurnal.untan.ac.id/index.php/jpositron",
+  "type": "journal",
+  "fields": [
+   "physics"
+  ],
+  "languages": [
+   "Indonesian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Revista Bibliotecas",
+  "url": "http://www.revistas.una.ac.cr/index.php/bibliotecas/index",
+  "type": "journal",
+  "fields": [
+   "religion"
+  ],
+  "languages": [
+   "Spanish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Research Ideas and Outcomes",
+  "url": "http://rio.pensoft.net",
+  "type": "journal",
+  "fields": [
+   "science"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Challenges of the Knowledge Society",
+  "url": "https://cks.univnt.ro/",
+  "type": "journal",
+  "fields": [
+   "social sciences",
+   "economics",
+   "law"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Kitaibelia",
+  "url": "https://ojs.lib.unideb.hu/kitaibelia",
+  "type": "journal",
+  "fields": [
+   "biology",
+   "earth sciences",
+   "agriculture"
+  ],
+  "languages": [
+   "Hungarian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Palaeontologia Electronica",
+  "url": "https://palaeo-electronica.org/content/",
+  "type": "journal",
+  "fields": [
+   "earth sciences"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "선진국방연구",
+  "url": "https://journal.idap.re.kr",
+  "type": "journal",
+  "fields": [
+   "economics"
+  ],
+  "languages": [
+   "English",
+   "Korean"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Journal of Languages for Specific Purposes",
+  "url": "http://jlsp.steconomiceuoradea.ro/",
+  "type": "journal",
+  "fields": [
+   "education",
+   "language and literature"
+  ],
+  "languages": [
+   "English",
+   "French",
+   "German",
+   "Italian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Cihan University-Erbil Scientific Journal",
+  "url": "https://journals.cihanuniversity.edu.iq/index.php/cuesj",
+  "type": "journal",
+  "fields": [
+   "engineering"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Translatio",
+  "url": "https://seer.ufrgs.br/translatio",
+  "type": "journal",
+  "fields": [
+   "language and literature"
+  ],
+  "languages": [
+   "Spanish",
+   "Portuguese",
+   "French",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Bestuur",
+  "url": "https://jurnal.uns.ac.id/bestuur/index",
+  "type": "journal",
+  "fields": [
+   "law"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Vojenské Reflexie",
+  "url": "https://www.aos.sk/en/departments/military-reflections",
+  "type": "journal",
+  "fields": [
+   "military science"
+  ],
+  "languages": [
+   "English",
+   "Czech",
+   "Slovak"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Fırat Üniversitesi İlahiyat Fakültesi Dergisi",
+  "url": "https://dergipark.org.tr/en/pub/firatilahiyat",
+  "type": "journal",
+  "fields": [
+   "philosophy",
+   "religion",
+   "Islamic studies"
+  ],
+  "languages": [
+   "Arabic",
+   "English",
+   "Turkish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Revista de Investigación en Actividades Acuáticas",
+  "url": "http://revistas.innovacionumh.es/index.php?journal=investigacionactividadesacuatica",
+  "type": "journal",
+  "fields": [
+   "physics",
+   "earth sciences",
+   "social sciences"
+  ],
+  "languages": [
+   "Portuguese",
+   "Spanish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Informação em Pauta",
+  "url": "http://www.periodicos.ufc.br/index.php/informacaoempauta/index",
+  "type": "journal",
+  "fields": [
+   "religion"
+  ],
+  "languages": [
+   "Spanish",
+   "Portuguese",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Jefore Ethiopian Journal of Applied Sciences",
+  "url": "https://www.jejas.org/index.php/jejas/",
+  "type": "journal",
+  "fields": [
+   "science"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Revista Latinoamericana de Educación Inclusiva",
+  "url": "https://revistainclusiva.ucentral.cl/revistainclusiva/index",
+  "type": "journal",
+  "fields": [
+   "social sciences",
+   "education"
+  ],
+  "languages": [
+   "Spanish",
+   "English",
+   "Portuguese"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "HuRuf Journal",
+  "url": "https://ejournal.uinbukittinggi.ac.id/huruf",
+  "type": "journal",
+  "fields": [
+   "Islamic studies",
+   "education",
+   "language and literature"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Analytical Approaches to World Music",
+  "url": "https://journal.iftawm.org/",
+  "type": "journal",
+  "fields": [
+   "arts"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Revista Latinoamericana de Recursos Naturales",
+  "url": "http://revista.itson.edu.mx",
+  "type": "journal",
+  "fields": [
+   "biology",
+   "earth sciences",
+   "engineering"
+  ],
+  "languages": [
+   "English",
+   "Spanish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Nominal: Barometer Riset Akuntansi dan Manjemen",
+  "url": "https://journal.uny.ac.id/index.php/nominal/index",
+  "type": "journal",
+  "fields": [
+   "computer science",
+   "social sciences",
+   "economics"
+  ],
+  "languages": [
+   "Indonesian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "COMHARTaighde",
+  "url": "https://comhartaighde.ie",
+  "type": "journal",
+  "fields": [
+   "earth sciences",
+   "social sciences",
+   "language and literature"
+  ],
+  "languages": [
+   "Scottish Gaelic",
+   "Irish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Política e Gestão Educacional",
+  "url": "https://periodicos.fclar.unesp.br/rpge/index",
+  "type": "journal",
+  "fields": [
+   "economics",
+   "education"
+  ],
+  "languages": [
+   "Spanish",
+   "Portuguese",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Ayalgu Disiplinlerarası Türk Mûsikîsi Araştırmaları Dergisi",
+  "url": "https://dergipark.org.tr/en/pub/ayalgu",
+  "type": "journal",
+  "fields": [
+   "education",
+   "language and literature",
+   "arts"
+  ],
+  "languages": [
+   "English",
+   "Turkish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Outra Travessia",
+  "url": "https://periodicos.ufsc.br/index.php/Outra/index",
+  "type": "journal",
+  "fields": [
+   "language and literature",
+   "arts"
+  ],
+  "languages": [
+   "Portuguese"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Acta Universitatis Lodziensis Folia Iuridica",
+  "url": "https://czasopisma.uni.lodz.pl/Iuridica/Open_access_policy",
+  "type": "journal",
+  "fields": [
+   "law"
+  ],
+  "languages": [
+   "Polish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Infinity",
+  "url": "http://e-journal.stkipsiliwangi.ac.id/index.php/infinity",
+  "type": "journal",
+  "fields": [
+   "mathematics",
+   "education"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Вестник аритмологии",
+  "url": "https://vestar.elpub.ru/jour",
+  "type": "journal",
+  "fields": [
+   "medicine",
+   "arts"
+  ],
+  "languages": [
+   "Russian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Vojenské rozhledy",
+  "url": "https://www.vojenskerozhledy.cz/en",
+  "type": "journal",
+  "fields": [
+   "military science"
+  ],
+  "languages": [
+   "Czech",
+   "English",
+   "Slovak"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Metaphysics",
+  "url": "http://mph.ui.ac.ir/",
+  "type": "journal",
+  "fields": [
+   "philosophy",
+   "religion",
+   "Islamic studies"
+  ],
+  "languages": [
+   "Persian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Cailiao gongcheng",
+  "url": "http://jme.biam.ac.cn/CN/1001-4381/home.shtml",
+  "type": "journal",
+  "fields": [
+   "physics",
+   "engineering"
+  ],
+  "languages": [
+   "Chinese"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Proceedings from the Document Academy",
+  "url": "https://ideaexchange.uakron.edu/docam/",
+  "type": "journal",
+  "fields": [
+   "religion"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Journal of Spatial and Organizational Dynamics",
+  "url": "https://www.jsod-cieo.net/journal-tsw/index.php/jtsw/index",
+  "type": "journal",
+  "fields": [
+   "social sciences"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Arabi: Journal of Arabic Studies",
+  "url": "http://journal.imla.or.id/index.php/arabi",
+  "type": "journal",
+  "fields": [
+   "Islamic studies",
+   "education",
+   "language and literature"
+  ],
+  "languages": [
+   "Arabic",
+   "English",
+   "Indonesian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Música Hodie",
+  "url": "https://revistas.ufg.br/musica",
+  "type": "journal",
+  "fields": [
+   "arts"
+  ],
+  "languages": [
+   "English",
+   "Spanish",
+   "Portuguese"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Access",
+  "url": "https://journal.access-bg.org/",
+  "type": "journal",
+  "fields": [
+   "computer science",
+   "social sciences",
+   "economics"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Acta Economica et Turistica",
+  "url": "https://hrcak.srce.hr/en/aet",
+  "type": "journal",
+  "fields": [
+   "earth sciences",
+   "social sciences",
+   "economics"
+  ],
+  "languages": [
+   "English",
+   "Croatian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Journal of Local Government Issues",
+  "url": "https://ejournal.umm.ac.id/index.php/LOGOS/",
+  "type": "journal",
+  "fields": [
+   "economics",
+   "law"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Accurate",
+  "url": "https://ejournal.pnc.ac.id/index.php/accurate/index",
+  "type": "journal",
+  "fields": [
+   "engineering",
+   "agriculture"
+  ],
+  "languages": [
+   "Indonesian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Analele Universităţii \"Dunărea de Jos\" din Galaţi. Fascicula XIX, Istorie",
+  "url": "https://www.gup.ugal.ro/ugaljournals/index.php/history",
+  "type": "journal",
+  "fields": [
+   "history"
+  ],
+  "languages": [
+   "English",
+   "Romanian",
+   "German",
+   "French"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Talía",
+  "url": "https://revistas.ucm.es/index.php/TRET/index",
+  "type": "journal",
+  "fields": [
+   "language and literature",
+   "arts"
+  ],
+  "languages": [
+   "Spanish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "حقوق بشر",
+  "url": "http://humanrights.mofidu.ac.ir/?lang=en",
+  "type": "journal",
+  "fields": [
+   "law"
+  ],
+  "languages": [
+   "Persian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Eurasian Journal of Science and Engineering",
+  "url": "https://eajse.tiu.edu.iq/",
+  "type": "journal",
+  "fields": [
+   "medicine"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Defence Science Review",
+  "url": "http://www.defencesciencereview.com.pl/",
+  "type": "journal",
+  "fields": [
+   "military science"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Conductual: Revista Internacional de Interconductismo y Análisis de Conducta",
+  "url": "http://www.conductual.com",
+  "type": "journal",
+  "fields": [
+   "philosophy",
+   "religion",
+   "social sciences"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "علوم و فناوری رنگ",
+  "url": "https://jcst.icrc.ac.ir/?lang=en",
+  "type": "journal",
+  "fields": [
+   "physics",
+   "earth sciences",
+   "engineering"
+  ],
+  "languages": [
+   "Persian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Jurnal Pustaka Ilmiah",
+  "url": "https://jurnal.uns.ac.id/jurnalpustakailmiah",
+  "type": "journal",
+  "fields": [
+   "religion",
+   "economics"
+  ],
+  "languages": [
+   "English",
+   "Indonesian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Revista Conjuntura Austral",
+  "url": "http://seer.ufrgs.br/index.php/ConjunturaAustral/index",
+  "type": "journal",
+  "fields": [
+   "social sciences"
+  ],
+  "languages": [
+   "English",
+   "Portuguese",
+   "Spanish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Tadris Al-Arabiyat",
+  "url": "https://ejournal.iaida.ac.id/index.php/arabiyat",
+  "type": "journal",
+  "fields": [
+   "Islamic studies",
+   "education",
+   "language and literature"
+  ],
+  "languages": [
+   "Indonesian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Pesquisa Agropecuária Tropical",
+  "url": "https://revistas.ufg.br/pat/index",
+  "type": "journal",
+  "fields": [
+   "agriculture"
+  ],
+  "languages": [
+   "English",
+   "Portuguese"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Journal of Social Media Research",
+  "url": "https://jsomer.org/",
+  "type": "journal",
+  "fields": [
+   "computer science",
+   "social sciences",
+   "language and literature"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "پژوهش و برنامه‌ریزی در آموزش عالی",
+  "url": "https://journal.irphe.ac.ir/?lang=en",
+  "type": "journal",
+  "fields": [
+   "education"
+  ],
+  "languages": [
+   "Persian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Indonesian Journal of Innovation and Applied Sciences",
+  "url": "https://ojs.literacyinstitute.org/index.php/ijias",
+  "type": "journal",
+  "fields": [
+   "engineering",
+   "social sciences",
+   "education"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Forma y Función",
+  "url": "http://www.revistas.unal.edu.co/index.php/formayfuncion",
+  "type": "journal",
+  "fields": [
+   "language and literature"
+  ],
+  "languages": [
+   "English",
+   "Portuguese",
+   "Spanish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "علوم رایانش و فناوری اطلاعات",
+  "url": "https://jcsit.ir/",
+  "type": "journal",
+  "fields": [
+   "mathematics",
+   "engineering",
+   "computer science"
+  ],
+  "languages": [
+   "Persian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Revista Colombiana de Endocrinología, Diabetes y Metabolismo",
+  "url": "https://revistaendocrino.org/index.php/rcedm/index",
+  "type": "journal",
+  "fields": [
+   "medicine",
+   "chemistry",
+   "biology"
+  ],
+  "languages": [
+   "English",
+   "Spanish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Systemy Logistyczne Wojsk",
+  "url": "https://slw.wat.edu.pl/",
+  "type": "journal",
+  "fields": [
+   "military science"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Jurnal Studi Ilmu-ilmu Al-Qur'an dan Hadis",
+  "url": "http://ejournal.uin-suka.ac.id/ushuluddin/alquran",
+  "type": "journal",
+  "fields": [
+   "philosophy",
+   "religion",
+   "Islamic studies"
+  ],
+  "languages": [
+   "Arabic",
+   "English",
+   "Indonesian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Journal of Anthropology of Sport and Physical Education",
+  "url": "https://jaspe.ucg.ac.me/",
+  "type": "journal",
+  "fields": [
+   "physics",
+   "earth sciences",
+   "social sciences"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Jurnal Progress",
+  "url": "https://publikasiilmiah.unwahas.ac.id/PROGRESS/index",
+  "type": "journal",
+  "fields": [
+   "religion",
+   "Islamic studies",
+   "education"
+  ],
+  "languages": [
+   "Indonesian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "ARPHA Proceedings",
+  "url": "https://ap.pensoft.net/",
+  "type": "journal",
+  "fields": [
+   "science"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Соціально-економічні відносини в цифровому суспільстві",
+  "url": "https://ser.net.ua",
+  "type": "journal",
+  "fields": [
+   "social sciences",
+   "economics",
+   "education"
+  ],
+  "languages": [
+   "Ukrainian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Comparative Oriental Manuscript Studies Bulletin",
+  "url": "https://www.aai.uni-hamburg.de/en/comst/publications/bulletin.html",
+  "type": "journal",
+  "fields": [
+   "Islamic studies",
+   "language and literature"
+  ],
+  "languages": [
+   "English",
+   "Italian",
+   "German",
+   "French"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "JERAMI",
+  "url": "https://jerami.faperta.unand.ac.id/index.php/Jerami-JIJCS/index",
+  "type": "journal",
+  "fields": [
+   "agriculture"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Filosofia e História da Biologia",
+  "url": "https://www.revistas.usp.br/fhb",
+  "type": "journal",
+  "fields": [
+   "biology",
+   "history",
+   "philosophy"
+  ],
+  "languages": [
+   "Spanish",
+   "English",
+   "Portuguese"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Frontiers in Communications and Networks",
+  "url": "https://www.frontiersin.org/journals/communications-and-networks",
+  "type": "journal",
+  "fields": [
+   "computer science",
+   "language and literature",
+   "arts"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Cuadernos de Prehistoria y Arqueología de la Universidad de Granada",
+  "url": "http://revistaseug.ugr.es/index.php/cpag",
+  "type": "journal",
+  "fields": [
+   "earth sciences",
+   "history",
+   "social sciences"
+  ],
+  "languages": [
+   "Spanish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Liminal",
+  "url": "http://revistas.ensad.edu.pe/index.php/liminal/index",
+  "type": "journal",
+  "fields": [
+   "economics",
+   "language and literature",
+   "arts"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Revista de Educación",
+  "url": "https://fh.mdp.edu.ar/revistas/index.php/r_educ",
+  "type": "journal",
+  "fields": [
+   "education"
+  ],
+  "languages": [
+   "Spanish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Shanghai Jiaotong Daxue xuebao",
+  "url": "http://xuebao.sjtu.edu.cn/CN/1006-2467/home.shtml",
+  "type": "journal",
+  "fields": [
+   "engineering",
+   "arts"
+  ],
+  "languages": [
+   "Chinese"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Religionsvidenskabeligt Tidsskrift",
+  "url": "https://tidsskrift.dk/rvt/index",
+  "type": "journal",
+  "fields": [
+   "history",
+   "philosophy",
+   "religion"
+  ],
+  "languages": [
+   "Norwegian",
+   "Swedish",
+   "Danish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Cinétismes",
+  "url": "https://www.revue-cinetismes.com/",
+  "type": "journal",
+  "fields": [
+   "language and literature"
+  ],
+  "languages": [
+   "French",
+   "English",
+   "German",
+   "Spanish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Annales Universitatis Mariae Curie-Skłodowska. Sectio G, Ius",
+  "url": "https://journals.umcs.pl/g/index",
+  "type": "journal",
+  "fields": [
+   "law"
+  ],
+  "languages": [
+   "Polish",
+   "English",
+   "German",
+   "Spanish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Jurnal Ilmiah Informatika",
+  "url": "https://journal.ibrahimy.ac.id/index.php/JIMI/home",
+  "type": "journal",
+  "fields": [
+   "mathematics",
+   "engineering",
+   "computer science"
+  ],
+  "languages": [
+   "Indonesian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "ORL.ro",
+  "url": "https://medichub.ro/reviste-de-specialitate/orl-ro",
+  "type": "journal",
+  "fields": [
+   "medicine"
+  ],
+  "languages": [
+   "English",
+   "Romanian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Ciência da Informação em Revista",
+  "url": "http://www.seer.ufal.br/index.php/cir/index",
+  "type": "journal",
+  "fields": [
+   "religion"
+  ],
+  "languages": [
+   "Portuguese"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Contributions to Tobacco and Nicotine Research",
+  "url": "https://reference-global.com/journal/CTTR",
+  "type": "journal",
+  "fields": [
+   "science"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Revista Enfoques Educacionales",
+  "url": "https://enfoqueseducacionales.uchile.cl/index.php/REE/index",
+  "type": "journal",
+  "fields": [
+   "social sciences",
+   "education"
+  ],
+  "languages": [
+   "Spanish",
+   "English",
+   "Portuguese"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "الآداب للدراسات اللغوية والأدبية",
+  "url": "https://www.tu.edu.ye/journals/index.php/arts/index",
+  "type": "journal",
+  "fields": [
+   "Islamic studies",
+   "language and literature"
+  ],
+  "languages": [
+   "French",
+   "English",
+   "Arabic"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Journal of International Agricultural and Extension Education",
+  "url": "https://newprairiepress.org/jiaee/",
+  "type": "journal",
+  "fields": [
+   "agriculture",
+   "social sciences"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Revista Políticas Públicas & Cidades",
+  "url": "https://journalppc.com/RPPC",
+  "type": "journal",
+  "fields": [
+   "arts"
+  ],
+  "languages": [
+   "Portuguese"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Trends in Ecological and Indoor Environmental Engineering",
+  "url": "https://www.teiee.net/",
+  "type": "journal",
+  "fields": [
+   "biology",
+   "earth sciences",
+   "engineering"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Bio-Protocol",
+  "url": "https://bio-protocol.org",
+  "type": "journal",
+  "fields": [
+   "chemistry",
+   "biology"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Jurnal Ilmiah Akuntansi dan Bisnis",
+  "url": "https://journal.undiknas.ac.id/index.php/akuntansi/index",
+  "type": "journal",
+  "fields": [
+   "computer science",
+   "social sciences",
+   "economics"
+  ],
+  "languages": [
+   "Indonesian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Journal of Communication Studies and Society",
+  "url": "https://journal.undiknas.ac.id/index.php/commusty/index",
+  "type": "journal",
+  "fields": [
+   "economics",
+   "language and literature"
+  ],
+  "languages": [
+   "Indonesian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Revista EDaPECI: Educação a Distância e Práticas Educativas Comunicacionais e Interculturais",
+  "url": "https://seer.ufs.br/index.php/edapeci",
+  "type": "journal",
+  "fields": [
+   "education"
+  ],
+  "languages": [
+   "Portuguese"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Zeszyt Prawniczy UAM",
+  "url": "http://zeszyt.amu.edu.pl/",
+  "type": "journal",
+  "fields": [
+   "engineering",
+   "law"
+  ],
+  "languages": [
+   "Polish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "New Classicists",
+  "url": "https://www.newclassicists.com/",
+  "type": "journal",
+  "fields": [
+   "history"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Estudios Interlingüísticos",
+  "url": "https://estudiosinterlinguisticos.com/",
+  "type": "journal",
+  "fields": [
+   "language and literature"
+  ],
+  "languages": [
+   "Spanish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Revista do Direito Público",
+  "url": "http://www.uel.br/revistas/uel/index.php/direitopub",
+  "type": "journal",
+  "fields": [
+   "law"
+  ],
+  "languages": [
+   "English",
+   "Portuguese",
+   "Spanish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Lifestyle Journal",
+  "url": "https://revistas.unasp.edu.br/LifestyleJournal",
+  "type": "journal",
+  "fields": [
+   "medicine",
+   "philosophy",
+   "religion"
+  ],
+  "languages": [
+   "Portuguese"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "نشریه مهندسی متالورژی و مواد",
+  "url": "https://jmme.um.ac.ir/?lang=fa",
+  "type": "journal",
+  "fields": [
+   "physics",
+   "engineering"
+  ],
+  "languages": [
+   "Persian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Al-Bidayah: Jurnal Pendidikan Dasar Islam",
+  "url": "https://ejournal.uin-suka.ac.id/tarbiyah/albidayah/",
+  "type": "journal",
+  "fields": [
+   "religion",
+   "Islamic studies",
+   "education"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Лëд и снег",
+  "url": "http://ice-snow.igras.ru/",
+  "type": "journal",
+  "fields": [
+   "science"
+  ],
+  "languages": [
+   "Russian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Juris",
+  "url": "https://www.seer.furg.br/juris",
+  "type": "journal",
+  "fields": [
+   "social sciences",
+   "law"
+  ],
+  "languages": [
+   "Spanish",
+   "Portuguese",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Quaderni di Linguistica e Studi Orientali",
+  "url": "https://oaj.fupress.net/index.php/bsfm-qulso/index",
+  "type": "journal",
+  "fields": [
+   "Islamic studies",
+   "language and literature"
+  ],
+  "languages": [
+   "English",
+   "Italian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Jurnal Agroqua",
+  "url": "https://journals.unihaz.ac.id/index.php/agroqua",
+  "type": "journal",
+  "fields": [
+   "agriculture"
+  ],
+  "languages": [
+   "English",
+   "Indonesian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Spool",
+  "url": "http://spool.ac",
+  "type": "journal",
+  "fields": [
+   "arts"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "ESPACIO I+D: Innovación más Desarrollo",
+  "url": "http://www.espacioimasd.unach.mx",
+  "type": "journal",
+  "fields": [
+   "biology",
+   "engineering",
+   "social sciences"
+  ],
+  "languages": [
+   "Spanish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Jurnal Kimia Sains dan Aplikasi",
+  "url": "https://ejournal.undip.ac.id/index.php/ksa/",
+  "type": "journal",
+  "fields": [
+   "chemistry"
+  ],
+  "languages": [
+   "English",
+   "Indonesian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Journal of Computational Design",
+  "url": "https://dergipark.org.tr/en/pub/jcode",
+  "type": "journal",
+  "fields": [
+   "computer science",
+   "arts"
+  ],
+  "languages": [
+   "English",
+   "Turkish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Revista Latino-Americana de Geografia e Gênero",
+  "url": "http://www.revistas2.uepg.br/index.php/rlagg",
+  "type": "journal",
+  "fields": [
+   "earth sciences",
+   "social sciences"
+  ],
+  "languages": [
+   "Spanish",
+   "Portuguese",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Areté",
+  "url": "http://saber.ucv.ve/ojs/index.php/rev_arete/index",
+  "type": "journal",
+  "fields": [
+   "education"
+  ],
+  "languages": [
+   "Spanish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Art is on",
+  "url": "https://artis-on.letras.ulisboa.pt/index.php/aio/index",
+  "type": "journal",
+  "fields": [
+   "history",
+   "arts"
+  ],
+  "languages": [
+   "Portuguese",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Creatio Fantastica",
+  "url": "https://creatiofantastica.wordpress.com/",
+  "type": "journal",
+  "fields": [
+   "language and literature"
+  ],
+  "languages": [
+   "Polish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Регуляторные исследования и экспертиза лекарственных средств",
+  "url": "https://www.vedomostincesmp.ru/",
+  "type": "journal",
+  "fields": [
+   "medicine"
+  ],
+  "languages": [
+   "Russian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "McGill Science Undergraduate Research Journal",
+  "url": "https://msurjonline.mcgill.ca/",
+  "type": "journal",
+  "fields": [
+   "science"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Estudos de Sociologia",
+  "url": "http://seer.fclar.unesp.br/estudos",
+  "type": "journal",
+  "fields": [
+   "social sciences",
+   "economics"
+  ],
+  "languages": [
+   "Spanish",
+   "Portuguese"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Indonesian Journal of Arabic Studies",
+  "url": "https://syekhnurjati.ac.id/jurnal/index.php/ijas/index",
+  "type": "journal",
+  "fields": [
+   "Islamic studies",
+   "education",
+   "language and literature"
+  ],
+  "languages": [
+   "Indonesian",
+   "Arabic",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Estudis d'Història Agraria",
+  "url": "https://revistes.ub.edu/index.php/estudishistoriaagraria",
+  "type": "journal",
+  "fields": [
+   "agriculture",
+   "history"
+  ],
+  "languages": [
+   "Catalan",
+   "Spanish",
+   "Galician",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Gondang: Jurnal Seni dan Budaya",
+  "url": "http://jurnal.unimed.ac.id/2012/index.php/GDG",
+  "type": "journal",
+  "fields": [
+   "arts"
+  ],
+  "languages": [
+   "Indonesian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Revista del Museo Argentino de Ciencias Naturales",
+  "url": "http://revista.macn.gob.ar/ojs/index.php/RevMus/index",
+  "type": "journal",
+  "fields": [
+   "biology",
+   "earth sciences"
+  ],
+  "languages": [
+   "English",
+   "Spanish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Japanese Research on Linguistics, Literature, and Culture",
+  "url": "http://publikasi.dinus.ac.id/index.php/jrllc",
+  "type": "journal",
+  "fields": [
+   "earth sciences",
+   "language and literature"
+  ],
+  "languages": [
+   "English",
+   "Indonesian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Arti dello Spettacolo / Performing Arts",
+  "url": "https://www.artidellospettacolo-performingarts.com/",
+  "type": "journal",
+  "fields": [
+   "economics",
+   "language and literature",
+   "arts"
+  ],
+  "languages": [
+   "English",
+   "Italian",
+   "French",
+   "Russian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Belantika Pendidikan",
+  "url": "https://kayonmedia.com/jurnal/index.php/bp/index",
+  "type": "journal",
+  "fields": [
+   "education"
+  ],
+  "languages": [
+   "Indonesian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Revista Controversia",
+  "url": "http://www.revistacontroversia.com",
+  "type": "journal",
+  "fields": [
+   "engineering",
+   "history",
+   "social sciences"
+  ],
+  "languages": [
+   "Spanish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Studies in Ancient Art and Civilization",
+  "url": "https://journals.akademicka.pl/saac",
+  "type": "journal",
+  "fields": [
+   "history",
+   "arts"
+  ],
+  "languages": [
+   "French",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Anadiss",
+  "url": "https://anadiss.usv.ro/",
+  "type": "journal",
+  "fields": [
+   "language and literature"
+  ],
+  "languages": [
+   "Spanish",
+   "Italian",
+   "German",
+   "French"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Polish Yearbook of International Law",
+  "url": "https://czasopisma.inp.pan.pl/index.php/pyil",
+  "type": "journal",
+  "fields": [
+   "law"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Opuscula Mathematica",
+  "url": "https://www.opuscula.agh.edu.pl/",
+  "type": "journal",
+  "fields": [
+   "mathematics",
+   "engineering",
+   "economics"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Journal of Magnetism and Its Applications",
+  "url": "http://www.jourmag.org/index.php/jma",
+  "type": "journal",
+  "fields": [
+   "physics",
+   "chemistry",
+   "engineering"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Indonesia Law Reform Journal",
+  "url": "https://ejournal.umm.ac.id/index.php/ilrej/index",
+  "type": "journal",
+  "fields": [
+   "religion",
+   "Islamic studies",
+   "law"
+  ],
+  "languages": [
+   "Indonesian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Lawsuit",
+  "url": "https://e-jurnal.lppmunsera.org/index.php/JUMA/home",
+  "type": "journal",
+  "fields": [
+   "social sciences",
+   "economics"
+  ],
+  "languages": [
+   "Indonesian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Tanwir Arabiyyah",
+  "url": "https://jurnal.umsb.ac.id/index.php/aflj",
+  "type": "journal",
+  "fields": [
+   "Islamic studies",
+   "education",
+   "language and literature"
+  ],
+  "languages": [
+   "Arabic",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "جامعه شناسی کاربردی",
+  "url": "https://jas.ui.ac.ir/?lang=en",
+  "type": "journal",
+  "fields": [
+   "agriculture",
+   "social sciences"
+  ],
+  "languages": [
+   "Persian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Журнал Белорусского государственного университета: Химия",
+  "url": "https://journals.bsu.by/index.php/chemistry/index",
+  "type": "journal",
+  "fields": [
+   "chemistry",
+   "arts"
+  ],
+  "languages": [
+   "Belarusian",
+   "English",
+   "Russian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "ECONOMICS",
+  "url": "https://reference-global.com/journal/EOIK",
+  "type": "journal",
+  "fields": [
+   "computer science",
+   "social sciences",
+   "economics"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Estudos Econômicos",
+  "url": "https://www.revistas.usp.br/ee",
+  "type": "journal",
+  "fields": [
+   "earth sciences",
+   "engineering",
+   "history"
+  ],
+  "languages": [
+   "Portuguese",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Script Journal",
+  "url": "http://jurnal.fkip-uwgm.ac.id/index.php/Script",
+  "type": "journal",
+  "fields": [
+   "economics",
+   "education",
+   "language and literature"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "JLA (Jurnal Lingua Applicata)",
+  "url": "https://jurnal.ugm.ac.id/jla",
+  "type": "journal",
+  "fields": [
+   "education",
+   "language and literature"
+  ],
+  "languages": [
+   "English",
+   "Indonesian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Italian Journal of Educational Technology",
+  "url": "https://ijet.itd.cnr.it/index.php/td/index",
+  "type": "journal",
+  "fields": [
+   "engineering",
+   "social sciences",
+   "education"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Almanach Historyczny",
+  "url": "https://almanachhistoryczny.ujk.edu.pl/pagesgb/display/homegb",
+  "type": "journal",
+  "fields": [
+   "history"
+  ],
+  "languages": [
+   "German",
+   "French",
+   "Polish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Rizoma",
+  "url": "http://online.unisc.br/seer/index.php/rizoma",
+  "type": "journal",
+  "fields": [
+   "language and literature"
+  ],
+  "languages": [
+   "Spanish",
+   "Portuguese"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Leiden Journal of International Law",
+  "url": "https://www.cambridge.org/core/journals/leiden-journal-of-international-law",
+  "type": "journal",
+  "fields": [
+   "law"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Ergodesign & HCI",
+  "url": "http://periodicos.puc-rio.br/index.php/revistaergodesign-hci",
+  "type": "journal",
+  "fields": [
+   "mathematics",
+   "engineering",
+   "computer science"
+  ],
+  "languages": [
+   "English",
+   "Portuguese"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Journal of Silk Road Tourism Research",
+  "url": "https://dergipark.org.tr/en/pub/silkroadtour",
+  "type": "journal",
+  "fields": [
+   "medicine",
+   "physics",
+   "social sciences"
+  ],
+  "languages": [
+   "English",
+   "Turkish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "آموزه‌های قرآنی",
+  "url": "https://qd.razavi.ac.ir/?lang=en",
+  "type": "journal",
+  "fields": [
+   "philosophy",
+   "religion",
+   "Islamic studies"
+  ],
+  "languages": [
+   "Persian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "European Journal of Materials Science and Engineering",
+  "url": "https://ejmse.ro/archive/",
+  "type": "journal",
+  "fields": [
+   "physics",
+   "engineering"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Proceedings (European Academy of Sciences and Arts)",
+  "url": "https://www.peasa.eu/site/index",
+  "type": "journal",
+  "fields": [
+   "religion",
+   "social sciences",
+   "economics"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Revista Peruana de Investigación Agropecuaria",
+  "url": "https://revistas.unaaa.edu.pe/index.php/repia",
+  "type": "journal",
+  "fields": [
+   "agriculture"
+  ],
+  "languages": [
+   "Portuguese",
+   "English",
+   "Spanish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Fashion Highlight",
+  "url": "https://riviste.fupress.net/index.php/fh/index",
+  "type": "journal",
+  "fields": [
+   "arts"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "International Journal of Population Data Science",
+  "url": "https://ijpds.org",
+  "type": "journal",
+  "fields": [
+   "computer science",
+   "social sciences",
+   "economics"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Africana Studia",
+  "url": "https://ojs.letras.up.pt/index.php/AfricanaStudia",
+  "type": "journal",
+  "fields": [
+   "earth sciences",
+   "history",
+   "social sciences"
+  ],
+  "languages": [
+   "Portuguese",
+   "English",
+   "French"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Journal of Tax Reform",
+  "url": "http://jtr.urfu.ru/en/",
+  "type": "journal",
+  "fields": [
+   "economics",
+   "law"
+  ],
+  "languages": [
+   "Russian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Estetik",
+  "url": "http://journal.iaincurup.ac.id/index.php/estetik",
+  "type": "journal",
+  "fields": [
+   "education",
+   "language and literature"
+  ],
+  "languages": [
+   "Indonesian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "قرآن فرهنگ و تمدن",
+  "url": "https://qcc.quran.ac.ir/?lang=en",
+  "type": "journal",
+  "fields": [
+   "engineering",
+   "philosophy",
+   "religion"
+  ],
+  "languages": [
+   "Persian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Revista de Istorie și Teorie Literară",
+  "url": "https://ritl.ro/",
+  "type": "journal",
+  "fields": [
+   "history",
+   "language and literature"
+  ],
+  "languages": [
+   "Italian",
+   "German",
+   "French",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Gragoatá",
+  "url": "https://periodicos.uff.br/gragoata",
+  "type": "journal",
+  "fields": [
+   "language and literature"
+  ],
+  "languages": [
+   "Portuguese"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Law & Criminology Journal",
+  "url": "https://lcj.ugent.be/",
+  "type": "journal",
+  "fields": [
+   "law"
+  ],
+  "languages": [
+   "Dutch",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Bulletin of Computational Applied Mathematics",
+  "url": "http://www.compama.co.usb.ve/",
+  "type": "journal",
+  "fields": [
+   "mathematics"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Entre-Lugar",
+  "url": "http://ojs.ufgd.edu.br/index.php/entre-lugar/",
+  "type": "journal",
+  "fields": [
+   "medicine",
+   "earth sciences",
+   "social sciences"
+  ],
+  "languages": [
+   "Portuguese"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Studia Philosophica Estonica",
+  "url": "https://ojs.utlib.ee/index.php/spe",
+  "type": "journal",
+  "fields": [
+   "physics",
+   "history",
+   "philosophy"
+  ],
+  "languages": [
+   "English",
+   "Estonian",
+   "German"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Mazahib",
+  "url": "https://journal.uinsi.ac.id/index.php/mazahib/index",
+  "type": "journal",
+  "fields": [
+   "religion",
+   "Islamic studies",
+   "law"
+  ],
+  "languages": [
+   "Arabic",
+   "English",
+   "Indonesian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Aresty Rutgers Undergraduate Research Journal",
+  "url": "https://arestyrurj.libraries.rutgers.edu/index.php/arestyrurj/index",
+  "type": "journal",
+  "fields": [
+   "social sciences",
+   "education"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Arab Media and Society",
+  "url": "https://www.arabmediasociety.com",
+  "type": "journal",
+  "fields": [
+   "Islamic studies",
+   "social sciences",
+   "language and literature"
+  ],
+  "languages": [
+   "Arabic",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "HortScience",
+  "url": "https://journals.ashs.org/hortsci/view/journals/hortsci/hortsci-overview.xml",
+  "type": "journal",
+  "fields": [
+   "agriculture"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "ARQ",
+  "url": "https://edicionesarq.com/ARQ-Journal",
+  "type": "journal",
+  "fields": [
+   "arts"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Bioeduca",
+  "url": "https://journal.walisongo.ac.id/index.php/BIOEDUCA",
+  "type": "journal",
+  "fields": [
+   "biology",
+   "engineering",
+   "philosophy"
+  ],
+  "languages": [
+   "English",
+   "Indonesian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Paradigma: İktisadi ve İdari Araştırmalar Dergisi",
+  "url": "https://dergipark.org.tr/en/pub/paradigmaiiad",
+  "type": "journal",
+  "fields": [
+   "computer science",
+   "social sciences",
+   "economics"
+  ],
+  "languages": [
+   "English",
+   "Turkish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "InterCarto. InterGIS",
+  "url": "http://intercarto.msu.ru",
+  "type": "journal",
+  "fields": [
+   "earth sciences",
+   "engineering",
+   "social sciences"
+  ],
+  "languages": [
+   "Russian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Current Trends in Translation Teaching and Learning E",
+  "url": "http://www.cttl.org/",
+  "type": "journal",
+  "fields": [
+   "education",
+   "language and literature"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Revista Iberoamericana de la Propiedad Intelectual",
+  "url": "https://ojs.austral.edu.ar/index.php/ripi",
+  "type": "journal",
+  "fields": [
+   "engineering",
+   "law"
+  ],
+  "languages": [
+   "Spanish",
+   "Portuguese"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Czasopismo Naukowe Instytutu Studiów Kobiecych",
+  "url": "http://studiakobiece.pl/index_a.html",
+  "type": "journal",
+  "fields": [
+   "history",
+   "social sciences"
+  ],
+  "languages": [
+   "English",
+   "Polish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Círculo de Lingüística Aplicada a la Comunicación",
+  "url": "https://revistas.ucm.es/index.php/CLAC/index",
+  "type": "journal",
+  "fields": [
+   "language and literature"
+  ],
+  "languages": [
+   "Italian",
+   "German",
+   "French",
+   "Spanish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Annales de la Faculté de Droit d’Istanbul",
+  "url": "https://iupress.istanbul.edu.tr/en/journal/annales/home",
+  "type": "journal",
+  "fields": [
+   "law"
+  ],
+  "languages": [
+   "German",
+   "French",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "康复学报",
+  "url": "https://kfxb.publish.founderss.cn/homeNav?lang=en",
+  "type": "journal",
+  "fields": [
+   "medicine",
+   "engineering",
+   "education"
+  ],
+  "languages": [
+   "Chinese",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Slavonic Pedagogical Studies Journal",
+  "url": "http://www.pegasjournal.eu",
+  "type": "journal",
+  "fields": [
+   "philosophy",
+   "education",
+   "language and literature"
+  ],
+  "languages": [
+   "English",
+   "Slovak",
+   "Czech",
+   "Russian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Atmospheric and Oceanic Science Letters",
+  "url": "https://www.keaipublishing.com/en/journals/atmospheric-and-oceanic-science-letters/",
+  "type": "journal",
+  "fields": [
+   "physics",
+   "chemistry",
+   "earth sciences"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "فقه و اصول",
+  "url": "https://jfiqh.um.ac.ir/",
+  "type": "journal",
+  "fields": [
+   "religion",
+   "Islamic studies",
+   "social sciences"
+  ],
+  "languages": [
+   "Persian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "برنامه‌ریزی و بودجه",
+  "url": "http://jpbud.ir/index.php?&slct_pg_id=10&sid=1&slc_lang=en",
+  "type": "journal",
+  "fields": [
+   "social sciences",
+   "economics",
+   "law"
+  ],
+  "languages": [
+   "Persian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Вісник Київського національного університету імені Тараса Шевченка. Східні мови та літератури",
+  "url": "https://oriental.bulletin.knu.ua/home",
+  "type": "journal",
+  "fields": [
+   "Islamic studies",
+   "education",
+   "language and literature"
+  ],
+  "languages": [
+   "Ukrainian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Journal of Agriculture and Environment for International Development",
+  "url": "http://www.jaeid.it",
+  "type": "journal",
+  "fields": [
+   "agriculture",
+   "social sciences",
+   "economics"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Pós",
+  "url": "https://periodicos.ufmg.br/index.php/revistapos",
+  "type": "journal",
+  "fields": [
+   "arts"
+  ],
+  "languages": [
+   "French",
+   "Spanish",
+   "English",
+   "Portuguese"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Osmia",
+  "url": "https://www.osmia-journal-hymenoptera.com/",
+  "type": "journal",
+  "fields": [
+   "biology"
+  ],
+  "languages": [
+   "English",
+   "French"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Capic Review",
+  "url": "https://capicreview.com/index.php/capicreview",
+  "type": "journal",
+  "fields": [
+   "computer science",
+   "social sciences",
+   "economics"
+  ],
+  "languages": [
+   "Spanish"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Kiri-Kerê",
+  "url": "https://periodicos.ufes.br/index.php/kirikere",
+  "type": "journal",
+  "fields": [
+   "education"
+  ],
+  "languages": [
+   "Portuguese"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "تاریخ اسلام",
+  "url": "https://hiq.bou.ac.ir/?lang=en",
+  "type": "journal",
+  "fields": [
+   "engineering",
+   "history",
+   "philosophy"
+  ],
+  "languages": [
+   "Persian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "TradTerm",
+  "url": "http://www.revistas.usp.br/tradterm",
+  "type": "journal",
+  "fields": [
+   "language and literature"
+  ],
+  "languages": [
+   "Portuguese"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Науково-інформаційний вісник Івано-Франківського університету права імені Короля Данила Галицького",
+  "url": "https://visnyk.iful.edu.ua/en/",
+  "type": "journal",
+  "fields": [
+   "law"
+  ],
+  "languages": [
+   "Ukrainian",
+   "English",
+   "Polish",
+   "Russian"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Advances in Artificial Intelligence Research",
+  "url": "https://dergipark.org.tr/en/pub/aair",
+  "type": "journal",
+  "fields": [
+   "mathematics",
+   "biology",
+   "engineering"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Zhongguo Linchuang Yixue",
+  "url": "http://www.c-jcm.com",
+  "type": "journal",
+  "fields": [
+   "medicine"
+  ],
+  "languages": [
+   "English",
+   "Chinese"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Philosophy and the Mind Sciences",
+  "url": "https://philosophymindscience.org/index.php/phimisci/index",
+  "type": "journal",
+  "fields": [
+   "philosophy",
+   "religion",
+   "social sciences"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Open-access journal listed in DOAJ.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ }
+]
