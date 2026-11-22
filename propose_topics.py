@@ -194,6 +194,176 @@ def search_europe_pmc(query):
     return out
 
 
+# --------------------------------------------------------------------------
+# Source registries (§17) — credibility / whitelist SIGNAL only.
+# Four curated registries sit beside this script in the repo:
+#   sources_registry.json        (registry 1, registry schema)
+#   sources_registry_500_more.json (500 DOAJ journals, compact schema:
+#                                   {id, name, url, type, fields,
+#                                    languages, country, checked,
+#                                    http_status} — no verified/api)
+#   sources_registry_2.json      (registry 2, registry schema)
+#   thesis_registry.json         (thesis-HOSTING sources, registry
+#                                   schema — repositories and ETD
+#                                   archives, not individual theses)
+# Both schemas normalise into one record {name, url, domain, type,
+# fields, languages, registry}. A registry match is a ranking SIGNAL
+# ONLY: it never verifies a source (the DOI / Crossref / publisher
+# verification law is unchanged) and never counts toward the source
+# bar. Loading is fail-soft: a missing or unreadable registry file
+# logs one line and the run continues with the rest.
+# --------------------------------------------------------------------------
+
+REGISTRY_FILES = ["sources_registry.json",
+                  "sources_registry_500_more.json",
+                  "sources_registry_2.json",
+                  "thesis_registry.json"]
+_REGISTRY_DIR = os.path.dirname(os.path.abspath(__file__))
+
+
+def _registry_norm_url(url):
+    """Normalised URL key for dedupe: lowercase host, leading www.
+    stripped, default ports (80/443) stripped, trailing slash
+    stripped from the path."""
+    raw = (url or "").strip()
+    if not raw:
+        return ""
+    if "://" not in raw:
+        raw = "https://" + raw
+    try:
+        parts = urllib.parse.urlsplit(raw)
+        host = (parts.hostname or "").lower()
+        if host.startswith("www."):
+            host = host[4:]
+        port = parts.port
+    except ValueError:
+        return raw.lower().rstrip("/")
+    if not host:
+        return raw.lower().rstrip("/")
+    netloc = host
+    if port and port not in (80, 443):
+        netloc = f"{host}:{port}"
+    path = (parts.path or "").rstrip("/")
+    out = netloc + path
+    if parts.query:
+        out += "?" + parts.query
+    return out
+
+
+def _registry_domain(url):
+    """Normalised domain (host) of a URL, or '' when unparsable."""
+    key = _registry_norm_url(url)
+    return key.split("/")[0].split("?")[0] if key else ""
+
+
+def load_source_registry(base_dir=None):
+    """Load all registry files; returns (domain_index, url_index,
+    stats). domain_index / url_index map the normalised domain / URL
+    to the normalised record (first record wins). Fail-soft per
+    file: a missing or unreadable registry is logged and skipped."""
+    base = base_dir or _REGISTRY_DIR
+    domain_index, url_index = {}, {}
+    stats = {"loaded": 0, "unique_urls": 0, "unique_domains": 0,
+             "duplicates": 0, "files_ok": 0}
+    for fname in REGISTRY_FILES:
+        path = os.path.join(base, fname)
+        try:
+            with open(path, encoding="utf-8") as f:
+                entries = json.load(f)
+            if not isinstance(entries, list):
+                raise ValueError("registry root is not a list")
+        except Exception as e:
+            print(f"registry: {fname} unavailable ({e}) — continuing "
+                  "without it")
+            continue
+        stats["files_ok"] += 1
+        for entry in entries:
+            if not isinstance(entry, dict):
+                continue
+            url = (entry.get("url") or "").strip()
+            if not url:
+                continue
+            stats["loaded"] += 1
+            record = {
+                "name": str(entry.get("name") or "").strip(),
+                "url": url,
+                "domain": _registry_domain(url),
+                "type": str(entry.get("type") or "").strip(),
+                "fields": [str(x) for x in
+                           (entry.get("fields") or [])
+                           if x is not None],
+                "languages": [str(x) for x in
+                              (entry.get("languages") or [])
+                              if x is not None],
+                "registry": fname,
+            }
+            key = _registry_norm_url(url)
+            if key in url_index:
+                stats["duplicates"] += 1
+                continue
+            url_index[key] = record
+            if record["domain"] and \
+                    record["domain"] not in domain_index:
+                domain_index[record["domain"]] = record
+    stats["unique_urls"] = len(url_index)
+    stats["unique_domains"] = len(domain_index)
+    print(f"registry: loaded {stats['loaded']} entries from "
+          f"{stats['files_ok']} files, {stats['unique_urls']} unique "
+          f"URLs, {stats['unique_domains']} unique domains, "
+          f"{stats['duplicates']} duplicate URLs dropped")
+    return domain_index, url_index, stats
+
+
+_REGISTRY_CACHE = None
+
+
+def get_registry():
+    """Load the registries once per run (fail-soft) and cache them."""
+    global _REGISTRY_CACHE
+    if _REGISTRY_CACHE is None:
+        _REGISTRY_CACHE = load_source_registry()
+    return _REGISTRY_CACHE
+
+
+def registry_match_for(candidate):
+    """The registry record matching a candidate, or None. Exact
+    normalised-URL match first, then domain match, over the
+    candidate's landing-page URLs. doi.org links are skipped (the
+    DOI resolver domain says nothing about the publisher)."""
+    if not isinstance(candidate, dict):
+        return None
+    domain_index, url_index, _stats = get_registry()
+    urls = []
+    for key in ("url", "landing_url", "landing_page_url",
+                "publisher_url"):
+        u = candidate.get(key)
+        if u and u not in urls:
+            urls.append(u)
+    for u in urls:
+        rec = url_index.get(_registry_norm_url(u))
+        if rec:
+            return rec
+    for u in urls:
+        dom = _registry_domain(u)
+        if dom and dom not in ("doi.org", "dx.doi.org"):
+            rec = domain_index.get(dom)
+            if rec:
+                return rec
+    return None
+
+
+def registry_tag(candidate):
+    """Tag a candidate in place with its registry match (display
+    string) and return the record or None. Signal only — this never
+    touches verification or counting."""
+    rec = registry_match_for(candidate)
+    if rec:
+        candidate["registry_match"] = (
+            f"{rec['name']} ({rec['type']}, {rec['registry']})")
+    return rec
+
+
+
 def grounding_digest(field, idea, api_key, model):
     """Titles of what already exists around the idea (best effort)."""
     queries = []
@@ -204,22 +374,40 @@ def grounding_digest(field, idea, api_key, model):
         english_q = translate_query_to_english(f"{field} {idea}", api_key, model)
         if english_q and english_q not in queries:
             queries.append(english_q)
+    # Registry signal (§17): grounding results from a searcher whose
+    # home domain is in a curated registry are tagged and preferred
+    # when the digest cap forces a choice (stable sort, matched
+    # first). Grounding only — nothing here verifies anything.
+    domain_index, _url_index, _rstats = get_registry()
+    searcher_domains = ((search_openalex, "openalex.org"),
+                        (search_crossref, "crossref.org"),
+                        (search_openaire, "openaire.eu"),
+                        (search_europe_pmc, "europepmc.org"))
     seen, titles = set(), []
     for q in queries:
-        for searcher in (search_openalex, search_crossref,
-                         search_openaire, search_europe_pmc):
+        for searcher, sdomain in searcher_domains:
             try:
                 results = searcher(q)
             except Fail as e:
                 print(f"WARNING: grounding search failed for {q!r}: {e}")
                 continue
+            rec = domain_index.get(sdomain)
             for r in results:
                 key = normalise_title(r["title"])
                 if r["title"] and key not in seen:
                     seen.add(key)
+                    if rec:
+                        r["registry_match"] = (
+                            f"{rec['name']} ({rec['type']}, "
+                            f"{rec['registry']})")
                     titles.append(r)
-                if len(titles) >= 30:
+                if len(titles) >= 120:
                     break
+    titles.sort(key=lambda t: 0 if t.get("registry_match") else 1)
+    titles = titles[:30]
+    print(f"grounding registry-matched: "
+          f"{sum(1 for t in titles if t.get('registry_match'))} of "
+          f"{len(titles)} digest works")
     lines = [f"- {t['title']}" + (f" ({t['year']})" if t.get("year") else "")
              for t in titles]
     return "\n".join(lines), len(titles)
@@ -821,6 +1009,7 @@ def main():
     chain = llm_chain()
     print(f"LLM provider: {provider} (model {llm_model()}); "
           f"brain chain: {chain}")
+    get_registry()  # §17: loads + logs the registry counts (fail-soft)
 
     if not field or not idea:
         raise Fail("FIELD and IDEA inputs are required.")
