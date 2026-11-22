@@ -1643,6 +1643,310 @@ def format_reference(i, s):
     return ref
 
 
+# --------------------------------------------------------------------------
+# Quality laws (§15) — relevance first, credible tradition, content required
+# --------------------------------------------------------------------------
+
+CONTENT_MIN_ABSTRACT_CHARS = 50
+
+_SCREEN_STOPWORDS = {
+    "the", "and", "for", "with", "from", "into", "over", "under",
+    "between", "among", "that", "this", "these", "those", "have", "has",
+    "are", "was", "were", "will", "would", "can", "could", "its",
+    "der", "die", "das", "und", "den", "des", "les", "une", "est", "sur",
+    "aux", "dans", "par", "qui", "que",
+}
+
+
+def _screen_tokens(text):
+    return {t for t in re.findall(r"[^\W_]+", (text or "").lower())
+            if len(t) >= 3 and t not in _SCREEN_STOPWORDS}
+
+
+def _script_families(text):
+    fams = set()
+    for ch in text or "":
+        if "\u0600" <= ch <= "\u06FF":
+            fams.add("arab")
+        elif ch.isascii() and ch.isalpha():
+            fams.add("latin")
+    return fams
+
+
+def _parse_json_value(text):
+    """Best-effort: extract the first JSON value (list or object) from
+    an LLM reply that may carry code fences or prose around it."""
+    t = (text or "").strip()
+    t = re.sub(r"^```(?:json)?\s*", "", t)
+    t = re.sub(r"\s*```$", "", t)
+    starts = [i for i in (t.find("["), t.find("{")) if i >= 0]
+    if not starts:
+        raise ValueError("no JSON value in reply")
+    start = min(starts)
+    end = max(t.rfind("]"), t.rfind("}"))
+    if end <= start:
+        raise ValueError("no JSON value in reply")
+    return json.loads(t[start:end + 1])
+
+
+def has_content(source):
+    """Content-required law (§15): a source counts only with real
+    content — a fetched full-text excerpt or a non-trivial abstract.
+    A bare title/DOI record never counts."""
+    if (source.get("fulltext_excerpt") or "").strip():
+        return True
+    return len((source.get("abstract") or "").strip()) \
+        >= CONTENT_MIN_ABSTRACT_CHARS
+
+
+def _llm_relevance_screen(field, topic, borderline, api_key, model):
+    """One batched brain-chain call judging the borderline candidates.
+    Returns {1-based index: (keep, reason)}. Any failure returns {} —
+    unjudged borderline candidates are then dropped (fail-closed)."""
+    lines = []
+    for j, s in enumerate(borderline, 1):
+        content = (s.get("abstract") or "").strip()
+        if not content and s.get("fulltext_excerpt"):
+            content = s["fulltext_excerpt"][:800]
+        lines.append(
+            f"[{j}] Title: {s.get('title', '')}\n"
+            f"    Authors: {', '.join((s.get('authors') or [])[:4])} | "
+            f"Year: {s.get('year') or 'n.d.'} | "
+            f"Venue: {s.get('venue') or 'n/a'} | "
+            f"Index: {s.get('index') or '?'}\n"
+            f"    Content: {content[:800] or '(no abstract available)'}")
+    prompt = (
+        "You are screening candidate sources for a scholarly article.\n"
+        f"Field: {field}\nTopic: {topic}\n\n"
+        "For EACH candidate decide keep=true ONLY if BOTH hold:\n"
+        "1) It is GENUINELY about the topic — its title/content "
+        "addresses the topic itself, not a keyword coincidence (a "
+        "shared word used in a different sense does not count).\n"
+        "2) It is credible scholarship in English, French or German — "
+        "the European / American / Indian research tradition. Exclude "
+        "Persian or Arabic keyword-noise (school textbooks, government "
+        "decrees, unrelated matches) UNLESS the item is a primary text "
+        "in a scholarly edition or translation of that tradition.\n"
+        "Give a one-line reason in English for every verdict.\n"
+        "Reply with JSON only, a list like: "
+        '[{"i": 1, "keep": true, "reason": "..."}, ...]\n\n'
+        "CANDIDATES:\n" + "\n".join(lines))
+    try:
+        raw = call_llm(prompt, api_key, model, temperature=0.1,
+                       json_mode=True)
+        data = _parse_json_value(raw)
+        verdicts = {}
+        for item in data or []:
+            i = int(item.get("i"))
+            verdicts[i] = (bool(item.get("keep")),
+                           str(item.get("reason") or "").strip()
+                           or "LLM relevance screen")
+        return verdicts
+    except Exception as e:
+        print(f"WARNING: LLM relevance screen failed ({e}); borderline "
+              "candidates will be dropped (fail-closed)")
+        return {}
+
+
+def screen_sources(field, topic, sources, api_key, model):
+    """Relevance filter + content-required gate (§15). Returns the
+    sources that COUNT: genuinely relevant AND content-bearing.
+    Deterministic token/concept overlap decides the clear cases; one
+    batched LLM call decides the borderline ones. Every verdict is
+    logged, and the fail-closed bar is applied to the result."""
+    terms = _screen_tokens(topic) | _screen_tokens(field)
+    base = _screen_tokens(topic) or terms
+    kept, borderline = [], []
+    for s in sources:
+        title = s.get("title") or ""
+        title_tokens = _screen_tokens(title)
+        body_tokens = _screen_tokens(
+            title + " " + (s.get("abstract") or "") + " "
+            + (s.get("fulltext_excerpt") or "")[:2000])
+        cov_title = (len(base & title_tokens) / len(base)) if base else 0.0
+        cov_body = (len(base & body_tokens) / len(base)) if base else 0.0
+        same_script = bool(_script_families(topic)
+                           & _script_families(title))
+        if base and cov_title >= 0.6:
+            s["relevance_reason"] = (
+                f"deterministic keep: {cov_title:.0%} of topic terms "
+                "in the title")
+            kept.append(s)
+            print(f"relevance: keep {title[:70]} — "
+                  f"{s['relevance_reason']}")
+        elif base and same_script and cov_body >= 0.6:
+            s["relevance_reason"] = (
+                f"deterministic keep: {cov_body:.0%} of topic terms "
+                "in title+abstract")
+            kept.append(s)
+            print(f"relevance: keep {title[:70]} — "
+                  f"{s['relevance_reason']}")
+        elif base and same_script and cov_body == 0.0:
+            print(f"relevance: drop {title[:70]} — deterministic drop: "
+                  "no topic-term overlap in title or abstract")
+        else:
+            borderline.append(s)
+    if borderline:
+        verdicts = _llm_relevance_screen(field, topic, borderline,
+                                         api_key, model)
+        for j, s in enumerate(borderline, 1):
+            keep, reason = verdicts.get(
+                j, (False, "no verdict from the relevance screen — "
+                           "dropped"))
+            title = s.get("title") or ""
+            if keep:
+                s["relevance_reason"] = f"LLM screen: {reason}"
+                kept.append(s)
+                print(f"relevance: keep {title[:70]} — "
+                      f"LLM screen: {reason}")
+            else:
+                print(f"relevance: drop {title[:70]} — {reason}")
+    counted = []
+    for s in kept:
+        if has_content(s):
+            counted.append(s)
+        else:
+            print("content: not counted (no abstract/full text) — "
+                  f"{(s.get('title') or '')[:70]}")
+    print(f"Relevance + content screen: {len(sources)} verified -> "
+          f"{len(kept)} relevant -> {len(counted)} counted")
+    return counted
+
+
+# Title law (§15): narrow, claim-fitted titles only.
+TITLE_SPECIFICITY_MARKERS = (
+    "روش", "اندازه‌گیری", "اندازه گیری", "بازسازی", "خطای", "خطا",
+    "ارزیابی", "سنجش", "محاسبه", "حساسیت", "مطالعهٔ موردی",
+    "method", "measurement", "measuring", "reconstruction", "error",
+    "assessment", "evaluation", "sensitivity", "determination",
+    "computation", "case study",
+)
+
+
+def title_is_specific(title, field, topic):
+    """Deterministic specificity check: rejects broad field-label
+    titles. A title passes only if it is long enough to say something
+    specific, is not just the field/topic labels re-arranged, and
+    names a specific element (a method, object, measurement, error,
+    assessment...)."""
+    t = norm(title)
+    if len(t.split()) < 5:
+        return False
+    if t == norm(topic) or t == norm(field):
+        return False
+    label_tokens = _screen_tokens(field) | _screen_tokens(topic)
+    title_tokens = _screen_tokens(title)
+    if title_tokens and title_tokens <= label_tokens:
+        return False
+    return any(m in t for m in TITLE_SPECIFICITY_MARKERS)
+
+
+def generate_titles(field, topic, language, part1, part3, api_key,
+                    model):
+    """After the body exists: 5–6 narrow title candidates + the best
+    index + 3 narrow follow-up topic suggestions, via the brain chain.
+    Returns (candidates, best_index, next_topics); ([], 0, []) on any
+    failure (the caller falls back, loudly)."""
+    lang_name = LANGUAGE_NAMES.get(language.lower(), language)
+    prompt = (
+        f"Field: {field}\nTopic: {topic}\n\n"
+        "The scholarly article below is already written. Based ONLY "
+        "on what it actually argues and proves, propose SIX narrow, "
+        f"specific scholarly titles in {lang_name}.\n"
+        "TITLE LAW: each title must name the specific object, method "
+        "or result this article is about, so it could fit ONLY this "
+        "article. Broad field-label titles are banned (never anything "
+        "like 'The role of X in the history of Y', and never a "
+        "restatement of the field plus the topic). Also propose THREE "
+        "narrow, related topics suitable for a follow-up article in "
+        "the same claim area.\n"
+        "Reply with JSON only: {\"candidates\": [6 titles], \"best\": "
+        "<0-based index of the best candidate>, \"next_topics\": "
+        "[3 topics]}\n\n"
+        f"ARTICLE ABSTRACT AND INTRODUCTION:\n{part1[:4000]}\n\n"
+        f"ARTICLE DISCUSSION AND CONCLUSION:\n{part3[:4000]}\n")
+    try:
+        raw = call_llm(prompt, api_key, model, temperature=0.3,
+                       json_mode=True)
+        data = _parse_json_value(raw)
+        candidates = [str(c).strip() for c in data.get("candidates", [])
+                      if str(c).strip()]
+        next_topics = [str(c).strip()
+                       for c in data.get("next_topics", [])
+                       if str(c).strip()]
+        best = int(data.get("best", 0))
+        if not (0 <= best < len(candidates)):
+            best = 0
+        return candidates[:6], best, next_topics[:3]
+    except Exception as e:
+        print(f"WARNING: title generation failed ({e}); falling back")
+        return [], 0, []
+
+
+def select_title(candidates, best, field, topic):
+    """Pick the article title: the LLM's best candidate first, then
+    the rest in order — the first one passing the deterministic
+    specificity check wins. If none passes, the top candidate is used
+    with a loud warning (a finished article is not discarded over its
+    title)."""
+    if not candidates:
+        print("WARNING: no title candidates; using the topic as title")
+        return topic
+    order = [candidates[best]] + [c for i, c in enumerate(candidates)
+                                  if i != best]
+    for c in order:
+        if title_is_specific(c, field, topic):
+            return c
+    print("WARNING: no title candidate passed the specificity check; "
+          f"using the top candidate: {order[0][:80]}")
+    return order[0]
+
+
+def build_suggestions_text(title, candidates, next_topics):
+    """The end-of-production DM text (§15 suggestions-visible law):
+    the user SEES the bot's title candidates, the used one marked,
+    plus narrow next-topic suggestions."""
+    lines = ["🎉 مقالهٔ شما در کانال Discovery منتشر شد.",
+             f"عنوان نهایی: «{title}»", "",
+             "📌 عنوان‌های پیشنهادی ربات برای این مقاله:"]
+    if candidates:
+        for c in candidates:
+            if c == title:
+                lines.append(f"✅ عنوان استفاده‌شده: {c}")
+            else:
+                lines.append(f"• {c}")
+    else:
+        lines.append("• (پیشنهاد عنوانی ثبت نشد)")
+    lines += ["", "💡 موضوع‌های باریک و مرتبط برای مقالهٔ بعدی:"]
+    if next_topics:
+        for t in next_topics:
+            lines.append(f"• {t}")
+    else:
+        lines.append("• (پیشنهادی ثبت نشد)")
+    return "\n".join(lines)
+
+
+def send_suggestions_dm(token, chat_id, title, candidates, next_topics):
+    """Fail-soft: send the suggestions DM to the requester
+    (ARTICLE_CHAT_ID). Never raises, never fails the run. Returns
+    True if sent."""
+    try:
+        chat_id = (chat_id or "").strip()
+        if not chat_id or not token:
+            print("suggestions DM skipped: no ARTICLE_CHAT_ID/token")
+            return False
+        text = build_suggestions_text(title, candidates, next_topics)
+        for chunk in split_text(text, 3900):
+            tg_call("sendMessage", token,
+                    {"chat_id": chat_id, "text": chunk})
+        print(f"suggestions DM sent to chat {chat_id}")
+        return True
+    except Exception as e:
+        print(f"WARNING: suggestions DM failed (ignored): {e}")
+        return False
+
+
+
 # Article category/type (§14). Absent env (manual dispatch) defaults to
 # intl/isi. TYPE_GUIDE lines are injected into the writing prompts;
 # TYPE_LABELS are shown in the channel header.
@@ -1673,9 +1977,30 @@ TYPE_LABELS = {
 }
 
 
-def write_article(field, topic, language, sources, api_key, model, guide=""):
+# Target word counts (§15 length standards), by article type.
+TYPE_WORD_TARGETS = {
+    "res": (5000, 7000),
+    "isc": (5000, 7000),
+    "isi": (6000, 8000),
+    "scopus": (5000, 7000),
+    "pubmed": (5000, 7000),
+    "ieee": (4000, 6000),
+    "review": (8000, 10000),
+    "promo": (3000, 4000),
+    "conf": (2500, 3500),
+    "intlconf": (2500, 3500),
+}
+
+
+
+def write_article(field, topic, language, sources, api_key, model, guide="",
+                  word_target=None):
     lang_name = LANGUAGE_NAMES.get(language.lower(), language)
     cards = source_cards_text(sources)
+    if not word_target:
+        word_target = (6000, 8000)
+    lo, hi = word_target
+    mid = (lo + hi) // 2
     hard_rules = (
         "HARD RULES — follow exactly:\n"
         "- Use ONLY the numbered sources below. Never mention any work, author, "
@@ -1685,52 +2010,76 @@ def write_article(field, topic, language, sources, api_key, model, guide=""):
         "- Synthesise in your own words; never copy a sentence from an abstract.\n"
         "- If the sources do not answer something, say so plainly instead of "
         "filling the gap.\n"
+        "- DEPTH (§15): work with the sources' ACTUAL content — specific data, "
+        "formulas, numerical values, named methods and named results exactly "
+        "as the source cards give them. Compare the sources head-to-head: "
+        "where they agree, where they contradict, and by how much. Include "
+        "error, uncertainty and limitation analysis wherever the sources "
+        "support it.\n"
+        "- NO GENERIC FILLER: any paragraph that could be pasted unchanged "
+        "into an article on a different topic is forbidden. If a source card "
+        "carries no usable detail on a point, say so in one sentence and "
+        "move on — never invent detail.\n"
+        f"- TARGET LENGTH: the complete article must reach {lo}–{hi} words.\n"
         f"- Write the ENTIRE output in {lang_name}.\n")
     common = (f"Field: {field}\nTopic: {topic}\n\n{hard_rules}\n"
               + (f"{guide}\n" if guide else "")
               + f"THE ONLY SOURCES YOU MAY USE:\n{cards}\n")
 
     part1 = call_llm(common +
-        "\nWrite PART 1 of a scholarly review article:\n"
-        "1) A precise title line (no exaggeration), prefixed with 'TITLE: '\n"
-        "2) '## Abstract' — a structured abstract with labelled parts: "
+        f"\nWrite PART 1 of a scholarly article (about {int(mid * 0.18)} "
+        "words):\n"
+        "1) '## Abstract' — a structured abstract with labelled parts: "
         "Background, Objective, Method, Findings, Conclusion — based only on "
-        "the sources.\n"
-        "3) '## Keywords' — 5 to 7 keywords on one line.\n"
-        "4) '## Introduction' — a funnel: broad context, narrowing to the "
-        "specific topic, the gap visible in these sources, and this review's aim.",
+        "the sources. The Findings must state concrete results from the "
+        "sources (named methods, values, dates), never generalities.\n"
+        "2) '## Keywords' — 5 to 7 keywords on one line.\n"
+        "3) '## Introduction' — a funnel: broad context, narrowing to the "
+        "specific problem, the specific gap visible in these sources, and "
+        "this article's precise aim and claim. Do NOT write a title; the "
+        "title is chosen after the article is complete.",
         api_key, model)
     progress_update(55, "✍️ نگارش بخش اول")
     part2 = call_llm(common +
-        "\nWrite PART 2 of the same review article: the body. Organise the "
-        "synthesis into 3 to 5 thematic sections, each with a '## ' heading. "
-        "Compare the sources with each other, note agreements and "
-        "contradictions, and keep every claim cited as [n]. Do NOT repeat the "
-        "title, abstract or introduction.",
+        f"\nWrite PART 2 of the same article: the body (about "
+        f"{int(mid * 0.52)} words). Organise the synthesis into 3 to 5 "
+        "thematic sections, each with a '## ' heading. In every section: "
+        "present the specific evidence from the cards (data, formulas, "
+        "numbers, named methods and results), compare the sources with "
+        "each other, and analyse errors, uncertainties and disagreements "
+        "where the sources allow. Keep every claim cited as [n]. Do NOT "
+        "repeat the abstract or introduction.",
         api_key, model)
     progress_update(75, "✍️ نگارش بخش دوم")
     part3 = call_llm(common +
-        "\nWrite PART 3 of the same review article:\n"
-        "1) '## Discussion' — what the combined evidence means, and how it "
-        "compares across the sources.\n"
-        "2) '## Conclusion' — the takeaways that the sources actually support.\n"
-        "3) '## Limitations' — honest limits of this review (sources are "
-        "abstract-level, free-access only, etc.).\n"
+        f"\nWrite PART 3 of the same article (about {int(mid * 0.30)} "
+        "words):\n"
+        "1) '## Discussion' — what the combined evidence means, how it "
+        "compares across the sources, and what the article's claim is "
+        "worth.\n"
+        "2) '## Conclusion' — the takeaways that the sources actually "
+        "support.\n"
+        "3) '## Limitations' — honest limits of this article (only "
+        "relevant, content-bearing sources were used; abstract/full-text "
+        "level; free-access only).\n"
         "Do NOT write a reference list; it is added separately.",
         api_key, model)
     progress_update(90, "✍️ نگارش بخش پایانی")
 
-    title = ""
-    m = re.search(r"TITLE:\s*(.+)", part1)
-    if m:
-        title = m.group(1).strip().strip("#").strip()
-        part1 = part1.replace(m.group(0), "", 1).strip()
-    if not title:
-        title = f"{topic} — a review of the literature"
-    references = "\n".join(format_reference(i, s) for i, s in enumerate(sources, 1))
+    # Title law (§15): the title is generated AFTER the body, from the
+    # article's actual claim, and must pass the specificity check.
+    candidates, best, next_topics = generate_titles(
+        field, topic, language, part1, part3, api_key, model)
+    title = select_title(candidates, best, field, topic)
+    references = "\n".join(format_reference(i, s)
+                           for i, s in enumerate(sources, 1))
     article = (f"# {title}\n\n{part1}\n\n{part2}\n\n{part3}\n\n"
                f"## References\n\n{references}\n")
-    return title, article
+    word_count = len(article.split())
+    print(f"word count: {word_count} (target {lo}–{hi})")
+    return title, article, {"title_candidates": candidates,
+                            "next_topics": next_topics,
+                            "word_count": word_count}
 
 
 # --------------------------------------------------------------------------
@@ -1951,26 +2300,34 @@ def main():
     progress_update(15, "🔎 جست‌وجوی منابع")
     verified = collect_verified(queries)
     progress_update(35, "📚 راستی‌آزمایی منابع")
-    if len(verified) < MIN_SOURCES:
-        raise Fail(
-            f"Only {len(verified)} verifiable sources found for "
-            f"'{topic}' (minimum {MIN_SOURCES}). Refusing to write an article "
-            "on unverified material. Try a broader or different topic.")
 
     try:
         attach_fulltexts(verified)
     except Exception as e:
         print(f"WARNING: full-text bridge failed (continuing without): {e}")
 
+    # Quality laws (§15): only genuinely relevant, content-bearing
+    # sources count toward the bar — verification alone is not enough.
+    counted = screen_sources(field, topic, verified, api_key, model)
+    progress_update(45, "🎯 گزینش منابع مرتبط")
+    if len(counted) < MIN_SOURCES:
+        raise Fail(
+            f"Only {len(counted)} relevant, content-bearing sources for "
+            f"'{topic}' out of {len(verified)} verified (minimum "
+            f"{MIN_SOURCES}). Refusing to write an article on irrelevant "
+            "or title-only material. Try a broader or different topic.")
+
     _t0 = time.monotonic()
-    title, article = write_article(field, topic, language, verified,
-                                   api_key, model,
-                                   guide=TYPE_GUIDE[article_type])
+    title, article, meta = write_article(
+        field, topic, language, counted, api_key, model,
+        guide=TYPE_GUIDE[article_type],
+        word_target=TYPE_WORD_TARGETS.get(article_type))
     print(f"timing: writing {time.monotonic() - _t0:.1f}s")
 
     header = (f"📚 Scientific Discovery Agent — new article\n"
               f"Field: {field}\nTopic: {topic}\nLanguage: {language}\n"
-              f"Mode: {mode}\nVerified sources: {len(verified)}\n"
+              f"Mode: {mode}\nVerified sources: {len(verified)} "
+              f"(relevant, content-bearing: {len(counted)})\n"
               f"نوع مقاله: {TYPE_LABELS[article_type]}\n\n{title}")
     message_ids = []
     r = tg_call("sendMessage", tg_token, {"chat_id": chat_id, "text": header})
@@ -1989,11 +2346,16 @@ def main():
         "field": field, "topic": topic, "language": language, "mode": mode,
         "title": title,
         "date": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "sources": len(verified),
+        "sources": len(counted),
         "message_ids": message_ids,
     })
     save_state(state)
     progress_update(100, "انتشار در کانال")
+    # Suggestions-visible law (§15): the requester SEES the bot's
+    # title candidates (used one marked) + next-topic suggestions.
+    send_suggestions_dm(tg_token, os.environ.get("ARTICLE_CHAT_ID", ""),
+                        title, meta.get("title_candidates", []),
+                        meta.get("next_topics", []))
     print(f"Done. Article delivered, message_ids={message_ids}")
     return 0
 
