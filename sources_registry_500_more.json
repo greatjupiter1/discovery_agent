@@ -1,0 +1,8113 @@
+[
+ {
+  "id": 1,
+  "name": "FUDMA Journal of Accounting and Finance Research (FUJAFR)",
+  "url": "https://fujafr.fudutsinma.edu.ng/index.php/fujafr/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Accounting. Bookkeeping",
+   "Finance"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 2,
+  "name": "صوت و ارتعاش",
+  "url": "https://jvs.isav.ir/?lang=en",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Acoustics. Sound"
+  ],
+  "languages": [
+   "FA"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 3,
+  "name": "Studi di Estetica",
+  "url": "http://journals.mimesisedizioni.it/index.php/studi-di-estetica/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Aesthetics",
+   "Philosophy (General)"
+  ],
+  "languages": [
+   "EN",
+   "FR",
+   "DE",
+   "IT",
+   "ES"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 4,
+  "name": "Igra Ustvarjalnosti",
+  "url": "https://iu-cg.org/en/index.php",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Aesthetics of cities. City planning and beautifying",
+   "City planning"
+  ],
+  "languages": [
+   "EN",
+   "SL"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 5,
+  "name": "Food Agricultural Sciences and Technology (FAST)",
+  "url": "https://ph02.tci-thaijo.org/index.php/stej",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Agriculture"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 6,
+  "name": "Historia Agraria",
+  "url": "https://www.historiaagraria.com/en/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Agriculture (General)",
+   "Land use"
+  ],
+  "languages": [
+   "EN",
+   "PT",
+   "ES"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 7,
+  "name": "British and American Studies",
+  "url": "https://bas-journal.ro/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "American literature",
+   "English literature"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 8,
+  "name": "Constructive Mathematical Analysis",
+  "url": "https://dergipark.org.tr/en/pub/cma",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Analysis"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 9,
+  "name": "Zurnal hromatograficnogo tovaristva",
+  "url": "http://zht.igns.gov.ua/index.php/en",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Analytical chemistry"
+  ],
+  "languages": [
+   "EN",
+   "RU",
+   "UK"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 10,
+  "name": "Studia Historica: Historia Antigua",
+  "url": "https://revistas.usal.es/uno/index.php/0213-2052/es/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Ancient history"
+  ],
+  "languages": [
+   "ES"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 11,
+  "name": "Медицина болю",
+  "url": "https://painmedicine.org.ua/index.php/pnmdcn/uk",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Anesthesiology"
+  ],
+  "languages": [
+   "EN",
+   "UK"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 302
+ },
+ {
+  "id": 12,
+  "name": "Frontiers in Arachnid Science",
+  "url": "https://www.frontiersin.org/journals/arachnid-science",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Animal biochemistry",
+   "Zoology"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 13,
+  "name": "Revista de la Facultad de Medicina Veterinaria y de Zootecnia",
+  "url": "https://revistas.unal.edu.co//index.php/remevez/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Animal culture",
+   "Veterinary medicine"
+  ],
+  "languages": [
+   "ES"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 14,
+  "name": "Anthropological Review",
+  "url": "https://czasopisma.uni.lodz.pl/ar",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Anthropology"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 15,
+  "name": "Modern Stochastics: Theory and Applications",
+  "url": "https://www.vmsta.org/journal/VMSTA",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Applied mathematics. Quantitative methods",
+   "Mathematics"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 16,
+  "name": "Laser and Particle Beams",
+  "url": "https://www.cambridge.org/core/journals/laser-and-particle-beams",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Applied optics. Photonics",
+   "Nuclear and particle physics. Atomic energy. Radioactivity"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 17,
+  "name": "Progress in Fishery Sciences",
+  "url": "https://journal.yykxjz.cn/yykxjzen/home",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Aquaculture. Fisheries. Angling"
+  ],
+  "languages": [
+   "EN",
+   "ZH"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 18,
+  "name": "Античный мир и археология",
+  "url": "https://ama.sgu.ru/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Archaeology"
+  ],
+  "languages": [
+   "RU",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 19,
+  "name": "Studia Universitatis Hereditati",
+  "url": "https://www.hippocampus.si/issn/2350-5443/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Architecture",
+   "Archaeology"
+  ],
+  "languages": [
+   "EN",
+   "IT",
+   "SL"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 20,
+  "name": "Malaria Journal",
+  "url": "https://link.springer.com/journal/12936?error=cookies_not_supported&code=763a4146-5083-4a6f-9670-135cdc29ecf9",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Arctic medicine. Tropical medicine",
+   "Infectious and parasitic diseases"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 21,
+  "name": "Notos",
+  "url": "https://notos.numerev.com/accueil",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Arts in general",
+   "Language and Literature"
+  ],
+  "languages": [
+   "IT",
+   "ES",
+   "FR"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 22,
+  "name": "Kongjian kexue xuebao",
+  "url": "https://www.sciengine.com/CJSS/home",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Astronomy"
+  ],
+  "languages": [
+   "EN",
+   "ZH"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 23,
+  "name": "Discover Space",
+  "url": "https://link.springer.com/journal/11038?error=cookies_not_supported&code=4aafb584-acd1-4594-9a08-ff78a2c36245",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Astrophysics",
+   "Geophysics. Cosmic physics"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 24,
+  "name": "Living Reviews in Relativity",
+  "url": "https://link.springer.com/journal/41114?error=cookies_not_supported&code=a2a858ec-ed73-4df9-a24d-dc9610f68a93",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Atomic physics. Constitution and properties of matter"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 25,
+  "name": "International Journal of Computers Communications & Control",
+  "url": "https://univagora.ro/jour/index.php/ijccc/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Automation",
+   "Electronic computers. Computer science"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 26,
+  "name": "Културно-историческо наследство: Опазване, представяне, дигитализация",
+  "url": "https://www.math.bas.bg/vt/kin/index.php",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Auxiliary sciences of history",
+   "Electronic computers. Computer science"
+  ],
+  "languages": [
+   "EN",
+   "BG",
+   "RU"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 27,
+  "name": "Insaniyat: Journal of Islam and Humanities",
+  "url": "https://journal.uinjkt.ac.id/index.php/insaniyat/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Bibliography. Library science. Information resources",
+   "Islam",
+   "Social Sciences"
+  ],
+  "languages": [
+   "AR",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 28,
+  "name": "Journal of Medical Biochemistry",
+  "url": "https://scindeks.ceon.rs/JournalDetails.aspx?issn=1452-8258&lang=en",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Biochemistry"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 29,
+  "name": "Biografistyka Pedagogiczna",
+  "url": "https://czaz.akademiazamojska.edu.pl/index.php/bp/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Biography",
+   "Education"
+  ],
+  "languages": [
+   "FR",
+   "EN",
+   "PL"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 30,
+  "name": "Biomath",
+  "url": "https://biomath.math.bas.bg/biomath/index.php/biomath",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Biology (General)",
+   "Mathematics"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 31,
+  "name": "Медицина и биотехнологии",
+  "url": "https://medbiosci.ru/MedBiotech",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Biotechnology",
+   "Medicine (General)"
+  ],
+  "languages": [
+   "RU",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 32,
+  "name": "Italian Botanist",
+  "url": "https://italianbotanist.pensoft.net/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Botany"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 33,
+  "name": "Revista Adm.Made",
+  "url": "https://mestradoedoutoradoestacio.periodicoscientificos.com.br/index.php/admmade",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Business"
+  ],
+  "languages": [
+   "EN",
+   "PT",
+   "ES"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 34,
+  "name": "Proskuneo",
+  "url": "https://e-journal.stttransformasi-indonesia.ac.id/index.php/pjt",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "By religion",
+   "Religious ethics",
+   "Practical religion. The Christian life",
+   "Religion (General)"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 35,
+  "name": "Journal of Chemical Engineering Research Progress",
+  "url": "https://journal.bcrec.id/index.php/jcerp",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Chemical engineering"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 36,
+  "name": "Frontiers in Soft Matter",
+  "url": "https://www.frontiersin.org/journals/soft-matter",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Chemistry",
+   "Medical physics. Medical radiology. Nuclear medicine",
+   "Polymers and polymer manufacture"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 37,
+  "name": "The Biblical Annals",
+  "url": "https://czasopisma.kul.pl/ba",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Christianity",
+   "The Bible"
+  ],
+  "languages": [
+   "EN",
+   "FR",
+   "DE",
+   "IT",
+   "PL"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 38,
+  "name": "Journal of Urban and Regional Analysis",
+  "url": "https://jurareview.ro/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Cities. Urban geography",
+   "Urban groups. The city. Urban sociology"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 39,
+  "name": "Huellas de la Migración",
+  "url": "https://huellasdelamigracion.uaemex.mx/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Colonies and colonization. Emigration and immigration. International migration",
+   "City population. Including children in cities, immigration"
+  ],
+  "languages": [
+   "ES"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 40,
+  "name": "International Journal of Management, Technology, and Social Sciences",
+  "url": "https://ijmts.supublication.com/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Commerce",
+   "Information technology",
+   "Social sciences (General)"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 41,
+  "name": "İletişim Kuram ve Araştırma Dergisi",
+  "url": "https://dergipark.org.tr/en/pub/ikad",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Communication. Mass media"
+  ],
+  "languages": [
+   "TR",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 42,
+  "name": "Caste",
+  "url": "https://journals.library.brandeis.edu/index.php/caste/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Communities. Classes. Races"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 43,
+  "name": "Discover Artificial Intelligence",
+  "url": "https://link.springer.com/journal/44163?error=cookies_not_supported&code=ef2f59e9-c1d8-47d2-9517-bb7e15268642",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Computational linguistics. Natural language processing",
+   "Electronic computers. Computer science"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 44,
+  "name": "Brain Informatics",
+  "url": "https://link.springer.com/journal/40708?error=cookies_not_supported&code=316e40b0-7219-4e8a-b8af-6c9485954d7d",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Computer applications to medicine. Medical informatics",
+   "Computer software"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 45,
+  "name": "Journal of Internet and Software Engineering",
+  "url": "https://jurnal.ugm.ac.id/v3/JISE",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Computer engineering. Computer hardware",
+   "Electric apparatus and materials. Electric circuits. Electric networks"
+  ],
+  "languages": [
+   "EN",
+   "ID"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 46,
+  "name": "Data Science",
+  "url": "https://talenta.usu.ac.id/JoCAI",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Computer software"
+  ],
+  "languages": [
+   "ID",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 47,
+  "name": "Journal of Automation and Intelligence",
+  "url": "https://www.keaipublishing.com/en/journals/journal-of-automation-and-intelligence",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Control engineering systems. Automatic machinery (General)",
+   "Electronic computers. Computer science"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 48,
+  "name": "Materials and Devices",
+  "url": "https://caip.co-ac.com/index.php/materialsanddevices",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Crystallography",
+   "Physical and theoretical chemistry"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 49,
+  "name": "Cybernetics and Physics",
+  "url": "https://cap.physcon.ru/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Cybernetics",
+   "Physics"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 50,
+  "name": "Erbil Dental Journal",
+  "url": "https://edj.hmu.edu.krd/index.php/journal",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Dentistry"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 51,
+  "name": "Dermatology Practical & Conceptual",
+  "url": "https://dpcj.org/index.php/dpc",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Dermatology"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 52,
+  "name": "Interventional Cardiology Perspectives",
+  "url": "https://intcarper.com/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Diseases of the circulatory (Cardiovascular) system"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 53,
+  "name": "The University of Louisville Journal of Respiratory Infections",
+  "url": "https://ir.library.louisville.edu/jri/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Diseases of the respiratory system"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 54,
+  "name": "Fønix",
+  "url": "https://foenix1976.dk/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Doctrinal Theology",
+   "Literature (General)"
+  ],
+  "languages": [
+   "DA"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 55,
+  "name": "Critical Stages",
+  "url": "https://www.critical-stages.org/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Dramatic representation. The theater"
+  ],
+  "languages": [
+   "EN",
+   "FR"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 56,
+  "name": "Pad",
+  "url": "https://www.padjournal.net/new/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Drawing. Design. Illustration",
+   "Architectural drawing and design"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 57,
+  "name": "Геосистемы переходных зон",
+  "url": "http://journal.imgg.ru/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Dynamic and structural geology",
+   "Stratigraphy",
+   "Engineering geology. Rock mechanics. Soil mechanics. Underground construction",
+   "Petrology"
+  ],
+  "languages": [
+   "RU",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 58,
+  "name": "Advances in Oceanography and Limnology",
+  "url": "https://www.pagepressjournals.org/aiol",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Ecology"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 59,
+  "name": "Expresión Económica",
+  "url": "https://expresioneconomica.cucea.udg.mx/index.php/eera",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Economic history and conditions",
+   "Finance",
+   "Economics as a science"
+  ],
+  "languages": [
+   "ES",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 60,
+  "name": "Ekonomista",
+  "url": "https://ekonomista.pte.pl/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Economics as a science",
+   "Finance"
+  ],
+  "languages": [
+   "PL",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 61,
+  "name": "Multidisciplinary Journal of School Education",
+  "url": "https://czasopisma.ignatianum.edu.pl/jpe",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Education"
+  ],
+  "languages": [
+   "EN",
+   "ES"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 62,
+  "name": "Jurnal Smart",
+  "url": "https://ejournal.umpri.ac.id/index.php/smart/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Education (General)",
+   "English language"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 63,
+  "name": "Journal of Electrical Systems and Information Technology",
+  "url": "https://idp.springer.com/transit?redirect_uri=https%3A%2F%2Flink.springer.com%2Fjournal%2F43067&code=ea2d6b52-6647-427f-bd59-237c1404c88f",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Electrical engineering. Electronics. Nuclear engineering",
+   "Information technology"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 302
+ },
+ {
+  "id": 64,
+  "name": "Leida xuebao",
+  "url": "https://radars.ac.cn/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Electricity and magnetism"
+  ],
+  "languages": [
+   "ZH",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 65,
+  "name": "Complex Systems Stability & Control",
+  "url": "https://www.sciltp.com/journals/cssc",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Electronic computers. Computer science"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 66,
+  "name": "Liangzi dianzi xuebao",
+  "url": "http://lk.hfcas.ac.cn/EN/1007-5461/home.shtml",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Electronics",
+   "Optics. Light"
+  ],
+  "languages": [
+   "ZH"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 67,
+  "name": "Earth Energy Science",
+  "url": "https://www.keaipublishing.com/en/journals/earth-energy-science",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Energy conservation",
+   "Engineering geology. Rock mechanics. Soil mechanics. Underground construction"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 68,
+  "name": "Communications Engineering",
+  "url": "https://www.nature.com/commseng/?error=cookies_not_supported&code=8f72f2ed-b67d-4f7c-8aeb-1565d41e023e",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Engineering (General). Civil engineering (General)"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 69,
+  "name": "مکانیک سنگ",
+  "url": "https://www.irsrmjournal.ir/?lang=en",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Engineering geology. Rock mechanics. Soil mechanics. Underground construction"
+  ],
+  "languages": [
+   "EN",
+   "FA"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 70,
+  "name": "Diyala Journal of Engineering Sciences",
+  "url": "https://djes.info/index.php/djes/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Engineering machinery, tools, and implements",
+   "Mechanics of engineering. Applied mechanics",
+   "Electrical engineering. Electronics. Nuclear engineering",
+   "Chemical engineering"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 71,
+  "name": "Revista Alicantina de Estudios Ingleses",
+  "url": "https://raei.ua.es/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "English language",
+   "English literature"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 72,
+  "name": "Marvell Studies",
+  "url": "https://marvell.openlibhums.org/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "English literature"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 73,
+  "name": "Informatyka, Automatyka, Pomiary w Gospodarce i Ochronie Środowiska",
+  "url": "https://ph.pollub.pl/index.php/iapgos/en",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Environmental engineering",
+   "Environmental sciences"
+  ],
+  "languages": [
+   "PL",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 74,
+  "name": "Naturaleza y Sociedad: Desafíos Medioambientales",
+  "url": "https://revistas.uniandes.edu.co/index.php/nys/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Environmental law",
+   "Environmental sciences"
+  ],
+  "languages": [
+   "PT",
+   "EN",
+   "ES"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 75,
+  "name": "Environmental Monitoring and Contaminants Research",
+  "url": "https://emcr-journal.org/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Environmental pollution"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 76,
+  "name": "Vegetation Classification and Survey (VCS)",
+  "url": "https://vcs.pensoft.net/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Environmental sciences"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 77,
+  "name": "Asian Journal of Atmospheric Environment",
+  "url": "https://link.springer.com/journal/44273?error=cookies_not_supported&code=1e5ec59d-c9a2-47ee-9f6f-0ee92a18fbcb",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Environmental technology. Sanitary engineering",
+   "Environmental sciences"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 78,
+  "name": "Apuntes de Bioética",
+  "url": "https://revistas.usat.edu.pe/index.php/apuntes",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Ethics"
+  ],
+  "languages": [
+   "ES",
+   "PT"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 79,
+  "name": "Народы и религии Евразии",
+  "url": "https://journal.asu.ru/wv",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Ethnology. Social and cultural anthropology"
+  ],
+  "languages": [
+   "RU"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 80,
+  "name": "IOASD Journal of Business and Management Studies",
+  "url": "https://ioasdpublisher.com/ioasdjbms",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Finance",
+   "Commerce"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 81,
+  "name": "Tate Papers",
+  "url": "https://www.tate.org.uk/research/tate-papers",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Fine Arts",
+   "History of the arts"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 82,
+  "name": "Lähivõrdlusi",
+  "url": "http://arhiiv.rakenduslingvistika.ee/ajakirjad/index.php/lahivordlusi",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Finnic. Baltic-Finnic"
+  ],
+  "languages": [
+   "EN",
+   "ET",
+   "FI"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 83,
+  "name": "Food Physics",
+  "url": "https://www.keaipublishing.com/en/journals/food-physics",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Food processing and manufacture",
+   "Physical and theoretical chemistry"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 84,
+  "name": "Bartın Orman Fakültesi Dergisi",
+  "url": "https://dergipark.org.tr/en/pub/barofd",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Forestry"
+  ],
+  "languages": [
+   "EN",
+   "TR"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 85,
+  "name": "Acta Palaeontologica Polonica",
+  "url": "https://www.app.pan.pl/home.html",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Fossil man. Human paleontology",
+   "Paleontology"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 86,
+  "name": "Bibliotheca Dantesca",
+  "url": "https://penn.manifoldapp.org/journals/bibliotheca-dantesca",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "French literature - Italian literature - Spanish literature - Portuguese literature"
+  ],
+  "languages": [
+   "IT",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 87,
+  "name": "Estudios Avanzados",
+  "url": "https://revistas.usach.cl/ojs/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "General Works"
+  ],
+  "languages": [
+   "PT",
+   "ES"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 88,
+  "name": "Frontiers in Conservation Science",
+  "url": "https://www.frontiersin.org/journals/conservation-science",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "General. Including nature conservation, geographical distribution"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 89,
+  "name": "Journal of Genetic Resources",
+  "url": "https://sc.journals.umz.ac.ir/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Genetics"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 90,
+  "name": "Geodesy and Cartography",
+  "url": "https://journals.vilniustech.lt/index.php/GAC",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Geodesy"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 91,
+  "name": "GI_FORUM - Journal for Geographic Information Science",
+  "url": "https://www.austriaca.at/GI_Forum",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Geography (General)"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 92,
+  "name": "GéoProximitéS",
+  "url": "https://geoproximites.fr/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Geography. Anthropology. Recreation"
+  ],
+  "languages": [
+   "FR"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 93,
+  "name": "European Geologist",
+  "url": "https://eurogeologists.eu/journal/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Geology"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 94,
+  "name": "Comptes Rendus. Géoscience",
+  "url": "https://comptes-rendus.academie-sciences.fr/geoscience",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Geophysics. Cosmic physics",
+   "Chemistry",
+   "Geology"
+  ],
+  "languages": [
+   "FR",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 95,
+  "name": "Guoji laonian yixue zazhi",
+  "url": "https://gwll.publish.founderss.cn/homeNav?lang=en",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Geriatrics"
+  ],
+  "languages": [
+   "ZH"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 96,
+  "name": "Convivium",
+  "url": "https://czasopisma.uni.lodz.pl/conv",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "German literature",
+   "Philology. Linguistics"
+  ],
+  "languages": [
+   "EN",
+   "DE",
+   "PL"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 97,
+  "name": "Germanica Wratislaviensia",
+  "url": "https://czasopisma.uwr.edu.pl/gwr",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Germanic languages. Scandinavian languages",
+   "German literature"
+  ],
+  "languages": [
+   "DE"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 98,
+  "name": "Latein und Griechisch in Nordrhein-Westfalen",
+  "url": "https://www.biejournals.de/index.php/lgnrw/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Greek language and literature. Latin language and literature",
+   "Philology. Linguistics"
+  ],
+  "languages": [
+   "DE"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 99,
+  "name": "Cambridge Prisms: Coastal Futures",
+  "url": "https://www.cambridge.org/core/journals/cambridge-prisms-coastal-futures",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Harbors and coast protective works. Coastal engineering. Lighthouses",
+   "Oceanography"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 100,
+  "name": "Tiempos Modernos: Revista Electrónica de Historia Moderna",
+  "url": "http://www.tiemposmodernos.org/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "History (General)",
+   "Modern history, 1453-"
+  ],
+  "languages": [
+   "EN",
+   "FR",
+   "ES"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 101,
+  "name": "Tér és Társadalom",
+  "url": "https://tet.rkk.hu/index.php/TeT",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "History (General) and history of Europe",
+   "Economic history and conditions",
+   "Economic growth, development, planning",
+   "Sociology (General)"
+  ],
+  "languages": [
+   "EN",
+   "HU"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 102,
+  "name": "Zamani: A Journal of African Historical Studies",
+  "url": "https://www.plutojournals.com/zamani/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "History of Africa"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 103,
+  "name": "Asia Pacific",
+  "url": "https://sujo.usindh.edu.pk/index.php/ASIA-PACIFIC",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "History of Asia",
+   "Political institutions and public administration - Asia (Asian studies only)",
+   "Social sciences and state - Asia (Asian studies only)"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 104,
+  "name": "Archeologické Rozhledy",
+  "url": "https://archeologickerozhledy.cz/index.php/ar",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "History of Central Europe",
+   "Ancient history"
+  ],
+  "languages": [
+   "SK",
+   "CS",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 105,
+  "name": "Plural: History, Culture, Society",
+  "url": "https://plural.upsc.md/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "History of Eastern Europe"
+  ],
+  "languages": [
+   "RU",
+   "RO",
+   "DE",
+   "FR",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 106,
+  "name": "Iberoamericana. América Latina - España - Portugal",
+  "url": "https://journals.iai.spk-berlin.de/index.php/iberoamericana",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "History of Portugal",
+   "History of Spain",
+   "Latin America. Spanish America",
+   "French literature - Italian literature - Spanish literature - Portuguese literature"
+  ],
+  "languages": [
+   "ES",
+   "PT",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 107,
+  "name": "Cuadernos de Historia de España",
+  "url": "https://revistascientificas.filo.uba.ar/index.php/che/issue/view/873",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "History of Spain"
+  ],
+  "languages": [
+   "ES"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 108,
+  "name": "Revue d’Histoire Culturelle",
+  "url": "https://journals.openedition.org/rhc",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "History of education"
+  ],
+  "languages": [
+   "EN",
+   "FR"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 109,
+  "name": "Patristica et Mediaevalia",
+  "url": "https://revistascientificas.filo.uba.ar/index.php/petm/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "History of scholarship and learning. The humanities",
+   "Philosophy (General)"
+  ],
+  "languages": [
+   "ES",
+   "PT",
+   "IT",
+   "FR",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 110,
+  "name": "Историческое оружиеведение",
+  "url": "https://historical-weapons.com/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "History of the arts",
+   "History (General)"
+  ],
+  "languages": [
+   "EN",
+   "RU"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 111,
+  "name": "Journal of Tourism and Heritage Research",
+  "url": "http://www.jthr.es/index.php/journal",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Hospitality industry. Hotels, clubs, restaurants, etc. Food service",
+   "Recreation. Leisure",
+   "History of Spain"
+  ],
+  "languages": [
+   "EN",
+   "ES"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 112,
+  "name": "Open Quaternary",
+  "url": "https://openquaternary.com/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Human evolution",
+   "Prehistoric archaeology",
+   "Paleontology"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 113,
+  "name": "Shuili fazhan yanjiu",
+  "url": "https://slfz.cbpt.cnki.net/portal",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Hydraulic engineering",
+   "Environmental technology. Sanitary engineering"
+  ],
+  "languages": [
+   "ZH"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 114,
+  "name": "Nubihar Akademi",
+  "url": "https://dergipark.org.tr/en/pub/nubihar",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Indo-Iranian languages and literature",
+   "Language. Linguistic theory. Comparative grammar"
+  ],
+  "languages": [
+   "AR",
+   "FA",
+   "TR",
+   "KU",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 115,
+  "name": "Frontiers in Batteries and Electrochemistry",
+  "url": "https://www.frontiersin.org/journals/batteries-and-electrochemistry",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Industrial electrochemistry"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 116,
+  "name": "Journal of Engineering, Project, and Production Management",
+  "url": "http://www.ppml.url.tw/EPPM_Journal/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Industrial engineering. Management engineering"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 117,
+  "name": "JISA (Jurnal Informatika dan Sains)",
+  "url": "https://ojs.trilogi.ac.id/index.php/JISA/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Information technology",
+   "Computer software"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 118,
+  "name": "Saudi Journal of Internal Medicine",
+  "url": "https://www.ovid.com/jnls/sjim",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Internal medicine"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 119,
+  "name": "Polis: Revista de Stiinte Politice",
+  "url": "https://revistapolis.ro/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "International relations"
+  ],
+  "languages": [
+   "IT",
+   "RO",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 120,
+  "name": "Walisongo: Jurnal Penelitian Sosial Keagamaan",
+  "url": "https://journal.walisongo.ac.id/index.php/walisongo",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Islam"
+  ],
+  "languages": [
+   "ID",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 121,
+  "name": "Journal of Umm Al-Qura University for Shari'ah Sciences and Islamic Studies",
+  "url": "https://uqu.edu.sa/en/jill",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Islam. Bahai Faith. Theosophy, etc."
+  ],
+  "languages": [
+   "AR",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 122,
+  "name": "مطالعات بنیادین تمدن نوین اسلامی",
+  "url": "https://nic.shahed.ac.ir:443/?lang=en",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Islamic law",
+   "Islam"
+  ],
+  "languages": [
+   "FA"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 123,
+  "name": "Erciyes İletişim Dergisi",
+  "url": "https://dergipark.org.tr/en/pub/erciyesiletisim",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Journalism. The periodical press, etc."
+  ],
+  "languages": [
+   "TR",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 124,
+  "name": "Studies in Christian-Jewish Relations",
+  "url": "https://ejournals.bc.edu/index.php/scjr/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Judaism",
+   "Christianity"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 125,
+  "name": "Revista Internacional de Derechos Humanos",
+  "url": "https://ojs.austral.edu.ar/ridh",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Jurisprudence. Philosophy and theory of law"
+  ],
+  "languages": [
+   "ES",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 126,
+  "name": "Language Documentation and Description",
+  "url": "https://www.lddjournal.org/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Language acquisition"
+  ],
+  "languages": [
+   "EN",
+   "ES",
+   "FR"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 127,
+  "name": "Teksty Drugie",
+  "url": "https://journals.openedition.org/td",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Language and Literature"
+  ],
+  "languages": [
+   "PL",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 128,
+  "name": "Journal of Portuguese Linguistics",
+  "url": "https://jpl.letras.ulisboa.pt/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Language. Linguistic theory. Comparative grammar"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 129,
+  "name": "Études Caribéennes",
+  "url": "https://journals.openedition.org/etudescaribeennes",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Latin America. Spanish America",
+   "Social Sciences"
+  ],
+  "languages": [
+   "ES",
+   "FR",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 130,
+  "name": "Studia Iuridica Lublinensia",
+  "url": "https://journals.umcs.pl/sil/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Law",
+   "Political institutions and public administration (General)"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 131,
+  "name": "Revista Tribuna Internacional",
+  "url": "https://tribunainternacional.uchile.cl/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Law in general. Comparative and uniform law. Jurisprudence",
+   "Private international law. Conflict of laws",
+   "International relations"
+  ],
+  "languages": [
+   "EN",
+   "ES"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 132,
+  "name": "Slovenska Literatura",
+  "url": "https://www.sav.sk/?lang=en&doc=journal-list&journal_no=52",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Literature (General)"
+  ],
+  "languages": [
+   "CS",
+   "SK"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 133,
+  "name": "Logical Methods in Computer Science",
+  "url": "https://lmcs.episciences.org/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Logic",
+   "Electronic computers. Computer science"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 134,
+  "name": "SINTECH (Science and Information Technology) Journal",
+  "url": "https://ejournal.instiki.ac.id/index.php/sintechjournal/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Management information systems"
+  ],
+  "languages": [
+   "ID",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 135,
+  "name": "MIX: Jurnal Ilmiah Manajemen",
+  "url": "https://publikasi.mercubuana.ac.id/index.php/Jurnal_Mix/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Management. Industrial management",
+   "Finance"
+  ],
+  "languages": [
+   "EN",
+   "ID"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 136,
+  "name": "توسعه کارآفرینی",
+  "url": "https://jed.ut.ac.ir/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Marketing. Distribution of products",
+   "General Works"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 137,
+  "name": "npj Quantum Materials",
+  "url": "https://www.nature.com/npjquantmats/?error=cookies_not_supported&code=532ae4d0-f20c-44cb-8713-c486303fb0bc",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Materials of engineering and construction. Mechanics of materials",
+   "Atomic physics. Constitution and properties of matter"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 138,
+  "name": "Geoinformatics FCE CTU",
+  "url": "https://ojs.cvut.cz/ojs/index.php/gi",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Mathematical geography. Cartography",
+   "Geodesy"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 139,
+  "name": "Pythagoras",
+  "url": "https://pythagoras.org.za/index.php/pythagoras",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Mathematics",
+   "Theory and practice of education"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 140,
+  "name": "مهندسی مکانیک شریف",
+  "url": "https://sjme.journals.sharif.edu/?lang=en",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Mechanical engineering and machinery"
+  ],
+  "languages": [
+   "FA"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 141,
+  "name": "Journal of Mechanical Ventilation",
+  "url": "https://www.journalmechanicalventilation.com/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Medical emergencies. Critical care. Intensive care. First aid",
+   "Diseases of the respiratory system"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 142,
+  "name": "Yixue yu zhexue",
+  "url": "https://yizhe.dmu.edu.cn/yxyzx",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Medical philosophy. Medical ethics"
+  ],
+  "languages": [
+   "ZH"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 143,
+  "name": "Вестник рентгенологии и радиологии",
+  "url": "https://www.russianradiology.ru/jour",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Medical physics. Medical radiology. Nuclear medicine"
+  ],
+  "languages": [
+   "RU",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 144,
+  "name": "Revista Herediana de Rehabilitación",
+  "url": "https://revistas.upch.edu.pe/index.php/RHR",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Medical technology",
+   "Therapeutics. Pharmacology"
+  ],
+  "languages": [
+   "ES",
+   "EN",
+   "PT"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 145,
+  "name": "Medical Laboratory Journal",
+  "url": "http://mlj.goums.ac.ir/index.php",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Medicine"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 146,
+  "name": "Graduate Medical Education Research Journal",
+  "url": "https://digitalcommons.unmc.edu/gmerj/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Medicine (General)"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 147,
+  "name": "Tabularia",
+  "url": "https://journals.openedition.org/tabularia",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Medieval history"
+  ],
+  "languages": [
+   "FR",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 148,
+  "name": "Gaoyuan qixiang",
+  "url": "http://www.gyqx.ac.cn/EN/home",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Meteorology. Climatology"
+  ],
+  "languages": [
+   "ZH"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 149,
+  "name": "The Journal of Medical Laboratory Science & Technology of South Africa",
+  "url": "https://jmlstsa.org.za/index.php/jmlstsa",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Microbiology",
+   "Biology (General)"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 150,
+  "name": "Vojnotehnički Glasnik",
+  "url": "http://www.vtg.mod.gov.rs/index-e.html",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Military Science",
+   "Engineering (General). Civil engineering (General)"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 151,
+  "name": "Mineralia Slovaca",
+  "url": "https://www.geology.sk/mineralia/?lang=en",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Mineralogy"
+  ],
+  "languages": [
+   "SK",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 152,
+  "name": "Frontiers in Metals and Alloys",
+  "url": "https://www.frontiersin.org/journals/metals-and-alloys",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Mining engineering. Metallurgy"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 153,
+  "name": "Differenz",
+  "url": "https://revistascientificas.us.es/index.php/Differenz/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Modern"
+  ],
+  "languages": [
+   "ES",
+   "EN",
+   "DE",
+   "IT",
+   "PT"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 154,
+  "name": "Journal of Early Modern Studies",
+  "url": "https://oajournals.fupress.net/index.php/bsfm-jems",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Modern history, 1453-",
+   "Language and Literature"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 155,
+  "name": "Kongqi donglixue xuebao",
+  "url": "http://kqdlxxb.xml-journal.net/indexen.htm",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Motor vehicles. Aeronautics. Astronautics"
+  ],
+  "languages": [
+   "EN",
+   "ZH"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 156,
+  "name": "Cadernos de Sociomuseologia",
+  "url": "https://revistas.ulusofona.pt/index.php/cadernosociomuseologia/pt",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Museums. Collectors and collecting",
+   "Sociology (General)"
+  ],
+  "languages": [
+   "ES",
+   "PT",
+   "GL",
+   "FR",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 157,
+  "name": "Gli Spazi della Musica",
+  "url": "https://ojs.unito.it/index.php/spazidellamusica",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Music"
+  ],
+  "languages": [
+   "EN",
+   "IT"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 158,
+  "name": "Journal of Jazz Studies",
+  "url": "https://jjs.libraries.rutgers.edu/index.php/jjs",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Music and books on Music",
+   "Music"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 159,
+  "name": "MusPed: Research",
+  "url": "https://cdforskning.no/cdf/catalog/series/musped",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Musical instruction and study"
+  ],
+  "languages": [
+   "EN",
+   "DA",
+   "SV",
+   "NO"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 160,
+  "name": "Proceedings of the National Institute of Ecology of the Republic of Korea",
+  "url": "https://accesson.kr/pnie",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Natural history (General)"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 161,
+  "name": "Ship Science & Technology (Cartagena)",
+  "url": "https://shipjournal.co/challenge?next=%2Findex.php%2Fsst%2Findex",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Naval Science"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 162,
+  "name": "Journal of the Egyptian National Cancer Institute",
+  "url": "https://link.springer.com/journal/43046?error=cookies_not_supported&code=3d9e66c6-3b68-4cc3-a552-e96f369a46b7",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Neoplasms. Tumors. Oncology. Including cancer and carcinogens"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 163,
+  "name": "Neurology Letters",
+  "url": "https://www.neurologyletters.com/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Neurology. Diseases of the nervous system"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 164,
+  "name": "eNeuro",
+  "url": "https://www.eneuro.org/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Neurosciences. Biological psychiatry. Neuropsychiatry"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 165,
+  "name": "International Journal of Advanced Nuclear Reactor Design and Technology",
+  "url": "https://www.keaipublishing.com/en/journals/international-journal-of-advanced-nuclear-reactor-design-and-technology",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Nuclear engineering. Atomic power"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 166,
+  "name": "Reabilitacijos Mokslai: Slauga, Kineziterapija, Ergoterapija",
+  "url": "https://journals.lsu.lt/reabilitacijos-mokslai/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Nursing",
+   "Internal medicine"
+  ],
+  "languages": [
+   "EN",
+   "LT"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 167,
+  "name": "Nutrimentum et Curae",
+  "url": "https://www.nutrimentumetcurae.com/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Nutrition. Foods and food supply"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 168,
+  "name": "Marine and Fishery Sciences",
+  "url": "https://ojs.inidep.edu.ar/index.php/mafis/en",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Oceanography",
+   "Aquaculture. Fisheries. Angling",
+   "Ecology"
+  ],
+  "languages": [
+   "ES",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 169,
+  "name": "Petroleum Research",
+  "url": "https://www.keaipublishing.com/en/journals/petroleum-research",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Oils, fats, and waxes",
+   "Petroleum refining. Petroleum products"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 170,
+  "name": "Investigaciones Fenomenológicas",
+  "url": "https://revistas.uned.es/index.php/rif/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Ontology"
+  ],
+  "languages": [
+   "ES",
+   "CA",
+   "EN",
+   "FR",
+   "EU"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 171,
+  "name": "Opto-Electronic Advances",
+  "url": "https://www.oejournal.org/oea",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Optics. Light"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 172,
+  "name": "Nepal Orthopedic Association Journal",
+  "url": "https://noaj.org.np/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Orthopedic surgery"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 173,
+  "name": "BMC Complementary Medicine and Therapies",
+  "url": "https://link.springer.com/journal/12906?error=cookies_not_supported&code=83e643e5-9ad1-4488-90bf-e517b82298a7",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Other systems of medicine"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 174,
+  "name": "Acta Palaeobotanica",
+  "url": "https://acpa.botany.pl/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Paleontology",
+   "Botany"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 175,
+  "name": "Revista Ecuatoriana de Pediatría",
+  "url": "https://rev-sep.ec/index.php/johs",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Pediatrics"
+  ],
+  "languages": [
+   "EN",
+   "ES"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 176,
+  "name": "Нефтегазовая геология: Теория и практика",
+  "url": "https://ngtp.ru/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Petroleum refining. Petroleum products",
+   "Geology"
+  ],
+  "languages": [
+   "EN",
+   "RU"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 177,
+  "name": "Al-Mustansiriyah Journal of Pharmaceutical Sciences",
+  "url": "https://ajps.uomustansiriyah.edu.iq/index.php/AJPS",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Pharmacy and materia medica"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 178,
+  "name": "Linguarum Universe",
+  "url": "https://linguarumuniverse.weebly.com/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Philology. Linguistics"
+  ],
+  "languages": [
+   "SK",
+   "DE",
+   "FR",
+   "EN",
+   "BG"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 179,
+  "name": "Tópicos",
+  "url": "https://bibliotecavirtual.unl.edu.ar/challenge?next=%2Fpublicaciones%2Findex.php%2FTopicos",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Philosophy (General)"
+  ],
+  "languages": [
+   "EN",
+   "ES",
+   "PT"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 180,
+  "name": "Principia: An International Journal of Epistemology",
+  "url": "https://periodicos.ufsc.br/index.php/principia/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Philosophy. Psychology. Religion",
+   "Philosophy (General)"
+  ],
+  "languages": [
+   "ES",
+   "PT",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 181,
+  "name": "Magnetic Resonance Letters",
+  "url": "https://www.keaipublishing.com/en/journals/magnetic-resonance-letters",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Physical and theoretical chemistry",
+   "Analytical chemistry"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 182,
+  "name": "Boletim Geográfico do Rio Grande do Sul",
+  "url": "https://revistas.planejamento.rs.gov.br:443/index.php/boletim-geografico-rs",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Physical geography",
+   "Geography (General)"
+  ],
+  "languages": [
+   "PT",
+   "ES"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 183,
+  "name": "npj Quantum Information",
+  "url": "https://www.nature.com/npjqi/?error=cookies_not_supported&code=d4a907d2-c520-4099-9774-cb413a79de06",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Physics",
+   "Electronic computers. Computer science"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 184,
+  "name": "Ожирение и метаболизм",
+  "url": "https://www.omet-endojournals.ru/jour/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Physiology",
+   "Biochemistry"
+  ],
+  "languages": [
+   "RU",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 185,
+  "name": "Zhongguo youliao zuowu xuebao",
+  "url": "http://www.jouroilcrops.cn/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Plant culture"
+  ],
+  "languages": [
+   "ZH"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 186,
+  "name": "Revista Estudios de Políticas Públicas",
+  "url": "https://revistaestudiospoliticaspublicas.uchile.cl/index.php/REPP/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Political institutions and public administration (General)"
+  ],
+  "languages": [
+   "ES",
+   "EN",
+   "PT"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 187,
+  "name": "Meridiano 47",
+  "url": "https://periodicos.unb.br/index.php/MED",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Political science",
+   "International relations"
+  ],
+  "languages": [
+   "PT",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 188,
+  "name": "Global justice: Theory, Practice, Rhetoric",
+  "url": "https://www.theglobaljusticenetwork.org/index.php/gjn",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Political science (General)"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 189,
+  "name": "Polimery w Medycynie",
+  "url": "https://polimery.umw.edu.pl/en/about/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Polymers and polymer manufacture"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 190,
+  "name": "Koers : Bulletin for Christian Scholarship",
+  "url": "https://www.koersjournal.org.za/index.php/koers",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Practical Theology",
+   "Moral theology"
+  ],
+  "languages": [
+   "AF",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 191,
+  "name": "Probability Surveys",
+  "url": "https://imstat.org/journals-and-publications/probability-surveys",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Probabilities. Mathematical statistics"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 192,
+  "name": "Energy Geoscience",
+  "url": "https://www.keaipublishing.com/en/journals/energy-geoscience",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Production of electric energy or power. Powerplants. Central stations"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 193,
+  "name": "European Psychiatry",
+  "url": "https://www.cambridge.org/core/journals/european-psychiatry",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Psychiatry"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 194,
+  "name": "Revista de Psicología",
+  "url": "https://revistapsicologia.uchile.cl/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Psychology"
+  ],
+  "languages": [
+   "ES"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 195,
+  "name": "Archives of Public Health",
+  "url": "https://link.springer.com/journal/13690?error=cookies_not_supported&code=4879b003-7e59-4481-aaf5-0d7ceb73d1b0",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Public aspects of medicine"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 196,
+  "name": "Вестник Научно-исследовательского института железнодорожного транспорта",
+  "url": "https://www.journal-vniizht.ru/jour",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Railroad engineering and operation"
+  ],
+  "languages": [
+   "RU"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 197,
+  "name": "Studia Universitatis Vasile Goldis Arad, Seria Stiinte Economice",
+  "url": "https://reference-global.com/journal/SUES",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Regional economics. Space in economics",
+   "Economics as a science"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 198,
+  "name": "Regions & Cohesion",
+  "url": "https://www.berghahnjournals.com/view/journals/regions-and-cohesion/regions-and-cohesion-overview.xml",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Regional planning",
+   "International relations"
+  ],
+  "languages": [
+   "EN",
+   "ES",
+   "FR"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 199,
+  "name": "Vanguard Journal of Theology & Ministry",
+  "url": "https://vjtm.vanguardcollege.com/index.php/vjtm",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Religion (General)"
+  ],
+  "languages": [
+   "EN",
+   "FR"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 200,
+  "name": "Dharmasmrti",
+  "url": "https://ejournal.unhi.ac.id/index.php/dharmasmrti",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Religions. Mythology. Rationalism",
+   "Religion (General)"
+  ],
+  "languages": [
+   "ID"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 201,
+  "name": "ASANKA",
+  "url": "https://jurnal.iainponorogo.ac.id/index.php/asanka",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Religious ethics",
+   "Philosophy (General)"
+  ],
+  "languages": [
+   "ID"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 202,
+  "name": "Computational and Experimental Research in Materials and Renewable Energy",
+  "url": "https://cerimre.journal.unej.ac.id/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Renewable energy sources"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 203,
+  "name": "Frontiers in Freshwater Science",
+  "url": "https://www.frontiersin.org/journals/freshwater-science",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "River, lake, and water-supply engineering (General)"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 204,
+  "name": "Boletín de la Academia Peruana de la Lengua",
+  "url": "https://revistas.apl.org.pe/index.php/boletinapl/home",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Romanic languages",
+   "Philology. Linguistics"
+  ],
+  "languages": [
+   "ES"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 205,
+  "name": "Journal of Biological Researches",
+  "url": "https://www.berkalahayati.org/index.php/jurnal",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Science",
+   "Biology (General)"
+  ],
+  "languages": [
+   "ID",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 302
+ },
+ {
+  "id": 206,
+  "name": "مجلة جامعة الانبار للعلوم الصرفة",
+  "url": "https://juaps.uoanbar.edu.iq/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Science (General)"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 207,
+  "name": "Syntactic Theory and Research",
+  "url": "https://star-linguistics.org/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Semantics"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 208,
+  "name": "Научный диалог",
+  "url": "https://www.nauka-dialog.ru/jour",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Slavic languages. Baltic languages. Albanian languages"
+  ],
+  "languages": [
+   "RU"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 209,
+  "name": "South Asia Multidisciplinary Academic Journal",
+  "url": "https://journals.openedition.org/samaj",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Social Sciences"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 210,
+  "name": "Kaibon Abhinaya",
+  "url": "https://e-jurnal.lppmunsera.org/index.php/KA/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Social history and conditions. Social problems. Social reform",
+   "Communities. Classes. Races"
+  ],
+  "languages": [
+   "EN",
+   "ID"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 211,
+  "name": "Boletín Criminológico",
+  "url": "https://revistas.uma.es/index.php/boletin-criminologico/es",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Social pathology. Social and public welfare. Criminology"
+  ],
+  "languages": [
+   "ES"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 212,
+  "name": "An-Natiq",
+  "url": "https://riset.unisma.ac.id/index.php/natiq",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Social sciences (General)"
+  ],
+  "languages": [
+   "ID",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 213,
+  "name": "Gerontologia",
+  "url": "https://journal.fi/gerontologia/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Sociology (General)",
+   "Geriatrics"
+  ],
+  "languages": [
+   "FI",
+   "SV"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 214,
+  "name": "Journal of East Asian Studies",
+  "url": "https://www.cambridge.org/core/journals/journal-of-east-asian-studies",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "South Asia. Southeast Asia. East Asia",
+   "Social Sciences"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 215,
+  "name": "Ankara Üniversitesi Eğitim Bilimleri Fakültesi Özel Eğitim Dergisi",
+  "url": "https://dergipark.org.tr/en/pub/ozelegitimdergisi",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Special aspects of education"
+  ],
+  "languages": [
+   "TR",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 216,
+  "name": "Journal of Fair Trade",
+  "url": "https://www.plutojournals.com/the-journal-of-fair-trade/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Special industries and trades"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 217,
+  "name": "npj Metabolic Health and Disease",
+  "url": "https://www.nature.com/npjmetabhealth/?error=cookies_not_supported&code=03705433-2f0d-490c-b804-b84dbbc9cc26",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Specialties of internal medicine"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 218,
+  "name": "Revista de Psicología Aplicada al Deporte y al Ejercicio Físico",
+  "url": "https://www.revistapsicologiaaplicadadeporteyejercicio.org/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Sports",
+   "Psychology"
+  ],
+  "languages": [
+   "ES"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 219,
+  "name": "Фізичне виховання, спорт і культура здоров’я у сучасному суспільстві",
+  "url": "https://sport.vnu.edu.ua/index.php/sport/en",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Sports medicine"
+  ],
+  "languages": [
+   "UK",
+   "PL",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 302
+ },
+ {
+  "id": 220,
+  "name": "Journal of Stratigraphy and Sedimentology Researches",
+  "url": "https://jssr.ui.ac.ir/?lang=en",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Stratigraphy"
+  ],
+  "languages": [
+   "FA",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 221,
+  "name": "Journal of Society of Surgeons of Nepal",
+  "url": "https://nepjol.info/index.php/JSSN/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Surgery"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 222,
+  "name": "Jurnal RESTI (Rekayasa Sistem dan Teknologi Informasi)",
+  "url": "http://jurnal.iaii.or.id/index.php/RESTI",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Systems engineering",
+   "Information technology"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 223,
+  "name": "Revista Científica",
+  "url": "https://revistas.udistrital.edu.co/index.php/revcie/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Technology",
+   "Science"
+  ],
+  "languages": [
+   "EN",
+   "ES"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 224,
+  "name": "Computational Ecology and Software",
+  "url": "http://www.iaees.org/publications/journals/ces/online-version.asp",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Technology (General)",
+   "Science"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 225,
+  "name": "مهندسی مخابرات جنوب",
+  "url": "https://sanad.iau.ir/en/Journal/jce",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Telecommunication"
+  ],
+  "languages": [
+   "FA"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 226,
+  "name": "Protokolle zur Bibel",
+  "url": "https://www.protokollezurbibel.at/index.php/pzb",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "The Bible"
+  ],
+  "languages": [
+   "DE",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 227,
+  "name": "فقه و حقوق خانواده",
+  "url": "https://flj.isu.ac.ir/?lang=en",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "The family. Marriage. Woman",
+   "Islam"
+  ],
+  "languages": [
+   "FA"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 228,
+  "name": "Revista aSPAs",
+  "url": "https://revistas.usp.br/aspas/pt_BR",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "The performing arts. Show business"
+  ],
+  "languages": [
+   "PT",
+   "ES",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 229,
+  "name": "Journal of Mathematics Education at Teachers College",
+  "url": "https://journals.library.columbia.edu/index.php/jmetc",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Theory and practice of education",
+   "Mathematics"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 230,
+  "name": "International Journal of Integrative Psychotherapy",
+  "url": "https://www.integrative-journal.com/index.php/ijip",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Therapeutics. Psychotherapy",
+   "Psychology"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 231,
+  "name": "Arhiv za Higijenu Rada i Toksikologiju",
+  "url": "https://reference-global.com/journal/AIHT",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Toxicology. Poisons"
+  ],
+  "languages": [
+   "HR",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 232,
+  "name": "Translation and Interpreting : the International Journal of Translation and Interpreting Research",
+  "url": "https://trans-int.org/index.php/transint",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Translating and interpreting"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 233,
+  "name": "Active Travel Studies",
+  "url": "https://activetravelstudies.org/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Transportation and communications",
+   "Meteorology. Climatology",
+   "Environmental sciences"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 234,
+  "name": "European Transport Research Review",
+  "url": "https://idp.springer.com/transit?redirect_uri=https%3A%2F%2Flink.springer.com%2Fjournal%2F12544&code=d1b6c3e4-44bf-4ef5-8060-a095de822197",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Transportation engineering",
+   "Transportation and communications"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 302
+ },
+ {
+  "id": 235,
+  "name": "New Jersey Studies: an Interdisciplinary Journal",
+  "url": "https://njs.libraries.rutgers.edu/index.php/njs",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "United States local history"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 236,
+  "name": "Comparative Population Studies",
+  "url": "https://www.comparativepopulationstudies.de/index.php/CPoS/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Urban groups. The city. Urban sociology",
+   "City population. Including children in cities, immigration",
+   "Demography. Population. Vital events"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 237,
+  "name": "Veterinary Integrative Sciences",
+  "url": "https://he02.tci-thaijo.org/index.php/vis/about",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Veterinary medicine"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 238,
+  "name": "Significação: Revista de Cultura Audiovisual",
+  "url": "https://revistas.usp.br/significacao/pt_BR",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Visual arts"
+  ],
+  "languages": [
+   "EN",
+   "PT",
+   "ES"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 239,
+  "name": "Developmental Disabilities Network Journal",
+  "url": "https://digitalcommons.usu.edu/ddnj/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Vocational rehabilitation. Employment of people with disabilities",
+   "Special aspects of education"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 301
+ },
+ {
+  "id": 240,
+  "name": "Con X",
+  "url": "https://perio.unlp.edu.ar/ojs/index.php/conequis",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Women. Feminism",
+   "Sociology (General)"
+  ],
+  "languages": [
+   "ES"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 241,
+  "name": "Fragmenta entomologica",
+  "url": "https://rosa.uniroma1.it/rosa02/fragmenta_entomologica",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Zoology"
+  ],
+  "languages": [
+   "IT",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 242,
+  "name": "Proyecciones",
+  "url": "https://revistas.unlp.edu.ar/proyecciones/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Accounting. Bookkeeping",
+   "Finance"
+  ],
+  "languages": [
+   "PT",
+   "EN",
+   "ES"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 243,
+  "name": "Plant Trends",
+  "url": "https://www.bsmiab.org/plant-trends",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Agriculture"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 244,
+  "name": "Jurnal Ilmiah Rekayasa Pertanian dan Biosistem",
+  "url": "https://jrpb.unram.ac.id/index.php/jrpb",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Agriculture (General)"
+  ],
+  "languages": [
+   "ID",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 245,
+  "name": "Indonesian Journal of Chemical Analysis",
+  "url": "https://journal.uii.ac.id/IJCA",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Analytical chemistry"
+  ],
+  "languages": [
+   "EN",
+   "ID"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 246,
+  "name": "Revista Brasileira de Parasitologia Veterinária",
+  "url": "https://www.scielo.br/j/rbpv",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Animal culture"
+  ],
+  "languages": [
+   "EN",
+   "PT"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 247,
+  "name": "Recherches Sociologiques et Anthropologiques",
+  "url": "https://journals.openedition.org/rsa",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Anthropology",
+   "Sociology (General)"
+  ],
+  "languages": [
+   "FR",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 248,
+  "name": "Mathematics in Applied Sciences and Engineering",
+  "url": "https://ojs.lib.uwo.ca/index.php/mase/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Applied mathematics. Quantitative methods"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 249,
+  "name": "Ribogospodarsʹka Nauka Ukraïni",
+  "url": "https://fsu.ua/index.php/en",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Aquaculture. Fisheries. Angling"
+  ],
+  "languages": [
+   "EN",
+   "UK"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 250,
+  "name": "Fasciculi Archaeologiae Historicae",
+  "url": "https://journals.iaepan.pl/fah",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Archaeology",
+   "Ethnology. Social and cultural anthropology"
+  ],
+  "languages": [
+   "DE",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 251,
+  "name": "Pensum",
+  "url": "https://revistas.unc.edu.ar/index.php/pensu",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Architecture",
+   "Urban groups. The city. Urban sociology"
+  ],
+  "languages": [
+   "ES"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 252,
+  "name": "DAPesquisa",
+  "url": "https://www.revistas.udesc.br/index.php/dapesquisa/pt_BR",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Arts in general",
+   "Visual arts"
+  ],
+  "languages": [
+   "PT"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 253,
+  "name": "Frontiers in Astronomy and Space Sciences",
+  "url": "https://www.frontiersin.org/journals/astronomy-and-space-sciences",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Astronomy",
+   "Geophysics. Cosmic physics"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 254,
+  "name": "Spektra: Jurnal Fisika dan Aplikasinya",
+  "url": "https://journal.unj.ac.id/unj/index.php/spektra/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Astrophysics",
+   "Physics",
+   "Renewable energy sources"
+  ],
+  "languages": [
+   "EN",
+   "ID"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 255,
+  "name": "Čitalište",
+  "url": "https://citaliste.rs/index_e.html",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Bibliography. Library science. Information resources"
+  ],
+  "languages": [
+   "SR",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 256,
+  "name": "JMIRx Bio",
+  "url": "https://xbio.jmir.org/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Biochemistry",
+   "Biology (General)"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 202
+ },
+ {
+  "id": 257,
+  "name": "Jurnal Riset Biologi dan Aplikasinya",
+  "url": "https://journal.unesa.ac.id/index.php/risetbiologi",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Biology (General)"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 258,
+  "name": "Bioautomation",
+  "url": "http://www.biomed.bas.bg/bioautomation/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Biotechnology",
+   "Biology (General)"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 259,
+  "name": "Natural History Sciences",
+  "url": "https://sisn.pagepress.org/index.php/nhs/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Botany",
+   "Geology"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 260,
+  "name": "Journal of Small Business Strategy",
+  "url": "https://jsbs.scholasticahq.com/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Business"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 261,
+  "name": "Equilibrium",
+  "url": "https://jurnal.uns.ac.id/equilibrium/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Chemical engineering"
+  ],
+  "languages": [
+   "EN",
+   "ID"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 262,
+  "name": "ChemPhysMater",
+  "url": "https://www.keaipublishing.com/en/journals/chemphysmater",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Chemistry",
+   "Physics"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 263,
+  "name": "Didache",
+  "url": "https://journal.sttsimpson.ac.id/index.php/djce",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Christianity",
+   "Practical Theology"
+  ],
+  "languages": [
+   "EN",
+   "ID"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 264,
+  "name": "Sub\\urban",
+  "url": "https://zeitschrift-suburban.de/sys/index.php/suburban",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Cities. Urban geography",
+   "Urban groups. The city. Urban sociology"
+  ],
+  "languages": [
+   "DE"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 265,
+  "name": "Central and Eastern European Migration Review",
+  "url": "http://www.ceemr.uw.edu.pl/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Colonies and colonization. Emigration and immigration. International migration",
+   "City population. Including children in cities, immigration"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 266,
+  "name": "Revista de Derecho Económico",
+  "url": "https://revistaderechoeconomico.uchile.cl/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Commerce",
+   "Regulation of industry, trade, and commerce. Occupational law"
+  ],
+  "languages": [
+   "EN",
+   "ES"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 267,
+  "name": "PragMATIZES",
+  "url": "https://periodicos.uff.br/pragmatizes",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Communication. Mass media",
+   "Social sciences (General)"
+  ],
+  "languages": [
+   "PT"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 268,
+  "name": "ABUAD Journal of the Humanities-AGIDIGBO",
+  "url": "https://journals.abuad.edu.ng/index.php/agidigbo",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Communities. Classes. Races"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 269,
+  "name": "Социолингвистика",
+  "url": "https://sociolinguistics.ru/index.php/sociolinguistics/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Computational linguistics. Natural language processing"
+  ],
+  "languages": [
+   "EN",
+   "RU"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 270,
+  "name": "Journal on Interactive Systems",
+  "url": "https://journals-sol.sbc.org.br/index.php/jis",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Computer software",
+   "Computer engineering. Computer hardware"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 271,
+  "name": "Frontiers in Control Engineering",
+  "url": "https://www.frontiersin.org/journals/control-engineering",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Control engineering systems. Automatic machinery (General)",
+   "Technology"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 272,
+  "name": "Кібернетика та обчислювальна техніка",
+  "url": "http://kvt-journal.org.ua/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Cybernetics"
+  ],
+  "languages": [
+   "EN",
+   "UK"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 273,
+  "name": "Revista de Ecocardiografía Práctica y Otras Técnicas de Imagen Cardíaca",
+  "url": "https://imagenretic.org/RevEcocarPract/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Diseases of the circulatory (Cardiovascular) system",
+   "Medical physics. Medical radiology. Nuclear medicine"
+  ],
+  "languages": [
+   "ES"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 274,
+  "name": "Perspectiva Teológica",
+  "url": "https://www.faje.edu.br/periodicos/index.php/perspectiva/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Doctrinal Theology"
+  ],
+  "languages": [
+   "ES",
+   "PT",
+   "IT",
+   "FR",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 275,
+  "name": "Earth Surface Dynamics",
+  "url": "https://www.earth-surface-dynamics.net/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Dynamic and structural geology"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 276,
+  "name": "Frontiers in Bee Science",
+  "url": "https://www.frontiersin.org/journals/bee-science",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Ecology",
+   "Science"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 277,
+  "name": "Wieś i Rolnictwo",
+  "url": "https://kwartalnik.irwirpan.waw.pl/wir",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Economic history and conditions",
+   "Agriculture (General)",
+   "Plant culture",
+   "Forestry"
+  ],
+  "languages": [
+   "EN",
+   "PL"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 278,
+  "name": "ეკონომიკური პროფილი",
+  "url": "http://economicprofile.org/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Economics as a science"
+  ],
+  "languages": [
+   "EN",
+   "KA"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 279,
+  "name": "Український педагогічний журнал",
+  "url": "https://uej.undip.org.ua/index.php/journal/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Education"
+  ],
+  "languages": [
+   "UK",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 280,
+  "name": "Sophía: Colección de Filosofía de la Educación",
+  "url": "https://sophia.ups.edu.ec/index.php/sophia",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Education (General)",
+   "Philosophy (General)"
+  ],
+  "languages": [
+   "ES",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 281,
+  "name": "Iraqi Journal for Electrical and Electronic Engineering",
+  "url": "https://ijeee.edu.iq/ijeee",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Electrical engineering. Electronics. Nuclear engineering"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 282,
+  "name": "Big Data Mining and Analytics",
+  "url": "https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=8254253",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Electronic computers. Computer science"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 283,
+  "name": "Journal of Amasya University the Institute of Sciences and Technology",
+  "url": "https://dergipark.org.tr/en/pub/amesia",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Engineering (General). Civil engineering (General)"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 284,
+  "name": "矿业科学学报",
+  "url": "http://kykxxb.cumtb.edu.cn/indexen.htm",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Engineering geology. Rock mechanics. Soil mechanics. Underground construction",
+   "Mining engineering. Metallurgy"
+  ],
+  "languages": [
+   "ZH",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 285,
+  "name": "Atlantis",
+  "url": "https://www.atlantisjournal.org/index.php/atlantis",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "English language",
+   "English literature"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 286,
+  "name": "The Burney Journal",
+  "url": "https://theburneyjournal.library.mcgill.ca/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "English literature"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 287,
+  "name": "Atmospheric Measurement Techniques",
+  "url": "https://www.atmospheric-measurement-techniques.net/home.html",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Environmental engineering",
+   "Earthwork. Foundations"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 288,
+  "name": "Administrative and Environmental Law Review",
+  "url": "https://jurnal.fh.unila.ac.id/index.php/aelr",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Environmental law"
+  ],
+  "languages": [
+   "EN",
+   "ID"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 289,
+  "name": "Fountain Journal of Natural and Applied Sciences (FUJNAS)",
+  "url": "https://fountainjournals.com/index.php/FUJNAS/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Environmental sciences",
+   "Physics",
+   "Biology (General)",
+   "Chemical engineering"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 290,
+  "name": "Advances in Environmental Technology",
+  "url": "https://aet.irost.ir/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Environmental technology. Sanitary engineering"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 291,
+  "name": "Ethics in Progress",
+  "url": "https://pressto.amu.edu.pl/index.php/eip",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Ethics"
+  ],
+  "languages": [
+   "EN",
+   "DE",
+   "PL"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 292,
+  "name": "Paradigma: Jurnal Kajian Budaya",
+  "url": "https://scholarhub.ui.ac.id/paradigma/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Ethnology. Social and cultural anthropology",
+   "Philosophy. Psychology. Religion"
+  ],
+  "languages": [
+   "ID",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 293,
+  "name": "Forum",
+  "url": "https://journals.ed.ac.uk/forum",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Fine Arts",
+   "Language and Literature"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 294,
+  "name": "فناوری‌های جدید در صنعت غذا",
+  "url": "https://jift.irost.ir/?lang=en",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Food processing and manufacture"
+  ],
+  "languages": [
+   "EN",
+   "FA"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 295,
+  "name": "Gozdarski Vestnik",
+  "url": "https://zgds.si/gozdarski-vestnik/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Forestry"
+  ],
+  "languages": [
+   "SL"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 296,
+  "name": "Criando",
+  "url": "https://riviste.unimi.it/index.php/CRIANDO/it",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "French literature - Italian literature - Spanish literature - Portuguese literature"
+  ],
+  "languages": [
+   "ES",
+   "PT",
+   "IT"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 297,
+  "name": "Al Mu'azarah",
+  "url": "https://ejournal.uiidalwa.ac.id/index.php/almuazarah",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "General Works"
+  ],
+  "languages": [
+   "EN",
+   "ID"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 298,
+  "name": "Biological and Molecular Chemistry",
+  "url": "https://www.biolmolchem.com/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Genetics",
+   "Microbiology",
+   "Medicine"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 299,
+  "name": "مجله فیزیک زمین و فضا",
+  "url": "https://jesphys.ut.ac.ir/?lang=en",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Geodesy",
+   "Geomagnetism"
+  ],
+  "languages": [
+   "EN",
+   "FA"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 300,
+  "name": "Annales Universitatis Mariae Curie-Skłodowska. Sectio B, Geographia, Geologia, Mineralogia et Petrographia",
+  "url": "https://journals.umcs.pl/b/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Geography (General)",
+   "Geology"
+  ],
+  "languages": [
+   "PL",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 301,
+  "name": "Journal of Limnology",
+  "url": "https://www.jlimnol.it/jlimnol",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Geography. Anthropology. Recreation",
+   "Physical geography",
+   "Environmental sciences"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 302
+ },
+ {
+  "id": 302,
+  "name": "Discover Soil",
+  "url": "https://link.springer.com/journal/44378?error=cookies_not_supported&code=1cdafa18-ddfe-480d-9ef8-7e780c527943",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Geology",
+   "Environmental sciences"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 303,
+  "name": "Geoscientific Instrumentation, Methods and Data Systems",
+  "url": "https://www.geoscientific-instrumentation-methods-and-data-systems.net/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Geophysics. Cosmic physics"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 304,
+  "name": "Futhark: International Journal of Runic Studies",
+  "url": "https://futhark-journal.com/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Germanic languages. Scandinavian languages"
+  ],
+  "languages": [
+   "SV",
+   "NO",
+   "DE",
+   "EN",
+   "DA"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 305,
+  "name": "СибСкрипт",
+  "url": "https://www.sibscript.ru/jour",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "History (General)",
+   "Language and Literature"
+  ],
+  "languages": [
+   "DE",
+   "IT",
+   "FR",
+   "EN",
+   "RU"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 306,
+  "name": "Jurnal Sejarah Citra Lekha",
+  "url": "https://ejournal.undip.ac.id:443/index.php/jscl",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "History (General) and history of Europe",
+   "History of Asia"
+  ],
+  "languages": [
+   "EN",
+   "ID"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 307,
+  "name": "Modern Africa",
+  "url": "https://journals.uhk.cz/modernafrica",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "History of Africa",
+   "International relations"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 308,
+  "name": "Historia i Świat",
+  "url": "https://auth.dev.uws.edu.pl/realms/audytorzy-czasopism/protocol/openid-connect/auth?approval_prompt=force&client_id=audytorzy-ojs&redirect_uri=https%3A%2F%2Fczasopisma.uph.edu.pl%2Foauth2%2Fcallback&response_type=code&scope=openid+email&state=4SxT1JZtWgnfJCq0nNqp2kLWcCJGtXjAM4O_d77c0Uo%3A%2Fhistoriaswiat%2Fabout",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "History of Central Europe",
+   "History of Eastern Europe"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 309,
+  "name": "Gerundium",
+  "url": "https://anubis.lib.unideb.hu/.within.website/?redir=https%3A%2F%2Fojs.lib.unideb.hu%2Fgerundium",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "History of education"
+  ],
+  "languages": [
+   "HU",
+   "EN",
+   "DE"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 310,
+  "name": "The Programming Historian em Português",
+  "url": "https://programminghistorian.org/pt/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "History of scholarship and learning. The humanities",
+   "Computer software"
+  ],
+  "languages": [
+   "PT"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 311,
+  "name": "Peregrinations",
+  "url": "https://digital.kenyon.edu/perejournal/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "History of the arts",
+   "Medieval history"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 312,
+  "name": "هیدروژیولوژی",
+  "url": "https://hydro.tabrizu.ac.ir/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Hydraulic engineering",
+   "Geology"
+  ],
+  "languages": [
+   "EN",
+   "FA"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 313,
+  "name": "پژوهش‌های بین‌رشته‌ای ادبی",
+  "url": "https://lir.ihcs.ac.ir/?lang=en",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Indo-Iranian languages and literature"
+  ],
+  "languages": [
+   "FA",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 314,
+  "name": "Pesquimat",
+  "url": "http://revistasinvestigacion.unmsm.edu.pe/index.php/matema",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Industrial engineering. Management engineering",
+   "Mathematics"
+  ],
+  "languages": [
+   "ES"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 315,
+  "name": "Milky Way Scientific Journal",
+  "url": "https://mwsjournal.com/index.php/mws",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Information technology",
+   "Electronic computers. Computer science"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 316,
+  "name": "BMC Medical Genomics",
+  "url": "https://link.springer.com/journal/12920?error=cookies_not_supported&code=ac1e70a9-5438-4e81-bbe0-d173365e1a81",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Internal medicine",
+   "Genetics"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 317,
+  "name": "Вестник Московского Университета. Серия XXV: Международные отношения и мировая политика",
+  "url": "https://fmp.elpub.ru/jour",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "International relations"
+  ],
+  "languages": [
+   "EN",
+   "RU"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 318,
+  "name": "Ascarya",
+  "url": "https://journal.ascarya.or.id/index.php/iscs/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Islam",
+   "Social Sciences"
+  ],
+  "languages": [
+   "EN",
+   "ID"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 319,
+  "name": "Indonesian Journal of Law and Syariah",
+  "url": "https://ejournal.foundae.com/index.php/ijls/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Islamic law"
+  ],
+  "languages": [
+   "EN",
+   "ID"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 320,
+  "name": "الباحث الإعلامي",
+  "url": "https://abaa.uobaghdad.edu.iq/index.php/abaa",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Journalism. The periodical press, etc."
+  ],
+  "languages": [
+   "AR",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 321,
+  "name": "Revista da Defensoria Pública do Estado do Rio Grande do Sul",
+  "url": "https://revista.defensoria.rs.def.br/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Jurisprudence. Philosophy and theory of law",
+   "Political institutions and public administration (General)"
+  ],
+  "languages": [
+   "PT"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 322,
+  "name": "Annales Universitatis Mariae Curie-Skłodowska. Sectio N, Educatio Nova",
+  "url": "https://journals.umcs.pl/en",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Language and Literature",
+   "Social Sciences"
+  ],
+  "languages": [
+   "PL",
+   "FR",
+   "EN",
+   "DE"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 323,
+  "name": "Language and Psychoanalysis",
+  "url": "https://journals.ed.ac.uk/languageandpsychoanalysis",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Language. Linguistic theory. Comparative grammar",
+   "Psychology"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 324,
+  "name": "Revista TEFROS",
+  "url": "https://www2.hum.unrc.edu.ar/ojs/index.php/tefros/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Latin America. Spanish America",
+   "Social history and conditions. Social problems. Social reform"
+  ],
+  "languages": [
+   "EN",
+   "PT",
+   "ES"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 325,
+  "name": "Cultura giuridica e diritto vivente",
+  "url": "https://journals.uniurb.it/index.php/cgdv/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Law"
+  ],
+  "languages": [
+   "EN",
+   "IT"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 326,
+  "name": "(Des)troços",
+  "url": "https://periodicos.ufmg.br/index.php/revistadestrocos",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Law in general. Comparative and uniform law. Jurisprudence",
+   "Philosophy (General)"
+  ],
+  "languages": [
+   "PT",
+   "EN",
+   "ES",
+   "FR",
+   "IT"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 327,
+  "name": "Texto Poético",
+  "url": "https://textopoetico.emnuvens.com.br/rtp/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Literature (General)",
+   "French literature - Italian literature - Spanish literature - Portuguese literature"
+  ],
+  "languages": [
+   "PT"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 328,
+  "name": "Journal of Marketing and Consumer Behaviour in Emerging Markets",
+  "url": "https://press.wz.uw.edu.pl/jmcbem/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Marketing. Distribution of products",
+   "Management. Industrial management"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 301
+ },
+ {
+  "id": 329,
+  "name": "Journal of Materials Science: Materials in Medicine",
+  "url": "https://idp.springer.com/transit?redirect_uri=https%3A%2F%2Flink.springer.com%2Fjournal%2F10856&code=af6228f3-ddec-4277-a2cb-df898fe1ead9",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Materials of engineering and construction. Mechanics of materials",
+   "Medical technology"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 302
+ },
+ {
+  "id": 330,
+  "name": "Jambura Journal of Mathematics",
+  "url": "https://ejurnal.ung.ac.id/index.php/jjom/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Mathematics"
+  ],
+  "languages": [
+   "ID",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 331,
+  "name": "Periodica Polytechnica: Mechanical Engineering",
+  "url": "https://pp.bme.hu/me",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Mechanical engineering and machinery"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 332,
+  "name": "Critical Care Innovations",
+  "url": "https://irdim.net/cci/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Medical emergencies. Critical care. Intensive care. First aid"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 301
+ },
+ {
+  "id": 333,
+  "name": "Revista Argentina de Radiología",
+  "url": "https://revistarar.com/es/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Medical physics. Medical radiology. Nuclear medicine"
+  ],
+  "languages": [
+   "EN",
+   "ES"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 334,
+  "name": "Journal of Biomedical Optics",
+  "url": "https://www.spiedigitallibrary.org/journals/journal-of-biomedical-optics",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Medical technology",
+   "Optics. Light"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 335,
+  "name": "European Journal of Case Reports in Internal Medicine",
+  "url": "https://ejcrim.com/index.php/ejcrim",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Medicine"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 336,
+  "name": "Patient Preference and Adherence",
+  "url": "https://www.dovepress.com/patient-preference-and-adherence-journal",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Medicine (General)"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 337,
+  "name": "Advances in Climate Change Research",
+  "url": "https://www.keaipublishing.com/en/journals/advances-in-climate-change-research",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Meteorology. Climatology",
+   "Social sciences (General)"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 338,
+  "name": "Mineralogia",
+  "url": "https://reference-global.com/journal/MIPO",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Mineralogy"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 339,
+  "name": "International Journal of Mining and Geo-Engineering",
+  "url": "https://ijmge.ut.ac.ir/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Mining engineering. Metallurgy"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 340,
+  "name": "Pro Musica Sacra",
+  "url": "https://czasopisma.upjp2.edu.pl/promusicasacra",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Music"
+  ],
+  "languages": [
+   "PL",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 341,
+  "name": "Western Indian Ocean Journal of Marine Science",
+  "url": "https://www.ajol.info/index.php/wiojms/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Naval Science"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 342,
+  "name": "Libri Oncologici",
+  "url": "https://hrcak.srce.hr/en/libri-oncologici",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Neoplasms. Tumors. Oncology. Including cancer and carcinogens"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 343,
+  "name": "Neurologijos seminarai",
+  "url": "https://www.journals.vu.lt/neurologijos_seminarai/en",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Neurology. Diseases of the nervous system"
+  ],
+  "languages": [
+   "EN",
+   "LT"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 344,
+  "name": "Frontiers in Systems Neuroscience",
+  "url": "https://www.frontiersin.org/journals/systems-neuroscience",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Neurosciences. Biological psychiatry. Neuropsychiatry"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 345,
+  "name": "Глобальная ядерная безопасность",
+  "url": "https://glonucsec.elpub.ru/jour/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Nuclear engineering. Atomic power"
+  ],
+  "languages": [
+   "EN",
+   "RU"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 346,
+  "name": "Journal of Client-centered Nursing Care",
+  "url": "https://jccnc.iums.ac.ir/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Nursing"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 347,
+  "name": "Oceanological and Hydrobiological Studies",
+  "url": "https://reference-global.com/journal/OANDHS",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Oceanography",
+   "Biology (General)"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 348,
+  "name": "Гений oртопедии",
+  "url": "https://www.ilizarov-journal.com/jour",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Orthopedic surgery"
+  ],
+  "languages": [
+   "RU",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 349,
+  "name": "Current Research in MRI",
+  "url": "https://curremr.com/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Other systems of medicine"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 350,
+  "name": "古脊椎动物学报 (中英文版)",
+  "url": "https://www.vertpala.ac.cn/EN/2096-9899/home.shtml",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Paleontology",
+   "Fossil man. Human paleontology"
+  ],
+  "languages": [
+   "EN",
+   "ZH"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 351,
+  "name": "Iranian Journal of Neonatology",
+  "url": "https://ijn.mums.ac.ir/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Pediatrics"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 352,
+  "name": "Annales Academiae Medicae Silesiensis",
+  "url": "https://annales.sum.edu.pl/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Pharmacy and materia medica",
+   "Dentistry"
+  ],
+  "languages": [
+   "EN",
+   "PL"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 353,
+  "name": "East European Journal of Psycholinguistics",
+  "url": "https://eejpl.vnu.edu.ua/index.php/eejpl",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Philology. Linguistics",
+   "Psychology"
+  ],
+  "languages": [
+   "UK",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 354,
+  "name": "Educare Et Comunicare",
+  "url": "https://revistas.usat.edu.pe/index.php/educare",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Philosophy (General)",
+   "Education (General)",
+   "History (General)"
+  ],
+  "languages": [
+   "ES"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 355,
+  "name": "Revista Seminario Mayor de Medellín",
+  "url": "https://revista.seminarioconciliardemedellin.org/index.php/revista/es",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Philosophy. Psychology. Religion"
+  ],
+  "languages": [
+   "ES"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 356,
+  "name": "Tropical Cyclone Research and Review",
+  "url": "https://www.keaipublishing.com/en/journals/tropical-cyclone-research-and-review",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Physical geography",
+   "Environmental sciences"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 357,
+  "name": "Вісник Черкаського університету. Серія Фізико-математичні науки",
+  "url": "https://phys-ejournal.cdu.edu.ua/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Physics",
+   "Mathematics"
+  ],
+  "languages": [
+   "UK",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 358,
+  "name": "Discover Plants",
+  "url": "https://link.springer.com/journal/44372?error=cookies_not_supported&code=c3199d50-e264-491f-bc70-0fafef86184b",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Plant culture",
+   "Botany"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 302
+ },
+ {
+  "id": 359,
+  "name": "Africa’s Public Service Delivery & Performance Review",
+  "url": "https://apsdpr.org/index.php/apsdpr",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Political institutions and public administration (General)",
+   "Regional planning"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 302
+ },
+ {
+  "id": 360,
+  "name": "POLIS",
+  "url": "https://uet.edu.al/polis/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Political science",
+   "Social Sciences"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 301
+ },
+ {
+  "id": 361,
+  "name": "Avrasya İncelemeleri Dergisi",
+  "url": "https://iupress.istanbul.edu.tr/en/journal/avid/home",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Political science (General)",
+   "Sociology (General)"
+  ],
+  "languages": [
+   "RU",
+   "EN",
+   "TR"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 362,
+  "name": "Advanced Industrial and Engineering Polymer Research",
+  "url": "https://www.keaipublishing.com/en/journals/advanced-industrial-and-engineering-polymer-research",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Polymers and polymer manufacture",
+   "Engineering (General). Civil engineering (General)"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 363,
+  "name": "Electronic Communications in Probability",
+  "url": "https://imstat.org/journals-and-publications/electronic-communications-in-probability",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Probabilities. Mathematical statistics"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 364,
+  "name": "BMC Psychiatry",
+  "url": "https://link.springer.com/journal/12888?error=cookies_not_supported&code=72542715-3353-43f3-9a37-ad372192d204",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Psychiatry"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 365,
+  "name": "Journal of Numerical Cognition",
+  "url": "https://jnc.psychopen.eu/index.php/jnc",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Psychology",
+   "Mathematics"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 366,
+  "name": "Pan-African Journal of Health and Environmental Science",
+  "url": "https://journals.aua.ke/ajhes",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Public aspects of medicine"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 367,
+  "name": "Jurnal Litbang Provinsi Jawa Tengah",
+  "url": "https://ejournal.bappeda.jatengprov.go.id/index.php/jurnaljateng",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Regional planning",
+   "Economic growth, development, planning"
+  ],
+  "languages": [
+   "EN",
+   "ID"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 368,
+  "name": "Türkiye Din Eğitimi Araştırmaları Dergisi",
+  "url": "https://dergipark.org.tr/en/pub/tudear",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Religion (General)"
+  ],
+  "languages": [
+   "TR",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 369,
+  "name": "New Diversities",
+  "url": "https://newdiversities.mmg.mpg.de/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Religious ethics",
+   "Religions. Mythology. Rationalism",
+   "Ethnology. Social and cultural anthropology"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 370,
+  "name": "Renewables: Wind, Water, and Solar",
+  "url": "https://idp.springer.com/transit?redirect_uri=https%3A%2F%2Flink.springer.com%2Fjournal%2F40807&code=1d1479c1-b3d6-48b1-88d6-1f2f4127cdc9",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Renewable energy sources"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 302
+ },
+ {
+  "id": 371,
+  "name": "Lenguaje",
+  "url": "https://revistalenguaje.univalle.edu.co/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Romanic languages",
+   "Philology. Linguistics"
+  ],
+  "languages": [
+   "ES",
+   "FR",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 372,
+  "name": "Earth and Planetary Physics",
+  "url": "http://www.eppcgs.org/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Science",
+   "Geophysics. Cosmic physics",
+   "Environmental sciences"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 373,
+  "name": "Science and Technology Indonesia",
+  "url": "https://sciencetechindonesia.com/index.php/jsti",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Science (General)",
+   "Electronic computers. Computer science"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 374,
+  "name": "DiSlaw",
+  "url": "https://dislaw.at/.within.website/?redir=http://dislaw.at/ds",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Slavic languages. Baltic languages. Albanian languages"
+  ],
+  "languages": [
+   "EN",
+   "DE",
+   "RU",
+   "UK",
+   "SH"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 375,
+  "name": "Harmoni Sosial: Jurnal Pendidikan IPS",
+  "url": "https://journal.uny.ac.id/index.php/hsjpi",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Social Sciences",
+   "Social sciences (General)"
+  ],
+  "languages": [
+   "ID"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 376,
+  "name": "E-Dimas",
+  "url": "https://journal.upgris.ac.id/index.php/e-dimas",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Social history and conditions. Social problems. Social reform",
+   "Communities. Classes. Races"
+  ],
+  "languages": [
+   "ID"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 377,
+  "name": "Columbia Social Work Review",
+  "url": "https://journals.library.columbia.edu/index.php/cswr",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Social pathology. Social and public welfare. Criminology"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 378,
+  "name": "گردشگری و اوقات فراغت",
+  "url": "https://tlj.usc.ac.ir/?lang=en",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Social sciences (General)"
+  ],
+  "languages": [
+   "EN",
+   "FA"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 379,
+  "name": "SocietàMutamentoPolitica: Rivista Italiana di Sociologia",
+  "url": "https://oajournals.fupress.net/index.php/smp",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Sociology (General)"
+  ],
+  "languages": [
+   "EN",
+   "FR",
+   "DE",
+   "IT",
+   "ES"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 380,
+  "name": "El Cálculo y su Enseñanza",
+  "url": "https://recacym.org/index.php/recacym",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Special aspects of education",
+   "Mathematics"
+  ],
+  "languages": [
+   "EN",
+   "ES"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 381,
+  "name": "Archives in Sport Management and Leadership",
+  "url": "https://asml.ui.ac.ir/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Sports"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 382,
+  "name": "Journal of Scientific Research",
+  "url": "https://www.banglajol.info:443/index.php/JSR",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Technology",
+   "Science"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 383,
+  "name": "Engineering, MAthematics and Computer Science Journal (EMACS)",
+  "url": "https://journal.binus.ac.id/index.php/EMACS",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Technology (General)",
+   "Science"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 384,
+  "name": "Journal of Internet Services and Applications",
+  "url": "https://journals-sol.sbc.org.br/index.php/jisa",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Telecommunication",
+   "Computer engineering. Computer hardware"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 385,
+  "name": "Journal of Advances in Physics Education",
+  "url": "https://jurnal.pbs.fkip.unila.ac.id/index.php/JAPE/home",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Theory and practice of education"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 386,
+  "name": "Journal of Financial Therapy",
+  "url": "https://journals.newprairiepress.org/jft/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Therapeutics. Psychotherapy"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 387,
+  "name": "Public Health and Toxicology",
+  "url": "https://www.publichealthtoxicology.com/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Toxicology. Poisons"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 388,
+  "name": "Транспортные сооружения",
+  "url": "https://t-s.today/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Transportation engineering"
+  ],
+  "languages": [
+   "RU"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 389,
+  "name": "Basrah Journal of Veterinary Research",
+  "url": "https://bjvr.uobasrah.edu.iq/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Veterinary medicine"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 390,
+  "name": "Ética & Cine",
+  "url": "https://ethicsandfilms.org/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Visual arts",
+   "Communication. Mass media",
+   "Ethics"
+  ],
+  "languages": [
+   "ES"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 391,
+  "name": "زن در فرهنگ و هنر",
+  "url": "https://jwica.ut.ac.ir/?lang=en",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Women. Feminism"
+  ],
+  "languages": [
+   "FA"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 392,
+  "name": "Travaux du Muséum National d’Histoire Naturelle “Grigore Antipa”",
+  "url": "https://travaux.pensoft.net/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Zoology"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 393,
+  "name": "حسابداری ارزشی و رفتاری",
+  "url": "https://aapc.khu.ac.ir/index.php?slc_lang=en&slc_sid=1",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Accounting. Bookkeeping"
+  ],
+  "languages": [
+   "FA"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 394,
+  "name": "Journal of Agricultural Research",
+  "url": "https://jar.punjab.gov.pk/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Agriculture"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 395,
+  "name": "Agricultural Socio-Economic Empowerment and Agribusiness Journal",
+  "url": "https://jurnal.uns.ac.id/agrisema/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Agriculture (General)",
+   "Plant culture",
+   "Forestry"
+  ],
+  "languages": [
+   "ID",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 396,
+  "name": "Pachyderm",
+  "url": "https://pachydermjournal.org/index.php/pachyderm",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Animal culture",
+   "General. Including nature conservation, geographical distribution"
+  ],
+  "languages": [
+   "FR",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 302
+ },
+ {
+  "id": 397,
+  "name": "Zero: Jurnal Sains, Matematika, dan Terapan",
+  "url": "http://jurnal.uinsu.ac.id/index.php/zero",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Applied mathematics. Quantitative methods",
+   "Mathematics"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 398,
+  "name": "Jurnal Enggano",
+  "url": "https://ejournal.unib.ac.id/index.php/jurnalenggano/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Aquaculture. Fisheries. Angling"
+  ],
+  "languages": [
+   "ID"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 399,
+  "name": "Archaeologia Historica",
+  "url": "https://journals.phil.muni.cz/archaeologia-historica",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Archaeology"
+  ],
+  "languages": [
+   "EN",
+   "CS",
+   "SK",
+   "DE",
+   "PL"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 400,
+  "name": "园林",
+  "url": "https://www.gardenmagazine.cn/ylzz/home",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Architecture",
+   "Garden cities. The city beautiful"
+  ],
+  "languages": [
+   "ZH"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 401,
+  "name": "Ricerche di S/Confine",
+  "url": "https://www.ricerchedisconfine.info/chi-siamo/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Arts in general",
+   "Anthropology",
+   "Literature (General)"
+  ],
+  "languages": [
+   "EN",
+   "IT",
+   "FR"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 402,
+  "name": "Serbian Astronomical Journal",
+  "url": "https://saj.matf.bg.ac.rs/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Astronomy"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 403,
+  "name": "Communications Physics",
+  "url": "https://www.nature.com/commsphys/?error=cookies_not_supported&code=34769a4a-6468-4076-a824-c8a48108dc9d",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Astrophysics",
+   "Physics"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 404,
+  "name": "International Journal of Digital Content Management",
+  "url": "https://dcm.atu.ac.ir/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Bibliography. Library science. Information resources",
+   "Communication. Mass media"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 405,
+  "name": "Journal of Epigenetics",
+  "url": "https://jep.usb.ac.ir/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Biochemistry",
+   "Genetics",
+   "Microbiology"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 406,
+  "name": "Communication in Biomathematical Sciences",
+  "url": "https://journals.itb.ac.id/index.php/cbms/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Biology (General)",
+   "Mathematics"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 407,
+  "name": "Drug Analytical Research",
+  "url": "https://seer.ufrgs.br/dar/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Biotechnology",
+   "Chemistry"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 408,
+  "name": "Менеджмент та підприємництво в Україні: етапи становлення і проблеми розвитку",
+  "url": "https://science.lpnu.ua/smeu",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Business"
+  ],
+  "languages": [
+   "UK",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 409,
+  "name": "Indonesian Journal of Chemical Research",
+  "url": "https://ojs3.unpatti.ac.id/index.php/ijcr",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Chemical engineering",
+   "Chemistry"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 410,
+  "name": "Наносистеми, наноматеріали, нанотехнології",
+  "url": "https://www.imp.kiev.ua/nanosys/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Chemistry",
+   "Materials of engineering and construction. Mechanics of materials"
+  ],
+  "languages": [
+   "EN",
+   "UK"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 411,
+  "name": "Estudios Eclesiásticos",
+  "url": "https://revistas.comillas.edu/estudioseclesiasticos/es",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Christianity",
+   "Doctrinal Theology"
+  ],
+  "languages": [
+   "ES"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 302
+ },
+ {
+  "id": 412,
+  "name": "Informasi",
+  "url": "https://journal.uny.ac.id/index.php/informasi",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Communication. Mass media"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 413,
+  "name": "Сучасні інформаційні системи",
+  "url": "https://ais.khpi.edu.ua/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Computer software",
+   "Information theory"
+  ],
+  "languages": [
+   "UK",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 414,
+  "name": "Journal of Systems Thinking in Practice",
+  "url": "https://jstinp.um.ac.ir/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Dynamic and structural geology",
+   "Engineering (General). Civil engineering (General)",
+   "Electronic computers. Computer science"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 415,
+  "name": "Vie et Milieu",
+  "url": "https://journals.sorbonne-universite.fr/Viemilieu",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Ecology",
+   "Naval Science"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 416,
+  "name": "Вісник Київського національного університету імені Тараса Шевченка. Серія Економіка",
+  "url": "https://econom.bulletin.knu.ua/en",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Economics as a science"
+  ],
+  "languages": [
+   "EN",
+   "DE",
+   "RU",
+   "UK"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 302
+ },
+ {
+  "id": 417,
+  "name": "Review of Science, Mathematics and ICT Education",
+  "url": "https://pasithee.library.upatras.gr/review",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Education"
+  ],
+  "languages": [
+   "EN",
+   "FR"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 418,
+  "name": "Qualifizierung für Inklusion",
+  "url": "https://www.qfi-oz.de/index.php/inklusion",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Education (General)"
+  ],
+  "languages": [
+   "DE"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 419,
+  "name": "Journal of Naval Architecture and Marine Technology",
+  "url": "https://jnamt.org/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Electrical engineering. Electronics. Nuclear engineering"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 420,
+  "name": "Journal of Universal Computer Science",
+  "url": "https://lib.jucs.org/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Electronic computers. Computer science"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 421,
+  "name": "Будівельні конструкції. Теорія і практика",
+  "url": "https://bctp.knuba.edu.ua/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Engineering (General). Civil engineering (General)",
+   "Building construction"
+  ],
+  "languages": [
+   "UK",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 422,
+  "name": "Yantu gongcheng xuebao",
+  "url": "https://www.cgejournal.com/indexen.htm",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Engineering geology. Rock mechanics. Soil mechanics. Underground construction"
+  ],
+  "languages": [
+   "ZH",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 423,
+  "name": "Cultural Perspectives",
+  "url": "https://pubs.ub.ro/?pg=revues&rev=cp",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "English language",
+   "English literature",
+   "Social Sciences"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 424,
+  "name": "Journal of Applied Life Sciences and Environment",
+  "url": "https://jurnalalse.iuls.ro/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Environmental sciences",
+   "Agriculture"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 425,
+  "name": "Frontiers in Environmental Chemistry",
+  "url": "https://www.frontiersin.org/journals/environmental-chemistry",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Environmental technology. Sanitary engineering"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 426,
+  "name": "تأملات اخلاقی",
+  "url": "https://jer.znu.ac.ir/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Ethics"
+  ],
+  "languages": [
+   "FA",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 427,
+  "name": "Identidades",
+  "url": "https://iidentidadess.wordpress.com/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Ethnology. Social and cultural anthropology"
+  ],
+  "languages": [
+   "ES"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 428,
+  "name": "Performing Arts Resources",
+  "url": "https://journals.publishing.umich.edu/par",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Fine Arts",
+   "Communication. Mass media"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 429,
+  "name": "Liang you shipin ke-ji",
+  "url": "http://lyspkj.ijournal.cn/lyspkj/home",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Food processing and manufacture",
+   "Nutrition. Foods and food supply"
+  ],
+  "languages": [
+   "EN",
+   "ZH"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 430,
+  "name": "Annals of Forest Science",
+  "url": "https://idp.springer.com/transit?redirect_uri=https%3A%2F%2Flink.springer.com%2Fjournal%2F13595&code=19ebc71a-b86c-44fa-a58e-bf3469fd593c",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Forestry"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 302
+ },
+ {
+  "id": 431,
+  "name": "Romanica Wratislaviensia",
+  "url": "https://czasopisma.uwr.edu.pl/rwr",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "French literature - Italian literature - Spanish literature - Portuguese literature",
+   "Romanic languages"
+  ],
+  "languages": [
+   "FR",
+   "ES",
+   "IT",
+   "PL"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 432,
+  "name": "UCV-Scientia",
+  "url": "http://revistas.ucv.edu.pe/index.php/UCV-SCIENTIA",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "General Works"
+  ],
+  "languages": [
+   "ES"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 433,
+  "name": "Genetics and Molecular Biology",
+  "url": "http://www.scielo.br/j/gmb/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Genetics"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 434,
+  "name": "Reports on Geodesy and Geoinformatics",
+  "url": "https://reference-global.com/journal/RGG",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Geodesy"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 435,
+  "name": "Carsologica Sinica",
+  "url": "http://zgyr.karst.ac.cn/indexen.htm",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Geography (General)",
+   "Environmental sciences"
+  ],
+  "languages": [
+   "ZH",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 436,
+  "name": "Journal of Arid Land",
+  "url": "https://www.keaipublishing.com/en/journals/journal-of-arid-land",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Geography. Anthropology. Recreation",
+   "Geology"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 437,
+  "name": "Natural Hazards Research",
+  "url": "https://www.keaipublishing.com/en/journals/natural-hazards-research",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Geology",
+   "Geophysics. Cosmic physics"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 438,
+  "name": "CT Lilun yu yingyong yanjiu",
+  "url": "https://cttacn.org.cn/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Geophysics. Cosmic physics",
+   "Medicine (General)"
+  ],
+  "languages": [
+   "EN",
+   "ZH"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 439,
+  "name": "Godišnjak",
+  "url": "https://godisnjak.anubih.ba/index.php/godisnjak/en",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "History (General)"
+  ],
+  "languages": [
+   "BS",
+   "FR",
+   "IT",
+   "DE",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 440,
+  "name": "Folia Historica Cracoviensia",
+  "url": "http://czasopisma.upjp2.edu.pl/foliahistoricacracoviensia",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "History (General) and history of Europe",
+   "Fine Arts"
+  ],
+  "languages": [
+   "RU",
+   "PL",
+   "IT",
+   "DE",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 441,
+  "name": "Kasvatus & Aika",
+  "url": "https://journal.fi/kasvatusjaaika",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "History of education"
+  ],
+  "languages": [
+   "FI"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 442,
+  "name": "Mayéutica: Revista Científica de Humanidades y Artes",
+  "url": "https://revistas.uclave.org/index.php/mayeutica/es",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "History of scholarship and learning. The humanities",
+   "Social sciences (General)"
+  ],
+  "languages": [
+   "EN",
+   "ES"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 443,
+  "name": "Historia Slavorum Occidentis",
+  "url": "https://czasopisma.marszalek.com.pl/hso/18?lang=pl",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "History of the arts",
+   "History (General)"
+  ],
+  "languages": [
+   "PL",
+   "CS",
+   "EN",
+   "SK"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 444,
+  "name": "Buana Information Technology and Computer Sciences",
+  "url": "https://journal.ubpkarawang.ac.id/index.php/bit-cs",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Information technology",
+   "Electronic computers. Computer science"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 445,
+  "name": "Italian Journal of Prevention Diagnostic and Therapeutic Medicine",
+  "url": "https://www.ijpdtm.it/index.php/ijpdtm",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Internal medicine",
+   "Medicine (General)"
+  ],
+  "languages": [
+   "EN",
+   "IT"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 446,
+  "name": "Canadian Journal of European and Russian Studies",
+  "url": "https://ojs.library.carleton.ca/index.php/CJERS/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "International relations",
+   "Social Sciences"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 447,
+  "name": "Maghza: Jurnal Ilmu Al Qur'an dan Tafsir",
+  "url": "https://ejournal.uinsaizu.ac.id/index.php/maghza/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Islam"
+  ],
+  "languages": [
+   "EN",
+   "ID"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 448,
+  "name": "پژوهش‌نامه حقوق اسلامی",
+  "url": "https://ilr.isu.ac.ir/?lang=en",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Islamic law"
+  ],
+  "languages": [
+   "AR",
+   "FA",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 449,
+  "name": "Наукові записки інституту журналістики",
+  "url": "https://nz.knu.ua/en",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Journalism. The periodical press, etc.",
+   "Communication. Mass media"
+  ],
+  "languages": [
+   "UK",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 450,
+  "name": "Derechos y Libertades",
+  "url": "https://e-revistas.uc3m.es/index.php/DYL/es/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Jurisprudence. Philosophy and theory of law"
+  ],
+  "languages": [
+   "ES"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 451,
+  "name": "Narrativa",
+  "url": "https://journals.openedition.org/narrativa",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Language and Literature",
+   "Arts in general"
+  ],
+  "languages": [
+   "IT"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 452,
+  "name": "Constructions",
+  "url": "https://constructions.journals.hhu.de/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Language. Linguistic theory. Comparative grammar"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 453,
+  "name": "Estudios de Cultura Maya",
+  "url": "https://revistas-filologicas.unam.mx/estudios-cultura-maya/index.php/ecm/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Latin America. Spanish America",
+   "Social Sciences"
+  ],
+  "languages": [
+   "ES",
+   "FR",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 454,
+  "name": "Cahiers Africains des Droits de l’Homme et de la Démocratie ainsi que du Développement Durable",
+  "url": "https://www.cadhd-dr.org/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Law"
+  ],
+  "languages": [
+   "FR",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 455,
+  "name": "International Law Discourse in Southeast Asia",
+  "url": "https://journal.unnes.ac.id/journals/ildisea",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Law in general. Comparative and uniform law. Jurisprudence"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 456,
+  "name": "Anuari de Filologia: Literatures Contemporànies",
+  "url": "https://revistes.ub.edu/index.php/AFLC/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Literature (General)"
+  ],
+  "languages": [
+   "CA",
+   "EN",
+   "DE",
+   "ES"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 457,
+  "name": "AUT Journal of Mathematics and Computing",
+  "url": "https://ajmc.aut.ac.ir/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Mathematics"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 458,
+  "name": "Vietnam Journal of Mechanics",
+  "url": "https://vjs.ac.vn/index.php/vjmech",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Mechanical engineering and machinery",
+   "Descriptive and experimental mechanics"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 459,
+  "name": "International Journal of First Aid Education",
+  "url": "https://firstaidjournal.org/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Medical emergencies. Critical care. Intensive care. First aid"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 460,
+  "name": "肿瘤影像学",
+  "url": "https://www.zhongliuyingxiangxue.com/homeNav?lang=en",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Medical physics. Medical radiology. Nuclear medicine",
+   "Neoplasms. Tumors. Oncology. Including cancer and carcinogens"
+  ],
+  "languages": [
+   "ZH",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 461,
+  "name": "Journal of Radiation Protection and Research",
+  "url": "https://jrpr.org/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Medical technology"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 462,
+  "name": "Revista de Homeopatia",
+  "url": "http://revista.aph.org.br/index.php/aph/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Medicine",
+   "Homeopathy"
+  ],
+  "languages": [
+   "EN",
+   "PT"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 463,
+  "name": "Medicina Universitaria",
+  "url": "https://www.medicinauniversitaria.org/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Medicine (General)"
+  ],
+  "languages": [
+   "ES",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 464,
+  "name": "Weather and Climate Dynamics",
+  "url": "https://www.weather-climate-dynamics.net/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Meteorology. Climatology"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 465,
+  "name": "Boletim do Museu Paraense Emílio Goeldi. Ciências Naturais",
+  "url": "https://boletimcn.museu-goeldi.br/bcnaturais/pt_BR",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Mineralogy",
+   "Paleontology",
+   "Natural history (General)",
+   "Life"
+  ],
+  "languages": [
+   "PT",
+   "EN",
+   "ES"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 466,
+  "name": "The Annals of “Dunarea de Jos” University of Galati. Fascicle IX, Metallurgy and Materials Science",
+  "url": "http://www.gup.ugal.ro/ugaljournals/index.php/mms",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Mining engineering. Metallurgy"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 467,
+  "name": "Journal of Music Archaeology",
+  "url": "https://jma.vlg.oeaw.ac.at/index.php/jma",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Music",
+   "Archaeology"
+  ],
+  "languages": [
+   "EN",
+   "FR",
+   "IT",
+   "ES"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 468,
+  "name": "Nuclear Analysis",
+  "url": "https://www.keaipublishing.com/en/journals/nuclear-analysis",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Nuclear engineering. Atomic power",
+   "Nuclear and particle physics. Atomic energy. Radioactivity"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 469,
+  "name": "Kufa Journal for Nursing Sciences",
+  "url": "https://journal.uokufa.edu.iq/index.php/kjns/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Nursing"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 470,
+  "name": "Zitteliana",
+  "url": "https://zitteliana.pensoft.net/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Paleontology"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 471,
+  "name": "Health and Biosciences",
+  "url": "https://periodicos.ufes.br/healthandbiosciences/pt_BR/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Pharmacy and materia medica",
+   "Biology (General)"
+  ],
+  "languages": [
+   "PT"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 472,
+  "name": "Семиотические исследования",
+  "url": "https://journals.ssau.ru/semiotic/ru",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Philology. Linguistics",
+   "Philosophy. Psychology. Religion"
+  ],
+  "languages": [
+   "EN",
+   "RU"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 473,
+  "name": "Tópicos",
+  "url": "https://revistas.up.edu.mx/topicos/es",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Philosophy (General)"
+  ],
+  "languages": [
+   "IT",
+   "DE",
+   "FR",
+   "EN",
+   "ES"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 474,
+  "name": "Prometeus: Filosofia em Revista",
+  "url": "https://periodicos.ufs.br/prometeus",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Philosophy. Psychology. Religion",
+   "Philosophy (General)"
+  ],
+  "languages": [
+   "EN",
+   "FR",
+   "PT",
+   "ES"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 475,
+  "name": "Revue Territoires Environnement et Développement",
+  "url": "https://revues.imist.ma/index.php/TED/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Physical geography",
+   "Cities. Urban geography",
+   "Urbanization. City and country",
+   "Meteorology. Climatology"
+  ],
+  "languages": [
+   "AR",
+   "FR",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 476,
+  "name": "Momento",
+  "url": "https://revistas.unal.edu.co/index.php/momento",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Physics",
+   "Optics. Light"
+  ],
+  "languages": [
+   "ES",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 477,
+  "name": "HortTechnology",
+  "url": "https://journals.ashs.org/view/journals/horttech/horttech-overview.xml",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Plant culture"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 478,
+  "name": "Desafíos",
+  "url": "https://revistas.udh.edu.pe/index.php/udh",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Political science",
+   "Education",
+   "Social Sciences"
+  ],
+  "languages": [
+   "EN",
+   "ES"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 479,
+  "name": "Journal of Statistical Theory and Applications (JSTA)",
+  "url": "https://link.springer.com/journal/44199?error=cookies_not_supported&code=b151bee6-b00c-42cd-9b78-dc0f53711016",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Probabilities. Mathematical statistics"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 480,
+  "name": "South African Journal of Psychiatry",
+  "url": "https://sajp.org.za/index.php/sajp",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Psychiatry"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 481,
+  "name": "Psiquemag",
+  "url": "https://revistas.ucv.edu.pe/index.php/psiquemag/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Psychology",
+   "Mental healing",
+   "Medicine"
+  ],
+  "languages": [
+   "ES",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 482,
+  "name": "Journal of Health Inequalities",
+  "url": "https://www.termedia.pl/Journal/Journal_of_Health_Inequalities-100",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Public aspects of medicine"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 483,
+  "name": "el-Aqwal",
+  "url": "https://ejournal.uinsaizu.ac.id/index.php/elaqwal/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Religion (General)"
+  ],
+  "languages": [
+   "ID",
+   "AR",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 484,
+  "name": "Circula",
+  "url": "https://circula.recherche.usherbrooke.ca/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Romanic languages"
+  ],
+  "languages": [
+   "FR",
+   "IT",
+   "ES"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 485,
+  "name": "Recent Advances in Natural Sciences",
+  "url": "https://flayoophl.com/journals/index.php/rans/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Science"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 486,
+  "name": "Makara Seri Sains",
+  "url": "https://scholarhub.ui.ac.id/science/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Science (General)"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 487,
+  "name": "Studia Slavica",
+  "url": "https://studiaslavica.osu.eu/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Slavic languages. Baltic languages. Albanian languages"
+  ],
+  "languages": [
+   "SK",
+   "CS",
+   "RU",
+   "PL",
+   "UK"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 488,
+  "name": "JPAIR",
+  "url": "https://philair.org/index.php/jpair/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Social Sciences",
+   "Education"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 489,
+  "name": "Vilnius University Open Series",
+  "url": "https://www.journals.vu.lt/open-series/en",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Social sciences (General)",
+   "Philology. Linguistics",
+   "Philosophy. Psychology. Religion"
+  ],
+  "languages": [
+   "EN",
+   "LT"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 490,
+  "name": "Society and Security Insights",
+  "url": "https://journal.asu.ru/ssi",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Sociology (General)"
+  ],
+  "languages": [
+   "RU"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 491,
+  "name": "Revista de Educação Matemática",
+  "url": "http://www.revistasbemsp.com.br/index.php/REMat-SP/index",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Special aspects of education",
+   "Theory and practice of education",
+   "Mathematics"
+  ],
+  "languages": [
+   "PT"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 492,
+  "name": "Bibechana",
+  "url": "https://www.nepjol.info/index.php/BIBECHANA",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Technology",
+   "Technology (General)",
+   "Science"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 493,
+  "name": "Technical Transactions",
+  "url": "https://reference-global.com/journal/TECHTRANS",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Technology (General)",
+   "Engineering (General). Civil engineering (General)"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 494,
+  "name": "IEEE Journal of Indoor and Seamless Positioning and Navigation",
+  "url": "https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=9955032",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Telecommunication"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 495,
+  "name": "Al-Muyassar",
+  "url": "https://jurnal.umt.ac.id/index.php/al",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Theory and practice of education"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 496,
+  "name": "Communications in Transportation Research",
+  "url": "https://www.sciopen.com/journal/2097-5023",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Transportation engineering"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 497,
+  "name": "Berliner und Münchener Tierärztliche Wochenschrift",
+  "url": "https://vetline.de/berliner-und-m%C3%BCnchener-tier%C3%A4rztliche-wochenschrift/en",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Veterinary medicine"
+  ],
+  "languages": [
+   "DE",
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 498,
+  "name": "TV Series",
+  "url": "https://journals.openedition.org/tvseries",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Visual arts",
+   "Communication. Mass media"
+  ],
+  "languages": [
+   "EN",
+   "FR"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 499,
+  "name": "Journal of Field Ornithology",
+  "url": "https://journal.afonet.org/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Zoology",
+   "Animal culture"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ },
+ {
+  "id": 500,
+  "name": "Journal of Horticulture and Postharvest Research",
+  "url": "https://jhpr.birjand.ac.ir/",
+  "type": "journal (DOAJ)",
+  "fields": [
+   "Agriculture"
+  ],
+  "languages": [
+   "EN"
+  ],
+  "country": "",
+  "checked": "2026-11-22",
+  "http_status": 200
+ }
+]
