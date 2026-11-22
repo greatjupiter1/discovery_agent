@@ -127,16 +127,39 @@ jobs:
           if [ -f verify_cache.json ]; then git add verify_cache.json; fi
           if [ -d fulltext ]; then git add fulltext; fi
           git diff --cached --quiet || git commit -m "record production: ${{ inputs.topic }}"
+          OUR_COMMIT=$(git rev-parse HEAD)
+          pushed=0
           for attempt in 1 2 3; do
             if git pull --rebase && git push; then
+              pushed=1
               break
             fi
-            if [ "$attempt" = "3" ]; then
-              echo "commit-back push failed after 3 attempts" >&2
-              exit 1
+            echo "commit-back attempt $attempt failed — re-applying this run's state onto latest main"
+            git rebase --abort 2>/dev/null || true
+            git show "$OUR_COMMIT:state.json" > /tmp/ours_state.json
+            rm -f /tmp/ours_vc.json
+            git show "$OUR_COMMIT:verify_cache.json" > /tmp/ours_vc.json 2>/dev/null || true
+            git fetch origin main
+            git reset --hard origin/main
+            python3 merge_state.py /tmp/ours_state.json state.json
+            if [ -s /tmp/ours_vc.json ]; then
+              if [ -f verify_cache.json ]; then
+                python3 merge_state.py /tmp/ours_vc.json verify_cache.json
+              else
+                cp /tmp/ours_vc.json verify_cache.json
+              fi
             fi
+            git checkout "$OUR_COMMIT" -- fulltext 2>/dev/null || true
+            git add state.json
+            if [ -f verify_cache.json ]; then git add verify_cache.json; fi
+            if [ -d fulltext ]; then git add fulltext; fi
+            git diff --cached --quiet || git commit -m "record production: ${{ inputs.topic }} (re-applied onto latest main)"
+            OUR_COMMIT=$(git rev-parse HEAD)
             sleep 5
           done
+          if [ "$pushed" != "1" ]; then
+            git push
+          fi
 
       - name: Save proposals (record the batch in requests/)
         if: ${{ success() && inputs.mode == 'propose' }}
