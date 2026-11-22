@@ -1243,6 +1243,368 @@ def retrieve_wave1(queries, rstate):
 
 
 # --------------------------------------------------------------------------
+# §19 — primary sources: source map, reserved-lane retrieval, in-book
+# search. Root fix (Jupiter, 2026-11-22: «باید از ریشه درست کنی»): the
+# pipeline was journal-article shaped — topical keyword search, one
+# shared verified pool filled by the journal indexes first, books with
+# no abstract failing the content gate, and a full-text bridge that
+# only ever read a book's opening pages. A primary source (the topic
+# author's own work, the founding paper/document) therefore never
+# reached the writer. This stage is GENERAL (any field/topic/author):
+# a brain-built source map names the topic's foundational works, they
+# are searched BY TITLE/AUTHOR in library catalogues, verified in a
+# reserved lane that does not compete for the journal pool, and their
+# content is extracted by searching INSIDE the book text for the
+# topic's keywords — not by reading the head. Fail-soft throughout:
+# any failure leaves the §18 pipeline exactly as it was.
+# --------------------------------------------------------------------------
+
+PRIMARY_MAX_VERIFIED = 3
+IA_FULLTEXT_MAX_BYTES = 8 * 1024 * 1024
+PASSAGE_WINDOW_CHARS = 6000
+PASSAGE_MAX_CLUSTERS = 3
+PASSAGE_CONTEXT_BEFORE = 1000
+
+
+def build_source_map(field, topic, api_key, model):
+    """ONE brain-chain call mapping this topic's primary sources:
+    {primary_works: [{author, title, language, kind}], keywords,
+    name_variants}. Fail-soft: ANY failure returns an empty map and
+    the run continues exactly as §18."""
+    empty = {"primary_works": [], "keywords": [], "name_variants": []}
+    prompt = (
+        "You are mapping the PRIMARY sources for a scholarly article, "
+        "the way a researcher plans library work before searching.\n"
+        f"Field: {field}\nTopic: {topic}\n\n"
+        "Reply with JSON only, like:\n"
+        '{"primary_works": [{"author": "...", "title": "...", '
+        '"language": "...", "kind": "book"}], "keywords": ["..."], '
+        '"name_variants": ["..."]}\n\n'
+        "Rules:\n"
+        "- primary_works: up to 4 FOUNDATIONAL primary sources a "
+        "researcher consults FIRST for this topic — when the topic "
+        "concerns a historical author or school, that author's own "
+        "work(s) on the subject; for a scientific topic, the original "
+        "paper/document that founded the result; a classic primary "
+        "text in its standard scholarly edition/translation counts. "
+        "Give each title in its best-known scholarly form (the "
+        "original-language title, its standard transliteration, or "
+        "its standard translated title) — it will be searched BY "
+        "TITLE AND AUTHOR in library catalogues (Internet Archive, "
+        "Google Books), so it must be the real catalogue title, and "
+        "kind is one of book / paper / document.\n"
+        "- Only list works you are confident really exist. If the "
+        "topic has no identifiable primary works, return an empty "
+        "list — never invent a title.\n"
+        "- keywords: 6–12 words or short phrases (English; add "
+        "original-language terms, including Arabic-script ones, "
+        "where the primary literature uses them) that mark THIS "
+        "topic's passages inside a full book text — specific terms, "
+        "place names, method names, not broad field words.\n"
+        "- name_variants: the Latin-script name variants of the "
+        "main author(s) (e.g. al-Biruni / Biruni / Abu Rayhan).")
+    try:
+        raw = call_llm(prompt, api_key, model, temperature=0.2,
+                       json_mode=True)
+        data = _parse_json_value(raw)
+        if not isinstance(data, dict):
+            print("WARNING: source map (§19) reply was not an object; "
+                  "continuing without primary sources")
+            return empty
+        works = []
+        for w in data.get("primary_works") or []:
+            if not isinstance(w, dict):
+                continue
+            title = str(w.get("title") or "").strip()
+            if not title:
+                continue
+            kind = str(w.get("kind") or "book").strip().lower()
+            if kind not in ("book", "paper", "document"):
+                kind = "book"
+            works.append({
+                "author": str(w.get("author") or "").strip(),
+                "title": title[:200],
+                "language": str(w.get("language") or "").strip(),
+                "kind": kind})
+            if len(works) >= 4:
+                break
+
+        def _str_list(key, cap, maxlen=120):
+            out = []
+            for v in data.get(key) or []:
+                v = str(v).strip()
+                if v and v not in out:
+                    out.append(v[:maxlen])
+                if len(out) >= cap:
+                    break
+            return out
+
+        smap = {"primary_works": works,
+                "keywords": _str_list("keywords", 12),
+                "name_variants": _str_list("name_variants", 6)}
+        print(f"source map (§19): {len(works)} primary work(s), "
+              f"{len(smap['keywords'])} keyword(s), "
+              f"name variants {smap['name_variants']}")
+        for w in works:
+            print(f"  primary work: {w['author']} — {w['title']} "
+                  f"({w['kind']})")
+        return smap
+    except Exception as e:
+        print(f"WARNING: source map (§19) failed ({e}); continuing "
+              "without primary sources")
+        return empty
+
+
+def _lucene_clean(text):
+    """Strip Lucene field-query syntax characters from a title/author
+    so it can sit safely inside title:(...) / creator:(...)."""
+    return re.sub(r"[^\w\s.'’-]+", " ", text or "",
+                  flags=re.UNICODE).strip()
+
+
+def search_ia_primary(work):
+    """Internet Archive advancedsearch BY TITLE/CREATOR FIELDS for one
+    primary work (§19) — never a topical keyword search. Candidates
+    are tagged source_type='primary'."""
+    title = _lucene_clean(work.get("title"))
+    author = _lucene_clean(work.get("author"))
+    parts = []
+    if title:
+        parts.append(f"title:({title})")
+    if author:
+        parts.append(f"creator:({author})")
+    if not parts:
+        return []
+    q = "(" + " OR ".join(parts) + ") AND mediatype:texts"
+    url = ("https://archive.org/advancedsearch.php?q="
+           + urllib.parse.quote(q)
+           + "&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=creator"
+             "&fl%5B%5D=date&fl%5B%5D=language"
+           + "&rows=10&page=1&output=json")
+    data = http_json(url)
+    out = []
+    for doc in (data.get("response") or {}).get("docs", []) or []:
+        ident = str(doc.get("identifier") or "").strip()
+        if not ident:
+            continue
+        creator = doc.get("creator") or []
+        if isinstance(creator, str):
+            creator = [creator]
+        date = str(doc.get("date") or "")
+        cand = {
+            "title": str(doc.get("title") or "").strip(),
+            "authors": [str(a).strip() for a in creator
+                        if str(a).strip()],
+            "year": int(date[:4]) if date[:4].isdigit() else None,
+            "venue": "Internet Archive",
+            "doi": None,
+            "url": f"https://archive.org/details/{ident}",
+            "abstract": "",
+            "arxiv_id": None,
+            "index": "Internet Archive",
+            "source_type": "primary",
+        }
+        lang = str(doc.get("language") or "").strip()
+        if lang:
+            cand["language"] = lang
+        out.append(cand)
+    return out
+
+
+def search_google_books_primary(work):
+    """Google Books with intitle:/inauthor: field operators for one
+    primary work (§19). Candidates are tagged source_type='primary'."""
+    title = (work.get("title") or "").replace('"', " ").strip()
+    author = (work.get("author") or "").replace('"', " ").strip()
+    bits = []
+    if title:
+        bits.append(f'intitle:"{title}"')
+    if author:
+        bits.append(f'inauthor:"{author}"')
+    if not bits:
+        return []
+    url = ("https://www.googleapis.com/books/v1/volumes?maxResults=10&q="
+           + urllib.parse.quote(" ".join(bits)))
+    data = http_json(url)
+    out = []
+    for item in data.get("items", []) or []:
+        info = item.get("volumeInfo") or {}
+        published = str(info.get("publishedDate") or "")
+        cand = {
+            "title": (info.get("title") or "").strip(),
+            "authors": [a for a in info.get("authors", []) if a],
+            "year": int(published[:4]) if published[:4].isdigit()
+                    else None,
+            "venue": info.get("publisher") or "Google Books",
+            "doi": None,
+            "url": info.get("infoLink") or item.get("selfLink") or "",
+            "abstract": (info.get("description") or "")[:1500],
+            "arxiv_id": None,
+            "index": "Google Books",
+            "source_type": "primary",
+        }
+        lang = str(info.get("language") or "").strip()
+        if lang:
+            cand["language"] = lang
+        out.append(cand)
+    return out
+
+
+def _primary_title_score(candidate_title, work_title):
+    """Token-overlap of a catalogue hit's title against the requested
+    work's title (0..1) — how strongly the hit IS the requested work."""
+    want = _screen_tokens(work_title)
+    if not want:
+        return 0.0
+    got = _screen_tokens(candidate_title)
+    return len(want & got) / len(want)
+
+
+def _primary_author_match(candidate, work):
+    author = _lucene_clean(work.get("author")).lower()
+    if not author:
+        return False
+    surname = author.split()[-1]
+    if len(surname) < 3:
+        return False
+    return any(surname in (a or "").lower()
+               for a in candidate.get("authors") or [])
+
+
+def retrieve_primary_sources(smap, rstate):
+    """The reserved primary lane (§19): for each work in the source
+    map, field-search the library catalogues, verify the best matches
+    in their OWN lane (the existing verification law — IA item page /
+    publisher page) and return up to PRIMARY_MAX_VERIFIED verified
+    primary sources. They never consume the journal pool's
+    MAX_VERIFIED slots. Fail-soft per work and per source."""
+    works = (smap or {}).get("primary_works") or []
+    if not works:
+        print("primary sources (§19): no primary works in the source "
+              "map — stage skipped")
+        return []
+    if rstate.get("cache") is None:
+        rstate["cache"] = load_verify_cache()
+    cache = rstate["cache"]
+    seen = rstate["seen"]
+    keywords = (list(smap.get("keywords") or [])
+                + list(smap.get("name_variants") or []))
+    verified_primaries = []
+    for work in works[:4]:
+        if len(verified_primaries) >= PRIMARY_MAX_VERIFIED:
+            break
+        cands = []
+        for fn in (search_ia_primary, search_google_books_primary):
+            try:
+                cands.extend(fn(work))
+            except Exception as e:
+                print(f"WARNING: primary search {fn.__name__} failed "
+                      f"for {work.get('title', '')[:60]!r}: {e}")
+        ranked = sorted(
+            cands,
+            key=lambda c: -_primary_title_score(c.get("title"),
+                                                work.get("title")))
+        picked = []
+        for c in ranked:
+            if not c.get("title"):
+                continue
+            score = _primary_title_score(c["title"], work.get("title"))
+            if score < 0.34 and not _primary_author_match(c, work):
+                continue  # a catalogue neighbour, not this work
+            key = (c["doi"].lower() if c.get("doi") else None) \
+                or normalise_title(c["title"])
+            if key in seen:
+                continue
+            # Intake language gate (§18) applies — EXCEPT that a
+            # strong title match to the requested work IS the primary
+            # text itself, admissible in a scholarly edition /
+            # translation under the SOURCE LAW.
+            if language_gate_drop(c) and score < 0.6:
+                rstate["lang_gate_dropped"] = \
+                    rstate.get("lang_gate_dropped", 0) + 1
+                continue
+            seen.add(key)
+            c["source_type"] = "primary"
+            c["primary_work"] = work.get("title")
+            c["search_keywords"] = keywords
+            picked.append(c)
+            rstate["total_candidates"] = \
+                rstate.get("total_candidates", 0) + 1
+            if len(picked) >= 2:
+                break
+        if not picked:
+            continue
+        with ThreadPoolExecutor(max_workers=VERIFY_WORKERS) as ex:
+            outcomes = list(ex.map(
+                lambda c: _verify_one(c, cache), picked))
+        for c, (ok, _via) in zip(picked, outcomes):
+            if not ok:
+                continue
+            verified_primaries.append(c)
+            print(f"  verified primary [{len(verified_primaries)}] "
+                  f"{c['title'][:80]}")
+            if len(verified_primaries) >= PRIMARY_MAX_VERIFIED:
+                break
+    save_verify_cache(cache)
+    print(f"primary sources (§19): {len(verified_primaries)} verified "
+          "in the primary lane (reserved slots — the journal pool is "
+          "untouched)")
+    return verified_primaries
+
+
+def extract_passages(text, keywords, window=PASSAGE_WINDOW_CHARS,
+                     max_clusters=PASSAGE_MAX_CLUSTERS):
+    """In-book search (§19): find the topic keywords inside a book's
+    full text (case-insensitive; Arabic-script keywords match as-is),
+    cluster the hits, and return (excerpt, hit_count) — passage
+    windows around the densest clusters, merged and capped at
+    FULLTEXT_EXCERPT_CHARS. (None, 0) when nothing hits. The excerpt
+    comes from the HIT REGIONS, never from the file head."""
+    if not text or not keywords:
+        return None, 0
+    low = text.lower()
+    hits = []
+    for kw in keywords:
+        needle = (kw or "").strip().lower()
+        if len(needle) < 3:
+            continue
+        start = 0
+        while True:
+            i = low.find(needle, start)
+            if i < 0:
+                break
+            hits.append(i)
+            start = i + len(needle)
+    if not hits:
+        return None, 0
+    hits.sort()
+    clusters = [[hits[0]]]
+    for h in hits[1:]:
+        if h - clusters[-1][0] <= window:
+            clusters[-1].append(h)
+        else:
+            clusters.append([h])
+    clusters.sort(key=len, reverse=True)
+    spans = []
+    for cur in clusters[:max_clusters]:
+        a = max(0, cur[0] - PASSAGE_CONTEXT_BEFORE)
+        b = min(len(text), max(cur[0] + window, cur[-1] + 400))
+        spans.append((a, b))
+    spans.sort()
+    merged = []
+    for a, b in spans:
+        if merged and a <= merged[-1][1]:
+            merged[-1] = (merged[-1][0], max(merged[-1][1], b))
+        else:
+            merged.append((a, b))
+    parts = [text[a:b].strip() for a, b in merged]
+    excerpt = "\n\n[...]\n\n".join(p for p in parts if p)
+    if len(excerpt) > FULLTEXT_EXCERPT_CHARS:
+        excerpt = excerpt[:FULLTEXT_EXCERPT_CHARS]
+    return (excerpt or None), len(hits)
+
+
+# --------------------------------------------------------------------------
 # Verification law
 # --------------------------------------------------------------------------
 
@@ -1504,10 +1866,12 @@ def _ia_find_by_title(title):
     return None
 
 
-def _ia_djvu_text(ia_id):
+def _ia_djvu_text(ia_id, cap=IA_TEXT_MAX_BYTES):
     """The item's ready-extracted full text, or None (a miss — e.g.
     lending-restricted items — is never an error). The real file name
-    comes from the metadata API; it is not always <id>_djvu.txt."""
+    comes from the metadata API; it is not always <id>_djvu.txt.
+    `cap` bounds the fetch (the §19 in-book search passes a larger cap
+    so keyword hits deep in the book are reachable)."""
     fname = None
     try:
         meta = http_json("https://archive.org/metadata/"
@@ -1523,7 +1887,7 @@ def _ia_djvu_text(ia_id):
     url = ("https://archive.org/download/"
            + urllib.parse.quote(ia_id, safe="") + "/"
            + urllib.parse.quote(fname))
-    data = _fetch_capped(url, IA_TEXT_MAX_BYTES, timeout=60)
+    data = _fetch_capped(url, cap, timeout=60)
     if not data:
         return None
     text = data.decode("utf-8", "replace")
@@ -1639,6 +2003,33 @@ def _attach_fulltext_one(s):
         md5 = s.get("md5") or None
         ia_id = (_ia_id_from_url(s.get("url", ""))
                  if s.get("index") == "Internet Archive" else None)
+        # §19 in-book search for PRIMARY sources: fetch the IA text
+        # in FULL (larger cap) and extract the passages around the
+        # source-map keyword hits — the relevant chapter, not the
+        # book's opening pages. Only the extracted passages are
+        # cached (storage law). No hits -> the head excerpt below is
+        # the fallback, exactly as before.
+        keywords = s.get("search_keywords") or []
+        if s.get("source_type") == "primary" and keywords:
+            pid = ia_id or _ia_find_by_title(s["title"])
+            if pid:
+                full = _ia_djvu_text(pid, cap=IA_FULLTEXT_MAX_BYTES)
+                if full:
+                    excerpt, hits = extract_passages(full, keywords)
+                    if excerpt:
+                        _write_cache(md5 or pid, excerpt)
+                        s["fulltext_excerpt"] = \
+                            excerpt[:FULLTEXT_EXCERPT_CHARS]
+                        print(f"fulltext route: ia-passages ({hits} "
+                              "keyword hits, passages extracted)")
+                        return True, False
+                    print("fulltext: primary book fetched but no "
+                          "keyword hits — head excerpt fallback")
+                    _write_cache(md5 or pid, full)
+                    s["fulltext_excerpt"] = \
+                        full[:FULLTEXT_EXCERPT_CHARS]
+                    print("fulltext route: ia-text (head fallback)")
+                    return True, False
         text = route = None
         from_cache = False
         for key in (md5, ia_id):
@@ -1683,11 +2074,17 @@ def attach_fulltexts(verified):
     FULLTEXT_WORKERS); ex.map keeps the outcome order aligned with
     the selection order, so the results match the old serial walk."""
     selected = []
-    for s in verified:
+    # §19: primary sources are served FIRST by the bridge (their
+    # passages are the run's grounding); the rest keep their order.
+    ordered = ([s for s in verified
+                if s.get("source_type") == "primary"]
+               + [s for s in verified
+                  if s.get("source_type") != "primary"])
+    for s in ordered:
         md5 = s.get("md5") or None
         ia_id = (_ia_id_from_url(s.get("url", ""))
                  if s.get("index") == "Internet Archive" else None)
-        if not md5 and not ia_id:
+        if not md5 and not ia_id and s.get("source_type") != "primary":
             continue
         ext = s.get("ext") or ""
         if ext and ext not in ("pdf", "epub", "djvu"):
@@ -2112,6 +2509,10 @@ def source_cards_text(sources):
             f"    Year: {s['year'] or 'n.d.'} | Venue: {s['venue'] or 'n/a'} | "
             f"DOI: {s['doi'] or 'none'} | URL: {s['url']}\n"
             f"    Abstract: {(s['abstract'] or '(no abstract available)')[:1500]}")
+        if s.get("source_type") == "primary":
+            card += ("\n    PRIMARY SOURCE (the author's own work / "
+                     "a foundational document for this topic; the "
+                     "excerpt below is from the work itself)")
         if s.get("registry_match"):
             card += (f"\n    Registry match (curated open-access "
                      f"registry, credibility signal): "
@@ -2208,11 +2609,20 @@ def _llm_relevance_screen(field, topic, borderline, api_key, model,
     (§16.4 second judge)."""
     lines = []
     for j, s in enumerate(borderline, 1):
-        content = (s.get("abstract") or "").strip()
-        if not content and s.get("fulltext_excerpt"):
-            content = s["fulltext_excerpt"][:800]
+        if s.get("source_type") == "primary":
+            type_line = ("PRIMARY SOURCE — the author's own work / a "
+                         "foundational document for this topic")
+            content = (s.get("fulltext_excerpt") or "").strip()
+            if not content:
+                content = (s.get("abstract") or "").strip()
+        else:
+            type_line = "Secondary scholarship"
+            content = (s.get("abstract") or "").strip()
+            if not content and s.get("fulltext_excerpt"):
+                content = s["fulltext_excerpt"][:800]
         lines.append(
             f"[{j}] Title: {s.get('title', '')}\n"
+            f"    Type: {type_line}\n"
             f"    Authors: {', '.join((s.get('authors') or [])[:4])} | "
             f"Year: {s.get('year') or 'n.d.'} | "
             f"Venue: {s.get('venue') or 'n/a'} | "
@@ -2221,9 +2631,20 @@ def _llm_relevance_screen(field, topic, borderline, api_key, model,
     prompt = (
         "You are screening candidate sources for a scholarly article.\n"
         f"Field: {field}\nTopic: {topic}\n\n"
-        "For EACH candidate decide keep=true ONLY if BOTH hold:\n"
-        "1) It is GENUINELY about the topic — its title/content "
-        "addresses the topic itself, not a keyword coincidence (a "
+        "Judge EACH candidate by its TYPE (marked on its line):\n"
+        "- PRIMARY SOURCE (the topic author's own work, or a "
+        "foundational document, in a scholarly edition or "
+        "translation): keep=true when its extracted passages "
+        "genuinely address the topic. When the topic is about that "
+        "author's work or method, the author's own treatment IS "
+        "relevant by definition.\n"
+        "- SECONDARY SCHOLARSHIP: keep=true when it is genuinely "
+        "ABOUT the topic's subject or method — a general treatment "
+        "of the same method, or a modern application of it, still "
+        "counts. A source does NOT have to perform the article's "
+        "own exact claim, reconstruction or error analysis itself.\n"
+        "For BOTH types, BOTH of these must also hold:\n"
+        "1) The match is genuine, not a keyword coincidence (a "
         "shared word used in a different sense does not count).\n"
         "2) It is credible scholarship in English, French or German — "
         "the European / American / Indian research tradition. Exclude "
@@ -2275,7 +2696,7 @@ def screen_sources(field, topic, sources, api_key, model):
     stats = {"input": len(sources), "relevant": 0, "counted": 0,
              "drop_irrelevant": 0, "drop_tradition": 0,
              "drop_disagreement": 0, "drop_no_content": 0,
-             "registry_matched": 0}
+             "registry_matched": 0, "primary_counted": 0}
     # Registry signal (§17): tag every candidate; the tag never
     # changes a relevance verdict — it only re-orders the counted
     # list at the end (matched first, stable otherwise).
@@ -2326,25 +2747,41 @@ def screen_sources(field, topic, sources, api_key, model):
         # only if BOTH judges keep it.
         second_brain, second = None, {}
         if first_keeps:
-            for name in llm_chain():
-                if (name != first_brain and name in KNOWN_BRAINS
-                        and _brain_key_available(name, api_key)):
-                    second_brain = name
-                    break
-            if second_brain is None:
+            candidates2 = [name for name in llm_chain()
+                           if name != first_brain
+                           and name in KNOWN_BRAINS
+                           and _brain_key_available(name, api_key)]
+            if not candidates2:
                 print("second judge: unavailable (no other keyed "
                       "brain in the chain) — first-judge verdicts "
                       "stand")
             else:
-                print(f"second judge: {second_brain} reviews "
-                      f"{len(first_keeps)} borderline keep(s) of "
-                      f"first judge {first_brain}")
-                raw2 = _llm_relevance_screen(field, topic, first_keeps,
-                                             api_key, model,
-                                             provider=second_brain)
-                for k, s2 in enumerate(first_keeps, 1):
-                    if k in raw2:
-                        second[id(s2)] = raw2[k]
+                # Fail-soft along the chain (§19): a pinned brain
+                # that errors (e.g. HTTP 503) no longer kills the
+                # first judge's keeps — the NEXT available chain
+                # brain judges instead. Only when EVERY candidate
+                # brain fails does a keep count as unjudged, and the
+                # existing fail-closed disagreement handling applies.
+                for cand_brain in candidates2:
+                    print(f"second judge: {cand_brain} reviews "
+                          f"{len(first_keeps)} borderline keep(s) of "
+                          f"first judge {first_brain}")
+                    raw2 = _llm_relevance_screen(
+                        field, topic, first_keeps, api_key, model,
+                        provider=cand_brain)
+                    if raw2:
+                        second_brain = cand_brain
+                        for k, s2 in enumerate(first_keeps, 1):
+                            if k in raw2:
+                                second[id(s2)] = raw2[k]
+                        break
+                    print(f"second judge: {cand_brain} returned no "
+                          "verdict (provider failure) — trying the "
+                          "next brain in the chain")
+                if second_brain is None:
+                    second_brain = candidates2[0]
+                    print("second judge: ALL chain brains failed — "
+                          "keeps count as unjudged (fail-closed)")
         for j, s in enumerate(borderline, 1):
             keep, reason, kind = verdicts.get(
                 j, (False, "no verdict from the relevance screen — "
@@ -2392,6 +2829,8 @@ def screen_sources(field, topic, sources, api_key, model):
     counted.sort(key=lambda s: 0 if s.get("registry_match") else 1)
     stats["registry_matched"] = sum(1 for s in counted
                                     if s.get("registry_match"))
+    stats["primary_counted"] = sum(
+        1 for s in counted if s.get("source_type") == "primary")
     stats["counted"] = len(counted)
     print(f"Relevance + content screen: {len(sources)} verified -> "
           f"{len(kept)} relevant -> {len(counted)} counted "
@@ -2554,6 +2993,8 @@ def build_funnel_text(topic, funnel, success, stage=None,
              f"منابع نهاییِ شمرده‌شده: {funnel.get('counted', 0)}",
              f"هم‌خوان با فهرست منابع معتبر (رجیستری): "
              f"{funnel.get('registry_matched', 0)}",
+             f"منابع اصلی (متن مؤلف/سند بنیادین): "
+             f"{funnel.get('primary_counted', 0)}",
              "",
              "حذف‌شده‌ها:",
              "• دروازهٔ زبان در ورودی (فارسی/عربی): "
@@ -2910,7 +3351,7 @@ def _quality_pipeline(field, topic, verified_list, api_key, model):
 def _merge_funnel(funnel, sstats):
     for k in ("verified", "with_content", "relevant", "counted",
               "drop_irrelevant", "drop_tradition", "drop_disagreement",
-              "drop_no_content", "registry_matched"):
+              "drop_no_content", "registry_matched", "primary_counted"):
         funnel[k] = funnel.get(k, 0) + sstats.get(k, 0)
 
 
@@ -3000,10 +3441,21 @@ def main():
         add_query(translate_query_to_english(topic, api_key, model))
     print(f"Queries: {queries}")
 
+    # Source map (§19): one brain call names this topic's primary
+    # works + in-text keywords. Fail-soft — an empty map simply means
+    # the primary stage below is skipped.
+    smap = build_source_map(field, topic, api_key, model)
+
     progress_start(os.environ.get("ARTICLE_CHAT_ID", ""), tg_token)
     progress_update(15, "🔎 جست‌وجوی منابع")
     rstate = _new_retrieval_state()
     verified = retrieve_wave1(queries, rstate)
+    # Primary lane (§19): the topic's own foundational works, field-
+    # searched and verified in reserved slots alongside wave 1; they
+    # join the same enrich -> bridge -> screen pipeline below.
+    primaries = retrieve_primary_sources(smap, rstate)
+    if primaries:
+        verified = verified + primaries
     progress_update(35, "📚 راستی‌آزمایی منابع")
 
     # Quality laws (§15): only genuinely relevant, content-bearing
@@ -3012,7 +3464,7 @@ def main():
               "relevant": 0, "counted": 0, "drop_irrelevant": 0,
               "drop_tradition": 0, "drop_disagreement": 0,
               "drop_no_content": 0, "registry_matched": 0,
-              "drop_language_gate": 0}
+              "primary_counted": 0, "drop_language_gate": 0}
     counted, sstats = _quality_pipeline(field, topic, verified,
                                         api_key, model)
     _merge_funnel(funnel, sstats)
