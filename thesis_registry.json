@@ -1,0 +1,7814 @@
+[
+ {
+  "name": "ETD-AAU (Addis Ababa)",
+  "url": "https://etd.aau.edu.et",
+  "type": "thesis_archive",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Amharic",
+   "English"
+  ],
+  "api": null,
+  "notes": "Addis Ababa University electronic theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "ETD@UWC (Western Cape)",
+  "url": "https://etd.uwc.ac.za",
+  "type": "thesis_archive",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of the Western Cape electronic theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "FUTO Repository (Nigeria)",
+  "url": "https://repository.futo.edu.ng",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "FUTO Repository: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "KNUST Repository (Kumasi)",
+  "url": "https://ir.knust.edu.gh",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "KNUST (Ghana) repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Kubanni (ABU Zaria)",
+  "url": "https://kubanni.abu.edu.ng",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Ahmadu Bello University repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Landmark University EPrints",
+  "url": "https://eprints.lmu.edu.ng",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Landmark University EPrints: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Mak Dissertations (Makerere)",
+  "url": "https://dissertations.mak.ac.ug",
+  "type": "thesis_archive",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Makerere University dissertation repository.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Makerere DSpace",
+  "url": "https://dspace.mak.ac.ug",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Makerere DSpace: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Mzuzu University Repository (Malawi)",
+  "url": "https://repository.mzuni.ac.mw",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Mzuzu University Repository: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "NWU Boloka Repository",
+  "url": "https://repository.nwu.ac.za",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English",
+   "Afrikaans"
+  ],
+  "api": null,
+  "notes": "North-West University repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "OUT Repository (Open University Tanzania)",
+  "url": "https://repository.out.ac.tz",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English",
+   "Swahili"
+  ],
+  "api": null,
+  "notes": "OUT Repository: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "OpenUCT",
+  "url": "https://open.uct.ac.za",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Cape Town open repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "ResearchSpace (UKZN)",
+  "url": "https://researchspace.ukzn.ac.za",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of KwaZulu-Natal repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "SUNScholar (Stellenbosch)",
+  "url": "https://scholar.sun.ac.za",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English",
+   "Afrikaans"
+  ],
+  "api": null,
+  "notes": "Stellenbosch University repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Strathmore Repository (SU+)",
+  "url": "https://su-plus.strathmore.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Strathmore University repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UCC Repository (Cape Coast)",
+  "url": "https://ir.ucc.edu.gh",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Cape Coast repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UDSM Repository (Dar es Salaam)",
+  "url": "https://repository.udsm.ac.tz",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English",
+   "Swahili"
+  ],
+  "api": null,
+  "notes": "University of Dar es Salaam repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UFS Scholar",
+  "url": "https://scholar.ufs.ac.za",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of the Free State repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UGSpace (Ghana)",
+  "url": "https://ugspace.ug.edu.gh",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Ghana repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UI Repository (Ibadan)",
+  "url": "https://repository.ui.edu.ng",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Ibadan repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UNAM Repository (Namibia)",
+  "url": "https://repository.unam.edu.na",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English",
+   "Portuguese"
+  ],
+  "api": null,
+  "notes": "University of Namibia repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UNILAG Repository",
+  "url": "https://ir.unilag.edu.ng",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "UNILAG Repository: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UNISA Institutional Repository",
+  "url": "https://uir.unisa.ac.za",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of South Africa repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UPSpace (Pretoria)",
+  "url": "https://repository.up.ac.za",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English",
+   "Afrikaans"
+  ],
+  "api": null,
+  "notes": "University of Pretoria repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UR Digital Repository (Rwanda)",
+  "url": "https://dr.ur.ac.rw",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Rwanda digital repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "WIReDSpace (Wits)",
+  "url": "https://wiredspace.wits.ac.za",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of the Witwatersrand repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "ADDI (UPV/EHU)",
+  "url": "https://addi.ehu.es",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "Basque",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of the Basque Country repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "AIR (Milano)",
+  "url": "https://air.unimi.it",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Italian",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Milan repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "AMS Dottorato (Bologna)",
+  "url": "https://amsdottorato.unibo.it",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Italian",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Bologna doctoral theses repository.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "APD (Warsaw)",
+  "url": "https://apd.uw.edu.pl",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Polish",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Warsaw diploma theses archive (APD).",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Aaltodoc (Aalto)",
+  "url": "https://aaltodoc.aalto.fi",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Finnish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Aalto University repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Académica-e (Navarra)",
+  "url": "https://academica-e.unavarra.es",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Universidad Pública de Navarra repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Apollo (Cambridge)",
+  "url": "https://www.repository.cam.ac.uk",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Cambridge repository hosting Cambridge theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Archive ouverte UNIGE (Geneva)",
+  "url": "https://archive-ouverte.unige.ch",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "French",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Geneva open archive hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "BME Repository (Budapest Tech)",
+  "url": "https://repozitorium.omikk.bme.hu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Hungarian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Budapest University of Technology repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "BNTU Repository (Minsk)",
+  "url": "https://rep.bntu.by",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Belarusian",
+   "Russian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Belarusian National Technical University repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "BORIS (Bern)",
+  "url": "https://boris.unibe.ch",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "German",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Bern repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "BSPU Electronic Library (Minsk)",
+  "url": "https://elib.bspu.by",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Belarusian",
+   "Russian",
+   "English"
+  ],
+  "api": null,
+  "notes": "BSPU Electronic Library: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Bristol Research Portal",
+  "url": "https://research-information.bris.ac.uk",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Bristol Research Portal: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "CORA (University College Cork)",
+  "url": "https://cora.ucc.ie",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "UCC institutional repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "CRZP (Slovak Thesis Registry)",
+  "url": "https://www.crzp.sk",
+  "type": "thesis_archive",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Slovak",
+   "English"
+  ],
+  "api": null,
+  "notes": "Slovak Central Registry of Theses and Dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "CentAUR (Reading)",
+  "url": "https://centaur.reading.ac.uk",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Reading repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Chalmers Research",
+  "url": "https://research.chalmers.se",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Swedish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Chalmers University of Technology repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Charles University Repository",
+  "url": "https://dspace.cuni.cz",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Czech",
+   "English"
+  ],
+  "api": null,
+  "notes": "Charles University DSpace hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Comum (RCAAP shared)",
+  "url": "https://comum.rcaap.pt",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Portuguese",
+   "English"
+  ],
+  "api": null,
+  "notes": "Shared RCAAP repository for Portuguese institutions, hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Corvinus PhD Repository",
+  "url": "https://phd.lib.uni-corvinus.hu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Hungarian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Corvinus University of Budapest PhD dissertation repository.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Cronfa (Swansea)",
+  "url": "https://cronfa.swan.ac.uk",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English",
+   "Welsh"
+  ],
+  "api": null,
+  "notes": "Swansea University research repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "DABAR (Croatia)",
+  "url": "https://dabar.srce.hr",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Croatian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Digital Academic Archives and Repositories of Croatia, hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "DDD (UAB)",
+  "url": "https://ddd.uab.cat",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Catalan",
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Universitat Autònoma de Barcelona digital repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "DEA (Debrecen)",
+  "url": "https://dea.lib.unideb.hu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Hungarian",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Debrecen electronic archive hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "DI-fusion (ULB Brussels)",
+  "url": "https://difusion.ulb.ac.be",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "French",
+   "English"
+  ],
+  "api": null,
+  "notes": "Université libre de Bruxelles repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "DONA (Wrocław Tech)",
+  "url": "https://dona.pwr.edu.pl",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Polish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Wrocław University of Science and Technology repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "DORAS (DCU)",
+  "url": "https://doras.dcu.ie",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Dublin City University repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "DSpace LU (Latvia)",
+  "url": "https://dspace.lu.lv",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Latvian",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Latvia repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "DSpace ČVUT (Prague)",
+  "url": "https://dspace.cvut.cz",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Czech",
+   "English"
+  ],
+  "api": null,
+  "notes": "Czech Technical University in Prague repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "DTU Orbit",
+  "url": "https://orbit.dtu.dk",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Danish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Technical University of Denmark research database including theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "DUMAS (Dépôt Universitaire de Mémoires)",
+  "url": "https://dumas.ccsd.cnrs.fr",
+  "type": "thesis_archive",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "French",
+   "English"
+  ],
+  "api": null,
+  "notes": "DUMAS: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "DUO (Oslo)",
+  "url": "https://www.duo.uio.no",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Norwegian",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Oslo digital repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "DepositOnce (TU Berlin)",
+  "url": "https://depositonce.tu-berlin.de",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "German",
+   "English"
+  ],
+  "api": null,
+  "notes": "TU Berlin repository hosting dissertations and theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Digibug (Granada)",
+  "url": "https://digibug.ugr.es",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Universidad de Granada repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Digibuo (Oviedo)",
+  "url": "https://digibuo.uniovi.es",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Universidad de Oviedo repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Digitale Bibliothek Thüringen",
+  "url": "https://www.db-thueringen.de",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "German",
+   "English"
+  ],
+  "api": null,
+  "notes": "Thuringian university library repository hosting dissertations from Jena, Weimar, Erfurt and Ilmenau.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Digitum (Murcia)",
+  "url": "https://digitum.um.es",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Universidad de Murcia repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Dipòsit UB (Barcelona)",
+  "url": "https://diposit.ub.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Catalan",
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Universitat de Barcelona repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Doria (National Library of Finland)",
+  "url": "https://www.doria.fi",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Finnish",
+   "Swedish",
+   "English"
+  ],
+  "api": null,
+  "notes": "National Library of Finland digital repository hosting theses of member universities.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Durham e-Theses",
+  "url": "https://etheses.dur.ac.uk",
+  "type": "thesis_archive",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Durham University e-theses repository (DRO).",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "E-Prints Complutense (Madrid)",
+  "url": "https://eprints.ucm.es",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Universidad Complutense de Madrid repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "EADD (Greece National PhD Archive)",
+  "url": "https://www.didaktorika.gr",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Greek",
+   "English"
+  ],
+  "api": null,
+  "notes": "Greek National Archive of PhD Theses (National Documentation Centre).",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "ELAKPI (Kyiv Polytechnic)",
+  "url": "https://ela.kpi.ua",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Ukrainian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Igor Sikorsky Kyiv Polytechnic repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "ENPUIR (Lviv Polytechnic)",
+  "url": "https://ena.lpnu.ua",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Ukrainian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Lviv Polytechnic National University repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "EPub Bayreuth",
+  "url": "https://epub.uni-bayreuth.de",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "German",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Bayreuth repository hosting dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "ETD (Pisa)",
+  "url": "https://etd.adm.unipi.it",
+  "type": "thesis_archive",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Italian",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Pisa electronic theses and dissertations archive.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "ETH Research Collection (Zurich)",
+  "url": "https://www.research-collection.ethz.ch",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "German",
+   "English",
+   "French",
+   "Italian"
+  ],
+  "api": null,
+  "notes": "ETH Zurich repository hosting ETH dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "EThOS (British Library)",
+  "url": "https://ethos.bl.uk",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "UK national EThOS service for British doctoral theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Edinburgh Research Archive",
+  "url": "https://era.ed.ac.uk",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Edinburgh repository hosting Edinburgh theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Estudo Geral (Coimbra)",
+  "url": "https://estudogeral.uc.pt",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Portuguese",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Coimbra repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "FLORE (Firenze)",
+  "url": "https://flore.unifi.it",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Italian",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Florence repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Frankfurt University Publications",
+  "url": "https://publikationen.ub.uni-frankfurt.de",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "German",
+   "English"
+  ],
+  "api": null,
+  "notes": "Goethe University Frankfurt repository hosting dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "FreiDok plus (Freiburg)",
+  "url": "https://freidok.uni-freiburg.de",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "German",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Freiburg repository hosting dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "GUPEA (Gothenburg)",
+  "url": "https://gupea.ub.gu.se",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Swedish",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Gothenburg repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Glasgow Theses Service",
+  "url": "https://theses.gla.ac.uk",
+  "type": "thesis_archive",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Glasgow theses service hosting Glasgow theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Goldsmiths Research Online",
+  "url": "https://research.gold.ac.uk",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Goldsmiths, University of London, repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "GrSU Electronic Library (Grodno)",
+  "url": "https://elib.grsu.by",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Belarusian",
+   "Russian",
+   "English"
+  ],
+  "api": null,
+  "notes": "GrSU Electronic Library: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Gredos (Salamanca)",
+  "url": "https://gredos.usal.es",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Universidad de Salamanca repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "HAL Sorbonne Université",
+  "url": "https://hal.sorbonne-universite.fr",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "French",
+   "English"
+  ],
+  "api": null,
+  "notes": "Sorbonne University HAL portal hosting theses and research.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Helda (Helsinki)",
+  "url": "https://helda.helsinki.fi",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Finnish",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Helsinki repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "IKEE (Thessaloniki)",
+  "url": "https://ikee.lib.auth.gr",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Greek",
+   "English"
+  ],
+  "api": null,
+  "notes": "Aristotle University of Thessaloniki repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "IRIS (Cagliari)",
+  "url": "https://iris.unica.it",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Italian",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Cagliari repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "IRIS (Modena e Reggio Emilia)",
+  "url": "https://iris.unimore.it",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Italian",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Modena and Reggio Emilia repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "IRIS (Napoli Federico II)",
+  "url": "https://www.iris.unina.it",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Italian",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Naples Federico II repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "IRIS (Palermo)",
+  "url": "https://iris.unipa.it",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Italian",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Palermo repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "IRIS (Sapienza Roma)",
+  "url": "https://iris.uniroma1.it",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Italian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Sapienza University of Rome repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "IRIS (Trento)",
+  "url": "https://iris.unitn.it",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Italian",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Trento repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "IRIS (Verona)",
+  "url": "https://iris.univr.it",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Italian",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Verona repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "IRIS Ca' Foscari (Venezia)",
+  "url": "https://iris.unive.it",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Italian",
+   "English"
+  ],
+  "api": null,
+  "notes": "IRIS Ca' Foscari: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "IRIS IMT Lucca",
+  "url": "https://iris.imtlucca.it",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Italian",
+   "English"
+  ],
+  "api": null,
+  "notes": "IRIS IMT Lucca: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "IRIS Roma Tre",
+  "url": "https://iris.uniroma3.it",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Italian",
+   "English"
+  ],
+  "api": null,
+  "notes": "IRIS Roma Tre: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "IRIS SISSA (Trieste)",
+  "url": "https://iris.sissa.it",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Italian",
+   "English"
+  ],
+  "api": null,
+  "notes": "IRIS SISSA: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Infoscience (EPFL)",
+  "url": "https://infoscience.epfl.ch",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English",
+   "French"
+  ],
+  "api": null,
+  "notes": "EPFL repository hosting EPFL theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "JYX (Jyväskylä)",
+  "url": "https://jyx.jyu.fi",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Finnish",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Jyväskylä repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "KAR (Kent)",
+  "url": "https://kar.kent.ac.uk",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Kent Academic Repository hosting University of Kent theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "KITopen (Karlsruhe)",
+  "url": "https://publikationen.bibliothek.kit.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "German",
+   "English"
+  ],
+  "api": null,
+  "notes": "Karlsruhe Institute of Technology repository hosting dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "KTH DiVA",
+  "url": "https://kth.diva-portal.org",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Swedish",
+   "English"
+  ],
+  "api": null,
+  "notes": "KTH Royal Institute of Technology DiVA portal hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "KTU ePubl",
+  "url": "https://epubl.ktu.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Lithuanian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Kaunas University of Technology repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "KUPS (Cologne)",
+  "url": "https://kups.ub.uni-koeln.de",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "German",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Cologne publication server hosting dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "KhPI Repository (Kharkiv)",
+  "url": "https://repository.kpi.kharkov.ua",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Ukrainian",
+   "English"
+  ],
+  "api": null,
+  "notes": "KhPI Repository: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "King's College London Pure",
+  "url": "https://kclpure.kcl.ac.uk",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "King's College London Pure: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "LMU Open Access (Munich)",
+  "url": "https://edoc.ub.uni-muenchen.de",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "German",
+   "English"
+  ],
+  "api": null,
+  "notes": "LMU Munich repository hosting dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "LSE Theses Online",
+  "url": "https://etheses.lse.ac.uk",
+  "type": "thesis_archive",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "London School of Economics repository of LSE PhD theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "LUH Repository (Hannover)",
+  "url": "https://www.repo.uni-hannover.de",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "German",
+   "English"
+  ],
+  "api": null,
+  "notes": "Leibniz University Hannover repository hosting dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "LUISS Theses",
+  "url": "https://tesi.luiss.it",
+  "type": "thesis_archive",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Italian",
+   "English"
+  ],
+  "api": null,
+  "notes": "LUISS Guido Carli thesis repository.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "LUP (Lund)",
+  "url": "https://lup.lub.lu.se",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Swedish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Lund University Publications hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Leicester Figshare",
+  "url": "https://leicester.figshare.com",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Leicester research repository (Figshare) hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Leiden Scholarly Publications",
+  "url": "https://scholarlypublications.universiteitleiden.nl",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Dutch",
+   "English"
+  ],
+  "api": null,
+  "notes": "Leiden University repository hosting dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Linköping DiVA",
+  "url": "https://liu.diva-portal.org",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Swedish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Linköping University DiVA portal hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Linnaeus University DiVA",
+  "url": "https://lnu.diva-portal.org",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Swedish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Linnaeus University DiVA: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Lirias (KU Leuven)",
+  "url": "https://lirias.kuleuven.be",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Dutch",
+   "English"
+  ],
+  "api": null,
+  "notes": "KU Leuven repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Loughborough Repository",
+  "url": "https://repository.lboro.ac.uk",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Loughborough University repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "MACAU (Kiel)",
+  "url": "https://macau.uni-kiel.de",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "German",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Kiel repository hosting dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "MADOC (Mannheim)",
+  "url": "https://madoc.bib.uni-mannheim.de",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "German",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Mannheim repository hosting dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Mainz OPEN",
+  "url": "https://openscience.ub.uni-mainz.de",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "German",
+   "English"
+  ],
+  "api": null,
+  "notes": "Johannes Gutenberg University Mainz repository hosting dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Manchester Research Explorer",
+  "url": "https://www.research.manchester.ac.uk",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Manchester Research Explorer: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Minerva (Santiago de Compostela)",
+  "url": "https://minerva.usc.es",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Galician",
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Universidade de Santiago de Compostela repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Most Wiedzy (Gdańsk Tech)",
+  "url": "https://mostwiedzy.pl",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Polish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Gdańsk University of Technology 'Bridge of Knowledge' portal hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "NBUV Dissertation Abstracts (Ukraine)",
+  "url": "http://irbis-nbuv.gov.ua",
+  "type": "thesis_archive",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Ukrainian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Vernadsky National Library of Ukraine dissertation abstract database.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "NSK Digital Collections (Croatia)",
+  "url": "https://dr.nsk.hr",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Croatian",
+   "English"
+  ],
+  "api": null,
+  "notes": "National and University Library Zagreb digital collections including theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "NUŠL (Czech Grey Literature)",
+  "url": "https://nusl.techlib.cz",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Czech",
+   "English"
+  ],
+  "api": null,
+  "notes": "Czech National Repository of Grey Literature including theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "NaRDuS (Serbia)",
+  "url": "https://nardus.mpn.gov.rs",
+  "type": "thesis_archive",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Serbian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Serbian National Repository of Doctoral Dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Nemertes (Patras)",
+  "url": "https://nemertes.library.upatras.gr",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Greek",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Patras repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Newcastle Theses",
+  "url": "https://theses.ncl.ac.uk",
+  "type": "thesis_archive",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Newcastle University theses repository.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Nottingham ePrints",
+  "url": "https://eprints.nottingham.ac.uk",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Nottingham repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "OPUS (Stuttgart)",
+  "url": "https://elib.uni-stuttgart.de",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "German",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Stuttgart repository hosting dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "ORBi (Liège)",
+  "url": "https://orbi.uliege.be",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "French",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Liège repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "ORE (Exeter)",
+  "url": "https://ore.exeter.ac.uk",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Exeter Open Research Exeter repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "OpenArchives.gr",
+  "url": "https://www.openarchives.gr",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Greek",
+   "English"
+  ],
+  "api": null,
+  "notes": "Greek open archives portal aggregating theses and research.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "OpenData (Halle)",
+  "url": "https://opendata.uni-halle.de",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "German",
+   "English"
+  ],
+  "api": null,
+  "notes": "Martin Luther University Halle repository hosting dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "OuluREPO",
+  "url": "https://oulurepo.oulu.fi",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Finnish",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Oulu repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Oxford University Research Archive (ORA)",
+  "url": "https://ora.ox.ac.uk",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Oxford repository hosting Oxford theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "POLITesi (Politecnico di Milano)",
+  "url": "https://www.politesi.polimi.it",
+  "type": "thesis_archive",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Italian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Politecnico di Milano thesis repository.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "PORTO@IRIS (Politecnico di Torino)",
+  "url": "https://iris.polito.it",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Italian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Politecnico di Torino repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "PUB (Bielefeld)",
+  "url": "https://pub.uni-bielefeld.de",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "German",
+   "English"
+  ],
+  "api": null,
+  "notes": "Bielefeld University publication repository hosting dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Padua Thesis & Dissertation",
+  "url": "https://thesis.unipd.it",
+  "type": "thesis_archive",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Italian",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Padua thesis and dissertation repository.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Pergamos (Athens)",
+  "url": "https://pergamos.lib.uoa.gr",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Greek",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Athens repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Phaidra (Belgrade)",
+  "url": "https://phaidrabg.bg.ac.rs",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Serbian",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Belgrade Phaidra repository hosting dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "QMRO (Queen Mary London)",
+  "url": "https://qmro.qmul.ac.uk",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Queen Mary University of London repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Qucosa (Saxony)",
+  "url": "https://qucosa.de",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "German",
+   "English"
+  ],
+  "api": null,
+  "notes": "Saxon state repository (SLUB Dresden) hosting dissertations from Saxon universities.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Queen's Belfast Pure",
+  "url": "https://pure.qub.ac.uk",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Queen's Belfast Pure: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "RCAAP (Portugal)",
+  "url": "https://www.rcaap.pt",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Portuguese",
+   "English"
+  ],
+  "api": null,
+  "notes": "Portugal's national open access repository portal (Repositórios Científicos de Acesso Aberto de Portugal).",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "RECIPP (Porto Polytechnic)",
+  "url": "https://recipp.ipp.pt",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Portuguese",
+   "English"
+  ],
+  "api": null,
+  "notes": "Polytechnic Institute of Porto repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "REI Teze Doctorat (Romania)",
+  "url": "https://www.rei.gov.ro",
+  "type": "thesis_archive",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Romanian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Romanian national register of doctoral theses (REI).",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "RIUMA (Málaga)",
+  "url": "https://riuma.uma.es",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Universidad de Málaga repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "RSL Dissertation Library (Moscow)",
+  "url": "https://diss.rsl.ru",
+  "type": "thesis_archive",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Russian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Russian State Library electronic dissertation library (abstracts openly searchable).",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "RUA (Alicante)",
+  "url": "https://rua.ua.es",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Universidad de Alicante repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "RUC (A Coruña)",
+  "url": "https://ruc.udc.es",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Universidade da Coruña repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "RWTH Publications (Aachen)",
+  "url": "https://publications.rwth-aachen.de",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "German",
+   "English"
+  ],
+  "api": null,
+  "notes": "RWTH Aachen University repository hosting dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "RePub (Erasmus Rotterdam)",
+  "url": "https://repub.eur.nl",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Dutch",
+   "English"
+  ],
+  "api": null,
+  "notes": "Erasmus University Rotterdam repository hosting dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Refubium (FU Berlin)",
+  "url": "https://refubium.fu-berlin.de",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "German",
+   "English"
+  ],
+  "api": null,
+  "notes": "Freie Universität Berlin repository hosting dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Repositori UJI (Jaume I)",
+  "url": "https://repositori.uji.es",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Catalan",
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Universitat Jaume I repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Repositori UPF (Pompeu Fabra)",
+  "url": "https://repositori.upf.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Catalan",
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Universitat Pompeu Fabra repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Repositorio CEU",
+  "url": "https://repositorioinstitucional.ceu.es",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Repositorio CEU: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Repositorio Comillas",
+  "url": "https://repositorio.comillas.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Repositorio Comillas: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Repositorio Deusto",
+  "url": "https://repositorio.deusto.es",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Repositorio Deusto: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Repositorio UAL (Almería)",
+  "url": "https://repositorio.ual.es",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Repositorio UAL: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Repositorio UAM (Madrid Autónoma)",
+  "url": "https://repositorio.uam.es",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Universidad Autónoma de Madrid repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Repositorio UNICAN (Cantabria)",
+  "url": "https://repositorio.unican.es",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Repositorio UNICAN: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "RepositóriUM (Minho)",
+  "url": "https://repositorium.sdum.uminho.pt",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Portuguese",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Minho repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Repositório Aberto (Porto)",
+  "url": "https://repositorio-aberto.up.pt",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Portuguese",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Porto open repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Repositório Aberto (U Aberta)",
+  "url": "https://repositorioaberto.uab.pt",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Portuguese",
+   "English"
+  ],
+  "api": null,
+  "notes": "Universidade Aberta repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Repositório IPL (Lisbon Polytechnic)",
+  "url": "https://repositorio.ipl.pt",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Portuguese",
+   "English"
+  ],
+  "api": null,
+  "notes": "Polytechnic Institute of Lisbon repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Repositório ISCTE-IUL",
+  "url": "https://repositorio.iscte-iul.pt",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Portuguese",
+   "English"
+  ],
+  "api": null,
+  "notes": "ISCTE-IUL (Lisbon) repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Repositório ULisboa",
+  "url": "https://repositorio.ulisboa.pt",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Portuguese",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Lisbon repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Repozitorij UL (Ljubljana)",
+  "url": "https://repozitorij.uni-lj.si",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Slovenian",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Ljubljana repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Repozytorium AMU (Poznań)",
+  "url": "https://repozytorium.amu.edu.pl",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Polish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Adam Mickiewicz University repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Riunet (UPV)",
+  "url": "https://riunet.upv.es",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Universitat Politècnica de València repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Roderic (València)",
+  "url": "https://roderic.uv.es",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Universitat de València repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "RosDok (Rostock)",
+  "url": "https://rosdok.uni-rostock.de",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "German",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Rostock repository hosting dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "SONAR (Swiss Open Access Repository)",
+  "url": "https://www.sonar.ch",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "German",
+   "French",
+   "Italian",
+   "English"
+  ],
+  "api": null,
+  "notes": "SONAR: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "SPbU Repository (St Petersburg)",
+  "url": "https://dspace.spbu.ru",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Russian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Saint Petersburg University repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Skemman (Iceland)",
+  "url": "https://skemman.is",
+  "type": "thesis_archive",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Icelandic",
+   "English"
+  ],
+  "api": null,
+  "notes": "Icelandic national repository of theses from Icelandic universities.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Spiral (Imperial College London)",
+  "url": "https://spiral.imperial.ac.uk",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Imperial College repository hosting Imperial theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "St Andrews Research Repository",
+  "url": "https://research-repository.st-andrews.ac.uk",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of St Andrews repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Stockholm University DiVA",
+  "url": "https://su.diva-portal.org",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Swedish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Stockholm University DiVA portal hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Surrey Open Research",
+  "url": "https://openresearch.surrey.ac.uk",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Surrey open research repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Sussex Research Online",
+  "url": "https://sro.sussex.ac.uk",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Sussex repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Szeged PhD Theses",
+  "url": "https://doktori.bibl.u-szeged.hu",
+  "type": "thesis_archive",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Hungarian",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Szeged doctoral theses repository.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "TESEO (Spain)",
+  "url": "https://www.educacion.gob.es/teseo",
+  "type": "thesis_archive",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish"
+  ],
+  "api": null,
+  "notes": "Spanish national database of doctoral theses (Ministry of Education).",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "TPU eArchive (Tomsk)",
+  "url": "https://earchive.tpu.ru",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Russian",
+   "English"
+  ],
+  "api": null,
+  "notes": "TPU eArchive: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "TU Delft Repository",
+  "url": "https://repository.tudelft.nl",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Dutch",
+   "English"
+  ],
+  "api": null,
+  "notes": "Delft University of Technology repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "TalTech Digikogu",
+  "url": "https://digikogu.taltech.ee",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Estonian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Tallinn University of Technology digital repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Trepo (Tampere)",
+  "url": "https://trepo.tuni.fi",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Finnish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Tampere University repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UBIRA eTheses (Birmingham)",
+  "url": "https://etheses.bham.ac.uk",
+  "type": "thesis_archive",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Birmingham e-theses repository.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UEA Digital Repository",
+  "url": "https://ueaeprints.uea.ac.uk",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of East Anglia repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UGent Academic Bibliography",
+  "url": "https://biblio.ugent.be",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Dutch",
+   "English"
+  ],
+  "api": null,
+  "notes": "Ghent University bibliography and repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UKIM Repository (Skopje)",
+  "url": "https://repository.ukim.mk",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Macedonian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Ss. Cyril and Methodius University repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UTM Repository (Moldova)",
+  "url": "https://repository.utm.md",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Romanian",
+   "English"
+  ],
+  "api": null,
+  "notes": "UTM Repository: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UTUPub (Turku)",
+  "url": "https://www.utupub.fi",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Finnish",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Turku repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UVaDOC (Valladolid)",
+  "url": "https://uvadoc.uva.es",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Universidad de Valladolid repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Umeå DiVA",
+  "url": "https://umu.diva-portal.org",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Swedish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Umeå University DiVA portal hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Uppsala DiVA",
+  "url": "https://uu.diva-portal.org",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Swedish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Uppsala University DiVA portal hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UrFU ELAR (Ural)",
+  "url": "https://elar.urfu.ru",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Russian",
+   "English"
+  ],
+  "api": null,
+  "notes": "UrFU ELAR: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Utrecht University Repository",
+  "url": "https://dspace.library.uu.nl",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Dutch",
+   "English"
+  ],
+  "api": null,
+  "notes": "Utrecht University DSpace hosting dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UvA-DARE (Amsterdam)",
+  "url": "https://dare.uva.nl",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Dutch",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Amsterdam digital repository hosting dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UzhNU DSpace (Uzhhorod)",
+  "url": "https://dspace.uzhnu.edu.ua",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Ukrainian",
+   "English"
+  ],
+  "api": null,
+  "notes": "UzhNU DSpace: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "VBN (Aalborg)",
+  "url": "https://vbn.aau.dk",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Danish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Aalborg University research portal hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "VSKP (VŠE Prague)",
+  "url": "https://vskp.vse.cz",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Czech",
+   "English"
+  ],
+  "api": null,
+  "notes": "Prague University of Economics thesis repository.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "VU ePublications (Vilnius)",
+  "url": "https://epublications.vu.lt",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Lithuanian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Vilnius University e-publications repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "WRAP (Warwick)",
+  "url": "https://wrap.warwick.ac.uk",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Warwick repository hosting Warwick theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "White Rose eTheses (Leeds, Sheffield, York)",
+  "url": "https://etheses.whiterose.ac.uk",
+  "type": "thesis_archive",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "White Rose consortium e-theses for Leeds, Sheffield and York.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "ZORA (Zurich)",
+  "url": "https://www.zora.uzh.ch",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "German",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Zurich repository hosting dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Zaguán (Zaragoza)",
+  "url": "https://zaguan.unizar.es",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Universidad de Zaragoza repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "bonndoc (Bonn)",
+  "url": "https://bonndoc.ulb.uni-bonn.de",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "German",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Bonn repository hosting dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "e-Spacio (UNED)",
+  "url": "https://e-spacio.uned.es",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "UNED (Spanish distance university) repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "eBUAH (Alcalá)",
+  "url": "https://ebuah.uah.es",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Universidad de Alcalá repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "eLABa (Lithuania)",
+  "url": "https://www.elaba.lt",
+  "type": "thesis_archive",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Lithuanian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Lithuanian Academic Electronic Library, national ETD consortium repository.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "ePUB JKU (Linz)",
+  "url": "https://epub.jku.at",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "German",
+   "English"
+  ],
+  "api": null,
+  "notes": "Johannes Kepler University Linz repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "ePub WU (Vienna Economics)",
+  "url": "https://epub.wu.ac.at",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "German",
+   "English"
+  ],
+  "api": null,
+  "notes": "WU Vienna repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "ediss (Hamburg)",
+  "url": "https://ediss.sub.uni-hamburg.de",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "German",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Hamburg dissertation server.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "edoc (Basel)",
+  "url": "https://edoc.unibas.ch",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "German",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Basel repository hosting dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "edoc (HU Berlin)",
+  "url": "https://edoc.hu-berlin.de",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "German",
+   "English"
+  ],
+  "api": null,
+  "notes": "Humboldt University Berlin repository hosting dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "idUS (Sevilla)",
+  "url": "https://idus.us.es",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Universidad de Sevilla repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "mediaTUM (TU Munich)",
+  "url": "https://mediatum.ub.tum.de",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "German",
+   "English"
+  ],
+  "api": null,
+  "notes": "Technical University of Munich repository hosting dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "miami (Münster)",
+  "url": "https://miami.uni-muenster.de",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "German",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Münster repository hosting dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "publish.UP (Potsdam)",
+  "url": "https://publishup.uni-potsdam.de",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "German",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Potsdam repository hosting dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "reposiTUm (TU Wien)",
+  "url": "https://repositum.tuwien.at",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "German",
+   "English"
+  ],
+  "api": null,
+  "notes": "TU Wien repository hosting dissertations and theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "theses.cz",
+  "url": "https://theses.cz",
+  "type": "thesis_archive",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Czech",
+   "English"
+  ],
+  "api": null,
+  "notes": "Czech national thesis registry and public search (Masaryk University system).",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "u:theses (Vienna)",
+  "url": "https://utheses.univie.ac.at",
+  "type": "thesis_archive",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "German",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Vienna thesis repository (u:theses).",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "uBibliorum (Beira Interior)",
+  "url": "https://ubibliorum.ubi.pt",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Portuguese",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Beira Interior repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "uni≡pub (Graz)",
+  "url": "https://unipub.uni-graz.at",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "German",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Graz repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "BASE (Bielefeld Academic Search Engine)",
+  "url": "https://www.base-search.net",
+  "type": "thesis_archive",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English",
+   "German"
+  ],
+  "api": null,
+  "notes": "Bielefeld search engine indexing open repositories, heavily including theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "CORE",
+  "url": "https://core.ac.uk",
+  "type": "thesis_archive",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "CORE aggregator of open access repositories, including thesis repositories.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Cybertesis (International)",
+  "url": "https://www.cybertesis.net",
+  "type": "thesis_archive",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "International Cybertesis network portal for electronic theses (UNMSM-led).",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Global ETD Search (NDLTD)",
+  "url": "https://search.ndltd.org",
+  "type": "thesis_archive",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "NDLTD Global ETD Search portal over member thesis repositories.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "PQDT Open (ProQuest)",
+  "url": "https://pqdtopen.proquest.com",
+  "type": "thesis_archive",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "ProQuest open access dissertations and theses collection.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "ALICIA (CONCYTEC Peru)",
+  "url": "https://alicia.concytec.gob.pe",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Peruvian national repository portal (CONCYTEC) including theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "BDigital (UNCuyo)",
+  "url": "https://bdigital.uncu.edu.ar",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Universidad Nacional de Cuyo digital library hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Biblioteca Digital UdeA",
+  "url": "https://bibliotecadigital.udea.edu.co",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Universidad de Antioquia digital library hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Biblioteca USAC Tesis (Guatemala)",
+  "url": "https://biblioteca.usac.edu.gt/tesis",
+  "type": "thesis_archive",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Universidad de San Carlos de Guatemala thesis library.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Catálogo de Teses e Dissertações (CAPES)",
+  "url": "https://catalogodeteses.capes.gov.br",
+  "type": "thesis_archive",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Portuguese"
+  ],
+  "api": null,
+  "notes": "CAPES national catalogue of Brazilian theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Cybertesis UNMSM",
+  "url": "https://cybertesis.unmsm.edu.pe",
+  "type": "thesis_archive",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Universidad Nacional Mayor de San Marcos Cybertesis repository.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "DSpace ESPOL (Ecuador)",
+  "url": "https://www.dspace.espol.edu.ec",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "ESPOL (Ecuador) repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "DSpace UAZUAY (Ecuador)",
+  "url": "https://dspace.uazuay.edu.ec",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "DSpace UAZUAY: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "DSpace UPS (Ecuador)",
+  "url": "https://dspace.ups.edu.ec",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "DSpace UPS: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Kérwá (UCR Costa Rica)",
+  "url": "https://www.kerwa.ucr.ac.cr",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Universidad de Costa Rica repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Lume (UFRGS)",
+  "url": "https://lume.ufrgs.br",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Portuguese",
+   "English"
+  ],
+  "api": null,
+  "notes": "Federal University of Rio Grande do Sul repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Maxwell (PUC-Rio)",
+  "url": "https://www.maxwell.vrac.puc-rio.br",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Portuguese",
+   "English"
+  ],
+  "api": null,
+  "notes": "PUC-Rio Maxwell repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Noesis (UIS)",
+  "url": "https://noesis.uis.edu.co",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Universidad Industrial de Santander repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Pantheon (UFRJ)",
+  "url": "https://pantheon.ufrj.br",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Portuguese",
+   "English"
+  ],
+  "api": null,
+  "notes": "Federal University of Rio de Janeiro repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "RDU (Córdoba)",
+  "url": "https://rdu.unc.edu.ar",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Universidad Nacional de Córdoba digital repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "RI CONICET (Argentina)",
+  "url": "https://ri.conicet.gov.ar",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "RI CONICET: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "RID-UP (Panama)",
+  "url": "https://up-rid.up.ac.pa",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Universidad de Panamá repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Repositorio COLMEX",
+  "url": "https://repositorio.colmex.mx",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "El Colegio de México repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Repositorio Digital IPN",
+  "url": "https://www.repositoriodigital.ipn.mx",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Instituto Politécnico Nacional (Mexico) repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Repositorio FILO (UBA)",
+  "url": "https://repositorio.filo.uba.ar",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Buenos Aires (Filosofía y Letras) repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Repositorio Tec de Monterrey",
+  "url": "https://repositorio.tec.mx",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Repositorio Tec de Monterrey: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Repositorio UADY (Yucatán)",
+  "url": "https://repositorio.uady.mx",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Repositorio UADY: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Repositorio UC (PUC Chile)",
+  "url": "https://repositorio.uc.cl",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Pontificia Universidad Católica de Chile repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Repositorio UCA (Argentina)",
+  "url": "https://repositorio.uca.edu.ar",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Repositorio UCA: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Repositorio UChile",
+  "url": "https://repositorio.uchile.cl",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Universidad de Chile repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Repositorio ULIMA (Peru)",
+  "url": "https://repositorio.ulima.edu.pe",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Repositorio ULIMA: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Repositorio UNA (Costa Rica)",
+  "url": "https://repositorio.una.ac.cr",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Universidad Nacional de Costa Rica repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Repositorio UNAL (Colombia)",
+  "url": "https://repositorio.unal.edu.co",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Universidad Nacional de Colombia repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Repositorio UNI (Peru)",
+  "url": "https://repositorio.uni.edu.pe",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Universidad Nacional de Ingeniería (Peru) repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Repositorio UNNE",
+  "url": "https://repositorio.unne.edu.ar",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Repositorio UNNE: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Repositorio UNS",
+  "url": "https://repositoriodigital.uns.edu.ar",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Universidad Nacional del Sur repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Repositorio UP (Pacífico, Peru)",
+  "url": "https://repositorio.up.edu.pe",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Repositorio UP: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Repositorio UPTC (Colombia)",
+  "url": "https://repositorio.uptc.edu.co",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Repositorio UPTC: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Repositorio USIL (Peru)",
+  "url": "https://repositorio.usil.edu.pe",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Repositorio USIL: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Repositorio UdeC",
+  "url": "https://repositorio.udec.cl",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Universidad de Concepción repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Repositorio Uniandes",
+  "url": "https://repositorio.uniandes.edu.co",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Universidad de los Andes (Colombia) repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Repository Javeriana",
+  "url": "https://repository.javeriana.edu.co",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Pontificia Universidad Javeriana repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Repository UDISTRTAL (Colombia)",
+  "url": "https://repository.udistrital.edu.co",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Repository UDISTRTAL: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Repositório FGV",
+  "url": "https://repositorio.fgv.br",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Portuguese",
+   "English"
+  ],
+  "api": null,
+  "notes": "Fundação Getulio Vargas repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Repositório UFMA (Maranhão)",
+  "url": "https://repositorio.ufma.br",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Portuguese",
+   "English"
+  ],
+  "api": null,
+  "notes": "Repositório UFMA: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Repositório UFMG",
+  "url": "https://repositorio.ufmg.br",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Portuguese",
+   "English"
+  ],
+  "api": null,
+  "notes": "Federal University of Minas Gerais repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Repositório UFPA (Pará)",
+  "url": "https://repositorio.ufpa.br",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Portuguese",
+   "English"
+  ],
+  "api": null,
+  "notes": "Repositório UFPA: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Repositório UFPB",
+  "url": "https://repositorio.ufpb.br",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Portuguese",
+   "English"
+  ],
+  "api": null,
+  "notes": "Federal University of Paraíba repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Repositório UFPE",
+  "url": "https://repositorio.ufpe.br",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Portuguese",
+   "English"
+  ],
+  "api": null,
+  "notes": "Federal University of Pernambuco repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Repositório UFPI (Piauí)",
+  "url": "https://repositorio.ufpi.br",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Portuguese",
+   "English"
+  ],
+  "api": null,
+  "notes": "Repositório UFPI: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Repositório UFRN",
+  "url": "https://repositorio.ufrn.br",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Portuguese",
+   "English"
+  ],
+  "api": null,
+  "notes": "Federal University of Rio Grande do Norte repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Repositório UFSC",
+  "url": "https://repositorio.ufsc.br",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Portuguese",
+   "English"
+  ],
+  "api": null,
+  "notes": "Federal University of Santa Catarina repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Repositório UFSCar",
+  "url": "https://repositorio.ufscar.br",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Portuguese",
+   "English"
+  ],
+  "api": null,
+  "notes": "Repositório UFSCar: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Repositório UFU (Uberlândia)",
+  "url": "https://repositorio.ufu.br",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Portuguese",
+   "English"
+  ],
+  "api": null,
+  "notes": "Repositório UFU: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Repositório UNICAMP",
+  "url": "https://repositorio.unicamp.br",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Portuguese",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Campinas repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Repositório UNIFESP",
+  "url": "https://repositorio.unifesp.br",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Portuguese",
+   "English"
+  ],
+  "api": null,
+  "notes": "Repositório UNIFESP: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Repositório UnB",
+  "url": "https://repositorio.unb.br",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Portuguese",
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Brasília repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "SEDICI (UNLP)",
+  "url": "https://sedici.unlp.edu.ar",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Universidad Nacional de La Plata repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Saber UCV (Venezuela)",
+  "url": "https://saber.ucv.ve",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Universidad Central de Venezuela repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "TEDE UFAM (Amazonas)",
+  "url": "https://tede.ufam.edu.br",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Portuguese",
+   "English"
+  ],
+  "api": null,
+  "notes": "TEDE UFAM: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "TEDE UNIOESTE",
+  "url": "https://tede.unioeste.br",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Portuguese",
+   "English"
+  ],
+  "api": null,
+  "notes": "TEDE UNIOESTE: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "TESIUNAM (UNAM)",
+  "url": "https://tesiunam.dgb.unam.mx",
+  "type": "thesis_archive",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "UNAM thesis database of the Universidad Nacional Autónoma de México.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Tesis PUCP",
+  "url": "https://tesis.pucp.edu.pe",
+  "type": "thesis_archive",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Spanish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Pontificia Universidad Católica del Perú thesis repository.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "AIUB DSpace (Bangladesh)",
+  "url": "https://dspace.aiub.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "AIUB DSpace: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "AUA DSpace (American University of Armenia)",
+  "url": "https://dspace.aua.am",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English",
+   "Armenian"
+  ],
+  "api": null,
+  "notes": "AUA DSpace: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Aga Khan University eCommons",
+  "url": "https://ecommons.aku.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Aga Khan University repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Al-Quds University DSpace",
+  "url": "https://dspace.alquds.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Arabic",
+   "English"
+  ],
+  "api": null,
+  "notes": "Al-Quds University DSpace: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "An-Najah Repository",
+  "url": "https://repository.najah.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Arabic",
+   "English"
+  ],
+  "api": null,
+  "notes": "An-Najah National University repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Bethlehem University DSpace",
+  "url": "https://dspace.bethlehem.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Arabic",
+   "English"
+  ],
+  "api": null,
+  "notes": "Bethlehem University DSpace: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Bibliotheca Alexandrina",
+  "url": "https://www.bibalex.org",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Arabic",
+   "English"
+  ],
+  "api": null,
+  "notes": "Bibliotheca Alexandrina digital assets repository including theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Bilkent Repository",
+  "url": "https://repository.bilkent.edu.tr",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Turkish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Bilkent University repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "CUHK Electronic Theses",
+  "url": "https://repository.lib.cuhk.edu.hk",
+  "type": "thesis_archive",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English",
+   "Chinese"
+  ],
+  "api": null,
+  "notes": "Chinese University of Hong Kong repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "CUIR (Chulalongkorn)",
+  "url": "https://cuir.car.chula.ac.th",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Thai",
+   "English"
+  ],
+  "api": null,
+  "notes": "Chulalongkorn University repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Cairo University Scholar",
+  "url": "https://scholar.cu.edu.eg",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Arabic",
+   "English"
+  ],
+  "api": null,
+  "notes": "Cairo University scholars repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "CiNii Dissertations (Japan)",
+  "url": "https://ci.nii.ac.jp/d",
+  "type": "thesis_archive",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Japanese",
+   "English"
+  ],
+  "api": null,
+  "notes": "Japanese national dissertation database (NII).",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "CityU Scholars (Hong Kong)",
+  "url": "https://scholars.cityu.edu.hk",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English",
+   "Chinese"
+  ],
+  "api": null,
+  "notes": "CityU Scholars: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "DSpace Ankara",
+  "url": "https://dspace.ankara.edu.tr",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Turkish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Ankara University repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "ENU Repository (Kazakhstan)",
+  "url": "https://repository.enu.kz",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Kazakh",
+   "Russian",
+   "English"
+  ],
+  "api": null,
+  "notes": "L.N. Gumilyov Eurasian National University repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "EdUHK Research Repository",
+  "url": "https://repository.eduhk.hk",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English",
+   "Chinese"
+  ],
+  "api": null,
+  "notes": "EdUHK Research Repository: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Elmnet (Iran)",
+  "url": "https://elmnet.ir",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Persian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Iranian scientific document portal indexing theses and papers.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "HKUST Repository",
+  "url": "https://repository.hkust.edu.hk",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English",
+   "Chinese"
+  ],
+  "api": null,
+  "notes": "Hong Kong University of Science and Technology repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "HUSCAP (Hokkaido)",
+  "url": "https://eprints.lib.hokudai.ac.jp",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Japanese",
+   "English"
+  ],
+  "api": null,
+  "notes": "Hokkaido University repository hosting dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Hacettepe Open Access",
+  "url": "https://openaccess.hacettepe.edu.tr",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Turkish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Hacettepe University open access repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Hebron University DSpace",
+  "url": "https://dspace.hebron.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Arabic",
+   "English"
+  ],
+  "api": null,
+  "notes": "Hebron University DSpace: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "IPB Repository",
+  "url": "https://repository.ipb.ac.id",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Indonesian",
+   "English"
+  ],
+  "api": null,
+  "notes": "IPB University repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "ITB Digital Library",
+  "url": "https://digilib.itb.ac.id",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Indonesian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Institut Teknologi Bandung digital library hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "ITS Repository (Surabaya)",
+  "url": "https://repository.its.ac.id",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Indonesian",
+   "English"
+  ],
+  "api": null,
+  "notes": "ITS Repository: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Ilia State EPrints",
+  "url": "https://eprints.iliauni.edu.ge",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Georgian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Ilia State University (Georgia) repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "InK (SMU)",
+  "url": "https://ink.library.smu.edu.sg",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Singapore Management University repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "KFUPM ePrints",
+  "url": "https://eprints.kfupm.edu.sa",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English",
+   "Arabic"
+  ],
+  "api": null,
+  "notes": "King Fahd University of Petroleum and Minerals repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "KOARA (Keio)",
+  "url": "https://koara.lib.keio.ac.jp",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Japanese",
+   "English"
+  ],
+  "api": null,
+  "notes": "Keio University academic repository hosting dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "KURENAI (Kyoto)",
+  "url": "https://repository.kulib.kyoto-u.ac.jp",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Japanese",
+   "English"
+  ],
+  "api": null,
+  "notes": "Kyoto University research information repository hosting dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Kathmandu University Repository",
+  "url": "https://repository.ku.edu.np",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English",
+   "Nepali"
+  ],
+  "api": null,
+  "notes": "Kathmandu University Repository: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Lingnan Scholars (Hong Kong)",
+  "url": "https://scholars.ln.edu.hk",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English",
+   "Chinese"
+  ],
+  "api": null,
+  "notes": "Lingnan Scholars: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "NDLTD Taiwan",
+  "url": "https://ndltd.ncl.edu.tw",
+  "type": "thesis_archive",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Chinese",
+   "English"
+  ],
+  "api": null,
+  "notes": "Taiwan National Digital Library of Theses and Dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "NTU Digital Thesis Archive",
+  "url": "https://tdr.lib.ntu.edu.tw",
+  "type": "thesis_archive",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Chinese",
+   "English"
+  ],
+  "api": null,
+  "notes": "National Taiwan University digital thesis and dissertation archive.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "NYCU Institutional Repository (Taiwan)",
+  "url": "https://ir.lib.nycu.edu.tw",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Chinese",
+   "English"
+  ],
+  "api": null,
+  "notes": "NYCU Institutional Repository: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "National Digital Library of India",
+  "url": "https://ndl.iitkgp.ac.in",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "National Digital Library of India, including a large theses collection.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "OUKA (Osaka)",
+  "url": "https://ir.library.osaka-u.ac.jp",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Japanese",
+   "English"
+  ],
+  "api": null,
+  "notes": "Osaka University knowledge archive hosting dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "OpenMETU",
+  "url": "https://open.metu.edu.tr",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Turkish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Middle East Technical University open repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "PNST (Algeria Thesis Portal)",
+  "url": "https://www.pnst.cerist.dz",
+  "type": "thesis_archive",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Arabic",
+   "French",
+   "English"
+  ],
+  "api": null,
+  "notes": "Algerian National Thesis Reporting Portal (CERIST).",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "PolyU Electronic Theses",
+  "url": "https://theses.lib.polyu.edu.hk",
+  "type": "thesis_archive",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English",
+   "Chinese"
+  ],
+  "api": null,
+  "notes": "Hong Kong Polytechnic University electronic theses collection.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "RISS (Korea)",
+  "url": "https://www.riss.kr",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Korean",
+   "English"
+  ],
+  "api": null,
+  "notes": "Korean national academic portal (KERIS) with dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "S-Space (Seoul National)",
+  "url": "https://s-space.snu.ac.kr",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Korean",
+   "English"
+  ],
+  "api": null,
+  "notes": "Seoul National University repository hosting dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "TSU DSpace (Tbilisi)",
+  "url": "https://dspace.tsu.ge",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Georgian",
+   "English"
+  ],
+  "api": null,
+  "notes": "TSU DSpace: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "TUCL eLibrary (Tribhuvan)",
+  "url": "https://elibrary.tucl.edu.np",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Nepali",
+   "English"
+  ],
+  "api": null,
+  "notes": "Tribhuvan University Central Library e-library hosting Nepalese theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UAEU Scholarworks",
+  "url": "https://scholarworks.uaeu.ac.ae",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English",
+   "Arabic"
+  ],
+  "api": null,
+  "notes": "United Arab Emirates University repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UMS EPrints (Surakarta)",
+  "url": "https://eprints.ums.ac.id",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Indonesian",
+   "English"
+  ],
+  "api": null,
+  "notes": "UMS EPrints: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UNAIR Repository",
+  "url": "https://repository.unair.ac.id",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Indonesian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Universitas Airlangga repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UNDIP EPrints",
+  "url": "https://eprints.undip.ac.id",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Indonesian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Universitas Diponegoro repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UNHAS Repository (Hasanuddin)",
+  "url": "https://repository.unhas.ac.id",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Indonesian",
+   "English"
+  ],
+  "api": null,
+  "notes": "UNHAS Repository: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UNS Digital Library",
+  "url": "https://digilib.uns.ac.id",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Indonesian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Universitas Sebelas Maret digital library hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UNY EPrints (Yogyakarta)",
+  "url": "https://eprints.uny.ac.id",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Indonesian",
+   "English"
+  ],
+  "api": null,
+  "notes": "UNY EPrints: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UP Diliman Repository",
+  "url": "https://repository.mainlib.upd.edu.ph",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English",
+   "Filipino"
+  ],
+  "api": null,
+  "notes": "UP Diliman Repository: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "USM EPrints",
+  "url": "https://eprints.usm.my",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Malay",
+   "English"
+  ],
+  "api": null,
+  "notes": "Universiti Sains Malaysia repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "YSU DSpace",
+  "url": "https://dspace.ysu.am",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Armenian",
+   "English"
+  ],
+  "api": null,
+  "notes": "Yerevan State University repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "YÖK National Thesis Center (Turkey)",
+  "url": "https://tez.yok.gov.tr",
+  "type": "thesis_archive",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Turkish",
+   "English"
+  ],
+  "api": null,
+  "notes": "Turkish Council of Higher Education national thesis database.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "dCollection (Korea)",
+  "url": "https://www.dcollection.net",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Korean",
+   "English"
+  ],
+  "api": null,
+  "notes": "Korean university digital thesis collection system (dCollection).",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "ASU KEEP Repository",
+  "url": "https://keep.lib.asu.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Arizona State University KEEP repository hosting ASU dissertations and theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Archipel (UQAM)",
+  "url": "https://archipel.uqam.ca",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "French",
+   "English"
+  ],
+  "api": null,
+  "notes": "UQAM repository hosting theses and mémoires.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Atrium (Guelph)",
+  "url": "https://atrium.lib.uoguelph.ca",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Guelph repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "BYU ScholarsArchive",
+  "url": "https://scholarsarchive.byu.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Brigham Young University repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Brock Digital Repository",
+  "url": "https://dr.library.brocku.ca",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Brock University repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Brown Digital Repository",
+  "url": "https://repository.library.brown.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Brown University repository hosting Brown theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "CU Scholar (Colorado Boulder)",
+  "url": "https://scholar.colorado.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Colorado Boulder repository with theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "CUNY Academic Works",
+  "url": "https://academicworks.cuny.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "City University of New York repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "CURVE (Carleton)",
+  "url": "https://repository.library.carleton.ca",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English",
+   "French"
+  ],
+  "api": null,
+  "notes": "Carleton University repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Chapman University Digital Commons",
+  "url": "https://digitalcommons.chapman.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Chapman University repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Columbia Academic Commons",
+  "url": "https://academiccommons.columbia.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Columbia University repository hosting Columbia dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Cornell eCommons",
+  "url": "https://ecommons.cornell.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Cornell University repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "CorpusUL (Laval)",
+  "url": "https://corpus.ulaval.ca",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "French",
+   "English"
+  ],
+  "api": null,
+  "notes": "Université Laval repository hosting Laval theses and mémoires.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "CurateND (Notre Dame)",
+  "url": "https://curate.nd.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Notre Dame repository with theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "D-Scholarship@Pitt",
+  "url": "https://d-scholarship.pitt.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Pittsburgh repository with theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "DRUM (Maryland)",
+  "url": "https://drum.lib.umd.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Maryland Digital Repository hosting dissertations and theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "DalSpace (Dalhousie)",
+  "url": "https://dalspace.library.dal.ca",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Dalhousie University repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Digital Commons @ ODU",
+  "url": "https://digitalcommons.odu.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Old Dominion University repository with theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Digital Howard (Howard University)",
+  "url": "https://dh.howard.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Howard University digital repository hosting dissertations and theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Digital WPI",
+  "url": "https://digital.wpi.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Worcester Polytechnic Institute repository with graduate theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "DigitalCommons@Andrews",
+  "url": "https://digitalcommons.andrews.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "DigitalCommons@Andrews: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "DigitalCommons@Bucknell",
+  "url": "https://digitalcommons.bucknell.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Bucknell University repository hosting honors theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "DigitalCommons@CalPoly",
+  "url": "https://digitalcommons.calpoly.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Cal Poly repository hosting master's theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "DigitalCommons@FAU",
+  "url": "https://digitalcommons.fau.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "DigitalCommons@FAU: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "DigitalCommons@MurrayState",
+  "url": "https://digitalcommons.murraystate.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "DigitalCommons@MurrayState: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "DigitalCommons@Oberlin",
+  "url": "https://digitalcommons.oberlin.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "DigitalCommons@Oberlin: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "DigitalCommons@Pace",
+  "url": "https://digitalcommons.pace.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Pace University repository hosting dissertations and theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "DigitalCommons@Rockefeller",
+  "url": "https://digitalcommons.rockefeller.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "DigitalCommons@Rockefeller: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "DigitalCommons@UMaine",
+  "url": "https://digitalcommons.library.umaine.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Maine repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "DigitalCommons@UNF (North Florida)",
+  "url": "https://digitalcommons.unf.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "DigitalCommons@UNF: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "DigitalCommons@URI",
+  "url": "https://digitalcommons.uri.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Rhode Island repository with theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "DigitalCommons@USU",
+  "url": "https://digitalcommons.usu.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Utah State University repository with theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "DigitalCommons@University of Nebraska",
+  "url": "https://digitalcommons.unl.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Nebraska-Lincoln repository with dissertations and theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "DigitalCommons@WKU",
+  "url": "https://digitalcommons.wku.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "DigitalCommons@WKU: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "DigitalCommons@WayneState",
+  "url": "https://digitalcommons.wayne.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "DigitalCommons@WayneState: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "DukeSpace",
+  "url": "https://dukespace.lib.duke.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Duke University repository hosting Duke dissertations and theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "ERA (Alberta)",
+  "url": "https://era.library.ualberta.ca",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Alberta Education and Research Archive with theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "EliScholar (Yale)",
+  "url": "https://elischolar.library.yale.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Yale Library repository with Yale dissertations and theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Emory ETD Archive",
+  "url": "https://etd.library.emory.edu",
+  "type": "thesis_archive",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Emory University electronic theses and dissertations archive.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "FIU Digital Commons",
+  "url": "https://digitalcommons.fiu.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Florida International University repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "FSU Repository",
+  "url": "https://repository.lib.fsu.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Florida State University repository with theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "GW ScholarSpace",
+  "url": "https://scholarspace.library.gwu.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "George Washington University repository with theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Georgetown University Repository",
+  "url": "https://repository.library.georgetown.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Georgetown University repository hosting graduate theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Georgia Tech Repository",
+  "url": "https://repository.gatech.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Georgia Tech repository hosting Georgia Tech theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Harvard DASH",
+  "url": "https://dash.harvard.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Harvard's DASH repository hosts Harvard dissertations and theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Harvest (Saskatchewan)",
+  "url": "https://harvest.usask.ca",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Saskatchewan repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "IDEALS (UIUC)",
+  "url": "https://www.ideals.illinois.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Illinois repository hosting Illinois dissertations and theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "IUScholarWorks (Indiana)",
+  "url": "https://scholarworks.iu.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Indiana University repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Iowa Research Online",
+  "url": "https://iro.uiowa.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Iowa repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "LMU Digital Commons",
+  "url": "https://digitalcommons.lmu.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Loyola Marymount University repository with theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "LSU Repository",
+  "url": "https://repository.lsu.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Louisiana State University repository hosting graduate theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "MARS (George Mason)",
+  "url": "https://mars.gmu.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "George Mason University's MARS repository hosting dissertations and theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "MINDS@UW (Wisconsin)",
+  "url": "https://minds.wisconsin.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Wisconsin repository hosting UW theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "MIT DSpace",
+  "url": "https://dspace.mit.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "MIT institutional repository; MIT theses and dissertations collection.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "MOSpace (Missouri)",
+  "url": "https://mospace.umsystem.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Missouri repository with theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "MSpace (Manitoba)",
+  "url": "https://mspace.lib.umanitoba.ca",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Manitoba repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "MacSphere (McMaster)",
+  "url": "https://macsphere.mcmaster.ca",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "McMaster University repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Marquette ePublications",
+  "url": "https://epublications.marquette.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Marquette ePublications: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Memorial University Research Repository",
+  "url": "https://research.library.mun.ca",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Memorial University of Newfoundland repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "NC State Repository",
+  "url": "https://repository.lib.ncsu.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "NC State University repository hosting graduate theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "NYU Archive",
+  "url": "https://archive.nyu.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "New York University faculty and dissertation archive.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Northeastern University Repository",
+  "url": "https://repository.library.northeastern.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Northeastern University repository hosting dissertations and theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "OhioLINK ETD Center",
+  "url": "https://etd.ohiolink.edu",
+  "type": "thesis_archive",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "OhioLINK Electronic Theses and Dissertations Center for Ohio universities.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Open Scholarship (WashU)",
+  "url": "https://openscholarship.wustl.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Washington University repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "OpenClemson (TigerPrints)",
+  "url": "https://open.clemson.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Clemson University repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "OpenCommons@UConn",
+  "url": "https://digitalcommons.uconn.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Connecticut repository hosting dissertations and theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "PDXScholar (Portland State)",
+  "url": "https://pdxscholar.library.pdx.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Portland State University repository hosting dissertations and theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "PRISM (Calgary)",
+  "url": "https://prism.ucalgary.ca",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Calgary repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Papyrus (Montréal)",
+  "url": "https://papyrus.bib.umontreal.ca",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "French",
+   "English"
+  ],
+  "api": null,
+  "notes": "Université de Montréal repository hosting theses and mémoires.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Pepperdine Digital Commons",
+  "url": "https://digitalcommons.pepperdine.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Pepperdine University repository hosting dissertations and theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Purdue e-Pubs",
+  "url": "https://docs.lib.purdue.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Purdue University e-Pubs hosting Purdue theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "QSpace (Queen's)",
+  "url": "https://qspace.library.queensu.ca",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Queen's University repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Rice Scholarship",
+  "url": "https://scholarship.rice.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Rice University repository hosting Rice theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Rutgers RUcore",
+  "url": "https://rucore.libraries.rutgers.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Rutgers University repository including ETD collections.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "SHAREOK (Oklahoma)",
+  "url": "https://shareok.org",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Shared repository of the University of Oklahoma and Oklahoma State, hosting ETDs.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "SJSU ScholarWorks",
+  "url": "https://scholarworks.sjsu.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "San Jose State University repository hosting master's theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "SMU Scholar",
+  "url": "https://scholar.smu.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Southern Methodist University repository with theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "SURFACE (Syracuse)",
+  "url": "https://surface.syr.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Syracuse University repository with dissertations and theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Savoirs UdeS (Sherbrooke)",
+  "url": "https://savoirs.usherbrooke.ca",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "French",
+   "English"
+  ],
+  "api": null,
+  "notes": "Université de Sherbrooke repository hosting theses and mémoires.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Scholar Commons (Santa Clara)",
+  "url": "https://scholarcommons.scu.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Santa Clara University repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Scholar Commons (South Carolina)",
+  "url": "https://scholarcommons.sc.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of South Carolina repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "ScholarSpace (Hawaii)",
+  "url": "https://scholarspace.manoa.hawaii.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Hawaii at Manoa repository hosting dissertations and theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "ScholarWorks@Brandeis",
+  "url": "https://scholarworks.brandeis.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Brandeis University repository with theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "ScholarWorks@UA (Alaska)",
+  "url": "https://scholarworks.alaska.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Alaska repository with theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "ScholarWorks@UARK",
+  "url": "https://scholarworks.uark.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Arkansas repository with theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Scholars Compass (VCU)",
+  "url": "https://scholarscompass.vcu.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Virginia Commonwealth University repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Scholars Junction (Mississippi State)",
+  "url": "https://scholarsjunction.msstate.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Mississippi State University repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "ScholarsArchive@OSU",
+  "url": "https://ir.library.oregonstate.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Oregon State University repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Scholarship at UWindsor",
+  "url": "https://scholar.uwindsor.ca",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Windsor repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Scholarship@Western",
+  "url": "https://ir.lib.uwo.ca",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Western University repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Spectrum (Concordia)",
+  "url": "https://spectrum.library.concordia.ca",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English",
+   "French"
+  ],
+  "api": null,
+  "notes": "Concordia University research repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Summit (SFU)",
+  "url": "https://summit.sfu.ca",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Simon Fraser University repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "TRACE (Tennessee)",
+  "url": "https://trace.tennessee.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Tennessee TRACE repository with theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "TSpace (Toronto)",
+  "url": "https://tspace.library.utoronto.ca",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Toronto repository hosting Toronto theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Texas Tech IR (TTU)",
+  "url": "https://ttu-ir.tdl.org",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Texas Tech University institutional repository (Texas Digital Library) with ETDs.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Tufts Digital Library",
+  "url": "https://dl.tufts.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Tufts University digital library with theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UA Institutional Repository (Alabama)",
+  "url": "https://ir.ua.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Alabama repository with theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UCF STARS",
+  "url": "https://stars.library.ucf.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Central Florida STARS repository hosting ETDs.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UChicago Knowledge",
+  "url": "https://knowledge.uchicago.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Chicago repository hosting dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UDSpace (Delaware)",
+  "url": "https://udspace.udel.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Delaware repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UF Digital Collections (Florida)",
+  "url": "https://ufdc.ufl.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Florida digital collections including theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UKnowledge (Kentucky)",
+  "url": "https://uknowledge.uky.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Kentucky repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UNB Scholar",
+  "url": "https://unbscholar.lib.unb.ca",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of New Brunswick repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UNH Scholars' Repository",
+  "url": "https://scholars.unh.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of New Hampshire repository with theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UNM Digital Repository",
+  "url": "https://digitalrepository.unm.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of New Mexico repository with theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UNT Digital Library",
+  "url": "https://digital.library.unt.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of North Texas digital library including UNT theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UR Research (Rochester)",
+  "url": "https://urresearch.rochester.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Rochester institutional repository with ETDs.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "USF Digital Commons",
+  "url": "https://digitalcommons.usf.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of South Florida repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UT Austin Digital Repository",
+  "url": "https://repositories.lib.utexas.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Texas at Austin repository hosting UT dissertations and theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UVA LibraETD",
+  "url": "https://libraetd.lib.virginia.edu",
+  "type": "thesis_archive",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Virginia LibraETD theses and dissertations repository.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UVicSpace (Victoria)",
+  "url": "https://dspace.library.uvic.ca",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Victoria repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UWSpace (Waterloo)",
+  "url": "https://uwspace.uwaterloo.ca",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Waterloo repository hosting Waterloo theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "VTechWorks (Virginia Tech)",
+  "url": "https://vtechworks.lib.vt.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Virginia Tech repository with a large ETD collection.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "WVU Research Repository",
+  "url": "https://researchrepository.wvu.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "West Virginia University repository with ETD collections.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "YorkSpace (York University)",
+  "url": "https://yorkspace.library.yorku.ca",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "York University repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "cIRcle (UBC)",
+  "url": "https://open.library.ubc.ca",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of British Columbia repository hosting UBC theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "eGrove (Ole Miss)",
+  "url": "https://egrove.olemiss.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Mississippi eGrove repository with theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "eScholarship (University of California)",
+  "url": "https://escholarship.org",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of California open repository hosting UC dissertations and theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "eScholarship@McGill",
+  "url": "https://escholarship.mcgill.ca",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English",
+   "French"
+  ],
+  "api": null,
+  "notes": "McGill University repository hosting McGill theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "uO Research (Ottawa)",
+  "url": "https://ruor.uottawa.ca",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English",
+   "French"
+  ],
+  "api": null,
+  "notes": "University of Ottawa repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "ANU Open Research Repository",
+  "url": "https://openresearch-repository.anu.edu.au",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Australian National University repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Adelaide Digital Library",
+  "url": "https://digital.library.adelaide.edu.au",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Adelaide digital library hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Bond University Figshare",
+  "url": "https://bond.figshare.com",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Bond University Figshare: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "CQUniversity Figshare",
+  "url": "https://cqu.figshare.com",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "CQUniversity Figshare: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Charles Sturt Figshare",
+  "url": "https://csu.figshare.com",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Charles Sturt Figshare: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Curtin eSpace",
+  "url": "https://espace.curtin.edu.au",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Curtin University repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "DRO (Deakin)",
+  "url": "https://dro.deakin.edu.au",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Deakin University research repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "ECU Figshare (Edith Cowan)",
+  "url": "https://ecu.figshare.com",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "ECU Figshare: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Federation University Figshare",
+  "url": "https://federation.figshare.com",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Federation University Figshare: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Flinders Figshare",
+  "url": "https://flinders.figshare.com",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Flinders Figshare: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "JCU Figshare (James Cook)",
+  "url": "https://jcu.figshare.com",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "JCU Figshare: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "MRO (Massey)",
+  "url": "https://mro.massey.ac.nz",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Massey University research repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Macquarie Figshare",
+  "url": "https://mq.figshare.com",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Macquarie Figshare: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Minerva Access (Melbourne)",
+  "url": "https://minerva-access.unimelb.edu.au",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Melbourne repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Monash Bridges (Figshare)",
+  "url": "https://bridges.monash.edu",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Monash University research repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Murdoch Figshare",
+  "url": "https://murdoch.figshare.com",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Murdoch Figshare: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "OPUS (UTS)",
+  "url": "https://opus.lib.uts.edu.au",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Technology Sydney repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "OUR Archive (Otago)",
+  "url": "https://ourarchive.otago.ac.nz",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Otago repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Open Access VUW (Wellington)",
+  "url": "https://openaccess.wgtn.ac.nz",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Victoria University of Wellington open repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "QUT ePrints",
+  "url": "https://eprints.qut.edu.au",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Queensland University of Technology repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "RMIT Figshare",
+  "url": "https://rmit.figshare.com",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "RMIT Figshare: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Research Commons (Waikato)",
+  "url": "https://researchcommons.waikato.ac.nz",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Waikato repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Research Online (Wollongong)",
+  "url": "https://ro.uow.edu.au",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Wollongong repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "ResearchSpace (Auckland)",
+  "url": "https://researchspace.auckland.ac.nz",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Auckland repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Southern Cross Figshare",
+  "url": "https://scu.figshare.com",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Southern Cross Figshare: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Sydney Figshare",
+  "url": "https://sydney.figshare.com",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Sydney Figshare: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UNE Figshare (New England)",
+  "url": "https://une.figshare.com",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "UNE Figshare: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UNSW Figshare",
+  "url": "https://unsw.figshare.com",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "UNSW Figshare: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UQ eSpace (Queensland)",
+  "url": "https://espace.library.uq.edu.au",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Queensland repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UTAS Figshare (Tasmania)",
+  "url": "https://figshare.utas.edu.au",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Tasmania repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UWA Research Repository",
+  "url": "https://research-repository.uwa.edu.au",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "University of Western Australia repository hosting theses.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "UniSC Figshare (Sunshine Coast)",
+  "url": "https://usc.figshare.com",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "UniSC Figshare: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "VUIR (Victoria University Melbourne)",
+  "url": "https://vuir.vu.edu.au",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "VUIR: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ },
+ {
+  "name": "Victoria University Figshare (Melbourne)",
+  "url": "https://vu.figshare.com",
+  "type": "repository",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "api": null,
+  "notes": "Victoria University Figshare: institutional repository hosting theses and dissertations.",
+  "verified": true,
+  "verified_date": "2026-11-22"
+ }
+]
