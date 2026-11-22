@@ -879,23 +879,41 @@ def _verify_one(candidate, cache):
     return ok, via
 
 
-def collect_verified(queries):
+def _new_retrieval_state():
+    """Shared retrieval machinery state for collect_verified(): the
+    dedupe set, the per-source time budgets / bench set, the verify
+    cache and the cumulative candidate count. Passing the SAME state
+    to a second call (wave 2, §16.2) makes that call respect wave 1's
+    bench decisions and never re-fetch a wave-1 candidate."""
+    return {"seen": set(), "source_time": {}, "benched": set(),
+            "cache": None, "total_candidates": 0}
+
+
+def collect_verified(queries, state=None, searcher_order=None):
     """Waves of parallel retrieval + parallel verification until the
     pool is full (MAX_VERIFIED), the early-stop bar is reached, the
-    candidate cap is hit, or the queries run out."""
-    seen = set()
+    candidate cap is hit, or the queries run out. `state` (see
+    _new_retrieval_state) shares the dedupe/bench/cache machinery
+    across calls; `searcher_order` overrides the deterministic merge
+    priority (wave 2 puts the book sources first)."""
+    if state is None:
+        state = _new_retrieval_state()
+    seen = state["seen"]
+    source_time, benched = state["source_time"], state["benched"]
+    if state.get("cache") is None:
+        state["cache"] = load_verify_cache()
+    cache = state["cache"]
+    order = list(searcher_order) if searcher_order else list(SEARCHERS)
     verified, verified_by = [], {}
     found_by, kept_by = {}, {}
-    source_time, benched = {}, set()
-    cache = load_verify_cache()
-    total_candidates = 0
+    total_candidates = state["total_candidates"]
     retrieval_t = verification_t = 0.0
     for query in queries:
         if len(verified) >= EARLY_STOP_VERIFIED:
             break
         if total_candidates >= MAX_CANDIDATES:
             break
-        active = [s for s in SEARCHERS if s.__name__ not in benched]
+        active = [s for s in order if s.__name__ not in benched]
         wave_results = {}
         t0 = time.monotonic()
         if active:
@@ -915,7 +933,7 @@ def collect_verified(queries):
                               f"{SEARCHER_LABEL.get(s.__name__, s.__name__)}")
         retrieval_t += time.monotonic() - t0
         wave_candidates = []
-        for s in SEARCHERS:  # deterministic merge: source priority order
+        for s in order:  # deterministic merge: source priority order
             if s.__name__ not in wave_results:
                 continue
             res, err = wave_results[s.__name__]
@@ -955,6 +973,7 @@ def collect_verified(queries):
                 verified_by[idx] = verified_by.get(idx, 0) + 1
                 print(f"  verified [{len(verified)}] {c['title'][:80]}")
         verification_t += time.monotonic() - t0
+    state["total_candidates"] = total_candidates
     save_verify_cache(cache)
     print(_counts_line("Candidates by source:", found_by, kept_by))
     print(f"Candidates collected: {total_candidates}")
@@ -996,6 +1015,116 @@ def verify_detailed(candidate):
 
 def verify(candidate):
     return verify_detailed(candidate)[0]
+
+
+# --------------------------------------------------------------------------
+# Abstract enrichment (§16.1) — after verification, BEFORE the content
+# gate: a verified record whose index gave no usable abstract gets
+# another chance BY DOI, from OpenAlex, then Europe PMC, then
+# Semantic Scholar. DOI-based only (no-DOI records are skipped and
+# logged in the summary). Fail-soft per source and per record; a host
+# that fails ENRICH_BENCH_LIMIT times in a run is benched for the rest
+# of the enrichment stage. Lookups run in parallel across records,
+# through the existing http helper with its retry law.
+# --------------------------------------------------------------------------
+
+ENRICH_WORKERS = 8
+ENRICH_BENCH_LIMIT = 3
+_ENRICH_FAILURES = {}
+
+
+def _enrich_benched(label):
+    return _ENRICH_FAILURES.get(label, 0) >= ENRICH_BENCH_LIMIT
+
+
+def _enrich_note(label, ok):
+    if ok:
+        _ENRICH_FAILURES[label] = 0
+    else:
+        _ENRICH_FAILURES[label] = _ENRICH_FAILURES.get(label, 0) + 1
+
+
+def _abstract_via_openalex(doi):
+    url = ("https://api.openalex.org/works/doi:"
+           + urllib.parse.quote(doi, safe="/")
+           + "?mailto=" + CROSSREF_MAILTO)
+    data = http_json(url)
+    return reconstruct_abstract(data.get("abstract_inverted_index"))
+
+
+def _abstract_via_europepmc(doi):
+    url = ("https://www.ebi.ac.uk/europepmc/webservices/rest/search"
+           "?format=json&resultType=core&pageSize=5&query="
+           + urllib.parse.quote(f'DOI:"{doi}"'))
+    data = http_json(url)
+    for r in (data.get("resultList") or {}).get("result", []) or []:
+        if (r.get("doi") or "").strip().lower() == doi.lower():
+            return r.get("abstractText") or ""
+    return ""
+
+
+def _abstract_via_semanticscholar(doi):
+    url = ("https://api.semanticscholar.org/graph/v1/paper/DOI:"
+           + urllib.parse.quote(doi, safe="/") + "?fields=abstract")
+    data = http_json(url)
+    return data.get("abstract") or ""
+
+
+_ENRICHERS = (("openalex", _abstract_via_openalex),
+              ("europepmc", _abstract_via_europepmc),
+              ("semanticscholar", _abstract_via_semanticscholar))
+
+
+def _enrich_one(candidate):
+    """Fill candidate['abstract'] from the first enricher returning a
+    usable abstract; returns that enricher's label, or None. Never
+    raises."""
+    doi = (candidate.get("doi") or "").strip()
+    if not doi:
+        return None
+    for label, fn in _ENRICHERS:
+        if _enrich_benched(label):
+            continue
+        try:
+            abstract = (fn(doi) or "").strip()
+        except Exception:
+            _enrich_note(label, False)
+            continue
+        _enrich_note(label, True)
+        if len(abstract) >= CONTENT_MIN_ABSTRACT_CHARS:
+            candidate["abstract"] = abstract
+            return label
+    return None
+
+
+def enrich_abstracts(candidates):
+    """Fill missing abstracts by DOI, in parallel across records.
+    Returns the counts dict and logs the summary line."""
+    _t0 = time.monotonic()
+    targets, skipped = [], 0
+    for c in candidates:
+        if len((c.get("abstract") or "").strip()) \
+                >= CONTENT_MIN_ABSTRACT_CHARS:
+            continue
+        if (c.get("doi") or "").strip():
+            targets.append(c)
+        else:
+            skipped += 1
+    counts = {"filled": 0, "openalex": 0, "europepmc": 0,
+              "semanticscholar": 0, "skipped_no_doi": skipped}
+    if targets:
+        with ThreadPoolExecutor(max_workers=ENRICH_WORKERS) as ex:
+            labels = list(ex.map(_enrich_one, targets))
+        for label in labels:
+            if label:
+                counts["filled"] += 1
+                counts[label] += 1
+    print(f"enrichment: filled {counts['filled']} abstracts "
+          f"(openalex {counts['openalex']}, "
+          f"europepmc {counts['europepmc']}, "
+          f"semanticscholar {counts['semanticscholar']})")
+    print(f"timing: enrichment {time.monotonic() - _t0:.1f}s")
+    return counts
 
 
 # --------------------------------------------------------------------------
@@ -1242,25 +1371,14 @@ def _libgen_text(md5, ext):
                 pass
 
 
-def attach_fulltexts(verified):
-    """Attach a grounding excerpt to the top verified BOOK records.
-    Fail-soft throughout: if nothing can be fetched, the records are
-    exactly as before. Only extracted text is ever cached/committed."""
-    selected = []
-    for s in verified:
-        md5 = s.get("md5") or None
-        ia_id = (_ia_id_from_url(s.get("url", ""))
-                 if s.get("index") == "Internet Archive" else None)
-        if not md5 and not ia_id:
-            continue
-        ext = s.get("ext") or ""
-        if ext and ext not in ("pdf", "epub", "djvu"):
-            continue  # known non-book format (e.g. azw3)
-        selected.append(s)
-        if len(selected) >= FULLTEXT_MAX_BOOKS:
-            break
-    fetched = cached = 0
-    for s in selected:
+FULLTEXT_WORKERS = 4
+
+
+def _attach_fulltext_one(s):
+    """Fetch one book's grounding excerpt (committed cache -> IA
+    ready text -> LibGen on the runner). Sets s['fulltext_excerpt']
+    and returns (fetched, from_cache). Fail-soft: never raises."""
+    try:
         md5 = s.get("md5") or None
         ia_id = (_ia_id_from_url(s.get("url", ""))
                  if s.get("index") == "Internet Archive" else None)
@@ -1290,14 +1408,49 @@ def attach_fulltexts(verified):
             if not from_cache:
                 _write_cache(md5 or ia_id, text)
             s["fulltext_excerpt"] = text[:FULLTEXT_EXCERPT_CHARS]
-            fetched += 1
-            if from_cache:
-                cached += 1
             print(f"fulltext route: {route}")
-        else:
-            print(f"fulltext: no text for {s['title'][:60]!r}")
+            return True, from_cache
+        print(f"fulltext: no text for {s['title'][:60]!r}")
+        return False, False
+    except Exception as e:
+        print(f"fulltext: failed for {(s.get('title') or '')[:60]!r}: "
+              f"{e}")
+        return False, False
+
+
+def attach_fulltexts(verified):
+    """Attach a grounding excerpt to the top verified BOOK records.
+    Fail-soft throughout: if nothing can be fetched, the records are
+    exactly as before. Only extracted text is ever cached/committed.
+    The eligible books are fetched CONCURRENTLY (§16.5,
+    FULLTEXT_WORKERS); ex.map keeps the outcome order aligned with
+    the selection order, so the results match the old serial walk."""
+    selected = []
+    for s in verified:
+        md5 = s.get("md5") or None
+        ia_id = (_ia_id_from_url(s.get("url", ""))
+                 if s.get("index") == "Internet Archive" else None)
+        if not md5 and not ia_id:
+            continue
+        ext = s.get("ext") or ""
+        if ext and ext not in ("pdf", "epub", "djvu"):
+            continue  # known non-book format (e.g. azw3)
+        selected.append(s)
+        if len(selected) >= FULLTEXT_MAX_BOOKS:
+            break
+    _t0 = time.monotonic()
+    fetched = cached = 0
+    if selected:
+        with ThreadPoolExecutor(max_workers=FULLTEXT_WORKERS) as ex:
+            outcomes = list(ex.map(_attach_fulltext_one, selected))
+        for got, was_cached in outcomes:
+            if got:
+                fetched += 1
+                if was_cached:
+                    cached += 1
     print(f"libgen: fetched {fetched}/{len(selected)} books "
           f"({cached} from cache)")
+    print(f"timing: full-text bridge {time.monotonic() - _t0:.1f}s")
 
 
 # --------------------------------------------------------------------------
@@ -1543,7 +1696,14 @@ def _call_brain(name, prompt, api_key, model, temperature, json_mode):
     return gemini(prompt, api_key, model)
 
 
-def call_llm(prompt, api_key, model, temperature=0.4, json_mode=False):
+# The brain that served the most recent successful call_llm()
+# (§16.4: the relevance screen's second judge must differ from the
+# first judge, so the dispatcher records which brain served).
+_LAST_BRAIN = {"name": None}
+
+
+def call_llm(prompt, api_key, model, temperature=0.4, json_mode=False,
+             provider=None):
     """One logical LLM call, served by the brain chain (llm_chain()):
     brains are tried in order, each for up to CHAIN_ATTEMPTS attempts
     with a CHAIN_BACKOFF_SECONDS x attempt pause between attempts.
@@ -1551,8 +1711,20 @@ def call_llm(prompt, api_key, model, temperature=0.4, json_mode=False):
     count as failed attempts. A brain whose key is missing is skipped.
     The call raises Fail only when every brain in the chain was
     skipped or exhausted — fail-closed, exactly as the single-brain
-    path was."""
-    chain = llm_chain()
+    path was. `provider` pins the call to ONE named brain (the
+    relevance screen's second judge, §16.4): the pinned brain gets
+    the same attempts, and a missing key is a Fail rather than a
+    skip, so the caller knows the pinned call never ran."""
+    if provider is not None:
+        provider = provider.strip().lower()
+        if provider not in KNOWN_BRAINS:
+            raise Fail(f"Unknown LLM provider {provider!r} "
+                       f"(expected one of: {', '.join(KNOWN_BRAINS)})")
+        if not _brain_key_available(provider, api_key):
+            raise Fail(f"Pinned brain {provider!r} has no key available")
+        chain = [provider]
+    else:
+        chain = llm_chain()
     failures = []
     for name in chain:
         if name not in KNOWN_BRAINS:
@@ -1576,6 +1748,7 @@ def call_llm(prompt, api_key, model, temperature=0.4, json_mode=False):
                     time.sleep(CHAIN_BACKOFF_SECONDS * attempt)
                 continue
             print(f"brain ok: {name}")
+            _LAST_BRAIN["name"] = name
             return text
         print(f"brain switch: {name} failed after {CHAIN_ATTEMPTS} "
               "attempts -> next brain")
@@ -1699,10 +1872,15 @@ def has_content(source):
         >= CONTENT_MIN_ABSTRACT_CHARS
 
 
-def _llm_relevance_screen(field, topic, borderline, api_key, model):
+def _llm_relevance_screen(field, topic, borderline, api_key, model,
+                          provider=None):
     """One batched brain-chain call judging the borderline candidates.
-    Returns {1-based index: (keep, reason)}. Any failure returns {} —
-    unjudged borderline candidates are then dropped (fail-closed)."""
+    Returns {1-based index: (keep, reason, drop_kind)} where drop_kind
+    is "irrelevant" (fails the about-the-topic test) or "tradition"
+    (relevant but outside the EN/FR/DE scholarly tradition). Any
+    failure returns {} — unjudged borderline candidates are then
+    dropped (fail-closed). `provider` pins the call to one brain
+    (§16.4 second judge)."""
     lines = []
     for j, s in enumerate(borderline, 1):
         content = (s.get("abstract") or "").strip()
@@ -1728,19 +1906,28 @@ def _llm_relevance_screen(field, topic, borderline, api_key, model):
         "decrees, unrelated matches) UNLESS the item is a primary text "
         "in a scholarly edition or translation of that tradition.\n"
         "Give a one-line reason in English for every verdict.\n"
+        'When keep=false, also set "drop" to "irrelevant" if it '
+        'fails test 1, or "tradition" if it passes test 1 but fails '
+        "test 2.\n"
         "Reply with JSON only, a list like: "
-        '[{"i": 1, "keep": true, "reason": "..."}, ...]\n\n'
+        '[{"i": 1, "keep": true, "reason": "..."}, '
+        '{"i": 2, "keep": false, "drop": "irrelevant", '
+        '"reason": "..."}]\n\n'
         "CANDIDATES:\n" + "\n".join(lines))
     try:
         raw = call_llm(prompt, api_key, model, temperature=0.1,
-                       json_mode=True)
+                       json_mode=True, provider=provider)
         data = _parse_json_value(raw)
         verdicts = {}
         for item in data or []:
             i = int(item.get("i"))
+            kind = str(item.get("drop") or "").strip().lower()
+            if kind not in ("irrelevant", "tradition"):
+                kind = "irrelevant"
             verdicts[i] = (bool(item.get("keep")),
                            str(item.get("reason") or "").strip()
-                           or "LLM relevance screen")
+                           or "LLM relevance screen",
+                           kind)
         return verdicts
     except Exception as e:
         print(f"WARNING: LLM relevance screen failed ({e}); borderline "
@@ -1749,11 +1936,20 @@ def _llm_relevance_screen(field, topic, borderline, api_key, model):
 
 
 def screen_sources(field, topic, sources, api_key, model):
-    """Relevance filter + content-required gate (§15). Returns the
-    sources that COUNT: genuinely relevant AND content-bearing.
-    Deterministic token/concept overlap decides the clear cases; one
-    batched LLM call decides the borderline ones. Every verdict is
-    logged, and the fail-closed bar is applied to the result."""
+    """Relevance filter + content-required gate (§15) with a second
+    judge for borderline candidates (§16.4). Returns (counted, stats):
+    counted = the sources that COUNT (genuinely relevant AND
+    content-bearing); stats carries the funnel numbers — input,
+    relevant, counted, and drops by reason (irrelevant / tradition /
+    judge disagreement / no content). Deterministic token/concept
+    overlap decides the clear cases; a batched LLM call decides the
+    borderline ones, and a borderline candidate is kept only if a
+    SECOND judge — the next keyed brain in the chain, different from
+    the first — agrees. Every verdict is logged, and the fail-closed
+    bar is applied to the result."""
+    stats = {"input": len(sources), "relevant": 0, "counted": 0,
+             "drop_irrelevant": 0, "drop_tradition": 0,
+             "drop_disagreement": 0, "drop_no_content": 0}
     terms = _screen_tokens(topic) | _screen_tokens(field)
     base = _screen_tokens(topic) or terms
     kept, borderline = [], []
@@ -1782,6 +1978,7 @@ def screen_sources(field, topic, sources, api_key, model):
             print(f"relevance: keep {title[:70]} — "
                   f"{s['relevance_reason']}")
         elif base and same_script and cov_body == 0.0:
+            stats["drop_irrelevant"] += 1
             print(f"relevance: drop {title[:70]} — deterministic drop: "
                   "no topic-term overlap in title or abstract")
         else:
@@ -1789,28 +1986,79 @@ def screen_sources(field, topic, sources, api_key, model):
     if borderline:
         verdicts = _llm_relevance_screen(field, topic, borderline,
                                          api_key, model)
+        first_brain = _LAST_BRAIN["name"]
+        first_keeps = [s for j, s in enumerate(borderline, 1)
+                       if verdicts.get(j, (False, "", ""))[0]]
+        # Second judge (§16.4): the next keyed chain brain that
+        # differs from the first judge re-screens ONLY the first
+        # judge's keeps. A borderline candidate counts as relevant
+        # only if BOTH judges keep it.
+        second_brain, second = None, {}
+        if first_keeps:
+            for name in llm_chain():
+                if (name != first_brain and name in KNOWN_BRAINS
+                        and _brain_key_available(name, api_key)):
+                    second_brain = name
+                    break
+            if second_brain is None:
+                print("second judge: unavailable (no other keyed "
+                      "brain in the chain) — first-judge verdicts "
+                      "stand")
+            else:
+                print(f"second judge: {second_brain} reviews "
+                      f"{len(first_keeps)} borderline keep(s) of "
+                      f"first judge {first_brain}")
+                raw2 = _llm_relevance_screen(field, topic, first_keeps,
+                                             api_key, model,
+                                             provider=second_brain)
+                for k, s2 in enumerate(first_keeps, 1):
+                    if k in raw2:
+                        second[id(s2)] = raw2[k]
         for j, s in enumerate(borderline, 1):
-            keep, reason = verdicts.get(
+            keep, reason, kind = verdicts.get(
                 j, (False, "no verdict from the relevance screen — "
-                           "dropped"))
+                           "dropped", "irrelevant"))
             title = s.get("title") or ""
-            if keep:
+            if not keep:
+                if kind == "tradition":
+                    stats["drop_tradition"] += 1
+                else:
+                    stats["drop_irrelevant"] += 1
+                print(f"relevance: drop {title[:70]} — {reason}")
+                continue
+            if second_brain is not None:
+                v2 = second.get(id(s))
+                if not (v2 and v2[0]):
+                    stats["drop_disagreement"] += 1
+                    reason2 = (v2[1] if v2 else
+                               "no verdict from the second judge")
+                    print(f"relevance: drop (judge disagreement) "
+                          f"{title[:70]} — second judge "
+                          f"({second_brain}): {reason2}")
+                    continue
+                s["relevance_reason"] = (
+                    f"LLM screen (two judges agree): {reason}")
+                kept.append(s)
+                print(f"relevance: keep {title[:70]} — "
+                      f"{s['relevance_reason']}")
+            else:
                 s["relevance_reason"] = f"LLM screen: {reason}"
                 kept.append(s)
                 print(f"relevance: keep {title[:70]} — "
                       f"LLM screen: {reason}")
-            else:
-                print(f"relevance: drop {title[:70]} — {reason}")
+    stats["relevant"] = len(kept)
     counted = []
     for s in kept:
         if has_content(s):
             counted.append(s)
         else:
+            stats["drop_no_content"] += 1
             print("content: not counted (no abstract/full text) — "
                   f"{(s.get('title') or '')[:70]}")
+    stats["counted"] = len(counted)
     print(f"Relevance + content screen: {len(sources)} verified -> "
           f"{len(kept)} relevant -> {len(counted)} counted")
-    return counted
+    return counted, stats
 
 
 # Title law (§15): narrow, claim-fitted titles only.
@@ -1945,6 +2193,68 @@ def send_suggestions_dm(token, chat_id, title, candidates, next_topics):
         print(f"WARNING: suggestions DM failed (ignored): {e}")
         return False
 
+
+# --------------------------------------------------------------------------
+# Quality funnel report (§16.3) — at the end of EVERY article run,
+# success or fail-closed failure, the requester gets the funnel in
+# Persian: candidates found -> verified -> with content -> relevant
+# -> counted, with the drops by reason, plus the final word count +
+# target on success, or the stopping stage on failure. Fail-soft,
+# like the suggestions DM; the same text is printed as log lines.
+# --------------------------------------------------------------------------
+
+def build_funnel_text(topic, funnel, success, stage=None,
+                      word_count=None, word_target=None):
+    lines = ["📊 گزارش کیفیت تولید مقاله",
+             f"موضوع: {topic}",
+             "",
+             f"منابع پیدا شده: {funnel.get('candidates', 0)}",
+             f"راستی‌آزمایی‌شده: {funnel.get('verified', 0)}",
+             f"دارای محتوا (چکیده یا متن کامل): "
+             f"{funnel.get('with_content', 0)}",
+             f"مرتبط تشخیص داده‌شده: {funnel.get('relevant', 0)}",
+             f"منابع نهاییِ شمرده‌شده: {funnel.get('counted', 0)}",
+             "",
+             "حذف‌شده‌ها:",
+             f"• نامرتبط: {funnel.get('drop_irrelevant', 0)}",
+             f"• بدون محتوا: {funnel.get('drop_no_content', 0)}",
+             "• خارج از سنت پژوهشی مجاز (انگلیسی/فرانسوی/آلمانی): "
+             f"{funnel.get('drop_tradition', 0)}"]
+    if funnel.get("drop_disagreement"):
+        lines.append("• اختلاف دو داور ارتباط: "
+                     f"{funnel['drop_disagreement']}")
+    lines.append("")
+    if success:
+        lo, hi = word_target or (0, 0)
+        lines.append(f"✅ مقاله منتشر شد — تعداد کلمات: {word_count} "
+                     f"(هدف: {lo}–{hi})")
+    else:
+        lines.append(f"❌ تولید متوقف شد — مرحله: {stage or 'نامشخص'}")
+    return "\n".join(lines)
+
+
+def send_funnel_dm(token, chat_id, topic, funnel, success, stage=None,
+                   word_count=None, word_target=None):
+    """Fail-soft: print the funnel as log lines and DM it to the
+    requester (ARTICLE_CHAT_ID). Never raises. Returns True if sent."""
+    text = build_funnel_text(topic, funnel, success, stage=stage,
+                             word_count=word_count,
+                             word_target=word_target)
+    for line in text.splitlines():
+        print(f"funnel: {line}")
+    try:
+        chat_id = (chat_id or "").strip()
+        if not chat_id or not token:
+            print("funnel DM skipped: no ARTICLE_CHAT_ID/token")
+            return False
+        for chunk in split_text(text, 3900):
+            tg_call("sendMessage", token,
+                    {"chat_id": chat_id, "text": chunk})
+        print(f"funnel DM sent to chat {chat_id}")
+        return True
+    except Exception as e:
+        print(f"WARNING: funnel DM failed (ignored): {e}")
+        return False
 
 
 # Article category/type (§14). Absent env (manual dispatch) defaults to
@@ -2236,6 +2546,53 @@ def norm(s):
 # Main
 # --------------------------------------------------------------------------
 
+def _quality_pipeline(field, topic, verified_list, api_key, model):
+    """One retrieval wave's quality pipeline (§16): enrich abstracts
+    by DOI, attach full texts, then the relevance + content screen.
+    Returns (counted, stats) — the screen stats plus this wave's
+    verified / with-content counts, for the funnel report (§16.3)."""
+    enrich_abstracts(verified_list)
+    try:
+        attach_fulltexts(verified_list)
+    except Exception as e:
+        print(f"WARNING: full-text bridge failed (continuing "
+              f"without): {e}")
+    counted, stats = screen_sources(field, topic, verified_list,
+                                    api_key, model)
+    stats["verified"] = len(verified_list)
+    stats["with_content"] = sum(1 for s in verified_list
+                                 if has_content(s))
+    return counted, stats
+
+
+def _merge_funnel(funnel, sstats):
+    for k in ("verified", "with_content", "relevant", "counted",
+              "drop_irrelevant", "drop_tradition", "drop_disagreement",
+              "drop_no_content"):
+        funnel[k] = funnel.get(k, 0) + sstats.get(k, 0)
+
+
+def _wave2_queries(field, topic, api_key, model):
+    """Broader wave-2 query variants (§16.2): the field alone, the
+    topic split into keyword halves, and extra English variants via
+    the existing translation path. Best-effort; deduped, order kept."""
+    out = []
+
+    def add(q):
+        if q and q not in out:
+            out.append(q)
+
+    add(field)
+    tokens = topic.split()
+    if len(tokens) >= 2:
+        half = (len(tokens) + 1) // 2
+        add(" ".join(tokens[:half]))
+        add(" ".join(tokens[half:]))
+    add(translate_query_to_english(field, api_key, model))
+    add(translate_query(f"{field} {topic}", api_key, model, "English"))
+    return out
+
+
 def main():
     field = os.environ.get("FIELD", "").strip()
     topic = os.environ.get("TOPIC", "").strip()
@@ -2298,19 +2655,52 @@ def main():
 
     progress_start(os.environ.get("ARTICLE_CHAT_ID", ""), tg_token)
     progress_update(15, "🔎 جست‌وجوی منابع")
-    verified = collect_verified(queries)
+    rstate = _new_retrieval_state()
+    verified = collect_verified(queries, state=rstate)
     progress_update(35, "📚 راستی‌آزمایی منابع")
-
-    try:
-        attach_fulltexts(verified)
-    except Exception as e:
-        print(f"WARNING: full-text bridge failed (continuing without): {e}")
 
     # Quality laws (§15): only genuinely relevant, content-bearing
     # sources count toward the bar — verification alone is not enough.
-    counted = screen_sources(field, topic, verified, api_key, model)
+    funnel = {"candidates": 0, "verified": 0, "with_content": 0,
+              "relevant": 0, "counted": 0, "drop_irrelevant": 0,
+              "drop_tradition": 0, "drop_disagreement": 0,
+              "drop_no_content": 0}
+    counted, sstats = _quality_pipeline(field, topic, verified,
+                                        api_key, model)
+    _merge_funnel(funnel, sstats)
     progress_update(45, "🎯 گزینش منابع مرتبط")
+
     if len(counted) < MIN_SOURCES:
+        # Tiered wave 2 (§16.2): ONE broader retrieval wave — book
+        # sources first — through the SAME verify -> enrich -> bridge
+        # -> screen pipeline, sharing wave 1's dedupe/bench machinery,
+        # before the run is allowed to fail.
+        before_candidates = rstate["total_candidates"]
+        w2_queries = _wave2_queries(field, topic, api_key, model)
+        print(f"wave 2: only {len(counted)} counted after wave 1 "
+              f"(< {MIN_SOURCES}); broader retrieval, queries: "
+              f"{w2_queries}")
+        book_first = [search_internet_archive, search_annas_archive]
+        order2 = book_first + [s for s in SEARCHERS
+                               if s not in book_first]
+        verified2 = collect_verified(w2_queries, state=rstate,
+                                     searcher_order=order2)
+        counted2, sstats2 = _quality_pipeline(field, topic, verified2,
+                                              api_key, model)
+        _merge_funnel(funnel, sstats2)
+        verified = verified + verified2
+        counted = counted + counted2
+        print(f"wave 2: "
+              f"+{rstate['total_candidates'] - before_candidates} "
+              f"candidates, +{len(verified2)} verified, "
+              f"+{len(counted2)} counted")
+        progress_update(48, "🎯 موج دوم گزینش منابع")
+    funnel["candidates"] = rstate["total_candidates"]
+
+    if len(counted) < MIN_SOURCES:
+        send_funnel_dm(tg_token, os.environ.get("ARTICLE_CHAT_ID", ""),
+                       topic, funnel, False,
+                       stage="گزینش منابع مرتبط و محتوادار")
         raise Fail(
             f"Only {len(counted)} relevant, content-bearing sources for "
             f"'{topic}' out of {len(verified)} verified (minimum "
@@ -2318,10 +2708,15 @@ def main():
             "or title-only material. Try a broader or different topic.")
 
     _t0 = time.monotonic()
-    title, article, meta = write_article(
-        field, topic, language, counted, api_key, model,
-        guide=TYPE_GUIDE[article_type],
-        word_target=TYPE_WORD_TARGETS.get(article_type))
+    try:
+        title, article, meta = write_article(
+            field, topic, language, counted, api_key, model,
+            guide=TYPE_GUIDE[article_type],
+            word_target=TYPE_WORD_TARGETS.get(article_type))
+    except Fail:
+        send_funnel_dm(tg_token, os.environ.get("ARTICLE_CHAT_ID", ""),
+                       topic, funnel, False, stage="نگارش مقاله")
+        raise
     print(f"timing: writing {time.monotonic() - _t0:.1f}s")
 
     header = (f"📚 Scientific Discovery Agent — new article\n"
@@ -2356,6 +2751,12 @@ def main():
     send_suggestions_dm(tg_token, os.environ.get("ARTICLE_CHAT_ID", ""),
                         title, meta.get("title_candidates", []),
                         meta.get("next_topics", []))
+    # Funnel report (§16.3): every run ends with the quality funnel
+    # in the requester's DM (and in the log).
+    send_funnel_dm(tg_token, os.environ.get("ARTICLE_CHAT_ID", ""),
+                   topic, funnel, True,
+                   word_count=meta.get("word_count"),
+                   word_target=TYPE_WORD_TARGETS.get(article_type))
     print(f"Done. Article delivered, message_ids={message_ids}")
     return 0
 
