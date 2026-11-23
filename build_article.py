@@ -1565,6 +1565,17 @@ def _primary_title_score(candidate_title, work_title):
     return len(want & got) / len(want)
 
 
+def _primary_work_score(candidate_title, work):
+    """§20 fix (run 45107999596): the score of a catalogue hit against
+    a mapped work is the MAX over ALL title variants — the catalogue
+    holds the same work under Latin and Arabic-script titles, and
+    scoring an Arabic-titled copy against the Latin form alone gave
+    0, so the lane threw away the very book the catalogue check had
+    just confirmed."""
+    return max((_primary_title_score(candidate_title, v)
+                for v in _title_variants(work)), default=0.0)
+
+
 def _primary_author_match(candidate, work):
     author = _lucene_clean(work.get("author")).lower()
     if not author:
@@ -1621,13 +1632,12 @@ def retrieve_primary_sources(smap, rstate, extra_keywords=None,
                       f"for {work.get('title', '')[:60]!r}: {e}")
         ranked = sorted(
             cands,
-            key=lambda c: -_primary_title_score(c.get("title"),
-                                                work.get("title")))
+            key=lambda c: -_primary_work_score(c.get("title"), work))
         picked = []
         for c in ranked:
             if not c.get("title"):
                 continue
-            score = _primary_title_score(c["title"], work.get("title"))
+            score = _primary_work_score(c["title"], work)
             if score < 0.34 and not _primary_author_match(c, work):
                 continue  # a catalogue neighbour, not this work
             key = _dedupe_key(c)
@@ -3184,6 +3194,26 @@ def _ia_title_docs(title, rows=10):
     return (data.get("response") or {}).get("docs", []) or []
 
 
+def _catalogue_match(work, variant, doc_title, doc_creators):
+    """(confirmed, score): a catalogue doc confirms a mapped work
+    when the title score is >= 0.5 AND the match is substantive —
+    at least 2 shared title tokens, or the work's author is
+    corroborated by the doc's creators. (Run 45107999596 lesson: a
+    1-token title like 'India' was 'confirmed' by an unrelated
+    'Theatre in India'; token overlap alone is not evidence.)"""
+    score = _primary_title_score(doc_title, variant)
+    if score < 0.5:
+        return False, score
+    shared = _screen_tokens(variant) & _screen_tokens(doc_title)
+    if len(shared) >= 2:
+        return True, score
+    author_tokens = _screen_tokens(work.get("author"))
+    creator_text = " ".join(doc_creators or []).lower()
+    if author_tokens and any(t in creator_text for t in author_tokens):
+        return True, score
+    return False, score
+
+
 def verify_work_in_catalogue(work):
     """§20.2 — a mapped title is trusted only if the Internet Archive
     catalogue (or, failing that, Google Books) actually holds a work
@@ -3206,16 +3236,24 @@ def verify_work_in_catalogue(work):
             continue
         for doc in docs:
             doc_title = doc.get("title") or ""
-            if (_primary_title_score(title, doc_title) >= 0.5
-                    or _primary_title_score(variant, doc_title) >= 0.5):
+            creators = doc.get("creator") or []
+            if isinstance(creators, str):
+                creators = [creators]
+            ok, _score = _catalogue_match(work, variant, doc_title,
+                                          creators)
+            if ok:
                 return True, doc_title
     try:
         hits = search_google_books_primary(
             {"title": title, "author": author})
         responded = True
         for h in hits:
-            if _primary_title_score(title, h.get("title")) >= 0.5:
-                return True, h.get("title")
+            for variant in _title_variants(work):
+                ok, _score = _catalogue_match(
+                    work, variant, h.get("title") or "",
+                    h.get("authors") or [])
+                if ok:
+                    return True, h.get("title")
     except Exception as e:
         print(f"NOTE: Google Books catalogue check unreachable for "
               f"{title!r} ({e})")
