@@ -1,0 +1,606 @@
+International Journal of Science and Research (IJSR)
+ISSN: 2319-7064
+SJIF (2022): 7.94
+
+Biruni's Measurement of the Earth
+Alberto Gomez Gomez1
+1Unaffiliated
+
+Email: agg29@ou.ac.uk,. algomgom@gmail.com
+
+Abstract
+The peak from which Biruni measured the Earth is pinpointed; his measurements are shown to tally with the
+geographical features of the landscape around the peak. Mathematics shows what measurements he is likely to have
+taken, and his famous formula is fully derived. Also, an appendix is given for those who wish to measure mountains
+by themselves and follow in Biruni’s footsteps.
+Keywords: Biruni, Nandana, Earth’s radius, Baghanwala, Masudic Canon, Hakimite Tables, al-Mamun, Salt Range, Sine Law
+
+1. Introduction
+Abu Rayhan (Muhammad ibn Ahmad) al-Biruni
+was born in Kath, capital of Khwarezm (the region
+of the Amu Darya delta), in modern Khiva, on
+September 4, 973 (362-12-03 AH), and died in
+Ghazni, Khorasan, on December 13, 1048 (44007-04 AH).1 He was a well-travelled Persian sage
+who spoke fluent Persian, Arabic, Turkish, Sanskrit,
+Greek, Hebrew, Syrian, and several other local languages in whose literatures he was also well versed.
+Not only did he possess ‘all the well known books
+on astronomy written within the area extending
+from the Mediterranean Sea to the Bay of Bengal, including all the Greek, Indian, and Muslim
+authors from Spain to Egypt’ (Biruni, 1956:A13;
+Ahmad, 2010:171), but he also wrote prolifically
+on all branches of knowledge, like cartography,
+geography, ethnography, history, philosophy, mathematics, astronomy, and science in general, a total
+of about 180 works, some sadly lost to us now (EI2,
+1979:A1237). Chief among these is his Masudic
+Canon, an encyclopaedia of astronomy he dedicated
+to Sultan Masud, who, delighted with the sage’s
+accomplishment, presented him with an elephantload of silver! To everyone’s amazement, Biruni
+refused it, pleading that he could not bear to abuse
+the generosity of someone who had already shown
+him more kindnesses than he felt he deserved (Siraj,
+1975:343-4).
+1Some think that, according to the solar calendar, the Muslim date
+440 AH should be taken to mean AD 1050 (EI2, 1979:A1236, and
+Encyclopaedia of World Bibliography, 1973:A578
+
+Of his many contributions to the good of humanity, it is hard to decide which is the most important,
+and certainly it is not in the scope of a short paper
+like this to do justice to the vastness of his genius.
+So, it is as a matter of personal choice that the
+author decided to deal here with just one of these:
+the fact that he measured the Earth with an unprecedented precision, not equalled in the West until
+the 16th century (Norhudzaev, 1973). You may
+find the author is rather critical sometimes, for,
+in Biruni’s own teachings, it is the truth that we
+must seek and speak, even when it goes against
+us. His value for the Earth’s radius (6335.725 km)
+was the result of having solved a complex geodesic
+equation, as we will see. But to fully understand
+the whole story, we must know something about its
+background and about the early Islamic measures
+then (and herein) used: these were exactly those
+of ancient Mesopotamia, where ‘each mile was a
+third of a farsang, or 4000 cubits, called ‘black’
+in Iraq, each of which equalled 24 digits’ (Biruni,
+1934:208; Wright, 1934:119; Mercier, 1993:177).
+That is, one farsang (5916 m) equalled three miles,
+one mile (1972 m) equalled 4000 cubits, and one
+(black) cubit (493 mm) equalled twenty-four digits.
+Note the connection with the Roman mile (1479 m)
+of 3000 cubits (each of 493 mm).
+2. Early attempts
+The story begins before Biruni, when Sultan alMamun ordered two teams of surveyors to measure
+the Earth. They did so by departing from a place in
+
+Volume 12 Issue 3, March 2023
+www.ijsr.net
+Licensed Under Creative Commons Attribution CC BY
+Paper ID: SR23326005322
+
+DOI: 10.21275/SR23326005322
+
+1535
+
+International Journal of Science and Research (IJSR)
+ISSN: 2319-7064
+SJIF (2022): 7.94
+
+the desert of Sinjad, nineteen farsangs from Mosul
+and forty-three from Samarra, heading north and
+south respectively, and both determining the length
+of one degree of latitude to be somewhere between
+56 and 57 Arabic miles (Ali et al., 1967:178-80).
+Among the several extant accounts of this survey, Habash al-Hasib (Langermann, 1985:108-28)
+quotes at length from a direct account from Khalid:
+The Commander of the Faithful, al-Mamun,
+wished to know the size of the Earth. He inquired
+into this and found that Ptolemy mentioned in
+one of his books that the girth of the Earth is so
+and so many thousands of stades. He asked the
+commentators about the meaning of stade, and
+they differed about the meaning of this. Since he
+was not told what he wanted, he directed Khalid
+ibn Abd al-Malik al-Marwarrudhi, Ali bin Isa
+al-Asturlabi [from his surname, evidently an
+instrument maker], and Ahmad ibn al-Bukhturi
+al-Dhari [from his surname, the Surveyor] with
+a group of surveyors and skilled artisans,
+including carpenters and brass makers, who were
+to maintain the instruments they needed. He led
+them to a place, which he chose in the desert of
+Sinjar. From there, Khalid and his party headed
+for the North Pole of the Little Bear, and Ali and
+Ahmad and their party headed to the South Pole.
+They proceeded until they found that the height
+of the Sun at noon had increased (or differed) by
+one degree from the noon height they had taken
+at the place from which they had separated, after
+subtracting from it the Sun’s declination along
+the path of the outward journey. They put arrows
+there. Then they returned to the arrows, testing
+the measurement a second time, and so found
+that one degree of the Earth was 56 miles, of
+which one mile is 4000 black cubits. This is the
+cubit adopted by al-Mamun for the measurement
+of cloths, surveying of fields, and the distribution
+
+Sind ibn Ali reports that al-Mamun ordered that
+he and Khalid ibn Abd al-Malik al-Marwarrudhi
+should measure one degree of the great circle of
+the Earth’s surface. ‘We left together,’ he says,
+‘for this purpose.’ He gave the same order to Ali
+ibn Isa al-Asturlabi and Ali ibn al-Bukhturi,
+who took themselves to another direction. Sin
+
+[...]
+
+s of a degree, and therefore
+does not allow us to use mathematics this time
+to find out whether he averaged it out of several
+measurements or not. Perhaps the prevailing poor
+visibility forced him to be satisfied with fewer measurements, or perhaps he had some other reason for
+the figure he gave.
+
+DOI: 10.21275/SR23326005322
+
+1539
+
+International Journal of Science and Research (IJSR)
+ISSN: 2319-7064
+SJIF (2022): 7.94
+
+Figure 3: The plain is not perfectly flat. It slopes unevenly away to the south. For illustrative purposes, heights and
+distances are not to scale nor is the Earth’s curvature shown. Between about 26 and 28 km south of the 533 m high
+peak, the plain rises to about 211 or 212 m above the sea. Relative to this area, our peak stands 3211/2 m (or 652
+cubits) high.
+
+By the formula in Figure 4, the author found
+that the apparent dip 𝜃 of the horizon from this
+mountain (that is, taking into account ray-bending at
+mean air conditions)7 is about 32′ , which is almost
+the same as Biruni reports. Care must be taken to
+provide the formula with the right mountain height
+ℎ for this problem, which is neither 533 m above
+sea level (we’ll consider this one later for sport)
+nor Biruni’s 3211/2 m above the plain’s top grounds,
+but 340 m above the farthest visible point on the
+horizon (which is about 72 1/2 km from our peak and
+about 193 m above sea level). 32′ is close to Biruni’s
+figure, but not quite. At first sight, a difference of
+just a couple of minutes seems negligible, but it
+is hardly so, and this is one of the drawbacks of
+Biruni’s method: that it is so dependent on taking
+the dip angle with such hair splitting accuracy, that
+just a minute of a degree results in a difference
+of hundreds of kilometres for the computed Earthradius, not to mention the difficulty in taking such
+an angle with any reliable accuracy at all!8 Let us
+pay more attention to Biruni’s own words (Biruni,
+1956:2:530; Ali et al., 1967:188):
+I changed to another way owing to having found
+in a region in India a mountain peak facing
+toward a wide flat plain whose flatness served as
+the smooth surface of the sea. Then on its peak I
+gauged the intersection of heaven and Earth [the
+horizon] in the prospect, and I found it by an
+instrument to incline from the East-West line
+7Mean air conditions are taken to be 15◦ C of temperature, 1013.25
+mb of pressure, 6.49◦ C/km of lapse rate, 0% of relative humidity, and
+450 ppm of CO2 content.
+8The main difficulties arise from the ever-changing air conditions and
+from the limitations of human eyesight.
+
+[southern astronomical horizon] a little less than
+1/31/4of a degree, and I took it as 34 ′. I derived
+the height of the mountain taking the summit in
+two places, and I found it to be 652 1/20 cubits.
+
+So he took the dip as ‘a little less than 1/31/4 of
+a degree’ and rounded it down to 34 ′. But a little
+less than 1/31/4 of a degree should round up to 35′ .
+Why 34 ′ and not 35′ ? There is just one minute
+of difference, but one minute that makes all the
+difference: 34 ′ got him closer to Mamun’s value
+than 35′ or 33′ . Certainly, Mamun’s value served
+him as a reference all the time, and the difference
+between 32′ , 33′ , 34′ , or 35′ is so tiny that he might
+indeed have believed in earnest that 34′ must be
+the right angle his instrument was reading. Had he
+chosen a different dip, he would have gone wrong
+by hundreds of kilometres. It is only by chance,
+therefore, that the compensating features of the
+lucky scenario chosen led him to a figure so close
+to the truth! Even his own measurements do lead
+to a value slightly worse than Mamun’s, should the
+cosine mistake alone be corrected! (By the way, note
+that the little 1/31/4 detail suggests that his instru - ment was accurate to 5 minutes of a degree.)
+Scientifically speaking, Biruni’s method leads
+to results infected by ray bending when applied to
+other scenarios. For example, as mentioned above,
+in the completely imaginary case that our 533 m
+mountain looked south onto the sea (which is just an
+imagined scenario), the apparent (refracted) dip of
+the horizon would be about 40′22′′ (by the equation
+in Figure 4). With these data, Biruni’s formula
+gives an Earth-radius (for Nandana’s latitude) of
+7734 km, which is too large by about 6/5 due to ray
+
+Volume 12 Issue 3, March 2023
+www.ijsr.net
+Licensed Under Creative Commons Attribution CC BY
+Paper ID: SR23326005322
+
+DOI: 10.21275/SR23326005322
+
+1540
+
+International Journal of Science and Research (IJSR)
+ISSN: 2319-7064
+SJIF (2022): 7.94
+
+bending. His celebrated method, nevertheless, bears
+the immortal originality of saving a lot of walking
+through deserts and, provided we take accurate
+measurements and compensate for ray bending, it
+certainly does correctly yield the Earth’s radius!
+(See Figure 4.)9
+
+Figure 4: Biruni’s method leads to results infected by ray
+bending. Yet, provided you allow for this and take precise
+measurements, it certainly yields the Earth’s radius!
+
+To be fair to Biruni, it must be said that he was
+not just lucky. Clearly, he picked his landscape
+most carefully after testing his method on several
+places, noting the disparity of the results, and finally
+picking the one that best matched that of Mamun’s
+teams (see Figure 5). It is to his credit that he openly
+regarded his own method as a curious complement
+to their work, accepting their result as more reliable, because, as he said (Biruni, 1956; Mercier,
+1993:183), ‘Their instrument was more refined, and
+they took greater pains in its accomplishment.’
+7. Concluding notes
+
+knew this was the one! After drawing the new
+profile and doing the same intuitive subtraction, a
+perfect match to Biruni’s number was found! All
+that remained was to make sense of it all.
+The reader is invited to suggest new ideas, easier
+wordings for the difficult concepts expressed in
+this paper, and new mathematical approaches to
+reveal Biruni’s actual instrument and readings, or
+to contest any part of this paper. The author is
+especially interested in trying to find the two actual
+points from which Biruni measured the mountain.
+Though the most likely candidates are given in the
+text, the author has included a fuller list in Table 1,
+which of course can be expanded by the diligent
+reader.
+Note that to stay within the area of about 3 ± 0.5
+km south of our peak and gently sloping from about
+212 to 211 m above the sea, the angles must be
+between 51/4◦ and 71/3 ◦ . Any bigger than 71/3 ◦ and
+you get closer to the mountain, but also higher than
+212 m. From this position you will not be able to
+compute the height of Biruni’s mountain unless you
+lower the ground you are standing on by arguing
+that some sediment has piled up that wasn’t there a
+thousand years ago.
+Appendix
+Today, we measure mountain heights with theodolites, graphometers, or laser range finders instead
+of astrolabes, and use a slightly simpler formula
+derived where else but from our beloved Sine Law,
+which applied to the two triangles in Figure 6,
+allows us to know that
+®
+®
+𝐹𝑇
+𝑁𝑇
+𝑑
+=
+=
+.
+sin 𝜃 1 sin (𝜃 2 − 𝜃 1 ) sin 𝜃 2
+Also,
+®
+®
+𝑁𝑇
+ℎ
+𝐹𝑇
+.
+=
+=
+◦
+sin 𝜃2 sin (90◦ 𝜃 2 )
+sin 90
+
+When the author started this work, he first suspected
+another peak west of Nandana of being the one
+Biruni used, perhaps because of the resemblance
+between its 677 m height and Biruni’s 652-cubit
+figure. (What a meaningless connection!) After
+drawing the profile of the landscape south of this,
+he was inspired to subtract the mountain’s height From these relations we deduce that
+from the highest point on the profile. The result
+® sin 𝜃2 .
+ℎ = 𝑁𝑇
+was close to Biruni’s mountain’s height, but not
+quite: this was not the peak! Then, he remembered Hence,
+𝑑 sin 𝜃 1 sin 𝜃 2
+another peak near Nandana Fort, and at once he
+.
+ℎ=
+sin(𝜃 2 − 𝜃 1)
+−
+
+9Note added 2012: See an interactive illustration of Biruni’s method
+at https://www.geogebra.org/m/AehHCy5h.
+
+This equation works like the one Biruni used.
+
+Volume 12 Issue 3, March 2023
+www.ijsr.net
+Licensed Under Creative Commons Attribution CC BY
+Paper ID: SR23326005322
+
+DOI: 10.21275/SR23326005322
+
+1541
+
+International Journal of Science and Research (IJSR)
+ISSN: 2319-7064
+SJIF (2022): 7.94
+
+Figure 5: View of Biruni’s happy choice of landscape.
+Table 1: Points from which Biruni may have measured the peak’s height.
+
+likelihood
+
+instrument’s
+accuracy
+
+dist.
+between
+points (m)
+
+dist.
+between
+points
+(cubits)
+
+𝜃1
+
+𝜃2
+
+derived
+(cubits)
+
+Likely
+Likely
+Possible
+Possible
+Possible
+Possible
+Possible
+
+30′
+15′
+15′
+20 ′
+20 ′
+5′
+5′
+
+896.767
+677.012
+2070.230
+972.360
+2099.256
+2100.920
+547.887
+
+1819
+13731/4
+41991/4
+19721/3
+42581/8
+42611/2
+11111/3
+
+5◦30′
+5◦ 15′
+4◦ 00′
+4◦ 45′
+4◦ 00′
+4◦ 10′
+4◦ 40′
+
+7◦30′
+6◦30′
+7◦15′
+6◦ 20′
+7◦ 20′
+7◦ 55′
+5◦ 25′
+
+652 3′ 17′′ 10′′′
+652 3′ 17′′ 54′′′
+652 3′ 18′′ 05′′′
+652 3′ 17′′ 50′′′
+652 3′ 18′′ 00′′′
+652 3′ 17′′ 47′′′
+652 3′ 18′′ 36′′′
+
+height
+
+of a hill? Again the Sine Law comes to our rescue!
+Have a look at Figure 7.
+
+𝑇
+
+ℎ
+
+𝜃2
+𝐵
+
+𝜃1
+𝑁
+
+𝑑
+
+𝐹
+
+Figure 6: Finding the height of a mountain.
+
+If you have a restless mind and wish to know
+more about these matters, perhaps you may be
+intrigued by the following problem: How do you
+find the height, not of a hill, but of a building on top
+
+Figure 7: To calculate the height h of a building on a
+hilltop, we need to measure the distance d from the two
+points 𝑁 and 𝐹 at ground level from which we are to take
+the angles 𝜃 𝑖 (for 𝑖 = 1, 2, 3) to the top T and base B of
+the building.
+
+Volume 12 Issue 3, March 2023
+www.ijsr.net
+Licensed Under Creative Commons Attribution CC BY
+Paper ID: SR23326005322
+
+DOI: 10.21275/SR23326005322
+
+1542
+
+International Journal of Science and Research (IJSR)
+ISSN: 2319-7064
+SJIF (2022): 7.94
+
+Knowing that
+
+References
+
+®
+®
+𝑁𝑇
+𝑑
+𝐹𝑇
+=
+=
+sin 𝜃 1 sin ( 𝜃 2 𝜃 1 ) sin ( 180◦
+−
+
+−
+
+𝜃2 )
+
+and
+®
+𝑁𝑇
+𝑁®𝐵
+ℎ
+=
+=
+,
+sin (90◦ + 𝜃 3 ) sin (𝜃 2 − 𝜃 3 ) sin (90◦ − 𝜃 2 )
+we can deduce that
+® =
+𝑁𝑇
+
+𝑑 sin 𝜃 1
+sin (𝜃 2 − 𝜃1 )
+
+and
+(90◦ + 𝜃 3)
+® = ℎ sin
+𝑁𝑇
+.
+sin (𝜃 2 − 𝜃 3 )
+Hence,
+ℎ=
+
+𝑑 sin 𝜃 1 sin (𝜃 2 − 𝜃 3)
+.
+sin (𝜃 2 − 𝜃1 ) cos 𝜃 3
+
+You must be careful, though, for the angles must be
+taken from the ground, not from eye level and, if you
+want to save yourself discomfort, you might like to
+use the help of a mirror. Build a big protractor (as
+in Figure 8), and tilt the mirror until the image of
+the mountaintop reflected on it is made to touch the
+ground at your feet directly under the plummet line
+of sight. The tilt 𝜇 of the mirror gives the angle 𝜃
+from your feet to the mountaintop by the following
+relation.
+Alternatively, you may not need to build a protractor at all. Just lay the mirror flat on the ground
+with the help of a spirit level. Then place a stick
+upright between the mirror and the mountain, in
+such a way that the reflected tops of the mountain
+and the stick are aligned with a spot drawn on the
+mirror. The angle 𝜃 from this spot to the mountaintop is the arctangent of the quotient of the height h
+of the stick and the distance d between the spot and
+the base of the stick. (See Figure 9.)
+
+Ahmad, Riaz (2010), ‘Al-Biruni: A great Muslim scientist,
+philosopher and historian (AD 973–1050)’, Pakistan Vision
+10(1), 167–179.
+Ali, Jamil et al. (1967), The Determination of the Coordinates
+of Positions for the Correction of Distances Between Cities:
+A Translation from the Arabic of Kitāb Tah. dı̄d Nihāyāt Alamakin Litas. .hıh Masafat Al-masakin, American University
+of Beirut.
+Biruni (1934), Book of Instructions in the Elements of the Art
+of Astrology, ed. and tr. by Robert Ramsey Wright, Luzac,
+London.
+Biruni (1956), Al-Qanun al-Masudi (Canon Masudicus), or
+An Encyclopedia of Astronomical Sciences, 3 vols, Osmani
+Oriental Publications Bureau, Hyderabad-Dn, India.
+Burton, Harry Edwin (1945), ‘The optics of Euclid’, JOSA
+35(5), 357–372.
+EI2 (1979), Encyclopaedia of Islam, New Edition, Vol. 1, Brill,
+Leiden.
+Langermann, Y Tzvi (1985), ‘The book of bodies and distances
+of habash al-hāsı̄b’, Centaurus 28(2), 108–128.
+Mercier, Raymond P. (1993), ‘Geodesy’, The History of
+Cartography 2(8), 175–188.
+Norhudzaev, K. (1973), ‘Al-Biruni and the science of geodesy
+(Uzbek)’, in Collection dedicated to the 1000th anniversary
+of the birth of al-Biruni, Tashkent, pp. 145–158.
+Rizvi, Saiyid Samad Husain (1979), ‘A newly discovered book
+of al-Biruni: “Ghurrat-uz-Zĳat,” and al-Biruni’s “Measurements of Earth’s dimensions”’, in Al-Biruni Commemorative
+Volume, pp. 605–80.
+Siraj, Minhaj (1975), Tabaqat-i-Nasiri, original in Persian translated into Urdu by Ghulam Rasool Mehr, Vol. 2, Markazi
+Urdu Board, Lahore.
+Stein, Aurel (1932), ‘The Site of Alexander’s Passage of the
+Hydaspes and the Battle with Poros’, The Geographical
+Journal 80(1), 31–46.
+Wright, Robert Ramsey (1934), Book of Instructions in the
+Elements of the Art of Astrology, Luzac, London.
+¯
+
+¯
+
+¯
+
+¯
+
+¯
+
+Acknowledgements
+The author wishes to thank his friend Máire Ní
+Lorcáin for kindly proof reading this paper and
+providing valuable comments.
+
+Volume 12 Issue 3, March 2023
+www.ijsr.net
+Licensed Under Creative Commons Attribution CC BY
+Paper ID: SR23326005322
+
+DOI: 10.21275/SR23326005322
+
+1543
+
+International Journal of Science and Research (IJSR)
+ISSN: 2319-7064
+SJIF (2022): 7.94
+
+Figure 8: Angles must be taken from the ground, for w

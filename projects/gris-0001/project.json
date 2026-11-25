@@ -1,0 +1,54 @@
+{
+ "project_id": "gris-0001",
+ "id": "gris-0001",
+ "field": "نجوم و ریاضیات در آثار ابوریحان بیرونی",
+ "topic": "اندازه‌گیری شعاع زمین به روش ابوریحان بیرونی در نندنه: بازسازی محاسبهٔ او در تحدید نهایات الأماکن و سنجش خطای آن در برابر مقدار امروزی",
+ "language": "fa",
+ "category": "intl",
+ "type": "isi",
+ "status": "failed_closed",
+ "stage": "retrieval",
+ "created_at": "2026-11-25T16:57:20Z",
+ "updated_at": "2026-11-25T19:13:06Z",
+ "finished_at": "2026-11-25T19:13:06Z",
+ "funnel": {
+  "candidates": 46,
+  "verified": 38,
+  "with_content": 37,
+  "relevant": 0,
+  "counted": 0,
+  "registry_matched": 0,
+  "primary_counted": 0,
+  "fulltext_counted": 0,
+  "claims_supported": 0,
+  "claims_total": 0,
+  "paged_evidence": 0,
+  "repairs": 0,
+  "drop_irrelevant": 34,
+  "drop_tradition": 0,
+  "drop_disagreement": 4,
+  "drop_no_content": 0,
+  "drop_language_gate": 0
+ },
+ "checkpoints": {
+  "intake": {
+   "status": "done",
+   "at": "2026-11-25T16:57:21Z",
+   "attempts": 1
+  },
+  "retrieval": {
+   "status": "failed",
+   "at": "2026-11-25T19:13:06Z",
+   "attempts": 1
+  }
+ },
+ "repair_log": [],
+ "human_action_needed": null,
+ "outputs": {
+  "channel_messages": [],
+  "docx": null,
+  "pdf": null,
+  "html": null,
+  "article_md": null
+ }
+}

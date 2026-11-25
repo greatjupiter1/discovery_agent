@@ -1,0 +1,287 @@
+DOI: https://doi.org/10.37547/mesmj-V7-I7-29
+
+Pages: 299-311
+
+MENTAL ENLIGHTENMENT SCIENTIFIC –
+METHODOLOGICAL JOURNAL
+MENTAL ENLIGHTENMENT SCIENTIFIC –
+METHODOLOGICAL JOURNAL
+http://mentaljournal-jspu.uz/index.php/mesmj/index
+journal
+homepage:
+
+http://mentaljournal-jspu.uz/index.php/mesmj/about
+
+THE SCIENTIFIC HERITAGE OF ABU RAYHAN BIRUNI AND ITS ROLE IN THE
+DEVELOPMENT OF WORLD SCIENCE
+U.S.Tupchiev
+Associate Professor
+Jizzakh State Pedagogical University
+Jizzakh, Uzbekistan
+ABOUT ARTICLE
+Abstract: This article analyzes the life,
+Key words: Abu Rayhan Beruni,
+Eastern Renaissance, Ma'mun Academy of scientific activities, and immense contribution
+Khorezm, geodesy, meridian degree, to world science of Abu Rayhan Beruni-a
+encyclopedic scholar, scientific heritage, brilliant encyclopedic scholar and prominent
+representative of the Eastern Renaissance in
+civilization.
+Central Asia during the 9th-12th centuriesbased on modern scientific and methodological
+Received: 05.08.26
+approaches. Furthermore, it scientifically
+Accepted: 06.08.26
+substantiates the contemporary relevance of
+Published: 07.08.26
+studying the scholar's heritage and its role in the
+upbringing of the younger generation.
+Introduction. Significant progress is being made in Uzbekistan toward building a
+democratic state governed by the rule of law and a free civil society, liberalizing all spheres of
+public life, implementing comprehensive reforms, modernizing the country, and ensuring its
+deeper integration into the international community. In this process, the rich and ancient
+cultural, educational, philosophical, and scientific heritage of our people, which constitutes an
+important part of the treasury of universal human civilization, holds particular significance.
+President Shavkat Mirziyoyev has repeatedly emphasized that an in-depth study of the
+rich scientific legacy left by our ancestors—including manuscripts in mathematics, astronomy,
+medicine, physics, literature, and philosophy—serves as a vital foundation for strengthening
+the New Uzbekistan. He has also underscored that the lives and achievements of great scholars
+represent an exemplary school for shaping the worldview of young people and fostering their
+intellectual maturity. As he stated: “Every nation takes pride in its history. However, nowhere
+http://mentaljournal-jspu.uz/index.php/mesmj/index
+
+299
+
+else is there a history as rich as ours or scholars as great as our ancestors. We must study this
+heritage profoundly and present it to our people and to the world.”[1].
+Among the outstanding representatives of the early medieval scientific tradition, Abu
+Rayhan al-Biruni occupies a unique position as one of the greatest scholars in the history of
+world civilization. Possessing an extraordinary intellectual legacy, he made fundamental
+contributions to the advancement of global science and significantly influenced the
+development of numerous branches of knowledge. An objective study and critical analysis of
+al-Biruni's vast scholarly heritage, together with the translation and interpretation of his works
+and the systematic investigation of his philosophical and natural-scientific ideas, remain among
+the most important priorities of contemporary academic research.
+Renowned for his encyclopedic scholarship, Abu Rayhan al-Biruni (973–1048) made
+remarkable contributions to virtually every major field of science of his time. He occupied a
+distinguished place within the Khwarazm Ma'mun Academy, where his exceptional intellectual
+achievements played a pivotal role in the advancement of scientific inquiry and the flourishing
+of the academy's scholarly tradition.
+The theoretical and methodological foundation of this study is based on the rich
+scientific and philosophical legacy of Abu Rayhan al-Biruni, as well as a wide range of primary
+and secondary sources devoted to examining his outstanding contributions to the development
+of world civilization. To provide a comprehensive understanding of the research topic, relevant
+historical sources and scholarly literature were systematically reviewed and comparatively
+analyzed. The study employs a comparative-historical approach, textual analysis, and critical
+interpretation to evaluate al-Biruni's intellectual heritage within its historical context and to
+assess its significance from the perspective of contemporary scholarship.
+Primary Sources and Historical-Documentary Foundations. Primary historical sources
+constitute the principal basis for examining the life, scholarly activities, and personal qualities
+of Abu Rayhan al-Biruni. In particular, Abu al-Fazl Bayhaqi's Tarikh-i Mas'udi was employed as
+a primary source, as it provides valuable contemporary evidence of al-Biruni's exceptional
+intellectual abilities. The work highlights the high esteem in which he was held by his
+contemporaries for his profound knowledge of geometry, philosophy, and his ability to
+comprehend the essence of natural phenomena. In addition, the biographical accounts of Yaqut
+al-Hamawi were analyzed using a historical-retrospective approach to examine al-Biruni's
+lifelong commitment to scientific inquiry, his way of life, and his remarkable perseverance in
+pursuing knowledge until the final moments of his life.
+
+http://mentaljournal-jspu.uz/index.php/mesmj/index
+
+300
+
+Contemporary Approaches to the Study of the Early Medieval Eastern Renaissance and
+al-Biruni's Legacy. The present study also draws upon the works of both Uzbek and
+international scholars devoted to the encyclopedic legacy of al-Biruni and his contributions to
+the natural sciences. Particular attention was given to G. K. Masharipova's monograph The
+Scientific Heritage and Philosophical Views of Abu Rayhan al-Biruni, which provides a
+comprehensive analysis of the integration of philosophical thought and the exact sciences in alBiruni's intellectual system. Furthermore, P. Shermukhamedov's The Birth of a Genius, or the
+Fate of Abu Rayhan al-Biruni, A. Otokhojayev's Abu Rayhan al-Biruni, and H. Hasanov's ScholarTravellers were extensively utilized as secondary scholarly sources. These studies offer
+valuable interpretations of al-Biruni's geodetic measurements, geographical predictions, and
+scientific expeditions, thereby contributing to a deeper understanding of his role in the
+development of medieval science.
+Methodology. To ensure the scientific rigor and objectivity of the study, the following
+methodological principles and research methods were employed:
+- Historical-comparative analysis. Al-Biruni's geodetic measurements for determinin
+
+[...]
+
+below the horizontal. I then measured the height of the mountain,
+which amounted to 652.055 gaz, according to the local unit of measurement” [10].
+Using these measurements, al-Biruni calculated the Earth's radius to be 12,803,337.036
+gaz. Assuming one gaz equals approximately 0.4933 m, this corresponds to an Earth radius of
+approximately 6,315.9 km. Compared with the currently accepted mean value, the error is less
+than 1%, demonstrating the remarkable accuracy of his calculations. He further determined
+that the length of one degree of the meridian at the latitude of 32°00′ was approximately
+223,550.329 gaz, or 110.277 km. When compared with the modern geodetic value of
+approximately 110.895 km, the difference amounts to only 618 m. Achieving such a high level
+of precision nearly one thousand years ago stands as one of the most outstanding
+accomplishments in the history of medieval geodesy and mathematical geography [10].
+The determination of the Earth's circumference, as proposed by al-Biruni, represented
+a more accurate and practical approach compared with the traditional method of measuring
+meridian arcs through extensive land surveys. By applying trigonometric principles to
+
+http://mentaljournal-jspu.uz/index.php/mesmj/index
+
+305
+
+determine mountain elevations and astronomical distances, al-Biruni achieved results that
+surpassed the accuracy of many earlier astronomers.
+Regarding the calculation of the Earth's circumference, al-Biruni explained his method
+as follows:
+“To determine the length of the Earth's circumference, in all cases it is sufficient to
+double the obtained radius and multiply it by 22. Then divide the resulting product by 7, and
+the length of the Earth's circumference will be obtained in the units used for measurement.”
+Applying the procedure described by al-Biruni, the circumference of a circle can be
+calculated according to the formula L = 2πR, where the fraction 22/7 represents an
+approximation of the mathematical constant π (pi).
+Through his own observations and calculations, al-Biruni determined the geographical
+latitudes of numerous cities. For example, he calculated the latitude of Ghazna as 33°35′,
+Kandahar as 33°55′, and Dumpar as 34°20′. According to his calculations, the latitude of
+Bukhara was determined as 39°20′, while the modern value is approximately 39°46′. Thus, the
+difference between al-Biruni's calculation and the contemporary measurement is only about
+26 arc minutes, demonstrating the remarkable precision of his astronomical and geodetic
+methods [10].
+Therefore, the study and dissemination of the scientific and cultural heritage of the great
+scholar Abu Rayhan al-Biruni represent an important continuation of the intellectual values
+and traditions inherited from our ancestors. As noted by President Shavkat Mirziyoyev: “It is
+extremely difficult to fully assess the unparalleled discoveries created through the scientific
+genius of the great encyclopedic scholar Abu Rayhan al-Biruni. Although only 31 of his more
+than 150 scientific works have survived to the present day, even these incomplete manuscripts
+provide clear evidence of the extraordinarily diverse and profound legacy he left behind” [2].
+The socio-cultural and intellectual development that took place in Central Asia during
+the ninth–twelfth centuries should be regarded as one of the most remarkable and productive
+manifestations of the early stage of the Eastern Renaissance. Indeed, contemporary scholars
+from both Eastern and Western academic traditions identify the prominent representatives of
+this Renaissance primarily among the scholars who emerged from this region and made
+outstanding contributions to global science and culture.
+Historical sources indicate that Abu Rayhan al-Biruni served as the scientific leader of
+the Khwarazm Ma'mun Academy. His scholarly activities within this institution constituted a
+crucial stage in his intellectual development. Alongside other distinguished scholars of the
+
+http://mentaljournal-jspu.uz/index.php/mesmj/index
+
+306
+
+Academy, al-Biruni made groundbreaking discoveries in both the natural and social sciences,
+thereby becoming one of the most influential figures in the history of world scholarship.
+Al-Biruni authored his renowned work Geodesy, which laid the foundation for the
+scientific discipline of the same name. One of his remarkable achievements was his anticipation
+of the existence of an unknown landmass in the Western Hemisphere—later identified as the
+American continent—as early as the eleventh century, approximately 450 years before
+European explorers. He repeatedly discussed this possibility in his writings based on
+mathematical and geographical reasoning. Historical studies suggest that Christopher
+Columbus, during his long preparations for his transatlantic voyages, was familiar with the
+works of Eastern scholars and travelers, including those of al-Biruni [6:21].
+For many years, European scholars maintained the view that the first terrestrial globe
+was created by the German scholar Martin Behaim in 1492. However, historical evidence
+demonstrates that approximately five centuries earlier, in 995, Abu Rayhan al-Biruni had
+already constructed a scientifically based model of the Earth [8:49].
+It should be emphasized that, during this period, the Karakhanid dynasty had firmly
+established its authority in Transoxiana (Mawaraunnahr). Meanwhile, in the territories
+between the Amu Darya River and India, the power of Mahmud of Ghazni was expanding
+rapidly, creating political instability and posing a threat to the Abbasid Caliphate, the
+Karakhanids, and the Ma'munid state of Khwarazm. In 1017, Mahmud of Ghazni (998–1030)
+conquered Khwarazm, brought an end to the Ma'munid dynasty, and appointed his own
+governors to administer the region. In the same year, al-Biruni, together with other prominent
+scholars, was taken to Ghazna under these circumstances [9].
+Thus, al-Biruni spent the final and, at the same time, one of the most productive periods
+of his life in Ghazna. Historical sources indicate that during the early years of his residence
+there, he experienced considerable difficulties but demonstrated remarkable resilience and
+intellectual perseverance. Subsequently, al-Biruni gradually resumed his scientific
+investigations, producing many of his most significant works during the reigns of Mahmud of
+Ghazni’s successors, Mas'ud (1030–1041) and Ma'dud (1041–1048).
+Al-Biruni’s scientific achievements and written works received high recognition even
+during his own lifetime. For instance, the renowned historian Abu al-Fazl Bayhaqi stated:
+“Master Abu Rayhan possessed such profound knowledge in oral traditions,
+understanding the essence of things, geometry, and philosophy that no one of his time could be
+considered his equal” [3].
+
+http://mentaljournal-jspu.uz/index.php/mesmj/index
+
+307
+
+Similarly, numerous scholars from both Eastern and Western academic traditions—
+including J. Reynaud, E. Sachau, G. Suter, E. Wiedemann, C. Nallino, G. Sarton, R. Wright, M.
+Meyerhof, S. H. Nasr, M. Kozim, S. Baraniy, M. Nizamuddin, and Sh. Yaltkaya—highly evaluated
+al-Biruni’s intellectual legacy. The American historian of science George Sarton gave one of the
+highest assessments of al-Biruni’s contribution, describing him as one of the greatest scientific
+minds of his era and considering him among the foremost scholars of the medieval world. The
+distinguished Orientalist Ignaty Krachkovsky, while evaluating al-Biruni’s heritage,
+emphasized the extraordinary breadth of his knowledge by stating that “it is easier to list the
+fields of science in which he was not interested than those in which he was interested” [5:109].
+Beyond the study of al-Biruni’s scientific and intellectual heritage, his personal life and
+way of living also provide valuable lessons for contemporary generations. His dedication to
+scientific inquiry until the final moments of his life, his authorship of more than one hundred
+scientific and philosophical works, and his ability to overcome numerous hardships through
+patience, determination, and perseverance represent an exemplary model of intellectual
+commitment.
+Particularly noteworthy are al-Biruni’s interactions with Mahmud of Ghazni, including
+the intellectual challenges imposed by the ruler and the scholar’s ability to respond to such
+situations with exceptional wisdom and ingenuity. These episodes demonstrate not only his
+scientific knowledge but also his extraordinary analytical thinking and practical intelligence.
+One such example is the well-known intellectual challenge posed by Sultan Mahmud.
+According to historical accounts, the ruler once attempted to test al-Biruni by asking: “I have
+hidden something in my mind; tell me what it is. The palace has twelve doors—through which
+one will I leave and through which will I enter?” After careful consideration, al-Biruni wrote his
+answer on a sheet of paper and folded it without revealing its contents. The Sultan then ordered
+a new opening to be created in the palace wall, exited through that newly constructed passage,
+and later returned through a door of his choice. When he opened al-Biruni’s written response,
+he found the following words:
+“The palace wall will be opened, a new door will be created, and the ruler will exit
+through it and return through whichever door he chooses.”
+According to the account, the Sultan became even more frustrated by al-Biruni’s
+intelligence and ordered his vizier to throw the scholar from the palace roof. However, Khwaja
+Hasan, who deeply respected al-Biruni, secretly prevented the execution and saved his life.
+Several days later, Sultan Mahmud regretted his decision and expressed remorse. Khwaja
+Hasan then informed the Sultan that if al-Biruni were granted pardon, he would return to the
+http://mentaljournal-jspu.uz/index.php/mesmj/index
+
+308
+
+court. Following his reinstatement, al-Biruni resumed his scholarly activities at the palace
+[7:54–55].
+Another remarkable example demonstrating al-Biruni’s lifelong devotion to knowledge
+is related to his final days. According to historical accounts, his friend Qadi al-Walwaliji once
+discussed with him a complex issue concerning al-Jaddat al-Fasida, a branch of Islamic
+inheritance law dealing with the distribution of inheritance. However, their conversation
+remained unfinished for certain reasons. Several years later, when al-Walwaliji visited alBiruni, who was already on his deathbed, the scholar—despite suffering from severe weakness,
+difficulty breathing, and physical exhaustion—asked his friend to explain that same unresolved
+issue. When his friend suggested postponing the discussion due to al-Biruni’s critical condition,
+the scholar refused, stating:
+“O fortunate companion! Everyone who comes into this world must eventually depart
+from it. I am now leaving this world. Is it not better for me to depart knowing the answer to this
+question rather than leaving it unresolved?”
+After receiving the explanation from his friend, al-Biruni expressed his own scholarly
+opinion on the matter and continued the discussion until his final moments before passing away
+[7:56].
+The examples presented above demonstrate that al-Biruni remained devoted to
+intellectual activity and scientific inquiry throughout his entire life. Describing al-Biruni’s later
+years, Yaqut al-Hamawi noted that the scholar was never seen without a pen in his hand,
+without contemplation in his eyes, or without intellectual reflection in his mind. According to
+al-Hamawi, al-Biruni made no distinction between periods of rest and labor, day and night,
+except on two annual occasions—Nowruz (the spring New Year celebration in March) and
+Mihrjan (the autumn harvest festival)—when he would prepare only enough food and clothing
+for his basic needs.
+By 1048, during the final period of his life, al-Biruni’s health had significantly
+deteriorated, and his eyesight had weakened. Nevertheless, his scientific achievements and
+discoveries had already transformed the intellectual landscape of his era. His works
+contributed greatly to the advancement of numerous scientific disciplines and later played an
+important role in awakening and enriching European scientific thought through the study and
+translation of his writings. Each of al-Biruni’s works was created with a unique intellectual
+spirit, profound enthusiasm, and an unwavering commitment to scientific truth. Consequently,
+his writings continue to inspire admiration and intellectual curiosity among readers and
+researchers.
+http://mentaljournal-jspu.uz/index.php/mesmj/index
+
+309
+
+Conclusion. In conclusion, the encyclopedic scientific heritage of Abu Rayhan al-Biruni
+and his unwavering commitment to the pursuit of knowledge represent one of the most
+remarkable achievements of the early medieval Eastern Renaissance. His continuous scientific
+investigations until the final moments of his life and the extensive written legacy he left behind
+demonstrate his exceptional sense of responsibility toward science and humanity.
+The analysis conducted in this study shows that al-Biruni’s contributions to the natural
+sciences—particularly his foundational role in the development of geodesy, his highly accurate
+determination of the Earth's meridian measurements, and his advanced geographical
+theories—surpassed the scientific boundaries of his time and provided a strong foundation for
+the subsequent development of modern science.
+Furthermore, al-Biruni’s perseverance, intell

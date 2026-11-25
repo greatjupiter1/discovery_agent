@@ -1,0 +1,7238 @@
+This PDF was generated on 16/01/2017 from online resources as part of the 
+Qatar Digital Library's digital archive. 
+
+
+The online record contains extra information, high resolution zoomable views and 
+transcriptions. It can be viewed at: 
+
+
+http://www.qdl.qa/en/archive/81055/vdc_100022880536.0x000001 
+
+
+Reference 
+Or 1997 
+
+
+Title 
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﺪﻤﺣﺃ ﻦﺑ ﺪﻤﺤﻣ 
+،ﻲﻧﻭﺮﻴﺑ 
+
+
+Date(s) 
+Rabī‘ I 570 (AH, Hijri qamari) 
+
+
+Written in 
+Arabic in Arabic 
+
+
+Extent and Format 
+Codex; ff. iii+262+iii 
+
+
+Holding Institution 
+British Library: Oriental Manuscripts 
+
+
+Copyright for document 
+Public Domain 
+
+
+About this record 
+
+
+An early and complete copy of the comprehensive astronomical work, or Canon , by Abū al- 
+Rayḥān Muḥammad ibn Aḥmad al-Bīrūnī (ﻲﻧﻭﺮﻴﺒﻟا ﺪﻤﺣﺃ ﻦﺑ ﺪﻤﺤﻣ ﻥﺎﺤﻳﺮﻟا ﻮﺑﺃ , ca 973-1048). The al-Qanūn  
+al-M asʿūdī was dedicated to Sultan Mas‘ūd of Ghaznī (reg. 1030-1040), and 
+summarises the astronomy of the Almagest (ﻲﻄﺴﺠﻤﻟا ﺏﺎﺘﻛ) of Ptolemy (Claudius Ptolemaeus; c 
+90-c 168) and brings it up to date by adjusting stellar longitudes to account for the almost nine centuries 
+elapsed between the two authors, and by adding astronomical advancements drawn from Arabic, Persian and 
+Sanskrit sources. 
+
+
+The copy was completed in Rabī‘ I 570/Sept.-Oct. 1174 in Baghdad by an anonymous scribe. 
+
+
+The text is divided into 11 treatises (ﺕﻻﺎﻘﻣ) subdivided into chapters (أ ﺏاﻮﺑﺃ and then sections (ﻝﻮﺼﻓ). A 
+detailed table of contents is found on ff. 2r-5r. 
+
+
+Contents: 
+
+
+• Treatise One (ﻝﻭﻷا ﺔﻟﺎﻘﻤﻟا), eleven introductory chapters (ff. 5v-17v); 
+
+
+• Treatise Two (ﻲﻧﺎﺜﻟا ﺔﻟﺎﻘﻤﻟا), twelve chapters on calendars and chronologies (ff. 18r- 
+51r); 
+
+
+• Treatise Three (ﺔﺜﻟﺎﺜﻟا ﺔﻟﺎﻘﻤﻟا), ten chapters on trigonometry (ff. 52r-65v); 
+
+
+• Treatise Four (ﺔﻌﺑاﺮﻟا ﺔﻟﺎﻘﻤﻟا), twenty-six chapters on spherical astronomy (ff. 66r- 
+91r); 
+
+
+Cover page 
+
+
+• Treatise Five (ﺔﺴﻣﺎﺨﻟا ﺔﻟﺎﻘﻤﻟا), eleven chapters on geodesy (ff. 91v-109r); 
+
+
+• Treatise Six (ﺔﺳﺩﺎﺴﻟا ﺔﻟﺎﻘﻤﻟا), eleven chapters on solar motion and time (ff. 109v- 
+131r); 
+
+
+• Treatise Seven (ﺔﻌﺑﺎﺴﻟا ﺔﻟﺎﻘﻤﻟا) eleven chapters on lunar motion. (ff. 131v-158r); 
+
+
+• Treatise Eight (ﺔﻨﻣﺎﺜﻟا ﺔﻟﺎﻘﻤﻟا) seventeen chapters on eclipses (ff. 158v-179r); 
+
+
+• Treatise Nine (ﺔﻌﺳﺎﺘﻟا ﺔﻟﺎﻘﻤﻟا) nine chapters on the fixed stars (ff. 179v-211v); 
+
+
+• Treatise Ten (ﺓﺮﺷﺎﻌﻟا ﺔﻟﺎﻘﻤﻟا) thirteen chapters on the planets (ff. 212r-242r); 
+
+
+• Treatise Eleven (ﺮﺸﻋ ﻱﺩﺎﺤﻟا ﺔﻟﺎﻘﻤﻟا) eleven chapters on astrology (ff. 242v-262r). 
+
+
+Begins (f. 1v, lines 2-5): 
+
+
+ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا 
+
+
+ﷲ ﻪﻤﺣﺭ ﻲﻧﻭﺮﻴﺒﻟا ﺪﻤﺣﺃ ﻦﺑ ﺪﻤﺤﻣ ﻥﺎﺤﻳﺮﻟا ﻲﺑﺃ ﻞﻤﻋ 
+
+
+ﻎﻠﺒﻳ ﻥﺎﻛ ﻲﻧاﻭ ﻊﻨﻣ ﺎﻤﻟ ﺪﺟاﻭ ﻻﻭ ﻊﻓﺭ ﻦﻤﻟ ﻊﺿاﻭ ﻼﻓ ﻩﺎﺒﺷﻷاﻭ ﻝﺎﻜﺷﻷا ﻦﻋ ﻩﺎﻳا ﻩﺪﻴﻳﺎﺒﺗ ﺩﺮﻔﺗﻭ ﻪﻠﻟﺎﺑ ﺪﻌﺳ ﻦﻣ ﺩﻮﻌﺴﻤﻟا 
+ﻚﻠﻣ 
+
+
+ﻪﻟﻮﺳﺮﻟ ﺓﺰﻌﻟا ﻰﻟﺎﻌﺗ ﻩﺭﺎﻬﻇﺃ ﻻ ﻮﻟ ﺎﻬﺑﺭﺎﻗﺃ ﺪﻌﺑ ﺎﻫﺪﻋﺎﺑﺃ ﻰﻟﺇ ﻩﺮﺒﺧ ﻲﻫﺎﺘﻨﻳﻭ ﺎﻬﺑﺭﺎﻐﻣﻭ ﺓﺭﻮﻤﻌﻤﻟا ﺽﺭﻷا ﻕﺭﺎﺸﻣ ﻡﻼﺳﻹا 
+ـﺱﺮﻤﻠﻟﻭ ﻦﻴﻟـ ين] 
+
+
+Ends (f. 262, lines 10-12): 
+
+
+... ﻪﻴﻠﻋ ﻪﻠﻛﻮﺘﻣ ﻞﻛﻮﺗ ﻥﺇﻭ (؟ ﻦﻴﺑ ﺎًﺣﺎﺣ اًﺮﻣﺃ) ﻦﻴﻣﻮﺴﻣ اًﺩاﺪﻋﺃﻭ اًﺩﺪﻋ ﻪﻟ ﺢﺘﻔﻧﻭ ﻪﺑ ﻦﻴﺑﻭ ﻪﻟﻮﺣ 
+
+
+ﻩﺮﻨﺣ ﻲﻓ ﻱﺮﺸﻳ ﻪﻴﻟﺇ ﻝﻭﺮﺒﻟﺎﻓ ؟ ﷲ ﺏﻮﺟﻭ ﻪﻟ ﺐﻟﺎﻏ ﻼﻓ ﷲ ﻩﺮﺼﻧ ﻦﻤﻓ ﷲ ﺪﻨﻋ ﻦﻣﻷا ﺮﺼﻨﻟا ﺎﻣﻭ له 
+
+
+ﻦﻴﻘﺘﻤﻠﻟ ﺔﺒﻗﺎﻌﻟاﻭ ﻥﻮﺒﻟﺎﻐﻟا ﻢﻬﻟ 
+
+
+Colophon (f. 262, lines 13-18): 
+
+
+ﺮﺸﻋ ﺔﻳﺩﺎﺤﻟا ﺔﻟﺎﻘﻤﻟا ﺖﻤﺗ 
+
+
+ﻒﻴﻨﺼﺗ ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا ﺎﻬﻣﺎﻤﺘﺑ ﻢﺗﻭ 
+
+
+ﺔﻨﻤﻟاﻭ ﺪﻤﺤﻟا ﻪﻠﻟﻭ ﻲﻧﻭﺮﻴﺒﻟا ﻥﺎﺤﻳﺮﻟا ﻲﺑﺃ 
+
+
+ﻊﻴﺑﺭ ﺮﻬﺷ ﻲﻓ ﺩاﺪﻐﺑ ﻢﻠﺴﻟا ﺔﻨﻳﺪﻤﺑ 
+
+
+ﺔﻳﺮﺠﻫ ﺔﺋﺎﻣ ﺲﻤﺧﻭ ﻦﻴﻌﺒﺳ ﺔﻨﺳ ﻦﻣ ﻰﻟﻭﻷا 
+
+
+ﻦﻴﻤﻟﺎﻌﻟا ﺏﺭ ﻪﻠﻟ ﺪﻤﺤﻟاﻭ 
+
+
+Collation note next to colophon (f. 262) 
+
+
+ﺎﻤﻣ ﺎﻬﺑ ﻞﺑاﻮﻗ ؟ ﻲﻓ ﻪﻨﻣ ﺖﻠﻘﻧ في 
+
+
+ﻦﻴﻌﺒﺳﻭ ﻯﺪﺣﺇ ﺔﻨﺳ ﻡﺮﺤﻣ 
+
+
+ﺔﻴﺑﺮﻋ ﺔﻳﺮﺠﻫ ﺔﺋﺎﻣ ﺲﻤﺧﻭ ؟ ﻢﻠﺴﻟاﻭ لم 
+
+
+Cover page 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [front] (1/544) 
+
+
+1 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000002 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [back] (2/544) 
+
+
+2 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000003 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [spine] (3/544) 
+
+
+3 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000004 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [edge] (4/544) 
+
+
+4 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000005 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [head] (5/544) 
+
+
+5 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000006 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [tail] (6/544) 
+
+
+6 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000007 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [front-i] (7/544) 
+
+
+7 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000008 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [i-r] (8/544) 
+
+
+8 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000009 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [i-v] (9/544) 
+
+
+9 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00000a 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [ii-r] (10/544) 
+
+
+10 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00000b 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [ii-v] (11/544) 
+
+
+11 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00000c 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [iii-r] (12/544) 
+
+
+12 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00000d 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [iii-v] (13/544) 
+
+
+13 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00000e 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [1r] (14/544) 
+
+
+14 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00000f 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [1v] (15/544) 
+
+
+15 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000010 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [2r] (16/544) 
+
+
+16 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000011 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [2v] (17/544) 
+
+
+17 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000012 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [3r] (18/544) 
+
+
+18 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000013 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [3v] (19/544) 
+
+
+19 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000014 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [4r] (20/544) 
+
+
+20 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000015 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [4v] (21/544) 
+
+
+21 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000016 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [5r] (22/544) 
+
+
+22 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000017 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [5v] (23/544) 
+
+
+23 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000018 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [6r] (24/544) 
+
+
+24 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000019 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [6v] (25/544) 
+
+
+25 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00001a 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [7r] (26/544) 
+
+
+26 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00001b 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [7v] (27/544) 
+
+
+27 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00001c 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [8r] (28/544) 
+
+
+28 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00001d 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [8v] (29/544) 
+
+
+29 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00001e 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [9r] (30/544) 
+
+
+30 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00001f 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [9v] (31/544) 
+
+
+31 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000020 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [10r] (32/544) 
+
+
+32 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000021 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [10v] (33/544) 
+
+
+33 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000022 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [11r] (34/544) 
+
+
+34 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000023 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [11v] (35/544) 
+
+
+35 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000024 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [12r] (36/544) 
+
+
+36 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000025 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [12v] (37/544) 
+
+
+37 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000026 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [13r] (38/544) 
+
+
+38 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000027 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [13v] (39/544) 
+
+
+39 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000028 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [14r] (40/544) 
+
+
+40 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000029 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [14v] (41/544) 
+
+
+41 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00002a 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [15r] (42/544) 
+
+
+42 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00002b 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [15v] (43/544) 
+
+
+43 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00002c 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [16r] (44/544) 
+
+
+44 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00002d 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [16v] (45/544) 
+
+
+45 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00002e 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [17r] (46/544) 
+
+
+46 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00002f 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [17v] (47/544) 
+
+
+47 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000030 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [18r] (48/544) 
+
+
+48 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000031 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [18v] (49/544) 
+
+
+49 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000032 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [19r] (50/544) 
+
+
+50 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000033 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [19v] (51/544) 
+
+
+51 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000034 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [20r] (52/544) 
+
+
+52 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000035 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [20v] (53/544) 
+
+
+53 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000036 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [21r] (54/544) 
+
+
+54 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000037 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [21v] (55/544) 
+
+
+55 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000038 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [22r] (56/544) 
+
+
+56 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000039 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [22v] (57/544) 
+
+
+57 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00003a 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [23r] (58/544) 
+
+
+58 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00003b 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [23v] (59/544) 
+
+
+59 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00003c 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [24r] (60/544) 
+
+
+60 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00003d 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [24v] (61/544) 
+
+
+61 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00003e 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [25r] (62/544) 
+
+
+62 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00003f 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [25v] (63/544) 
+
+
+63 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000040 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [26r] (64/544) 
+
+
+64 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000041 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [26v] (65/544) 
+
+
+65 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000042 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [27r] (66/544) 
+
+
+66 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000043 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [27v] (67/544) 
+
+
+67 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000044 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [28r] (68/544) 
+
+
+68 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000045 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [28v] (69/544) 
+
+
+69 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000046 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [29r] (70/544) 
+
+
+70 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000047 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [29v] (71/544) 
+
+
+71 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000048 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [30r] (72/544) 
+
+
+72 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000049 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [30v] (73/544) 
+
+
+73 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00004a 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [31r] (74/544) 
+
+
+74 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00004b 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [31v] (75/544) 
+
+
+75 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00004c 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [32r] (76/544) 
+
+
+76 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00004d 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [32v] (77/544) 
+
+
+77 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00004e 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [33r] (78/544) 
+
+
+78 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00004f 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [33v] (79/544) 
+
+
+79 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000050 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [34r] (80/544) 
+
+
+80 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000051 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [34v] (81/544) 
+
+
+81 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000052 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [35r] (82/544) 
+
+
+82 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000053 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [35v] (83/544) 
+
+
+83 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000054 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [36r] (84/544) 
+
+
+84 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000055 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [36v] (85/544) 
+
+
+85 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000056 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [37r] (86/544) 
+
+
+86 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000057 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [37v] (87/544) 
+
+
+87 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000058 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [38r] (88/544) 
+
+
+88 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000059 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [38v] (89/544) 
+
+
+89 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00005a 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [39r] (90/544) 
+
+
+90 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00005b 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [39v] (91/544) 
+
+
+91 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00005c 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [40r] (92/544) 
+
+
+92 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00005d 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [40v] (93/544) 
+
+
+93 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00005e 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [41r] (94/544) 
+
+
+94 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00005f 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [41v] (95/544) 
+
+
+95 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000060 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [42r] (96/544) 
+
+
+96 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000061 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [42v] (97/544) 
+
+
+97 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000062 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [43r] (98/544) 
+
+
+98 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000063 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [43v] (99/544) 
+
+
+99 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000064 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [44r] (100/544) 
+
+
+100 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000065 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [44v] (101/544) 
+
+
+101 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000066 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [45r] (102/544) 
+
+
+102 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000067 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [45v] (103/544) 
+
+
+103 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000068 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [46r] (104/544) 
+
+
+104 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000069 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [46v] (105/544) 
+
+
+105 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00006a 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [47r] (106/544) 
+
+
+106 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00006b 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [47v] (107/544) 
+
+
+107 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00006c 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [48r] (108/544) 
+
+
+108 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00006d 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [48v] (109/544) 
+
+
+109 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00006e 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [49r] (110/544) 
+
+
+110 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00006f 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [49v] (111/544) 
+
+
+111 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000070 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [50r] (112/544) 
+
+
+112 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000071 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [50v] (113/544) 
+
+
+113 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000072 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [51r] (114/544) 
+
+
+114 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000073 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [51v] (115/544) 
+
+
+115 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000074 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [52r] (116/544) 
+
+
+116 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000075 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [52v] (117/544) 
+
+
+117 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000076 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [53r] (118/544) 
+
+
+118 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000077 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [53v] (119/544) 
+
+
+119 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000078 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [54r] (120/544) 
+
+
+120 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000079 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [54v] (121/544) 
+
+
+121 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00007a 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [55r] (122/544) 
+
+
+122 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00007b 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [55v] (123/544) 
+
+
+123 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00007c 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [56r] (124/544) 
+
+
+124 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00007d 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [56v] (125/544) 
+
+
+125 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00007e 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [57r] (126/544) 
+
+
+126 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00007f 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [57v] (127/544) 
+
+
+127 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000080 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [58r] (128/544) 
+
+
+128 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000081 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [58v] (129/544) 
+
+
+129 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000082 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [59r] (130/544) 
+
+
+130 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000083 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [59v] (131/544) 
+
+
+131 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000084 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [60r] (132/544) 
+
+
+132 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000085 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [60v] (133/544) 
+
+
+133 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000086 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [61r] (134/544) 
+
+
+134 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000087 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [61v] (135/544) 
+
+
+135 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000088 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [62r] (136/544) 
+
+
+136 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000089 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [62v] (137/544) 
+
+
+137 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00008a 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [63r] (138/544) 
+
+
+138 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00008b 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [63v] (139/544) 
+
+
+139 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00008c 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [64r] (140/544) 
+
+
+140 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00008d 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [64v] (141/544) 
+
+
+141 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00008e 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [65r] (142/544) 
+
+
+142 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00008f 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [65v] (143/544) 
+
+
+143 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000090 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [66r] (144/544) 
+
+
+144 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000091 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [66v] (145/544) 
+
+
+145 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000092 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [67r] (146/544) 
+
+
+146 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000093 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [67v] (147/544) 
+
+
+147 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000094 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [68r] (148/544) 
+
+
+148 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000095 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [68v] (149/544) 
+
+
+149 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000096 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [69r] (150/544) 
+
+
+150 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000097 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [69v] (151/544) 
+
+
+151 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000098 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [70r] (152/544) 
+
+
+152 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x000099 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [70v] (153/544) 
+
+
+153 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00009a 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [71r] (154/544) 
+
+
+154 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00009b 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [71v] (155/544) 
+
+
+155 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00009c 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [72r] (156/544) 
+
+
+156 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00009d 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [72v] (157/544) 
+
+
+157 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00009e 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [73r] (158/544) 
+
+
+158 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x00009f 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [73v] (159/544) 
+
+
+159 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x0000a0 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [74r] (160/544) 
+
+
+160 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x0000a1 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [74v] (161/544) 
+
+
+161 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x0000a2 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [75r] (162/544) 
+
+
+162 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x0000a3 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [75v] (163/544) 
+
+
+163 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x0000a4 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [76r] (164/544) 
+
+
+164 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x0000a5 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [76v] (165/544) 
+
+
+165 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x0000a6 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [77r] (166/544) 
+
+
+166 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x0000a7 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [77v] (167/544) 
+
+
+167 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x0000a8 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [78r] (168/544) 
+
+
+168 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x0000a9 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [78v] (169/544) 
+
+
+169 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x0000aa 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [79r] (170/544) 
+
+
+170 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x0000ab 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [79v] (171/544) 
+
+
+171 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x0000ac 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [80r] (172/544) 
+
+
+172 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x0000ad 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [80v] (173/544) 
+
+
+173 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x0000ae 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [81r] (174/544) 
+
+
+174 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x0000af 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [81v] (175/544) 
+
+
+175 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x0000b0 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [82r] (176/544) 
+
+
+176 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x0000b1 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [82v] (177/544) 
+
+
+177 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x0000b2 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [83r] (178/544) 
+
+
+178 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x0000b3 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [83v] (179/544) 
+
+
+179 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x0000b4 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [84r] (180/544) 
+
+
+180 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x0000b5 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [84v] (181/544) 
+
+
+181 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x0000b6 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [85r] (182/544) 
+
+
+182 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x0000b7 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [85v] (183/544) 
+
+
+183 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x0000b8 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [86r] (184/544) 
+
+
+184 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x0000b9 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [86v] (185/544) 
+
+
+185 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x0000ba 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [87r] (186/544) 
+
+
+186 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x0000bb 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [87v] (187/544) 
+
+
+187 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x0000bc 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [88r] (188/544) 
+
+
+188 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x0000bd 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [88v] (189/544) 
+
+
+189 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x0000be 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [89r] (190/544) 
+
+
+190 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x0000bf 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [89v] (191/544) 
+
+
+191 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x0000c0 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [90r] (192/544) 
+
+
+192 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x0000c1 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [90v] (193/544) 
+
+
+193 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x0000c2 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [91r] (194/544) 
+
+
+194 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x0000c3 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [91v] (195/544) 
+
+
+195 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x0000c4 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [92r] (196/544) 
+
+
+196 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x0000c5 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [92v] (197/544) 
+
+
+197 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x0000c6 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [93r] (198/544) 
+
+
+198 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x0000c7 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [93v] (199/544) 
+
+
+199 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514425.0x0000c8 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [94r] (200/544) 
+
+
+200 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000001 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [94v] (201/544) 
+
+
+201 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000002 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [95r] (202/544) 
+
+
+202 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000003 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [95v] (203/544) 
+
+
+203 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000004 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [96r] (204/544) 
+
+
+204 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000005 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [96v] (205/544) 
+
+
+205 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000006 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [97r] (206/544) 
+
+
+206 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000007 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [97v] (207/544) 
+
+
+207 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000008 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [98r] (208/544) 
+
+
+208 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000009 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [98v] (209/544) 
+
+
+209 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00000a 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [99r] (210/544) 
+
+
+210 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00000b 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [99v] (211/544) 
+
+
+211 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00000c 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [100r] (212/544) 
+
+
+212 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00000d 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [100v] (213/544) 
+
+
+213 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00000e 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [101r] (214/544) 
+
+
+214 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00000f 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [101v] (215/544) 
+
+
+215 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000010 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [102r] (216/544) 
+
+
+216 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000011 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [102v] (217/544) 
+
+
+217 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000012 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [103r] (218/544) 
+
+
+218 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000013 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [103v] (219/544) 
+
+
+219 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000014 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [104r] (220/544) 
+
+
+220 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000015 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [104v] (221/544) 
+
+
+221 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000016 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [105r] (222/544) 
+
+
+222 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000017 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [105v] (223/544) 
+
+
+223 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000018 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [106r] (224/544) 
+
+
+224 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000019 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [106v] (225/544) 
+
+
+225 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00001a 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [107r] (226/544) 
+
+
+226 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00001b 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [107v] (227/544) 
+
+
+227 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00001c 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [108r] (228/544) 
+
+
+228 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00001d 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [108v] (229/544) 
+
+
+229 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00001e 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [109r] (230/544) 
+
+
+230 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00001f 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [109v] (231/544) 
+
+
+231 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000020 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [110r] (232/544) 
+
+
+232 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000021 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [110v] (233/544) 
+
+
+233 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000022 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [111r] (234/544) 
+
+
+234 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000023 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [111v] (235/544) 
+
+
+235 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000024 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [112r] (236/544) 
+
+
+236 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000025 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [112v] (237/544) 
+
+
+237 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000026 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [113r] (238/544) 
+
+
+238 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000027 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [113v] (239/544) 
+
+
+239 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000028 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [114r] (240/544) 
+
+
+240 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000029 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [114v] (241/544) 
+
+
+241 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00002a 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [115r] (242/544) 
+
+
+242 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00002b 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [115v] (243/544) 
+
+
+243 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00002c 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [116r] (244/544) 
+
+
+244 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00002d 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [116v] (245/544) 
+
+
+245 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00002e 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [117r] (246/544) 
+
+
+246 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00002f 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [117v] (247/544) 
+
+
+247 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000030 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [118r] (248/544) 
+
+
+248 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000031 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [118v] (249/544) 
+
+
+249 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000032 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [119r] (250/544) 
+
+
+250 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000033 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [119v] (251/544) 
+
+
+251 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000034 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [120r] (252/544) 
+
+
+252 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000035 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [120v] (253/544) 
+
+
+253 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000036 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [121r] (254/544) 
+
+
+254 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000037 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [121v] (255/544) 
+
+
+255 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000038 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [122r] (256/544) 
+
+
+256 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000039 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [122v] (257/544) 
+
+
+257 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00003a 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [123r] (258/544) 
+
+
+258 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00003b 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [123v] (259/544) 
+
+
+259 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00003c 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [124r] (260/544) 
+
+
+260 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00003d 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [124v] (261/544) 
+
+
+261 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00003e 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [125r] (262/544) 
+
+
+262 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00003f 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [125v] (263/544) 
+
+
+263 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000040 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [126r] (264/544) 
+
+
+264 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000041 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [126v] (265/544) 
+
+
+265 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000042 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [127r] (266/544) 
+
+
+266 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000043 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [127v] (267/544) 
+
+
+267 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000044 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [128r] (268/544) 
+
+
+268 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000045 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [128v] (269/544) 
+
+
+269 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000046 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [129r] (270/544) 
+
+
+270 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000047 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [129v] (271/544) 
+
+
+271 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000048 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [130r] (272/544) 
+
+
+272 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000049 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [130v] (273/544) 
+
+
+273 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00004a 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [131r] (274/544) 
+
+
+274 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00004b 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [131v] (275/544) 
+
+
+275 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00004c 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [132r] (276/544) 
+
+
+276 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00004d 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [132v] (277/544) 
+
+
+277 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00004e 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [133r] (278/544) 
+
+
+278 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00004f 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [133v] (279/544) 
+
+
+279 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000050 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [134r] (280/544) 
+
+
+280 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000051 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [134v] (281/544) 
+
+
+281 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000052 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [135r] (282/544) 
+
+
+282 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000053 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [135v] (283/544) 
+
+
+283 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000054 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [136r] (284/544) 
+
+
+284 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000055 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [136v] (285/544) 
+
+
+285 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000056 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [137r] (286/544) 
+
+
+286 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000057 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [137v] (287/544) 
+
+
+287 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000058 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [138r] (288/544) 
+
+
+288 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000059 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [138v] (289/544) 
+
+
+289 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00005a 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [139r] (290/544) 
+
+
+290 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00005b 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [139v] (291/544) 
+
+
+291 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00005c 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [140r] (292/544) 
+
+
+292 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00005d 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [140v] (293/544) 
+
+
+293 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00005e 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [141r] (294/544) 
+
+
+294 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00005f 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [141v] (295/544) 
+
+
+295 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000060 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [142r] (296/544) 
+
+
+296 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000061 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [142v] (297/544) 
+
+
+297 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000062 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [143r] (298/544) 
+
+
+298 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000063 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [143v] (299/544) 
+
+
+299 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000064 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [144r] (300/544) 
+
+
+300 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000065 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [144v] (301/544) 
+
+
+301 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000066 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [145r] (302/544) 
+
+
+302 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000067 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [145v] (303/544) 
+
+
+303 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000068 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [146r] (304/544) 
+
+
+304 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000069 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [146v] (305/544) 
+
+
+305 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00006a 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [147r] (306/544) 
+
+
+306 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00006b 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [147v] (307/544) 
+
+
+307 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00006c 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [148r] (308/544) 
+
+
+308 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00006d 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [148v] (309/544) 
+
+
+309 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00006e 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [149r] (310/544) 
+
+
+310 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00006f 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [149v] (311/544) 
+
+
+311 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000070 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [150r] (312/544) 
+
+
+312 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000071 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [150v] (313/544) 
+
+
+313 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000072 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [151r] (314/544) 
+
+
+314 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000073 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [151v] (315/544) 
+
+
+315 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000074 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [152r] (316/544) 
+
+
+316 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000075 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [152v] (317/544) 
+
+
+317 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000076 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [153r] (318/544) 
+
+
+318 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000077 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [153v] (319/544) 
+
+
+319 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000078 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [154r] (320/544) 
+
+
+320 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000079 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [154v] (321/544) 
+
+
+321 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00007a 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [155r] (322/544) 
+
+
+322 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00007b 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [155v] (323/544) 
+
+
+323 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00007c 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [156r] (324/544) 
+
+
+324 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00007d 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [156v] (325/544) 
+
+
+325 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00007e 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [157r] (326/544) 
+
+
+326 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00007f 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [157v] (327/544) 
+
+
+327 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000080 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [158r] (328/544) 
+
+
+328 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000081 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [158v] (329/544) 
+
+
+329 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000082 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [159r] (330/544) 
+
+
+330 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000083 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [159v] (331/544) 
+
+
+331 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000084 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [160r] (332/544) 
+
+
+332 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000085 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [160v] (333/544) 
+
+
+333 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000086 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [161r] (334/544) 
+
+
+334 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000087 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [161v] (335/544) 
+
+
+335 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000088 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [162r] (336/544) 
+
+
+336 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000089 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [162v] (337/544) 
+
+
+337 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00008a 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [163r] (338/544) 
+
+
+338 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00008b 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [163v] (339/544) 
+
+
+339 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00008c 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [164r] (340/544) 
+
+
+340 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00008d 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [164v] (341/544) 
+
+
+341 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00008e 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [165r] (342/544) 
+
+
+342 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00008f 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [165v] (343/544) 
+
+
+343 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000090 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [166r] (344/544) 
+
+
+344 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000091 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [166v] (345/544) 
+
+
+345 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000092 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [167r] (346/544) 
+
+
+346 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000093 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [167v] (347/544) 
+
+
+347 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000094 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [168r] (348/544) 
+
+
+348 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000095 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [168v] (349/544) 
+
+
+349 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000096 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [169r] (350/544) 
+
+
+350 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000097 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [169v] (351/544) 
+
+
+351 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000098 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [170r] (352/544) 
+
+
+352 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x000099 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [170v] (353/544) 
+
+
+353 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00009a 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [171r] (354/544) 
+
+
+354 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00009b 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [171v] (355/544) 
+
+
+355 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00009c 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [172r] (356/544) 
+
+
+356 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00009d 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [172v] (357/544) 
+
+
+357 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00009e 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [173r] (358/544) 
+
+
+358 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x00009f 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [173v] (359/544) 
+
+
+359 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x0000a0 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [174r] (360/544) 
+
+
+360 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x0000a1 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [174v] (361/544) 
+
+
+361 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x0000a2 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [175r] (362/544) 
+
+
+362 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x0000a3 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [175v] (363/544) 
+
+
+363 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x0000a4 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [176r] (364/544) 
+
+
+364 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x0000a5 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [176v] (365/544) 
+
+
+365 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x0000a6 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [177r] (366/544) 
+
+
+366 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x0000a7 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [177v] (367/544) 
+
+
+367 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x0000a8 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [178r] (368/544) 
+
+
+368 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x0000a9 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [178v] (369/544) 
+
+
+369 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x0000aa 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [179r] (370/544) 
+
+
+370 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x0000ab 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [179v] (371/544) 
+
+
+371 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x0000ac 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [180r] (372/544) 
+
+
+372 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x0000ad 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [180v] (373/544) 
+
+
+373 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x0000ae 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [181r] (374/544) 
+
+
+374 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x0000af 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [181v] (375/544) 
+
+
+375 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x0000b0 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [182r] (376/544) 
+
+
+376 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x0000b1 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [182v] (377/544) 
+
+
+377 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x0000b2 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [183r] (378/544) 
+
+
+378 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x0000b3 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [183v] (379/544) 
+
+
+379 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x0000b4 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [184r] (380/544) 
+
+
+380 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x0000b5 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [184v] (381/544) 
+
+
+381 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x0000b6 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [185r] (382/544) 
+
+
+382 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x0000b7 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [185v] (383/544) 
+
+
+383 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x0000b8 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [186r] (384/544) 
+
+
+384 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x0000b9 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [186v] (385/544) 
+
+
+385 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x0000ba 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [187r] (386/544) 
+
+
+386 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x0000bb 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [187v] (387/544) 
+
+
+387 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x0000bc 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [188r] (388/544) 
+
+
+388 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x0000bd 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [188v] (389/544) 
+
+
+389 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x0000be 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [189r] (390/544) 
+
+
+390 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x0000bf 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [189v] (391/544) 
+
+
+391 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x0000c0 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [190r] (392/544) 
+
+
+392 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x0000c1 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [190v] (393/544) 
+
+
+393 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x0000c2 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [191r] (394/544) 
+
+
+394 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x0000c3 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [191v] (395/544) 
+
+
+395 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x0000c4 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [192r] (396/544) 
+
+
+396 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x0000c5 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [192v] (397/544) 
+
+
+397 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x0000c6 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [193r] (398/544) 
+
+
+398 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x0000c7 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [193v] (399/544) 
+
+
+399 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514426.0x0000c8 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [194r] (400/544) 
+
+
+400 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000001 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [194v] (401/544) 
+
+
+401 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000002 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [195r] (402/544) 
+
+
+402 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000003 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [195v] (403/544) 
+
+
+403 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000004 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [196r] (404/544) 
+
+
+404 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000005 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [196v] (405/544) 
+
+
+405 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000006 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [197r] (406/544) 
+
+
+406 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000007 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [197v] (407/544) 
+
+
+407 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000008 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [198r] (408/544) 
+
+
+408 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000009 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [198v] (409/544) 
+
+
+409 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00000a 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [199r] (410/544) 
+
+
+410 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00000b 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [199v] (411/544) 
+
+
+411 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00000c 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [200r] (412/544) 
+
+
+412 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00000d 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [200v] (413/544) 
+
+
+413 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00000e 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [201r] (414/544) 
+
+
+414 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00000f 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [201v] (415/544) 
+
+
+415 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000010 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [202r] (416/544) 
+
+
+416 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000011 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [202v] (417/544) 
+
+
+417 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000012 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [203r] (418/544) 
+
+
+418 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000013 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [203v] (419/544) 
+
+
+419 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000014 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [204r] (420/544) 
+
+
+420 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000015 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [204v] (421/544) 
+
+
+421 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000016 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [205r] (422/544) 
+
+
+422 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000017 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [205v] (423/544) 
+
+
+423 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000018 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [206r] (424/544) 
+
+
+424 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000019 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [206v] (425/544) 
+
+
+425 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00001a 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [207r] (426/544) 
+
+
+426 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00001b 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [207v] (427/544) 
+
+
+427 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00001c 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [208r] (428/544) 
+
+
+428 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00001d 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [208v] (429/544) 
+
+
+429 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00001e 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [209r] (430/544) 
+
+
+430 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00001f 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [209v] (431/544) 
+
+
+431 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000020 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [210r] (432/544) 
+
+
+432 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000021 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [210v] (433/544) 
+
+
+433 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000022 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [211r] (434/544) 
+
+
+434 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000023 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [211v] (435/544) 
+
+
+435 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000024 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [212r] (436/544) 
+
+
+436 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000025 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [212v] (437/544) 
+
+
+437 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000026 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [213r] (438/544) 
+
+
+438 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000027 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [213v] (439/544) 
+
+
+439 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000028 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [214r] (440/544) 
+
+
+440 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000029 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [214v] (441/544) 
+
+
+441 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00002a 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [215r] (442/544) 
+
+
+442 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00002b 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [215v] (443/544) 
+
+
+443 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00002c 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [216r] (444/544) 
+
+
+444 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00002d 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [216v] (445/544) 
+
+
+445 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00002e 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [217r] (446/544) 
+
+
+446 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00002f 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [217v] (447/544) 
+
+
+447 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000030 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [218r] (448/544) 
+
+
+448 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000031 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [218v] (449/544) 
+
+
+449 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000032 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [219r] (450/544) 
+
+
+450 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000033 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [219v] (451/544) 
+
+
+451 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000034 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [220r] (452/544) 
+
+
+452 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000035 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [220v] (453/544) 
+
+
+453 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000036 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [221r] (454/544) 
+
+
+454 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000037 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [221v] (455/544) 
+
+
+455 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000038 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [222r] (456/544) 
+
+
+456 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000039 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [222v] (457/544) 
+
+
+457 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00003a 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [223r] (458/544) 
+
+
+458 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00003b 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [223v] (459/544) 
+
+
+459 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00003c 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [224r] (460/544) 
+
+
+460 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00003d 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [224v] (461/544) 
+
+
+461 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00003e 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [225r] (462/544) 
+
+
+462 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00003f 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [225v] (463/544) 
+
+
+463 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000040 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [226r] (464/544) 
+
+
+464 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000041 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [226v] (465/544) 
+
+
+465 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000042 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [227r] (466/544) 
+
+
+466 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000043 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [227v] (467/544) 
+
+
+467 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000044 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [228r] (468/544) 
+
+
+468 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000045 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [228v] (469/544) 
+
+
+469 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000046 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [229r] (470/544) 
+
+
+470 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000047 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [229v] (471/544) 
+
+
+471 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000048 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [230r] (472/544) 
+
+
+472 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000049 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [230v] (473/544) 
+
+
+473 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00004a 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [231r] (474/544) 
+
+
+474 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00004b 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [231v] (475/544) 
+
+
+475 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00004c 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [232r] (476/544) 
+
+
+476 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00004d 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [232v] (477/544) 
+
+
+477 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00004e 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [233r] (478/544) 
+
+
+478 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00004f 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [233v] (479/544) 
+
+
+479 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000050 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [234r] (480/544) 
+
+
+480 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000051 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [234v] (481/544) 
+
+
+481 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000052 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [235r] (482/544) 
+
+
+482 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000053 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [235v] (483/544) 
+
+
+483 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000054 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [236r] (484/544) 
+
+
+484 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000055 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [236v] (485/544) 
+
+
+485 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000056 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [237r] (486/544) 
+
+
+486 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000057 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [237v] (487/544) 
+
+
+487 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000058 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [238r] (488/544) 
+
+
+488 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000059 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [238v] (489/544) 
+
+
+489 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00005a 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [239r] (490/544) 
+
+
+490 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00005b 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [239v] (491/544) 
+
+
+491 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00005c 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [240r] (492/544) 
+
+
+492 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00005d 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [240v] (493/544) 
+
+
+493 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00005e 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [241r] (494/544) 
+
+
+494 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00005f 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [241v] (495/544) 
+
+
+495 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000060 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [242r] (496/544) 
+
+
+496 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000061 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [242v] (497/544) 
+
+
+497 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000062 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [243r] (498/544) 
+
+
+498 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000063 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [243v] (499/544) 
+
+
+499 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000064 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [244r] (500/544) 
+
+
+500 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000065 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [244v] (501/544) 
+
+
+501 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000066 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [245r] (502/544) 
+
+
+502 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000067 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [245v] (503/544) 
+
+
+503 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000068 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [246r] (504/544) 
+
+
+504 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000069 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [246v] (505/544) 
+
+
+505 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00006a 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [247r] (506/544) 
+
+
+506 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00006b 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [247v] (507/544) 
+
+
+507 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00006c 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [248r] (508/544) 
+
+
+508 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00006d 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [248v] (509/544) 
+
+
+509 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00006e 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [249r] (510/544) 
+
+
+510 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00006f 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [249v] (511/544) 
+
+
+511 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000070 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [250r] (512/544) 
+
+
+512 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000071 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [250v] (513/544) 
+
+
+513 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000072 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [251r] (514/544) 
+
+
+514 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000073 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [251v] (515/544) 
+
+
+515 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000074 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [252r] (516/544) 
+
+
+516 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000075 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [252v] (517/544) 
+
+
+517 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000076 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [253r] (518/544) 
+
+
+518 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000077 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [253v] (519/544) 
+
+
+519 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000078 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [254r] (520/544) 
+
+
+520 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000079 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [254v] (521/544) 
+
+
+521 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00007a 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [255r] (522/544) 
+
+
+522 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00007b 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [255v] (523/544) 
+
+
+523 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00007c 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [256r] (524/544) 
+
+
+524 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00007d 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [256v] (525/544) 
+
+
+525 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00007e 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [257r] (526/544) 
+
+
+526 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00007f 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [257v] (527/544) 
+
+
+527 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000080 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [258r] (528/544) 
+
+
+528 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000081 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [258v] (529/544) 
+
+
+529 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000082 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [259r] (530/544) 
+
+
+530 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000083 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [259v] (531/544) 
+
+
+531 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000084 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [260r] (532/544) 
+
+
+532 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000085 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [260v] (533/544) 
+
+
+533 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000086 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [261r] (534/544) 
+
+
+534 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000087 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [261v] (535/544) 
+
+
+535 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000088 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [262r] (536/544) 
+
+
+536 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000089 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [262v] (537/544) 
+
+
+537 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00008a 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [iv-r] (538/544) 
+
+
+538 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00008b 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [iv-v] (539/544) 
+
+
+539 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00008c 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [v-r] (540/544) 
+
+
+540 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00008d 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [v-v] (541/544) 
+
+
+541 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00008e 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [vi-r] (542/544) 
+
+
+542 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x00008f 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [vi-v] (543/544) 
+
+
+543 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000090 
+
+
+al-Qanūn al-Masʿūdī ﻱﺩﻮﻌﺴﻤﻟا ﻥﻮﻧﺎﻘﻟا Bīrūnī, Muḥammad ibn Aḥmad ﻦﺑ ﺪﻤﺤﻣ ،ﻲﻧﻭﺮﻴﺑ 
+
+
+ﺪﻤﺣﺃ [back-i] (544/544) 
+
+
+544 
+Reference: Or 1997. Copyright for this page: Public Domain 
+
+
+View on the Qatar Digital Library: http://www.qdl.qa/en/archive/81055/vdc_100023514427.0x000091 
+
+

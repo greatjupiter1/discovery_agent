@@ -1,0 +1,292 @@
+eISSN: 2229-3213
+
+pISSN: 2229-3205
+
+Volume 16,Issue 03
+
+March, 2026
+
+The Journal of Applied Science and Social Science
+
+THE FORMATION OF EMPIRICAL METHODS AND EXPERIMENTAL METHODS
+IN THE SCIENTIFIC HERITAGE OF CENTRAL ASIAN SCIENTISTS IN THE 9TH–
+12TH CENTURIES
+Ashurov Sherzodbek Yuldashboevich
+Andijan branch of Turon University
+Master's Department
+History specialty
+Graduate student of the 1st stage
+Abstract
+Within the framework of the Islamic Golden Age of the 9th-12th centuries, scholars of
+Central Asia (Movarounnahr and Khorezm) played an important role in the development of the
+empirical style and methods of experience in scientific thought. During this period, thinkers such
+as Abu Rayhan Beruni (973-1048) and Abu Ali ibn Sina (980-1037) enriched the theoretical
+approaches derived from Aristotle's philosophy with practical observations and experiments.
+When measuring the Earth's radius, Beruni used trigonometry and empirical experiments on the
+mountain horizon, developed experimental methods based on equilibrium and water volume to
+determine the density of matter, and also analyzed astronomical phenomena through precise
+observations. In his work "The Canon of Medicine" (Al-Qanun fi at-tibb), Ibn Sina systematized
+the principles of experimentation (tajribah) for evaluating the efficacy of medicinal substances.
+By combining analogy with experimental trials, he emphasized the necessity of considering
+factors such as age, gender, dosage, and the state of the illness when determining a drug's
+potency. These approaches solidified the roots of empiricism in medieval Eastern science and
+later formed the basis for the European scientific revolution. This article compares the legacies
+of these scholars, illuminating the mechanisms behind the formation of the empirical method and
+its place in the history of dunyo science.
+Keywords
+XI th-XII th centuries, Central Asian scholars, empirical method, experimental method,
+Abu Rayhan Beruni, Abu Ali ibn Sina, scientific methodology, Eastern Renaissance, dunyo
+history of science.
+Introduction
+The 9th–12th centuries are referred to as the “Golden Age” of the Islamic world or the
+Eastern Renaissance, during which Central Asia (Movarounnahr and Khorezm) became one of
+the major centers of science. Scientific institutions such as the Ma'mun Academy were
+established, and encyclopedic scholars such as Abu Rayhan Beruni (973–1048) and Abu Ali ibn
+Sina (980–1037) were active. These scholars not only preserved Greek, Indian, and Persian
+heritage through translation but also critically analyzed it and significantly developed empirical
+methods and experimental approaches. The fundamental elements of the modern scientific
+method—observation, experimentation, and evidence-based reasoning—began to take shape
+during this period.
+Abu Rayhan Beruni is considered one of the most prominent representatives of the
+empirical method. In measuring the Earth’s radius, he relied on trigonometry and observations of
+the horizon from mountain peaks, and he determined the density of substances through
+experiments based on balance and water volume. In his works such as “Qanun al-Mas‘udi”,
+“India”, and “Mineralogy”, he confirmed astronomical, geodetic, and natural phenomena
+through precise observation and mathematical calculations. Beruni regarded experimentation as
+
+http://www.internationaljournal.co.in/index.php/jasass
+
+— 594 —
+
+IF = 9.112
+
+eISSN: 2229-3213
+
+pISSN: 2229-3205
+
+Volume 16,Issue 03
+
+March, 2026
+
+The Journal of Applied Science and Social Science
+
+“the only means of verifying the truth of knowledge” and insisted that theoretical conclusions
+must always be tested through practical experiments.
+Abu Ali ibn Sina, on the other hand, systematized the empirical method in medicine and
+philosophy. In his work “The Canon of Medicine” (Al-Qanun fi al-Tibb), he described in detail
+the rules of experimentation for evaluating the effects of medicinal substances. Ibn Sina
+combined analogy with experimental testing and emphasized the need to consider factors such as
+age, gender, dosage, disease condition, and climate when determining the effectiveness of drugs.
+He viewed experimentation as the primary means of validating theory and introduced
+observation-based methods in diagnosis and treatment.
+This article examines the formation of empirical methods and experimental approaches in
+the scientific heritage of Central Asian scholars during the 9th–12th centuries. The main focus is
+on the works of Beruni and Ibn Sina, comparing their experimental approaches and highlighting
+their place in the history of world science. The relevance of this study lies in the fact that the
+origins of the modern scientific method are often associated with the European Renaissance,
+while the contributions of Central Asian scholars during the Eastern Renaissance have not yet
+been fully appreciated. This work aims to reveal the significance of this heritage and reconsider
+the history of science from a global perspective.
+Main Part
+The formation of empirical methods and experimental approaches in the scientific
+activity of Central Asian scholars during the 9th–12th centuries is one of the most significant
+achievements of the Eastern Renaissance. This process represents a transition from the
+theoretical dominance of Aristotelian philosophy to a practical, experimental approach. During
+this period, empiricism (knowledge based on experience) and the experimental method
+(verification through testing) became the main principles of scientific research. These changes
+laid the foundation not only for local scientific development but also for the formation of global
+scientific methodology.
+Abu Rayhan Beruni (973–1048) is recognized as the most consistent and prominent
+representative of the empirical method. In his works, experimentation is regarded not only as a
+tool of observation but also as the only reliable mechanism for confirming or refuting theoretical
+conclusions. Beruni’s method of determining the Earth’s radius is a classical example of this
+approach. From a mountain peak in Nandana (present-day Pakistan), he measured the dip angle
+of the horizon and calculated the Earth’s radius using trigonometric principles, arriving at a value
+of 6339.6 km. Compared to the modern average radius (6371 km), this result has an error of less
+than 0.5%. The essence of the method lies in the fact that due to the Earth’s curvature, the
+horizon appears lower when viewed from a mountain peak. Beruni measured this angle using an
+astrolabe and calculated the radius through geometric relationships of triangles. This experiment
+combined direct measurement with mathematical modeling, distinguishing it from purely
+theoretical approaches.
+(Figure 1: Diagram of Beruni’s measurement of the Earth’s radius)
+
+http://www.internationaljournal.co.in/index.php/jasass
+
+— 595 —
+
+IF = 9.112
+
+eISSN: 2229-3213
+
+pISSN: 2229-3205
+
+Volume 16,Issue 03
+
+March, 2026
+
+The Journal of Applied Science and Social Science
+
+Beruni’s experiments on determining the density of substances also played a crucial role
+in the development of the empirical method. Using hydrostatic balance, he calculated density by
+comparing the weight and volume of substances in water. This method is based on Archimedes’
+principle and was applied by Beruni to various minerals and metals. In his work “Kitab alJawahir” (The Book of Precious Stones), he emphasized the importance of repeated experiments
+and controlled conditions to minimize error. His approach is close to the inductive method:
+moving from individual observations to general conclusions and continuously testing theory
+through experimentation.
+Abu Ali ibn Sina (980–1037) systematically applied the empirical method in medicine and
+philosophy. In the second book of “Al-Qanun fi al-Tibb” (The Canon of Medicine), he outlined
+detailed rules for experimentation (tajribah) in evaluating medicinal substances. He distinguished
+two methods for determining drug potency: analogy (qiyas) and experimentation. For
+experimental results to be reliable, he established seven conditions:
+1. The experiment must be conducted on organisms in similar conditions;
+2. The substance must be pure and not mixed;
+3. The test must be repeated, not performed only once;
+4. Results must be evaluated independently of external factors (age, gender, climate, disease
+condition);
+5. Experiments should be conducted on humans (results from animals may not fully apply);
+6. Dosage and duration must be strictly controlled;
+7. Negative effects (toxicity, side effects) must be separately observed.
+These rules represent a prototype of modern clinical trials. Ibn Sina considered
+experimentation superior to theory, stating that “experiment is the only way to confirm theory.”
+He critically analyzed the works of Galen and other Greek scholars, prioritizing empirical
+evidence. For example, he used analogy only as a preliminary hypothesis, requiring final
+http://www.internationaljournal.co.in/index.php/jasass
+
+— 596 —
+
+IF = 9.112
+
+eISSN: 2229-3213
+
+pISSN: 2229-3205
+
+Volume 16,Issue 03
+
+March, 2026
+
+The Journal of Applied Science and Social Science
+
+conclusions to be confirmed through experimental testing.
+(Table: Ibn Sina’s rules of experimentation from “The Canon of Medicine,” Book II)
+No. Experimental Rule
+1
+Uniform conditions
+2
+
+Purity of substance
+
+3
+
+Repetition
+of
+experiment
+Control of external
+factors
+Human testing
+
+4
+5
+6
+7
+
+Dosage and duration
+control
+Observation of side
+effects
+
+Description
+The experiment must be conducted on organisms under similar
+conditions.
+The medicinal substance must be pure and not mixed with other
+substances.
+The test must be repeated multiple times, not conducted only
+once.
+Results must be evaluated independently of external factors
+such as age, gender, climate, and disease condition.
+Experiments should be conducted on humans, as results from
+animals may not fully apply.
+The dosage and duration of the drug’s effect must be precisely
+controlled.
+Negative effects such as toxicity and side effects must be
+carefully monitored.
+
+A comparison of Beruni and Ibn Sina reveals shared characteristics of the empirical
+method: observation-based induction, repeated testing, error reduction, and practical verification
+of theory. However, Beruni relied more on mathematical and trigonometrical models in physics
+and natural sciences, while Ibn Sina developed systematic rules considering biological and
+clinical factors in medicine. Both scholars established experimentation as the main criterion of
+scientific knowledge and directly influenced later European thinkers such as Roger Bacon,
+Francis Bacon, and Galileo.
+(Figure 2: Ibn Sina’s experimental rules and Beruni’s hydrostatic apparatus – schematic
+composition)
+Thus, the empirical method and experimental approaches developed in the scientific
+heritage of Central Asian scholars during the 9th–12th centuries represent not only the
+achievements of the Eastern Renaissance but also a turning point in the history of world science.
+These approaches facilitated the transition from speculative philosophy to empirical scientific
+research and laid the foundations of the modern scientific method.
+Conclusion
+The formation of empirical methods and experimental approaches in the scientific
+heritage of Central Asian scholars during the 9th–12th centuries was one of the most significant
+achievements of the Eastern Renaissance. Thinkers such as Abu Rayhan Beruni and Abu Ali ibn
+Sina ensured the transition from purely theoretical approaches to research based on observation
+and experimentation, bringing fundamental changes to scientific methodology.
+Beruni’s determination of the Earth’s radius using trigonometry and horizon
+measurements, as well as his evaluation of substance density through hydrostatic balance,
+demonstrated the precision and repeatability of the empirical method. Ibn Sina, in “The Canon of
+Medicine,” systematized seven experimental conditions and used analogy only as an initial
+hypothesis, requiring final conclusions to be supported by empirical evidence. These principles
+form the prototype of modern clinical trials.
+Both scholars’ approaches were based on common principles—inductive reasoning,
+controlled conditions, and the use of experimentation as a verification mechanism—and later
+influenced European scientists such as Roger Bacon and Galileo. As a result, the roots of the
+modern scientific method lie not only in the European Renaissance but also in the scientific
+
+http://www.internationaljournal.co.in/index.php/jasass
+
+— 597 —
+
+IF = 9.112
+
+eISSN: 2229-3213
+
+pISSN: 2229-3205
+
+Volume 16,Issue 03
+
+March, 2026
+
+The Journal of Applied Science and Social Science
+
+tradition of Central Asia during the 9th–12th centuries. This heritage represents a crucial turning
+point in the history of science, and highlighting the “forgotten” contributions of the East remains
+an important task today. The development of the empirical method stands as a key factor
+ensuring continuity in the scientific progress of human civilization.
+References
+1.
+Al-Beruni, Abu Rayhan. (2002). Kitab al-Jamahir fi Ma'rifat al-Jawahir (The Book of
+Precious Stones). Beirut: Dar al-Kutub al-Ilmiyya. (Original: 11th century).
+2.
+Ibn Sina, Abu Ali. (1996). Al-Qanun fi al-Tibb (The Canon of Medicine). Vol. 1–2.
+Tashkent: Fan Publishing. (Original: 11th century).
+3.
+Saliba, George. (2007). Islamic Science and the Making of the European Renaissance.
+MIT Press.
+4.
+Gutas, Dimitri. (1998). Greek Thought, Arabic Culture. Routledge.
+5.
+Rashed, Roshdi. (2006). Encyclopedia of the History of Arabic Science. Routledge.
+6.
+Sabra, A. I. (1987). The Optics of Ibn al-Haytham. London: Warburg Institute.
+7.
+Kennedy, Edward S. (1973). “Al-Biruni’s Determination of the Coordinates of Mecca.”
+Journal for the History of Arabic Science, 1(1), 45–60.
+8.
+McGinnis, Jon. (2010). Avicenna. Oxford University Press.
+9.
+Ragep, F. Jamil. (2007). “When Did Islamic Science Die (and Who Cares?).”
+
+http://www.internationaljournal.co.in/index.php/jasass
+
+— 598 —
+
+IF = 9.112

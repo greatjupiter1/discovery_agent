@@ -1,0 +1,360 @@
+Journal of Artificial Intelligence and Metaheuristic
+♦
+
+ISSN: 2833-5597 Vol: 12, No.01, 2027 ♦ PP. 55–65
+♦ Article DOI: https://doi.org/10.54216/JAIM.120105
+
+FULL LENGTH ARTICLE
+
+Smart Home Energy Consumption Forecasting: An Engineering
+Approach with IoT and Al-Biruni Earth Radius Optimized LSTM
+Networks
+M. El-Said 1,2,*
+1 Electrical Engineering Department, Faculty of Engineering, Mansoura University, Mansoura 35516, Egypt
+
+2 Delta Higher Institute of Engineering and Technology, Mansoura 35111, Egypt
+
+Email: Melsaid@mans.edu.eg
+Received: May 08, 2026 Revised: June 30, 2026 Accepted: August 30, 2026 ⋆ Corresponding author
+
+ABSTRACT
+With the growing complexity of energy consumption patterns, accurate forecasting is required to maximize the
+benefits of demand-side management, which relies on precise forecasting and optimization. To respond to this
+challenge, this research suggests a new forecasting method by integrating the Al-Biruni Earth Radius (BER)
+optimization algorithm with the Long Short-Term Memory (LSTM) network within an Internet of Things (IoT)-based
+framework. The BER-optimized LSTM model processes real-time IoT sensor data, such as energy usage patterns
+and weather conditions, to enhance energy usage predictions. Time-series clustering addresses data uncertainty and
+noise, providing a probabilistic load forecast at both the household and aggregated levels. Extensive evaluation of the
+model’s performance demonstrates substantial predictive accuracy, achieving a root mean squared error (RMSE) of
+0.007146, surpassing conventional forecasting methods. These findings corroborate that BER optimization, coupled
+with the use of LSTM networks, provides a suitable tool for smart home energy forecasting, which, in turn, can
+facilitate improved energy management, demand-side optimization, and innovative grid applications in the evolving
+energy market.
+
+Keywords:
+
+Al-Biruni Earth Radius
+
+Load Forecasting
+
+1. INTRODUCTION
+
+Modern electrical systems are comprised of generation, transmission, distribution, and end-use consumption. Their reliable operation depends upon the continuous balancing of
+supply and demand, yet the rapid pace of urbanization, industrialization, and the integration of renewable energy sources
+have complicated the task of forecasting electricity requirements, creating a pressing need for advanced, data-driven
+predictive techniques [1]. The emergence of smart grids and
+the diversified energy mix further amplify the complexity of
+energy management, underscoring the necessity for accurate,
+adaptable forecasting solutions [2].
+
+IoT
+
+Long Short-Term Memory
+
+Weather Conditions
+
+As electricity demand grows, so do the challenges associated with energy planning, grid operations, and resource
+allocation. Accurate forecasting empowers stakeholders to
+anticipate fluctuations in demand, mitigate risks, and deploy
+timely interventions. Traditional approaches, which rely on
+statistical analysis of historical consumption data [3], are
+increasingly insufficient for capturing the full spectrum of
+demand variability. In contrast, probabilistic forecasting offers a richer, more nuanced perspective on future demand,
+supporting robust risk management and enabling efficient
+resource allocation.
+Electricity consumption is affected by a broad array of fac-
+
+© 2027 The Author(s). Published by ASPG. This article is licensed under CC BY 4.0.
+
+55
+
+Journal of Artificial Intelligence and Metaheuristic (JAIM)
+
+tors: seasonal patterns, meteorological conditions, economic
+trends, consumer behaviors, and technological change. The
+growing penetration of renewable energy sources—notably
+wind and solar—introduces additional uncertainty, given their
+inherent intermittency and variability [4]. Hence, forecasting
+methods must evolve to accommodate both shifting consumption patterns and a more heterogeneous energy mix. The proliferation of sensor networks and real-time data acquisition
+has enabled the collection of granular energy consumption
+data, presenting significant opportunities to enhance both
+forecasting accuracy and energy management [5].
+Advances in artificial intelligence and machine learning
+have introduced powerful new tools for forecasting. Datadriven models are now applied to short-, medium-, and longterm predictions, offering enhanced flexibility and precision
+[6]. However, conventional time-series approaches, such as
+ARIMA and regression, often struggle to model complex
+temporal dynamics and non-linear dependencies within the
+data [7]. Recurrent neural networks, and in particular Long
+Short-Term Memory (LSTM) networks, have demonstrated
+superior capacity to learn both short- and long-term temporal
+relationships, resulting in improved predictive performance.
+LSTM networks overcome limitations associated with standard recurrent neural networks, such as the vanishing gradient problem, by employing specialized gating mechanisms
+that regulate information flow and retention [8]. This attribute makes LSTMs particularly well-suited for modeling
+energy consumption, which is characterized by sequential,
+non-linear, and long-term dependencies. Empirical research
+has confirmed their effectiveness in enhancing both the accuracy and reliability of demand forecasts.
+Within the context of the Internet of Things (IoT), machine
+learning is further transforming the landscape of smart home
+energy management. Real-time data streams from sensors
+and smart meters facilitate the development of adaptive forecasting models that can dynamically respond to evolving consumption patterns [9]. Moreover, the integration of deep learning with metaheuristic optimization techniques—enabling
+systematic parameter tuning, feature selection, and overfitting
+prevention—has led to increasingly robust and computationally efficient forecasting frameworks [10].
+Accurate energy forecasting is not only critical for efficient
+resource use and grid stability, but also plays a central role in
+the transition toward sustainable energy systems. Improved
+forecasts facilitate responsible consumption, optimize energy
+distribution, and help build resilient, environmentally sound
+infrastructure [11].
+This research advances a hybrid forecasting framework that
+combines deep learning with optimization, addre
+
+[...]
+
+management Predictive distributions for energy conance energy consumption.
+and forecasting.
+sumption planning.
+Energy consumption prediction for smart Deep learning-based ensemble method Improves prediction accuracy for better
+homes and cities.
+with adaptive neuro-fuzzy inference sys- energy management.
+tem.
+
+critical issues around model interpretability and data privacy
+are often overlooked, despite their importance for trust and
+practical deployment. While a number of metaheuristic optimization algorithms—such as Particle Swarm Optimization
+(PSO), Genetic Algorithms (GA), and Grey Wolf Optimizer
+(GWO)—have been used to tune deep learning models for
+energy forecasting, these methods are often limited by premature convergence, stagnation in local optima, and sensitivity
+to initial parameter settings, especially in high-dimensional
+and noisy smart home data environments. This can result
+in suboptimal model performance and limited adaptability
+across diverse conditions. In contrast, the Al-Biruni Earth Radius (BER) algorithm introduces a unique geometric search
+mechanism that more effectively balances exploration and
+exploitation, thereby enhancing convergence speed and robustness in complex optimization landscapes. Our empirical
+results (see Section X) confirm that BER delivers superior
+performance over other state-of-the-art metaheuristics in optimizing LSTM hyperparameters for smart home forecasting.
+This study directly addresses these gaps by introducing the
+Al-Biruni Earth Radius (BER) optimization algorithm, which
+systematically improves hyperparameter tuning and model
+convergence. Time-series clustering is employed to better
+manage data uncertainty, while simultaneous integration of
+real-time IoT sensor data enhances the model’s adaptive capabilities and forecasting accuracy for dynamic, real-world
+conditions. The proposed framework is also designed to support future integration of explainable AI and federated learning methods, directly targeting the longstanding challenges
+of interpretability and privacy. By bridging these gaps, this
+research aims to deliver a more robust, practical, and forwardlooking smart home energy forecasting solution, matching
+the evolving needs of both households and energy providers.
+
+3. MATERIALS AND METHODS
+
+Figure 1 illustrates the overall workflow for forecasting energy consumption in a smart home using the proposed BERLSTM model. The process begins with data acquisition,
+where minute-level smart home energy consumption and
+weather data are obtained. Preprocessing involves cleaning the data, handling missing values, removing outliers, and
+normalizing all features to ensure quality. To address data
+uncertainty and enhance the representativeness of the training set, time-series clustering is applied. The data is then
+split into 80% for training and 20% for testing, ensuring robust model validation. The LSTM network architecture is
+constructed, and the initial parameter bounds are defined. Hyperparameter optimization is performed using the Al-Biruni
+Earth Radius (BER) algorithm. Model training is carried out
+on the training set with the optimized parameters, while the
+test set is used to evaluate the generalization ability of the
+model using established metrics such as mean squared error
+(MSE), mean absolute error (MAE), and the coefficient of
+determination (R2 ). Statistical tests are also performed to
+substantiate the reliability of the model’s predictions. This
+comprehensive design ensures that the proposed system maximizes forecasting efficiency and enables robust, data-driven
+energy usage predictions for smart homes.
+3.1 Dataset
+
+The dataset used in this study, obtained from Kaggle [31],
+provides minute-level measurements of household energy
+consumption alongside concurrent weather data over approximately 350 days. The records, collected via a smart meter,
+are reported in kilowatts (kW) for both total consumption
+and specific appliances, as well as for total energy generated
+from solar and other distributed sources. In addition to power
+metrics, the dataset includes detailed weather information
+
+58
+
+Journal of Artificial Intelligence and Metaheuristic (JAIM)
+
+Vol. 12, No. 01 · 2027
+
+Figure 1. Workflow for Smart Home Energy Consumption Forecasting Using BER-LSTM Model
+
+such as temperature, humidity, wind speed, and solar radiation—all of which are known to influence residential energy
+consumption patterns.
+The dataset offers appliance-level energy consumption and
+weather data sampled at one-minute intervals. Consequently,
+all energy consumption forecasts produced by our model are
+also generated at a one-minute resolution, supporting highly
+detailed, short-term prediction capabilities. The use of a
+one-minute resolution is motivated by the need to capture
+rapid appliance switching events and transient changes in
+household consumption that are frequently missed by coarser,
+hourly data. This high-frequency granularity enables more
+accurate real-time forecasting, which is critical for demandside management, appliance-level control, and integration
+with advanced smart grid applications.
+Key features of the dataset are:
+• time: Timestamp for each observation at one-minute
+intervals.
+• use [kW]: Total power consumption by household appliances.
+• gen [kW]: Total on-site generation, primarily from solar panels.
+• House overall [kW]: Aggregate household energy
+consumption.
+• Appliance-specific consumption data (e.g., Dishwasher,
+Furnace 1 & 2, Home Office, Fridge, Wine Cellar)
+recorded in kW.
+
+In preparation for robust modeling, the dataset underwent a series of preprocessing steps. Missing or erroneous data points
+were identified and imputed using linear interpolation, which
+was selected for its simplicity and effectiveness in preserving
+local trends in high-frequency time-series data. Alternative
+interpolation methods (such as spline and nearest-neighbor)
+were considered, but preliminary tests showed negligible improvement in forecasting accuracy. Outliers were detected
+using the z-score method, with a threshold of |z| > 3; outlying
+values were replaced with the local median to mitigate their
+impact while maintaining temporal structure. This approach
+balances noise reduction and the preservation of genuine rapid
+changes typical in household load data. Additionally, normalization was applied to both energy and weather variables
+to standardize feature scales, facilitating improved learning
+convergence. The time-series data was carefully structured
+to preserve chronological order and subsequently split into
+training and testing subsets for effective model training and
+validation. This comprehensive preprocessing ensures the
+dataset is well-conditioned for precise and reliable forecasting
+of energy consumption in smart home environments, thereby
+enabling the development of responsive and efficient energy
+management systems.
+To assess the robustness of our approach, we conducted supplementary analyses using alternative imputation methods
+(including spline interpolation) and more conservative outlier
+thresholds (|z| > 2.5). The BER-optimized LSTM consistently outperformed baseline metaheuristic-optimized models
+across these settings in terms of RMSE and MAE, indicating
+that the observed performance improvements are robust to
+reasonable changes in preprocessing strategy. Additionally,
+
+59
+
+Journal of Artificial Intelligence and Metaheuristic (JAIM)
+
+when we downsampled the data to five- and fifteen-minute
+intervals, BER maintained its relative advantage over competing optimizers, though overall accuracy declined slightly at
+lower resolutions.
+
+Vol. 12, No. 01 · 2027
+
+that warrant further investigation. This dual representation
+supports a more nuanced interpretation of consumption behaviors and is crucial for informed energy management and
+forecasting.
+
+To address data uncertainty and variability in smart home
+energy consumption patterns, an unsupervised clustering step
+was performed during data preprocessing. Specifically, the
+K-means clustering algorithm was applied to the normalized
+feature vectors derived from the energy consumption time series. Prior to clustering, principal component analysis (PCA)
+was used to reduce the dimensionality of the data and to
+visualize cluster structure.
+The number of clusters, K = 3, was selected based on the
+silhouette score and an analysis of typical daily load profiles, corresponding to low, medium, and high energy usage
+regimes. Figure 2 shows the resulting cluster assignments
+projected onto the first two principal components, clearly
+illustrating the separation between the identified regimes.
+Cluster labels were then appended as an additional categorical
+input feature to the LSTM model. This enables the network
+to condition its predictions on the broader context of consumption patterns, thus reducing the influence of noise and
+improving the robustness of the forecasts. By grouping similar temporal patterns and providing regime-awareness to the
+LSTM, the clustering process mitigates the effects of data
+heterogeneity and uncertainty.
+Although the present approach does not explicitly model probabilistic prediction intervals, the integration of cluster context
+allows the model to learn distinct error distributions and behaviors for each consumption regime, thereby contributing to
+more reliable and context-sensitive short-term forecasts.
+
+Figure 3. Daily consumption values and their 7-day rolling average
+over the observed period.
+
+A detailed understanding of how energy consumption is distributed among various household appliances is essential for
+identifying opportunities for efficiency improvements and
+targeted interventions. Figure 4 provides a visual summary of
+the proportional energy consumption attributed to each major
+appliance within the household, expressed as a percentage
+of total energy usage. By examining the relative shares consumed by devices such as furnaces, home office equipment,
+fridge, wine cellar, and dishwasher, stakeholders can readily
+pinpoint which appliances exert the greatest influence on overall energy demand. This proportional analysis is instrumental
+for prioritizing conservation measures and for formulating
+strategies to optimize household energy management.
+
+Figure 2. Visualization of time-series clustering for smart home
+energy usage using PCA and K-means.
+
+To capture both the short-term fluctuations and the longerterm patterns in consumption data, it is instructive to analyze
+daily usage alongside smoothed trends. Figure 3 displays
+the daily consumption profile together with its corresponding
+7-day rolling average over a period spanning several weeks.
+The inclusion of the rolling average curve provides a valuable
+means of dampening short-term volatility, thereby highlighting underlying trends and persistent shifts in usage that might
+otherwise be obscured by day-to-day variability. By comparing the raw daily data to the moving average, one can
+more effectively identify periods of sustained high or low
+consumption, as well as detect anomalies or abrupt changes
+
+Figure 4. Proportional distribution of total energy consumption
+among major household appliances.
+3.2 Al-Biruni Earth Radius (BER) Algorithm
+
+The Al-Biruni Earth Radius (BER) algorithm is a metaheuristic optimization approach inspired by the historical method
+of the Persian polymath Al-Biruni, who estimated the Earth’s
+radius using geometric observations from two spatially separated points. In the BER algorithm, this geometric concept
+is abstracted such that candidate solutions “estimate” the optimal point in the search space by comparing their relative
+positions in a manner analogous to Al-Biruni’s triangulation
+60
+
+Journal of Artificial Intelligence and Metaheuristic (JAIM)
+
+Vol. 12, No. 01 · 2027
+
+process. The algorithm represents each candidate solution as
+a vector Q(t) = {Q1 , Q2 , . . . , Qd } ∈ Rd at iteration t, where
+d is the search-space dimension. A fitness function evaluates
+each candidate to determine the best solution Q∗ (t) obtained
+so far.
+3.2.1 Exploration Operation
+
+Exploration identifies promising regions of the search space
+and avoids premature convergence. The update rules are:
+Q(t + 1) = Q(t) + D(t) (2r2 − 1)
+
+(1)
+
+
+D(t) = r1 S(t) − Q(t)
+
+(2)
+
+Here, S(t) is a randomly selected peer solution from the
+population, Q(t) is the current candidate vector, and D(t) is
+the adaptive step vector controlling the exploration direction.
+The coefficients r1 , r2 are random scalars sampled from [0, 1]
+independently at each iteration.
+A geometric scaling term is computed as:
+r=h
+
+cos x
+1 − cos x
+
+(3)
+
+where h is a user-defined scaling hyperparameter (typically
+in [0, 2]), and x is a randomly sampled angle from [0, π].
+This formulation mimics the geometric observation principle
+used by Al-Biruni, where angular differences influence the
+estimation of radial distance—here translated into adaptive
+scaling of exploration steps.
+3.2.2 Exploitation Operation
+
+Once promising areas are detected, exploitation refines candidate solutions:
+
+Q(t + 1) = r2 Q(t) + D(t)
+
+D(t) = r3 Q∗ (t) − Q(t)
+
+(4)
+(5)
+
+Here, r3 ∼ U(0, 1) controls exploitation intensity, and Q∗ (t)
+is the global best solution found up to iteration t. This str

@@ -1,0 +1,428 @@
+Journal of Artificial Intelligence and Metaheuristic
+♦
+
+ISSN: 2833-5597
+
+Vol: 11, No. 02, 2026
+
+♦
+
+PP. 35–54
+
+Article DOI: https://doi.org/10.54216/JAIM.110203
+
+FULL LENGTH ARTICLE
+
+A Hybrid Al-Biruni Earth Radius–Random Forest Model for
+Accurate and Efficient Student Performance Classification
+Mohamed E. Ghoneim1,*
+
+1 Mathematics Department, Faculty of Science, Umm Al-Qura University, Saudi Arabia
+
+Email: meghoneim@uqu.edu.sa
+Received: December 30, 2025 Revised: February 28, 2026 Accepted: April 30, 2026 ⋆ Corresponding author
+
+ABSTRACT
+The growing availability of educational data has prompted the use of machine learning methods to predict student
+academic performance and support data-driven decision-making in education. Nevertheless, such models for
+predicting performance rely heavily on proper data preprocessing, model selection, and optimal hyperparameter
+settings. This research proposes a hybrid predictive architecture that combines machine learning classifiers with
+bio-inspired metaheuristic optimization algorithms to improve classification efficiency in educational data mining.
+It is based on the xAPI-Edu.A dataset of 480 students’ demographic, academic, and behavioral characteristics is
+used to first analyze a set of baseline machine learning models, including Random Forest, XGBoost, Support Vector
+Machine, Multilayer Perceptron, K-Nearest Neighbors, and Gaussian Naive Bayes, using standard classification
+metrics. The initial experimental findings on the baseline layer show that the Random Forest classifier outperforms
+the other models before optimization, achieving accuracies of 0.8889 and 0.8814, and F-scores of 0.8889 and 0.8814,
+respectively, indicating strong generalization and equal discrimination among the classes. To further improve the
+predictive performance, the state-of-the-art metaheuristic algorithms, i.e., the Al-Biruni Earth Radius Optimizer
+(BER), the Gray Wolf Optimizer (GWO), the Particle Swarm Optimization (PSO), the Genetic Algorithms (GA) and
+the Whale Optimization Algorithms (WOA) are adopted to optimize the hyperparameters of the Random Forest.
+It has been experimentally demonstrated that every optimization approach provides a measurable performance
+increase, but the BER-optimized Random Forest consistently performs better. In particular, the BER-Random
+Forest model achieves an F-score of 0.9477 and an accuracy of 0.9439, both of which are much higher than the
+baseline configuration. Full statistical and visual analyses, such as kernel density estimation, Z-score heatmaps, and
+swarm plots, also support the strength, stability and superiority of the proposed BER-based optimization framework.
+Such findings demonstrate the effectiveness of metaheuristic-based hyperparameter optimization in educational
+predictive analytics and provide significant insights into the creation of intelligent, efficient, and data-driven systems
+of academic assistance.
+
+Student Academic Performance
+Educational Data Mining
+Keywords:
+
+Machine Learning
+
+1. INTRODUCTION
+
+In recent years, education has undergone a notable transformation driven by technological advancements and the increas-
+
+Metaheuristic Optimization
+
+Random Forest
+
+ing availability of educational data. This paradigmatic shift
+has seen traditional pedagogical methods progressively replaced by data-driven approaches aimed at enhancing student
+performance and improving academic outcomes. Central to
+
+© 2026 The Author(s). Published by ASPG. This article is licensed under CC BY 4.0.
+
+35
+
+Journal of Artificial Intelligence and Metaheuristic (JAIM)
+
+this transformation is the vast volume of educational data
+generated across primary, secondary, and tertiary education
+levels, coupled with the emergence of sophisticated machine
+learning algorithms and advanced data analytics methodologies [1, 2]. Academic institutions, ranging from elementary
+schools to universities, increasingly employ data-driven strategies to monitor, assess, and improve learning outcomes. The
+present study investigates the extensive range of research
+methodologies that have been adopted within this domain,
+with findings intended to support the development of robust
+predictive models for student performance across diverse
+academic disciplines.
+Machine learning models have demonstrated remarkable effectiveness in predicting student academic performance, a
+task that was previously considered highly challenging. These
+models are capable of uncovering latent patterns, correlations,
+and trends embedded within complex educational datasets,
+thereby providing valuable insights to educators and institutional decision-makers. Such insights enable early identification of at-risk students, the provision of personalized
+instructional recommendations, and the implementation of
+adaptive teaching strategies [3, 4]. By leveraging machine
+learning techniques, educators can develop a deeper understanding of the multifaceted dynamics of educational environments and respond proactively to the diverse needs of learners.
+Moreover, several studies have emphasized the critical role
+of optimization techniques in refining predictive models and
+enhancing their overall performance [5, 6]. Optimization
+serves as an auxiliary mechanism for fine-tuning algorithmic parameters, improving predictive accuracy, and ensuring
+alignment between predicted outcomes and actual student
+performance trajectories. In addition, optimization methods
+facilitate effective feature selection by identifying the most
+relevant variables and eliminating redundant or noisy data,
+thereby strengthening model precision.
+This study explores the evolving landscape of predictive modeling within the educational domain by examining the interplay between machine learning, optimization techniques, and
+statistical analysis. First, the paper investigates the effective
+application of machine learning algorithms—including Random Forest, Extreme Gradient Boosting (XGBoost), Support
+Vector Machine (SVM), Multilayer Perceptron (MLP), Gaussian Naïve Bayes, and K-Nearest Neighbors (KNN)—for
+predicting student academic performance. Second, the study
+examines how optimization techniques such as the Al-Biruni
+Earth Radius Optimizer (BER) [7], Grey Wolf Optimizer
+(GWO) [8], Particle Swarm Optimizer (PSO) [9], Genetic
+Algorithm (GA), and Whale Optimization Algorithm (WOA)
+can enhance the predictive capabilities of these machine learning models, with particular emphasis on the Random Forest
+classifier. Finally, statistical analyses, including Analysis of
+Variance (ANOVA), are employed to assess the impact
+
+[...]
+
+processes
+and adaptive search schemes that trade off exploration (global
+search) with exploitation (local refinement) to prevent early
+convergence to suboptimal solutions. Metaheuristics have
+been widely used across a broad range of applications, including feature selection, hyperparameter optimization, scheduling, and engineering optimization. They are especially useful
+in machine learning, where they can be used to search model
+hyperparameters with a very high-dimensional, nonlinear,
+and multimodal search space.
+The present research applies metaheuristic algorithms to optimize the hyperparameters of the Random Forest classifier to
+enhance predictive accuracy in the classification of student
+academic performance. In contrast to grid or random search,
+which may become inefficient or incomplete as the number
+of hyperparameters grows, metaheuristic methods dynamically update their search paths based on population-based
+interactions and feedback from fitness. Other algorithms include the Al-Biruni Earth Radius Optimizer (BER), the Grey
+Wolf Optimizer (GWO), Particle Swarm Optimization (PSO),
+Genetic Algorithms (GA), and the Whale Optimization Algorithm (WOA), which use mimics of natural, physical, or
+social processes to guide the optimization process. Their
+population-based characteristics enable multiple candidate
+solutions to be explored simultaneously, thereby increasing
+the probability of obtaining near-optimal or globally optimal
+hyperparameter settings.
+The reason for adopting metaheuristic optimization in this
+context is that ensemble learning models, particularly Random Forests, are highly sensitive to hyperparameter settings,
+including tree depth, the number of estimators, and feature
+sampling. Metaheuristic algorithms improve model generalization, robustness, and classification performance by systematically optimizing these parameters through adaptive search
+mechanisms. Moreover, due to their flexibility and scalability, they can be used in educational data mining applications,
+where datasets may exhibit non-homogeneous feature distributions and complex interaction patterns. Consequently, the
+introduced combination of metaheuristic algorithms will offer
+
+Vol. 11, No. 02 · 2026
+
+a principled and efficient way to improve machine learning
+performance while retaining computational viability.
+3.4.1 Role of Metaheuristics in Hyperparameter Optimization
+
+Hyperparameter optimization is a fundamental step in developing reliable machine learning models, as hyperparameters
+control model complexity, learning behavior, and generalization capability. Unlike model parameters that are learned
+directly from data, hyperparameters (e.g., number of trees in
+Random Forest, depth constraints, learning rate in boosting,
+kernel parameters in SVM, or neighborhood size in KNN)
+must be set externally and can substantially influence predictive performance. Exhaustive approaches such as grid search
+and random search may become computationally expensive
+as the dimensionality of the hyperparameter space grows,
+particularly when hyperparameter interactions are nonlinear
+and the search landscape contains multiple local optima.
+Metaheuristic algorithms offer an automated and computationally efficient alternative for hyperparameter tuning by
+formulating the problem as a global optimization task. In
+this setting, each candidate solution represents a specific hyperparameter configuration, and a fitness function—typically
+derived from cross-validated performance metrics such as
+accuracy or F-score—guides the search process. Metaheuristics iteratively explore the hyperparameter space using
+stochastic operators and population-based mechanisms that
+balance exploration (broad search across diverse configurations) and exploitation (refinement around high-performing
+regions). This balance enables metaheuristics to escape local optima and to locate near-optimal configurations more
+effectively than purely deterministic procedures in complex,
+high-dimensional search spaces.
+Furthermore, metaheuristic optimization can reduce human
+intervention in model development by systematically identifying high-performing hyperparameter settings without requiring manual trial-and-error. This property is particularly valuable in educational predictive modeling, where datasets may
+include heterogeneous demographic and behavioral variables,
+resulting in highly nonconvex objective functions. By improving the quality of hyperparameter selection, metaheuristics typically enhance model generalization, stabilize performance across different data splits, and increase robustness to
+noise and feature redundancy. Consequently, metaheuristicdriven hyperparameter optimization constitutes an effective
+strategy for strengthening machine learning models and improving their predictive accuracy in data-driven educational
+systems.
+3.5 Proposed BER-based Optimization Algorithm
+3.6 Al-Biruni Earth Radius Optimization (BER)
+
+The optimization strategy adopted in this work is the AlBiruni Earth Radius (BER) algorithm [7]. This metaheuristic
+method integrates exploration and exploitation mechanisms
+to navigate complex search spaces efficiently. The algorithm
+divides candidate solutions into two cooperative groups. The
+exploration group is responsible for broadly scanning the
+search space to identify promising regions that may contain
+near-optimal solutions. In contrast, the exploitation group focuses on intensifying the search around the currently best solution by applying strategies such as leader-oriented updates
+
+44
+
+Journal of Artificial Intelligence and Metaheuristic (JAIM)
+
+Vol. 11, No. 02 · 2026
+
+Algorithm 2. BER-based optimization algorithm
+1: Initialize BER agents ⃗
+Si for i = 1, 2, . . . , d, population size d, maximum iterations MaxIter, and fitness function Fn
+2: Initialize BER parameters
+3: Compute Fn for each ⃗
+Si
+4: Identify the best agent ⃗
+S∗
+5: while t ≤ MaxIter do
+6:
+for each agent in the first group do
+7:
+Heading towards the best agent
+8:
+9:
+10:
+
+cos(x)
+1 − cos(x)
+Compute ⃗D = r1 ⃗S(t) − 1
+Update
+
+Compute r = h
+
+
+⃗S(t + 1) = ⃗S(t) + ⃗D 2r2 − 1
+11:
+12:
+13:
+14:
+15:
+
+end for
+for each agent in the second group do
+Apply elitism of the best agent
+
+Compute ⃗D = r2 ⃗L(t) − ⃗S(t)
+Compute
+⃗S1 (t + 1) = r2 ⃗S(t) + ⃗D
+
+16:
+17:
+
+Investigate the region around the best agent
+Compute
+⃗k = 1 +
+
+18:
+
+2t 2
+MaxIter
+
+Compute
+⃗S2 (t + 1) = r ⃗S∗ (t) +⃗k
+
+19:
+20:
+21:
+
+
+
+
+
+Select the best candidate and set it as ⃗S∗
+if best fitness did not change for two iterations then
+Mutate the agent
+⃗S(t + 1) =⃗kz2 − h cos(x)
+1 − cos(x)
+
+22:
+end if
+23:
+end for
+24:
+Update Fn for each ⃗S
+25: end while
+26: Return best agent ⃗
+S∗
+
+and localized investigation of neighboring solution regions.
+A defining characteristic of BER is its adaptive mutation
+mechanism. This mechanism enables the algorithm to modify
+stagnating solutions based on a predefined fitness criterion
+when progress fails to occur over successive iterations. Such
+adaptive behavior improves the algor
+
+[...]
+
+plement the aggregate and distribution-based analyses of optimized model performance, a swarm plot–based
+visualization was employed to illustrate metric-level dispersion across optimization strategies. Figure 12 presents swarm
+plots of six evaluation metrics—accuracy, sensitivity (TPR),
+specificity (TNR), positive predictive value (PPV), negative
+predictive value (NPV), and F-score—for Random Forest
+models optimized using BER, GWO, PSO, GA, and WOA.
+
+Besides predictive accuracy, computational efficiency is also
+a very essential consideration in determining the feasibility of machine learning models, especially in large-scale or
+real-time education systems. The computational overhead
+directly impacts model deployability, scalability, and energy
+usage, particularly when using metaheuristic optimization
+tools. Consequently, this subsection presents a comparative
+computational study of the optimized Random Forest models
+to evaluate their runtime, memory usage, and processor usage.
+Table 8 indicates the mean execution time (in seconds), memory consumption (in megabytes), and CPU consumption (in
+percentage) of the Random Forest models that are optimized
+with the help of various metaheuristic algorithms. All experiments have been done in the same hardware and software
+settings to promote fairness and reproducibility.
+The computational results clearly indicate that the BERoptimized Random Forest model not only achieves superior
+predictive performance but also exhibits the highest computational efficiency among all evaluated approaches. Specifically,
+BER + Random Forest records the lowest average execution
+time, minimal memory consumption, and the least CPU uti50
+
+Journal of Artificial Intelligence and Metaheuristic (JAIM)
+
+Vol. 11, No. 02 · 2026
+
+Table 8. Computational Performance Comparison of Optimized Models
+Avg. Time (s)
+
+Memory Usage (MB)
+
+CPU Usage (%)
+
+38.67
+52.53
+60.29
+65.32
+69.57
+72.42
+
+1038.21
+1525.05
+1599.28
+1727.55
+1877.64
+1922.54
+
+55.13
+64.26
+75.32
+79.27
+85.22
+89.84
+
+Algorithm
+BER + Random Forest
+GWO + Random Forest
+PSO + STGCN
+PSO + Random Forest
+GA + Random Forest
+WOA + Random Forest
+
+lization. This demonstrates BER’s ability to converge rapidly
+toward high-quality solutions while maintaining efficient resource usage.
+In contrast, optimization techniques such as GA and WOA
+incur significantly higher computational costs, reflected in
+increased runtime, memory usage, and processor load. These
+overheads are primarily attributed to their more complex
+evolutionary operators and slower convergence characteristics. PSO-based approaches also exhibit higher computational
+demands, particularly when integrated with more complex
+model architectures, as evidenced by the PSO + STGCN
+configuration.
+Overall, this computational analysis reinforces the suitability of the BER-based optimization framework for real-world
+educational applications. By delivering both superior predictive accuracy and reduced computational overhead, the
+BER-optimized Random Forest model offers a balanced and
+scalable solution for deployment in data-driven academic
+performance monitoring and early warning systems.
+In order to further supplement the quantitative computational
+analysis performed in Table 8, a visual resource distribution
+analysis is given in order to intuitively compare the computational efficiency of various strategies of optimization.
+Figure 13shows that execution time, memory usage, CPU utilization, and an integrated efficiency score for the optimized
+Random Forest models were distributed proportionally across
+the various metaheuristic algorithms. By displaying them as
+donut charts, the figure allows a global assessment of how
+each optimization method uses system resources. This visualization shows the trade-off between predictive enhancement
+and computational cost, with strong support for the practical
+benefits of lightweight but effective optimizers, specifically
+the BER-based Random Forest, which proves to be more efficient with minimal resource overhead across all measured dimensions. To provide a general impression of computational
+efficiency and predictive effectiveness, a specific algorithm
+performance dashboard is presented in Figure 14. This figure
+integrates several performance factors, including execution
+time, memory consumption, CPU consumption, performance
+score, overall cost index, and overall performance index, into
+a single comparative visualization system. The dashboard
+provides an intuitive analysis of the trade-offs between the
+discussed optimization strategies, based on the measurement
+of indicators: the low-value indicators (time, memory, CPU
+usage, and cost index) are more desirable, while the highvalue indicators (efficiency and performance indices) predict
+better performance. As demonstrated in Figure 14, the BERsensitive random forest is always associated with positive
+computational characteristics and, simultaneously, the most
+desirable efficiency and performance indicators; it can be ap-
+
+Figure 13. Resource distribution analysis of computational
+performance metrics across optimized models.
+
+plied to large-scale resource-constrained predictive analytics.
+
+Figure 14. Comprehensive algorithm performance dashboard
+comparing computational and efficiency-related metrics.
+
+A performance trend analysis is presented in Figure 15 to
+assess the computational properties of the optimized models
+in a trend-oriented, relative manner. The figure will present
+variations in three critical computation indicators, which are
+the execution time, the consumption of memory as well as
+the utilization of the CPU, amongst the strategies adopted
+in optimization and the classifier that is the Random Forest.
+The graph, which shows these measures simultaneously, reveals differences in computational cost across metaheuristic
+algorithms. Figure 15 indicates that the BER-optimal Random Forest is the shortest in terms of execution time, has
+the lowest memory and CPU requirements, and resource consumption is observed to increase with GWO-, PSO-, GA-, and
+
+51
+
+Journal of Artificial Intelligence and Metaheuristic (JAIM)
+
+WOA-based models. The given trend-based representation
+offers a good insight into the trade-offs between optimization
+complexity and computational efficiency, and thus, it can be
+concluded that BER can be extended to scalable, resourceefficient educational predictive modeling.
+
+Figure 15. Algorithm performance trends based on time, memory,
+and CPU utilization.
+
+5. DISCUSSION
+
+The empirical results of this research provide solid evidence
+that modern machine learning tools can be used effectively
+to predict students’ academic performance, provided they are
+supported by rigorous preprocessing and systematic evaluation. The comparison against the baseline of Random Forest,
+XGBoost, MLP, SVM, KNN, and Gaussian Naive Bayes
+has revealed clear differences in predictive capacity, indicating differences in inductive bias, representational capacity,
+and optimization behavior. Specifically, the higher baseline
+performance achieved by ensemble-based learners is consistent with the established benefit of aggregation mechanisms
+in minimizing variance and improving generalization, particularly on noisy and heterogeneous datasets that integrate
+demographic, academic, and behaviora

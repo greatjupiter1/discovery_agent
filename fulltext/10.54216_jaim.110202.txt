@@ -1,0 +1,456 @@
+Journal of Artificial Intelligence and Metaheuristic
+♦
+
+ISSN: 2833-5597
+
+Vol: 11, No. 02, 2026
+
+♦ PP. 20–34
+
+Article DOI: https://doi.org/10.54216/JAIM.110202
+
+FULL LENGTH ARTICLE
+
+A Hybrid Al-Biruni Earth Radius–Stochastic Fractal Search
+Optimized XGBoost Model for Accurate Student Performance
+Prediction
+Abdelaziz A. Abdelhamid1,*
+
+Amal H. Alharbi2
+
+1 Department of Computer Science, Faculty of Computer and Information Sciences, Ain Shams University, Cairo 11566, Egypt
+2 Department of Computer Sciences, College of Computer and Information Sciences, Princess Nourah bint Abdulrahman University,
+
+P.O. Box 84428, Riyadh 11671, Saudi Arabia
+Emails: abdelaziz@cis.asu.edu.eg · ahalharbi@pnu.edu.sa
+Received: December 09, 2025 Revised: February 10, 2026 Accepted: April 14, 2026 ⋆ Corresponding author
+
+ABSTRACT
+The ability to accurately predict student academic performance is now an established pillar of contemporary
+educational data mining, driven by the desire for data-driven interventions and personalized learning. This paper
+presents a mixed-methodology optimization and machine learning model that combines the Al-Biruni Earth RadiusStochastic Fractal Search (BER-SFS) algorithm with eXtreme Gradient Boosting (XGBoost) to improve predictive
+accuracy and model stability in forecasting student performance. The proposed BER-SFS + XGBoost model
+is an optimized system that systematically optimises the hyperparameter based on dual exploration-exploitation
+mechanism to reduce the Mean Squared Error (MSE) of the baseline XGBoost model of 0.0226 to 0.00029 and
+the Root Mean Squared Error (RMSE) of the baseline XGBoost model to 0.1504 to 0.00194 and the coefficient of
+determination R2 of 0.84362 to 0.9019 Comparison to the other metaheuristics, including the Grey Wolf Optimizer
+(GWO), Particle Swarm Optimization (PSO) and Whale Optimization Algorithm (WOA) proved the superiority
+of the suggested hybrid model in all metrics of the evaluation. These findings support the potential to combine the
+dynamics of geometric exploration provided by BER with those of diffusion-based refinement offered by SFS to
+achieve high generalization and minimal bias. The implications extend beyond predictive analytics, demonstrating
+that the hybrid metaheuristic optimization approach can serve as a scalable, explainable method for adaptive
+educational systems, enabling early detection of at-risk learners and the development of data-driven academic
+support mechanisms.
+
+Educational Data Mining (EDM)
+Hybrid Metaheuristic Optimization Al-Biruni Earth Radius–Stochastic
+Fractal Search (BER–SFS) eXtreme Gradient Boosting (XGBoost) Student Performance Prediction.
+Keywords:
+
+1. INTRODUCTION
+
+One of the most significant areas of contemporary educational research is students’ academic performance. On other
+tiers, schools also face the challenge of ensuring that student performance is treated holistically rather than limited
+to grades or test scores [1]. Student performance measurement is not merely a combination of independent variables,
+
+including cognitive outcomes, student engagement and motivation, socio-economic status, and school support systems.
+Such variables are generally dynamic and create patterns that
+cannot be easily analysed using conventional methods. As
+described in the study by [2], student performance does not
+depend solely on academic ability but also on personal, environmental, and institutional factors that influence learning
+
+© 2026 The Author(s). Published by ASPG. This article is licensed under CC BY 4.0.
+
+20
+
+Journal of Artificial Intelligence and Metaheuristic (JAIM)
+
+outcomes differently, and in most cases, nonlinearly. With
+such complexity, there is an increased demand for systematic,
+data-driven methods to analyze and predict student performance. The rise of digital learning programs, online learning
+systems, and academic management systems has led to a
+surge in educational content, commonly known as educational big data. This information has enormous potential to
+understand learner behavior, identify at-risk students, and
+improve institutional decision-making. Nevertheless, even
+in the wake of the opportunities it offers, educational data
+is characterized by high dimensionality, noisy missing values, and nonlinear relations between variables, making it
+very difficult to find a model and make predictions. The
+traditional statistical methods, despite their usefulness in inferential analysis, do not usually adequately describe these
+complex patterns of dependency . This restriction highlights
+the importance of more complex computational mechanisms
+that can acquire complex representations of student data and
+uncover hidden information. In this respect, Artificial Intelligence (AI) and Machine Learning (ML) paradigms have been
+agents of change in data analytics, enabling the modeling of
+complex systems and the generation of predictive knowledge
+[3]. Intelligent tutoring systems, automated evaluation, and
+adaptive learning have emerged in education due to advances
+in AI and ML. DL models, in particular, have demonstrated
+exceptional ability to process extensive, heterogeneous data
+from various education sources, such as student data systems,
+online education records, and evaluation systems [4]. Such
+models can handle multidimensional data to identify nonlinear relationships and make reliable predictions about student
+performance. On the other hand, regression-based machine
+learning models, such as Linear Regression, Support Vector
+Regression, and particularly tree-based ensemble regression
+models, are specifically designed to predict continuous target values, e.g., exam scores or grade point averages. The
+models enable researchers and educators to predict academic
+performance using a wide range of predictors, including behavioral, psychological, and socio-economic attributes [5].
+These models prove invaluable for studying the fundamentals of student success, as they are interpretable and can be
+applied to related studies. Nonetheless, predictive models
+are prone to the quality and format of input data; thus, their
+quality and reliability vary dramatically. Educational data is
+heterogeneous, consistin
+
+[...]
+
+ourse, and platform-level affective patterns.
+Explainable dropout prediction Classifiers + model explainability Achieved AUPRC 89.5%, Precision 95%, Recall 93%; iden(19 Brazilian schools)
+tified causes of dropout for targeted intervention.
+First-year dropout (engineering) Eight ML models; site-specific vs. Site-specific models outperform pooled; GBDT best; math
+pooled
+score lowers dropout risk.
+
+[9]
+[10]
+[24]
+
+[11]
+
+[12]
+[13]
+[14]
+[15]
+[25]
+[16]
+[17]
+[26]
+[18]
+[19]
+[20]
+[21]
+[22]
+
+Methodology
+
+Key Findings and Contributions
+
+Table 2. Description of Predictor Variables
+Feature Name
+
+Description
+
+Hours Studied
+
+Refers to the amount of time that a given student spent studying during a specific time.
+This variable is one of the primary predictors of effort and academic engagement in the
+study.
+Previous Scores
+Denotes the scores obtained by students in their previous assessments or tests. It acts as
+a proxy for prior academic performance and learning consistency.
+Extracurricular Activities
+Indicates whether a student participates in extracurricular activities, represented as a
+categorical variable with two possible values: Yes or No. This feature helps assess the
+balance between academic and non-academic commitments.
+Sleep Hours
+Denotes the mean number of hours of sleep the student gets each day. This is a potentially
+effective factor since adequate rest is a key element of cognitive performance and
+concentration.
+Sample Question Papers Prac- Measures the number of practice papers that the student has done before the assessment.
+ticed
+This variable indicates how prepared the student is for exams and how well he/she
+understand test formats.
+
+Table 3. Description of Target Variable
+Variable Name
+
+Description
+
+Performance Index
+
+The target variable is each student’s academic performance. The index ranges from 10
+to 100, with higher values indicating improved results. It is a composite quantitative
+indicator of student success, influenced by the predictor variables listed in Table 2. The
+values are simplified and rounded to the nearest number to make them simpler and more
+homogeneous.
+
+25
+
+Journal of Artificial Intelligence and Metaheuristic (JAIM)
+
+Vol. 11, No. 02 · 2026
+
+Figure 3. Distribution of Predictor Variables
+
+functions were used to ensure that the Student Performance
+Dataset was free of inconsistencies, bias, and noise. These
+processes are quality control, imputation and encoding, scaling, correlation screening and assisted feature design. Preprocessing phase one entailed quality control to ascertain
+the integrity and reliability of the data. These involved confirming completeness, consistency and logical validity of any
+records. Redundant and abnormal records, e.g., implausible
+study hours or negative performance indices, were identified
+and eliminated. Outliers were identified using statistical techniques, such as summary and boxplots, and missing values
+and data distribution were evaluated to ensure the dataset was
+ready. This was done to ensure that subsequent analyses used
+correct and representative data. After quality control, data
+values were either missing or incomplete, and imputation
+techniques were used to fill the gaps. For numerical values
+(i.e., Hours Studied, Sleep Hours, and Previous Scores), missing values were imputed using the feature’s mean or median,
+depending on its skewness. Mode imputations have been used
+to retain the most frequently occurring category for categorical variables such as Extracurricular Activities. Categorical
+variables were encoded as numbers to prepare the dataset for
+machine learning models. Extracurricular Activities were
+binary coded with 1 indicating Yes and 0 indicating No. The
+change made it easy to incorporate into regression-based
+algorithms, such as XGBoost and Support Vector Regression, that require numerical input features. Function scaling
+was applied to normalize the numerical variables and ensure
+that all features contributed equally to model training. Standardization per feature was adopted, and each variable was
+transformed to have a mean of zero and a standard deviation
+of one. The approach ensures that models that are sensitive
+to feature magnitudes are not biased toward larger-valued attributes, as typified by Support Vector Regression (SVR) and
+Gradient Boosting. The scaling parameters were trained only
+on the training data to avoid data leakage, and the same transformation was then applied to the test data. Mathematically,
+the standardized value zi for each feature xi was computed as:
+zi =
+
+xi − µx
+σx
+
+(1)
+
+where µx and σx represent the mean and standard deviation of
+the feature, respectively. Correlation analysis was performed
+to eliminate redundancy and reduce multicollinearity among
+features. The Pearson correlation coefficient was estimated
+for all combinations of numerical variables to assess the linear relationship between them. Strongly correlated variables
+
+(r > 0.85) were identified, and redundant variables were removed to improve model generalization and minimize overfitting. Also, they visualized the predictor dependency structure
+using correlation heatmaps, which allowed them to retain
+only the most significant variables—Hours Studied, Previous
+Scores, and Sample Question Papers Practiced—for further
+analysis in downstream modeling. In this work, both domain
+knowledge and statistical evidence were used to make feature
+engineering and preprocessing choices. From the exploratory
+analysis, it was found that behavioral characteristics (e.g.,
+hours of study, sleep duration) had nonlinear relationships
+with performance outcomes, which explains why nonlinear
+learners such as XGBoost and SVR should be included. To
+make the model interpretable, features were retained only if
+they made a meaningful contribution to academic prediction.
+The preprocessing pipeline was implemented to ensure reproducibility and future scalability, in case new data sources or
+features are introduced. All in all, the preprocessing phase
+produced a clean, standardized, and semantically consistent
+dataset that served as the basis for robust, comprehensible
+machine learning models.
+3.3 Al-Biruni Earth Radius (BER) Algorithm
+
+Unlike the theory in the 19th century, it relies on a methodology of the Persian polymath Al-Biruni in the 11th century to
+estimate the radius of the Earth. Al-Biruni cleverly used the
+calculations of the radius of the Earth as a result of geometrical observations made on a mountain peak. The first method
+he used to measure the mountain’s height was to measure
+the angle from two points on level ground to the mountain’s
+summit. The height of the mountain, h, is obtained by using
+the following equation:
+h=
+
+d (tan θ1 × tan θ2 )
+tan θ2 − tan θ1
+
+(2)
+
+Having known the height of the mountain, Al-Biruni estimated the angle of depression between the height of the
+mountain and the horizon. He then calculated the radius of
+the Earth, R, using trigonometric relationships as:
+R=
+
+h cos α
+1 − cos α
+
+(3)
+
+The geometric principle of this method is depicted in Fig. 4.
+The specified optimization algorithm is rooted in the concepts
+Al-Biruni developed for exploring and exploiting in the context of cooperative optimization. This mechanism is based on
+swarm intelligence, in which agents (individuals) collaborate
+and communicate to accomplish a common task. Swarm organisms, such as ants and bees, are groups that form naturally
+and can explore the environment in parallel and communicate
+with one another. The BER algorithm mimics this joint move
+by dividing its population into two sets, balancing exploration
+and exploitation to discover new regions and optimize existing solutions. The design aims to prevent local optima from
+forming prematurely, since every subgroup is complementary to the others in the optimization process. Exploration is
+dynamically strengthened if the algorithm fails to achieve improved fitness after several rounds. Optimization algorithms
+aim to determine the best solution to a problem subject to
+
+26
+
+Journal of Artificial Intelligence and Metaheuristic (JAIM)
+
+Vol. 11, No. 02 · 2026
+
+Q(t + 1) = r2 (Q(t) + D)
+D = r3 (L(t) − Q(t))
+
+(7)
+(8)
+
+where L(t) represents the best-known solution, and r3 is a
+random coefficient vector. A local search is then performed
+around the best solution using:
+
+Q′ (t + 1) = r(Q∗ (t) + k)
+k = 1+
+
+Figure 4. Calculation of Earth’s radius based on the Al-Biruni
+principle.
+
+given constraints. In BER, all the objects of the population
+are described as vectors of a d-dimensional nature:
+⃗ = {Q1 , Q2 , . . . , Qd } ∈ Rd
+Q
+where Qi denotes a feature or parameter, and d represents the
+problem’s dimensionality. The fitness function P evaluates
+the quality of each candidate solution. The goal of the optimization process is to maximize this fitness by iteratively
+updating the population vectors.
+The algorithm requires initialization of parameters, including
+the population size, the upper and lower bounds of the variables, and the maximum number of iterations (Maxiter ). A
+random population is generated at the beginning, and fitness
+values are computed for all individuals.
+
+2
+Maxiter
+
+(9)
+(10)
+
+If no improvement in fitness occurs over two consecutive
+iterations, mutation is applied as:
+Q(t + 1) = kz2 − h
+
+cos(x)
+1 − cos(x)
+
+(11)
+
+Where z is a random number between 0 and 1, the elitism
+mechanism ensures that the best solutions are preserved
+across iterations, maintaining stability while enhancing diversity. The dual exploration–exploitation strategy of BER
+enables it to achieve efficient global optimization while avoiding local stagnation.
+Algorithm 1 Al-Biruni Earth Radius (BER) Optimization
+Algorithm
+1: Initialize population ⃗
+Si (i = 1, 2, . . . , d), maximum itera-
+
+tions Maxiter , and fitness function Fn
+2: Initialize BER parameters
+3: Set iteration counter t = 1
+4: Compute initial fitness Fn for all ⃗
+Si
+
+⃗∗
+5: Identify best solution S
+
+3.4 Exploration Operation
+
+Exploration focuses on identifying promising regions in the
+search space and avoiding premature convergence. This stage
+allows the algorithm to investigate potential solutions near
+interesting regions using the following update equations:
+
+Q(t + 1) = Q(t) + D(2r2 − 1)
+
+(4)
+
+D = r1 (S(t) − 1)
+
+(5)
+
+Here, S(t) is the current solution vector, and D defines the
+search radius around each candidate. The coefficients r1
+and r2 are random parameters used to enhance stochastic
+movement across the search space. The distance factor r is
+calculated as:
+r=h
+
+2t 2
+
+cos(x)
+1 − cos(x)
+
+(6)
+
+where x is an angle between 0° and 180°, and h represents the
+metaphorical mountain height controlling exploration range.
+3.5 Exploitation Operation
+
+Exploitation aims to refine existing solutions and enhance
+convergence around optimal regions. It updates solutions
+using the following equations:
+
+6: while t ≤ Maxiter do
+
+for each solution in the exploration group do
+cos(x)
+8:
+Compute r = h 1−cos(x)
+9:
+D = r1 (S(t) − 1)
+10:
+S(t + 1) = S(t) + D(2r2 − 1)
+11:
+end for
+12:
+for each solution in the exploitation group do
+13:
+Compute D = r2 (L(t) − S(t))
+14:
+S1 (t + 1) = r2 (S(t) + D)
+2t 2
+15:
+k = 1 + Max
+iter
+16:
+S2 (t + 1) = r(S∗ (t) + k)
+17:
+Compare S1 (t + 1) and S2 (t + 1), select best S∗
+18:
+if no fitness improvement for two iterations then
+cos(x)
+19:
+Mutate solution: S(t + 1) = kz2 − h 1−cos(x)
+20:
+end if
+21:
+end for
+22:
+Update fitness Fn for all ⃗S
+23: end while
+⃗∗
+24: return best solution S
+7:
+
+The BER optimization process consists of exploration and
+exploitation, as summarized in Algorithm 1, to make the
+search process diverse and ensure convergence to the global
+optimum. The Stochastic Fractal Search (SFS) algorithm is
+based on the mathematical concept of fractals and their self27
+
+Journal of Artificial Intelligence and Metaheuristic (JAIM)
+
+Vol. 11, No. 02 · 2026
+
+similarity. It builds upon the original Fractal Search (FS) algorithm. It adds stochastic diffusion-based operations based on
+the concept of Diffusion-Limited Aggregation (DLA), which
+form fractal-shaped structures in the search space. SFS dynamic propagation of the best candidate solution is through
+a diffusion process that maintains a balance between exploration and exploitation. The diffusion process about the best
+solution (BP) is depicted in Figure 5 where clusters are created around the best solution, including BP1 , BP2 , BP3 , BP4 ,
+and BP5 that help in steering the search to the global optimum.
+
+better generalization. XGBoost is also particularly effective
+for predicting student performance, as it can capture subtle
+interactions among variables such as study hours, past scores,
+and lifestyle factors, and predict high student performance.
+Support Vector Regression (SVR) Support Vector Regression (SVR) is a variant of the Support Vector Machine (SVM)
+used for continuous prediction. The working principle of
+SVR is to map the input data into a high-dimensional feature
+space using kernel functions, and then fit a linear model in
+the transformed space. The algorithm is intended to reduce
+the prediction error to the required tolerance, represented by
+the variable ε, thereby introducin
