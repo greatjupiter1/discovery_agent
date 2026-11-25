@@ -34,9 +34,22 @@ Inputs come from the environment (set by .github/workflows/discovery.yml):
   GH_MODELS_MODEL (default "openai/gpt-4o"),
   GLM_MODEL (default "glm-4.7-flash", the free z.ai Flash model)
   GLM_MAX_TOKENS (default 8000, the GLM path's output budget)
+  GROQ_MODEL (default "openai/gpt-oss-120b"), OPENROUTER_MODEL
+  (default "meta-llama/llama-3.3-70b-instruct:free"),
+  CLOUDFLARE_MODEL (default "@cf/meta/llama-3.3-70b-fp8-fast"),
+  SAMBANOVA_MODEL (default "Meta-Llama-3.3-70B-Instruct"),
+  DASHSCOPE_MODEL (default "qwen-plus"), MODELSCOPE_MODEL (default
+  "Qwen/Qwen3-32B"), SILICONFLOW_MODEL (default
+  "Qwen/Qwen2.5-7B-Instruct"),
+  CF_ACCOUNT_ID (the Cloudflare account id — an identifier, not a
+  secret; the cloudflare brain is skipped when it is unset)
 Secrets (names only): GEMINI_API_KEY, TELEGRAM_BOT_TOKEN
   GH_MODELS_TOKEN (optional; the GitHub path falls back to GITHUB_TOKEN)
   GLM_API_KEY (the GLM path's key, from z.ai)
+  GROQ_API_KEY, OPENROUTER_API_KEY, SAMBANOVA_API_KEY,
+  CLOUDFLARE_API_TOKEN, DASHSCOPE_API_KEY, MODELSCOPE_API_KEY,
+  SILICONFLOW_API_KEY (optional §22 free-tier brains; each joins the
+  chain automatically when its secret exists)
 """
 
 import glob
@@ -474,6 +487,73 @@ GLM_URL = "https://api.z.ai/api/paas/v4/chat/completions"
 GLM_DEFAULT_MODEL = "glm-4.7-flash"
 GLM_DEFAULT_MAX_TOKENS = 8000
 
+# §22: seven free-tier OpenAI-compatible backup brains (mirrors
+# build_article.py). Each is used only when its credential exists
+# in the environment (see the chain append rule in llm_chain());
+# with no keys set, behaviour is exactly the legacy glm/gemini chain.
+GROQ_URL = "https://api.groq.com/openai/v1/chat/completions"
+GROQ_DEFAULT_MODEL = "openai/gpt-oss-120b"
+OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
+OPENROUTER_DEFAULT_MODEL = "meta-llama/llama-3.3-70b-instruct:free"
+CLOUDFLARE_DEFAULT_MODEL = "@cf/meta/llama-3.3-70b-fp8-fast"
+SAMBANOVA_URL = "https://api.sambanova.ai/v1/chat/completions"
+SAMBANOVA_DEFAULT_MODEL = "Meta-Llama-3.3-70B-Instruct"
+DASHSCOPE_URL = ("https://dashscope-intl.aliyuncs.com"
+                 "/compatible-mode/v1/chat/completions")
+DASHSCOPE_DEFAULT_MODEL = "qwen-plus"
+MODELSCOPE_URL = "https://api-inference.modelscope.cn/v1/chat/completions"
+MODELSCOPE_DEFAULT_MODEL = "Qwen/Qwen3-32B"
+SILICONFLOW_URL = "https://api.siliconflow.cn/v1/chat/completions"
+SILICONFLOW_DEFAULT_MODEL = "Qwen/Qwen2.5-7B-Instruct"
+EXTRA_BRAINS_MAX_TOKENS = 8000
+
+# Display labels for the §22 brains (log / error messages).
+_EXTRA_BRAIN_LABELS = {"groq": "Groq", "openrouter": "OpenRouter",
+                       "cloudflare": "Cloudflare Workers AI",
+                       "sambanova": "SambaNova",
+                       "dashscope": "DashScope",
+                       "modelscope": "ModelScope",
+                       "siliconflow": "SiliconFlow"}
+
+
+def _cloudflare_url():
+    """The Workers AI OpenAI-compatible endpoint for the configured
+    account; "" when CF_ACCOUNT_ID is unset (the cloudflare brain is
+    then unavailable, exactly like a missing key)."""
+    account = (os.environ.get("CF_ACCOUNT_ID") or "").strip()
+    if not account:
+        return ""
+    return ("https://api.cloudflare.com/client/v4/accounts/"
+            f"{account}/ai/v1/chat/completions")
+
+
+def _brain_endpoint(name):
+    """(url, api_key) for a §22 OpenAI-compatible brain, resolved
+    from the environment at call time; either element is "" when the
+    brain is not configured. ("" , "") for any other name."""
+    if name == "groq":
+        return (GROQ_URL,
+                (os.environ.get("GROQ_API_KEY") or "").strip())
+    if name == "openrouter":
+        return (OPENROUTER_URL,
+                (os.environ.get("OPENROUTER_API_KEY") or "").strip())
+    if name == "cloudflare":
+        return (_cloudflare_url(),
+                (os.environ.get("CLOUDFLARE_API_TOKEN") or "").strip())
+    if name == "sambanova":
+        return (SAMBANOVA_URL,
+                (os.environ.get("SAMBANOVA_API_KEY") or "").strip())
+    if name == "dashscope":
+        return (DASHSCOPE_URL,
+                (os.environ.get("DASHSCOPE_API_KEY") or "").strip())
+    if name == "modelscope":
+        return (MODELSCOPE_URL,
+                (os.environ.get("MODELSCOPE_API_KEY") or "").strip())
+    if name == "siliconflow":
+        return (SILICONFLOW_URL,
+                (os.environ.get("SILICONFLOW_API_KEY") or "").strip())
+    return ("", "")
+
 
 def llm_provider():
     return (os.environ.get("LLM_PROVIDER") or "gemini").strip().lower()
@@ -489,6 +569,27 @@ def _brain_model(name):
     if name == "github":
         return (os.environ.get("GH_MODELS_MODEL")
                 or GH_MODELS_DEFAULT_MODEL).strip()
+    if name == "groq":
+        return (os.environ.get("GROQ_MODEL")
+                or GROQ_DEFAULT_MODEL).strip()
+    if name == "openrouter":
+        return (os.environ.get("OPENROUTER_MODEL")
+                or OPENROUTER_DEFAULT_MODEL).strip()
+    if name == "cloudflare":
+        return (os.environ.get("CLOUDFLARE_MODEL")
+                or CLOUDFLARE_DEFAULT_MODEL).strip()
+    if name == "sambanova":
+        return (os.environ.get("SAMBANOVA_MODEL")
+                or SAMBANOVA_DEFAULT_MODEL).strip()
+    if name == "dashscope":
+        return (os.environ.get("DASHSCOPE_MODEL")
+                or DASHSCOPE_DEFAULT_MODEL).strip()
+    if name == "modelscope":
+        return (os.environ.get("MODELSCOPE_MODEL")
+                or MODELSCOPE_DEFAULT_MODEL).strip()
+    if name == "siliconflow":
+        return (os.environ.get("SILICONFLOW_MODEL")
+                or SILICONFLOW_DEFAULT_MODEL).strip()
     return (os.environ.get("GEMINI_MODEL") or "gemini-3.8-flash").strip()
 
 
@@ -611,6 +712,56 @@ def _glm_once(prompt, temperature=0.4, json_mode=False):
         raise Fail("GLM returned empty text")
     return text
 
+
+def _extra_brain_once(name, prompt, temperature=0.4, json_mode=False):
+    """One single attempt on a §22 OpenAI-compatible brain (Groq,
+    OpenRouter, Cloudflare Workers AI, SambaNova, DashScope,
+    ModelScope or SiliconFlow — no retries;
+    call_llm's brain chain owns retrying and failover). Auth is an
+    "Authorization: Bearer <key>" header with the brain's own env
+    key. Unlike GLM, no "thinking" field is sent: these endpoints
+    are plain OpenAI-compatible chat completions and the field is a
+    z.ai extension. A truncated reply (finish_reason "length")
+    raises Fail like any other failed attempt."""
+    label = _EXTRA_BRAIN_LABELS.get(name, name)
+    url, api_key = _brain_endpoint(name)
+    if not url:
+        raise Fail(f"{label} brain has no endpoint available: "
+                   "set the CF_ACCOUNT_ID repo variable.")
+    if not api_key:
+        raise Fail(f"{label} brain has no API key available.")
+    body = json.dumps({
+        "model": _brain_model(name),
+        "messages": [{"role": "user", "content": prompt}],
+        "temperature": temperature,
+        "max_tokens": EXTRA_BRAINS_MAX_TOKENS,
+        **({"response_format": {"type": "json_object"}} if json_mode else {}),
+    }).encode("utf-8")
+    status, raw = http_request(url, method="POST", data=body,
+                               headers={
+                                   "Content-Type": "application/json",
+                                   "Authorization": f"Bearer {api_key}"})
+    if status != 200:
+        raise Fail(f"{label} HTTP {status}: {raw[:300]!r}")
+    try:
+        data = json.loads(raw.decode("utf-8", "replace"))
+    except Exception:
+        raise Fail(f"{label} returned a non-JSON body "
+                   f"(HTTP {status}): {raw[:300]!r}")
+    try:
+        choice = data["choices"][0]
+        text = (choice["message"]["content"] or "").strip()
+        finish = choice.get("finish_reason")
+    except Exception:
+        raise Fail(f"{label} returned an unexpected shape: {raw[:300]!r}")
+    if finish == "length":
+        raise Fail(f"{label} reply truncated at "
+                   f"{EXTRA_BRAINS_MAX_TOKENS} tokens "
+                   "(finish_reason=length)")
+    if not text:
+        raise Fail(f"{label} returned empty text")
+    return text
+
 # ----------------------------------------------------------------------
 # Brain chain: every logical LLM call walks an ordered list of brains
 # (env LLM_CHAIN, comma-separated; default: LLM_PROVIDER, then glm,
@@ -619,11 +770,23 @@ def _glm_once(prompt, temperature=0.4, json_mode=False):
 # CHAIN_BACKOFF_SECONDS x attempt pause between them; a brain whose
 # key is missing is skipped. Only when every brain is skipped or
 # exhausted does the call fail — fail-closed, as before.
+#
+# §22 append rule (mirrors build_article.py): any of the seven
+# free-tier brains (EXTRA_BRAINS) whose credential is present in
+# the environment is APPENDED to the chain — after whatever
+# LLM_CHAIN / the default produced, in EXTRA_BRAINS order, without
+# duplicating a name already listed — so a new brain joins the run
+# the moment its secret exists, with no further configuration.
+# With no new keys set, the chain is exactly the legacy chain.
 # ----------------------------------------------------------------------
 
 CHAIN_ATTEMPTS = 3
 CHAIN_BACKOFF_SECONDS = 15
-KNOWN_BRAINS = ("glm", "gemini", "github")
+KNOWN_BRAINS = ("glm", "gemini", "github",
+               "groq", "openrouter", "cloudflare", "sambanova",
+               "dashscope", "modelscope", "siliconflow")
+EXTRA_BRAINS = ("groq", "openrouter", "cloudflare", "sambanova",
+                "dashscope", "modelscope", "siliconflow")
 
 
 def llm_chain():
@@ -632,7 +795,8 @@ def llm_chain():
     (when set) followed by glm and gemini, deduplicated, order
     preserved. "github" is excluded from the DEFAULT chain (GitHub
     Models is retired); it is honoured only when named explicitly in
-    LLM_CHAIN."""
+    LLM_CHAIN. Finally the §22 append rule adds every EXTRA_BRAINS
+    brain whose credential is present, in EXTRA_BRAINS order."""
     raw = (os.environ.get("LLM_CHAIN") or "").strip()
     if raw:
         names = [n.strip().lower() for n in raw.split(",") if n.strip()]
@@ -645,6 +809,9 @@ def llm_chain():
     chain = []
     for name in names:
         if name not in chain:
+            chain.append(name)
+    for name in EXTRA_BRAINS:
+        if name not in chain and _brain_key_available(name, ""):
             chain.append(name)
     return chain
 
@@ -661,6 +828,9 @@ def _brain_key_available(name, api_key):
     if name == "github":
         return bool((os.environ.get("GH_MODELS_TOKEN") or "").strip()
                     or (os.environ.get("GITHUB_TOKEN") or "").strip())
+    if name in EXTRA_BRAINS:
+        url, key = _brain_endpoint(name)
+        return bool(url and key)
     return False
 
 
@@ -675,6 +845,10 @@ def _call_brain(name, prompt, api_key, model, temperature, json_mode):
     if name == "github":
         return _github_models_once(prompt, temperature=temperature,
                                    json_mode=json_mode)
+    if name in EXTRA_BRAINS:
+        return _extra_brain_once(name, prompt,
+                                 temperature=temperature,
+                                 json_mode=json_mode)
     if json_mode:
         return gemini(prompt, api_key, model)
     return gemini_text(prompt, api_key, model)
