@@ -1,0 +1,63 @@
+name: Self-repair agent
+
+# §20.5 — the self-repair agent (repair_agent.py). When one of the
+# two production workflows finishes with failure, this workflow
+# diagnoses the failed run from its log, classifies it
+# deterministically (human-only / code-defect / external /
+# transient), repairs what is safely repairable — a brain-drafted
+# minimal patch ships ONLY when the full offline test suite passes
+# on the patched tree — and otherwise re-dispatches from the same
+# point (GRIS resumes via its project_id) or reports the one human
+# action needed. Loop guard: max 2 attempts per problem signature
+# (repairs/repair_state.json), then it escalates and stops.
+on:
+  workflow_run:
+    workflows: ["Build Discovery article", "Build GRIS sample project"]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: "Failed run id to diagnose and repair"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  # One repair at a time; a repair never cancels another repair.
+  group: self-repair
+  cancel-in-progress: false
+
+jobs:
+  repair:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'failure' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install python-docx (offline test-suite parity)
+        run: pip install -q python-docx
+
+      - name: Diagnose and repair the failed run
+        env:
+          REPAIR_RUN_ID: ${{ github.event.workflow_run.id || inputs.run_id }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          CHAT_ID: ${{ secrets.CHAT_ID }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+          GH_MODELS_TOKEN: ${{ secrets.GH_MODELS_TOKEN }}
+          GLM_API_KEY: ${{ secrets.GLM_API_KEY }}
+          GLM_MODEL: ${{ vars.GLM_MODEL }}
+          GLM_MAX_TOKENS: ${{ vars.GLM_MAX_TOKENS }}
+          LLM_PROVIDER: ${{ vars.LLM_PROVIDER }}
+          LLM_CHAIN: ${{ vars.LLM_CHAIN }}
+        run: python repair_agent.py
