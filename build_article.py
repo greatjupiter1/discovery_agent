@@ -57,6 +57,7 @@ Secrets (names only, set in the repo's Actions secrets):
 """
 
 import email.utils
+import hashlib
 import html as html_lib
 import json
 import os
@@ -4787,6 +4788,190 @@ def norm(s):
 
 
 # --------------------------------------------------------------------------
+# Stage checkpointing + resume (§20.6)
+#
+# Jupiter's law (2026-11-25): «مشکل هر جا ظاهر شده ربات بیاد از همون
+# جا ادامه بده نه از قبل دوباره صفر» — wherever a problem appears,
+# the bot continues FROM THAT POINT, never from zero. When the
+# screening/gate stage completes, the run's counted sources + funnel
+# are persisted to runs/<signature>/checkpoint.json (the workflow
+# commits it back on success AND on failure). A later dispatch with
+# the RESUME input set (any non-empty value — the repair agent
+# passes the failed stage's label) and matching inputs loads the
+# checkpoint and goes straight to the gate check + writing: no
+# matrix, no source map, no retrieval, no screening. A missing,
+# corrupt or stale checkpoint NEVER crashes a run — it simply runs
+# fresh (fail-soft). A successful production marks its checkpoint
+# consumed, so a later dispatch never silently reuses stale sources.
+# --------------------------------------------------------------------------
+
+RUNS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                        "runs")
+CHECKPOINT_MAX_BYTES = 2_000_000
+# The fields of a counted source record that the gate, the writer
+# and the §20.7 report read — the checkpoint stores exactly these.
+CHECKPOINT_SOURCE_KEYS = (
+    "title", "authors", "year", "venue", "doi", "url", "abstract",
+    "source_type", "primary_relation", "index", "registry_match",
+    "fulltext", "fulltext_route", "fulltext_excerpt", "passages",
+    "passage_hits", "mapped_title", "catalogue_via",
+    "catalogue_title", "catalogue_id")
+# Writer-prompt caps (source_cards_text): the checkpoint never
+# stores more of a text than the writer itself would be shown.
+CHECKPOINT_ABSTRACT_CHARS = 1500
+CHECKPOINT_EXCERPT_LADDER = (FULLTEXT_CARD_CHARS, 6000, 3000, 1500,
+                             800, 400)
+
+
+def run_signature(field, topic, language, category, article_type,
+                  mode):
+    """Stable identity of one production request: the first 16 hex
+    chars of sha256 over the normalised inputs."""
+    raw = "|".join(norm(x) for x in
+                   (field, topic, language, category, article_type,
+                    mode))
+    return hashlib.sha256(raw.encode("utf-8")).hexdigest()[:16]
+
+
+def checkpoint_path(signature):
+    return os.path.join(RUNS_DIR, signature, "checkpoint.json")
+
+
+def _checkpoint_source(source, excerpt_cap):
+    """A storage copy of one counted source record: only the fields
+    the gate/writer/report read, texts capped at the writer's own
+    caps. The live record is never mutated."""
+    out = {}
+    for key in CHECKPOINT_SOURCE_KEYS:
+        if key in source:
+            out[key] = source[key]
+    if out.get("abstract"):
+        out["abstract"] = out["abstract"][:CHECKPOINT_ABSTRACT_CHARS]
+    if out.get("fulltext_excerpt"):
+        out["fulltext_excerpt"] = out["fulltext_excerpt"][:excerpt_cap]
+    return out
+
+
+def save_stage_checkpoint(field, topic, language, category,
+                          article_type, mode, queries, smap, matrix,
+                          ft_keywords, counted, funnel,
+                          disagreement_titles, verified_count):
+    """Persist the post-screening checkpoint; returns the signature.
+    Raises on I/O or serialisation errors — the CALLER wraps this
+    fail-soft (a checkpoint problem must never fail the run)."""
+    signature = run_signature(field, topic, language, category,
+                              article_type, mode)
+    payload = {
+        "version": 1,
+        "signature": signature,
+        "status": "available",
+        "stage_reached": "screened",
+        "created_at": datetime.now(timezone.utc).strftime(
+            "%Y-%m-%dT%H:%M:%SZ"),
+        "inputs": {"field": field, "topic": topic,
+                   "language": language, "category": category,
+                   "article_type": article_type, "mode": mode},
+        "queries": list(queries or []),
+        "source_map": smap or {},
+        "matrix": {"core_keywords": list(
+                       (matrix or {}).get("core_keywords") or []),
+                   "name_variants": list(
+                       (matrix or {}).get("name_variants") or [])},
+        "ft_keywords": list(ft_keywords or []),
+        "funnel": dict(funnel or {}),
+        "disagreement_titles": list(disagreement_titles or []),
+        "verified_count": int(verified_count or 0),
+    }
+    # Size guard: excerpts are stored at the writer's own cap; only
+    # if the serialised checkpoint still exceeds the budget are the
+    # excerpts trimmed further (and the trim is logged).
+    text = None
+    for cap in CHECKPOINT_EXCERPT_LADDER:
+        payload["counted"] = [_checkpoint_source(s, cap)
+                              for s in (counted or [])]
+        text = json.dumps(payload, ensure_ascii=False, indent=1)
+        if len(text.encode("utf-8")) <= CHECKPOINT_MAX_BYTES:
+            if cap < FULLTEXT_CARD_CHARS:
+                print(f"checkpoint: excerpts trimmed to {cap} chars "
+                      f"to fit the {CHECKPOINT_MAX_BYTES}-byte "
+                      "budget")
+            break
+    path = checkpoint_path(signature)
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    tmp = path + ".tmp"
+    with open(tmp, "w", encoding="utf-8") as f:
+        f.write(text)
+    os.replace(tmp, path)
+    print(f"checkpoint saved: {path} (signature {signature}, "
+          f"{len(payload['counted'])} counted sources, "
+          f"{len(text.encode('utf-8'))} bytes)")
+    return signature
+
+
+def load_stage_checkpoint(field, topic, language, category,
+                          article_type, mode):
+    """Load the checkpoint for THIS dispatch's inputs, or None.
+    Fail-soft by design: a missing file, corrupt JSON, a consumed
+    checkpoint or a signature/inputs mismatch all log plainly and
+    return None (the caller then runs fresh). Never raises."""
+    signature = run_signature(field, topic, language, category,
+                              article_type, mode)
+    path = checkpoint_path(signature)
+    if not os.path.exists(path):
+        print(f"resume: no checkpoint at {path} — running fresh")
+        return None
+    try:
+        with open(path, encoding="utf-8") as f:
+            payload = json.load(f)
+    except Exception as e:
+        print(f"resume: checkpoint at {path} is unreadable ({e}) — "
+              "running fresh")
+        return None
+    want = {"field": field, "topic": topic, "language": language,
+            "category": category, "article_type": article_type,
+            "mode": mode}
+    got = payload.get("inputs") or {}
+    if (payload.get("signature") != signature
+            or payload.get("status") != "available"
+            or payload.get("stage_reached") != "screened"
+            or not isinstance(payload.get("counted"), list)
+            or not isinstance(payload.get("funnel"), dict)
+            or any(norm(got.get(k)) != norm(v)
+                   for k, v in want.items())):
+        print(f"resume: checkpoint at {path} does not match this "
+              "dispatch (or is already consumed) — running fresh")
+        return None
+    print(f"resume: checkpoint {signature} loaded "
+          f"(created {payload.get('created_at')})")
+    return payload
+
+
+def consume_stage_checkpoint(field, topic, language, category,
+                             article_type, mode):
+    """Mark this request's checkpoint consumed after a successful
+    production, so no later dispatch silently reuses its sources.
+    Fail-soft: never raises."""
+    try:
+        signature = run_signature(field, topic, language, category,
+                                  article_type, mode)
+        path = checkpoint_path(signature)
+        if not os.path.exists(path):
+            return
+        with open(path, encoding="utf-8") as f:
+            payload = json.load(f)
+        payload["status"] = "consumed"
+        payload["consumed_at"] = datetime.now(
+            timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+        tmp = path + ".tmp"
+        with open(tmp, "w", encoding="utf-8") as f:
+            json.dump(payload, f, ensure_ascii=False, indent=1)
+        os.replace(tmp, path)
+        print(f"checkpoint consumed: {signature}")
+    except Exception as e:
+        print(f"WARNING: checkpoint consume failed (ignored): {e}")
+
+
+# --------------------------------------------------------------------------
 # Main
 # --------------------------------------------------------------------------
 
@@ -4841,50 +5026,15 @@ def _wave2_queries(field, topic, api_key, model):
     return out
 
 
-def main():
-    field = os.environ.get("FIELD", "").strip()
-    topic = os.environ.get("TOPIC", "").strip()
-    category = (os.environ.get("ARTICLE_CATEGORY") or "intl").strip().lower()
-    if category not in ("ir", "intl"):
-        category = "intl"
-    article_type = (os.environ.get("ARTICLE_TYPE") or "isi").strip().lower()
-    if article_type not in TYPE_GUIDE:
-        article_type = "isi"
-    language = (os.environ.get("LANGUAGE") or "fa").strip()
-    mode = (os.environ.get("MODE") or "review").strip().lower()
-    model = (os.environ.get("GEMINI_MODEL") or "gemini-3.5-flash").strip()
-    api_key = os.environ.get("GEMINI_API_KEY", "").strip()
-    tg_token = os.environ.get("TELEGRAM_BOT_TOKEN", "").strip()
-    chat_id = os.environ.get("CHAT_ID", "").strip()
-    provider = llm_provider()
-    chain = llm_chain()
-    print(f"LLM provider: {provider} (model {llm_model()}); "
-          f"brain chain: {chain}")
-    get_registry()  # §17: loads + logs the registry counts (fail-soft)
-
-    if not field or not topic:
-        raise Fail("FIELD and TOPIC inputs are required.")
-    if mode != "review":
-        raise Fail(f"Mode '{mode}' is not in the v1 scope (v1 = review/synthesis only).")
-    if not any(_brain_key_available(name, api_key) for name in chain):
-        raise Fail("No usable LLM brain: chain " + ", ".join(chain)
-                   + " — none of its providers has its key available "
-                   "(GLM_API_KEY / GEMINI_API_KEY / GH_MODELS_TOKEN).")
-    missing = [n for n, v in [("TELEGRAM_BOT_TOKEN", tg_token),
-                              ("CHAT_ID", chat_id)] if not v]
-    if missing:
-        raise Fail("Missing required Actions secret(s): " + ", ".join(missing))
-
-    state = load_state()
-    for p in state.get("productions", []):
-        if (norm(p.get("category") or "intl") == norm(category)
-                and norm(p.get("type") or "isi") == norm(article_type)
-                and norm(p.get("field")) == norm(field)
-                and norm(p.get("topic")) == norm(topic)
-                and norm(p.get("language")) == norm(language)):
-            print(f"NOTE: '{topic}' ({field}, {language}) is already in "
-                  "state.json — refusing to duplicate. Exiting cleanly.")
-            return 0
+def _fresh_screening(field, topic, language, category, article_type,
+                     mode, api_key, model, tg_token):
+    """The fresh production pipeline up to the text-first gate:
+    multilingual query matrix -> source map -> wave 1 + the primary
+    lane -> the quality pipeline -> wave 2 when the gate is unmet.
+    Persists the §20.6 stage checkpoint at the end (fail-soft) and
+    returns everything main() needs afterwards: the counted
+    sources, the funnel, the disagreement titles, the queries, the
+    full-text keywords, the verified count and the gate verdict."""
 
     # Queries (§20 multilingual matrix; §18 fallback): the topic is
     # expanded into several phrasings PER RELEVANT LANGUAGE around
@@ -4994,12 +5144,112 @@ def main():
     funnel["candidates"] = rstate["total_candidates"]
     funnel["drop_language_gate"] = rstate.get("lang_gate_dropped", 0)
 
+    # §20.6: persist the stage checkpoint (counted sources + funnel)
+    # so a later RESUME dispatch continues from this point instead
+    # of starting over. Fail-soft — a checkpoint problem never
+    # fails the run.
+    try:
+        save_stage_checkpoint(field, topic, language, category,
+                              article_type, mode, queries, smap,
+                              matrix, ft_keywords, counted, funnel,
+                              disagreement_titles, len(verified))
+    except Exception as exc:
+        print(f"WARNING: stage checkpoint save failed (ignored): "
+              f"{exc}")
+    return {"counted": counted, "funnel": funnel,
+            "disagreement_titles": disagreement_titles,
+            "queries": queries, "ft_keywords": ft_keywords,
+            "verified_count": len(verified), "gate": gate}
+
+
+def main():
+    field = os.environ.get("FIELD", "").strip()
+    topic = os.environ.get("TOPIC", "").strip()
+    category = (os.environ.get("ARTICLE_CATEGORY") or "intl").strip().lower()
+    if category not in ("ir", "intl"):
+        category = "intl"
+    article_type = (os.environ.get("ARTICLE_TYPE") or "isi").strip().lower()
+    if article_type not in TYPE_GUIDE:
+        article_type = "isi"
+    language = (os.environ.get("LANGUAGE") or "fa").strip()
+    mode = (os.environ.get("MODE") or "review").strip().lower()
+    model = (os.environ.get("GEMINI_MODEL") or "gemini-3.5-flash").strip()
+    api_key = os.environ.get("GEMINI_API_KEY", "").strip()
+    tg_token = os.environ.get("TELEGRAM_BOT_TOKEN", "").strip()
+    chat_id = os.environ.get("CHAT_ID", "").strip()
+    provider = llm_provider()
+    chain = llm_chain()
+    print(f"LLM provider: {provider} (model {llm_model()}); "
+          f"brain chain: {chain}")
+    get_registry()  # §17: loads + logs the registry counts (fail-soft)
+
+    if not field or not topic:
+        raise Fail("FIELD and TOPIC inputs are required.")
+    if mode != "review":
+        raise Fail(f"Mode '{mode}' is not in the v1 scope (v1 = review/synthesis only).")
+    if not any(_brain_key_available(name, api_key) for name in chain):
+        raise Fail("No usable LLM brain: chain " + ", ".join(chain)
+                   + " — none of its providers has its key available "
+                   "(GLM_API_KEY / GEMINI_API_KEY / GH_MODELS_TOKEN).")
+    missing = [n for n, v in [("TELEGRAM_BOT_TOKEN", tg_token),
+                              ("CHAT_ID", chat_id)] if not v]
+    if missing:
+        raise Fail("Missing required Actions secret(s): " + ", ".join(missing))
+
+    state = load_state()
+    for p in state.get("productions", []):
+        if (norm(p.get("category") or "intl") == norm(category)
+                and norm(p.get("type") or "isi") == norm(article_type)
+                and norm(p.get("field")) == norm(field)
+                and norm(p.get("topic")) == norm(topic)
+                and norm(p.get("language")) == norm(language)):
+            print(f"NOTE: '{topic}' ({field}, {language}) is already in "
+                  "state.json — refusing to duplicate. Exiting cleanly.")
+            return 0
+
+    # §20.6 resume: a dispatch with RESUME set (any non-empty
+    # value; the repair agent passes the failed stage's label) and
+    # a matching stage checkpoint skips the whole retrieval /
+    # screening pipeline and continues from the gate check with the
+    # checkpointed counted sources. No valid checkpoint -> fresh.
+    resume_req = os.environ.get("RESUME", "").strip()
+    ckpt = None
+    if resume_req:
+        ckpt = load_stage_checkpoint(field, topic, language, category,
+                                     article_type, mode)
+    if ckpt:
+        counted = ckpt["counted"]
+        funnel = ckpt["funnel"]
+        disagreement_titles = list(ckpt.get("disagreement_titles")
+                                   or [])
+        queries = list(ckpt.get("queries") or [])
+        ft_keywords = list(ckpt.get("ft_keywords") or [])
+        verified_count = ckpt.get("verified_count",
+                                  funnel.get("verified", 0))
+        gate = text_first_gate(counted)
+        progress_start(os.environ.get("ARTICLE_CHAT_ID", ""),
+                       tg_token)
+        progress_update(55, "✍️ نگارش مقاله")
+        print(f"resumed from checkpoint: stage screened, "
+              f"{len(counted)} counted sources")
+    else:
+        fresh = _fresh_screening(field, topic, language, category,
+                                 article_type, mode, api_key, model,
+                                 tg_token)
+        counted = fresh["counted"]
+        funnel = fresh["funnel"]
+        disagreement_titles = fresh["disagreement_titles"]
+        queries = fresh["queries"]
+        ft_keywords = fresh["ft_keywords"]
+        verified_count = fresh["verified_count"]
+        gate = fresh["gate"]
+
     if not gate["ok"]:
         if gate["counted"] < MIN_SOURCES:
             stage = "گزینش منابع مرتبط و محتوادار"
             reason = (f"Only {gate['counted']} relevant, "
                       f"content-bearing sources for '{topic}' out of "
-                      f"{len(verified)} verified (minimum "
+                      f"{verified_count} verified (minimum "
                       f"{MIN_SOURCES}). Refusing to write an article "
                       "on irrelevant or title-only material.")
         elif gate["fulltext_passages"] < MIN_FULLTEXT_SOURCES:
@@ -5053,7 +5303,7 @@ def main():
 
     header = (f"📚 Scientific Discovery Agent — new article\n"
               f"Field: {field}\nTopic: {topic}\nLanguage: {language}\n"
-              f"Mode: {mode}\nVerified sources: {len(verified)} "
+              f"Mode: {mode}\nVerified sources: {verified_count} "
               f"(relevant, content-bearing: {len(counted)})\n"
               f"نوع مقاله: {TYPE_LABELS[article_type]}\n\n{title}")
     message_ids = []
@@ -5077,6 +5327,10 @@ def main():
         "message_ids": message_ids,
     })
     save_state(state)
+    # §20.6: the production succeeded — consume the stage
+    # checkpoint so a later dispatch never reuses stale sources.
+    consume_stage_checkpoint(field, topic, language, category,
+                             article_type, mode)
     progress_update(100, "انتشار در کانال")
     # Suggestions-visible law (§15): the requester SEES the bot's
     # title candidates (used one marked) + next-topic suggestions.
