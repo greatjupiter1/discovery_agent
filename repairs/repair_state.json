@@ -36,6 +36,24 @@
    "stop_stage": "گزینش منابع مرتبط و محتوادار",
    "resume_project_id": "gris-0001",
    "resume_stage": null
+  },
+  "4b197ccfa99c21f8": {
+   "workflow": "Build Discovery article",
+   "klass": "human-only",
+   "attempts": 0,
+   "escalated": false,
+   "history": [
+    {
+     "ts": "2026-11-25T21:35:56+00:00",
+     "run_id": "45696893163",
+     "action": "reported_human_only",
+     "detail": "کلید API نامعتبر/منقضی/باطل شده — کلید تازه بساز و در repo secrets جایگزین کن."
+    }
+   ],
+   "last_run_id": "45696893163",
+   "stop_stage": "گزینش منابع مرتبط و محتوادار",
+   "resume_project_id": null,
+   "resume_stage": null
   }
  }
 }
