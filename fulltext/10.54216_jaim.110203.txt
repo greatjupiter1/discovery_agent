@@ -112,6 +112,186 @@ Variance (ANOVA), are employed to assess the impact
 
 [...]
 
+ve
+studies reviewed in this section, highlighting their focus areas, methodological choices, and principal findings. Taken
+together, this body of research establishes the importance of
+machine learning, hybrid modeling, and optimization-driven
+
+38
+
+Journal of Artificial Intelligence and Metaheuristic (JAIM)
+
+Vol. 11, No. 02 · 2026
+
+pipelines in educational data mining, while also motivating
+the need for systematic evaluation frameworks that jointly
+address predictive accuracy, stability, and methodological
+reproducibility.
+3. MATERIALS AND METHODS
+
+This section describes the research dataset and the methods
+employed in this study. It begins with an overview of the
+dataset and the data preprocessing pipeline, including key
+steps such as data cleaning and feature engineering. An important component of preprocessing involves normalization
+and standardization to ensure data quality, consistency, and
+validity. The section also introduces the proposed optimization strategy, focusing on the Al-Biruni Earth Radius (BER)
+algorithm, and presents the machine learning techniques used
+in the analysis, particularly Random Forest classification and
+ensemble learning approaches, which are essential for extracting meaningful patterns from the preprocessed data. To
+explain the methodology chosen for the present research in a
+well-organized manner, a multi-stage analysis framework is
+depicted in Figure 1. The suggested framework is intended
+to systematically process raw educational data into reliable
+predictive information through a series of coherent steps that
+combine data preprocessing, baseline modeling, metaheuristic optimization, and statistical assessment. Figure 1 indicates
+that the workflow starts with a strict data preprocessing that
+improves the quality and consistency of the data, and then
+the creation of multiple reference machine learning models. Then, hyperparameter optimization for the Random Forest classifier is performed using the Al-Biruni Earth Radius
+(BER) metaheuristic. Lastly, extensive statistical and performance analyses are conducted to assess the effectiveness
+and robustness of the optimized predictive models. Such
+a systematic pipeline additionally provides methodological
+transparency, reproducibility, and a moderate evaluation of
+the predictive accuracy and statistical significance of all experimental steps.
+
+access to learning resources). The features that are contained
+in the xAPI-Edu.The data dataset is described in detail in
+Table 2. Each attribute is a particular demographic, academic,
+or behavioral orientation of students and can be considered a
+comprehensive foundation for the analysis and prediction of
+academic performance.
+
+3.1 Dataset
+
+3.2 Data Preprocessing
+
+The academic performance dataset used in this study is referred to as the Students’ Academic Performance Dataset
+(also known as xAPI-Edu.Data). [10] and can be accessed
+through Kaggle. The present xAPI learning mining dataset is
+based on data collected on students’ academic performance
+in the chosen courses via the Kalboard 360 e-learning system. The dataset contains records for 480 students, and each
+student profile consists of 16 attributes describing various dimensions of their educational backgrounds. The Experience
+API (xAPI), as part of the Training and Learning Architecture
+(TLA), supports data collection. xAPI is designed to quantify and capture learners’ activities and learning experiences,
+including reading learning resources and viewing teaching
+videos, making it a useful resource for educational analytics
+and predictive modelling.
+
+Machine learning pipelines. Data preprocessing is an important step of the process because the quality of input data
+directly determines the performance, reliability, and generalizability of predictive models. A number of preprocessing
+procedures were implemented for the xAPI-Edu.A dataset
+was used in this study to ensure data integrity and improve the
+learning capacity of the proposed models. Such procedures include handling missing data, nominal feature coding, scaling
+numerical variables, and assessing feature correlations.
+
+The dataset will consist 480 records of students characterized by 16 different features which can be divided into three
+major categories: (i) demographic features (e.g., gender and
+nationality), (ii) characteristics of the academic background
+(e.g., educational stage, grade level, and section), and (iii)
+behavioral characteristics (e.g., classroom participation and
+
+Figure 1. Proposed multi-stage framework for data preprocessing,
+model construction, BER-based optimization, and statistical
+evaluation.
+
+3.2.1 Handling Missing Values
+
+Incomplete or missing data may negatively affect model training and introduce bias in predictions. Thus, appropriate imputation strategies were used to handle missing values in the
+dataset. Statistical imputation methods, such as mean and
+median imputation, have been used for numerical attributes
+and are based on the distribution of the feature. Approximately normally distributed functions were mean imputed,
+whereas skewed distributions were more likely to use median
+imputation to avoid the impact of outliers.
+Besides that, K-Nearest Neighbors (KNN) imputation was
+
+39
+
+Journal of Artificial Intelligence and Metaheuristic (JAIM)
+
+Vol. 11, No. 02 · 2026
+
+Table 1. Summary of related studies on student academic performance prediction
+
+Ref. Focus
+
+Methodology
+
+[1]
+
+Students’ performance
+prediction
+
+MapReduce, PCA, Deep Belief Network, The proposed hybrid model demonstrated superior
+Support Vector Machine
+capability in analyzing large-scale educational
+datasets and accurately predicting student
+performance.
+
+[2]
+
+Predicting students’
+performance
+
+FlexNSLVOrd classification algorithm
+
+FlexNSLVOrd outperformed competing models in
+terms of classification accuracy, providing
+improved interpretability and predictive insight.
+
+[3]
+
+Analysis of student and
+teacher data
+
+Naïve Bayes, ID3, C4.5, SVM
+
+The study focused on predicting student
+performance using multiple classifiers; however,
+specific quantitative accuracy values were not
+reported.
+
+[18] Predicting final exam grades
+
+Random Forest, SVM, Logistic
+Regression, Naïve Bayes, KNN
+
+The proposed models achieved classification
+accuracies ranging from 70% to 75% and
+effectively identified students at high risk of failure.
+
+[19] Predicting and classifying
+students’ performance
+
+Random Forest, Decision Trees, KNN,
+MLP, XGBoost
+
+The incorporation of SMOTE-based data balancing
+significantly improved classification performance
+across evaluated models.
+
+[20] Prediction of students’
+academic performance
+
+Gradient Boosting, XGBoost,
+LightGBM, Super Learner
+
+The hybrid ensemble approach achieved high
+prediction accuracy for mathematics and
+Portuguese language courses.
+
+[21] Predicting students’
+performance
+
+Neural network model with 11 input
+variables
+
+The neural network achieved an accuracy of 84.8%
+in predicting students’ cumulative grade point
+average (CGPA).
+
+[22] Pred
+
+[...]
+
 processes
 and adaptive search schemes that trade off exploration (global
 search) with exploitation (local refinement) to prevent early
@@ -276,153 +456,3 @@ mechanism. This mechanism enables the algorithm to modify
 stagnating solutions based on a predefined fitness criterion
 when progress fails to occur over successive iterations. Such
 adaptive behavior improves the algor
-
-[...]
-
-plement the aggregate and distribution-based analyses of optimized model performance, a swarm plot–based
-visualization was employed to illustrate metric-level dispersion across optimization strategies. Figure 12 presents swarm
-plots of six evaluation metrics—accuracy, sensitivity (TPR),
-specificity (TNR), positive predictive value (PPV), negative
-predictive value (NPV), and F-score—for Random Forest
-models optimized using BER, GWO, PSO, GA, and WOA.
-
-Besides predictive accuracy, computational efficiency is also
-a very essential consideration in determining the feasibility of machine learning models, especially in large-scale or
-real-time education systems. The computational overhead
-directly impacts model deployability, scalability, and energy
-usage, particularly when using metaheuristic optimization
-tools. Consequently, this subsection presents a comparative
-computational study of the optimized Random Forest models
-to evaluate their runtime, memory usage, and processor usage.
-Table 8 indicates the mean execution time (in seconds), memory consumption (in megabytes), and CPU consumption (in
-percentage) of the Random Forest models that are optimized
-with the help of various metaheuristic algorithms. All experiments have been done in the same hardware and software
-settings to promote fairness and reproducibility.
-The computational results clearly indicate that the BERoptimized Random Forest model not only achieves superior
-predictive performance but also exhibits the highest computational efficiency among all evaluated approaches. Specifically,
-BER + Random Forest records the lowest average execution
-time, minimal memory consumption, and the least CPU uti50
-
-Journal of Artificial Intelligence and Metaheuristic (JAIM)
-
-Vol. 11, No. 02 · 2026
-
-Table 8. Computational Performance Comparison of Optimized Models
-Avg. Time (s)
-
-Memory Usage (MB)
-
-CPU Usage (%)
-
-38.67
-52.53
-60.29
-65.32
-69.57
-72.42
-
-1038.21
-1525.05
-1599.28
-1727.55
-1877.64
-1922.54
-
-55.13
-64.26
-75.32
-79.27
-85.22
-89.84
-
-Algorithm
-BER + Random Forest
-GWO + Random Forest
-PSO + STGCN
-PSO + Random Forest
-GA + Random Forest
-WOA + Random Forest
-
-lization. This demonstrates BER’s ability to converge rapidly
-toward high-quality solutions while maintaining efficient resource usage.
-In contrast, optimization techniques such as GA and WOA
-incur significantly higher computational costs, reflected in
-increased runtime, memory usage, and processor load. These
-overheads are primarily attributed to their more complex
-evolutionary operators and slower convergence characteristics. PSO-based approaches also exhibit higher computational
-demands, particularly when integrated with more complex
-model architectures, as evidenced by the PSO + STGCN
-configuration.
-Overall, this computational analysis reinforces the suitability of the BER-based optimization framework for real-world
-educational applications. By delivering both superior predictive accuracy and reduced computational overhead, the
-BER-optimized Random Forest model offers a balanced and
-scalable solution for deployment in data-driven academic
-performance monitoring and early warning systems.
-In order to further supplement the quantitative computational
-analysis performed in Table 8, a visual resource distribution
-analysis is given in order to intuitively compare the computational efficiency of various strategies of optimization.
-Figure 13shows that execution time, memory usage, CPU utilization, and an integrated efficiency score for the optimized
-Random Forest models were distributed proportionally across
-the various metaheuristic algorithms. By displaying them as
-donut charts, the figure allows a global assessment of how
-each optimization method uses system resources. This visualization shows the trade-off between predictive enhancement
-and computational cost, with strong support for the practical
-benefits of lightweight but effective optimizers, specifically
-the BER-based Random Forest, which proves to be more efficient with minimal resource overhead across all measured dimensions. To provide a general impression of computational
-efficiency and predictive effectiveness, a specific algorithm
-performance dashboard is presented in Figure 14. This figure
-integrates several performance factors, including execution
-time, memory consumption, CPU consumption, performance
-score, overall cost index, and overall performance index, into
-a single comparative visualization system. The dashboard
-provides an intuitive analysis of the trade-offs between the
-discussed optimization strategies, based on the measurement
-of indicators: the low-value indicators (time, memory, CPU
-usage, and cost index) are more desirable, while the highvalue indicators (efficiency and performance indices) predict
-better performance. As demonstrated in Figure 14, the BERsensitive random forest is always associated with positive
-computational characteristics and, simultaneously, the most
-desirable efficiency and performance indicators; it can be ap-
-
-Figure 13. Resource distribution analysis of computational
-performance metrics across optimized models.
-
-plied to large-scale resource-constrained predictive analytics.
-
-Figure 14. Comprehensive algorithm performance dashboard
-comparing computational and efficiency-related metrics.
-
-A performance trend analysis is presented in Figure 15 to
-assess the computational properties of the optimized models
-in a trend-oriented, relative manner. The figure will present
-variations in three critical computation indicators, which are
-the execution time, the consumption of memory as well as
-the utilization of the CPU, amongst the strategies adopted
-in optimization and the classifier that is the Random Forest.
-The graph, which shows these measures simultaneously, reveals differences in computational cost across metaheuristic
-algorithms. Figure 15 indicates that the BER-optimal Random Forest is the shortest in terms of execution time, has
-the lowest memory and CPU requirements, and resource consumption is observed to increase with GWO-, PSO-, GA-, and
-
-51
-
-Journal of Artificial Intelligence and Metaheuristic (JAIM)
-
-WOA-based models. The given trend-based representation
-offers a good insight into the trade-offs between optimization
-complexity and computational efficiency, and thus, it can be
-concluded that BER can be extended to scalable, resourceefficient educational predictive modeling.
-
-Figure 15. Algorithm performance trends based on time, memory,
-and CPU utilization.
-
-5. DISCUSSION
-
-The empirical results of this research provide solid evidence
-that modern machine learning tools can be used effectively
-to predict students’ academic performance, provided they are
-supported by rigorous preprocessing and systematic evaluation. The comparison against the baseline of Random Forest,
-XGBoost, MLP, SVM, KNN, and Gaussian Naive Bayes
-has revealed clear differences in predictive capacity, indicating differences in inductive bias, representational capacity,
-and optimization behavior. Specifically, the higher baseline
-performance achieved by ensemble-based learners is consistent with the established benefit of aggregation mechanisms
-in minimizing variance and improving generalization, particularly on noisy and heterogeneous datasets that integrate
-demographic, academic, and behaviora

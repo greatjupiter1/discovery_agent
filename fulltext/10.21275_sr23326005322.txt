@@ -134,7 +134,275 @@ who took themselves to another direction. Sin
 
 [...]
 
-s of a degree, and therefore
+ength of, and distance between two
+sticks aligned with the mountaintop and sticking
+out of a portable trough of water which provided
+the necessary horizontal, then the precision reached
+(though not necessarily accurate) could reach even
+seconds of a degree. Allow for complex fractional
+cubit gaps between the two angles, and several other
+possibilities arise, perhaps the most exotic of which
+is that of 11111/3 cubits separating 4◦ 40′ and 5◦ 25′ ,
+or, for its smallness, 1457/8◦ cubits separating 4◦ 35′
+and 4◦ 40′ .
+Before measuring the mountain’s height, he
+climbed to the top and, with his instrument, took
+the angle of the line of sight to the horizon as it dips
+below the horizontal: he found it to be 34′ . All that
+remained was to find a formula relating the Earth’s
+radius 𝑅 to the mountain height ℎ and the dip angle
+𝜃 he had taken. To this end he applied the Sine Law
+most ingeniously as follows. (See Figure 2).
+3Alternatively, we may use the slightly simpler formula in the
+Appendix.
+4Nandana Fort’s coords are N32◦ 43′ 33.52′′ , E73 ◦ 13′ 45.16′′ , 404 m
+above the sea.
+
+Volume 12 Issue 3, March 2023
+www.ijsr.net
+Licensed Under Creative Commons Attribution CC BY
+Paper ID: SR23326005322
+
+DOI: 10.21275/SR23326005322
+
+1537
+
+International Journal of Science and Research (IJSR)
+ISSN: 2319-7064
+SJIF (2022): 7.94
+
+4. Biruni’s formula
+Applying the Sine Law to the triangle in Figure 2,
+we have
+𝑎
+𝑏
+ℎ
+=
+=
+.
+sin 𝐴 sin 𝐵 sin 𝐻
+ℎ=
+
+𝑑 tan 𝜃 1 tan 𝜃 2
+tan 𝜃 2 − tan 𝜃 1
+
+Figure 1: Finding the height ℎ of a mountain requires taking three measurements: the distance 𝑑 between two level
+points that lie in a straight line from the mountain, and the angles 𝜃 1 and 𝜃 2 from these points to the mountaintop.
+
+𝐵
+
+Hence,
+
+𝜃
+𝑎
+
+ℎ
+𝑏
+,
+=
+sin 𝜃 cos 𝜃
+
+ℎ
+𝜃
+
+𝐻
+
+𝑏
+𝐴
+
+So,
+𝑏=
+
+𝑆
+
+ℎ cos 𝜃
+.
+sin 𝜃
+
+He also saw that the distance 𝑏 is the same as the
+distance HS and that, by the Pythagorean theorem,
+√︁
+𝑎 = 𝑏2 + ℎ2 .
+
+𝑅
+𝑅
+
+Knowing this, he could now deal with the bigger
+triangle, since
+
+𝜃
+
+BS = 𝑎 + HS = 𝑎 + 𝑏.
+Applying the Sine Law again, we have
+
+𝐶
+Figure 2: Biruni realized that the shape linking the
+Earth’s centre 𝐶, the mountaintop 𝐵, and the sea (or flat
+enough horizon) 𝑆 was a huge right-angled triangle on
+which the Sine Law could be made to yield the Earth’s
+radius!
+
+BS
+𝑅
+𝑅+ℎ
+.
+=
+=
+sin 𝐶 sin 𝐵
+sin 𝑆
+Using the relevant equalities, we have
+BS
+𝑅
+𝑅+ℎ
+.
+=
+=
+◦
+sin 𝜃 sin (90 − 𝜃) sin 90◦
+Hence,
+−
+
+Also
+𝑏
+𝑏
+=
+sin 𝐵 cos 𝜃
+
+and
+
+ℎ
+ℎ
+=
+.
+sin 𝐻 sin 𝜃
+
+𝑅=
+
+(𝑅 + ℎ) sin (90◦ − 𝜃)
+= (𝑅 + ℎ) cos 𝜃.
+sin 90◦
+
+Volume 12 Issue 3, March 2023
+www.ijsr.net
+Licensed Under Creative Commons Attribution CC BY
+Paper ID: SR23326005322
+
+DOI: 10.21275/SR23326005322
+
+1538
+
+International Journal of Science and Research (IJSR)
+ISSN: 2319-7064
+SJIF (2022): 7.94
+
+So,
+cos 𝜃 =
+
+𝑅
+1
+.
+=
+𝑅 + ℎ 1 + ℎ/𝑅
+
+Multiplying through by 1 + ℎ/𝑅 gives
+1 = cos 𝜃 +
+
+ℎ cos 𝜃
+,
+𝑅
+
+1 − cos 𝜃 =
+
+ℎ cos 𝜃
+,
+𝑅
+
+or
+
+and this finally gives Biruni’s famous equation
+𝑅=
+
+ℎ cos 𝜃
+.
+1 − cos 𝜃
+
+(The geometric distance to the horizon can also be
+deduced as BS ≈ 𝑅 tan 𝜃.)
+5. Exactly how exact?
+Armed with his newly found formula and with
+the data he had taken at Nandana (namely, a
+height of 652.055 cubits, and a dip of 34′ ), he
+stated that the Earth’s radius was 12,851,369.845
+cubits (6335.725 km). Had he had a calculator to
+hand, he would have got 13,331,728.352 cubits
+(6572.542 km) instead, but in his time, calculations
+were performed in a rather mental way. Instead
+of using cos (34′ ), he used sin ( 90 ◦ − 34 ′ ) , that
+is, sin (89◦ 26′ ), which is very much the same, but
+for the fact that it was then also fashionable to
+express numbers in the old Babylonian way, and the
+value he gives in his Masudic Canon for this sine
+is 0◦ 59′ 59 ′′ 9 ′′′2′′′′ 28′′′′′, which is slightly inaccurate. The correct number (as given by modern
+computers and expressed in the same historical
+fashion) should have been 0◦59 ′ 59 ′′49′′′ 26′′′′ 9 ′′′′′,
+hence the disagreement. He then went on to find
+the Earth’s girth, which he stated to be 80,780,039
+cubits 1′ 33′′ (clearly, the result of rounding 𝜋 up
+to 22/7).
+6. Biruni’s Peak
+Let us now readdress the issue of the mountain. We
+have already mentioned how Mercier (1993:183)
+pinpointed it as likely to be one standing about
+1.4 km south-southwest of the fort and 478 m above
+sea level. The author has not found such a place.
+
+Paper ID: SR23326005322
+
+Instead, he found a mountain 780 m southwest of the
+fort (N32◦ 43′ 14.60′′ , E73◦13 ′ 26.00′′ ) that stands
+533 m above sea level. Since Biruni said ‘west,’
+the author also checked another candidate 3.8 km
+west of the fort (N32 ◦ 43′ 46.08′′, E73◦ 11′ 20′′ ) and
+standing 677 m above sea level. From them, the
+plain to the south looks strikingly flat. It is hard
+to imagine a flatter thing, or one better suited for
+Biruni’s purpose. Yet, of course, it cannot be as flat
+as the sea.
+Slowly and somewhat unevenly, it slopes away
+to the south getting higher and then lower than at
+the mountain’s foot. In Figure 3, you can see how
+the plain evolves as seen from the 533 m peak: it
+first sinks to about 202 m above sea level, then rises
+again to about 211 or 212 m, and then resumes
+sloping away for as far as the eye can see. All this
+is important because, if you take the mountain’s
+height and take the higher of the plain’s levels
+from it, you find how much the mountain stands
+above these levels, that is, 533 − 212 = 321 m or
+652 cubits, which is Biruni’s figure exactly! But it
+wouldn’t be wise to measure a mountain from this
+far away. If you come closer and allow Biruni to
+take his measurements from the area between 21/2
+and 31/2 km south of our peak and gently sloping
+from about 212 to 211 m above sea level, you get
+again 652 cubits exactly. The choice of this area
+has the advantage not only of being close enough
+to allow reliable measurements, but also, and above
+all, of being on a level with the apparent horizon,
+which is seen from it as the plain’s upper levels.
+Seemingly, this was Biruni’s logical way of finding
+the ‘plain’s [otherwise relative] level.’
+Measuring the dip of the horizon from the Salt
+Range tops is easier said than done. As Rizvi
+(1979:619) reports, it takes a good deal of patience
+to wait for the right atmospheric conditions to get
+a clear view of the horizon. It is best to try after
+rain has cleared away the haze and dust from the air.
+(It is possible that Biruni lived in rainier times, for,
+after all, there must be some reason why the name
+Nandana means ‘Paradise’ in Sanskrit.) Even so,
+the dip he reports, 34′ , though strikingly accurate,
+is not given to seconds of a degree, and therefore
 does not allow us to use mathematics this time
 to find out whether he averaged it out of several
 measurements or not. Perhaps the prevailing poor
@@ -150,129 +418,11 @@ ISSN: 2319-7064
 SJIF (2022): 7.94
 
 Figure 3: The plain is not perfectly flat. It slopes unevenly away to the south. For illustrative purposes, heights and
-distances are not to scale nor is the Earth’s curvature shown. Between about 26 and 28 km south of the 533 m high
-peak, the plain rises to about 211 or 212 m above the sea. Relative to this area, our peak stands 3211/2 m (or 652
-cubits) high.
+distances are not to scale nor is the Earth’s curvature shown. Between about 26 a
 
-By the formula in Figure 4, the author found
-that the apparent dip 𝜃 of the horizon from this
-mountain (that is, taking into account ray-bending at
-mean air conditions)7 is about 32′ , which is almost
-the same as Biruni reports. Care must be taken to
-provide the formula with the right mountain height
-ℎ for this problem, which is neither 533 m above
-sea level (we’ll consider this one later for sport)
-nor Biruni’s 3211/2 m above the plain’s top grounds,
-but 340 m above the farthest visible point on the
-horizon (which is about 72 1/2 km from our peak and
-about 193 m above sea level). 32′ is close to Biruni’s
-figure, but not quite. At first sight, a difference of
-just a couple of minutes seems negligible, but it
-is hardly so, and this is one of the drawbacks of
-Biruni’s method: that it is so dependent on taking
-the dip angle with such hair splitting accuracy, that
-just a minute of a degree results in a difference
-of hundreds of kilometres for the computed Earthradius, not to mention the difficulty in taking such
-an angle with any reliable accuracy at all!8 Let us
-pay more attention to Biruni’s own words (Biruni,
-1956:2:530; Ali et al., 1967:188):
-I changed to another way owing to having found
-in a region in India a mountain peak facing
-toward a wide flat plain whose flatness served as
-the smooth surface of the sea. Then on its peak I
-gauged the intersection of heaven and Earth [the
-horizon] in the prospect, and I found it by an
-instrument to incline from the East-West line
-7Mean air conditions are taken to be 15◦ C of temperature, 1013.25
-mb of pressure, 6.49◦ C/km of lapse rate, 0% of relative humidity, and
-450 ppm of CO2 content.
-8The main difficulties arise from the ever-changing air conditions and
-from the limitations of human eyesight.
+[...]
 
-[southern astronomical horizon] a little less than
-1/31/4of a degree, and I took it as 34 ′. I derived
-the height of the mountain taking the summit in
-two places, and I found it to be 652 1/20 cubits.
-
-So he took the dip as ‘a little less than 1/31/4 of
-a degree’ and rounded it down to 34 ′. But a little
-less than 1/31/4 of a degree should round up to 35′ .
-Why 34 ′ and not 35′ ? There is just one minute
-of difference, but one minute that makes all the
-difference: 34 ′ got him closer to Mamun’s value
-than 35′ or 33′ . Certainly, Mamun’s value served
-him as a reference all the time, and the difference
-between 32′ , 33′ , 34′ , or 35′ is so tiny that he might
-indeed have believed in earnest that 34′ must be
-the right angle his instrument was reading. Had he
-chosen a different dip, he would have gone wrong
-by hundreds of kilometres. It is only by chance,
-therefore, that the compensating features of the
-lucky scenario chosen led him to a figure so close
-to the truth! Even his own measurements do lead
-to a value slightly worse than Mamun’s, should the
-cosine mistake alone be corrected! (By the way, note
-that the little 1/31/4 detail suggests that his instru - ment was accurate to 5 minutes of a degree.)
-Scientifically speaking, Biruni’s method leads
-to results infected by ray bending when applied to
-other scenarios. For example, as mentioned above,
-in the completely imaginary case that our 533 m
-mountain looked south onto the sea (which is just an
-imagined scenario), the apparent (refracted) dip of
-the horizon would be about 40′22′′ (by the equation
-in Figure 4). With these data, Biruni’s formula
-gives an Earth-radius (for Nandana’s latitude) of
-7734 km, which is too large by about 6/5 due to ray
-
-Volume 12 Issue 3, March 2023
-www.ijsr.net
-Licensed Under Creative Commons Attribution CC BY
-Paper ID: SR23326005322
-
-DOI: 10.21275/SR23326005322
-
-1540
-
-International Journal of Science and Research (IJSR)
-ISSN: 2319-7064
-SJIF (2022): 7.94
-
-bending. His celebrated method, nevertheless, bears
-the immortal originality of saving a lot of walking
-through deserts and, provided we take accurate
-measurements and compensate for ray bending, it
-certainly does correctly yield the Earth’s radius!
-(See Figure 4.)9
-
-Figure 4: Biruni’s method leads to results infected by ray
-bending. Yet, provided you allow for this and take precise
-measurements, it certainly yields the Earth’s radius!
-
-To be fair to Biruni, it must be said that he was
-not just lucky. Clearly, he picked his landscape
-most carefully after testing his method on several
-places, noting the disparity of the results, and finally
-picking the one that best matched that of Mamun’s
-teams (see Figure 5). It is to his credit that he openly
-regarded his own method as a curious complement
-to their work, accepting their result as more reliable, because, as he said (Biruni, 1956; Mercier,
-1993:183), ‘Their instrument was more refined, and
-they took greater pains in its accomplishment.’
-7. Concluding notes
-
-knew this was the one! After drawing the new
-profile and doing the same intuitive subtraction, a
-perfect match to Biruni’s number was found! All
-that remained was to make sense of it all.
-The reader is invited to suggest new ideas, easier
-wordings for the difficult concepts expressed in
-this paper, and new mathematical approaches to
-reveal Biruni’s actual instrument and readings, or
-to contest any part of this paper. The author is
-especially interested in trying to find the two actual
-points from which Biruni measured the mountain.
-Though the most likely candidates are given in the
-text, the author has included a fuller list in Table 1,
+ble 1,
 which of course can be expanded by the diligent
 reader.
 Note that to stay within the area of about 3 ± 0.5

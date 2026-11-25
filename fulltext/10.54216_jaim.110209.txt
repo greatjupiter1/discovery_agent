@@ -110,89 +110,107 @@ optimizing traffic flow, and adapting to terrain constraints.
 Enhancing route optimization contributes to the broader goals
 of sustainable mobility, ensuring efficient resource utilization while improving the overall experience for EV drivers
 [13, 14].
-Beyond its direct application to EV path plan
-
-[...]
-
-nal contextual details. This comprehensive
-
-151
-
-Journal of Artificial Intelligence and Metaheuristic (JAIM)
+Beyond its direct application to EV path planning, the hybrid
+GWO-BER algorithm demonstrates the broader potential of
+integrating nature-inspired optimization techniques with geometric modeling. This integration facilitates solutions for
+other real-world optimization challenges in logistics, transportation, and resource management. By showcasing how
+metaheuristic methods can be tailored to address specific
+challenges, this chapter highlights the transformative role
+of optimization algorithms in solving complex, multidimensional problems [15].
+The primary contribution of this chapter is the development
+of a novel hybrid optimization framework that integrates the
+Grey Wolf Optimizer (GWO) with the Al-Biruni Earth Radius
+(BER) algorithm to address the challenges of electric vehicle
 
 Vol. 11, No. 02 · 2026
 
-dataset provides crucial insights into EV charging behaviors,
-energy consumption patterns, and the operational efficiency
-of workplace charging infrastructures, making it an essential
-resource for evaluating optimization algorithms.
+path planning (EVPP). The key contributions of this work
+can be summarized as follows:
+• Development of a Hybrid Metaheuristic Algorithm:
+This chapter presents a hybrid optimization algorithm
+that leverages the strengths of GWO’s exploratory capabilities and BER’s precision-driven search. Integrating
+these two techniques enhances the algorithm’s ability to
+identify optimal, energy-efficient paths for EVs.
+• Energy-Efficient Path Optimization: The proposed approach systematically optimizes EV routes by minimizing energy consumption while considering constraints
+such as distance, terrain characteristics, and traffic conditions.
+• Enhanced Performance Over Existing Methods: Experimental evaluations demonstrate that the hybrid
+GWO-BER algorithm outperforms conventional metaheuristic approaches regarding solution accuracy, computational efficiency, and optimization robustness.
+• Real-World Applicability: The proposed framework is
+designed to be scalable within real-world transportation
+networks, offering potential logistics, traffic management, and sustainable mobility applications.
+• Bridging Optimization Techniques and Transportation Challenges: This chapter highlights the synergy
+between bio-inspired optimization techniques and realworld mobility challenges, showcasing how metaheuristic algorithms can be tailored for practical transportation
+applications.
+The findings presented in this work contribute to the broader
+domain of sustainable mobility by improving EV navigation
+efficiency and addressing key challenges in path optimization.
+The remainder of this chapter is structured to ensure a logical progression of concepts and findings. Section 2 presents
+a comprehensive literature review, discussing existing approaches to electric vehicle path planning while analyzing
+the strengths and limitations of both conventional and metaheuristic optimization techniques. Section 3 outlines the
+methodology, detailing the design and implementation of the
+proposed hybrid GWO-BER algorithm, along with dataset
+preprocessing and algorithmic structure. Section 4 delves into
+the theoretical foundations and working mechanisms of the
+Grey Wolf Optimizer and the Al-Biruni Earth Radius algorithm, explaining how their integration enhances optimization
+performance. Section 5 presents the experimental results, offering a comparative evaluation of the hybrid GWO-BER
+algorithm against conventional optimization techniques using
+multiple performance metrics. Finally, Section 6 provides
+a summary of key findings, highlighting the contributions
+of this work and discussing potential future research directions in the domain of electric vehicle path optimization and
+metaheuristic algorithm development.
+2. LITERATURE REVIEW
 
-These preprocessing steps ensured the dataset was clean, consistent, and ready for use in the optimization and evaluation
-phases. By systematically addressing potential data quality
-issues, the preprocessing phase enhanced the reliability and
-validity of the experimental outcomes.
+With integrating electric vehicles (EVs) into transportation
+systems, extensive research has been done on optimizing their
 
-3.1.2 Data Preprocessing
+150
 
-Figure 1 illustrates the correlation heatmap for the dataset
-variables. This heatmap visually represents the strength and
-direction of linear relationships between features such as
-kwhTotal,
-locationId,
-userId,
-distance,
-chargeTimeHrs, and stationId. The color intensity and
-values range from -1 to 1, where darker shades indicate
-stronger correlations. For example, kwhTotal shows a mod-erate
-positive correlation with chargeTimeHrs, while weak or
-negligible correlations are observed with other variables. This
-visualization provides insights into how features interact, which is
-critical for feature selection and optimization tasks.
+Journal of Artificial Intelligence and Metaheuristic (JAIM)
 
-Before applying the optimization algorithms, the dataset underwent a meticulous preprocessing phase to ensure data
-quality, consistency, and relevance. The preprocessing steps
-included the following:
-• Data Cleaning: Entries with missing or incomplete data
-were identified and addressed accordingly. Charging
-sessions lacking essential information, such as energy
-consumption or cost, were either removed or imputed
-using statistical methods to maintain data reliability and
-completeness.
-• Feature Selection: The preprocessing phase focused on
-retaining only the most relevant attributes, including session date, duration, energy usage, and cost. Redundant
-or non-contributory features were excluded to streamline the optimization process and enhance computational
-efficiency.
-• Normalization: To ensure that all numerical attributes
-contributed equally to the optimization process, data
-normalization techniques were applied. This step eliminated biases caused by differences in scale among energy
-consumption, cost, and other numerical variables.
-• Data Splitting: The dataset was divided into training
-and testing subsets. The training set was utilized to develop and fine-tune the hybrid GWO-BER algorithm,
-while the testing set was reserved to evaluate its performance on previously unseen data.
-• Outlier Detection: Charging sessions exhibiting unusually high or low energy consumption, session durations,
-or costs were identified as potential outliers. These
-instances were thoroughly analyzed, excluded, and adjusted to prevent skewed results and ensure accurate
-optimization.
+routing and charging systems to achieve better efficiency, reduce energy consumption, and address existing infrastructure
+limitations. This paper synthesizes the insights of ten key
+studies in the field, reviewing them to present an organization.
+It presents a detailed understanding of optimization strategies
+and methodologies employed in this field.
+EV route optimization with uncertainties in traffic conditions
+and demand is challenging. [16] proposes a robust optimization model where uncertainty in the demand and traffic conditions are represented by convex and box uncertainty sets,
+respectively. The problem of comparing the deterministic
+model with the robust model is developed by using the deviation coefficients, and it is demonstrated that the robust
+model could ensure feasibility in uncertain conditions at a
+higher cost. Further, the model is practicable by applying an
+improved genetic algorithm. The findings show the trade-off
+between robustness and optimality and how more resilient
+logistics systems can be constructed.
+Due to the limited EV range, energy-efficient routing strategies are essential. [17] presents a new mathematical routing
+model that considers energy consumption during start/stop
+operations and uses an amplified Ant Colony Optimization
+(A2CO) algorithm. Results of simulations on accurate maps
+show significant improvements in energy efficiency, travel
+time, and state of charge over traditional methods. This
+research highlights the possibility of implementing energyaware algorithms in real-time applications to optimize the
+behavior of EVs fully.
+To overcome the challenges of limited battery capacity and
+delivery restrictions, [18] proposes a Hybrid Variable Neighborhood Search (HVNS) algorithm for solving the CE-VRP.
+On this basis, the proposed solution is shown to minimize
+costs whilst optimizing fleet size and travel distance, and
+computational results support its efficacy. This paper offers a
+practical framework for improving EV logistics with recharging stations integrated into the routing problem under capacity
+constraints.
+Although not exclusively on EVs, [19] presents an understanding of path planning for uncrewed aerial vehicles relevant to
+metaheuristic algorithms. The findings show that these algorithms effectively solve single and multi-objective problems
+with such characteristics and, therefore, can be applied to
+EV routing problems within dynamic environments. The
+study indicates that metaheuristics can offer a way to address
+complex optimization problems.
+In [20], a broader perspective on EV optimization is proposed by aggregating progress across design, energy management, control, charging, and routing. The paper outlines the
+strengths and shortcomings of swarm intelligence and evolutionary optimization algorithms that will serve researchers as
+a valuable resource. The discussion gains practical relevance
+with the addition of the classification of driving cycles and
+simulati
 
-Figure 2 shows the histograms of key variables in the dataset,
-including kwhTotal, locationId, userId, distance,
-chargeTimeHrs, and stationId. These histograms pro-vide
-a distributional overview of each feature. For instance,
-kwhTotal demonstrates a right-skewed distribution with
-most values concentrated between 5 and 7 kWh, while
-chargeTimeHrs shows a peak around 2 to 4 hours. Other
-variables have more uniform distributions, such as distance and
-stationId. Understanding these distributions is es-sential
-for preprocessing and normalization steps during the
-optimization process.
-Figure 3 plots the Time consumed forTimecharging
-(chargeTimeHrs) across various locationIds. The figure
-shows temporal trends and variability in charging times, with
-charging durations spanning from less than an hour to over 10
-hours at different locations. Such insights are valuable for
-identifying patterns in charging behavior and optimizing
-charging station usage.
-Figure 4 visualizes the total energy consumed (kwhTotal)
+[...]
+
+ure 4 visualizes the total energy consumed (kwhTotal)
 during EV charging sessions. The plot reveals variability in
 energy consumption, with most values clustering below 10
 kWh while occasional peaks exceed 15 kWh. This variability
@@ -267,11 +285,67 @@ within the solution space using trigonometric relationships to identify promisin
 
 • Alpha (α): The leader responsible for guiding the pack.
 
-• Exploitation Group: This
+• Exploitation Group: This group focuses on refining
+solutions by optimizing within the promising regions
+identified by the exploration group.
 
-[...]
+• Beta (β ): The second-in-command, assisting and advising the alpha.
+• Delta (δ ): Subordinate wolves that dominate the lowerranking wolves but follow the alpha and beta.
+• Omega (ω): The lowest-ranking wolves follow the guidance of higher-ranking wolves.
+The optimization process consists of three main phases:
+1. Tracking, Encircling, and Approaching the Prey:
+Wolves update their positions iteratively based on the
+alpha, beta, and delta wolves. This behavior is modeled
+using the equations:
+⃗ · ⃗Xprey − ⃗Xwolf |,
+⃗D = |C
 
-Intelligence and Metaheuristic (JAIM)
+⃗X(t + 1) = ⃗Xprey − ⃗A · ⃗D
+
+The BER algorithm alternates between exploration and exploitation, dynamically adjusting control parameters based
+on the population’s fitness. The key mathematical equations
+governing this process include:
+⃗S(t + 1) = ⃗S(t) + D · (2r2 − 1),
+
+D = r1 (⃗S(t) − 1)
+
+where r1 and r2 are random variables, and D represents the
+adaptive search diameter.
+4.3.2 Strengths of BER
+
+The BER algorithm offers several advantages for optimization
+tasks:
+
+Here, ⃗D is the distance between a wolf and the prey,
+⃗A and C
+⃗ are coefficient vectors, and ⃗X represents the
+wolf’s position.
+
+• Precision Optimization: BER excels in fine-tuning
+solutions during the exploitation phase to achieve highly
+accurate results.
+
+2. Exploration: During early iterations, wolves explore
+the search space broadly by diverging from the prey.
+This is achieved by assigning |⃗A| > 1, encouraging
+global exploration.
+
+• Dynamic Adaptation: The algorithm dynamically adjusts its control parameters, improving convergence efficiency.
+
+3. Exploitation: In later iterations, wolves converge on
+the prey by reducing |⃗A| < 1, enabling local search in
+promising regions.
+4.2.2 Benefits of GWO for Multidimensional Problems
+
+• Geometric Modeling: BER utilizes geometric principles to navigate complex, nonlinear solution spaces
+efficiently.
+• Constraint Handling: The algorithm effectively manages optimization tasks involving multiple constraints.
+
+GWO offers several advantages for complex optimization
+problems:
+154
+
+Journal of Artificial Intelligence and Metaheuristic (JAIM)
 
 Vol. 11, No. 02 · 2026
 
@@ -306,174 +380,4 @@ Table 1. Performance Metrics for Feature Selection
 5. RESULTS
 5.1 Evaluation Metrics and Experimental Setup
 
-The proposed hybrid GWO-BER algorithm was evaluated
-using several performance metrics to assess its efficiency
-and effectiveness compared to conventional metaheuristic
-algorithms. The evaluation metrics include:
-• Average Error: Measures the mean deviation of the
-algorithm’s output from the optimal solution.
-• Average Selected Features: Quantifies the mean number of features the algorithm selects during the optimization process.
-• Fitness Values: Includes the average, best, and worst
-fitness scores obtained by each algorithm.
-• Accuracy: Represents the correctness of the solutions
-generated by the algorithms.
-• Response Time: Indicates the average computational
-Time required for the time algorithm to converge to an
-optimal or near-optimal solution.
-
-Metric
-
-Average Error
-Average Selected Features
-Average Fitness
-Best Fitness
-Worst Fitness
-Standard Deviation of Fitness
-
-bGWOBER
-
-bGWO
-
-bBER
-
-bPSO
-
-bGA
-
-0.5302
-0.5130
-0.6234
-0.5252
-0.6237
-0.4457
-
-0.5547
-0.7130
-0.6396
-0.5599
-0.6268
-0.4504
-
-0.6112
-0.7130
-0.6380
-0.6183
-0.6860
-0.4498
-
-0.6195
-0.8833
-0.6777
-0.6208
-0.7005
-0.5107
-
-0.5910
-0.6554
-0.6510
-0.5543
-0.6694
-0.4520
-
-Table 2. Performance Metrics: Accuracy, Optimal Solution, and
-Response Time
-Algorithm
-
-Accuracy
-
-Optimal Solution
-
-Average Response Time (s)
-
-GWOBER
-GWO
-BER
-PSO
-GA
-
-0.9335
-0.9220
-0.9183
-0.9125
-0.9035
-
-3675.11
-3814.40
-4136.40
-4532.40
-4741.51
-
-15.779
-18.745
-20.113
-21.129
-21.995
-
-5.3 Analysis and Discussion
-
-The results presented in Table 1 confirm that the hybrid GWOBER algorithm (bGWOBER) outperformed other algorithms
-in feature selection by achieving the lowest average error
-(0.530218) and the smallest average number of selected features (0.513018). Additionally, it attained the highest fitness
-
-155
-
-Journal of Artificial Intelligence and Metaheuristic (JAIM)
-
-score (0.525218) while optimizing with fewer selected features, demonstrating its efficiency.
-Table 2 further highlights the superior performance of the
-hybrid GWO-BER algorithm, achieving the highest accuracy
-(0.933468) and the fastest response time (15.779 seconds)
-compared to other metaheuristic algorithms. While GWO
-and BER individually performed reasonably well, the hybrid
-approach effectively mitigated their limitations in exploration
-and exploitation.
-Overall, the hybrid GWO-BER algorithm demonstrated a
-well-balanced and robust performance across all evaluation
-metrics. It became an effective tool for solving optimization
-problems in EV path planning and feature selection.
-5.4 Discussion of Findings and Their Implications for EV
-Path Planning
-
-The results obtained from the hybrid GWO-BER algorithm
-highlight its strong potential for addressing Electric Vehicle
-Path Planning (EVPP) challenges. The algorithm consistently
-achieved the lowest average error and the highest accuracy
-among the tested algorithms in feature selection and optimization tasks. These results can be attributed to the hybrid
-algorithm’s ability to balance global exploration, facilitated
-by the Grey Wolf Optimizer (GWO), and local exploitation,
-enhanced by the Al-Biruni Earth Radius (BER) algorithm.
-The key advantages of using the hybrid GWO-BER algorithm
-for EV path planning include:
-• Energy Optimization: The algorithm effectively identifies routes that minimize energy consumption, which is
-essential for maximizing the operational range of electric vehicles.
-• Dynamic Adaptability: By integrating the strengths
-of both GWO and BER, the hybrid approach adapts
-dynamically to constraints such as traffic patterns, terrain
-variability, and charging station availability.
-• Computational Efficiency: The reduced computational
-response time of the hybrid algorithm, compared to
-conventional methods, ensures timely decision-making,
-which is crucial for real-time EV path planning applications.
-These findings underscore the importance of leveraging complementary optimization strategies to tackle the complex, multidimensional challenges associated with EVPP. In addition to
-improving route planning efficiency, the hybrid GWO-BER
-algorithm enhances the overall user experience for EV drivers
-by reducing travel times and optimizing energy consumption.
-6. CONCLUSION
-
-This chapter introduced a novel hybrid optimization algorithm
-that combines the Grey Wolf Optimizer (GWO) and the AlBiruni Earth Radius (BER) algorithm to address challenges
-in Electric Vehicle Path Planning (EVPP). The hybrid approach established a robust and efficient optimization framework by leveraging GWO’s global exploration capabilities
-alongside BER’s precision-driven local refinement. Extensive
-experimental validation demonstrated superior performance
-across multiple metrics, including accuracy, computational
-
-Vol. 11, No. 02 · 2026
-
-efficiency, and optimization quality. The hybrid algorithm
-effectively balances global and local search strategies, minimizes energy consumption to extend EV range, and exhibits
-scalability for real-world applications, including logistics,
-traffic congestion management, and energy-efficient transportation systems.
-The proposed hybrid approach aligns with broader sustainable
-mobility objectives by optimizing transportation efficiency
-and contributing to carbon emission reduction. Future research directions include integrating additional metaheuristic
-techniques for improved performance, developing real-
+The propos

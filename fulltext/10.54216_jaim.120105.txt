@@ -224,60 +224,11 @@ of energy consumption in smart home environments, thereby
 enabling the development of responsive and efficient energy
 management systems.
 To assess the robustness of our approach, we conducted supplementary analyses using alternative imputation methods
-(including spline interpolation) and more conservative outlier
-thresholds (|z| > 2.5). The BER-optimized LSTM consistently outperformed baseline metaheuristic-optimized models
-across these settings in terms of RMSE and MAE, indicating
-that the observed performance improvements are robust to
-reasonable changes in preprocessing strategy. Additionally,
+(incl
 
-59
+[...]
 
-Journal of Artificial Intelligence and Metaheuristic (JAIM)
-
-when we downsampled the data to five- and fifteen-minute
-intervals, BER maintained its relative advantage over competing optimizers, though overall accuracy declined slightly at
-lower resolutions.
-
-Vol. 12, No. 01 · 2027
-
-that warrant further investigation. This dual representation
-supports a more nuanced interpretation of consumption behaviors and is crucial for informed energy management and
-forecasting.
-
-To address data uncertainty and variability in smart home
-energy consumption patterns, an unsupervised clustering step
-was performed during data preprocessing. Specifically, the
-K-means clustering algorithm was applied to the normalized
-feature vectors derived from the energy consumption time series. Prior to clustering, principal component analysis (PCA)
-was used to reduce the dimensionality of the data and to
-visualize cluster structure.
-The number of clusters, K = 3, was selected based on the
-silhouette score and an analysis of typical daily load profiles, corresponding to low, medium, and high energy usage
-regimes. Figure 2 shows the resulting cluster assignments
-projected onto the first two principal components, clearly
-illustrating the separation between the identified regimes.
-Cluster labels were then appended as an additional categorical
-input feature to the LSTM model. This enables the network
-to condition its predictions on the broader context of consumption patterns, thus reducing the influence of noise and
-improving the robustness of the forecasts. By grouping similar temporal patterns and providing regime-awareness to the
-LSTM, the clustering process mitigates the effects of data
-heterogeneity and uncertainty.
-Although the present approach does not explicitly model probabilistic prediction intervals, the integration of cluster context
-allows the model to learn distinct error distributions and behaviors for each consumption regime, thereby contributing to
-more reliable and context-sensitive short-term forecasts.
-
-Figure 3. Daily consumption values and their 7-day rolling average
-over the observed period.
-
-A detailed understanding of how energy consumption is distributed among various household appliances is essential for
-identifying opportunities for efficiency improvements and
-targeted interventions. Figure 4 provides a visual summary of
-the proportional energy consumption attributed to each major
-appliance within the household, expressed as a percentage
-of total energy usage. By examining the relative shares consumed by devices such as furnaces, home office equipment,
-fridge, wine cellar, and dishwasher, stakeholders can readily
-pinpoint which appliances exert the greatest influence on overall energy demand. This proportional analysis is instrumental
-for prioritizing conservation measures and for formulating
+ures and for formulating
 strategies to optimize household energy management.
 
 Figure 2. Visualization of time-series clustering for smart home
@@ -357,4 +308,110 @@ D(t) = r3 Q∗ (t) − Q(t)
 (5)
 
 Here, r3 ∼ U(0, 1) controls exploitation intensity, and Q∗ (t)
-is the global best solution found up to iteration t. This str
+is the global best solution found up to iteration t. This structure pulls candidates toward the best solution, improving
+convergence.
+A fine-tuning step further enhances local search:
+
+Q′ (t + 1) = r Q∗ (t) + k(t)
+
+k(t) = 1 +
+
+2t 2
+
+(6)
+
+(7)
+
+Maxiter2
+
+The term k(t) increases over time, enabling more aggressive
+exploitation in later iterations. Maxiter denotes the maximum
+allowed iterations (set to 500 in this study).
+If stagnation occurs, a mutation mechanism is activated:
+Q(t + 1) = Q(t) + k(t) z2 u − h
+
+cos x
+u
+1 − cos x
+
+d-dimensional vector rather than a scalar. This correction
+resolves inconsistencies in previous formulations. The mutation step enables the algorithm to escape local minima by
+introducing directionally controlled perturbations.
+By maintaining a dynamic balance between exploration and
+exploitation, and by incorporating geometric scaling inspired
+by Al-Biruni’s Earth radius estimation, the BER algorithm
+effectively searches complex, high-dimensional optimization
+landscapes such as those encountered in smart home energy
+forecasting.
+Each component of the BER algorithm is designed to target
+specific challenges present in smart home energy forecasting.
+The adaptive step size, which dynamically adjusts the magnitude of parameter updates based on current search progress,
+helps the optimizer to quickly explore broad regions in the
+early stages—thus effectively escaping the impact of noise
+and outliers typical of high-resolution, real-world sensor data.
+As the optimization progresses, step sizes become smaller,
+enabling fine-grained search in promising regions and supporting model stability against non-stationary fluctuations.
+The stochastic mutation mechanism is particularly valuable
+in the presence of non-stationary or abruptly changing patterns in the dataset. By introducing occasional, random jumps
+in the search space, the algorithm avoids premature convergence to local minima caused by transient events or unusual
+energy usage behaviors. This results in more robust hyperparameter solutions, which translate into improved forecasting
+accuracy across different operational regimes. Finally, the
+explicit balance between exploration and exploitation in BER
+is directly beneficial for time-varying household load data,
+as it enables the optimizer to adaptively search for global
+optima in complex, dynamic, and noisy environments—an
+essential property for maintaining predictive performance as
+household conditions evolve over time.
+3.3 Long Short-Term Memory (LSTM)
+
+Long Short-Term Memory (LSTM) networks are a specialized form of recurrent neural networks (RNNs) designed to
+model long-term dependencies in sequential data. This makes
+them particularly effective for time-series forecasting tasks
+such as predicting residential energy consumption. Unlike
+standard RNNs, LSTMs maintain a cell state that is regulated
+by input, forget, and output gates, enabling the network to
+selectively retain or discard information over long sequences.
+At each time step t, the LSTM cell state and hidden state are
+updated as follows:
+ct = ft ⊙ ct−1 + it ⊙ c̃t
+
+(9)
+
+ht = ot ⊙ tanh(ct )
+
+(10)
+
+Here, ct is the cell state at time t, ct−1 is the previous cell state,
+ht is the hidden state at time t, and ⊙ denotes element-wise
+multiplication. The gate variables ft , it , and ot correspond to
+the forget, input, and output gates, respectively, while c̃t is
+the candidate cell state.
+The gating mechanisms are computed as:
+
+(8)
+
+Here, z ∼ U(0, 1) and u is a randomly generated unit vector in Rd , ensuring that the mutation step outputs a valid
+
+ft = σ (W f · [ht−1 , xt ] + b f )
+
+(11)
+
+it = σ (Wi · [ht−1 , xt ] + bi )
+
+(12)
+
+61
+
+Journal of Artificial Intelligence and Metaheuristic (JAIM)
+
+Vol. 12, No. 01 · 2027
+
+c̃t = tanh(Wc · [ht−1 , xt ] + bc )
+
+(13)
+
+ot = σ (Wo · [ht−1 , xt ] + bo )
+
+(14)
+
+Here, xt denotes the input vector at time t, ht−1 is the previous hidden state, W f ,Wi ,Wc ,Wo are the learned weight matrices for each gate, and b f , bi , bc , bo are

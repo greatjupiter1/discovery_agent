@@ -103,127 +103,121 @@ heterogeneous, consistin
 
 [...]
 
-ourse, and platform-level affective patterns.
-Explainable dropout prediction Classifiers + model explainability Achieved AUPRC 89.5%, Precision 95%, Recall 93%; iden(19 Brazilian schools)
-tified causes of dropout for targeted intervention.
-First-year dropout (engineering) Eight ML models; site-specific vs. Site-specific models outperform pooled; GBDT best; math
-pooled
-score lowers dropout risk.
+field. The researchers observed a decline in traditional studies
+in instructional design. They proposed advancing research
+on learning analytics and student profiling, which focus on
+the active development of AI-based pedagogy. Online learning is also predominantly affected by academics’ emotions.
+According to [20], using deep learning and aspect-based sentiment analysis on data collected from a Massive Open Online
+Course (MOOC) provided insight into how students felt about
+it. The findings showed that positive emotions were greatest
+at the onset of courses, then leveled off, and that teacher and
+course dimensions were more influential than student characteristics. Resolving the issue of student dropout, paper [21]
+suggested a data structure based on the information provided
+by 19 Brazilian schools to train dropout prediction models.
+With high performance scores, such as 95% accuracy and
+93% recall, the study also revealed differences across levels
+of education and possible reasons behind dropout, which can
+be put into practical implementation. Equally, in a comparable study, the authors of the article by [22] tested dropout
+rates in the first year of engineering in Chile through multiple
+machine learning models. Decision trees trained with gradient boosting were found to be the most accurate, and results
+showed that higher mathematical test scores decreased the
+risk of dropping out. In contrast, higher language test scores
+inversely predicted the likelihood of dropping out. Lastly, in
+e-learning, where data are limited, the paper by discussed
+dropout prediction. The study, conducted over four years of
+academic testing, showed test accuracy of 77-93 percent and
+highlighted the need for rigorous performance assessment to
+eliminate bias from small data sets. All these studies collec-
 
-[9]
-[10]
-[24]
-
-[11]
-
-[12]
-[13]
-[14]
-[15]
-[25]
-[16]
-[17]
-[26]
-[18]
-[19]
-[20]
-[21]
-[22]
-
-Methodology
-
-Key Findings and Contributions
-
-Table 2. Description of Predictor Variables
-Feature Name
-
-Description
-
-Hours Studied
-
-Refers to the amount of time that a given student spent studying during a specific time.
-This variable is one of the primary predictors of effort and academic engagement in the
-study.
-Previous Scores
-Denotes the scores obtained by students in their previous assessments or tests. It acts as
-a proxy for prior academic performance and learning consistency.
-Extracurricular Activities
-Indicates whether a student participates in extracurricular activities, represented as a
-categorical variable with two possible values: Yes or No. This feature helps assess the
-balance between academic and non-academic commitments.
-Sleep Hours
-Denotes the mean number of hours of sleep the student gets each day. This is a potentially
-effective factor since adequate rest is a key element of cognitive performance and
-concentration.
-Sample Question Papers Prac- Measures the number of practice papers that the student has done before the assessment.
-ticed
-This variable indicates how prepared the student is for exams and how well he/she
-understand test formats.
-
-Table 3. Description of Target Variable
-Variable Name
-
-Description
-
-Performance Index
-
-The target variable is each student’s academic performance. The index ranges from 10
-to 100, with higher values indicating improved results. It is a composite quantitative
-indicator of student success, influenced by the predictor variables listed in Table 2. The
-values are simplified and rounded to the nearest number to make them simpler and more
-homogeneous.
-
-25
+23
 
 Journal of Artificial Intelligence and Metaheuristic (JAIM)
 
+tively show that research on educational data mining is being
+shaped by a range of machine learning methods, including
+conventional classifiers, deep learning, sentiment analysis,
+and transfer learning. These approaches, as described in
+Table 1, can advance predictive modeling in the fields of
+MOOCs, VLEs, online learning, and dropout prediction, and
+can offer significant data-driven educational enhancement
+tools.
+3. MATERIAL AND METHODS
+
+The overall methodological framework adopted in this study
+is illustrated in Figure 1. The workflow outlines the complete
+process from data acquisition to model evaluation, beginning
+with the Student Performance Dataset, which undergoes comprehensive preprocessing steps including handling of missing
+data, removal of null values, and normalization to ensure
+data quality and consistency. The processed dataset is then
+partitioned into training (80%) and testing (20%) subsets for
+model development. Baseline machine learning models such
+as XGBoost, Support Vector Regression, Decision Tree, and
+Gradient Boosting Regressor are initially trained, followed
+by optimization through the Al-Biruni Earth Radius (BER)
+algorithm integrated with the Sine–Cosine Function Search
+(SFS) framework. Additional metaheuristic optimization techniques—BERSFS, GWO, PSO, and WOA—are employed to
+enhance model performance. Finally, the optimized models
+are evaluated using multiple performance metrics to assess
+prediction accuracy and robustness.
+
 Vol. 11, No. 02 · 2026
 
-Figure 3. Distribution of Predictor Variables
+ships between the predictor variables and the target variable,
+enabling researchers and data analysts to determine the extent
+to which study habits, previous performance, extracurricular participation, and sleep patterns are positively related to
+overall academic success. Besides, it can serve as a powerful
+testing and benchmarking tool for machine learning models,
+particularly those aiming to predict student performance using regression-based methods. The data is well-structured
+and can be used for model validation, feature selection, and
+optimization experiments. It is necessary to add that the Student Performance Dataset is entirely artificial and was created
+solely for demonstration and experimentation. Thus, the relationships and correlations among the variables may not reflect
+the pattern of student performance in the real world. Nonetheless, the data set provides a controlled testing environment for
+algorithms, enabling the evaluation of predictive models and
+the analysis of feature significance in educational data mining.
+The performance of the aggregate students provides priceless
+statistics on the variability and central tendency of overall
+performance across the whole dataset. The Performance Index is roughly normally distributed, with the most frequent
+in the middle ranges of performance and less frequent at the
+higher and lower ends, as demonstrated by Figure 2. This
+tendency indicates that the data are evenly distributed and
+that the performance measure is appropriate for representing
+and capturing a range of student performance.
 
-functions were used to ensure that the Student Performance
-Dataset was free of inconsistencies, bias, and noise. These
-processes are quality control, imputation and encoding, scaling, correlation screening and assisted feature design. Preprocessing phase one entailed quality control to ascertain
-the integrity and reliability of the data. These involved confirming completeness, consistency and logical validity of any
-records. Redundant and abnormal records, e.g., implausible
-study hours or negative performance indices, were identified
-and eliminated. Outliers were identified using statistical techniques, such as summary and boxplots, and missing values
-and data distribution were evaluated to ensure the dataset was
-ready. This was done to ensure that subsequent analyses used
-correct and representative data. After quality control, data
-values were either missing or incomplete, and imputation
-techniques were used to fill the gaps. For numerical values
-(i.e., Hours Studied, Sleep Hours, and Previous Scores), missing values were imputed using the feature’s mean or median,
-depending on its skewness. Mode imputations have been used
-to retain the most frequently occurring category for categorical variables such as Extracurricular Activities. Categorical
-variables were encoded as numbers to prepare the dataset for
-machine learning models. Extracurricular Activities were
-binary coded with 1 indicating Yes and 0 indicating No. The
-change made it easy to incorporate into regression-based
-algorithms, such as XGBoost and Support Vector Regression, that require numerical input features. Function scaling
-was applied to normalize the numerical variables and ensure
-that all features contributed equally to model training. Standardization per feature was adopted, and each variable was
-transformed to have a mean of zero and a standard deviation
-of one. The approach ensures that models that are sensitive
-to feature magnitudes are not biased toward larger-valued attributes, as typified by Support Vector Regression (SVR) and
-Gradient Boosting. The scaling parameters were trained only
-on the training data to avoid data leakage, and the same transformation was then applied to the test data. Mathematically,
-the standardized value zi for each feature xi was computed as:
-zi =
+Figure 2. Distribution of Performance Index
+Figure 1. Workflow of the Proposed Methodology for Student
+Performance Prediction
+3.1 Dataset Description
 
-xi − µx
-σx
+The Student Performance Dataset is an artificial dataset designed to examine the primary variables that determine students’ academic performance. It has a total of 10,000 student
+records, where each record represents a single learner and
+contains information pertinent to a set of predictor variables
+and a single target variable, the Performance Index. This data
+will provide a methodological basis for research on the relationships among behavioral, academic, and lifestyle variables
+that affect general academic performance. The predictor variables in the dataset include the following and will be treated
+as independent inputs in the analysis. Each feature makes
+its own contribution to the determinants of academic performance. The dependent or target variable in this dataset is the
+performance index, which measures an individual student’s
+overall academic performance. The information is presented
+in Table 3. The dataset would help investigate the relation-
 
-(1)
+To obtain a detailed picture of the underlying trends in the
+data, one will need to analyze the distributions of each predictor variable. The distribution plots of the main independent
+variables — Hours Studied, Previous Scores, Extracurricular Activities, Sleep Hours, and Sample Question Papers
+Practiced —are presented in Figure 3. These visualizations
+show how variable and dispersed each feature can be, making them valuable markers of students’ behavior and study
+habits. The figure, for example, demonstrates that participation in extracurricular activities is highly binary. On the
+contrary, variables related to the study, i.e., hours studied and
+frequency of practice, are comparatively homogeneous. Such
+an exploratory analysis is an initial step toward establishing
+relationships among these factors and their combined impact
+on the Performance Index.
+3.2 Data Preprocessing
 
-where µx and σx represent the mean and standard deviation of
-the feature, respectively. Correlation analysis was performed
-to eliminate redundancy and reduce multicollinearity among
-features. The Pearson correlation coefficient was estimated
-for all combinations of numerical variables to assess the linear relationship between them. Strongly correlated variables
+Data preprocessing is an essential step in
 
-(r > 0.85) were identified, and redundant variables were removed to improve model generalization and minimize overfitting. Also, they visualized the predictor dependency structure
-using correlation heatmaps, which allowed them to retain
+[...]
+
+d them to retain
 only the most significant variables—Hours Studied, Previous
 Scores, and Sample Question Papers Practiced—for further
 analysis in downstream modeling. In this work, both domain
@@ -439,18 +433,4 @@ Vol. 11, No. 02 · 2026
 similarity. It builds upon the original Fractal Search (FS) algorithm. It adds stochastic diffusion-based operations based on
 the concept of Diffusion-Limited Aggregation (DLA), which
 form fractal-shaped structures in the search space. SFS dynamic propagation of the best candidate solution is through
-a diffusion process that maintains a balance between exploration and exploitation. The diffusion process about the best
-solution (BP) is depicted in Figure 5 where clusters are created around the best solution, including BP1 , BP2 , BP3 , BP4 ,
-and BP5 that help in steering the search to the global optimum.
-
-better generalization. XGBoost is also particularly effective
-for predicting student performance, as it can capture subtle
-interactions among variables such as study hours, past scores,
-and lifestyle factors, and predict high student performance.
-Support Vector Regression (SVR) Support Vector Regression (SVR) is a variant of the Support Vector Machine (SVM)
-used for continuous prediction. The working principle of
-SVR is to map the input data into a high-dimensional feature
-space using kernel functions, and then fit a linear model in
-the transformed space. The algorithm is intended to reduce
-the prediction error to the required tolerance, represented by
-the variable ε, thereby introducin
+a diffusion process that maintains a

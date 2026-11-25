@@ -1,0 +1,252 @@
+Al-Biruni and the Mathematical Geography
+Amelia Carolina Sparavigna
+
+To cite this version:
+Amelia Carolina Sparavigna. Al-Biruni and the Mathematical Geography. Philica, 2014, ⟨10.5281/zenodo.3362206⟩. ⟨hal-02264631⟩
+
+HAL Id: hal-02264631
+https://hal.science/hal-02264631v1
+Submitted on 7 Aug 2019
+
+HAL is a multi-disciplinary open access archive
+for the deposit and dissemination of scientific research documents, whether they are published or not.
+The documents may come from teaching and research
+institutions in France or abroad, or from public or private research centers.
+
+L’archive ouverte pluridisciplinaire HAL, est destinée au dépôt et à la diffusion de documents scientifiques de niveau recherche, publiés ou non, émanant
+des établissements d’enseignement et de recherche
+français ou étrangers, des laboratoires publics ou
+privés.
+
+HAL Authorization
+
+DOI 10.5281/zenodo.3362206
+
+Al-Biruni and the Mathematical Geography
+Amelia Carolina Sparavigna (Department of Applied Science and Technology, Politecnico di
+Torino)
+Published in geo.philica.com
+
+Abstract
+Abu Raihan Al-Biruni (973 - 1048) is considered one of the intellectual giants of humankind. He was an
+astronomer, physicist and geographer, that distinguished himself as linguist and historian too. Here we
+discuss his major contributions to the mathematical geography of Middle Ages. Keywords: History of
+Science, Medieval Science, Al-Biruni, Mathematical Geography, Geodesy. Author: A.C. Sparavigna,
+DISAT, Politecnico di Torino, Italy.
+
+Introduction
+During the Middle Ages, Khwarezm, a huge region of the western Central Asia, also known as
+Chorasmia or Khorasam, generated a large number of scientists and scholars. Albumasar,
+Alfraganus, Al-Farabi [1], Avicenna, Omar Khayyam, Al-Khwarizmi and many others were born
+there. Across this region, goods moved in long caravans on the Silk Road linking Europe to India
+and China, and scientific culture moved with them. In this stream of goods and knowledge, we find
+Abu Raihan Al-Biruni, one of the greatest minds of all time [2].
+Al-Biruni was born in 973 AD in the district of Kath, the old capital of Chorasmia, a town situated
+near the Aral Sea. He had as first teacher an educated Greek. His foster father, Mansur, a member
+of the royal family and distinguished mathematician and astronomer, introduced him to Euclidean
+geometry and Ptolemaic astronomy [3].
+Youth Al-Biruni soon became a master of geometry and astronomy, such as of several other
+sciences, including mineralogy, geography and cartography. Being able of giving latitude and
+longitude of any point of the compass, Al-Biruni used in his geographic works the data that he
+directly collected during the travels made to escape from wars or in his constant search for a
+patron. In this manner he became aware that, in many cases, geographic information given by the
+Muslim astronomers was better than that reported by Ptolemy.
+In fact, it was long before Al-Biruni’s time that Muslim scholars started their researches on
+mathematical geography and geodesy. A success obtained by them was the measurement of the
+meridian arc, measurement made by astronomers of Caliph Al-Mamun. From this measure, Earth’s
+circumference had been deduced and compared to the value given by ancient Greeks. Al-Biruni,
+eager to find his own value, proposed a new method based on sine trigonometric functions. Using it,
+he measured the Earth’s circumference finding a value quite close to the modern one. As we will
+see in this paper, Al-Biruni also proposed new methods for measuring longitude and new
+cartographic projections, some of them reinvented after centuries by modern cartographers.
+However, before discussing these Al-Biruni’s achievements, it is useful to talk shortly of the
+abovementioned result of Muslim geodesy, that is, the measurement of the arc corresponding to
+
+one degree of latitude, ordered by Abbasid Caliph Al-Ma’mun during his reign.
+The length of a meridian arc
+In geodesy, a meridian arc is the distance between two points with the same longitude.
+Measurements of arcs at different latitudes allow determining a reference ellipsoid which can be
+used to define the Figure of the Earth. Assuming our planet as a sphere, it is enough to measure a
+single arc, from which it is easy to obtain the Earth’s circumference. An earliest estimation of it was
+that given by Eratosthenes (third century BC). After more than a thousand of years, in 9th century,
+an Abbasid Caliph ordered the first test of this value. Probably in year 820 AD, the astronomers of
+Caliph Al-Ma’mun determined the equatorial Earth’s circumference being 20400 miles. Through the
+Compendium on the Science of Stars, written by Al-Farghani (Alfraganus), and translated in Latin
+by John of Seville and Gherardo da Cremona [4], this value of Earth’s circumference was well
+known in Western Europe during the Middle Ages [5,6].
+According to Alfraganus, a ‘mile’ is equal to 4000 ‘black cubits’, which, in the Latin translations,
+became ‘mean cubits’. Carlo Alfonso Nallino, an Italian orientalist, considered the black cubit made
+of 24 digits and equal, in average, to 0.4933 m; therefore, the ‘mile’ used by Alfraganus was
+1973.2 meters long. In this manner, the meridian arc measured during the reign of Al-Ma’mun,
+corresponding to one degree and 56 2/3 miles long, was equal to 111.8 km, a very good result
+indeed when compared to the modern value of 111.3 km [5].
+In surveying the Arabic literature reporting about Al-Ma’mun measurement, Nallino found that some
+authors are giving values of the arc different from that reported by Alfraganus. According to the Ibn
+Khallikan's Biographical dictionary (Cairo 1229), about Musa b. Shakir, after reading in the ancient
+books the value of the meridian arc Caliph Al-Ma’mun commissioned the three sons of Musa bin
+Shakir, the Banu Musa [7], to test this value [6]. The Banu Musa asked where they could find some
+flat lands suitable for this measurement; the answer was the desert near Senjar in northern
+Mesopotamia or the lowland of Kufah. They composed a team of expert people and went to the
+desert of Senjar. They stopped in a place and measured the altitude of North Celestial Pole. They
+planted a pole in the ground and attached a rope to it. They moved straight northwards on the flat
+land. When the rope ended, they planted another pole, used another rope, and moved again due
+North. This operation was repeated until they reached a place where the altitude of North Pole was
+one degree more than that observed at the starting place. The total length of ropes was 66 2/3
+miles. They went back to the first pole and repeated the measurement southwards, until they
+reached the same total length of ropes. In this place, they found that the altitude of North Pole
+diminished of one degree. Therefore, they knew the measures were good. Banu Musa came back to
+the Caliph, who ordered to repeat the measurement in Kufah; so they did and obtained the same
+result. According to Ibn Khallikan, the length of the arc was 66 2/3 miles. According to Abu'l-feda,
+Shems Ed-din and several others [4], the Banu Musa had two teams, one moving northwards, that
+obtained a value of 56 1/2 miles, the other moving southwards, that obtained a value of 56 miles.
+They used the greater one. It is certain that Alfraganus considered the value obtained by Banu
+Musa of 56 2/3 miles [4]. This arc, multiplied by 360, gave a Earth’s circumference of 20400 miles.
+Of course, Al-Biruni, who dealt with Earth in many of his works [3,8], knew these measures of
+meridian arcs. We can imagine that he had some concerns about a method that required stretching
+several ropes on a quite long path. Instead of using measurements of lengths, he proposed to
+measure angles. In his method, Al-Biruni used the sine law, as we can see in the Figure 1. First, he
+determined the elevation of a hill, and then he climbed the hill and measured the angle of the dip of
+horizon [9].
+
+Figure 1 - Al-Biruni’s method to measure Earth’s radius [9].
+The result obtained by Al-Biruni had been discussed in [2]. Let us just tell that, if the Arabic mile
+used by Al-Biruni was equal to 1.225947 English miles [10], his value of the Earth’s radius was
+different of only 2% from the mean radius of curvature of the reference ellipsoid at the latitude of
+measurements [10] (Al-Biruni made measurements when he was at the Fort of Nandana in Punjab
+[11]).
+
+Figure 2 – Equatorial and horizontal coordinates.
+Measuring latitude and longitude
+Muslim scholars used the Earth’s radius to calculate distance and direction to Mecca from any given
+point on Earth: this determined the Qibla, or Muslim direction of prayer. Therefore, Muslim
+mathematicians developed the spherical trigonometry which was necessary for these calculations.
+Al-Biruni worked on the determination of Qibla too, with his ‘Demarcation of the Coordinates of
+Cities’ [12]. In fact, once we know latitude and longitude of Mecca and of the place where a prayer
+is, these data can be applied to a spherical triangle, and the angle from prayer’s meridian to the
+
+direction of Mecca determined.
+Latitude can be obtained using equatorial and horizontal coordinates, that is, from the altitude h
+and declination d of the sun on the day of measurements. The declination is one of the two angles
+that locate a point on the celestial sphere in the equatorial coordinate system (in Figure 2, we can
+see equatorial and horizontal frames of reference). To determine the latitude, during the day we
+can use the sun at noon; by night, we can use the stars. Let us consider a circumpolar star. We can
+measure the two altitudes of the star when it is passing the meridian; the arithmetic mean of these
+two values is the latitude. Today, due to the precession of equinoxes, Polaris is almost coincident to
+the North Celestial Pole and therefore it is easy to find it and measure its altitude, but at Al-Biruni’s
+time, it was a circumpolar star like others. According to [13], in the book on geographic
+coordinates, Al-Biruni describes the methods to determine latitude showing examples from past and
+contemporary literature.
+As observed by Edward S. Kennedy in [13], since it is quite easy to determine latitudes, one could
+expect that the values we can find in medieval literature were accurate. This is not so. Let us
+consider, for instance, the 506 places of which Al-Kashi (about 1400 AD) is giving coordinates. 381
+have values in agreement with the modern ones, that is, they differ from the modern values of just
+4 minutes of arc in average. But the average of all the 506 values differs of more than a degree.
+This difference is explained by Kennedy in the following manner. Al-Kashi and other medieval
+geographers, could verify by themselves the latitude of a limited number of places, and therefore,
+in compiling their lists, they had to accept calculations made by other, probably not so competent,
+astronomers. However, let us stress that several of the data we can find in Arabic literature are
+providing many latitudes to within about a quarter of degree [13].
+Prime meridians
+Before discussing how longitude was measured, let us talk about the choice of the Prime Meridian.
+The geographical data coming from Arabic sources can be divided into two categories, determined
+by the Prime Meridian they used [13]. Ptolemy measured the longitudes eastward from the
+Fortunate Isles (i.e. Canaries): about a half of the Muslim sources made reference to him. This
+group is defined, for convenience, as the first group. The second group is following Al-Khwarizmi
+(ca. 820), who set the Prime Meridian of the Old World at the eastern oceanic shore, that is, 10
+degrees East of the Prime Meridian of the first group. It is unknown the reason for this division. In
+fact, the astronomers of Al-Ma’mun decided that the longitude of Baghdad, the Abbasid capital, was
+70 degrees. However, according to Ptolemy’s geography, Baghdad would have 80 degrees of
+longitude, and more than a half of the Muslim sources gave this value. In any case, the existence of
+two categories is a fact. Longitudes of the same town, in the tables of these two groups, tend
+differing of just 10 degrees [13]. In fact, there is also a text which is reporting of a third Prime
+Meridian. Al-Hamdani (d. 946) states that the Orientals are measuring longitudes to the west from
+the east coast of China. Al-Hamdani provided the coordinates of several Indian towns and of towns
+located in Arabian Peninsula, including Jerusalem and Damascus too [13].
+Measuring longitude
+Once we have defined the Prime Meridian, finding longitude of a place becomes a problem of
+knowing the angle between this meridian of reference and that passing through the given place. It
+seems easy: because Earth is rotating of 360 degrees in 24 hours, the difference of longitude
+corresponds to the difference of local times. However, it is necessary a time signal, simultaneously
+available in these two places, and, in Middle Ages this was anything but simple [13]. A lunar eclipse
+
+can be used for this purpose, because it is possible to observe the evolution of it in the same
+manner from different points of the globe. Two observers, each in a different place, can establish
+the local times of the eclipse. The difference of these times corresponds to the difference of
+longitude [13]. Al-Biruni made such measurements, with the help of Abu'l-Wafa; he was in Kath
+and his friend in Baghdad.
+
+Figure 3 – An isosceles trapezoid for two places A and C on the Earth.
+Al-Biruni proposed also a mathematical method for calculating the difference of longitude. Let us
+assume we know the latitudes of two places (A and C in the Figure 3) and their distance AC. In each
+of these two points are passing a meridian and a parallel, and therefore we have four circles, which
+intersect determining an isosceles trapezoid (ABCD). An isosceles trapezoid can be inscribed in a
+circle, and therefore we can use a theorem of Ptolemy on cyclic quadrilaterals. This theorems links
+sides and diagonals of trapezoids (it is given in the Figure 4).
+
+Figure 4 – Ptolemy’s theorem applied to a cyclic quadrilateral (left) and to an isosceles
+trapezoid (right).
+In applying the Ptolemy’s theorem, Al-Biruni used the chord function (Figure 5). Chords were the
+preferred objects of early trigonometry. We find them in the first trigonometric table, the
+Hipparchus’ table, where values of chord function are given for every 7.5 degrees. Ptolemy
+compiled a more extensive table of chords in his book on astronomy, giving the values by
+increments of half a degree. In the Figure 5 we see how angle, chord and sine functions are
+connected. Let us note that the name of trigonometric function ‘sine’ is coming from Latin ‘sinus’,
+
+which means ‘bend, curve, bosom’. Gherardo of Cremona used ‘sinus’ in his Latin translation of
+Arabic geometrical text to render Arabic ‘jiba’, ‘chord of an arc’, which he confused with ‘jaib’
+‘bundle, bosom’ [14].
+
+Figure 5 – The Chord Function and the Sine Function.
+In Figure 6, we can see how Al-Biruni used Ptolemy’s Theorem. Let us consider the isosceles
+trapezoid of Figure 3. Knowing the distance AC and the difference of latitude between these two
+places, he found the chord of the difference of longitude, crd(Dλ), and using Ptolemy’s tables, the
+corresponding angle.
+
+Figure 6 – The method of Al-Biruni for determining longitude, applied to isosceles trapezoid ABCD,
+made by chords corresponding to arcs of meridians and parallels.
+
+To have the distance AC, Al-Biruni used the lengths of caravan routes, renormalized by means of a
+certain coefficient depending on whether the route was more or less direct or difficult [13]. Let us
+note that, in applying the Ptolemy’s theorem, AC is a chord, not an arc. Al-Biruni, using the lengths
+of caravan routes was estimating the arc, not the chord. However, assuming arc and chord differing
+of a negligible quantity, we can evaluate crd(Dλ) as in Figure 6 and convert the result in degrees.
+To find the difference of longitude between Baghdad and Ghazni (in modern Afghanistan), Al-Biruni
+applied his own method using three different paths. The result he proposed was the arithmetic
+mean of these three results. In [13], it is told that the final value of longitude had an accuracy of
+about 1.5%. Between Baghdad and Ghazni, there is a difference of longitude of about 24 degrees.
+Given an Earth’s radius of 6371 km, for an angle of 24 degrees at a latitude of 33 degrees, the
+corresponding arc is 2238.1 km long and the chord 2221.8 km long. A difference of less than 20 km
+
+is negligible, when compared to the uncertainty of a distance obtained from the lengths of caravan
+routes. However, it is my opinion that, in some manner, Al-Biruni considered the difference between
+arc and chord in renormalizing the distance.
+Lists of places and cartography
+A collection of lists of places with their latitudes and longitudes reveals the large geographical
+knowledge of the medieval Muslim world. We can find these lists in books on astronomy, geography
+and compilations used to prepare maps [13] or to determine the Qibla [15]. In classical antiquity,
+maps were drawn by Anaximander, Hecataeus of Miletus, Herodotus, Eratosthenes and Ptolemy,
+and were prepared after the observations by explorers in a mathematical framework. It is almost
+certain that the world map of Ptolemy was available to geographers of Abbasid empire. During AlMa’mun reign, the geographers of his House of Wisdom prepared a new large map of the world.
+This was one of the fruits of the collaboration between scientists stimulated by this Caliph.
+Around 1005, Al-Biruni wrote a little work on the mapping of the globe, entitled ‘The Flat Projection
+of Figures and Balls’ [13]. In this treatise, Al-Biruni discussed eight types of map projections. One is
+the azimuthal equidistant projection, today used for polar projections, which shows all meridians as
+straight lines (the flag of United Nations is an example of such a polar azimuthal projection). AlBiruni describes this projection in mechanical terms as rolling a ball over the paper. More than five
+centuries later, a primitive example of such a method was provided by the map of the world drawn
+by Ahmad Al-Sharafi Sarafi of Sfax in 1571 [13]. He did not know the work of Al-Biruni, and the
+same was for Guillaume Postel, the first to apply this method in Europe in 1581 [13].
+Another method proposed by Al-Biruni was that which is known as Nicolosi globular projection. This
+method had no significant application in the East. It reappeared in Europe in 1660, when
+Giambattista Nicolosi published examples of it in two representations of east and west hemispheres.
+Another example appeared in Paris in 1676, and then others followed [13]. In 1701, the French
+scientist Philippe de la Hire described a mapping method very similar to the globular projection. The
+English cartographer Aaron Arrowsmith, in the notes accompanying a world map of 1794, tells that
+he is using the method proposed by de la Hire because it is the best. Moreover, he describes the
+construction of the grid of coordinates in exactly the same manner as Al-Biruni did [13]. Let us
+conclude with Kennedy’s words [13]; it is not appropriate to say that Al-Biruni would directly
+influenced Arrowsmith, but it is astonishing that two scientists, one of the eleventh and the other of
+the eighteenth century, found the same good solution to represent the globe.
+References
+[1] Sparavigna, A.C. (2014). The Ten Spheres of Al-Farabi: A Medieval Cosmology, International
+Journal of Sciences, vol.3 n.6, pp.34-39.
+[2] Gafurov, B. (1974). Al-Biruni, a Universal Gen
