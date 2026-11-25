@@ -18,6 +18,24 @@
    "stop_stage": "گزینش منابع مرتبط و محتوادار",
    "resume_project_id": null,
    "resume_stage": null
+  },
+  "1766cd6b0bd218b1": {
+   "workflow": "Build GRIS sample project",
+   "klass": "code-defect",
+   "attempts": 1,
+   "escalated": false,
+   "history": [
+    {
+     "ts": "2026-11-25T20:29:41+00:00",
+     "run_id": "45685919581",
+     "action": "patch_failed",
+     "detail": "diff did not apply cleanly — discarded"
+    }
+   ],
+   "last_run_id": "45685919581",
+   "stop_stage": "گزینش منابع مرتبط و محتوادار",
+   "resume_project_id": "gris-0001",
+   "resume_stage": null
   }
  }
 }
