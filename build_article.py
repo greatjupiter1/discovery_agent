@@ -1439,6 +1439,11 @@ def build_source_map(field, topic, api_key, model):
                 if matched and matched != w["title"]:
                     print(f"source map (§20): catalogue confirms "
                           f"{w['title']!r} as {matched!r}")
+                    # §20.4: the REAL catalogue title becomes the
+                    # work's identity for search + citation; the
+                    # brain-mapped title is kept for traceability.
+                    w["mapped_title"] = w["title"]
+                    w["title"] = matched
                 confirmed.append(w)
             else:
                 print(f"source map (§20): DROPPED unconfirmed title "
@@ -1669,6 +1674,19 @@ def retrieve_primary_sources(smap, rstate, extra_keywords=None,
             seen.add(alias)
             c["source_type"] = "primary"
             c["primary_work"] = work.get("title")
+            # §20.4/§20.7 traceability: how the mapped work was
+            # catalogue-confirmed and under what name the brain had
+            # mapped it (the candidate's own title is the REAL
+            # catalogue title of the found copy).
+            c["primary_relation"] = work.get("relation")
+            if work.get("mapped_title"):
+                c["mapped_title"] = work["mapped_title"]
+            if work.get("catalogue_via"):
+                c["catalogue_via"] = work["catalogue_via"]
+            if work.get("catalogue_title"):
+                c["catalogue_title"] = work["catalogue_title"]
+            if work.get("catalogue_id"):
+                c["catalogue_id"] = work["catalogue_id"]
             c["search_keywords"] = keywords
             picked.append(c)
             rstate["total_candidates"] = \
@@ -3567,6 +3585,74 @@ def _openlibrary_docs(work):
     return out, True
 
 
+EXISTENCE_FETCH_CAP = 128 * 1024  # §20.4: bounded djvu fetchability probe
+EXISTENCE_PROBE_MAX = 3           # §20.4: at most this many IA items probed
+
+
+def _catalogue_existence_match(work, doc_title, doc_creators,
+                               doc_identifier=""):
+    """§20.4 existence rule (CONTENT-OVER-TITLE law): a catalogue
+    record counts as evidence that the mapped work EXISTS when the
+    AUTHOR is corroborated (any distinctive author token matches the
+    doc's creators, title or identifier) AND at least ONE distinctive
+    title token of ANY title variant is shared with the doc's title.
+    The title's exact form is irrelevant — catalogues hold the same
+    work under different titles, transliterations and scripts, and
+    Jupiter's law is that the title must not decide a book's fate.
+    The 1-token-alone guard is preserved: without author
+    corroboration a shared token confirms nothing ('India' vs
+    'Theatre in India')."""
+    author_text = " ".join(doc_creators or []) + " " + \
+        (doc_title or "") + " " + (doc_identifier or "")
+    author_ok = bool(_matched_tokens(
+        _catalogue_tokens(work.get("author")),
+        _catalogue_tokens(author_text)))
+    if not author_ok:
+        return False
+    b = _catalogue_tokens(doc_title)
+    if not b:
+        return False
+    for variant in _title_variants(work):
+        if _matched_tokens(_catalogue_tokens(variant), b):
+            return True
+    return False
+
+
+def _ia_retrievable_copy(work, ia_docs):
+    """§20.4: find a REAL, RETRIEVABLE IA copy of the mapped work —
+    an item that plausibly is this work (the §20.3 matcher OR the
+    existence rule above) whose djvu full text actually fetches
+    (bounded probe). Returns the doc, or None. A retrievable copy is
+    the strongest existence proof: the pipeline will read the book's
+    CONTENT, and content — not the title — decides relevance later."""
+    candidates = []
+    for doc in ia_docs:
+        creators = doc.get("creator") or []
+        if isinstance(creators, str):
+            creators = [creators]
+        ident = str(doc.get("identifier") or "")
+        if not ident:
+            continue
+        strong = any(
+            _catalogue_match(work, variant, doc.get("title") or "",
+                             creators, ident)[0]
+            for variant in _title_variants(work))
+        if strong or _catalogue_existence_match(
+                work, doc.get("title") or "", creators, ident):
+            candidates.append(doc)
+    for doc in candidates[:EXISTENCE_PROBE_MAX]:
+        ident = str(doc.get("identifier") or "")
+        try:
+            text = _ia_djvu_text(ident, cap=EXISTENCE_FETCH_CAP)
+        except Exception as e:
+            print(f"NOTE: IA retrievability probe failed for "
+                  f"{ident} ({e})")
+            continue
+        if text:
+            return doc
+    return None
+
+
 def verify_work_in_catalogue(work):
     """§20.3 — a mapped title is trusted only if an independent
     catalogue actually holds a work matching one of the title
@@ -3579,7 +3665,20 @@ def verify_work_in_catalogue(work):
     (fail-soft, logged): an unreachable catalogue must not silently
     delete a real book, but a catalogue that answers with no match
     drops the title — the §19 lesson was a brain inventing or
-    misnaming the key work."""
+    misnaming the key work.
+
+    §20.4 (CONTENT-OVER-TITLE law, Jupiter 2026-11-25): confirmation
+    is EXISTENCE-based. A work is confirmed when a real copy is found
+    and retrievable (an IA item whose djvu text fetches), or when a
+    catalogue record exists for the author+work under ANY title form
+    (author corroborated + >= 1 shared distinctive title token). The
+    §20.3 title-overlap thresholds can no longer drop a work for
+    which such a copy/record exists. On confirmation the confirming
+    catalogue, the copy's REAL catalogue title and (for IA) its
+    identifier are recorded on the work dict (catalogue_via /
+    catalogue_title / catalogue_id) so the real title becomes the
+    citation identity downstream. A work with NO real copy or record
+    anywhere is still dropped — invented works still die."""
     title = (work.get("title") or "").strip()
     author = (work.get("author") or "").strip()
     variants = _title_variants(work)
@@ -3599,9 +3698,28 @@ def verify_work_in_catalogue(work):
                     work, variant, doc_title, creators,
                     str(doc.get("identifier") or ""))
                 if ok:
+                    work["catalogue_via"] = "archive.org"
+                    work["catalogue_title"] = doc_title
+                    work["catalogue_id"] = \
+                        str(doc.get("identifier") or "")
                     print(f"catalogue-confirmed via: archive.org — "
                           f"{title!r} matched {doc_title!r}")
                     return True, doc_title
+        # 1b. §20.4 existence: a real RETRIEVABLE copy confirms the
+        # work even when no title form matches the §20.3 thresholds —
+        # the copy's content will be judged, not its title.
+        copy_doc = _ia_retrievable_copy(work, ia_docs)
+        if copy_doc is not None:
+            doc_title = copy_doc.get("title") or ""
+            work["catalogue_via"] = "archive.org (retrievable copy)"
+            work["catalogue_title"] = doc_title
+            work["catalogue_id"] = \
+                str(copy_doc.get("identifier") or "")
+            print(f"catalogue-confirmed via: archive.org "
+                  f"(retrievable copy) — {title!r} exists as "
+                  f"{doc_title!r} [{work['catalogue_id']}] with a "
+                  "fetchable full text (§20.4 existence rule)")
+            return True, doc_title
     except Exception as e:
         print(f"NOTE: IA catalogue check failed for {title!r} ({e})")
 
@@ -3614,9 +3732,23 @@ def verify_work_in_catalogue(work):
                 work, variant, doc.get("title") or "",
                 doc.get("creator") or [])
             if ok:
+                work["catalogue_via"] = "openlibrary.org"
+                work["catalogue_title"] = doc.get("title")
                 print(f"catalogue-confirmed via: openlibrary.org — "
                       f"{title!r} matched {doc.get('title')!r}")
                 return True, doc.get("title")
+    # 2b. §20.4 existence: an OpenLibrary record for the author+work
+    # under ANY title form confirms existence.
+    for doc in ol_docs:
+        if _catalogue_existence_match(work, doc.get("title") or "",
+                                      doc.get("creator") or []):
+            work["catalogue_via"] = \
+                "openlibrary.org (any-title record)"
+            work["catalogue_title"] = doc.get("title")
+            print(f"catalogue-confirmed via: openlibrary.org "
+                  f"(any-title record) — {title!r} exists as "
+                  f"{doc.get('title')!r} (§20.4 existence rule)")
+            return True, doc.get("title")
 
     # 3. Google Books — optional corroboration ONLY. Any failure is
     # fail-soft and never required, never blocking.
@@ -3630,6 +3762,8 @@ def verify_work_in_catalogue(work):
                     work, variant, h.get("title") or "",
                     h.get("authors") or [])
                 if ok:
+                    work["catalogue_via"] = "google books"
+                    work["catalogue_title"] = h.get("title")
                     print(f"catalogue-confirmed via: google books — "
                           f"{title!r} matched {h.get('title')!r}")
                     return True, h.get("title")
@@ -3769,14 +3903,16 @@ def _llm_relevance_screen(field, topic, borderline, api_key, model,
         if s.get("source_type") == "primary":
             type_line = ("PRIMARY SOURCE — the author's own work / a "
                          "foundational document for this topic")
-            content = (s.get("fulltext_excerpt") or "").strip()
-            if not content:
-                content = (s.get("abstract") or "").strip()
         else:
             type_line = "Secondary scholarship"
+        # §20.4: the extracted passages / full-text excerpt are the
+        # evidence for EVERY source type — they outrank the abstract,
+        # and the title is never the evidence.
+        content = (s.get("fulltext_excerpt") or "").strip()
+        content_label = ("Extracted passages from inside the source"
+                         if content else "Abstract")
+        if not content:
             content = (s.get("abstract") or "").strip()
-            if not content and s.get("fulltext_excerpt"):
-                content = s["fulltext_excerpt"][:800]
         lines.append(
             f"[{j}] Title: {s.get('title', '')}\n"
             f"    Type: {type_line}\n"
@@ -3784,10 +3920,18 @@ def _llm_relevance_screen(field, topic, borderline, api_key, model,
             f"Year: {s.get('year') or 'n.d.'} | "
             f"Venue: {s.get('venue') or 'n/a'} | "
             f"Index: {s.get('index') or '?'}\n"
-            f"    Content: {content[:800] or '(no abstract available)'}")
+            f"    {content_label}: "
+            f"{content[:1200] or '(no abstract available)'}")
     prompt = (
         "You are screening candidate sources for a scholarly article.\n"
         f"Field: {field}\nTopic: {topic}\n\n"
+        "Judge relevance by the CONTENT shown for each candidate — "
+        "the extracted passages taken from INSIDE the source — NOT "
+        "by its title (§20.4 content-over-title law): a title that "
+        "does not mention the topic does NOT make a source "
+        "irrelevant when its passages address the topic, and a "
+        "title that matches the topic does NOT save a source whose "
+        "content does not address it.\n\n"
         "Judge EACH candidate by its TYPE (marked on its line):\n"
         "- PRIMARY SOURCE (the topic author's own work, or a "
         "foundational document, in a scholarly edition or "
@@ -3856,7 +4000,10 @@ def screen_sources(field, topic, sources, api_key, model):
     stats = {"input": len(sources), "relevant": 0, "counted": 0,
              "drop_irrelevant": 0, "drop_tradition": 0,
              "drop_disagreement": 0, "drop_no_content": 0,
-             "registry_matched": 0, "primary_counted": 0}
+             "registry_matched": 0, "primary_counted": 0,
+             # §20.7: titles the first judge kept that died as judge
+             # disagreement — the itemised report's near-miss list.
+             "disagreement_titles": []}
     # Registry signal (§17): tag every candidate; the tag never
     # changes a relevance verdict — it only re-orders the counted
     # list at the end (matched first, stable otherwise).
@@ -3890,14 +4037,28 @@ def screen_sources(field, topic, sources, api_key, model):
             print(f"relevance: keep {title[:70]} — "
                   f"{s['relevance_reason']}")
         elif base and same_script and cov_body == 0.0:
-            if s.get("source_type") == "primary" and s.get("passages"):
-                # §20.1: a primary carrying extracted passages must
-                # never die in the deterministic drop — the passages
-                # ARE the relevance evidence. Route it to the LLM
-                # screen, which judges primaries on the excerpt.
+            if s.get("passages") or \
+                    (s.get("fulltext_excerpt") or "").strip():
+                # §20.4 CONTENT-OVER-TITLE law (generalises §20.1):
+                # the deterministic title/abstract-overlap drop must
+                # NEVER drop a source that carries extracted content
+                # — passages OR a fetched full-text excerpt (even a
+                # head excerpt) — of ANY source type. The content IS
+                # the relevance evidence; the LLM screen judges it.
+                # (§20.1 keyed only on `passages` for primaries; the
+                # GRIS live run showed a primary whose fetch produced
+                # a head excerpt — keyword matching inside the book
+                # found no hits, so `passages` was never set — was
+                # still deterministic-dropped despite its full text
+                # having been fetched. That gap is now closed for
+                # every source type and every orchestration, since
+                # both call this shared function.)
+                kind = ("extracted passages" if s.get("passages")
+                        else "a fetched full-text excerpt")
                 s["relevance_reason"] = (
-                    "primary with extracted passages — sent to LLM "
-                    "screen despite zero topic-term overlap")
+                    f"source carrying {kind} — sent to LLM screen "
+                    "despite zero topic-term overlap (§20.4: content, "
+                    "not title, is judged)")
                 borderline.append(s)
                 print(f"relevance: borderline {title[:70]} — "
                       f"{s['relevance_reason']}")
@@ -3985,6 +4146,7 @@ def screen_sources(field, topic, sources, api_key, model):
                 v2 = second.get(id(s))
                 if not (v2 and v2[0]):
                     stats["drop_disagreement"] += 1
+                    stats["disagreement_titles"].append(title)
                     reason2 = (v2[1] if v2 else
                                "no verdict from the second judge")
                     print(f"relevance: drop (judge disagreement) "
@@ -4228,6 +4390,106 @@ def send_funnel_dm(token, chat_id, topic, funnel, success, stage=None,
         return True
     except Exception as e:
         print(f"WARNING: funnel DM failed (ignored): {e}")
+        return False
+
+
+# --------------------------------------------------------------------------
+# Detailed source report (§20.7, Jupiter 2026-11-25: «بعد از این ریز
+# منابع و محتوای مرتبط رو پیدا کردی بنویس ببینم وضع چطوره») — after
+# sources and relevant content are found, the owner gets an ITEMISED
+# report, not just funnel counts: every counted source with its real
+# title, type/relation, how its full text was obtained, its in-text
+# keyword-hit count and (for primaries) which catalogue confirmed it;
+# then the near-misses — first-judge keeps that died as judge
+# disagreement. Strictly a read-only reporting layer: it changes no
+# screening or confirmation behaviour. Sent at the text-first gate
+# point, whether the gate passes OR fails; fail-soft like the funnel.
+# --------------------------------------------------------------------------
+
+def _source_type_label_fa(s):
+    """Persian type/relation label for the §20.7 report."""
+    if s.get("source_type") == "primary":
+        if s.get("primary_relation") == "about":
+            return "منبع اصلی — کتاب دربارهٔ موضوع"
+        return "منبع اصلی — اثر مؤلف/سند بنیادین"
+    if s.get("source_type") == "video":
+        return "ویدئو (پشتیبان — شمرده نمی‌شود)"
+    idx = (s.get("index") or "").strip()
+    return f"مقاله/منبع نمایه‌ای ({idx})" if idx else "مقاله/منبع نمایه‌ای"
+
+
+def build_detailed_source_report(topic, counted,
+                                 disagreement_titles=None):
+    """The §20.7 itemised report text (Persian). Pure builder —
+    mocked-testable, no I/O."""
+    lines = ["📚 گزارش ریز منابع و محتوای مرتبط (§20.7)",
+             f"موضوع: {topic}", ""]
+    counted = list(counted or [])
+    if counted:
+        lines.append(f"✅ منابع شمرده‌شده ({len(counted)}):")
+        for i, s in enumerate(counted, 1):
+            title = (s.get("title") or "(بدون عنوان)").strip()
+            lines.append(f"{i}. {title}")
+            mapped = (s.get("mapped_title") or "").strip()
+            if mapped and mapped != title:
+                lines.append(f"   • عنوانِ نقشهٔ اولیه: {mapped}")
+            lines.append(f"   • نوع: {_source_type_label_fa(s)}")
+            route = (s.get("fulltext_route") or "").strip()
+            if route:
+                lines.append(f"   • مسیر گرفتن متن کامل: {route}")
+            elif (s.get("fulltext_excerpt") or "").strip():
+                lines.append("   • مسیر گرفتن متن کامل: گزیدهٔ متن "
+                             "(مسیر ثبت نشده)")
+            else:
+                lines.append("   • متن کامل: گرفته نشد (چکیده مبنا "
+                             "بوده است)")
+            if s.get("passage_hits"):
+                lines.append(f"   • یافته‌های کلیدواژه در متن: "
+                             f"{s['passage_hits']}")
+            if s.get("source_type") == "primary":
+                via = (s.get("catalogue_via") or "").strip()
+                if via:
+                    lines.append(f"   • تأیید کاتالوگ: {via}")
+                else:
+                    lines.append("   • تأیید کاتالوگ: در رکورد ثبت "
+                                 "نشده")
+    else:
+        lines.append("✅ منابع شمرده‌شده: هیچ‌کدام — هیچ منبعی از "
+                     "دروازهٔ متن‌محور نگذشت.")
+    near = [t for t in (disagreement_titles or []) if t]
+    lines.append("")
+    if near:
+        lines.append(f"⚠️ نزدیک‌به‌قبول‌ها — داور اول نگه داشت، با "
+                     f"اختلاف دو داور حذف شد ({len(near)}):")
+        for t in near:
+            lines.append(f"• {t}")
+    else:
+        lines.append("⚠️ نزدیک‌به‌قبول‌ها (اختلاف دو داور): هیچ‌کدام")
+    return "\n".join(lines)
+
+
+def send_detailed_source_report_dm(token, chat_id, topic, counted,
+                                   disagreement_titles=None):
+    """Fail-soft: print the §20.7 report as log lines and DM it to
+    the requester (ARTICLE_CHAT_ID) as its own message(s), split
+    with the same 3900-char chunking as the funnel. Never raises,
+    never fails the run. Returns True if sent."""
+    text = build_detailed_source_report(topic, counted,
+                                        disagreement_titles)
+    for line in text.splitlines():
+        print(f"source-report: {line}")
+    try:
+        chat_id = (chat_id or "").strip()
+        if not chat_id or not token:
+            print("source-report DM skipped: no ARTICLE_CHAT_ID/token")
+            return False
+        for chunk in split_text(text, 3900):
+            tg_call("sendMessage", token,
+                    {"chat_id": chat_id, "text": chunk})
+        print(f"source-report DM sent to chat {chat_id}")
+        return True
+    except Exception as e:
+        print(f"WARNING: source-report DM failed (ignored): {e}")
         return False
 
 
@@ -4685,6 +4947,8 @@ def main():
                                         api_key, model,
                                         keywords=ft_keywords)
     _merge_funnel(funnel, sstats)
+    disagreement_titles = list(sstats.get("disagreement_titles")
+                               or [])
     progress_update(45, "🎯 گزینش منابع مرتبط")
 
     gate = text_first_gate(counted)
@@ -4717,6 +4981,8 @@ def main():
                                               api_key, model,
                                               keywords=ft_keywords)
         _merge_funnel(funnel, sstats2)
+        disagreement_titles += list(
+            sstats2.get("disagreement_titles") or [])
         verified = verified + verified2
         counted = counted + counted2
         print(f"wave 2: "
@@ -4751,6 +5017,11 @@ def main():
                       f"the topic) with passages extracted from its "
                       f"full text. Refusing to publish without the "
                       "primary text.")
+        # §20.7: the itemised source report goes out at the gate
+        # point whether the gate passes or fails — here it failed.
+        send_detailed_source_report_dm(
+            tg_token, os.environ.get("ARTICLE_CHAT_ID", ""), topic,
+            counted, disagreement_titles)
         send_funnel_dm(tg_token, os.environ.get("ARTICLE_CHAT_ID", ""),
                        topic, funnel, False, stage=stage)
         raise Fail(reason + " Try a broader or different topic.")
@@ -4812,6 +5083,11 @@ def main():
     send_suggestions_dm(tg_token, os.environ.get("ARTICLE_CHAT_ID", ""),
                         title, meta.get("title_candidates", []),
                         meta.get("next_topics", []))
+    # §20.7: the gate passed — the itemised source report goes to
+    # the requester alongside the funnel.
+    send_detailed_source_report_dm(
+        tg_token, os.environ.get("ARTICLE_CHAT_ID", ""), topic,
+        counted, disagreement_titles)
     # Funnel report (§16.3): every run ends with the quality funnel
     # in the requester's DM (and in the log).
     send_funnel_dm(tg_token, os.environ.get("ARTICLE_CHAT_ID", ""),
