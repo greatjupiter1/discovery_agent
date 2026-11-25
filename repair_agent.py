@@ -176,7 +176,12 @@ def fetch_run_log_text(repo, run_id):
     with zipfile.ZipFile(io.BytesIO(blob)) as zf:
         for name in sorted(zf.namelist()):
             if name.endswith(".txt"):
-                parts.append(zf.read(name).decode("utf-8", "replace"))
+                # §20.9: keep the step-file boundary in the bundle —
+                # classify_failure scopes its human-only credential
+                # scan to the build step's own section, which is only
+                # possible if the sections stay delimited.
+                parts.append(f"===== LOGFILE: {name} =====\n"
+                             + zf.read(name).decode("utf-8", "replace"))
     text = "\n".join(parts)
     if len(text) > 3_000_000:  # keep head + tail, drop the middle
         text = text[:500_000] + "\n...[log middle elided]...\n" \
@@ -259,6 +264,44 @@ def _lines_with(text, needle):
     return [ln for ln in text.splitlines() if needle in ln]
 
 
+# §20.9 — the human-only credential scan is scoped to the failed
+# workflow's OWN build-step log. The fetched bundle concatenates
+# every step log of the run (plus the whole-job 0_build.txt, which
+# repeats all of them): a credential-shaped string in any other
+# step's log — or a bare "403" digit run inside a timestamp on an
+# unrelated line — must never be read as a dead API key. (Run
+# 45696893163 was misclassified human-only exactly that way: the
+# only "403" in its bundle sat inside a "...4534038Z" timestamp on
+# a "keyword hits" line, while both brains returned real verdicts
+# all run.)
+_BUILD_STEP_HINTS = ("build and deliver", "generate topic proposals")
+_PROVIDER_HINTS = ("generativelanguage", "googleapis", "z.ai", "glm",
+                   "gemini", "openai", "groq", "openrouter",
+                   "sambanova", "cloudflare", "dashscope",
+                   "modelscope", "siliconflow", "api key", "apikey",
+                   "bearer", "authorization", "token")
+
+
+def _build_step_text(text):
+    """The build step's own section(s) of a log bundle assembled by
+    fetch_run_log_text. A bundle with no LOGFILE markers (hand-fed
+    logs, unit tests) is treated as one build log, as before. A
+    marked bundle with no recognisable build step yields "" — the
+    human-only scan then stays silent rather than guessing from
+    another step's output."""
+    if "===== LOGFILE: " not in text:
+        return text
+    sections = re.split(r"^===== LOGFILE: (.+?) =====$",
+                        text, flags=re.M)
+    picked = []
+    for i in range(1, len(sections) - 1, 2):
+        name, body = sections[i], sections[i + 1]
+        base = name.rsplit("/", 1)[-1].lower()
+        if "/" in name and any(h in base for h in _BUILD_STEP_HINTS):
+            picked.append(body)
+    return "\n".join(picked) if picked else ""
+
+
 def classify_failure(log_text, workflow_name=""):
     """Returns {klass, markers, target_file, line_numbers,
     functions}. klass is one of: human-only, code-defect, external,
@@ -269,28 +312,37 @@ def classify_failure(log_text, workflow_name=""):
            "target_file": None, "line_numbers": [], "functions": []}
 
     # --- 1) human-only: credentials / balance — never auto-repair.
+    # §20.9: scanned ONLY in the build step's own log section (see
+    # _build_step_text), never across the whole bundle.
+    btext = _build_step_text(text)
+    blow = btext.lower()
     human = []
-    if re.search(r"insufficient[ _]?(balance|funds|credit)", low) \
-            or "balance insufficient" in low:
+    if re.search(r"insufficient[ _]?(balance|funds|credit)", blow) \
+            or "balance insufficient" in blow:
         human.append("insufficient balance (HTTP 402 class)")
-    if re.search(r"(http|status|error|code)[^\n]{0,24}402\b", low) \
-            or "payment required" in low:
+    if re.search(r"(http|status|error|code)[^\n]{0,24}402\b", blow) \
+            or "payment required" in blow:
         human.append("HTTP 402 payment required")
-    if re.search(r"(http|status|error|code)[^\n]{0,24}401\b", low) \
-            or "401 client error" in low:
+    if re.search(r"(http|status|error|code)[^\n]{0,24}401\b", blow) \
+            or "401 client error" in blow:
         human.append("HTTP 401 unauthorized")
     for phrase in ("invalid api key", "api key not valid",
                    "api_key_invalid", "invalid_api_key",
                    "bad credentials", "token has been revoked",
                    "revoked token", "invalid authentication",
                    "authentication failed", "key is invalid"):
-        if phrase in low:
+        if phrase in blow:
             human.append(f"credential failure: {phrase}")
-    for ln in _lines_with(text, "403"):
+    for ln in _lines_with(btext, "403"):
         ll = ln.lower()
-        if any(w in ll for w in ("key", "token", "auth", "permission",
-                                 "generativelanguage", "z.ai", "glm",
-                                 "gemini", "openai", "api")):
+        # The 403 must be an actual HTTP status (not a digit run
+        # inside a timestamp or a count) AND sit in a credentialed
+        # provider-API context on the same line — the same per-line
+        # provider scoping the external-outage rule below uses.
+        status_shaped = re.search(
+            r"(http|status|error|code)[^\n]{0,24}403\b", ll) \
+            or "403 client error" in ll or "403 forbidden" in ll
+        if status_shaped and any(w in ll for w in _PROVIDER_HINTS):
             human.append("HTTP 403 on a credentialed API call")
             break
     if human:
