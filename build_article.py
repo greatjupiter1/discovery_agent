@@ -1442,8 +1442,8 @@ def build_source_map(field, topic, api_key, model):
                 confirmed.append(w)
             else:
                 print(f"source map (§20): DROPPED unconfirmed title "
-                      f"{w['title']!r} (not found in the IA / Google "
-                      "Books catalogue)")
+                      f"{w['title']!r} (not confirmed by any "
+                      "catalogue: IA / OpenLibrary / Google Books)")
         smap = {"primary_works": confirmed,
                 "keywords": _str_list("keywords", 12),
                 "name_variants": _str_list("name_variants", 6)}
@@ -3369,69 +3369,274 @@ def _ia_title_docs(title, rows=10):
     return (data.get("response") or {}).get("docs", []) or []
 
 
-def _catalogue_match(work, variant, doc_title, doc_creators):
-    """(confirmed, score): a catalogue doc confirms a mapped work
-    when the title score is >= 0.5 AND the match is substantive —
-    at least 2 shared title tokens, or the work's author is
-    corroborated by the doc's creators. (Run 45107999596 lesson: a
-    1-token title like 'India' was 'confirmed' by an unrelated
-    'Theatre in India'; token overlap alone is not evidence.)"""
-    score = _primary_title_score(doc_title, variant)
-    if score < 0.5:
-        return False, score
-    shared = _screen_tokens(variant) & _screen_tokens(doc_title)
-    if len(shared) >= 2:
-        return True, score
-    author_tokens = _screen_tokens(work.get("author"))
-    creator_text = " ".join(doc_creators or []).lower()
-    if author_tokens and any(t in creator_text for t in author_tokens):
-        return True, score
-    return False, score
+# ---------------------------------------------------------------------------
+# §20.3 (2026-11-25, run 45660280064 lesson): catalogue confirmation must
+# NOT depend on Google Books. That run dropped both mapped titles of
+# al-Biruni's Qanun — Google Books returned HTTP 429 (daily quota) all
+# run, and the old IA check searched title:(<the full long title>),
+# whose terms are ANDed by Lucene, so the real IA item (held under a
+# shorter mixed-script title) never matched. Confirmation now succeeds
+# when ANY independent no-key catalogue confirms the work:
+#   1. Internet Archive — several query forms (exact title field per
+#      variant, distinctive-keyword title search, creator + keywords),
+#      matched on normalised text (see _catalogue_norm);
+#   2. OpenLibrary — title+author search, same matching rule;
+#   3. Google Books — OPTIONAL corroboration only: its failure is
+#      logged fail-soft and can never block or be required.
+# The law is unchanged: a title confirmed by NO catalogue is still
+# dropped as catalogue-unconfirmed, and when NO catalogue answers at
+# all the work is kept unverified (fail-soft), exactly as before.
+# ---------------------------------------------------------------------------
+
+# Arabic letter unifications for catalogue matching: the same word is
+# catalogued with Arabic-script and Persian-script letters, teh
+# marbuta vs heh, alef forms, etc. Both sides are folded to one form.
+_CATALOGUE_ARABIC_FOLD = str.maketrans({
+    "ي": "ی",  # Arabic yeh -> Farsi yeh
+    "ك": "ک",  # Arabic kaf -> Farsi kaf
+    "ة": "ه",  # teh marbuta -> heh
+    "ؤ": "و",  # waw with hamza -> waw
+    "ئ": "ی",  # yeh with hamza -> yeh
+    "ى": "ی",  # alef maksura -> yeh
+    "أ": "ا",  # alef with hamza above -> alef
+    "إ": "ا",  # alef with hamza below -> alef
+    "آ": "ا",  # alef with madda -> alef
+    "ـ": "",        # tatweel dropped
+})
+
+# (Self-contained: this block sits before _SCREEN_STOPWORDS in the
+# file, so the generic words are repeated here.)
+_CATALOGUE_STOPWORDS = {
+    "the", "and", "for", "with", "from", "into", "over", "under",
+    "between", "among", "that", "this", "these", "those", "have",
+    "has", "are", "was", "were", "will", "would", "can", "could",
+    "its", "der", "die", "das", "und", "den", "des", "les", "une",
+    "est", "sur", "aux", "dans", "par", "qui", "que",
+    "al", "el", "il", "ibn", "ben", "bin", "abu", "von", "van",
+    "kitab", "book",
+}
+
+
+def _catalogue_norm(text):
+    """Normal form for catalogue matching: diacritics stripped (so
+    'Qānūn' = 'Qanun'), modifier letters (ʿ ʾ) dropped, Arabic letter
+    variants folded (ي/ی, ك/ک, ة/ه, alef forms), lowercased."""
+    t = _strip_diacritics(text or "")
+    t = re.sub(r"[ʿʾʻʼ'’]", "", t)
+    t = t.translate(_CATALOGUE_ARABIC_FOLD)
+    return t.lower()
+
+
+def _catalogue_tokens(text):
+    """Distinctive tokens of a title/author string in catalogue
+    normal form: word tokens of length >= 3, stopwords removed."""
+    return {t for t in re.findall(r"[^\W_]+", _catalogue_norm(text))
+            if len(t) >= 3 and t not in _CATALOGUE_STOPWORDS}
+
+
+def _tokens_match(a, b):
+    """Two normalised tokens match when equal, or when one is a
+    prefix of the other and both are at least 4 chars (covers
+    transliteration wobble like masudi / masudic, qanun / qanuni)."""
+    if a == b:
+        return True
+    if min(len(a), len(b)) >= 4:
+        return a.startswith(b) or b.startswith(a)
+    return False
+
+
+def _matched_tokens(want, got):
+    """The subset of `want` tokens that have a match in `got`."""
+    return {t for t in want if any(_tokens_match(t, g) for g in got)}
+
+
+def _catalogue_match(work, variant, doc_title, doc_creators,
+                     doc_identifier=""):
+    """(confirmed, score) — the §20.3 matching rule. Both sides are
+    compared in catalogue normal form. Let A = the variant's
+    distinctive title tokens, B = the doc title's tokens, shared =
+    A-tokens matched in B, overlap = |shared| / min(|A|, |B|).
+    The author is corroborated when any distinctive author token
+    matches the doc's creators, title or identifier (IA records often
+    carry no creator field and embed the author in the title itself).
+    Confirm when:
+      (1) overlap >= 0.6 AND (author corroborated OR >= 2 shared
+          tokens) — a strong title match; or
+      (2) author corroborated AND >= 2 shared tokens AND the shared
+          tokens are at least half of A — the catalogue's short title
+          against the map's long title (the Qanun case: the mapped
+          'Al-Qanun al-Masudi fi al-Hay'a wa al-Nujum' vs the IA
+          item's 'Al Qanun Al Masudi …').
+    (Run 45107999596 lesson, kept: a 1-token title like 'India'
+    matched on that token alone, without author corroboration, is
+    NOT evidence — 'Theatre in India' confirms nothing.)"""
+    a = _catalogue_tokens(variant)
+    b = _catalogue_tokens(doc_title)
+    if not a or not b:
+        return False, 0.0
+    shared = _matched_tokens(a, b)
+    overlap = len(shared) / min(len(a), len(b))
+    author_text = " ".join(doc_creators or []) + " " + \
+        (doc_title or "") + " " + (doc_identifier or "")
+    author_ok = bool(_matched_tokens(
+        _catalogue_tokens(work.get("author")),
+        _catalogue_tokens(author_text)))
+    if overlap >= 0.6 and (author_ok or len(shared) >= 2):
+        return True, overlap
+    if author_ok and len(shared) >= 2 and len(shared) * 2 >= len(a):
+        return True, overlap
+    return False, overlap
+
+
+def _ia_catalogue_docs(work):
+    """(docs, responded): Internet Archive catalogue docs for a mapped
+    work from SEVERAL query forms (§20.3), deduplicated by
+    identifier: the exact title field per title variant, a
+    distinctive-keyword title search per variant (Lucene ANDs the
+    terms of a full-title query, so a longer mapped title never
+    matched the catalogue's shorter one), and a creator + keywords
+    search. IA confirmation alone is sufficient — no other catalogue
+    is consulted when IA confirms."""
+    queries = []
+    variants = _title_variants(work)
+    for variant in variants:
+        cleaned = _lucene_clean(variant)
+        if cleaned:
+            queries.append("title:(" + cleaned + ")")
+    for variant in variants:
+        kws = [t for t in re.findall(r"[^\W_]+",
+                                     _lucene_clean(variant))
+               if len(t) >= 3
+               and t.lower() not in _CATALOGUE_STOPWORDS]
+        if len(kws) >= 2:
+            queries.append("title:(" + " OR ".join(kws[:6]) + ")")
+    author = _lucene_clean(work.get("author"))
+    if author:
+        surname = author.split()[-1]
+        kws = []
+        for variant in variants:
+            for t in re.findall(r"[^\W_]+", _lucene_clean(variant)):
+                if len(t) >= 3 and \
+                        t.lower() not in _CATALOGUE_STOPWORDS \
+                        and t not in kws:
+                    kws.append(t)
+        if kws:
+            queries.append("creator:(" + surname + ") AND title:("
+                           + " OR ".join(kws[:6]) + ")")
+    docs = {}
+    responded = False
+    for q in queries:
+        url = ("https://archive.org/advancedsearch.php?q="
+               + urllib.parse.quote(q)
+               + "&fl[]=identifier,title,creator&rows=10"
+                 "&output=json")
+        try:
+            data = http_json(url)
+            responded = True
+        except Exception as e:
+            print(f"NOTE: IA catalogue query unreachable ({e})")
+            continue
+        for doc in (data.get("response") or {}).get("docs", []) or []:
+            ident = str(doc.get("identifier") or "")
+            docs[ident or str(len(docs))] = doc
+    return list(docs.values()), responded
+
+
+def _openlibrary_docs(work):
+    """(docs, responded): OpenLibrary search.json docs for a mapped
+    work — a second independent no-key catalogue (§20.3). Each doc is
+    normalised to {'title': ..., 'creator': [...]}."""
+    title = (work.get("title") or "").strip()
+    author = (work.get("author") or "").strip()
+    if not title:
+        return [], False
+    url = ("https://openlibrary.org/search.json?title="
+           + urllib.parse.quote(title)
+           + "&author=" + urllib.parse.quote(author)
+           + "&limit=10&fields=title,author_name")
+    try:
+        data = http_json(url)
+    except Exception as e:
+        print(f"NOTE: OpenLibrary catalogue check unreachable for "
+              f"{title!r} ({e})")
+        return [], False
+    out = []
+    for doc in data.get("docs", []) or []:
+        out.append({"title": doc.get("title") or "",
+                    "creator": doc.get("author_name") or []})
+    return out, True
 
 
 def verify_work_in_catalogue(work):
-    """§20.2 — a mapped title is trusted only if the Internet Archive
-    catalogue (or, failing that, Google Books) actually holds a work
-    whose title matches one of the title variants. Returns
-    (confirmed, matched_title). A catalogue TRANSPORT failure keeps
-    the work (fail-soft, logged): an unreachable catalogue must not
-    silently delete a real book, but a catalogue that answers with no
-    match drops the title — the §19 lesson was a brain inventing or
+    """§20.3 — a mapped title is trusted only if an independent
+    catalogue actually holds a work matching one of the title
+    variants. Internet Archive and OpenLibrary are each sufficient on
+    their own; Google Books is optional corroboration whose failure
+    (HTTP 429 quota, timeout, anything) is logged fail-soft and NEVER
+    blocks a confirmation from IA or OpenLibrary. Returns
+    (confirmed, matched_title) and logs which catalogue confirmed.
+    A catalogue TRANSPORT failure everywhere keeps the work
+    (fail-soft, logged): an unreachable catalogue must not silently
+    delete a real book, but a catalogue that answers with no match
+    drops the title — the §19 lesson was a brain inventing or
     misnaming the key work."""
     title = (work.get("title") or "").strip()
     author = (work.get("author") or "").strip()
+    variants = _title_variants(work)
     responded = False
-    for variant in _title_variants(work):
-        try:
-            docs = _ia_title_docs(variant)
-            responded = True
-        except Exception as e:
-            print(f"NOTE: IA catalogue check unreachable for "
-                  f"{title!r} ({e})")
-            continue
-        for doc in docs:
+
+    # 1. Internet Archive (multi-form search; sufficient alone).
+    try:
+        ia_docs, ia_responded = _ia_catalogue_docs(work)
+        responded = responded or ia_responded
+        for doc in ia_docs:
             doc_title = doc.get("title") or ""
             creators = doc.get("creator") or []
             if isinstance(creators, str):
                 creators = [creators]
-            ok, _score = _catalogue_match(work, variant, doc_title,
-                                          creators)
+            for variant in variants:
+                ok, _score = _catalogue_match(
+                    work, variant, doc_title, creators,
+                    str(doc.get("identifier") or ""))
+                if ok:
+                    print(f"catalogue-confirmed via: archive.org — "
+                          f"{title!r} matched {doc_title!r}")
+                    return True, doc_title
+    except Exception as e:
+        print(f"NOTE: IA catalogue check failed for {title!r} ({e})")
+
+    # 2. OpenLibrary (sufficient alone).
+    ol_docs, ol_responded = _openlibrary_docs(work)
+    responded = responded or ol_responded
+    for doc in ol_docs:
+        for variant in variants:
+            ok, _score = _catalogue_match(
+                work, variant, doc.get("title") or "",
+                doc.get("creator") or [])
             if ok:
-                return True, doc_title
+                print(f"catalogue-confirmed via: openlibrary.org — "
+                      f"{title!r} matched {doc.get('title')!r}")
+                return True, doc.get("title")
+
+    # 3. Google Books — optional corroboration ONLY. Any failure is
+    # fail-soft and never required, never blocking.
     try:
         hits = search_google_books_primary(
             {"title": title, "author": author})
         responded = True
         for h in hits:
-            for variant in _title_variants(work):
+            for variant in variants:
                 ok, _score = _catalogue_match(
                     work, variant, h.get("title") or "",
                     h.get("authors") or [])
                 if ok:
+                    print(f"catalogue-confirmed via: google books — "
+                          f"{title!r} matched {h.get('title')!r}")
                     return True, h.get("title")
     except Exception as e:
         print(f"NOTE: Google Books catalogue check unreachable for "
-              f"{title!r} ({e})")
+              f"{title!r} ({e}); continuing without it (fail-soft)")
+
     if responded:
         return False, ""
     print(f"NOTE: no catalogue answered for {title!r}; keeping the "
