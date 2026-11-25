@@ -161,6 +161,16 @@ jobs:
             git config user.email "discovery-agent@users.noreply.github.com"
             git add runs
             git diff --cached --quiet || git commit -m "stage checkpoint: ${{ inputs.topic }}"
+            # The build rewrites tracked files mid-run (verify_cache.json
+            # is re-saved by every verification pass). On a SUCCESSFUL run
+            # the "Save progress" step above already committed those, but
+            # it is success-only — on a failed run they stay unstaged, and
+            # `git pull --rebase` then refuses with "You have unstaged
+            # changes" (run 45696893163: the checkpoint commit 9817c9a was
+            # stranded locally and runs/ never reached the remote).
+            # Those leftovers are commit-back byproducts owned by the
+            # "Save progress" step, never checkpoint data — drop them.
+            git checkout -- .
             for attempt in 1 2 3; do
               if git pull --rebase && git push; then
                 break
