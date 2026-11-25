@@ -3507,9 +3507,21 @@ def screen_sources(field, topic, sources, api_key, model):
             print(f"relevance: keep {title[:70]} — "
                   f"{s['relevance_reason']}")
         elif base and same_script and cov_body == 0.0:
-            stats["drop_irrelevant"] += 1
-            print(f"relevance: drop {title[:70]} — deterministic drop: "
-                  "no topic-term overlap in title or abstract")
+            if s.get("source_type") == "primary" and s.get("passages"):
+                # §20.1: a primary carrying extracted passages must
+                # never die in the deterministic drop — the passages
+                # ARE the relevance evidence. Route it to the LLM
+                # screen, which judges primaries on the excerpt.
+                s["relevance_reason"] = (
+                    "primary with extracted passages — sent to LLM "
+                    "screen despite zero topic-term overlap")
+                borderline.append(s)
+                print(f"relevance: borderline {title[:70]} — "
+                      f"{s['relevance_reason']}")
+            else:
+                stats["drop_irrelevant"] += 1
+                print(f"relevance: drop {title[:70]} — deterministic drop: "
+                      "no topic-term overlap in title or abstract")
         else:
             borderline.append(s)
     if borderline:
