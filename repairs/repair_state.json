@@ -1,0 +1,23 @@
+{
+ "version": 1,
+ "signatures": {
+  "6348cb56e3584ad1": {
+   "workflow": "Build Discovery article",
+   "klass": "code-defect",
+   "attempts": 1,
+   "escalated": false,
+   "history": [
+    {
+     "ts": "2026-11-25T20:14:43+00:00",
+     "run_id": "45682939343",
+     "action": "patch_failed",
+     "detail": "diff did not apply cleanly — discarded"
+    }
+   ],
+   "last_run_id": "45682939343",
+   "stop_stage": "گزینش منابع مرتبط و محتوادار",
+   "resume_project_id": null,
+   "resume_stage": null
+  }
+ }
+}
