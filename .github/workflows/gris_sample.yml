@@ -1,0 +1,124 @@
+name: Build GRIS sample project
+
+# GRIS Phase-0 sample (GRIS-sample-spec.md): one complete project —
+# topic -> evidence-backed article -> DOCX/PDF — on the Discovery
+# engine, plus the project manager, evidence matrix, claim checker,
+# exporter and supervisor modules in gris_sample.py.
+# On-demand only (workflow_dispatch). Its OWN concurrency group: a
+# GRIS run never cancels, and is never cancelled by, a discovery run.
+on:
+  workflow_dispatch:
+    inputs:
+      field:
+        description: "Field / discipline (e.g. Medicine, Mathematics, History)"
+        required: true
+        type: string
+      topic:
+        description: "Article topic (any language)"
+        required: true
+        type: string
+      language:
+        description: "Output language code (fa, en, ar, ...)"
+        required: false
+        default: "fa"
+        type: string
+      mode:
+        description: "Production mode (review = article)"
+        required: false
+        default: "review"
+        type: string
+      chat_id:
+        description: "Requesting user's Telegram chat id (progress + funnel DM)"
+        required: false
+        default: ""
+        type: string
+      article_category:
+        description: "Article category: ir | intl"
+        required: false
+        default: ""
+        type: string
+      article_type:
+        description: "Article type code: isc|res|promo|conf|review|isi|scopus|pubmed|ieee|intlconf"
+        required: false
+        default: ""
+        type: string
+      project_id:
+        description: "Project id (gris-NNNN). Empty = next free number; an existing id RESUMES that project from its checkpoints"
+        required: false
+        default: ""
+        type: string
+      llm_provider:
+        description: "LLM provider override: gemini | github | glm (empty = repo variable LLM_PROVIDER, else gemini)"
+        required: false
+        default: ""
+        type: string
+
+permissions:
+  contents: write
+  models: read
+
+concurrency:
+  # The GRIS sample's own queue — fully separate from discovery-*.
+  group: gris-sample
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install poppler-utils (PDF text extraction for the full-text bridge)
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
+
+      - name: Install yt-dlp (YouTube lecture transcripts, §20 support only)
+        run: pip install -q yt-dlp
+
+      - name: Install GRIS exporter dependencies (this workflow only)
+        run: pip install -q python-docx weasyprint
+
+      - name: Build and deliver the GRIS project (fail-closed)
+        env:
+          FIELD: ${{ inputs.field }}
+          TOPIC: ${{ inputs.topic }}
+          LANGUAGE: ${{ inputs.language }}
+          MODE: ${{ inputs.mode }}
+          PROJECT_ID: ${{ inputs.project_id }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          CHAT_ID: ${{ secrets.CHAT_ID }}
+          ARTICLE_CHAT_ID: ${{ inputs.chat_id }}
+          ARTICLE_CATEGORY: ${{ inputs.article_category }}
+          ARTICLE_TYPE: ${{ inputs.article_type }}
+          LLM_PROVIDER: ${{ inputs.llm_provider || vars.LLM_PROVIDER || 'gemini' }}
+          GH_MODELS_TOKEN: ${{ secrets.GH_MODELS_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GLM_API_KEY: ${{ secrets.GLM_API_KEY }}
+          GLM_MODEL: ${{ vars.GLM_MODEL }}
+          GLM_MAX_TOKENS: ${{ vars.GLM_MAX_TOKENS }}
+          LLM_CHAIN: ${{ vars.LLM_CHAIN }}
+        run: python gris_sample.py
+
+      - name: Save the project (commit projects/ + state back)
+        if: ${{ always() }}
+        run: |
+          git config user.name "discovery-agent"
+          git config user.email "discovery-agent@users.noreply.github.com"
+          git add projects state.json
+          if [ -f verify_cache.json ]; then git add verify_cache.json; fi
+          if [ -d fulltext ]; then git add fulltext; fi
+          git diff --cached --quiet || git commit -m "gris project: ${{ inputs.project_id || 'auto' }} — ${{ inputs.topic }}"
+          for attempt in 1 2 3; do
+            if git pull --rebase && git push; then
+              break
+            fi
+            if [ "$attempt" = "3" ]; then
+              echo "commit-back push failed after 3 attempts" >&2
+              exit 1
+            fi
+            sleep 5
+          done
