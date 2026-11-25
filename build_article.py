@@ -31,7 +31,7 @@ like HTTP error statuses.
 
 Inputs come from the environment (set by .github/workflows/discovery.yml):
   FIELD, TOPIC, LANGUAGE (default "fa"), MODE (default "review"),
-  GEMINI_MODEL (default "gemini-3.8-flash")
+  GEMINI_MODEL (default "gemini-3.5-flash")
   LLM_PROVIDER (default "gemini"; "github" selects GitHub Models,
   "glm" selects GLM on z.ai),
   GH_MODELS_MODEL (default "openai/gpt-4o"),
@@ -2684,7 +2684,7 @@ def _brain_model(name):
     if name == "github":
         return (os.environ.get("GH_MODELS_MODEL")
                 or GH_MODELS_DEFAULT_MODEL).strip()
-    return (os.environ.get("GEMINI_MODEL") or "gemini-3.8-flash").strip()
+    return (os.environ.get("GEMINI_MODEL") or "gemini-3.5-flash").strip()
 
 
 def llm_model():
@@ -3468,8 +3468,11 @@ def screen_sources(field, topic, sources, api_key, model):
     overlap decides the clear cases; a batched LLM call decides the
     borderline ones, and a borderline candidate is kept only if a
     SECOND judge — the next keyed brain in the chain, different from
-    the first — agrees. Every verdict is logged, and the fail-closed
-    bar is applied to the result."""
+    the first — agrees. If every different brain errors, the first
+    judge's brain is the logged availability fallback (§20.2); a
+    keep counts as unjudged only when all chain brains errored.
+    Every verdict is logged, and the fail-closed bar is applied to
+    the result."""
     stats = {"input": len(sources), "relevant": 0, "counted": 0,
              "drop_irrelevant": 0, "drop_tradition": 0,
              "drop_disagreement": 0, "drop_no_content": 0,
@@ -3536,25 +3539,40 @@ def screen_sources(field, topic, sources, api_key, model):
         # only if BOTH judges keep it.
         second_brain, second = None, {}
         if first_keeps:
-            candidates2 = [name for name in llm_chain()
-                           if name != first_brain
-                           and name in KNOWN_BRAINS
-                           and _brain_key_available(name, api_key)]
+            others2 = [name for name in llm_chain()
+                       if name != first_brain
+                       and name in KNOWN_BRAINS
+                       and _brain_key_available(name, api_key)]
+            # Fail-soft along the chain (§19) + availability
+            # fallback (§20.2): a pinned brain that errors (e.g.
+            # HTTP 429/503) no longer kills the first judge's
+            # keeps — the NEXT available chain brain judges
+            # instead. If EVERY different brain errors, the first
+            # judge's own brain is tried LAST as an availability
+            # fallback; its use is logged loudly, never silent.
+            # Only when every brain in the chain has genuinely
+            # been tried and errored does a keep count as
+            # unjudged, and the existing fail-closed disagreement
+            # handling applies.
+            candidates2 = list(others2)
+            if (first_brain in KNOWN_BRAINS
+                    and _brain_key_available(first_brain, api_key)):
+                candidates2.append(first_brain)
             if not candidates2:
-                print("second judge: unavailable (no other keyed "
-                      "brain in the chain) — first-judge verdicts "
+                print("second judge: unavailable (no keyed brain "
+                      "in the chain) — first-judge verdicts "
                       "stand")
             else:
-                # Fail-soft along the chain (§19): a pinned brain
-                # that errors (e.g. HTTP 503) no longer kills the
-                # first judge's keeps — the NEXT available chain
-                # brain judges instead. Only when EVERY candidate
-                # brain fails does a keep count as unjudged, and the
-                # existing fail-closed disagreement handling applies.
                 for cand_brain in candidates2:
-                    print(f"second judge: {cand_brain} reviews "
-                          f"{len(first_keeps)} borderline keep(s) of "
-                          f"first judge {first_brain}")
+                    if cand_brain == first_brain:
+                        print(f"second judge via fallback brain: "
+                              f"{cand_brain} (same provider as the "
+                              f"first judge — availability fallback: "
+                              f"every other chain brain failed)")
+                    else:
+                        print(f"second judge: {cand_brain} reviews "
+                              f"{len(first_keeps)} borderline keep(s) "
+                              f"of first judge {first_brain}")
                     raw2 = _llm_relevance_screen(
                         field, topic, first_keeps, api_key, model,
                         provider=cand_brain)
@@ -4192,7 +4210,7 @@ def main():
         article_type = "isi"
     language = (os.environ.get("LANGUAGE") or "fa").strip()
     mode = (os.environ.get("MODE") or "review").strip().lower()
-    model = (os.environ.get("GEMINI_MODEL") or "gemini-3.8-flash").strip()
+    model = (os.environ.get("GEMINI_MODEL") or "gemini-3.5-flash").strip()
     api_key = os.environ.get("GEMINI_API_KEY", "").strip()
     tg_token = os.environ.get("TELEGRAM_BOT_TOKEN", "").strip()
     chat_id = os.environ.get("CHAT_ID", "").strip()
