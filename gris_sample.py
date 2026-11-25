@@ -1071,6 +1071,8 @@ def stage_retrieval(ctx):
     counted, sstats = ba._quality_pipeline(
         field, topic, verified, api_key, model, keywords=ft_keywords)
     ba._merge_funnel(funnel, sstats)
+    disagreement_titles = list(sstats.get("disagreement_titles")
+                               or [])
     ba.progress_update(45, "🎯 گزینش منابع مرتبط")
     gate = ba.text_first_gate(counted)
     if not gate["ok"]:
@@ -1096,6 +1098,8 @@ def stage_retrieval(ctx):
             field, topic, verified2, api_key, model,
             keywords=ft_keywords)
         ba._merge_funnel(funnel, sstats2)
+        disagreement_titles += list(
+            sstats2.get("disagreement_titles") or [])
         verified = verified + verified2
         counted = counted + counted2
         print(f"gris wave 2: +{rstate['total_candidates'] - before} "
@@ -1107,6 +1111,18 @@ def stage_retrieval(ctx):
     funnel["drop_language_gate"] = rstate.get("lang_gate_dropped", 0)
     for k, v in funnel.items():
         project["funnel"][k] = v
+    # §20.7 mirror: the itemised source report is built at the gate
+    # point (pass OR fail), printed to the log and stored on the
+    # project; main() DMs it alongside the funnel. Read-only —
+    # changes no screening behaviour.
+    ctx["disagreement_titles"] = disagreement_titles
+    ctx["counted"] = counted
+    report = ba.build_detailed_source_report(
+        topic, counted, disagreement_titles)
+    project["source_report"] = report
+    ctx["source_report"] = report
+    for line in report.splitlines():
+        print(f"source-report: {line}")
     save_project(project, ctx["base_dir"])
     ctx["funnel"] = funnel
     ctx["verified_count"] = len(verified)
@@ -1344,6 +1360,10 @@ def stage_delivery(ctx):
         token, os.environ.get("ARTICLE_CHAT_ID", ""), title,
         ctx["meta"].get("title_candidates", []),
         ctx["meta"].get("next_topics", []))
+    # §20.7: itemised source report DM alongside the funnel.
+    ba.send_detailed_source_report_dm(
+        token, os.environ.get("ARTICLE_CHAT_ID", ""), ctx["topic"],
+        ctx.get("counted", []), ctx.get("disagreement_titles"))
     send_gris_funnel_dm(
         token, os.environ.get("ARTICLE_CHAT_ID", ""), ctx["topic"],
         project["funnel"], True,
@@ -1412,7 +1432,7 @@ def main():
     if article_type not in ba.TYPE_GUIDE:
         article_type = "isi"
     language = (os.environ.get("LANGUAGE") or "fa").strip()
-    model = (os.environ.get("GEMINI_MODEL") or "gemini-3.8-flash") \
+    model = (os.environ.get("GEMINI_MODEL") or "gemini-3.5-flash") \
         .strip()
     api_key = os.environ.get("GEMINI_API_KEY", "").strip()
     tg_token = os.environ.get("TELEGRAM_BOT_TOKEN", "").strip()
@@ -1469,6 +1489,9 @@ def main():
         stage = ctx.get("fail_stage") or project["stage"]
         if e.error_class == "human_only" and e.human_action:
             print(f"gris HUMAN ACTION NEEDED: {e.human_action}")
+        ba.send_detailed_source_report_dm(
+            tg_token, os.environ.get("ARTICLE_CHAT_ID", ""), topic,
+            ctx.get("counted", []), ctx.get("disagreement_titles"))
         send_gris_funnel_dm(tg_token,
                             os.environ.get("ARTICLE_CHAT_ID", ""),
                             topic, project["funnel"], False,
@@ -1481,6 +1504,9 @@ def main():
         project["status"] = "failed_closed"
         project["finished_at"] = now_iso()
         save_project(project)
+        ba.send_detailed_source_report_dm(
+            tg_token, os.environ.get("ARTICLE_CHAT_ID", ""), topic,
+            ctx.get("counted", []), ctx.get("disagreement_titles"))
         send_gris_funnel_dm(tg_token,
                             os.environ.get("ARTICLE_CHAT_ID", ""),
                             topic, project["funnel"], False,
