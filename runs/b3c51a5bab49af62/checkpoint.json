@@ -1,0 +1,231 @@
+{
+ "version": 1,
+ "signature": "b3c51a5bab49af62",
+ "status": "available",
+ "stage_reached": "screened",
+ "created_at": "2026-11-25T22:57:08Z",
+ "inputs": {
+  "field": "نجوم و ریاضیات در آثار ابوریحان بیرونی",
+  "topic": "اندازه‌گیری شعاع زمین به روش ابوریحان بیرونی در نندنه: بازسازی محاسبهٔ او در تحدید نهایات الأماکن و سنجش خطای آن در برابر مقدار امروزی",
+  "language": "fa",
+  "category": "intl",
+  "article_type": "isi",
+  "mode": "review"
+ },
+ "queries": [
+  "Biruni Earth radius Nandana",
+  "Biruni Earth diameter Nandana",
+  "Biruni size of Earth Nandana",
+  "Biruni Earth measurement Nandana",
+  "قياس شعاع الأرض نندنة",
+  "قياس قطر الأرض نندنة",
+  "حجم الأرض نندنة",
+  "قياس الأرض نندنة",
+  "بيروني نندنة",
+  "ابوریحان شعاع زمین نندنه",
+  "ابوریحان قطر زمین نندنه",
+  "اندازه زمین نندنه",
+  "ابوریحان اندازه زمین نندنه",
+  "ابوریحان نندنه",
+  "Biruni Erdradius Nandana",
+  "Biruni Erddurchmesser Nandana",
+  "Biruni Erdgroße Nandana",
+  "Biruni Erdmessung Nandana",
+  "Biruni Nandana",
+  "Biruni rayon de la Terre Nandana",
+  "Biruni diamètre de la Terre Nandana",
+  "Biruni taille de la Terre Nandana",
+  "Biruni mesure de la Terre Nandana",
+  "Бируни радиус Земли Нандана",
+  "Бируни диаметр Земли Нандана",
+  "Бируни размер Земли Нандана",
+  "Бируни измерение Земли Нандана",
+  "Бируни Нандана"
+ ],
+ "source_map": {
+  "primary_works": [
+   {
+    "author": "Abu Rayhan al-Biruni",
+    "title": "Kitab Tahdid Nihayat Al-amakin L-i-tashih Masatat Al-masakin",
+    "language": "Arabic",
+    "kind": "book",
+    "relation": "author",
+    "title_ar": "تحدید الأماکن",
+    "catalogue_via": "archive.org",
+    "catalogue_title": "Kitab Tahdid Nihayat Al-amakin L-i-tashih Masatat Al-masakin",
+    "catalogue_id": "Kitab_Tahdid_Nihayat",
+    "mapped_title": "Kitab Tahdid al-Amakin"
+   },
+   {
+    "author": "Abu Rayhan al-Biruni",
+    "title": "القانون المسعودي ج 2 ابي ريحان البيروني",
+    "language": "Arabic",
+    "kind": "book",
+    "relation": "author",
+    "title_ar": "القانون المسعودي",
+    "catalogue_via": "archive.org",
+    "catalogue_title": "القانون المسعودي ج 2 ابي ريحان البيروني",
+    "catalogue_id": "2_20210326_202103",
+    "mapped_title": "Kitab al-Qanun al-Mas'udi"
+   },
+   {
+    "author": "Abu Rayhan al-Biruni",
+    "title": "Kitab Fi Tah Qiq I Ma Lil Hind Or Al Birunis India Arabic",
+    "language": "English",
+    "kind": "book",
+    "relation": "author",
+    "title_ar": "تحديد نهايات الأماكن",
+    "catalogue_via": "archive.org",
+    "catalogue_title": "Kitab Fi Tah Qiq I Ma Lil Hind Or Al Birunis India Arabic",
+    "catalogue_id": "in.ernet.dli.2015.361250",
+    "mapped_title": "India"
+   },
+   {
+    "author": "Abu Rayhan al-Biruni",
+    "title": "القانون المسعودي ج 2 ابي ريحان البيروني",
+    "language": "English",
+    "kind": "book",
+    "relation": "author",
+    "title_ar": "القانون المسعودي",
+    "catalogue_via": "archive.org",
+    "catalogue_title": "القانون المسعودي ج 2 ابي ريحان البيروني",
+    "catalogue_id": "2_20210326_202103",
+    "mapped_title": "Mas'ud Canon"
+   },
+   {
+    "author": "H. Suter",
+    "title": "Die Mathematiker und Astronomen der Araber und ihre Werke",
+    "language": "German",
+    "kind": "book",
+    "relation": "about",
+    "title_ar": "",
+    "catalogue_via": "openlibrary.org",
+    "catalogue_title": "Die Mathematiker und Astronomen der Araber und ihre Werke"
+   }
+  ],
+  "keywords": [
+   "Tahdid al-Amakin",
+   "Nandana",
+   "Meridian Convergence",
+   "Earth's Radius",
+   "Indus Valley",
+   "Al-Biruni's Method"
+  ],
+  "name_variants": [
+   "al-Biruni",
+   "Biruni",
+   "Abu Rayhan",
+   "Abu Rayhan al-Biruni",
+   "Alberuni"
+  ]
+ },
+ "matrix": {
+  "core_keywords": [
+   "ابوریحان بیرونی",
+   "نندنه",
+   "تحدید نهایات الأماکن",
+   "Earth radius",
+   "Earth diameter",
+   "size of the Earth",
+   "مساحة الأرض",
+   "خطای اندازه‌گیری",
+   "محاسبه شعاع",
+   "بیرونی",
+   "Earth measurement"
+  ],
+  "name_variants": [
+   "ابوریحان بیرونی",
+   "البيروني",
+   "Biruni",
+   "Alberuni",
+   "Abu Rayhan al-Biruni",
+   "ابوریحان"
+  ]
+ },
+ "ft_keywords": [
+  "Tahdid al-Amakin",
+  "Nandana",
+  "Meridian Convergence",
+  "Earth's Radius",
+  "Indus Valley",
+  "Al-Biruni's Method",
+  "al-Biruni",
+  "Biruni",
+  "Abu Rayhan",
+  "Abu Rayhan al-Biruni",
+  "Alberuni",
+  "ابوریحان بیرونی",
+  "نندنه",
+  "تحدید نهایات الأماکن",
+  "Earth radius",
+  "Earth diameter",
+  "size of the Earth",
+  "مساحة الأرض",
+  "خطای اندازه‌گیری",
+  "محاسبه شعاع",
+  "بیرونی",
+  "Earth measurement",
+  "البيروني",
+  "ابوریحان"
+ ],
+ "funnel": {
+  "candidates": 45,
+  "verified": 39,
+  "with_content": 38,
+  "relevant": 2,
+  "counted": 2,
+  "drop_irrelevant": 37,
+  "drop_tradition": 0,
+  "drop_disagreement": 0,
+  "drop_no_content": 0,
+  "registry_matched": 1,
+  "primary_counted": 1,
+  "fulltext_counted": 2,
+  "drop_language_gate": 0
+ },
+ "disagreement_titles": [],
+ "verified_count": 39,
+ "counted": [
+  {
+   "title": "Kitab Tahdid Nihayat Al-amakin L-i-tashih Masatat Al-masakin",
+   "authors": [
+    "Muhammad b. Ahmad al-Biruni"
+   ],
+   "year": null,
+   "venue": "Internet Archive",
+   "doi": null,
+   "url": "https://archive.org/details/Kitab_Tahdid_Nihayat",
+   "abstract": "",
+   "source_type": "primary",
+   "primary_relation": "author",
+   "index": "Internet Archive",
+   "registry_match": "Internet Archive (digital_library, sources_registry.json)",
+   "fulltext": true,
+   "fulltext_route": "ia-passages",
+   "fulltext_excerpt": "inimum \n\n\nand the Maximum altitude of a circumpolar star as it crosses the \n\n\nlocal meridian, and consider the following cases: (a) If both \n\n\n8 altitudes are above the northern horizon, we find half (MS 48) \n\n\nthe difference between the altitudes, then add this to the lesser \naltitude, and the sum will be the latitude of the city. (b) If the \n\n\n_ altitudes are in different \n\n\n65 \n\n\n\" directions, we find half the sum of the coaltitudes, then add this \n\n\nto the lesser altitude, and the sum wili be the latitude of the \ncity. (c) If one of the altitudes is exactly ninety degrees, we \nfind half the co-altitude of the lesser, then add this to the lesser \naltitude, and the sum will be the latitude of the city; or we can \nadd half the lesser altitude to’one-eighth of a rotation, and the \nsum will be the latitude of the city. The proof of the last state- \n\n\nment is as follows: The ratio of AD in the third situation to a \nquarter of a rotation is as thé ratio of AE to one-eighth (of a \n\n\n36 \n\n\nTAHDID AL-AMAKIN \n\n\nrotation), and the ratio of the difference between AD and a \nquarter to the difference between AE and an eighth is as the \n\n\nratio of a quarter to an eighth. Therefore DG, the second differ- © \n\n\nence, is equal to twice the first difference, but the second \ndifference is the lesser altitude and the first difference is the \nexcess of the altitude of the pole over one eighth of a rotation. \n\n\nFurther, if we add the lesser altitude to the greater, then \n\n\nDETERMINATIONS OF LATITUDES 37 \n\n\n2 half this sum will be the latitude of the city. Proof: Take TK \n\n\nequal ta GD then GDK is the sum of the two altitudes. But ET \nand TK are'equal to ED and DG. So half of GTKEK, therefore, is \n\n\nGE, the latitude of the city. (MS 49) \n\n\n66 \n\n\nOne of the observations carried out along these lines and \nknown to me is that which was made in Baghdad by Muhammad \nand Ahmad the sons of Miisa bin Shakir. They observed the \nmaximum and minimum meridian altitudes of the eighteenth \nstar in the Great Bear - it is the star at the root of the Bear’s tail \n\n\n_ and next to the Banat of the Great Na‘sh. They found that its \n\n\nmaximum altitude is 60;46°, and its minimum altitude is 635°. \nIf we subtract the lesser from the greater, there remains 54341 °. \n\n\nNow, half of: what remains is 27320,30\", and if we add this to the \nlesser altitude we get 33325,30°, which is the latitude of Baghdad. \n\n\nThey (the sons of Miisa) also observed at Baghdad the \n\n\n; nineteenth star in the Great Bear - it is (MS 50) the second of \n\n\nthe two Stars, next. to the Banat Na‘sh, and on the left hind \nshank of the Bear. They found that its maximum altitude is \n63313°, and its minimum altitude is 3;45°. So the sum of the \n\n\naltitudes is 66;58°, and half this sum is 333;29°, which is the \n_ latitude of Baghdad. \n\n\nThey also observed at Baghdad, the twenty-sixth star in \n\n\nthe Great Bear, at the middle of its tail - it is the middle star \nB of the Ban§&t, and is adjacent to the star, As-Suha. They found \nthat its maximum altitude is 62;3°, and its minimum altitude is \n\n\n458 ° (4348). If we add the sitrudes we get 66351 °, and half this \n\n\n__ sum is 33;25,30 °, which is the latitude of Baghdad. \n\n\nI found in some manuscripts that the maximum altitude of \n\n\n: this star is 625 313°. \n\n\n67 \n\n\na it follows from this that the latitude must be 33330,30°. However, \n\n\nsuch a minute difference may be undetectable by observational \n\n\ninstruments, and it may be a copyist’s error. No dates were given \n\n\nto these observations in the original manuscripts, but I suppose \n\n\nthey were made about the year two hundred forty-eight of the \n\n\n38 \n\n\nTAHDID AL-AMAKIN \n\n\nHijra, which is the year two hundred thirty-two of the Persians. \nGod knows best. \nIf the star observed is one of those that rise to a maximum \n\n\naltitude at transit, and if it does not pass through a least altitude, - \n\n\nas it declines westwards, but touches the horizon as it crosses the \n\n\nmeridian, (MS 51) then half that maximum altitude is the latitude \n\n\nA TA ; \n| \n- 8B \n6D GO \n\n\nFigure 2 \n\n\nof the city, if the transit occurs between the zenith and the north \npoint. This is illustrated in the first two parts of the figure (Fig.z). \n\n\n__ the star at any three \n\n\no arbitrary times. However the wider the intervals Cae, then \nare, the more reliable will be the result of the observation. Let Z, \n| Hyand 1 be the star’s (MS 53). positions in its daily path at the \n3 _ three chosen times. We collect the three heads of the rods in free \n\nie pivots at E and, at each chosen time, we fix one of the rods in. the \n\n\nDETERMINATIONS OF LATITUDES 39 \n\n\n9 But if it (transits) on the south side, as in the third part of the \n\n\nfigure, then GE is half of GAT, and GAT is the sum of GA, a \nquadrant,:and. AT, the complement of the altitude, in order to \nobtain, in the third part, the celestial equator, which is MO. So \n\n\nOG will be the complement of the latitude of the city. But OG is \nequal to TM and MB is the complement of the latitude of the \n_ city. So TM and MB are equal. Hence if we take half the altitude \n' TB, we get MB, the colatitude, and AM, the cop) erent of the \n: colatitude, gives us the latitude itself. \n\n\n-The:computation is as follows: If the transit is:not between \n\n\n____ the zenith and the south point, then half the altitude is equal to \nthe latitude of the city. If on the other hand, the transit is between - \n\n\nthe zenith and the south point, and if the co-altitude is added to \n\n\n: “ninety, or the altitude is deducted from one hundred and eighty, \n_then ‘half the result, in either PERragon will give the ee \n\n\nof the city. \n68 (MS 52) \n\n\nIf we can never find a star that is always visible, and-whose \nparallel does not intersect the horizon, then we are on the equator. \nAs evidence of that, when a star transits at the zenith, its rising on \n\n\nme right and its setting on the left are actually on the diameter. \n\n\n_ If the star observed is one of those whose daily paths inter- \n\n\nsect the horizon, ‘I mean that it has a rising point in the east and a \n\n_ setting point in the west, and since the position of the-observer - \ncan be regarded as the center of the Whole, so let it be E (in \n_ Fig.3); and let BG be the meridian line, ABD the star’s daily \n_ path, and AGD the line of intersection of its plane with that of the \n\n\nhorizon. Let us prepare, of any solid material we like, three \nStraight and equal rods: EK, EL, and EM, and let us observe \n\n\n69 ae ee \n\n\n40 \n\n\nI2 \n\n\n15 \n\n\n18 \n\n\n21 \n\n\nTAHDID AL-AMAKIN \n\n\nline of sight of that same star, either by placing the observer’s eye \nstraight along on the rod or, as usual, by the use of two perforated \nvisors. If we do that, EK will be collinear with KZ, EL with LH, \nEM with MT, and the three rods will be generators on the surface \nof the cone whose vertex.is the center of the Whole and whose \nbase is on the circumference of the parallel. Because the rods are \nof equal length, their tips, I mean K, L, M, will be on the circum- \nference of a circle wh\n\n[...]\n\n103 \n\n\n“of Dha al-Qa‘da, three hundred eighty-four of the Hijra, \n\n\nAsiman day, 27 of Adhar month, year three hundred sixty-three \nof Yazdigerd. It was 3035335 °. He also obtained it (the altitude) \n\n\n“after the solstice, at midday on Monday, Anirin day, 30 of \n_ Adhar month (as) 30353,32°. From that, he deduced that the \n“solstice had occurred slightly before midnight on Sunday. \n\n\nThen he wanted to determine the altitudes of the two \n\n\n: solstices, and although he had not obtained until then the mean \nand variable motions of the sun and the position of the apogee, \nhe knew that the available data for these in the zijes of the \n\n\nmoderns do not contradict empirical reality, particularly if he \n\n\nwanted to use them for minute arcs. So he sought the summer \nsolstice; he found that the interval between it and midday of \nthat Saturday is twelve hours, and that the sun’s motion in that \nsituation was approximately 0;28,36°, (MS 95) according to \n\n\n12 \n\n\n+S) \n\n\n18 \n\n\nIz \n\n\n5 \n\n\n18 \n\n\n72 : TAHDID AL-AMAKIN \n\n\nal-Battini’s zij. Next, he sought the winter solstice; he found \nthat the interval between it and midday of the preceding Friday \nwas thirty-six hours, and that the sun’s motion in that situation \nwas 133148 °. \n\nLet the circle ABE (Fig.rr) represent the ecliptic, and \nthe points G and E be the solstitial points, G for the summer \npoint, and E for the winter point. We join the diameter GE, and \nwe suppose that A is the point whose altitude was observed on \nSaturday, and B the point for Sunday. Because the altitudes are \nequal, the arc AG is equal to the arc GB empirically. AG is the \narc, 0328,36°, which he obtained. Also, let D be the point whose \naltitude was observed on Friday, H (the point observed) on \nMonday, and K the midpoint of the arc \n\n\n104 \n\n\nHD. Because the altitude of H is less than the altitude of D, the \npoint H is nearer to the solstice, and KH, which is half DH, is \nequal to 1;31,48 °. Now, the difference between the altitudes of D \nand H, which is three seconds, is equal to the difference between \ntheir declinations, and so, if the declination at H differs by three \nseconds, then the sun must have moved five minutes, according \nto the motions tabulated in the (above-) mentioned zij. \n\nWith E as pole and ED as radius, we draw the arc DT. \nTherefore T is the point whose declination, altitude, and dis- \nplacement from the solstice are.respectively equal to those of \npoint D. Hence the difference (MS 96) between the declinations \nof the points H and T is equal to three seconds, and the arc HT \nis five minutes. If it (HT) is added to arc KH the sum amounts \nto 1336,48 9, which is arc KT. He took this to be the displacement \nof T from the.first .of. Capricorn, I: mean. E. That is not so, \nbecause the required arc TE is part of KT. But KE is half of HT, \nbecause the ratio of DE to DT is as the ratio of DK to DH, which \nis the ratio of a half. Therefore, alternando et dividendo, the \nratio of KE to KT’ is the ratio of a half. Hence either he should \nadd TH to twice HK ‘to get the.sum TKD, and then take half \nof it to get the required displacement ET, or he should add half \nof TH to KH, and thereby he would get an identical result. If \nhe performs one of the two operations, he would obtain 13;34,18 ° \n\n\nOBLIQUITY OF THE ECLIPTIC 73 \n\n\ninstead of 1;36,48 °. \n105 \n\n\nAs he took that amount (13;36,48°) for the arc ET, he then \n\n\nfound the difference between it and the arc AG and obtained \n\n\n138,12 °, because by drawing AM parallel to GE (we can see that)» \n\n\n“MT is the difference between ET and AG. Also, since the \naltitude of T is equal to that of D, and the arc TM is known, then \n\n\nthe difference between the declinations of T and M is 030,32,30°. \nSo he diminished by it the altitude of T, which is that of D, and \nthere remained 30;53,2,30°, which is the altitude of M, whose \n‘displacement from the winter solstice E (MS 97) is equal to the \n\n\n-- displacement of A from G, the summer solstice. He called the \n“altitude of M the adjusted lesser altitude, and that of A the \n\n\nadjusted bigger altitude. The difference between them iS 47345375 \n\n\n30°, according to his derivation. But, as I have pointed out, he \n\n\nmade a careless mistake in working out this result, and if his \ncomputation failed it is because the adjusted lesser altitude is \ndifferent from what he set out to determine, although the \ndifference is an insensible amount. \n\n\n74 oe TAHDID AL-AMAKIN \n\n\nFurther, Let HG (Fig. 12) be an arc of the meridian circle \n\n\nwhich is twice \n\n\neso, \n\n\nae : : ion \nto lines which lie in this plane. Now, KS is the sine of HK, SE \n\n\n106 \n\n\nthe maximum declination in magnitude, and let E be the center \nof the sphere. We join H to E, and G to H, and we suppose that \nH represents the summer solstice, and G the winter one. We \nerect (orthogonal to) the meridian circle a great circle through \neach one of the two points H and G. ZH is Part of the ecliptic and \nthe summer solstice is on it at H. ZG also is part of",
+   "passages": true,
+   "passage_hits": 120,
+   "mapped_title": "Kitab Tahdid al-Amakin",
+   "catalogue_via": "archive.org",
+   "catalogue_title": "Kitab Tahdid Nihayat Al-amakin L-i-tashih Masatat Al-masakin",
+   "catalogue_id": "Kitab_Tahdid_Nihayat"
+  },
+  {
+   "title": "Biruni's Measurement of the Earth",
+   "authors": [
+    "Alberto Gomez Gomez"
+   ],
+   "year": 2023,
+   "venue": "International Journal of Science and Research (IJSR)",
+   "doi": "10.21275/sr23326005322",
+   "url": "https://doi.org/10.21275/sr23326005322",
+   "abstract": "The peak from which Biruni measured the Earth is pinpointed; his measurements are shown to tally with the geographical features of the landscape around the peak.Mathematics shows what measurements he is likely to have taken, and his famous formula is fully derived.Also, an appendix is given for those who wish to measure mountains by themselves and follow in Biruni's footsteps.",
+   "index": "OpenAlex",
+   "fulltext": true,
+   "fulltext_route": "unpaywall",
+   "fulltext_excerpt": "International Journal of Science and Research (IJSR)\nISSN: 2319-7064\nSJIF (2022): 7.94\n\nBiruni's Measurement of the Earth\nAlberto Gomez Gomez1\n1Unaffiliated\n\nEmail: agg29@ou.ac.uk,. algomgom@gmail.com\n\nAbstract\nThe peak from which Biruni measured the Earth is pinpointed; his measurements are shown to tally with the\ngeographical features of the landscape around the peak. Mathematics shows what measurements he is likely to have\ntaken, and his famous formula is fully derived. Also, an appendix is given for those who wish to measure mountains\nby themselves and follow in Biruni’s footsteps.\nKeywords: Biruni, Nandana, Earth’s radius, Baghanwala, Masudic Canon, Hakimite Tables, al-Mamun, Salt Range, Sine Law\n\n1. Introduction\nAbu Rayhan (Muhammad ibn Ahmad) al-Biruni\nwas born in Kath, capital of Khwarezm (the region\nof the Amu Darya delta), in modern Khiva, on\nSeptember 4, 973 (362-12-03 AH), and died in\nGhazni, Khorasan, on December 13, 1048 (44007-04 AH).1 He was a well-travelled Persian sage\nwho spoke fluent Persian, Arabic, Turkish, Sanskrit,\nGreek, Hebrew, Syrian, and several other local languages in whose literatures he was also well versed.\nNot only did he possess ‘all the well known books\non astronomy written within the area extending\nfrom the Mediterranean Sea to the Bay of Bengal, including all the Greek, Indian, and Muslim\nauthors from Spain to Egypt’ (Biruni, 1956:A13;\nAhmad, 2010:171), but he also wrote prolifically\non all branches of knowledge, like cartography,\ngeography, ethnography, history, philosophy, mathematics, astronomy, and science in general, a total\nof about 180 works, some sadly lost to us now (EI2,\n1979:A1237). Chief among these is his Masudic\nCanon, an encyclopaedia of astronomy he dedicated\nto Sultan Masud, who, delighted with the sage’s\naccomplishment, presented him with an elephantload of silver! To everyone’s amazement, Biruni\nrefused it, pleading that he could not bear to abuse\nthe generosity of someone who had already shown\nhim more kindnesses than he felt he deserved (Siraj,\n1975:343-4).\n1Some think that, according to the solar calendar, the Muslim date\n440 AH should be taken to mean AD 1050 (EI2, 1979:A1236, and\nEncyclopaedia of World Bibliography, 1973:A578\n\nOf his many contributions to the good of humanity, it is hard to decide which is the most important,\nand certainly it is not in the scope of a short paper\nlike this to do justice to the vastness of his genius.\nSo, it is as a matter of personal choice that the\nauthor decided to deal here with just one of these:\nthe fact that he measured the Earth with an unprecedented precision, not equalled in the West until\nthe 16th century (Norhudzaev, 1973). You may\nfind the author is rather critical sometimes, for,\nin Biruni’s own teachings, it is the truth that we\nmust seek and speak, even when it goes against\nus. His value for the Earth’s radius (6335.725 km)\nwas the result of having solved a complex geodesic\nequation, as we will see. But to fully understand\nthe whole story, we must know something about its\nbackground and about the early Islamic measures\nthen (and herein) used: these were exactly those\nof ancient Mesopotamia, where ‘each mile was a\nthird of a farsang, or 4000 cubits, called ‘black’\nin Iraq, each of which equalled 24 digits’ (Biruni,\n1934:208; Wright, 1934:119; Mercier, 1993:177).\nThat is, one farsang (5916 m) equalled three miles,\none mile (1972 m) equalled 4000 cubits, and one\n(black) cubit (493 mm) equalled twenty-four digits.\nNote the connection with the Roman mile (1479 m)\nof 3000 cubits (each of 493 mm).\n2. Early attempts\nThe story begins before Biruni, when Sultan alMamun ordered two teams of surveyors to measure\nthe Earth. They did so by departing from a place in\n\nVolume 12 Issue 3, March 2023\nwww.ijsr.net\nLicensed Under Creative Commons Attribution CC BY\nPaper ID: SR23326005322\n\nDOI: 10.21275/SR23326005322\n\n1535\n\n\fInternational Journal of Science and Research (IJSR)\nISSN: 2319-7064\nSJIF (2022): 7.94\n\nthe desert of Sinjad, nineteen farsangs from Mosul\nand forty-three from Samarra, heading north and\nsouth respectively, and both determining the length\nof one degree of latitude to be somewhere between\n56 and 57 Arabic miles (Ali et al., 1967:178-80).\nAmong the several extant accounts of this survey, Habash al-Hasib (Langermann, 1985:108-28)\nquotes at length from a direct account from Khalid:\nThe Commander of the Faithful, al-Mamun,\nwished to know the size of the Earth. He inquired\ninto this and found that Ptolemy mentioned in\none of his books that the girth of the Earth is so\nand so many thousands of stades. He asked the\ncommentators about the meaning of stade, and\nthey differed about the meaning of this. Since he\nwas not told what he wanted, he directed Khalid\nibn Abd al-Malik al-Marwarrudhi, Ali bin Isa\nal-Asturlabi [from his surname, evidently an\ninstrument maker], and Ahmad ibn al-Bukhturi\nal-Dhari [from his surname, the Surveyor] with\na group of surveyors and skilled artisans,\nincluding carpenters and brass makers, who were\nto maintain the instruments they needed. He led\nthem to a place, which he chose in the desert of\nSinjar. From there, Khalid and his party headed\nfor the North Pole of the Little Bear, and Ali and\nAhmad and their party headed to the South Pole.\nThey proceeded until they found that the height\nof the Sun at noon had increased (or differed) by\none degree from the noon height they had taken\nat the place from which they had separated, after\nsubtracting from it the Sun’s declination along\nthe path of the outward journey. They put arrows\nthere. Then they returned to the arrows, testing\nthe measurement a second time, and so found\nthat one degree of the Earth was 56 miles, of\nwhich one mile is 4000 black cubits. This is the\ncubit adopted by al-Mamun for the measurement\nof cloths, surveying of fields, and the distribution\n\nSind ibn Ali reports that al-Mamun ordered that\nhe and Khalid ibn Abd al-Malik al-Marwarrudhi\nshould measure one degree of the great circle of\nthe Earth’s surface. ‘We left together,’ he says,\n‘for this purpose.’ He gave the same order to Ali\nibn I\n\n[...]\n\ns of a degree, and therefore\ndoes not allow us to use mathematics this time\nto find out whether he averaged it out of several\nmeasurements or not. Perhaps the prevailing poor\nvisibility forced him to be satisfied with fewer measurements, or perhaps he had some other reason for\nthe figure he gave.\n\nDOI: 10.21275/SR23326005322\n\n1539\n\n\fInternational Journal of Science and Research (IJSR)\nISSN: 2319-7064\nSJIF (2022): 7.94\n\nFigure 3: The plain is not perfectly flat. It slopes unevenly away to the south. For illustrative purposes, heights and\ndistances are not to scale nor is the Earth’s curvature shown. Between about 26 and 28 km south of the 533 m high\npeak, the plain rises to about 211 or 212 m above the sea. Relative to this area, our peak stands 3211/2 m (or 652\ncubits) high.\n\nBy the formula in Figure 4, the author found\nthat the apparent dip 𝜃 of the horizon from this\nmountain (that is, taking into account ray-bending at\nmean air conditions)7 is about 32′ , which is almost\nthe same as Biruni reports. Care must be taken to\nprovide the formula with the right mountain height\nℎ for this problem, which is neither 533 m above\nsea level (we’ll consider this one later for sport)\nnor Biruni’s 3211/2 m above the plain’s top grounds,\nbut 340 m above the farthest visible point on the\nhorizon (which is about 72 1/2 km from our peak and\nabout 193 m above sea level). 32′ is close to Biruni’s\nfigure, but not quite. At first sight, a difference of\njust a couple of minutes seems negligible, but it\nis hardly so, and this is one of the drawbacks of\nBiruni’s method: that it is so dependent on taking\nthe dip angle with such hair splitting accuracy, that\njust a minute of a degree results in a difference\nof hundreds of kilometres for the computed Earthradius, not to mention the difficulty in taking such\nan angle with any reliable accuracy at all!8 Let us\npay more attention to Biruni’s own words (Biruni,\n1956:2:530; Ali et al., 1967:188):\nI changed to another way owing to having found\nin a region in India a mountain peak facing\ntoward a wide flat plain whose flatness served as\nthe smooth surface of the sea. Then on its peak I\ngauged the intersection of heaven and Earth [the\nhorizon] in the prospect, and I found it by an\ninstrument to incline from the East-West line\n7Mean air conditions are taken to be 15◦ C of temperature, 1013.25\nmb of pressure, 6.49◦ C/km of lapse rate, 0% of relative humidity, and\n450 ppm of CO2 content.\n8The main difficulties arise from the ever-changing air conditions and\nfrom the limitations of human eyesight.\n\n[southern astronomical horizon] a little less than\n1/31/4of a degree, and I took it as 34 ′. I derived\nthe height of the mountain taking the summit in\ntwo places, and I found it to be 652 1/20 cubits.\n\nSo he took the dip as ‘a little less than 1/31/4 of\na degree’ and rounded it down to 34 ′. But a little\nless than 1/31/4 of a degree should round up to 35′ .\nWhy 34 ′ and not 35′ ? There is just one minute\nof difference, but one minute that makes all the\ndifference: 34 ′ got him closer to Mamun’s value\nthan 35′ or 33′ . Certainly, Mamun’s value served\nhim as a reference all the time, and the difference\nbetween 32′ , 33′ , 34′ , or 35′ is so tiny that he might\nindeed have believed in earnest that 34′ must be\nthe right angle his instrument was reading. Had he\nchosen a different dip, he would have gone wrong\nby hundreds of kilometres. It is only by chance,\ntherefore, that the compensating features of the\nlucky scenario chosen led him to a figure so close\nto the truth! Even his own measurements do lead\nto a value slightly worse than Mamun’s, should the\ncosine mistake alone be corrected! (By the way, note\nthat the little 1/31/4 detail suggests that his instru - ment was accurate to 5 minutes of a degree.)\nScientifically speaking, Biruni’s method leads\nto results infected by ray bending when applied to\nother scenarios. For example, as mentioned above,\nin the completely imaginary case that our 533 m\nmountain looked south onto the sea (which is just an\nimagined scenario), the apparent (refracted) dip of\nthe horizon would be about 40′22′′ (by the equation\nin Figure 4). With these data, Biruni’s formula\ngives an Earth-radius (for Nandana’s latitude) of\n7734 km, which is too large by about 6/5 due to ray\n\nVolume 12 Issue 3, March 2023\nwww.ijsr.net\nLicensed Under Creative Commons Attribution CC BY\nPaper ID: SR23326005322\n\nDOI: 10.21275/SR23326005322\n\n1540\n\n\fInternational Journal of Science and Research (IJSR)\nISSN: 2319-7064\nSJIF (2022): 7.94\n\nbending. His celebrated method, nevertheless, bears\nthe immortal originality of saving a lot of walking\nthrough deserts and, provided we take accurate\nmeasurements and compensate for ray bending, it\ncertainly does correctly yield the Earth’s radius!\n(See Figure 4.)9\n\nFigure 4: Biruni’s method leads to results infected by ray\nbending. Yet, provided you allow for this and take precise\nmeasurements, it certainly yields the Earth’s radius!\n\nTo be fair to Biruni, it must be said that he was\nnot just lucky. Clearly, he picked his landscape\nmost carefully after testing his method on several\nplaces, noting the disparity of the results, and finally\npicking the one that best matched that of Mamun’s\nteams (see Figure 5). It is to his credit that he openly\nregarded his own method as a curious complement\nto their work, accepting their result as more reliable, because, as he said (Biruni, 1956; Mercier,\n1993:183), ‘Their instrument was more refined, and\nthey took greater pains in its accomplishment.’\n7. Concluding notes\n\nknew this was the one! After drawing the new\nprofile and doing the same intuitive subtraction, a\nperfect match to Biruni’s number was found! All\nthat remained was to make sense of it all.\nThe reader is invited to suggest new ideas, easier\nwordings for the difficult concepts expressed in\nthis paper, and new mathematical approaches to\nreveal Biruni’s actual ins",
+   "passages": true,
+   "passage_hits": 74
+  }
+ ]
+}
