@@ -275,6 +275,58 @@ check("(ix) a non-failure run is skipped entirely",
       res["action"] == "skipped" and calls["dispatch"] == []
       and calls["commit"] == [])
 
+# (x) §20.9: human-only credential scan is scoped to the build
+# step's own log section, and a 403 must be a real HTTP status in a
+# provider-API context (regression: run 45696893163 was classified
+# human-only on a "403" digit run inside a timestamp).
+BUNDLE_403_ELSEWHERE = (
+    "===== LOGFILE: 0_build.txt =====\n"
+    "2026-11-25T21:35:17.4534038Z fulltext v2: unpaywall passages "
+    "for 'Hybrid Grey Wolf' (74 keyword hits)\n"
+    "===== LOGFILE: build/6_Build and deliver the article "
+    "(fail-closed).txt =====\n"
+    "2026-11-25T21:35:17.4534038Z fulltext v2: unpaywall passages "
+    "for 'Hybrid Grey Wolf' (74 keyword hits)\n"
+    "WARNING: brain glm failed attempt (1/3): HTTP 429 Too Many "
+    "Requests\n"
+    "FAILED (fail-closed): All brains failed: chain exhausted\n"
+    "===== LOGFILE: build/4_Install poppler-utils (PDF text "
+    "extraction).txt =====\n"
+    "curl: HTTP 403 Forbidden from generativelanguage.googleapis."
+    "com token check\n")
+cls = ra.classify_failure(BUNDLE_403_ELSEWHERE,
+                          "Build Discovery article")
+check("(x1) 403 outside the build step + timestamp phantom is "
+      "NOT human-only", cls["klass"] != "human-only")
+check("(x2) that bundle still classifies by its build-step "
+      "content (transient)", cls["klass"] == "transient")
+
+BUNDLE_403_IN_BUILD = (
+    "===== LOGFILE: build/6_Build and deliver the article "
+    "(fail-closed).txt =====\n"
+    "WARNING: brain gemini failed attempt (1/3): HTTP 403 "
+    "Forbidden — generativelanguage.googleapis.com: API key not "
+    "valid\n"
+    "FAILED (fail-closed): All brains failed\n"
+    "===== LOGFILE: build/9_Save stage checkpoint (resume "
+    "support, §20.6).txt =====\n"
+    "checkpoint fine\n")
+cls = ra.classify_failure(BUNDLE_403_IN_BUILD,
+                          "Build Discovery article")
+check("(x3) genuine credentialed 403 in the build step is "
+      "human-only", cls["klass"] == "human-only")
+
+BUNDLE_401_IN_BUILD = (
+    "===== LOGFILE: build/6_Build and deliver the article "
+    "(fail-closed).txt =====\n"
+    "WARNING: brain glm failed attempt (1/3): HTTP 401 "
+    "Unauthorized (api.z.ai)\n"
+    "FAILED (fail-closed): All brains failed\n")
+cls = ra.classify_failure(BUNDLE_401_IN_BUILD,
+                          "Build Discovery article")
+check("(x4) genuine 401 from the brain API in the build step "
+      "is human-only", cls["klass"] == "human-only")
+
 failed = [n for n, ok in PASS if not ok]
 print(f"\n{len(PASS) - len(failed)}/{len(PASS)} checks passed")
 if failed:
