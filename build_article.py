@@ -3561,6 +3561,122 @@ def _ia_catalogue_docs(work):
     return list(docs.values()), responded
 
 
+def _has_arabic_script(text):
+    """True when the string carries Arabic-script characters
+    (Arabic + Persian blocks)."""
+    return any("؀" <= ch <= "ۿ" for ch in (text or ""))  # U+0600..U+06FF
+
+
+def _ia_arabic_docs(work):
+    """(docs, responded) — §20.8: Internet Archive docs from GENERAL
+    (non-fielded) queries over the Arabic-script title variants.
+    Live-verified 2026-11-26 against the Qanun item
+    (al-qanun-al-masudi-biruni-muhammad-ibn-ahmad, creator field
+    EMPTY, a multi-work collection): the Latin title-field forms
+    return numFound=0 and the Arabic title-FIELD query
+    title:(القانون المسعودي) returns 13 docs but the real item
+    ranks below the engine's rows=10 window, while the general
+    query القانون المسعودي بيروني returns numFound=4 with the item
+    inside, and the bare Arabic title returns numFound=18 — so the
+    general query is run with rows=50 (the whole small result set)
+    and deduplicated by identifier. IA's fielded index simply does
+    not surface this class of item (creator-less, mixed-script,
+    collection items) the way its general index does."""
+    queries = []
+    for variant in _title_variants(work):
+        if not _has_arabic_script(variant):
+            continue
+        cleaned = _lucene_clean(variant)
+        if cleaned and cleaned not in queries:
+            queries.append(cleaned)
+    docs = {}
+    responded = False
+    for q in queries:
+        url = ("https://archive.org/advancedsearch.php?q="
+               + urllib.parse.quote(q)
+               + "&fl[]=identifier,title,creator&rows=50"
+                 "&output=json")
+        try:
+            data = http_json(url)
+            responded = True
+        except Exception as e:
+            print(f"NOTE: IA Arabic catalogue query unreachable ({e})")
+            continue
+        for doc in (data.get("response") or {}).get("docs", []) or []:
+            ident = str(doc.get("identifier") or "")
+            docs[ident or str(len(docs))] = doc
+    return list(docs.values()), responded
+
+
+def _ia_slug_candidates(work):
+    """§20.8: IA identifier-slug candidates derived from the Latin
+    title variants — lowercase, diacritics stripped, non-alphanumeric
+    runs folded to single hyphens ('Al-Qanun al-Mas'udi' ->
+    'al-qanun-al-masudi'). IA identifiers ARE title slugs, usually
+    with the author's surname appended, so the candidates are: the
+    full slug, its 4/3/2-token prefixes, and the 4-token prefix and
+    full slug with the author surname appended. Prefix queries
+    (identifier:<slug>*) then find the real item even when no title
+    search surfaces it."""
+    surname = ""
+    author = _strip_diacritics(work.get("author") or "")
+    parts = [p for p in re.split(r"[^A-Za-z0-9]+", author) if p]
+    if parts:
+        surname = parts[-1].lower()
+    slugs = []
+    for variant in _title_variants(work):
+        if _has_arabic_script(variant):
+            continue
+        folded = _strip_diacritics(variant).lower()
+        folded = re.sub(r"['’ʿʾʻʼ]", "", folded)  # Mas'udi -> masudi
+        toks = [t for t in re.split(r"[^a-z0-9]+", folded) if t]
+        if not toks:
+            continue
+        full = "-".join(toks)
+        cands = [full]
+        for n in (4, 3, 2):
+            if len(toks) > n:
+                cands.append("-".join(toks[:n]))
+        base = "-".join(toks[:4]) if len(toks) >= 2 else full
+        if surname and len(surname) >= 3:
+            cands.append(base + "-" + surname)
+            if full != base:
+                cands.append(full + "-" + surname)
+        for c in cands:
+            if len(c) >= 5 and c not in slugs:
+                slugs.append(c)
+    return slugs[:8]
+
+
+def _ia_identifier_docs(work):
+    """(docs, responded) — §20.8: Internet Archive docs from
+    IDENTIFIER-pattern prefix queries (identifier:<slug>*), used
+    when the title searches returned nothing usable. Live-verified
+    2026-11-26: identifier:al-qanun-al-masudi* returns numFound=2
+    including the real Qanun item; identifier:al-qanun* returns 6
+    including it. A hit here is only a CANDIDATE — the caller
+    applies the same title-matching rules to the doc's real title
+    (and identifier) before anything is confirmed."""
+    docs = {}
+    responded = False
+    for slug in _ia_slug_candidates(work):
+        q = "identifier:" + slug + "*"
+        url = ("https://archive.org/advancedsearch.php?q="
+               + urllib.parse.quote(q)
+               + "&fl[]=identifier,title,creator&rows=10"
+                 "&output=json")
+        try:
+            data = http_json(url)
+            responded = True
+        except Exception as e:
+            print(f"NOTE: IA identifier query unreachable ({e})")
+            continue
+        for doc in (data.get("response") or {}).get("docs", []) or []:
+            ident = str(doc.get("identifier") or "")
+            docs[ident or str(len(docs))] = doc
+    return list(docs.values()), responded
+
+
 def _openlibrary_docs(work):
     """(docs, responded): OpenLibrary search.json docs for a mapped
     work — a second independent no-key catalogue (§20.3). Each doc is
@@ -3590,19 +3706,81 @@ EXISTENCE_FETCH_CAP = 128 * 1024  # §20.4: bounded djvu fetchability probe
 EXISTENCE_PROBE_MAX = 3           # §20.4: at most this many IA items probed
 
 
+# §20.8: tokens too generic to carry an existence confirmation.
+# The §20.4 rule (author corroborated + >= 1 shared distinctive
+# token) proved too loose live (GRIS retest run 45685919581): the
+# brain's garbled Tahdid title 'Tahdid al-Amanat li-Tahqiq
+# al-Aqalim' was existence-confirmed against al-Biruni's INDIA —
+# the only shared token was 'tahqiq', a generic genre word (a
+# "tahqiq" is any critical edition / investigation) — and two more
+# wrong books were confirmed the same way ('The History of the
+# Exact Sciences in Islam' -> 'Studies in tudor history' via
+# 'history'; 'The Measurement of the Earth in the Time of
+# al-Biruni' -> 'in time of earthquake' via 'time'). A token in
+# this set therefore never counts toward the §20.8 threshold:
+# genre/form words (tahqiq, kitab, book, treatise, works,
+# introduction, studies), broad field words (history, science,
+# sciences) and other near-universal title words (time, earth,
+# world, life, art, commentary...). 'kitab'/'book' are also in
+# _CATALOGUE_STOPWORDS; they are repeated here so this set is
+# self-contained.
+_CATALOGUE_WEAK_TOKENS = {
+    "tahqiq", "tahqiqat", "history", "science", "sciences",
+    "scientific", "book", "books", "kitab", "kutub", "introduction",
+    "studies", "study", "time", "earth", "world", "life", "art",
+    "arts", "treatise", "treatises", "works", "work", "commentary",
+    "notes", "essays", "essay", "letters", "manual", "guide",
+    "principles", "theory", "practice", "general", "complete",
+    "collected", "selected", "volume", "volumes", "part", "parts",
+    "first", "second", "third", "new", "old", "great", "short",
+}
+
+
+def _distinctive_shared_tokens(work, doc_title, doc_identifier=""):
+    """§20.8: the DISTINCTIVE title tokens shared between ANY title
+    variant of the mapped work and the catalogue doc — its real
+    title OR its identifier (IA identifiers are title slugs:
+    'al-qanun-al-masudi-biruni-...' carries qanun + masudi).
+    A shared token counts only when it is not a weak/generic token
+    (see _CATALOGUE_WEAK_TOKENS) and not one of the author's own
+    name tokens — author corroboration is a separate requirement
+    and must not double-count as title evidence (otherwise any
+    same-author book sharing one generic word would 'confirm')."""
+    got = _catalogue_tokens(doc_title)
+    if doc_identifier:
+        got = got | _catalogue_tokens(
+            str(doc_identifier).replace("-", " ").replace("_", " "))
+    if not got:
+        return set()
+    author_tokens = _catalogue_tokens(work.get("author"))
+    shared = set()
+    for variant in _title_variants(work):
+        shared |= _matched_tokens(_catalogue_tokens(variant), got)
+    return {t for t in shared
+            if t not in _CATALOGUE_WEAK_TOKENS
+            and t not in author_tokens}
+
+
 def _catalogue_existence_match(work, doc_title, doc_creators,
                                doc_identifier=""):
-    """§20.4 existence rule (CONTENT-OVER-TITLE law): a catalogue
-    record counts as evidence that the mapped work EXISTS when the
-    AUTHOR is corroborated (any distinctive author token matches the
-    doc's creators, title or identifier) AND at least ONE distinctive
-    title token of ANY title variant is shared with the doc's title.
-    The title's exact form is irrelevant — catalogues hold the same
-    work under different titles, transliterations and scripts, and
-    Jupiter's law is that the title must not decide a book's fate.
-    The 1-token-alone guard is preserved: without author
-    corroboration a shared token confirms nothing ('India' vs
-    'Theatre in India')."""
+    """§20.4 existence rule (CONTENT-OVER-TITLE law), TIGHTENED by
+    §20.8: a catalogue record counts as evidence that the mapped
+    work EXISTS when the AUTHOR is corroborated (any distinctive
+    author token matches the doc's creators, title or identifier)
+    AND at least TWO DISTINCTIVE title tokens are shared between
+    any title variant and the doc's real title or identifier
+    (see _distinctive_shared_tokens — weak/generic tokens like
+    'tahqiq', 'history', 'time' never count, and neither do the
+    author's own name tokens). The title's exact form stays
+    irrelevant — catalogues hold the same work under different
+    titles, transliterations and scripts, and Jupiter's law is
+    that the title must not decide a book's fate. The Qanun passes
+    via qanun + masudi (Latin title/identifier) and القانون +
+    المسعودي (Arabic title); the garbled-Tahdid-vs-India case
+    fails: its only shared token is the weak 'tahqiq'. The
+    1-token-alone guard is preserved and strengthened: without
+    author corroboration nothing confirms ('India' vs 'Theatre in
+    India')."""
     author_text = " ".join(doc_creators or []) + " " + \
         (doc_title or "") + " " + (doc_identifier or "")
     author_ok = bool(_matched_tokens(
@@ -3610,13 +3788,10 @@ def _catalogue_existence_match(work, doc_title, doc_creators,
         _catalogue_tokens(author_text)))
     if not author_ok:
         return False
-    b = _catalogue_tokens(doc_title)
-    if not b:
+    if not _catalogue_tokens(doc_title) and not doc_identifier:
         return False
-    for variant in _title_variants(work):
-        if _matched_tokens(_catalogue_tokens(variant), b):
-            return True
-    return False
+    return len(_distinctive_shared_tokens(
+        work, doc_title, doc_identifier)) >= 2
 
 
 def _ia_retrievable_copy(work, ia_docs):
@@ -3679,17 +3854,36 @@ def verify_work_in_catalogue(work):
     identifier are recorded on the work dict (catalogue_via /
     catalogue_title / catalogue_id) so the real title becomes the
     citation identity downstream. A work with NO real copy or record
-    anywhere is still dropped — invented works still die."""
+    anywhere is still dropped — invented works still die.
+
+    §20.8 (2026-11-26, the Qanun lesson): the IA item for
+    al-Biruni's Qanun EXISTS (identifier
+    al-qanun-al-masudi-biruni-muhammad-ibn-ahmad, creator field
+    empty, a multi-work collection) yet every Latin title-field
+    query returned numFound=0, the Arabic title-field query ranked
+    it below the rows window, and OpenLibrary/Google Books could
+    not confirm it either — so both mapped titles were dropped
+    while the book sat in the archive. Two more IA routes now run
+    before a work can be dropped: a GENERAL search over the
+    Arabic-script title variants, and an IDENTIFIER-pattern
+    prefix search from slugs derived from the Latin variants —
+    both live-verified to return the Qanun item; their hits are
+    candidates judged by the same matching rules. And the §20.4
+    existence rule is tightened: it now needs >= 2 DISTINCTIVE
+    shared title tokens (weak tokens like 'tahqiq'/'history' and
+    the author's own name tokens never count), after the GRIS
+    retest existence-confirmed three WRONG books on one generic
+    token each."""
     title = (work.get("title") or "").strip()
     author = (work.get("author") or "").strip()
     variants = _title_variants(work)
     responded = False
 
-    # 1. Internet Archive (multi-form search; sufficient alone).
-    try:
-        ia_docs, ia_responded = _ia_catalogue_docs(work)
-        responded = responded or ia_responded
-        for doc in ia_docs:
+    def _confirm_from_ia_docs(docs, via):
+        """§20.3 title-match over one pool of IA docs; on a match,
+        record the confirming route + the doc's REAL title and
+        identifier on the work and return the real title."""
+        for doc in docs:
             doc_title = doc.get("title") or ""
             creators = doc.get("creator") or []
             if isinstance(creators, str):
@@ -3699,28 +3893,64 @@ def verify_work_in_catalogue(work):
                     work, variant, doc_title, creators,
                     str(doc.get("identifier") or ""))
                 if ok:
-                    work["catalogue_via"] = "archive.org"
+                    work["catalogue_via"] = via
                     work["catalogue_title"] = doc_title
                     work["catalogue_id"] = \
                         str(doc.get("identifier") or "")
-                    print(f"catalogue-confirmed via: archive.org — "
+                    print(f"catalogue-confirmed via: {via} — "
                           f"{title!r} matched {doc_title!r}")
-                    return True, doc_title
+                    return doc_title
+        return ""
+
+    def _confirm_from_copy(copy_doc, via):
+        doc_title = copy_doc.get("title") or ""
+        work["catalogue_via"] = via
+        work["catalogue_title"] = doc_title
+        work["catalogue_id"] = str(copy_doc.get("identifier") or "")
+        print(f"catalogue-confirmed via: {via} — {title!r} exists "
+              f"as {doc_title!r} [{work['catalogue_id']}] with a "
+              "fetchable full text (§20.4 existence rule, §20.8 "
+              "tightened)")
+        return doc_title
+
+    # 1. Internet Archive (multi-form search; sufficient alone).
+    try:
+        ia_docs, ia_responded = _ia_catalogue_docs(work)
+        responded = responded or ia_responded
+        hit = _confirm_from_ia_docs(ia_docs, "archive.org")
+        if hit:
+            return True, hit
+        # 1a. §20.8: general (non-fielded) search over the
+        # Arabic-script title variants — IA's fielded index does
+        # not surface creator-less mixed-script collection items
+        # (the Qanun case) but its general index does.
+        ar_docs, ar_responded = _ia_arabic_docs(work)
+        responded = responded or ar_responded
+        hit = _confirm_from_ia_docs(
+            ar_docs, "archive.org (arabic title)")
+        if hit:
+            return True, hit
         # 1b. §20.4 existence: a real RETRIEVABLE copy confirms the
         # work even when no title form matches the §20.3 thresholds —
         # the copy's content will be judged, not its title.
-        copy_doc = _ia_retrievable_copy(work, ia_docs)
+        copy_doc = _ia_retrievable_copy(work, ia_docs + ar_docs)
         if copy_doc is not None:
-            doc_title = copy_doc.get("title") or ""
-            work["catalogue_via"] = "archive.org (retrievable copy)"
-            work["catalogue_title"] = doc_title
-            work["catalogue_id"] = \
-                str(copy_doc.get("identifier") or "")
-            print(f"catalogue-confirmed via: archive.org "
-                  f"(retrievable copy) — {title!r} exists as "
-                  f"{doc_title!r} [{work['catalogue_id']}] with a "
-                  "fetchable full text (§20.4 existence rule)")
-            return True, doc_title
+            return True, _confirm_from_copy(
+                copy_doc, "archive.org (retrievable copy)")
+        # 1c. §20.8: identifier-pattern search — only when the
+        # title routes above found nothing usable. The hits are
+        # candidates: the same §20.3 matching (and, for the copy
+        # probe, the tightened §20.8 existence rule) decides.
+        id_docs, id_responded = _ia_identifier_docs(work)
+        responded = responded or id_responded
+        hit = _confirm_from_ia_docs(
+            id_docs, "archive.org (identifier)")
+        if hit:
+            return True, hit
+        copy_doc = _ia_retrievable_copy(work, id_docs)
+        if copy_doc is not None:
+            return True, _confirm_from_copy(
+                copy_doc, "archive.org (identifier)")
     except Exception as e:
         print(f"NOTE: IA catalogue check failed for {title!r} ({e})")
 
