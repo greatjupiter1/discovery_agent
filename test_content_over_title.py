@@ -43,12 +43,22 @@ FIELD = "نجوم و ریاضیات در آثار ابوریحان بیرونی"
 # ---------------------------------------------------------------------------
 # §20.4 (i)/(ii): existence-based catalogue confirmation
 # ---------------------------------------------------------------------------
-# The brain garbled the mapped title; the catalogue holds the work
-# under a completely different title form, by the same author, and
-# the IA item's djvu text FETCHES. §20.3's overlap thresholds would
-# reject this (shared tokens: only 'qanun'); §20.4 must confirm it.
+# The brain's mapped title is a long descriptive form of the work;
+# the catalogue holds it under a different, shorter title form, by
+# the same author, and the IA item's djvu text FETCHES. §20.3's
+# overlap thresholds reject this (shared tokens qanun+masudi are
+# only 2 of the variant's 8, so both branches fail); the §20.4
+# existence route must confirm it.
+# §20.8 UPDATE (2026-11-26): this fixture previously used the title
+# "Biruni's Lost Treatise on Qanun Secrets XYZ", which shares only
+# ONE distinctive token ('qanun') with the real copy. That asserted
+# the OLD loose §20.4 existence rule (>= 1 shared token), which
+# live-confirmed wrong books in the GRIS retest; §20.8 tightened
+# the rule to >= 2 DISTINCTIVE shared tokens, so the fixture now
+# carries qanun + masudi while still failing §20.3.
 GARBLED_WORK = {"author": "Abu Rayhan al-Biruni",
-                "title": "Biruni's Lost Treatise on Qanun Secrets XYZ"}
+                "title": "Qanun al-Masudi — a handbook of astronomy "
+                         "in ten treatises from medieval Ghazna"}
 REAL_COPY_DOC = {
     "identifier": "al-qanun-al-masudi-biruni-muhammad-ibn-ahmad",
     "title": "Al Qanūn Al Masʿūdī القانون المسعودي "
