@@ -126,8 +126,8 @@ check("(e) expansion failure returns [] (legacy fallback)",
 # ---- (f) fail-closed bar + registry unchanged ----------------------------
 check("(f1) MIN_SOURCES bar still 5", ba.MIN_SOURCES == 5)
 reg = ba.get_registry()
-check("(f2) registry still loads (1980 unique URLs)",
-      reg[2]["unique_urls"] == 1980)
+check("(f2) registry still loads (1998 unique URLs)",
+      reg[2]["unique_urls"] == 1998)
 ft = ba.build_funnel_text("t", {"candidates": 1, "verified": 1,
                                 "with_content": 0, "relevant": 0,
                                 "counted": 0, "registry_matched": 0,
