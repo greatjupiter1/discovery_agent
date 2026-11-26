@@ -24,9 +24,10 @@ need = {"id", "title", "author", "language", "kind", "source_platform",
         "source_url", "date_verified", "chars", "text_file"}
 check("every item carries the manifest schema",
       all(need <= set(i) for i in items))
-check("shelf holds the four Biruni primaries + two articles",
+check("shelf holds the Biruni primaries (Qanun in all 3 volumes) + two articles",
       {i["work_id"] for i in items} ==
-      {"tahdid-amakin", "qanun-masudi-vol1", "tahqiq-ma-lil-hind",
+      {"tahdid-amakin", "qanun-masudi-vol1", "qanun-masudi-vol2",
+       "qanun-masudi-vol3", "tahqiq-ma-lil-hind",
        "athar-al-baqiya", "biruni-measurement-of-the-earth",
        "scientific-heritage-of-biruni"})
 check("every item is <=200 KB (the fulltext storage cap)",
@@ -43,9 +44,10 @@ check("repo-record items are the two articles + Tahqiq",
 check("primary books are kind 'primary book'",
       all(i["kind"] == "primary book" for i in items
           if i["work_id"] in ("tahdid-amakin", "qanun-masudi-vol1",
+                              "qanun-masudi-vol2", "qanun-masudi-vol3",
                               "tahqiq-ma-lil-hind", "athar-al-baqiya")))
 total = sum(i["bytes"] for i in items)
-check("shelf total is the recorded ~2.9 MB", 2_500_000 < total < 3_500_000)
+check("shelf total is the recorded ~4.4 MB", 4_000_000 < total < 4_800_000)
 
 # ------------------------------------------------------------- loader
 shelves = ba.load_shelves()
