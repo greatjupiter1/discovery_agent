@@ -2,13 +2,14 @@
 """Offline tests for §43: the SEARCH_SCOPE environment variable.
 "full" (default) is today's behaviour, unchanged; "new" restricts
 the candidate search to ONLY the searchers added in the newest
-build wave (§§32–49) — the §41 shelf plus the new items:
+build wave (§§32–50) — the §41 shelf plus the new items:
 search_shelf, search_university_lectures (§32), search_ensani
 (§34), search_jihs (§36), search_iran_math (§37),
 search_tajik_journals (§38), search_core (§42), search_ganjeh
 (§46), search_ablibrary (§46), search_najaf (§46),
 search_qdl_images (§47), search_loc_images (§47),
-search_islamweb (§48), search_rafed (§49). No network:
+search_islamweb (§48), search_rafed (§49),
+search_ketabonline (§50). No network:
 every searcher is replaced by a recording stub (a tripwire —
 the assertions read the call log, so a forbidden searcher
 cannot slip through silently), and the verify-cache I/O is
@@ -52,7 +53,8 @@ NEW_NAMES = ["search_shelf", "search_university_lectures",
              "search_tajik_journals", "search_core",
              "search_ganjeh", "search_ablibrary", "search_najaf",
              "search_qdl_images", "search_loc_images",
-             "search_islamweb", "search_rafed"]
+             "search_islamweb", "search_rafed",
+             "search_ketabonline"]
 
 
 class scoped_env:
@@ -85,8 +87,8 @@ for value, want in ((None, "full"), ("full", "full"),
               ba.search_scope() == want
               and pt.search_scope() == want)
 
-# --- 2. the new-only set: exactly the §§32–49 searchers -------
-check("NEW_ONLY_SEARCHERS is exactly the 14 newest searchers",
+# --- 2. the new-only set: exactly the §§32–50 searchers -------
+check("NEW_ONLY_SEARCHERS is exactly the 15 newest searchers",
       ba.NEW_ONLY_SEARCHERS == [ba.search_shelf,
                                 ba.search_university_lectures,
                                 ba.search_ensani, ba.search_jihs,
@@ -96,7 +98,8 @@ check("NEW_ONLY_SEARCHERS is exactly the 14 newest searchers",
                                 ba.search_ablibrary, ba.search_najaf,
                                 ba.search_qdl_images,
                                 ba.search_loc_images,
-                                ba.search_islamweb, ba.search_rafed]
+                                ba.search_islamweb, ba.search_rafed,
+                                ba.search_ketabonline]
       and [s.__name__ for s in ba.NEW_ONLY_SEARCHERS] == NEW_NAMES)
 check("every new-only searcher is in SEARCHERS and WAVE1",
       all(s in ba.SEARCHERS and s in ba.WAVE1_SEARCHERS
@@ -114,10 +117,10 @@ with scoped_env(None):
           and ba.scoped_searchers(ba.WAVE1_SEARCHERS)
           == ba.WAVE1_SEARCHERS)
 with scoped_env("new"):
-    check("new scope: SEARCHERS filters to the 14, order kept",
+    check("new scope: SEARCHERS filters to the 15, order kept",
           ba.scoped_searchers(ba.SEARCHERS)
           == ba.NEW_ONLY_SEARCHERS)
-    check("new scope: WAVE1 filters to the same 14",
+    check("new scope: WAVE1 filters to the same 15",
           ba.scoped_searchers(ba.WAVE1_SEARCHERS)
           == ba.NEW_ONLY_SEARCHERS)
     check("new scope: Crossref-only order filters to empty",
@@ -155,7 +158,7 @@ def tripwire_wave1(scope):
 
 
 log_new = tripwire_wave1("new")
-check("new mode wave 1: ONLY the 14 new searchers ran",
+check("new mode wave 1: ONLY the 15 new searchers ran",
       sorted(set(log_new)) == sorted(NEW_NAMES)
       and len(log_new) == len(NEW_NAMES))
 check("new mode wave 1: Crossref top-up never ran",
@@ -191,7 +194,7 @@ def tripwire_wave2(scope):
 
 
 log_w2 = tripwire_wave2("new")
-check("new mode wave 2: IA/Anna's skipped, only the 14 ran",
+check("new mode wave 2: IA/Anna's skipped, only the 15 ran",
       sorted(set(log_w2)) == sorted(NEW_NAMES))
 
 # --- 5. tripwire: the §19 primary lane stands down ------------
