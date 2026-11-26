@@ -5,7 +5,7 @@
    "workflow": "Build Discovery article",
    "klass": "code-defect",
    "attempts": 2,
-   "escalated": false,
+   "escalated": true,
    "history": [
     {
      "ts": "2026-11-25T20:14:43+00:00",
@@ -18,9 +18,15 @@
      "run_id": "45708051338",
      "action": "patch_failed",
      "detail": "diff did not apply cleanly — discarded"
+    },
+    {
+     "ts": "2026-11-26T14:41:08+00:00",
+     "run_id": "45802869465",
+     "action": "escalated",
+     "detail": "تلاش‌های قبلی: patch_failed؛ patch_failed — اقدام لازم: بررسی انسانیِ همین نشانه‌ها."
     }
    ],
-   "last_run_id": "45708051338",
+   "last_run_id": "45802869465",
    "stop_stage": "گزینش منابع مرتبط و محتوادار",
    "resume_project_id": null,
    "resume_stage": null
