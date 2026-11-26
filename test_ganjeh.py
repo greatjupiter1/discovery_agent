@@ -62,8 +62,8 @@ check("najaf platform entry + seed slugs from its sitemap",
 
 for mod, tag in ((ba, "build_article"), (pt, "propose_topics")):
     di, ui, st = mod.load_source_registry()
-    check(f"{tag} loads 21 files / 2188 entries",
-          st["files_ok"] == 21 and st["loaded"] == 2188)
+    check(f"{tag} loads 22 files / 2195 entries",
+          st["files_ok"] == 22 and st["loaded"] == 2195)
     check(f"{tag} §46 domains indexed",
           "reader.najm.ac" in di and "ablibrary.net" in di
           and "najafdesertlibrary.com" in di)
