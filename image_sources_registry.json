@@ -1,0 +1,61 @@
+[
+ {
+  "api": "IIIF Presentation manifest per item: https://www.qdl.qa/en/iiif/81055/<vdc_id>/manifest (sequences of canvases with folio labels); IIIF Image service per page: https://iiif.qdl.qa/iiif/images/81055/<vdc_id>/<file>.jp2/full/<size>/0/default.jpg. No key, no login.",
+  "fields": [
+   "manuscripts",
+   "history of science",
+   "astronomy",
+   "mathematics",
+   "Islamic manuscripts"
+  ],
+  "languages": [
+   "Arabic",
+   "Persian",
+   "English"
+  ],
+  "name": "Qatar Digital Library (QDL) — IIIF image service",
+  "notes": "LIVE-WIRED §47 (the IMAGE-SOURCE class; probed 2026-11-26 from the build sandbox, multi-route): QDL serves page IMAGES only — no extractable text — which is exactly the witness class the owner's IMAGE-SOURCE AMENDMENT admits: the image IS the manuscript's full content. Routes tried: (1) item pages and the IIIF manifest on www.qdl.qa and the image service on iiif.qdl.qa — every route answers this sandbox egress with a Cloudflare 'Just a moment...' challenge (the Najaf/SID egress position); (2) the Wayback Machine holds an archived copy of the Or 1997 manifest (snapshot 2024-09-30; 544 canvases, folio labels in the manifest itself) AND archived IIIF image responses for 350 of the 544 files, treatise V included at transcription grade (!1200,1200). End-to-end proof: image file 0196 (f. 92r, treatise V) fetched through the archived copy of the same IIIF response — real JPEG, 303,950 B, magic verified. The engine fetcher therefore tries the live IIIF service first and falls back to the archived copy of the same response; passages exist ONLY as genuine transcriptions of fetched page images (keyed Gemini vision), cited by shelfmark + folio. Metadata, catalogue records and curatorial descriptions NEVER count as passages.",
+  "type": "platform",
+  "url": "https://www.qdl.qa/en/iiif/collection",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "fields": [
+   "geodesy",
+   "astronomy",
+   "mathematics",
+   "history of science"
+  ],
+  "languages": [
+   "Arabic"
+  ],
+  "name": "القانون المسعودي — British Library Or 1997 (QDL IIIF witness)",
+  "notes": "§47 WITNESS entry: al-Qanun al-Masudi complete (11 treatises), British Library: Oriental Manuscripts, Or 1997; copied in Baghdad, Rabi' I 570 AH (Sep-Oct 1174 CE); ff. iii+262+iii; 544 IIIF images; collation note Muharram 571 AH. Treatise ranges from the witness note: I ff. 5v-17v, II ff. 18r-51r, III ff. 52r-65v, IV ff. 66r-91r, V (geodesy) ff. 91v-109r, VI ff. 109v-131r, VII ff. 131v-158r, VIII ff. 158v-179r, IX ff. 179v-211v, X ff. 212r-242r, XI ff. 242v-262r. Folio<->image-file map derived from the IIIF manifest's OWN canvas labels (anchors verified across the codex: f. 5v = file 23, f. 84v = 181, f. 91v = 195, f. 100r = 212, f. 109r = 230, f. 262r = 536): file = 2n + 12 (recto), 2n + 13 (verso); treatise V = files 195-230. Wired as search_qdl_images (tag qdl:iiif-image): for queries naming the work or al-Biruni it samples the treatise-V range, fetches page images (live IIIF, Wayback fallback), transcribes them with the keyed Gemini vision brain, and emits ONE primary candidate whose passages are those transcriptions under folio citations, tagged image-derived. Supersedes the witness note's pre-§47 'collation witness only' limitation: the note itself is updated with a §47 addendum, its history kept.",
+  "type": "manuscript",
+  "url": "https://www.qdl.qa/en/archive/81055/vdc_100022880536.0x000001",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "No-key JSON API: GET https://www.loc.gov/search/?q=<query>&fo=json&c=20 and GET https://www.loc.gov/item/<id>/?fo=json (item.iiif_manifest_url + resources[].files[] IIIF variants on https://tile.loc.gov/image-services/iiif/...). Requires a browser UA and an honest (long) timeout from this egress.",
+  "fields": [
+   "manuscripts",
+   "history of science",
+   "astronomy",
+   "mathematics",
+   "rare books"
+  ],
+  "languages": [
+   "Arabic",
+   "Persian",
+   "English"
+  ],
+  "name": "Library of Congress — World Digital Library collection (IIIF images via loc.gov)",
+  "notes": "LIVE-WIRED §47 (the IMAGE-SOURCE class; probed 2026-11-26 from the build sandbox): the World Digital Library's items are served from loc.gov today. This RE-PROBE supersedes the §27 verdict (world_libraries_registry.json held LOC registry-only: the API timed out under the research UA with short timeouts, curl 000). With a browser UA and a 60-90 s timeout the search API answers 200 with real results (query 'biruni' returns WDL manuscript items first), item JSON exposes per-page IIIF variants on tile.loc.gov, a fetched page image (JPEG, 174,320 B, magic verified) was transcribed by the keyed Gemini vision brain into the page's real Arabic text (a Tahqiq ma li'l-Hind page: the five elements, Homer, Porphyry — content no catalogue record holds). Wired as search_loc_images (tag loc:iiif-image, cap 8): access-restricted items are never touched; passages exist ONLY as genuine transcriptions of fetched page images, cited by item + digital page, tagged image-derived; items whose contributor names name al-Biruni are marked primary/author.",
+  "type": "digital_library",
+  "url": "https://www.loc.gov/collections/world-digital-library/",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ }
+]
