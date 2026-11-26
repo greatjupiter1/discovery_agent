@@ -1,0 +1,685 @@
+[
+ {
+  "api": "https://gutendex.com/books/",
+  "fields": [
+   "multidisciplinary",
+   "literature",
+   "history",
+   "science",
+   "philosophy"
+  ],
+  "languages": [
+   "English",
+   "French",
+   "German",
+   "Spanish",
+   "Portuguese",
+   "Italian",
+   "Dutch",
+   "Finnish"
+  ],
+  "name": "Project Gutenberg",
+  "notes": "One of the oldest free digital libraries (70,000+ public-domain books). Live search WIRED in build_article.py (search_digital_libraries, tag library:gutenberg) via the public Gutendex catalogue API (no key), probed 2026-11-26: query 'astronomy' returned 46 real book records with authors, subjects and a text/plain format per book. Full text verified reachable: a returned book's plain-text file was fetched from two official PG mirrors (mirror.csclub.uwaterloo.ca and mirrorservice.org/ibiblio) with HTTP 206 text/plain. NOTE: gutenberg.org itself returned its 'Temporarily Down for Maintenance' 503 page during the probe window; the identical files are served by the official mirror network, and candidates carry the canonical gutenberg.org text URL.",
+  "type": "digital_library",
+  "url": "https://www.gutenberg.org",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "https://en.wikisource.org/w/api.php",
+  "fields": [
+   "multidisciplinary",
+   "literature",
+   "history",
+   "law",
+   "science"
+  ],
+  "languages": [
+   "English"
+  ],
+  "name": "Wikisource — English edition",
+  "notes": "Wikimedia's free source-text library (proofread public-domain and freely licensed texts; 70+ language editions exist, the English edition is wired). Live search WIRED in build_article.py (search_digital_libraries, tag library:wikisource) via the MediaWiki API (no key), probed 2026-11-26: list=search returned real work hits and a returned page's full text was fetched via action=parse — the wiki pages ARE the full text (HTML).",
+  "type": "digital_library",
+  "url": "https://en.wikisource.org",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "https://books.scielo.org/search/",
+  "fields": [
+   "multidisciplinary",
+   "medicine",
+   "social sciences",
+   "humanities"
+  ],
+  "languages": [
+   "Portuguese",
+   "Spanish",
+   "English"
+  ],
+  "name": "SciELO Books",
+  "notes": "Open-access academic book collection of the SciELO programme (Brazil / Latin America, university presses). Live search WIRED in build_article.py (search_digital_libraries, tag library:scielo-books) via the site's own /search/?q= route (no key), probed 2026-11-26: real book records (title, editors, publisher, year, synopsis) and a returned book's PDF fetched with HTTP 200, %PDF-1.7 — full text verified.",
+  "type": "digital_library",
+  "url": "https://books.scielo.org",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "https://mek.oszk.hu/hu/search/elfull/",
+  "fields": [
+   "multidisciplinary",
+   "literature",
+   "history",
+   "science"
+  ],
+  "languages": [
+   "Hungarian",
+   "German",
+   "English"
+  ],
+  "name": "MEK — Hungarian Electronic Library (Magyar Elektronikus Könyvtár)",
+  "notes": "Hungary's national free digital library (National Széchényi Library). Live search WIRED in build_article.py (search_digital_libraries, tag library:mek) via the site's full-search POST form (no key), probed 2026-11-26: real result rows (author, title, canonical item URL) and a returned item's PDF fetched with HTTP 200, %PDF-1.3 — full text verified (items also offer full-text HTML).",
+  "type": "digital_library",
+  "url": "https://mek.oszk.hu",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "multidisciplinary",
+   "history",
+   "literature",
+   "science",
+   "press"
+  ],
+  "languages": [
+   "French",
+   "English"
+  ],
+  "name": "Gallica — Bibliothèque nationale de France",
+  "notes": "France's national digital library (BnF, millions of digitised documents with OCR full text). Registry-only: probed 2026-11-26, both the SRU search endpoint and a known item's .texteBrut full-text route returned HTTP 403 from the sandbox with curl and urllib — genuinely free for human readers, but neither search nor full text is provable from this egress, so it is not wired under the full-text-only law.",
+  "type": "digital_library",
+  "url": "https://gallica.bnf.fr",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English",
+   "multilingual"
+  ],
+  "name": "HathiTrust Digital Library",
+  "notes": "US research-library consortium digital library (millions of volumes; public-domain items are full-view). Registry-only: probed 2026-11-26, the babel full-text search and the catalogue search both returned HTTP 403 from the sandbox, and the HathiTrust Data API requires a key — no no-key route could be proved.",
+  "type": "digital_library",
+  "url": "https://www.hathitrust.org",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "humanities",
+   "social sciences",
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English",
+   "German",
+   "French",
+   "multilingual"
+  ],
+  "name": "OAPEN Library",
+  "notes": "Open-access academic books platform (OAPEN Foundation, Netherlands/Europe). Registry-only: probed 2026-11-26, its OAI-PMH endpoint answers (Identify 200) but OAI is harvest-only with no keyword search, the DSpace REST path returned 404 and the web discover route returned 403 — no searchable no-key route could be proved. Its books are also listed in DOAB (same corpus).",
+  "type": "digital_library",
+  "url": "https://library.oapen.org",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "multidisciplinary",
+   "humanities",
+   "social sciences"
+  ],
+  "languages": [
+   "English",
+   "multilingual"
+  ],
+  "name": "DOAB — Directory of Open Access Books",
+  "notes": "Directory of peer-reviewed open-access books (OAPEN service). Registry-only: probed 2026-11-26, /search/?q= returned the portal/news page with no server-side book results (search is JS-driven), and the underlying corpus is OAPEN's, whose only machine route is harvest-only OAI-PMH — no searchable no-key route could be proved.",
+  "type": "digital_library",
+  "url": "https://doabooks.org",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "multidisciplinary",
+   "history",
+   "law",
+   "science"
+  ],
+  "languages": [
+   "English"
+  ],
+  "name": "Library of Congress — Digital Collections",
+  "notes": "The US Library of Congress offers a free no-key JSON API (loc.gov/<format>/?fo=json). Registry-only for now: probed 2026-11-26, the API timed out twice via urllib and curl received no connection at all (000) — loc.gov is unreachable from the sandbox egress, so neither search nor full text could be proved under the full-text-only law.",
+  "type": "digital_library",
+  "url": "https://www.loc.gov",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "history",
+   "manuscripts",
+   "archives",
+   "Middle East studies"
+  ],
+  "languages": [
+   "English",
+   "Arabic"
+  ],
+  "name": "Qatar Digital Library",
+  "notes": "British Library / Qatar Foundation digitised manuscripts and archives for the Gulf region (IIIF images + OCR). Registry-only: probed 2026-11-26, the site search returned HTTP 403 from the sandbox — full text unprovable from this egress.",
+  "type": "digital_library",
+  "url": "https://www.qdl.qa",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "literature",
+   "history",
+   "humanities"
+  ],
+  "languages": [
+   "Spanish",
+   "Catalan"
+  ],
+  "name": "Biblioteca Virtual Miguel de Cervantes",
+  "notes": "Spain's major free Hispanic digital library (University of Alicante), full texts in HTML. Registry-only: probed 2026-11-26, its search returned HTTP 403 via urllib and the connection failed via curl — unreachable/unprovable from the sandbox.",
+  "type": "digital_library",
+  "url": "https://www.cervantesvirtual.com",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "multidisciplinary",
+   "history",
+   "literature"
+  ],
+  "languages": [
+   "Spanish"
+  ],
+  "name": "Biblioteca Digital Hispánica — Biblioteca Nacional de España",
+  "notes": "Spain's national digital library (BNE). Registry-only: probed 2026-11-26, the bnesearch route returned HTTP 403 from the sandbox — full text unprovable from this egress.",
+  "type": "digital_library",
+  "url": "https://bdh.bne.es",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "classics",
+   "ancient Greek",
+   "Latin",
+   "history",
+   "philosophy"
+  ],
+  "languages": [
+   "English",
+   "Greek",
+   "Latin",
+   "German"
+  ],
+  "name": "Perseus Digital Library — Tufts University",
+  "notes": "The standard free library of Greek and Latin classics with translations (Scaife Viewer). Registry-only: probed 2026-11-26, the Hopper text route returned HTTP 403 ('Please update your browser' bot wall) and the Scaife search page is a JS shell with no server-side results — no searchable no-key route could be proved. Many Perseus texts are also on the Internet Archive (already connected).",
+  "type": "digital_library",
+  "url": "https://www.perseus.tufts.edu",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "Chinese classics",
+   "philosophy",
+   "history"
+  ],
+  "languages": [
+   "Chinese",
+   "English"
+  ],
+  "name": "Chinese Text Project (ctext.org)",
+  "notes": "The largest free library of pre-modern Chinese texts with parallel English translations. Registry-only under the no-key law: probed 2026-11-26, its API's gettext function answered ERR_REQUIRES_AUTHENTICATION — the API demands authentication, and no other machine search route was proved.",
+  "type": "digital_library",
+  "url": "https://ctext.org",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "multidisciplinary",
+   "history",
+   "science"
+  ],
+  "languages": [
+   "Japanese",
+   "English"
+  ],
+  "name": "National Diet Library Digital Collections — Japan",
+  "notes": "Japan's national digital collections. Registry-only: probed 2026-11-26, the NDL Search opensearch API returned HTTP 429 (concurrent-access cap) on both attempts, and the digital collections' full text is largely restricted to registered users / in-library terminals — no open full-text route could be proved.",
+  "type": "digital_library",
+  "url": "https://dl.ndl.go.jp",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "history",
+   "multidisciplinary",
+   "Canadiana"
+  ],
+  "languages": [
+   "English",
+   "French"
+  ],
+  "name": "Canadiana — Canadian Research Knowledge Network",
+  "notes": "Canada's national heritage collection (books, periodicals, government publications). Registry-only: probed 2026-11-26, site search answers with real item links, but items open in a IIIF image viewer and no OCR-text or PDF route was found on the item page — full text unverified under the full-text-only law. (Much of its Héritage collection is also on the Internet Archive.)",
+  "type": "digital_library",
+  "url": "https://www.canadiana.ca",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "multidisciplinary",
+   "education",
+   "science"
+  ],
+  "languages": [
+   "English",
+   "Hindi",
+   "multilingual"
+  ],
+  "name": "National Digital Library of India",
+  "notes": "India's national digital library (IIT Kharagpur / Ministry of Education). Registry-only: probed 2026-11-26, the homepage connection failed from the sandbox, and NDLI full text sits behind a (free) login — both unreachable from here and against the no-key/no-registration law.",
+  "type": "digital_library",
+  "url": "https://ndl.gov.in",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "history",
+   "law",
+   "Russian studies"
+  ],
+  "languages": [
+   "Russian",
+   "English"
+  ],
+  "name": "Russian Presidential Library (Boris Yeltsin Presidential Library)",
+  "notes": "Russia's national presidential library (history, law, state documents). Registry-only: probed 2026-11-26, search returned HTTP 429 on repeated attempts from the sandbox, and much of the collection is restricted to reading-room terminals — no open full-text route could be proved.",
+  "type": "digital_library",
+  "url": "https://www.prlib.ru",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "multidisciplinary",
+   "cultural heritage",
+   "history"
+  ],
+  "languages": [
+   "multilingual"
+  ],
+  "name": "Europeana",
+  "notes": "The EU's cultural-heritage aggregator (tens of millions of items from European institutions). Registry-only under the no-key law: probed 2026-11-26, the record search API without a key answered HTTP 401 'Invalid API key provided!' — Europeana requires a (free) personal API key, which the no-registration law forbids using.",
+  "type": "digital_library",
+  "url": "https://www.europeana.eu",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "multidisciplinary",
+   "history",
+   "Americana"
+  ],
+  "languages": [
+   "English"
+  ],
+  "name": "DPLA — Digital Public Library of America",
+  "notes": "US national aggregation of library/archive/museum collections. Registry-only under the no-key law: probed 2026-11-26, the API without a key answered {'error':'invalid_api_key'} — a (free) API key is required.",
+  "type": "digital_library",
+  "url": "https://dp.la",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "multidisciplinary",
+   "newspapers",
+   "history",
+   "Australiana"
+  ],
+  "languages": [
+   "English"
+  ],
+  "name": "Trove — National Library of Australia",
+  "notes": "Australia's national discovery service (digitised newspapers, books, journals with OCR full text). Registry-only under the no-key law: probed 2026-11-26, the API answered 'No API key found in request' (HTTP 401) — a (free) API key is required.",
+  "type": "digital_library",
+  "url": "https://trove.nla.gov.au",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "multidisciplinary",
+   "science"
+  ],
+  "languages": [
+   "English",
+   "multilingual"
+  ],
+  "name": "CORE — Open Access research aggregator",
+  "notes": "The Open University's aggregator of open-access research papers with full texts. Registry-only under the no-key law: probed 2026-11-26, the API v3 unauthenticated request returned HTTP 429 and CORE requires a (free) API key for real use.",
+  "type": "digital_library",
+  "url": "https://core.ac.uk",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "multidisciplinary",
+   "history",
+   "New Zealand studies"
+  ],
+  "languages": [
+   "English",
+   "Maori"
+  ],
+  "name": "DigitalNZ — National Library of New Zealand",
+  "notes": "New Zealand's national aggregation service. Registry-only despite a surprise: probed 2026-11-26, its API answered WITHOUT a key (HTTP 200, 15,048 records for 'astronomy') — but the records are metadata aggregations (fulltext/text fields null in the samples; the content lives at source institutions), so per-item full text is neither hosted nor verifiable there under the full-text-only law.",
+  "type": "digital_library",
+  "url": "https://digitalnz.org",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "multidisciplinary",
+   "theses"
+  ],
+  "languages": [
+   "English",
+   "Hindi",
+   "multilingual"
+  ],
+  "name": "Shodhganga — Indian doctoral theses repository",
+  "notes": "INFLIBNET's repository of Indian PhD theses (full-text chapter PDFs). Registry-only: probed 2026-11-26, both the web UI and the DSpace REST API are behind an anti-bot check page ('Making sure you're not a bot!') from the sandbox. Checked first: Shodhganga does NOT appear in thesis_registry.json, so it is registered here.",
+  "type": "digital_library",
+  "url": "https://shodhganga.inflibnet.ac.in",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "multidisciplinary",
+   "cultural heritage",
+   "history"
+  ],
+  "languages": [
+   "German",
+   "English"
+  ],
+  "name": "Deutsche Digitale Bibliothek",
+  "notes": "Germany's national cultural-heritage portal. Registry-only under the no-key law: probed 2026-11-26, the API without a key answered 403 NotAuthorizedException — an API key is required.",
+  "type": "digital_library",
+  "url": "https://www.deutsche-digitale-bibliothek.de",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "newspapers",
+   "history",
+   "press"
+  ],
+  "languages": [
+   "German"
+  ],
+  "name": "ANNO — Austrian National Library newspaper archive",
+  "notes": "Austria's free historic-newspaper archive with OCR full text (ÖNB). Registry-only: probed 2026-11-26, the search front-end is an Angular JS shell and no server-side search route could be verified from the sandbox.",
+  "type": "digital_library",
+  "url": "https://anno.onb.ac.at",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "literature",
+   "Nordic",
+   "history"
+  ],
+  "languages": [
+   "Swedish",
+   "Danish",
+   "Norwegian",
+   "Finnish",
+   "English"
+  ],
+  "name": "Project Runeberg",
+  "notes": "Volunteer-run Nordic literature project (personal/volunteer class). Volunteer library of Nordic literature and reference works with full-text HTML. Registry-only: probed 2026-11-26, its 'search' simply redirects to a Google site: search — the library offers no search route of its own that the engine could query.",
+  "type": "digital_library",
+  "url": "https://runeberg.org",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "Caribbean studies",
+   "history",
+   "literature"
+  ],
+  "languages": [
+   "English",
+   "Spanish",
+   "French"
+  ],
+  "name": "Digital Library of the Caribbean (dLOC)",
+  "notes": "Partner-built Caribbean digital library (University of Florida). Registry-only: probed 2026-11-26, the results page is a 3.6 KB JS shell with no server-side results — no searchable route could be proved.",
+  "type": "digital_library",
+  "url": "https://dloc.com",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "https://www.fadedpage.com/csearc2.php",
+  "fields": [
+   "literature",
+   "history",
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English",
+   "French"
+  ],
+  "name": "Faded Page",
+  "notes": "Volunteer-run Canadian public-domain library (Distributed Proofreaders Canada). Live search WIRED in build_article.py (search_digital_libraries, tag library:fadedpage) via the site's own catalogue JSON endpoint csearc2.php by POST (no key), probed 2026-11-26: POST title='Bleak House' returned exactly that book (pid 20161103, author Dickens, first published 1853); note the title search is phrase-based, so it contributes when a query matches a title. Full text verified: the book's whole-text file books/20161103/20161103.txt fetched with HTTP 200, text/plain, 2,051,813 bytes.",
+  "type": "digital_library",
+  "url": "https://www.fadedpage.com",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "https://theanarchistlibrary.org/search",
+  "fields": [
+   "political theory",
+   "history",
+   "philosophy",
+   "social movements"
+  ],
+  "languages": [
+   "English",
+   "multilingual"
+  ],
+  "name": "The Anarchist Library",
+  "notes": "Volunteer-collective library of anarchist and related texts (Amusewiki). Live search WIRED in build_article.py (search_digital_libraries, tag library:anarchist-library) via the site's /search route (no key), probed 2026-11-26: real structured results (title, author, date) and a returned text page fetched with 42,218 plain-text characters — the text pages are the full text in HTML.",
+  "type": "digital_library",
+  "url": "https://theanarchistlibrary.org",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "literature",
+   "Russian literature",
+   "science fiction",
+   "history"
+  ],
+  "languages": [
+   "Russian"
+  ],
+  "name": "Lib.ru — Moshkov Library (Библиотека Максима Мошкова)",
+  "notes": "Russia's oldest and largest personal digital library, run by Maxim Moshkov since 1994; per-work full texts in HTML. Registry-only: probed 2026-11-26, every search route failed — /SEARCH/search.php 404, /SEARCH/ 404, /search/?q= HTTP 500, /cgi-bin/search 404 — the library offers no working search route the engine could query, so it cannot be wired under the full-text-only law.",
+  "type": "digital_library",
+  "url": "http://lib.ru",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "religion",
+   "mythology",
+   "folklore",
+   "classics"
+  ],
+  "languages": [
+   "English"
+  ],
+  "name": "Internet Sacred Text Archive (sacred-texts.com)",
+  "notes": "Large personal archive of public-domain sacred and traditional texts, run by J. B. Hare. Registry-only: probed 2026-11-26, its search pages returned HTTP 403 from the sandbox — full text unprovable from this egress.",
+  "type": "digital_library",
+  "url": "https://sacred-texts.com",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "literature",
+   "history",
+   "Australiana"
+  ],
+  "languages": [
+   "English"
+  ],
+  "name": "Project Gutenberg Australia",
+  "notes": "Volunteer/personal Australian sister project of Project Gutenberg (Colin Choat), full texts in HTML/text. Registry-only: probed 2026-11-26, the site itself states its search is 'Google Site Search' (/searchresults.html) — it offers no search route of its own, the same class as Project Runeberg.",
+  "type": "digital_library",
+  "url": "https://gutenberg.net.au",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "political theory",
+   "history",
+   "philosophy",
+   "economics"
+  ],
+  "languages": [
+   "English",
+   "multilingual"
+  ],
+  "name": "Marxists Internet Archive",
+  "notes": "Volunteer-collective archive of Marxist and related writings with full-text HTML. Registry-only: probed 2026-11-26, its /search.htm page returned 404 and the archive's site search is external (Google-based) — no own machine search route could be proved.",
+  "type": "digital_library",
+  "url": "https://www.marxists.org",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "Japanese literature",
+   "classics"
+  ],
+  "languages": [
+   "Japanese"
+  ],
+  "name": "Aozora Bunko (青空文庫)",
+  "notes": "Japan's volunteer-run library of public-domain Japanese literature (full texts in HTML/text per work). Registry-only: probed 2026-11-26, no web search route was found on the site (its catalogue is distributed as downloadable index files) — texts are reachable per-work but not searchable by the engine.",
+  "type": "digital_library",
+  "url": "https://www.aozora.gr.jp",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "literature",
+   "history",
+   "philosophy",
+   "religion"
+  ],
+  "languages": [
+   "English"
+  ],
+  "name": "Global Grey",
+  "notes": "Personal-run free public-domain ebook site (PDF/EPUB). Registry-only: probed 2026-11-26, its search page is a Google Custom Search shell — no own search route.",
+  "type": "digital_library",
+  "url": "https://www.globalgreyebooks.com",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "literature",
+   "classics"
+  ],
+  "languages": [
+   "English"
+  ],
+  "name": "Standard Ebooks",
+  "notes": "Volunteer nonprofit producing carefully formatted public-domain ebooks. Registry-only: probed 2026-11-26, /ebooks?query= returned the generic catalogue page (the query was ignored server-side) and the books are distributed as EPUB downloads — no searchable route returning plain full text could be proved.",
+  "type": "digital_library",
+  "url": "https://standardebooks.org",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ }
+]
