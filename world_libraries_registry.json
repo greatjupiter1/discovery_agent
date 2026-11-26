@@ -170,7 +170,7 @@
    "English"
   ],
   "name": "Library of Congress — Digital Collections",
-  "notes": "The US Library of Congress offers a free no-key JSON API (loc.gov/<format>/?fo=json). Registry-only for now: probed 2026-11-26, the API timed out twice via urllib and curl received no connection at all (000) — loc.gov is unreachable from the sandbox egress, so neither search nor full text could be proved under the full-text-only law.",
+  "notes": "The US Library of Congress offers a free no-key JSON API (loc.gov/<format>/?fo=json). Registry-only for now: probed 2026-11-26, the API timed out twice via urllib and curl received no connection at all (000) — loc.gov is unreachable from the sandbox egress, so neither search nor full text could be proved under the full-text-only law. §47 UPDATE (2026-11-26): RECLASSIFIED — live-wired as an IMAGE source (search_loc_images, tag loc:iiif-image). The unreachable verdict above was a probe artifact (research UA + short timeouts): with a browser UA and an honest timeout the JSON API answers, IIIF page images fetch from tile.loc.gov, and a fetched page was transcribed end to end by the keyed Gemini vision brain. Full record: image_sources_registry.json.",
   "type": "digital_library",
   "url": "https://www.loc.gov",
   "verified": true,
@@ -189,7 +189,7 @@
    "Arabic"
   ],
   "name": "Qatar Digital Library",
-  "notes": "British Library / Qatar Foundation digitised manuscripts and archives for the Gulf region (IIIF images + OCR). Registry-only: probed 2026-11-26, the site search returned HTTP 403 from the sandbox — full text unprovable from this egress.",
+  "notes": "British Library / Qatar Foundation digitised manuscripts and archives for the Gulf region (IIIF images + OCR). Registry-only: probed 2026-11-26, the site search returned HTTP 403 from the sandbox — full text unprovable from this egress. §47 UPDATE (2026-11-26): RECLASSIFIED — QDL is now live-wired as an IMAGE source (the witness class of the IMAGE-SOURCE AMENDMENT): search_qdl_images transcribes fetched IIIF page images of British Library Or 1997 (القانون المسعودي) into folio-cited passages. The images-only limitation stands as a fact about the format; it no longer bars the source. Full record: image_sources_registry.json.",
   "type": "digital_library",
   "url": "https://www.qdl.qa",
   "verified": true,
