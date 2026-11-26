@@ -3371,8 +3371,304 @@ def search_jihs(query):
 
 
 # --------------------------------------------------------------------------
+# Iranian mathematics journals (§37) — the verified Iranian math
+# journals registered in iran_math_registry.json (§17 wiring:
+# credibility/priority signal only, never verification). Most
+# Iranian university journals run the SAME Yektaweb journal
+# system as §36's JIHS, so one theme-tolerant parser reads them
+# all. Probed from the build sandbox on 2026-11-26 under the
+# full-text-only law and the multi-route rule:
+#   LIVE-WIRED (11) — the site search answers with real records
+#   AND a hit's direct PDF was probe-verified (%PDF- magic, no
+#   login): Sahand Communications in Mathematical Analysis
+#   (Maragheh; topology -> 25 hits, 25 PDFs), فرهنگ و اندیشه
+#   ریاضی (Iranian Mathematical Society; جبر -> 92-result badge,
+#   25/25 PDFs), ریاضی و جامعه (Isfahan; جبر -> 46-result badge,
+#   25 hits, 24 PDFs — the PDF-less hit is skipped), AUT Journal
+#   of Mathematics and Computing (topology -> 25 hits, 17 PDFs),
+#   Transactions on Combinatorics (Isfahan, older theme; graph
+#   -> 25/25), Algebraic Structures and Their Applications
+#   (Yazd; algebra -> 25/25), Iranian Journal of Mathematical
+#   Chemistry (Kashan; graph -> 25/25), Categories and General
+#   Algebraic Structures with Applications (Shahid Beheshti;
+#   category -> 25/25), Journal of Algebra and Related Topics
+#   (Guilan; algebra -> 25/25), Journal of Mathematical
+#   Modeling (Guilan; differential -> 25/25, topology -> a
+#   genuine 0), Analytical and Numerical Solutions for
+#   Nonlinear Equations (Damghan, on the gadm host; analysis
+#   -> 25/25).
+#   REGISTRY-ONLY (8, routes tried in the registry notes):
+#   BIMS (Springer — subscription full text), JIMS and the
+#   Journal of Hyperstructures (HTTP 403 bot wall from the
+#   sandbox), Mahani / JLTA / Communications in Combinatorics
+#   and Optimization (hosts did not answer at all), Khayyam
+#   Journal of Mathematics (new journal-system install returns
+#   zero records; classic site has no search route), IJMSI
+#   (article PDFs open and verified, but its only search is a
+#   POST form whose POST the sandbox could not complete — no
+#   verified machine search route).
+# The fetch discipline is the §23 single-shot _arab_fetch and
+# candidates are shaped by _arab_candidate, exactly like §36.
+# --------------------------------------------------------------------------
+
+IRAN_MATH_PER_JOURNAL_CAP = 8
+IRAN_MATH_TOTAL_CAP = 24
+_IRAN_MATH_JOURNALS = [
+    ("https://scma.maragheh.ac.ir",
+     "Sahand Communications in Mathematical Analysis"),
+    ("https://mct.iranjournals.ir",
+     "فرهنگ و اندیشه ریاضی (Mathematical Culture and Thought)"),
+    ("https://math-sci.ui.ac.ir",
+     "ریاضی و جامعه (Mathematics and Society)"),
+    ("https://ajmc.aut.ac.ir",
+     "AUT Journal of Mathematics and Computing"),
+    ("https://toc.ui.ac.ir", "Transactions on Combinatorics"),
+    ("https://as.yazd.ac.ir",
+     "Algebraic Structures and Their Applications"),
+    ("https://ijmc.kashanu.ac.ir",
+     "Iranian Journal of Mathematical Chemistry"),
+    ("https://cgasa.sbu.ac.ir",
+     "Categories and General Algebraic Structures "
+     "with Applications"),
+    ("https://jart.guilan.ac.ir",
+     "Journal of Algebra and Related Topics"),
+    ("https://jmm.guilan.ac.ir", "Journal of Mathematical Modeling"),
+    ("https://gadm.du.ac.ir",
+     "Analytical and Numerical Solutions for Nonlinear "
+     "Equations"),
+]
+
+
+def _parse_iran_math_results(body, base, venue_name):
+    """Parse one Yektaweb search-results page (the §36 JIHS
+    shape, theme-tolerant): each hit is headed by an element
+    carrying list-article-title whose tag_a anchor links
+    article_<id>.html; the text up to the next hit carries the
+    issue line (first <p>), a DOI paragraph (id="ar_doi"), the
+    authors paragraph and — once the article is published — a
+    direct PDF link (class="pdf_link"). Both system themes are
+    read (new: h2 + mb-1 paragraphs; old: h5 + margin-bottom-3
+    paragraphs). Hits without a PDF link (no full text anywhere
+    yet) are skipped, per the full-text-only law."""
+    out = []
+    if not body:
+        return out
+    marks = list(re.finditer(
+        r'list-article-title[^>]*>\s*<a class="tag_a" '
+        r'href="article_(\d+)\.html">(.*?)</a>', body, re.S))
+    for i, m in enumerate(marks):
+        seg = body[m.end():marks[i + 1].start()
+                   if i + 1 < len(marks) else len(body)]
+        pm = re.search(r'href="\./(article_\d+_[0-9a-f]+\.pdf)"', seg)
+        if not pm:
+            continue
+        title = _arab_strip_tags(m.group(2))
+        if not title:
+            continue
+        paras = [_arab_strip_tags(p) for p in re.findall(
+            r'<p class="[^"]*"[^>]*>(.*?)</p>', seg, re.S)]
+        issue = paras[0] if paras else ""
+        dm = re.search(r'href="https://doi\.org/([^"]+)"', seg)
+        authors = []
+        for text in paras[1:]:
+            if not text or "doi.org" in text or \
+                    text.startswith("10."):
+                continue
+            authors = [a.strip() for a in
+                       re.split(r"[،,;]", text) if a.strip()]
+            break
+        cand = _arab_candidate(
+            title, f"{base}/article_{m.group(1)}.html",
+            "persian:iran-math", authors=authors[:6],
+            year=_jihs_year(issue),
+            venue=(venue_name + (f" — {issue}" if issue else "")),
+            doi=(dm.group(1) if dm else None))
+        cand["oa_pdf_url"] = f"{base}/{pm.group(1)}"
+        out.append(cand)
+    return out
+
+
+def _iran_math_journal(base, venue_name, query):
+    """One journal of §37: its own site search, fail-soft,
+    capped per journal."""
+    url = (base + "/?" + urllib.parse.urlencode(
+        {"_action": "article", "keywords": query}))
+    status, body = _arab_fetch(url)
+    if status != 200 or not body:
+        return []
+    return _parse_iran_math_results(
+        body, base, venue_name)[:IRAN_MATH_PER_JOURNAL_CAP]
+
+
+def search_iran_math(query):
+    """§37: search the live-wired Iranian mathematics journals
+    directly on their own sites — the Yektaweb route of §36
+    generalised to the eleven journals that passed both bars
+    (registry-only journals are not queried; their articles
+    arrive via DOAJ/Crossref/OpenAlex). Fail-soft per journal,
+    capped at IRAN_MATH_PER_JOURNAL_CAP per journal and
+    IRAN_MATH_TOTAL_CAP overall."""
+    out = []
+    for base, venue_name in _IRAN_MATH_JOURNALS:
+        if len(out) >= IRAN_MATH_TOTAL_CAP:
+            break
+        try:
+            out.extend(_iran_math_journal(base, venue_name, query))
+        except Exception:
+            continue
+    return out[:IRAN_MATH_TOTAL_CAP]
+
+
+# --------------------------------------------------------------------------
+# Tajikistan journals (§38) — the verified Tajik journals
+# registered in tajik_journals_registry.json (§17 wiring:
+# credibility/priority signal only, never verification).
+# Tajikistan's own journal sites offer no article-level keyword
+# search (multi-route probe from the build sandbox, 2026-11-26):
+# the Academy portal journals.anrt.tj is static per-journal
+# listings of whole-issue PDFs with no search form;
+# vestnik-tnu.com's Joomla finder answers «ничего не найдено»
+# even for «математика» (its index does not cover the content);
+# uchzap.tj's finder returns ISSUE-archive pages, not articles
+# (whole-issue PDF attachments, recent issues via Google Drive);
+# tut.tj is a WordPress upload archive; eLibrary carries the
+# journals but its full texts need registration (excluded by
+# the no-key law); DOAJ carries ZERO Tajik journals
+# (API-checked, publisher_country:TJ -> total 0) and the
+# journals register no Crossref DOIs (a container-title probe
+# matched only the Russian Academy's Doklady).
+# The one route that passes both bars is CyberLeninka: eleven
+# Tajik journals are carried there with article-level full
+# text, and its search API —
+#   SEARCH — POST cyberleninka.ru/api/search, JSON body
+#       {"mode": "articles", "q": <q>, "size": 8, "from": 0,
+#        "journal": <numeric journal id>}
+#       ANSWERS with per-journal keyword results (Доклады
+#       НАНТ, journal 28997: математика -> 527 hits in the
+#       journal; астрономия -> 38, incl. papers of the
+#       Academy's Institute of Astrophysics, Sanglok).
+#   FULL TEXT — each hit's own PDF
+#       GET cyberleninka.ru/article/n/<slug>/pdf
+#       probe-verified WITHOUT login: %PDF-1.7. Candidates
+#       therefore carry oa_pdf_url = the article's /pdf route,
+#       and attach_fulltexts_v2 fetches it directly.
+# This supersedes the §24 probe of CyberLeninka, which never
+# got a keyword answer (GET /api/search -> 405, form POST ->
+# 400/empty, JSON without "mode" -> found:0): the missing
+# piece was mode:"articles" (the web app's own transport).
+# The platform occasionally truncates its chunked responses
+# (IncompleteRead, seen live); the §23 _arab_json retry
+# absorbs most of it and fail-soft the rest.
+# Registry-only (7, routes tried in the registry notes): the
+# Academy's Известия series (физико-математических — classic
+# and 2023 series — биологических и медицинских, общественных
+# наук) and its Медицинский вестник (portal listings only, not
+# on CyberLeninka); Вестник ТНУ (empty finder index);
+# Вестник ТУТ (no search route).
+# Languages: Tajik (tg) is NOT in MATRIX_LANGUAGES — the gap
+# is recorded here, not silently patched. The wired journals
+# publish mainly in Russian (ru, in the matrix) and Tajik,
+# several with English abstracts, and the platform also
+# indexes English titles/abstracts.
+# The fetch discipline is the §23 _arab_json (single-shot
+# _arab_fetch + one retry) and candidates are shaped by
+# _arab_candidate, exactly like §23/§37.
+# --------------------------------------------------------------------------
+
+TAJIK_PER_JOURNAL_CAP = 8
+TAJIK_TOTAL_CAP = 24
+_CL_BASE = "https://cyberleninka.ru"
+_CL_API = _CL_BASE + "/api/search"
+_TAJIK_CL_JOURNALS = [
+    (28997, "Доклады Национальной академии наук Таджикистана"),
+    (4799, "Вестник Педагогического университета"),
+    (36728, "Вестник педагогического университета "
+            "(Естественных наук)"),
+    (36890, "Историк (Муаррих)"),
+    (12079, "Ученые записки Худжандского государственного "
+            "университета им. академика Б. Гафурова. "
+            "Гуманитарные науки"),
+    (32457, "Вестник Таджикского государственного университета "
+            "права, бизнеса и политики. Серия общественных наук"),
+    (18700, "Вестник Таджикского государственного университета "
+            "права, бизнеса и политики. Серия гуманитарных наук"),
+    (36727, "Вестник педагогического университета (Серия 2)"),
+    (37205, "Финансово-экономический вестник"),
+    (27560, "Вестник Авиценны"),
+    (29952, "Здравоохранение Таджикистана"),
+]
+
+
+def _parse_tajik_cl_results(data, venue_fallback):
+    """Parse one CyberLeninka journal-filtered search response:
+    {found, articles: [{name (may carry <b> highlight tags),
+    annotation, link (/article/n/<slug>), authors, year,
+    journal, journal_link}]}. Hits without an article link or a
+    title are skipped (no reachable full text)."""
+    out = []
+    if not isinstance(data, dict):
+        return out
+    for art in data.get("articles") or []:
+        if not isinstance(art, dict):
+            continue
+        link = str(art.get("link") or "")
+        title = _arab_strip_tags(art.get("name"))
+        if not link or not title:
+            continue
+        url = _CL_BASE + link if link.startswith("/") else link
+        year = art.get("year")
+        cand = _arab_candidate(
+            title, url, "tajik:cyberleninka",
+            authors=[str(a) for a in (art.get("authors") or [])][:6],
+            year=(year if isinstance(year, int)
+                  else _arab_year(year)),
+            venue=str(art.get("journal") or venue_fallback),
+            abstract=_arab_strip_tags(art.get("annotation"))[:1500])
+        cand["oa_pdf_url"] = url + "/pdf"
+        out.append(cand)
+        if len(out) >= TAJIK_PER_JOURNAL_CAP:
+            break
+    return out
+
+
+def _tajik_cl_journal(journal_id, venue_name, query):
+    """One Tajik journal on CyberLeninka: the platform's search
+    API filtered to the journal, fail-soft, capped per
+    journal."""
+    payload = json.dumps(
+        {"mode": "articles", "q": query,
+         "size": TAJIK_PER_JOURNAL_CAP, "from": 0,
+         "journal": journal_id}).encode("utf-8")
+    data = _arab_json(_CL_API, data=payload)
+    return _parse_tajik_cl_results(data, venue_name)
+
+
+def search_tajik_journals(query):
+    """§38: search the eleven verified Tajik journals carried
+    by CyberLeninka, each through the platform's
+    journal-filtered search API, with article full text (the
+    /pdf route) probe-verified reachable. The registry-only
+    Tajik journals (the Academy's Известия series and its
+    Медицинский вестник, Вестник ТНУ, Вестник ТУТ) have no
+    article-level keyword route anywhere and are not queried
+    here. Fail-soft per journal, capped at
+    TAJIK_PER_JOURNAL_CAP per journal and TAJIK_TOTAL_CAP
+    overall."""
+    out = []
+    for journal_id, venue_name in _TAJIK_CL_JOURNALS:
+        if len(out) >= TAJIK_TOTAL_CAP:
+            break
+        try:
+            out.extend(_tajik_cl_journal(journal_id, venue_name,
+                                         query))
+        except Exception:
+            continue
+    return out[:TAJIK_TOTAL_CAP]
+
+
+# --------------------------------------------------------------------------
 # Source registries (§17) — credibility / whitelist SIGNAL only.
-# Twelve curated registries sit beside this script in the repo:
+# Fourteen curated registries sit beside this script in the repo:
 #   sources_registry.json        (registry 1, registry schema)
 #   sources_registry_500_more.json (500 DOAJ journals, compact schema:
 #                                   {id, name, url, type, fields,
@@ -3418,6 +3714,21 @@ def search_jihs(query):
 #                                   beside the §34 Ensani route,
 #                                   registry schema — one journal
 #                                   entry)
+#   iran_math_registry.json      (§37: the Iranian mathematics
+#                                   journals — 19 verified entries,
+#                                   11 wired DIRECTLY on their own
+#                                   Yektaweb sites, 8 registry-only
+#                                   with routes tried recorded,
+#                                   registry schema — journal
+#                                   entries, not articles)
+#   tajik_journals_registry.json (§38: the Tajikistan journals —
+#                                   18 verified entries, 11 wired
+#                                   via the CyberLeninka
+#                                   journal-filtered search API,
+#                                   7 registry-only with routes
+#                                   tried recorded, registry
+#                                   schema — journal entries, not
+#                                   articles)
 # Both schemas normalise into one record {name, url, domain, type,
 # fields, languages, registry}. A registry match is a ranking SIGNAL
 # ONLY: it never verifies a source (the DOI / Crossref / publisher
@@ -3437,7 +3748,9 @@ REGISTRY_FILES = ["sources_registry.json",
                   "world_libraries_registry.json",
                   "lectures_registry.json",
                   "ensani_registry.json",
-                  "jihs_registry.json"]
+                  "jihs_registry.json",
+                  "iran_math_registry.json",
+                  "tajik_journals_registry.json"]
 _REGISTRY_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
@@ -3591,7 +3904,8 @@ SEARCHERS = [search_openalex, search_crossref, search_openaire,
              search_semantic_scholar, search_arab_platforms,
              search_asian_platforms, search_arab_libraries,
              search_european_platforms, search_digital_libraries,
-             search_university_lectures, search_ensani, search_jihs]
+             search_university_lectures, search_ensani, search_jihs,
+             search_iran_math, search_tajik_journals]
 
 # English-first retrieval (§18): wave 1 queries the abstract-rich
 # indexes ONLY — Crossref is held back because, queried with a
@@ -3606,7 +3920,8 @@ WAVE1_SEARCHERS = [search_openalex, search_europe_pmc, search_hal,
                    search_annas_archive, search_arab_platforms,
                    search_asian_platforms, search_arab_libraries,
                    search_european_platforms, search_digital_libraries,
-                   search_university_lectures, search_ensani, search_jihs]
+                   search_university_lectures, search_ensani, search_jihs,
+                   search_iran_math, search_tajik_journals]
 CROSSREF_SEARCHERS = [search_crossref]
 
 
