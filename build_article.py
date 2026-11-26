@@ -87,7 +87,8 @@ MAX_ATTEMPTS = 6
 MATRIX_MAX_QUERIES = 28
 MATRIX_PER_LANG = 6
 MATRIX_LANGUAGES = ("en", "ar", "fa", "de", "fr", "ru", "es", "tr",
-                    "it", "la", "ur", "uz", "zh", "ja", "ko")
+                    "it", "la", "ur", "uz", "zh", "ja", "ko",
+                    "fi", "nl", "pl", "pt", "hr", "sr", "uk", "el")
 MIN_FULLTEXT_SOURCES = 3
 FULLTEXT_V2_MAX_SOURCES = 14
 FULLTEXT_FETCH_MAX_BYTES = 10 * 1024 * 1024
@@ -99,6 +100,8 @@ LANGUAGE_NAMES = {
     "fr": "French", "de": "German", "es": "Spanish", "ru": "Russian",
     "tr": "Turkish", "ur": "Urdu", "it": "Italian", "la": "Latin",
     "uz": "Uzbek", "ja": "Japanese", "ko": "Korean",
+    "fi": "Finnish", "nl": "Dutch", "pl": "Polish", "pt": "Portuguese",
+    "hr": "Croatian", "sr": "Serbian", "uk": "Ukrainian", "el": "Greek",
 }
 
 
@@ -1598,6 +1601,312 @@ def search_arab_libraries(query):
 
 
 # --------------------------------------------------------------------------
+# European-country journal platforms (§26) — open access, no keys.
+# The verified national platforms are registered in
+# european_journals_registry.json (§17 wiring: credibility/priority
+# signal only, never verification). Jupiter's full-text-only law
+# (2026-11-26) governs this section: a platform is wired ONLY when
+# the probe saw its keyword search answer with real results AND a
+# returned item's FULL TEXT was verified reachable — abstracts or
+# metadata alone never count. Probed live from the build sandbox
+# on 2026-11-26, multiple routes per platform:
+#   Biblioteka Nauki (Poland) — the platform's public JSON API
+#       POST bibliotekanauki.pl/api/search {searchCriteria:
+#       {generalSearchString, openResources:true},
+#       paginationCriteria} -> real documents (totalResults 2,760
+#       for "earthquake"); only documents carrying a PDF in
+#       fullTextFormats and not accessRestricted are emitted, and
+#       a returned item's PDF was verified (GET
+#       /articles/64160793.pdf -> application/pdf, %PDF-1.4).
+#   Persée (France) — GET persee.fr/search?ta=article&q=<q> ->
+#       real doc-result items (31,426 for "tremblement"); full
+#       text is page-based OCR HTML: the document page links its
+#       text pages at /doc/page/<docid>/<pageid> and a returned
+#       item's first page opened with the article's full text
+#       readable (the /docAsPDF/ PDF endpoint is altcha-protected
+#       and is not used).
+#   E-Periodica (Switzerland) — GET e-periodica.ch/search?q=<q>
+#       -> real ep-result article items; a returned item's issue
+#       OCR full text was verified (GET
+#       /download/sbz-002:1931:97/ocr-fulltext -> text/plain,
+#       ~2 MB of real OCR text). Some recent items carry a
+#       moving-wall embargo; they fail the unchanged gates.
+#   tidsskrift.dk (Denmark) — OJS site-wide search (shared §23
+#       parser); a returned article's galley PDF was verified
+#       (application/pdf, %PDF-1.4).
+# Registry-only (routes exhausted per the multi-route rule; see
+# DESIGN.md §26): Hrčak (Croatia — search answers HTTP 418
+# "Confirm you're not a robot"; OAI-PMH harvest-only); Journal.fi
+# (Finland — anti-bot proof-of-work challenge on search; OAI-PMH
+# harvest-only); OpenJournals.nl (Netherlands — WordPress portal,
+# no platform-wide search, journals on separate hosts);
+# OpenEdition (France — anti-bot challenge); SCIndeks (Serbia —
+# stateful ASP.NET search, plain GETs report no records; OAI-PMH
+# harvest-only); RCAAP (Portugal — anti-bot challenge); Dialnet
+# (Spain — search answers with real results but every follow-up
+# connection, article page / PDF download / external link, was
+# dropped from the sandbox, so full text is UNVERIFIED); EKT
+# ePublishing (Greece — platform search HTTP 500, per-journal OJS
+# only); SSOAR and BASE (Germany — DSpace app shell on every
+# route / anti-bot challenge); DiVA (Sweden — stateful JSF
+# search); Idunn (Norway — HTTP 403, partly OA); ETERA (Estonia —
+# JS app shell); OUCI (Ukraine — HTTP 403; an index, and Crossref
+# is already queried directly); Vernadsky periodicals (Ukraine —
+# legacy frameset catalogue); REAL (Hungary — EPrints search 302
+# loop; OAI-PMH harvest-only); SciELO Portugal (search error /
+# global search 403); RACO (Spain — HTTP 403); DML-CZ (Czechia —
+# mathematics-only subject library, no general national portal).
+# Belgium, Austria, Ireland, Italy, Romania and Bulgaria have no
+# confirmed national OA portal and get no entries (no fabrication).
+# Transport reuses the §23 single-shot fetch and candidate shape;
+# every platform call is fail-soft; candidates flow through the
+# UNCHANGED verification, screening, judges and text-first gate.
+# --------------------------------------------------------------------------
+
+EURO_PER_PLATFORM_CAP = 8
+EURO_TOTAL_CAP = 24
+_BN_KIND_PATH = {"ARTICLE": "articles", "BOOK": "books",
+                 "CHAPTER": "chapters"}
+
+
+def _euro_post_json(url, payload):
+    """One single-shot JSON POST for the Biblioteka Nauki API (no
+    retries on the http_request ladder: a dead platform must not
+    eat the retrieval wave's budget), with ONE retry like
+    _arab_json. Returns the parsed object or None."""
+    import http.client
+    body = json.dumps(payload).encode("utf-8")
+    for _attempt in range(2):
+        try:
+            _pace(urllib.parse.urlparse(url).netloc)
+            headers = dict(_ARAB_HEADERS)
+            headers["Content-Type"] = "application/json"
+            req = urllib.request.Request(url, data=body,
+                                         headers=headers)
+            with urllib.request.urlopen(req,
+                                        timeout=_ARAB_TIMEOUT) as resp:
+                try:
+                    raw = resp.read(3_000_000)
+                except http.client.IncompleteRead as e:
+                    raw = e.partial or b""
+                if resp.status != 200:
+                    continue
+                return json.loads(raw.decode("utf-8", "replace"))
+        except Exception:
+            continue
+    return None
+
+
+def _parse_bibliotekanauki(data):
+    """Biblioteka Nauki /api/search documents. Full-text-only law:
+    only documents whose fullTextFormats carry a PDF and that are
+    not access-restricted are emitted; the candidate URL is the
+    verified PDF route /<kind>/<id>.pdf."""
+    out = []
+    for doc in (data or {}).get("documents", []) or []:
+        if not isinstance(doc, dict):
+            continue
+        if doc.get("accessRestricted"):
+            continue
+        formats = [str(f).upper() for f in
+                   (doc.get("fullTextFormats") or [])]
+        if "PDF" not in formats:
+            continue
+        kind = _BN_KIND_PATH.get(
+            str(doc.get("publicationType") or "").upper())
+        pid = doc.get("publicationId")
+        if not kind or not pid:
+            continue
+        title = _arab_strip_tags(doc.get("mainTitle"))
+        if not title:
+            continue
+        venue = (str(doc.get("journalTitle") or "").strip()
+                 or str(doc.get("bookTitle") or "").strip()
+                 or "Biblioteka Nauki")
+        authors = [str(a).strip() for a in
+                   (doc.get("contributors") or []) if str(a).strip()]
+        out.append(_arab_candidate(
+            title,
+            f"https://bibliotekanauki.pl/{kind}/{pid}.pdf",
+            "europe:bibliotekanauki", authors=authors[:6],
+            year=_arab_year(doc.get("publishedDate")), venue=venue,
+            abstract=_arab_strip_tags(doc.get("mainAbstract"))[:1500]))
+        if len(out) >= EURO_PER_PLATFORM_CAP:
+            break
+    return out
+
+
+def _euro_bibliotekanauki(query):
+    """Poland Biblioteka Nauki public JSON API (probed live
+    2026-11-26: HTTP 200, real documents, PDF full text verified
+    at /articles/<id>.pdf)."""
+    payload = {"searchCriteria": {
+                   "generalSearchString": query,
+                   "openResources": True, "publicationTypes": [],
+                   "researchDataLink": False},
+               "paginationCriteria": {
+                   "pageNumber": 1,
+                   "pageSize": EURO_PER_PLATFORM_CAP,
+                   "sortingCriteria": {"fieldName": "score",
+                                       "direction": "DESC"}}}
+    data = _euro_post_json("https://bibliotekanauki.pl/api/search",
+                           payload)
+    if not isinstance(data, dict):
+        return []
+    return _parse_bibliotekanauki(data)
+
+
+def _parse_persee_results(page):
+    """Persée search results: one <div class="doc-result"> per hit;
+    the title anchor (class "title ...") points at the document
+    page /doc/<docid>, contributors sit in .contributors .name
+    spans and the bibliographic reference in .documentBibRef."""
+    out = []
+    for block in re.split(r'<div class="doc-result">',
+                          page or "")[1:]:
+        m = re.search(r'<a href="(https://www\.persee\.fr/doc/[^"]+)"'
+                      r' class="title[^"]*">(.*?)</a>', block, re.S)
+        if not m:
+            continue
+        url = m.group(1).split("?")[0]
+        title = _arab_strip_tags(m.group(2))
+        if not title:
+            continue
+        authors = []
+        cm = re.search(r'<div class="contributors">(.*?)</div>',
+                       block, re.S)
+        if cm:
+            for nm in re.finditer(r'<span class="name">(.*?)</span>',
+                                  cm.group(1), re.S):
+                name = _arab_strip_tags(nm.group(1))
+                if name and name not in authors:
+                    authors.append(name)
+        venue = "Persée"
+        year = None
+        bm = re.search(r'<div class="documentBibRef">(.*?)</div>',
+                       block, re.S)
+        if bm:
+            vm = re.search(r'<a[^>]*>(.*?)</a>', bm.group(1), re.S)
+            if vm:
+                venue = _arab_strip_tags(vm.group(1)) or venue
+            year = _arab_year(_arab_strip_tags(bm.group(1)))
+        out.append(_arab_candidate(
+            title, url, "europe:persee", authors=authors[:6],
+            year=year, venue=venue))
+        if len(out) >= EURO_PER_PLATFORM_CAP:
+            break
+    return out
+
+
+def _euro_persee(query):
+    """France Persée article search (probed live 2026-11-26:
+    HTTP 200 with real doc-result items; full text verified as
+    page-based OCR HTML via the document page's /doc/page/
+    links)."""
+    url = ("https://www.persee.fr/search?ta=article&q="
+           + urllib.parse.quote(query))
+    status, body = _arab_fetch(url)
+    if status != 200 or not body:
+        return []
+    return _parse_persee_results(body)
+
+
+def _parse_eperiodica_results(page):
+    """E-Periodica search results: one ep-results__item per
+    article; .ep-result__magazine carries journal + year,
+    .ep-result__title the article anchor (/view/<pid>),
+    .ep-result__authors the authors and the first
+    .ep-result__page__text the matched OCR snippet."""
+    out = []
+    for block in re.split(r'<div class="ep-results__item ',
+                          page or "")[1:]:
+        m = re.search(r'<h2 class="ep-result__title">\s*'
+                      r'<a href="([^"]+)"[^>]*>(.*?)</a>',
+                      block, re.S)
+        if not m:
+            continue
+        url = urllib.parse.urljoin("https://www.e-periodica.ch",
+                                   html_lib.unescape(m.group(1)))
+        title = _arab_strip_tags(m.group(2))
+        if not title:
+            continue
+        venue = "E-Periodica"
+        year = None
+        mm = re.search(r'<p class="ep-result__magazine">(.*?)</p>',
+                       block, re.S)
+        if mm:
+            line = _arab_strip_tags(mm.group(1))
+            if line:
+                venue = line.split("—")[0].strip() or venue
+                year = _arab_year(line)
+        authors = []
+        am = re.search(r'<p class="ep-result__authors">(.*?)</p>',
+                       block, re.S)
+        if am:
+            authors = [a.strip() for a in re.split(
+                r"\s/\s", _arab_strip_tags(am.group(1))) if a.strip()]
+        abstract = ""
+        sm = re.search(r'<p class="ep-result__page__text">(.*?)</p>',
+                       block, re.S)
+        if sm:
+            abstract = _arab_strip_tags(sm.group(1))[:1500]
+        out.append(_arab_candidate(
+            title, url, "europe:eperiodica", authors=authors[:6],
+            year=year, venue=venue, abstract=abstract))
+        if len(out) >= EURO_PER_PLATFORM_CAP:
+            break
+    return out
+
+
+def _euro_eperiodica(query):
+    """Switzerland E-Periodica full-text search (probed live
+    2026-11-26: HTTP 200 with real ep-result items; a returned
+    item's issue OCR full text verified reachable)."""
+    url = ("https://www.e-periodica.ch/search?q="
+           + urllib.parse.quote(query))
+    status, body = _arab_fetch(url)
+    if status != 200 or not body:
+        return []
+    return _parse_eperiodica_results(body)
+
+
+def _euro_tidsskrift(query):
+    """Denmark tidsskrift.dk OJS site-wide search (probed live
+    2026-11-26: HTTP 200 with real obj_article_summary results;
+    a returned article's galley PDF verified %PDF)."""
+    return _asia_ojs_search("https://tidsskrift.dk", query,
+                            "europe:tidsskrift",
+                            "tidsskrift.dk (Danish journals)")
+
+
+_EURO_PLATFORM_SEARCHERS = [("bibliotekanauki", _euro_bibliotekanauki),
+                            ("persee", _euro_persee),
+                            ("eperiodica", _euro_eperiodica),
+                            ("tidsskrift", _euro_tidsskrift)]
+
+
+def search_european_platforms(query):
+    """§26: search the wired European-country journal platforms
+    (Biblioteka Nauki, Persée, E-Periodica, tidsskrift.dk — each
+    with full text verified reachable, see the §26 header
+    comment). Per-platform fail-soft, capped at
+    EURO_PER_PLATFORM_CAP per platform and EURO_TOTAL_CAP
+    overall. The remaining verified platforms are registry-only
+    (see the §26 header comment) and are not queried here."""
+    out = []
+    for name, fn in _EURO_PLATFORM_SEARCHERS:
+        try:
+            found = fn(query) or []
+        except Exception as e:
+            print(f"europe:{name} failed for query {query!r}: {e}")
+            continue
+        out.extend(found)
+        if len(out) >= EURO_TOTAL_CAP:
+            break
+    return out[:EURO_TOTAL_CAP]
+
+
+# --------------------------------------------------------------------------
 # Source registries (§17) — credibility / whitelist SIGNAL only.
 # Six curated registries sit beside this script in the repo:
 #   sources_registry.json        (registry 1, registry schema)
@@ -1621,6 +1930,10 @@ def search_arab_libraries(query):
 #                                   libraries + the Iraqi Journal of
 #                                   Science alternate route, registry
 #                                   schema — library/platform entries)
+#   european_journals_registry.json (§26: the verified open-access
+#                                   European-country journal
+#                                   platforms, registry schema —
+#                                   platform entries, not journals)
 # Both schemas normalise into one record {name, url, domain, type,
 # fields, languages, registry}. A registry match is a ranking SIGNAL
 # ONLY: it never verifies a source (the DOI / Crossref / publisher
@@ -1635,7 +1948,8 @@ REGISTRY_FILES = ["sources_registry.json",
                   "thesis_registry.json",
                   "arab_journals_registry.json",
                   "asian_journals_registry.json",
-                  "arab_libraries_registry.json"]
+                  "arab_libraries_registry.json",
+                  "european_journals_registry.json"]
 _REGISTRY_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
@@ -1787,7 +2101,8 @@ SEARCHERS = [search_openalex, search_crossref, search_openaire,
              search_internet_archive, search_google_books,
              search_annas_archive, search_doaj, search_arxiv,
              search_semantic_scholar, search_arab_platforms,
-             search_asian_platforms, search_arab_libraries]
+             search_asian_platforms, search_arab_libraries,
+             search_european_platforms]
 
 # English-first retrieval (§18): wave 1 queries the abstract-rich
 # indexes ONLY — Crossref is held back because, queried with a
@@ -1800,7 +2115,8 @@ WAVE1_SEARCHERS = [search_openalex, search_europe_pmc, search_hal,
                    search_zbmath, search_internet_archive,
                    search_google_books, search_arxiv,
                    search_annas_archive, search_arab_platforms,
-                   search_asian_platforms, search_arab_libraries]
+                   search_asian_platforms, search_arab_libraries,
+                   search_european_platforms]
 CROSSREF_SEARCHERS = [search_crossref]
 
 
@@ -1841,6 +2157,7 @@ SEARCHER_LABEL = {
     "search_arab_platforms": "Arab platforms",
     "search_asian_platforms": "Asian platforms",
     "search_arab_libraries": "Arab libraries",
+    "search_european_platforms": "European platforms",
 }
 
 VERIFY_CACHE_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)),
@@ -4273,7 +4590,7 @@ def multilingual_query_matrix(field, topic, api_key=None, model=None):
         "Islamic-science topics include ar, fa, de, fr, ru, es, tr; "
         "for other fields choose the languages that actually carry "
         "the literature. Allowed codes: en ar fa de fr ru es tr it "
-        "la ur uz zh ja ko.\n"
+        "la ur uz zh ja ko fi nl pl pt hr sr uk el.\n"
         "Each query: 3-10 words, keywords only, no quotes, no "
         "Boolean operators, written in that language's own script.")
     try:
