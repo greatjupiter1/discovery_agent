@@ -253,8 +253,8 @@ check("(e7b) primary with NO content at all (title-only) is still "
 # ---- (f) standing laws + funnel ------------------------------------------
 check("(f1) MIN_SOURCES bar still 5", ba.MIN_SOURCES == 5)
 reg = ba.get_registry()
-check("(f2) registry still loads (2071 unique URLs)",
-      reg[2]["unique_urls"] == 2071)
+check("(f2) registry still loads (2072 unique URLs)",
+      reg[2]["unique_urls"] == 2072)
 ft = ba.build_funnel_text("t", {"candidates": 9, "verified": 8,
                                 "with_content": 5, "relevant": 5,
                                 "counted": 5, "registry_matched": 1,
