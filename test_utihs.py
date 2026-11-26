@@ -49,9 +49,9 @@ check("notes keep the §36 journal route unduplicated",
 
 for mod, tag in ((ba, "build_article"), (pt, "propose_topics")):
     di, ui, st = mod.load_source_registry()
-    check(f"{tag} loads 21 files / 2188 entries",
-          st["files_ok"] == 21 and st["loaded"] == 2188)
-    check(f"{tag} unique URL count", st["unique_urls"] == 2135)
+    check(f"{tag} loads 22 files / 2195 entries",
+          st["files_ok"] == 22 and st["loaded"] == 2195)
+    check(f"{tag} unique URL count", st["unique_urls"] == 2142)
     check(f"{tag} utihs indexed by domain", "utihs.ut.ac.ir" in di)
     check(f"{tag} REGISTRY_FILES lists utihs_registry.json",
           "utihs_registry.json" in mod.REGISTRY_FILES)
