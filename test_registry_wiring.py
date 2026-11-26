@@ -22,8 +22,8 @@ def check(label, cond):
 # §26 added european_journals_registry.json (23 platform entries)
 for mod, tag in ((ba, "build_article"), (pt, "propose_topics")):
     di, ui, st = mod.load_source_registry()
-    check(f"{tag} (a) 15 files load", st["files_ok"] == 15 and st["loaded"] == 2161)
-    check(f"{tag} (c) dedupe drops duplicates", st["duplicates"] > 0 and st["unique_urls"] == 2161 - st["duplicates"])
+    check(f"{tag} (a) 16 files load", st["files_ok"] == 16 and st["loaded"] == 2162)
+    check(f"{tag} (c) dedupe drops duplicates", st["duplicates"] > 0 and st["unique_urls"] == 2162 - st["duplicates"])
     print(f"  {tag} stats: {st}")
     globals()[f"stats_{tag}"] = st
 
