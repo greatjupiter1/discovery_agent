@@ -250,7 +250,8 @@ REGISTRY_FILES = ["sources_registry.json",
                   "arab_journals_registry.json",
                   "asian_journals_registry.json",
                   "arab_libraries_registry.json",
-                  "european_journals_registry.json"]
+                  "european_journals_registry.json",
+                  "world_libraries_registry.json"]
 _REGISTRY_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
