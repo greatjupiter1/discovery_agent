@@ -19,10 +19,11 @@ def check(label, cond):
 # arab_journals_registry.json (8 platform entries) to the original 4,
 # §24 added asian_journals_registry.json (22 platform entries)
 # §25 added arab_libraries_registry.json (6 library entries)
+# §26 added european_journals_registry.json (23 platform entries)
 for mod, tag in ((ba, "build_article"), (pt, "propose_topics")):
     di, ui, st = mod.load_source_registry()
-    check(f"{tag} (a) 7 files load", st["files_ok"] == 7 and st["loaded"] == 2036)
-    check(f"{tag} (c) dedupe drops duplicates", st["duplicates"] > 0 and st["unique_urls"] == 2036 - st["duplicates"])
+    check(f"{tag} (a) 8 files load", st["files_ok"] == 8 and st["loaded"] == 2059)
+    check(f"{tag} (c) dedupe drops duplicates", st["duplicates"] > 0 and st["unique_urls"] == 2059 - st["duplicates"])
     print(f"  {tag} stats: {st}")
     globals()[f"stats_{tag}"] = st
 
