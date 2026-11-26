@@ -1333,6 +1333,271 @@ def search_asian_platforms(query):
 
 
 # --------------------------------------------------------------------------
+# Arabic digital libraries + Iraq/Qatar alternate routes (§25) —
+# open access, no keys. The libraries are registered in
+# arab_libraries_registry.json (§17 wiring: credibility/priority
+# signal only, never verification). Jupiter's full-text-only law
+# (2026-11-26) governs this section: a route is wired ONLY when the
+# probe saw its search answer with real results AND a returned
+# item's FULL TEXT was verified reachable — abstracts/metadata
+# alone never count. Probed live from the build sandbox on
+# 2026-11-26:
+#   Shamela (المكتبة الشاملة) — the site's own content search
+#       POST shamela.ws/ajax/search {term: <q>} -> HTML fragment of
+#       <article class="srch-result"> hits, each linking the exact
+#       book page shamela.ws/book/<id>/<page>; a returned book page
+#       opened with its full text (the nass body) readable — full
+#       text verified. Book candidates (primary-source material).
+#       Transport intermittently truncates (IncompleteRead); the
+#       fetch salvages partial bodies and retries once. From the
+#       build sandbox the CDN also intermittently closes the body
+#       stream to Python clients outright (HTTP 200, empty body)
+#       for stretches of time, while curl — and urllib in other
+#       windows — succeed; the searcher uses a TLS-1.2-capped
+#       context (which measurably helped) and fail-soft absorbs
+#       a bad window.
+#   Iraq alternate route — IASJ itself closed every connection
+#       (site, OAI-PMH, alternate host), so Iraqi journal content
+#       is reached through the Iraqi Journal of Science
+#       (University of Baghdad) OJS site search directly:
+#       GET ijs.uobaghdad.edu.iq/index.php/eijs/search/search
+#           ?query=<q> (shared _parse_ojs_search_results; a returned
+#           article's galley PDF was verified: %PDF-1.7, ~1.16 MB).
+#       Its OAI-PMH Identify answers too.
+#   Qatar alternate route — QScience (HBKU Press) is a JavaScript
+#       SPA with no searchable route and a bot wall (403) from the
+#       sandbox, but its journals are Crossref-registered diamond
+#       OA (DOI prefix 10.5339): the Crossref works API filtered
+#       by the journals' online ISSNs (Qatar Medical Journal
+#       2227-0426 — 1,515 works under HBKU Press in the probe;
+#       QScience Connect 2223-506X) returns its articles, whose
+#       full texts are open at their DOI targets.
+# Registry-only (routes exhausted per the multi-route rule —
+# site search, public API, OAI-PMH, alternate hosts/mirrors,
+# sitemap/feeds and index fallbacks all tried; see DESIGN.md §25):
+#   Al-Mustafa (al-mostafa.com) — search answers and returns
+#       direct PDF links to primary works, but the file server's
+#       HTTPS is broken from the sandbox (empty reply / TLS
+#       wrong-signature across curl, urllib, wget, all TLS
+#       variants), so full-text delivery is UNVERIFIED;
+#   Waqfeya — Next.js client-side app, no machine search route
+#       (its book pages link full PDFs on archive.org — the WAQ
+#       collection — already covered by the IA searcher);
+#   Noor Book and Hindawi — Cloudflare challenge (HTTP 403) on
+#       every route from the sandbox;
+#   ASJP (Algeria) — every connection closed (site search, OAI on
+#       two paths, http/https, www/no-www); EKB (Egypt) — HTTP
+#       429 "Access Restricted" on journal subdomains incl. OAI.
+# Every call is fail-soft and single-shot (the shared _arab_fetch);
+# candidates carry the usual shape and flow through the UNCHANGED
+# verification, screening, judges and text-first gate.
+# --------------------------------------------------------------------------
+
+LIB_PER_SOURCE_CAP = 8
+LIB_TOTAL_CAP = 24
+_QSCIENCE_ISSNS = ("2227-0426", "2223-506X")
+
+
+def _parse_shamela_results(page):
+    """Shamela ajax/search fragment: one <article
+    class="srch-result"> per hit; .srch-result-title carries
+    <a href=".../book/<id>/<page>">book title</a> plus [author]
+    and (volume, page); .srch-snippet carries the matched-text
+    excerpt. Candidates are BOOK candidates (the book page is the
+    full text), shaped like the Internet Archive book candidates."""
+    out = []
+    for block in re.split(r'<article class="srch-result">',
+                          page or "")[1:]:
+        m = re.search(r'srch-result-title[^>]*>(.*?)</div>',
+                      block, re.S)
+        if not m:
+            continue
+        a = re.search(r'<a[^>]+href="([^"]+)"[^>]*>(.*?)</a>',
+                      m.group(1), re.S)
+        if not a:
+            continue
+        title = _arab_strip_tags(a.group(2))
+        if not title:
+            continue
+        authors = []
+        am = re.search(r"\[([^\]]+)\]",
+                       _arab_strip_tags(m.group(1)))
+        if am and am.group(1).strip():
+            authors = [am.group(1).strip()]
+            title = re.sub(r"\s*\[[^\]]*\]\s*$", "", title).strip()
+        sm = re.search(r'srch-snippet[^>]*>(.*?)</div>', block, re.S)
+        out.append(_arab_candidate(
+            title, html_lib.unescape(a.group(1)), "library:shamela",
+            authors=authors[:3], venue="Al-Shamela Library (book)",
+            abstract=_arab_strip_tags(sm.group(1))[:1500] if sm
+            else ""))
+        if len(out) >= LIB_PER_SOURCE_CAP:
+            break
+    return out
+
+
+def _shamela_fetch(url, data=None):
+    """Single-shot fetch for Shamela with a TLS-1.2-capped
+    context: the site's CDN intermittently closes the body
+    stream to the default Python TLS handshake (probed live
+    2026-11-26: default context -> HTTP 200 with an empty body
+    or RemoteDisconnected, while a TLS-1.2-capped ALPN context
+    returned the full fragment). Returns (status, text);
+    (None, "") on transport error; partial bodies are salvaged
+    exactly like _arab_fetch."""
+    import http.client
+    import ssl
+    headers = dict(_ARAB_HEADERS)
+    headers["X-Requested-With"] = "XMLHttpRequest"
+    headers["Referer"] = "https://shamela.ws/search"
+    try:
+        _pace(urllib.parse.urlparse(url).netloc)
+        ctx = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
+        ctx.check_hostname = False
+        ctx.verify_mode = ssl.CERT_NONE
+        ctx.maximum_version = ssl.TLSVersion.TLSv1_2
+        try:
+            ctx.set_alpn_protocols(["http/1.1"])
+        except Exception:
+            pass
+        req = urllib.request.Request(url, data=data, headers=headers)
+        with urllib.request.urlopen(req, timeout=_ARAB_TIMEOUT,
+                                    context=ctx) as resp:
+            try:
+                raw = resp.read(1_500_000)
+            except http.client.IncompleteRead as e:
+                raw = e.partial or b""
+            return resp.status, raw.decode("utf-8", "replace")
+    except urllib.error.HTTPError as e:
+        try:
+            return e.code, e.read(300_000).decode("utf-8", "replace")
+        except Exception:
+            return e.code, ""
+    except Exception:
+        return None, ""
+
+
+def _lib_shamela(query):
+    """Shamela content search (probed live 2026-11-26: POST
+    /ajax/search {term} -> HTTP 200 fragment with real book-page
+    hits; the endpoint intermittently truncates its response, so
+    one retry is allowed — _shamela_fetch salvages partial
+    bodies)."""
+    payload = urllib.parse.urlencode({"term": query}).encode("utf-8")
+    for _attempt in range(2):
+        status, body = _shamela_fetch("https://shamela.ws/ajax/search",
+                                      data=payload)
+        if status == 200 and "srch-result" in body:
+            return _parse_shamela_results(body)
+    return []
+
+
+def _lib_iraq_ijs(query):
+    """Iraq alternate route: Iraqi Journal of Science (University
+    of Baghdad) OJS search (probed live 2026-11-26: HTTP 200 with
+    20 real obj_article_summary blocks; galley PDF verified)."""
+    url = ("https://ijs.uobaghdad.edu.iq/index.php/eijs/search/"
+           "search?query=" + urllib.parse.quote(query))
+    status, body = _arab_fetch(url)
+    if status != 200 or not body:
+        return []
+    return _parse_ojs_search_results(
+        body, "iraq:ijs",
+        "Iraqi Journal of Science (University of Baghdad)")
+
+
+def _parse_qscience_crossref(data):
+    out = []
+    for it in (data.get("message") or {}).get("items", []) or []:
+        if not isinstance(it, dict):
+            continue
+        titles = it.get("title") or []
+        title = str(titles[0] if titles else "").strip()
+        if not title:
+            continue
+        authors = []
+        for a in it.get("author") or []:
+            if not isinstance(a, dict):
+                continue
+            name = " ".join(x for x in
+                            [str(a.get("given") or ""),
+                             str(a.get("family") or "")] if x).strip()
+            if name:
+                authors.append(name)
+        year = None
+        for key in ("published", "issued", "created"):
+            parts = ((it.get(key) or {}).get("date-parts")
+                     or [[None]])[0]
+            if parts and parts[0]:
+                try:
+                    year = int(parts[0])
+                except (TypeError, ValueError):
+                    year = None
+                break
+        doi = str(it.get("DOI") or "").strip() or None
+        url = str(it.get("URL") or "").strip()
+        if not url and doi:
+            url = "https://doi.org/" + doi
+        venue = str(((it.get("container-title") or [""])[0] or "")
+                    ).strip() or "QScience (HBKU Press)"
+        out.append(_arab_candidate(
+            title, url, "qatar:qscience-crossref",
+            authors=authors[:6], year=year, venue=venue, doi=doi))
+        if len(out) >= LIB_PER_SOURCE_CAP:
+            break
+    return out
+
+
+def _lib_qscience_crossref(query):
+    """Qatar alternate route: Crossref works API filtered by the
+    online ISSNs of QScience (HBKU Press) journals — Qatar
+    Medical Journal 2227-0426 (probe: 1,515 HBKU Press works) and
+    QScience Connect 2223-506X. QScience itself is a JS SPA with
+    no searchable route; its articles are diamond OA at their
+    DOI targets."""
+    out = []
+    for issn in _QSCIENCE_ISSNS:
+        qs = urllib.parse.urlencode(
+            [("query", query), ("filter", "issn:" + issn),
+             ("rows", str(LIB_PER_SOURCE_CAP)),
+             ("select", "DOI,title,author,published,URL,"
+                        "container-title")])
+        data = _arab_json("https://api.crossref.org/works?" + qs)
+        if isinstance(data, dict):
+            out.extend(_parse_qscience_crossref(data))
+        if len(out) >= LIB_PER_SOURCE_CAP:
+            break
+    return out[:LIB_PER_SOURCE_CAP]
+
+
+_LIB_SEARCHERS = [("shamela", _lib_shamela),
+                  ("iraq-ijs", _lib_iraq_ijs),
+                  ("qscience-crossref", _lib_qscience_crossref)]
+
+
+def search_arab_libraries(query):
+    """§25: search the wired Arabic digital libraries and the
+    Iraq/Qatar alternate routes (Shamela books, Iraqi Journal of
+    Science OJS, QScience via Crossref ISSN filter — each with
+    full text verified reachable, see the §25 header comment).
+    Per-source fail-soft, capped at LIB_PER_SOURCE_CAP per source
+    and LIB_TOTAL_CAP overall. Al-Mustafa, Waqfeya, Noor Book and
+    Hindawi are registry-only (see the §25 header comment) and
+    are not queried here."""
+    out = []
+    for name, fn in _LIB_SEARCHERS:
+        try:
+            found = fn(query) or []
+        except Exception as e:
+            print(f"library:{name} failed for query {query!r}: {e}")
+            continue
+        out.extend(found)
+        if len(out) >= LIB_TOTAL_CAP:
+            break
+    return out[:LIB_TOTAL_CAP]
+
+
+# --------------------------------------------------------------------------
 # Source registries (§17) — credibility / whitelist SIGNAL only.
 # Six curated registries sit beside this script in the repo:
 #   sources_registry.json        (registry 1, registry schema)
@@ -1352,6 +1617,10 @@ def search_asian_platforms(query):
 #                                   Asian-country journal platforms,
 #                                   registry schema — platform entries,
 #                                   not individual journals)
+#   arab_libraries_registry.json (§25: the great Arabic digital
+#                                   libraries + the Iraqi Journal of
+#                                   Science alternate route, registry
+#                                   schema — library/platform entries)
 # Both schemas normalise into one record {name, url, domain, type,
 # fields, languages, registry}. A registry match is a ranking SIGNAL
 # ONLY: it never verifies a source (the DOI / Crossref / publisher
@@ -1365,7 +1634,8 @@ REGISTRY_FILES = ["sources_registry.json",
                   "sources_registry_2.json",
                   "thesis_registry.json",
                   "arab_journals_registry.json",
-                  "asian_journals_registry.json"]
+                  "asian_journals_registry.json",
+                  "arab_libraries_registry.json"]
 _REGISTRY_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
@@ -1517,7 +1787,7 @@ SEARCHERS = [search_openalex, search_crossref, search_openaire,
              search_internet_archive, search_google_books,
              search_annas_archive, search_doaj, search_arxiv,
              search_semantic_scholar, search_arab_platforms,
-             search_asian_platforms]
+             search_asian_platforms, search_arab_libraries]
 
 # English-first retrieval (§18): wave 1 queries the abstract-rich
 # indexes ONLY — Crossref is held back because, queried with a
@@ -1530,7 +1800,7 @@ WAVE1_SEARCHERS = [search_openalex, search_europe_pmc, search_hal,
                    search_zbmath, search_internet_archive,
                    search_google_books, search_arxiv,
                    search_annas_archive, search_arab_platforms,
-                   search_asian_platforms]
+                   search_asian_platforms, search_arab_libraries]
 CROSSREF_SEARCHERS = [search_crossref]
 
 
@@ -1570,6 +1840,7 @@ SEARCHER_LABEL = {
     "search_arxiv": "arXiv", "search_semantic_scholar": "Semantic Scholar",
     "search_arab_platforms": "Arab platforms",
     "search_asian_platforms": "Asian platforms",
+    "search_arab_libraries": "Arab libraries",
 }
 
 VERIFY_CACHE_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)),
