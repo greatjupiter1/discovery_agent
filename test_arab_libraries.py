@@ -40,8 +40,8 @@ check("registry-only libraries carry no wired api",
 
 for mod, tag in ((ba, "build_article"), (pt, "propose_topics")):
     di, ui, st = mod.load_source_registry()
-    check(f"{tag} loads 14 files / 2160 entries",
-          st["files_ok"] == 14 and st["loaded"] == 2160)
+    check(f"{tag} loads 15 files / 2161 entries",
+          st["files_ok"] == 15 and st["loaded"] == 2161)
     check(f"{tag} arab libraries indexed by domain",
           all(d in di for d in ("shamela.ws", "al-mostafa.com",
                                 "waqfeya.net", "noor-book.com",
