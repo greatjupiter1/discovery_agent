@@ -32,7 +32,7 @@ like HTTP error statuses.
 Inputs come from the environment (set by .github/workflows/discovery.yml):
   FIELD, TOPIC, LANGUAGE (default "fa"), MODE (default "review"),
   SEARCH_SCOPE (default "full"; "new" restricts the candidate
-  search to the §§32–46 additions only — §43),
+  search to the §§32–48 additions only — §43),
   GEMINI_MODEL (default "gemini-3.5-flash")
   LLM_PROVIDER (default "gemini"; "github" selects GitHub Models,
   "glm" selects GLM on z.ai),
@@ -4974,8 +4974,257 @@ def search_loc_images(query):
 
 
 # --------------------------------------------------------------------------
+# §48 — ISLAMWEB LIBRARY (المكتبة الإسلامية, islamweb.net/ar/library),
+# registered in islamweb_registry.json (§17 wiring: credibility/
+# priority signal only, never verification). IslamWeb is one of the
+# largest Arabic heritage libraries on the web; it serves the FULL
+# TEXT of its books as page-based HTML (Shamela class). Probed live
+# on 2026-11-26 from the build sandbox under the full-text-only law
+# and the multi-route rule:
+#   index      GET /ar/library/index.php -> 200, server-side HTML
+#       carrying full book excerpts (Ibn Rushd, Ibn Hisham, Siyar
+#       A'lam tarajim) — the library is genuinely open, no login.
+#   search UI  GET /ar/library/index.php?page=expsearch&stxt=<q>
+#       (the route the site's own search box opens) -> the search
+#       FORM only; its results are loaded by JavaScript. POSTing
+#       the form fields (T1/R1/R2/range/wheretosearch/srchloc) to
+#       the same URL returns the form page again — no server-side
+#       results on that route.
+#   search API GET /ar/SearchEngine/explibtab.php — the endpoint
+#       the site's own search script (/ar/searchengine/
+#       expsearchengine.js, function doLibrarySearch) calls:
+#       ?lang=A&myRange=&synonym=0&extended=0&exact=0&device=0&
+#       generalsearch=0&srchloc=0&bk_no=-1&agent=&t=&txt=<q>&
+#       R1=1&R2=0 -> 200 in ~3.5 s with an HTML result list
+#       (الخوارزمي -> 11 items; الفلك -> 41 items): each item
+#       links one content page, shows a snippet, and names its
+#       book as a path (book > section > chapter).
+#   book text  GET /ar/library/content/<book_id>/<node_id>/<slug>
+#       -> 200; the book's real prose sits in
+#       <div class="bookcontent-dic" id='pagebody'> blocks (a
+#       node may split its text across several; probe: book 60 =
+#       سير أعلام النبلاء, node 5325 = the biography of شاور,
+#       جزء 20, printed p. 515 — read verbatim); the same page
+#       carries the book title in <h3 class="txt-blue"> and the
+#       author in <h4 class="txt-secondary">. CAVEAT: the site
+#       intermittently serves a LIGHT page variant with no
+#       pagebody at all (the same URL answered 254 KB with the
+#       text and 89 KB without it, minutes apart), so every node
+#       fetch is retried once when it carries no book text.
+#   catalogue  GET /ar/library/index.php?page=bookslist
+#       (&subject= / &author= filters) answers but is catalogue-
+#       only — not needed; the /ar/library/pdfbooks/ wing exists
+#       but the HTML route is cleaner and complete.
+# SEARCH DISCIPLINE: the platform's stemmer is aggressive — a
+# foreign name like البيروني is root-reduced and the search
+# returns dictionary entries (لسان العرب on وري) instead of the
+# name. The searcher therefore never trusts the match: passages
+# are extracted from the FETCHED pages with the query terms (the
+# unchanged screening and judges discard the noise), with only
+# the §46 Ganjeh fallback — the platform's own full-text index
+# matched the book, so its fetched real prose stands as the
+# passage — when exact-term extraction misses. NO PRIMARY SEEDS:
+# al-Biruni's own books are NOT hosted here (probed: searches
+# for القانون المسعودي and الآثار الباقية return other books
+# MENTIONING them), so no candidate is marked primary.
+# --------------------------------------------------------------------------
+
+ISLAMWEB_CAP = 8
+ISLAMWEB_PAGES_PER_BOOK = 3
+_ISLAMWEB_BASE = "https://www.islamweb.net"
+_ISLAMWEB_SEARCH_URL = _ISLAMWEB_BASE + "/ar/SearchEngine/explibtab.php"
+
+
+def _islamweb_text(fragment):
+    """Visible text of an IslamWeb fragment (§48): script/style
+    removed, then a QUOTE-AWARE tag strip — the site's tooltip
+    anchors carry '>' characters inside their onmouseover
+    attributes, which defeat the shared naive stripper and leak
+    JavaScript fragments into the text — and bare-URL tokens
+    removed (the pages hide reference anchors whose link text
+    is a raw index.php URL; never book prose)."""
+    if not fragment:
+        return ""
+    t = re.sub(r"<script\b.*?</script>", " ", fragment,
+               flags=re.S | re.I)
+    t = re.sub(r"<style\b.*?</style>", " ", t, flags=re.S | re.I)
+    t = re.sub(r"<(?:[^>\"']|\"[^\"]*\"|'[^']*')*>", " ", t)
+    t = html_lib.unescape(t)
+    t = re.sub(r"\S*index\.php\?\S*", " ", t)
+    t = re.sub(r"https?://\S+", " ", t)
+    return re.sub(r"\s+", " ", t).strip()
+
+
+def _islamweb_pagebody(body):
+    """The book text of one IslamWeb content page: EVERY exact
+    <div ... id='pagebody'> block (the page's articleBody — a
+    node may split its text across several such blocks), each
+    extracted with balanced div nesting, joined in document
+    order; "" when no block is present. (The twin
+    id='pagebody_thaskeel' div is a vocalised duplicate and is
+    never matched — the id must be exactly 'pagebody'.)"""
+    if not body:
+        return ""
+    texts = []
+    for m in re.finditer(
+            r"<div[^>]*\bid=['\"]pagebody['\"][^>]*>", body):
+        depth, pos = 1, m.end()
+        end = len(body)
+        for mm in re.finditer(r"<div\b[^>]*>|</div>", body[pos:]):
+            if mm.group(0).startswith("</"):
+                depth -= 1
+                if depth == 0:
+                    end = pos + mm.end()
+                    break
+            else:
+                depth += 1
+        text = _islamweb_text(body[m.start():end])
+        if text:
+            texts.append(text)
+    return "\n".join(texts)
+
+
+def _islamweb_node(url):
+    """One content page as (text, title, author): the page is
+    fetched, and fetched ONCE more when it carried no book text
+    — the site intermittently serves a light page variant with
+    no pagebody at all (probed 2026-11-26: the same URL answered
+    254 KB with the book text and 89 KB without it, minutes
+    apart). Title/author come from whichever fetch carried
+    them. ("", "", "") when both fetches fail."""
+    # The search results carry RAW Arabic slugs in their hrefs;
+    # urllib refuses a non-ASCII URL outright, so the path is
+    # percent-encoded first (the server accepts the encoded
+    # slug — probed live).
+    url = urllib.parse.quote(url, safe=":/?&=%#+@!$'()*;,[]")
+    text = title = author = ""
+    for _attempt in range(2):
+        st, page = _arab_fetch(url)
+        if st != 200 or not page:
+            continue
+        if not title:
+            title, author = _islamweb_book_meta(page)
+        text = _islamweb_pagebody(page)
+        if text:
+            break
+    return text, title, author
+
+
+def _islamweb_book_meta(body):
+    """(title, author) from a content page's header block: the
+    book title in <h3 class="txt-blue">, the author in
+    <h4 class="txt-secondary">, whose text is "short name - full
+    name" (the full name is kept). ("", "") on absence."""
+    title = author = ""
+    m = re.search(r"<h3[^>]*class=\"txt-blue\"[^>]*>(.*?)</h3>",
+                  body or "", re.S)
+    if m:
+        title = _arab_strip_tags(m.group(1))
+    m = re.search(r"<h4[^>]*class=\"txt-secondary\"[^>]*>(.*?)</h4>",
+                  body or "", re.S)
+    if m:
+        author = _arab_strip_tags(m.group(1))
+        if " - " in author:
+            author = author.split(" - ", 1)[1].strip() or author
+    return title, author
+
+
+def _islamweb_parse_results(body):
+    """Hit items from the explibtab response, in response order:
+    [{book_id, node_id, url, node_title, book_title}] — the book
+    title is the first segment of the item's book path
+    (book > section > chapter)."""
+    items = []
+    for chunk in re.split(r"<li\b", body or "")[1:]:
+        m = re.search(
+            r'href="(https://(?:www\.)?islamweb\.net/ar/library/'
+            r'content/(\d+)/(\d+)/[^"]*)"', chunk)
+        if not m:
+            continue
+        path = re.search(r'class="book-name">\s*<span[^>]*>'
+                         r'(.*?)</span>', chunk, re.S)
+        book = (_arab_strip_tags(path.group(1)).split(">")[0].strip()
+                if path else "")
+        t = re.search(r"<h5[^>]*>\s*<a[^>]*>(.*?)</a>", chunk, re.S)
+        items.append({"book_id": m.group(2), "node_id": m.group(3),
+                      "url": m.group(1), "book_title": book,
+                      "node_title": _arab_strip_tags(t.group(1))
+                      if t else ""})
+    return items
+
+
+def search_islamweb(query):
+    """§48: search the IslamWeb library (المكتبة الإسلامية)
+    through its own full-text search endpoint. Hits are grouped
+    by book; for each book the hit pages' real prose is fetched
+    from their content pages and passages extracted — a book
+    whose hit pages carry no real text yields NO candidate, per
+    the full-text-only law. Fail-soft, capped at ISLAMWEB_CAP."""
+    query = (query or "").strip()
+    if not query:
+        return []
+    qs = urllib.parse.urlencode(
+        {"debug_srch_url": 0, "lang": "A", "myRange": "",
+         "synonym": 0, "extended": 0, "exact": 0, "device": 0,
+         "generalsearch": 0, "srchloc": 0, "bk_no": -1,
+         "agent": "", "t": "", "txt": query, "R1": 1, "R2": 0})
+    status, body = _arab_fetch(f"{_ISLAMWEB_SEARCH_URL}?{qs}")
+    if status != 200 or not body:
+        return []
+    books, order = {}, []
+    for it in _islamweb_parse_results(body):
+        bid = it["book_id"]
+        if bid not in books:
+            books[bid] = {"title": it["book_title"], "nodes": []}
+            order.append(bid)
+        if all(n["node_id"] != it["node_id"]
+               for n in books[bid]["nodes"]):
+            books[bid]["nodes"].append(it)
+    terms = _shelf_query_terms(query)
+    out = []
+    for bid in order:
+        if len(out) >= ISLAMWEB_CAP:
+            break
+        info = books[bid]
+        texts, title, author = [], "", ""
+        for node in info["nodes"][:ISLAMWEB_PAGES_PER_BOOK]:
+            text, t, a = _islamweb_node(node["url"])
+            if not title and t:
+                title, author = t, a
+            if text and _lib46_text_ok(text):
+                texts.append(text)
+        if not texts:
+            continue
+        joined = "\n".join(texts)
+        excerpt, hits = extract_passages(joined, terms)
+        if not excerpt:
+            # The platform's own full-text index matched this
+            # book for the query (possibly through its root
+            # stemming, which the exact-term extractor cannot
+            # see); the fetched pages are real prose, so they
+            # stand as the passage.
+            excerpt = joined[:FULLTEXT_EXCERPT_CHARS]
+            hits = len(info["nodes"])
+        title = title or info["title"]
+        if not title:
+            continue
+        cand = _arab_candidate(
+            title, info["nodes"][0]["url"], "islamweb:library",
+            authors=[author] if author else [],
+            venue="IslamWeb — المكتبة الإسلامية (إسلام ويب)")
+        cand["fulltext"] = True
+        cand["fulltext_excerpt"] = excerpt[:FULLTEXT_EXCERPT_CHARS]
+        cand["fulltext_route"] = "islamweb:library"
+        cand["passages"] = True
+        cand["passage_hits"] = hits
+        cand["language"] = "ar"
+        out.append(cand)
+    return out
+
+
+# --------------------------------------------------------------------------
 # Source registries (§17) — credibility / whitelist SIGNAL only.
-# Twenty curated registries sit beside this script in the repo:
+# Twenty-one curated registries sit beside this script in the repo:
 #   sources_registry.json        (registry 1, registry schema)
 #   sources_registry_500_more.json (500 DOAJ journals, compact schema:
 #                                   {id, name, url, type, fields,
@@ -5096,6 +5345,16 @@ def search_loc_images(query):
 #                                   witness entries; passages
 #                                   exist only as transcriptions
 #                                   of fetched page images)
+#   islamweb_registry.json       (§48: IslamWeb — المكتبة
+#                                   الإسلامية, one of the largest
+#                                   Arabic heritage libraries,
+#                                   wired LIVE via its own search
+#                                   engine's endpoint (explibtab)
+#                                   + page-based HTML full text
+#                                   on its content route, registry
+#                                   schema — one platform entry +
+#                                   three page-verified book
+#                                   entries)
 # Both schemas normalise into one record {name, url, domain, type,
 # fields, languages, registry}. A registry match is a ranking SIGNAL
 # ONLY: it never verifies a source (the DOI / Crossref / publisher
@@ -5123,7 +5382,8 @@ REGISTRY_FILES = ["sources_registry.json",
                   "ganjeh_registry.json",
                   "ablibrary_registry.json",
                   "najaf_registry.json",
-                  "image_sources_registry.json"]
+                  "image_sources_registry.json",
+                  "islamweb_registry.json"]
 _REGISTRY_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
@@ -5450,7 +5710,7 @@ SEARCHERS = [search_shelf, search_openalex, search_crossref, search_openaire,
              search_university_lectures, search_ensani, search_jihs,
              search_iran_math, search_tajik_journals, search_core,
              search_ganjeh, search_ablibrary, search_najaf,
-             search_qdl_images, search_loc_images]
+             search_qdl_images, search_loc_images, search_islamweb]
 
 # English-first retrieval (§18): wave 1 queries the abstract-rich
 # indexes ONLY — Crossref is held back because, queried with a
@@ -5468,7 +5728,8 @@ WAVE1_SEARCHERS = [search_shelf, search_openalex, search_europe_pmc, search_hal,
                    search_university_lectures, search_ensani, search_jihs,
                    search_iran_math, search_tajik_journals, search_core,
                    search_ganjeh, search_ablibrary, search_najaf,
-                   search_qdl_images, search_loc_images]
+                   search_qdl_images, search_loc_images,
+                   search_islamweb]
 CROSSREF_SEARCHERS = [search_crossref]
 
 
@@ -5482,7 +5743,7 @@ CROSSREF_SEARCHERS = [search_crossref]
 #       WAVE1_SEARCHERS, the Crossref top-up, wave 2 and the
 #       §19 primary lane all run as before.
 #   "new" — the candidate search runs ONLY the searchers added
-#       in the newest build wave (§§32–47), i.e. the shelf plus
+#       in the newest build wave (§§32–48), i.e. the shelf plus
 #       the new items:
 #         search_shelf               (§41 — the collected shelf;
 #                                     carries the primary books
@@ -5503,6 +5764,10 @@ CROSSREF_SEARCHERS = [search_crossref]
 #                                     transcribed from page images)
 #         search_loc_images          (§47 — image sources: LOC /
 #                                     WDL IIIF items, likewise)
+#         search_islamweb            (§48 — IslamWeb library:
+#                                     its own full-text search
+#                                     endpoint + page-based HTML
+#                                     book text)
 #       (§39 utihs and §40 are registry-only — they have no
 #       searcher to include; §33 is the review layer, §44 the
 #       parallel writer and §45 the review robustness pass —
@@ -5527,7 +5792,8 @@ NEW_ONLY_SEARCHERS = [search_shelf, search_university_lectures,
                       search_ensani, search_jihs, search_iran_math,
                       search_tajik_journals, search_core,
                       search_ganjeh, search_ablibrary, search_najaf,
-                      search_qdl_images, search_loc_images]
+                      search_qdl_images, search_loc_images,
+                      search_islamweb]
 _NEW_ONLY_NAMES = {s.__name__ for s in NEW_ONLY_SEARCHERS}
 
 
@@ -5543,7 +5809,7 @@ def search_scope():
 def scoped_searchers(order):
     """The searcher order for one retrieval wave under the
     active scope (§43): unchanged in "full" mode; in "new" mode
-    only the §§32–47 searchers survive, in the caller's order."""
+    only the §§32–48 searchers survive, in the caller's order."""
     order = list(order)
     if search_scope() != "new":
         return order
@@ -5556,11 +5822,11 @@ def _scope_lines():
     if search_scope() != "new":
         return []
     return ["",
-            "دامنهٔ جستجو: فقط منابع تازه‌افزودهٔ §§32–47 "
+            "دامنهٔ جستجو: فقط منابع تازه‌افزودهٔ §§32–48 "
             "(قفسهٔ منابع گردآوری‌شده، CORE، سخنرانی‌های دانشگاهی، "
             "ensani، jihs، مجلات ریاضی ایران، مجلات تاجیکستان، "
             "گنجه، کتابخانهٔ اهل‌البیت، صحراء النجف، منابع تصویری "
-            "نسخه‌های خطی QDL و کتابخانهٔ کنگره)"]
+            "نسخه‌های خطی QDL و کتابخانهٔ کنگره، اسلام‌وب)"]
 
 
 def search_scope_note(language):
@@ -5568,19 +5834,21 @@ def search_scope_note(language):
     naming the restricted search scope of this production."""
     if (language or "").strip().lower().startswith("fa"):
         return ("> یادداشت: دامنهٔ جستجو در این تولید فقط منابع "
-                "تازه‌افزودهٔ §§32–47 بوده است (قفسهٔ منابع "
+                "تازه‌افزودهٔ §§32–48 بوده است (قفسهٔ منابع "
                 "گردآوری‌شده، CORE، سخنرانی‌های دانشگاهی، ensani، "
                 "jihs، مجلات ریاضی ایران و مجلات تاجیکستان، گنجه، "
-                "کتابخانهٔ اهل‌البیت، صحراء النجف و منابع تصویری "
-                "نسخه‌های خطی QDL و کتابخانهٔ کنگره)؛ همهٔ "
-                "دروازه‌های کیفیت بدون تغییر اعمال شده‌اند.")
+                "کتابخانهٔ اهل‌البیت، صحراء النجف، منابع تصویری "
+                "نسخه‌های خطی QDL و کتابخانهٔ کنگره و کتابخانهٔ "
+                "اسلام‌وب)؛ همهٔ دروازه‌های کیفیت بدون تغییر "
+                "اعمال شده‌اند.")
     return ("> Note: this production searched ONLY the newly "
-            "added sources (§§32–47: the collected-material "
+            "added sources (§§32–48: the collected-material "
             "shelf, CORE, university lectures, ensani, jihs, "
             "Iranian mathematics journals, Tajik journals, "
-            "Ganjeh, Ablibrary, the Najaf Desert Library and "
+            "Ganjeh, Ablibrary, the Najaf Desert Library, "
             "the QDL / Library of Congress manuscript image "
-            "sources); all quality gates applied unchanged.")
+            "sources and the IslamWeb library); all quality "
+            "gates applied unchanged.")
 
 
 def normalise_title(t):
@@ -5628,6 +5896,7 @@ SEARCHER_LABEL = {
     "search_najaf": "Najaf Desert Library (§46)",
     "search_qdl_images": "QDL manuscript images (§47)",
     "search_loc_images": "LOC/WDL images (§47)",
+    "search_islamweb": "IslamWeb library (§48)",
 }
 
 VERIFY_CACHE_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)),
@@ -5888,8 +6157,9 @@ def retrieve_wave1(queries, rstate):
                                 searcher_order=WAVE1_SEARCHERS)
     if search_scope() == "new":
         print("search scope (§43): NEW-ONLY — wave 1 ran only the "
-              "§§32–46 searchers (shelf, lectures, ensani, jihs, "
-              "iran-math, tajik, CORE, ganjeh, ablibrary, najaf); "
+              "§§32–48 searchers (shelf, lectures, ensani, jihs, "
+              "iran-math, tajik, CORE, ganjeh, ablibrary, najaf, "
+              "QDL/LOC images, islamweb); "
               "Crossref top-up skipped")
         return verified
     if len(verified) < EARLY_STOP_VERIFIED:
