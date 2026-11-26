@@ -173,9 +173,9 @@ check("propose_topics shelf grounding finds Biruni works",
               for t in titles))
 check("propose_topics shelf grounding is quiet for unrelated ideas",
       pt.search_shelf_titles("photosynthesis in desert plants") == [])
-check("registry pool after §49 (22 files / 2195)",
-      pt.load_source_registry()[2]["loaded"] == 2195
-      and ba.load_source_registry()[2]["loaded"] == 2195)
+check("registry pool after §50 (23 files / 2200)",
+      pt.load_source_registry()[2]["loaded"] == 2200
+      and ba.load_source_registry()[2]["loaded"] == 2200)
 
 print(f"\n{passed} passed, {failed} failed")
 raise SystemExit(1 if failed else 0)
