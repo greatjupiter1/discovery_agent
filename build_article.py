@@ -3243,8 +3243,136 @@ def search_ensani(query):
 
 
 # --------------------------------------------------------------------------
+# JIHS — مجلهٔ تاریخ علم (§36) — the Journal for the History of
+# Science of the Institute for the History of Science, University
+# of Tehran (پژوهشکدهٔ تاریخ علم دانشگاه تهران), registered in
+# jihs_registry.json (§17 wiring: credibility/priority signal
+# only, never verification). Iran's first and only specialised
+# history-of-science journal, علمی-پژوهشی, Persian with English
+# abstracts, open access (CC BY 4.0). The journal was already
+# reachable indirectly via the §34 Ensani route; this DIRECT
+# route removes the Ensani lag so the newest issues arrive as
+# soon as the journal publishes them. Probed from the build
+# sandbox on 2026-11-26 under the full-text-only law and the
+# multi-route rule:
+#   SEARCH — the journal site's own search form (homepage form:
+#       GET ./ with hidden _action=article and text field
+#       keywords)
+#       GET jihs.ut.ac.ir/?_action=article&keywords=<q>
+#       ANSWERS with real records, no login and no token needed
+#       (بیرونی -> 21 results; تاریخ علم -> 167 results,
+#       25 per page). Each results block carries the article
+#       title, authors, the issue line (دوره/شماره), a DOI
+#       (10.22059/jihs...) and — for published articles — a
+#       direct PDF link (class="pdf_link").
+#   FULL TEXT — that direct PDF link
+#       GET jihs.ut.ac.ir/article_<id>_<hash>.pdf
+#       probe-verified WITHOUT login or cookies:
+#       article_106822_....pdf -> HTTP 200, application/pdf,
+#       288,122 B, %PDF-1.5 (the page's own size badge,
+#       281.37 K, matches). Candidates therefore carry
+#       oa_pdf_url = the article's own PDF file, and
+#       attach_fulltexts_v2 fetches the PDF via its
+#       index-fulltext route.
+#   Online-first articles (مقالات آماده انتشار) have NO PDF yet
+#   — neither in the results list nor on their article pages
+#   (article_108572.html checked: no PDF link) — so the parser
+#   emits only hits that carry a PDF link, per the
+#   full-text-only law.
+#   Routes also tried: issue/archive listing pages
+#   (issue_<id>_<id>.html, e.g. issue_13738_13913.html -> 200 —
+#   covered by the site search, not queried separately);
+#   sitemap.xml exists (200, ~73 KB; robots.txt is permissive
+#   and points to it — neither needed); RSS (/rss.xml -> 404,
+#   /rss.php -> 404, /journal/rss -> 404, /?_action=rss -> 403)
+#   — no usable feed; alternate hosts www.jihs.ut.ac.ir did not
+#   answer from the sandbox and http://jihs.ut.ac.ir returned an
+#   empty reply — the canonical https host is the wired one;
+#   index fallbacks (Crossref/DOAJ -> the journal's DOIs) not
+#   needed — the journal's own routes passed both bars.
+# The fetch discipline is the §23 single-shot _arab_fetch and
+# candidates are shaped by _arab_candidate, exactly like §34.
+# --------------------------------------------------------------------------
+
+JIHS_CAP = 8
+_JIHS_BASE = "https://jihs.ut.ac.ir"
+_JIHS_VENUE = "تاریخ علم (Journal for the History of Science)"
+
+
+def _jihs_year(text):
+    """Year from a JIHS issue line: the journal prints its Jalali
+    years in LATIN digits (دوره 23، شماره 2، اسفند 1404), which
+    _ensani_year — Persian digits, or Latin 19xx/20xx — misses;
+    fall back to a 13xx/14xx Jalali match."""
+    y = _ensani_year(text)
+    if y:
+        return y
+    m = re.search(r"(?:13|14)\d{2}", str(text or ""))
+    return int(m.group(0)) if m else None
+
+
+def _parse_jihs_results(body):
+    """Parse one JIHS search-results page: each hit is headed by
+    an <h2 class="... list-article-title ..."> whose tag_a anchor
+    links article_<id>.html; the text up to the next hit carries
+    the issue line (<p class="mb-1">), a DOI paragraph
+    (id="ar_doi"), the authors paragraph and — once the article
+    is published — a direct PDF link (class="pdf_link"). Hits
+    without a PDF link (online-first, no full text anywhere yet)
+    are skipped, per the full-text-only law."""
+    out = []
+    if not body:
+        return out
+    marks = list(re.finditer(
+        r'list-article-title[^>]*>\s*<a class="tag_a" '
+        r'href="article_(\d+)\.html">(.*?)</a>', body, re.S))
+    for i, m in enumerate(marks):
+        seg = body[m.end():marks[i + 1].start()
+                   if i + 1 < len(marks) else len(body)]
+        pm = re.search(r'href="\./(article_\d+_[0-9a-f]+\.pdf)"', seg)
+        if not pm:
+            continue
+        title = _arab_strip_tags(m.group(2))
+        if not title:
+            continue
+        vm = re.search(r'<p class="mb-1">(.*?)</p>', seg, re.S)
+        issue = _arab_strip_tags(vm.group(1)) if vm else ""
+        dm = re.search(r'href="https://doi\.org/([^"]+)"', seg)
+        am = re.search(r'<p class="mb-1 " dir="rtl" >(.*?)</p>',
+                       seg, re.S)
+        authors = []
+        if am:
+            authors = [a.strip() for a in
+                       _arab_strip_tags(am.group(1)).split("،")
+                       if a.strip()]
+        cand = _arab_candidate(
+            title, f"{_JIHS_BASE}/article_{m.group(1)}.html",
+            "persian:jihs", authors=authors[:6],
+            year=_jihs_year(issue),
+            venue=(_JIHS_VENUE + (f" — {issue}" if issue else "")),
+            doi=(dm.group(1) if dm else None))
+        cand["oa_pdf_url"] = f"{_JIHS_BASE}/{pm.group(1)}"
+        out.append(cand)
+    return out
+
+
+def search_jihs(query):
+    """§36: search مجلهٔ تاریخ علم (Journal for the History of
+    Science, University of Tehran) directly on the journal's own
+    site — the direct route beside the §34 Ensani route, so the
+    newest issues arrive without the portal's lag. Fail-soft,
+    capped at JIHS_CAP."""
+    url = (_JIHS_BASE + "/?" + urllib.parse.urlencode(
+        {"_action": "article", "keywords": query}))
+    status, body = _arab_fetch(url)
+    if status != 200 or not body:
+        return []
+    return _parse_jihs_results(body)[:JIHS_CAP]
+
+
+# --------------------------------------------------------------------------
 # Source registries (§17) — credibility / whitelist SIGNAL only.
-# Eleven curated registries sit beside this script in the repo:
+# Twelve curated registries sit beside this script in the repo:
 #   sources_registry.json        (registry 1, registry schema)
 #   sources_registry_500_more.json (500 DOAJ journals, compact schema:
 #                                   {id, name, url, type, fields,
@@ -3283,6 +3411,13 @@ def search_ensani(query):
 #                                   humanities article bank,
 #                                   registry schema — one platform
 #                                   entry, not journals)
+#   jihs_registry.json           (§36: مجلهٔ تاریخ علم — the
+#                                   Journal for the History of
+#                                   Science, University of Tehran,
+#                                   wired DIRECTLY on its own site
+#                                   beside the §34 Ensani route,
+#                                   registry schema — one journal
+#                                   entry)
 # Both schemas normalise into one record {name, url, domain, type,
 # fields, languages, registry}. A registry match is a ranking SIGNAL
 # ONLY: it never verifies a source (the DOI / Crossref / publisher
@@ -3301,7 +3436,8 @@ REGISTRY_FILES = ["sources_registry.json",
                   "european_journals_registry.json",
                   "world_libraries_registry.json",
                   "lectures_registry.json",
-                  "ensani_registry.json"]
+                  "ensani_registry.json",
+                  "jihs_registry.json"]
 _REGISTRY_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
@@ -3455,7 +3591,7 @@ SEARCHERS = [search_openalex, search_crossref, search_openaire,
              search_semantic_scholar, search_arab_platforms,
              search_asian_platforms, search_arab_libraries,
              search_european_platforms, search_digital_libraries,
-             search_university_lectures, search_ensani]
+             search_university_lectures, search_ensani, search_jihs]
 
 # English-first retrieval (§18): wave 1 queries the abstract-rich
 # indexes ONLY — Crossref is held back because, queried with a
@@ -3470,7 +3606,7 @@ WAVE1_SEARCHERS = [search_openalex, search_europe_pmc, search_hal,
                    search_annas_archive, search_arab_platforms,
                    search_asian_platforms, search_arab_libraries,
                    search_european_platforms, search_digital_libraries,
-                   search_university_lectures, search_ensani]
+                   search_university_lectures, search_ensani, search_jihs]
 CROSSREF_SEARCHERS = [search_crossref]
 
 
