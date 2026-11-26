@@ -196,8 +196,11 @@ def t_camel():
           len(log.discovers()) == 1
           and json.loads(log.discovers()[0][1])["doi"]
           == "10.5678/doi.only.hit")
-    check("camelCase: query biased with _exists_:fullText",
-          "_exists_:fullText" in json.loads(log.searches()[0][1])["q"])
+    check("camelCase: plain query sent (no _exists_ clause — "
+          "the live API rejects it with HTTP 500)",
+          json.loads(log.searches()[0][1])["q"]
+          == "Biruni earth radius"
+          and len(log.searches()) == 1)
     titles = [c["title"] for c in out]
     check("camelCase: metadata-only + title-less hits dropped",
           "Metadata Only, No Full Text Anywhere" not in titles
@@ -286,7 +289,8 @@ def t_failsoft():
 
 with_key(t_failsoft)
 
-# --- 8. plain-query retry when the biased query is empty -----
+# --- 8. one plain search call per query (regression: the ---
+# --- old _exists_-biased first call failed terminally) -------
 def t_retry():
     state = {"n": 0}
 
@@ -294,14 +298,18 @@ def t_retry():
         if url.endswith("/discover"):
             return 200, json.dumps(DISCOVERY_OK)
         state["n"] += 1
-        if state["n"] == 1:
-            return 200, json.dumps({"totalHits": 0, "results": []})
-        return 200, json.dumps(SNAKE)
+        return 200, json.dumps({"totalHits": 0, "results": []})
 
     ba._core_fetch = fetch
     out = ba.search_core("spec record")
-    check("empty biased search -> one plain retry, then results",
-          state["n"] == 2 and len(out) == 1)
+    check("empty plain search -> [] after exactly ONE search "
+          "call (no biased first call, no phantom retry)",
+          state["n"] == 1 and out == [])
+    # and a failed (non-200) search likewise ends the call —
+    # visibly, via the WARNING _core_search_once prints.
+    ba._core_fetch = lambda url, data=None: (500, "boom")
+    check("HTTP 500 on the plain search -> []",
+          ba.search_core("spec record") == [])
 
 
 with_key(t_retry)
