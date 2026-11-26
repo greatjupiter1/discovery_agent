@@ -1,0 +1,57 @@
+name: Smoke test engine brain path (§22)
+
+# Manual diagnostic: calls build_article._extra_brain_once for the
+# chosen brain through the engine's OWN http_request helper (its real
+# User-Agent and retry logic), with the brain's repo secret in env.
+# Prints the reply or the Fail message. Never prints the key.
+
+on:
+  workflow_dispatch:
+    inputs:
+      provider:
+        description: "Brain to test through the engine path"
+        required: true
+        type: choice
+        options:
+          - groq
+          - openrouter
+          - cloudflare
+          - sambanova
+          - dashscope
+          - modelscope
+          - siliconflow
+
+jobs:
+  smoke-engine:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Call the engine brain path once
+        env:
+          PROVIDER: ${{ inputs.provider }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CF_ACCOUNT_ID: ${{ vars.CF_ACCOUNT_ID }}
+          SAMBANOVA_API_KEY: ${{ secrets.SAMBANOVA_API_KEY }}
+          DASHSCOPE_API_KEY: ${{ secrets.DASHSCOPE_API_KEY }}
+          MODELSCOPE_API_KEY: ${{ secrets.MODELSCOPE_API_KEY }}
+          SILICONFLOW_API_KEY: ${{ secrets.SILICONFLOW_API_KEY }}
+        run: |
+          python3 -u - <<'PYEOF'
+          import os, sys
+          sys.path.insert(0, ".")
+          import build_article as ba
+          name = os.environ["PROVIDER"]
+          print("chain:", ba.llm_chain(), flush=True)
+          try:
+              text = ba._extra_brain_once(name, "Reply with exactly: OK")
+              print(f"ENGINE-SMOKE {name}: OK reply={text[:120]!r}")
+          except Exception as e:
+              print(f"ENGINE-SMOKE {name}: FAIL {type(e).__name__}: {e}")
+              raise SystemExit(3)
+          PYEOF
