@@ -73,7 +73,7 @@ try:
           ba._brain_endpoint("openrouter")
           == ("https://openrouter.ai/api/v1/chat/completions", "k-or")
           and ba._brain_model("openrouter")
-          == "meta-llama/llama-3.3-70b-instruct:free")
+          == "google/gemma-4-31b-it:free")
     check("(a3) sambanova endpoint + default model",
           ba._brain_endpoint("sambanova")
           == ("https://api.sambanova.ai/v1/chat/completions", "k-sn")
