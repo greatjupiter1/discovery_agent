@@ -42,7 +42,7 @@ jobs:
           import json, os, urllib.request, urllib.error
           P = {
             "groq":       ("https://api.groq.com/openai/v1/chat/completions", "openai/gpt-oss-120b", "GROQ_API_KEY"),
-            "openrouter": ("https://openrouter.ai/api/v1/chat/completions", "meta-llama/llama-3.3-70b-instruct:free", "OPENROUTER_API_KEY"),
+            "openrouter": ("https://openrouter.ai/api/v1/chat/completions", "google/gemma-4-31b-it:free", "OPENROUTER_API_KEY"),
             "cloudflare": ("https://api.cloudflare.com/client/v4/accounts/{CF_ACCOUNT_ID}/ai/v1/chat/completions", "@cf/meta/llama-3.3-70b-fp8-fast", "CLOUDFLARE_API_TOKEN"),
             "sambanova":  ("https://api.sambanova.ai/v1/chat/completions", "Meta-Llama-3.3-70B-Instruct", "SAMBANOVA_API_KEY"),
             "dashscope":  ("https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions", "qwen-plus", "DASHSCOPE_API_KEY"),
