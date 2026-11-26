@@ -36,8 +36,8 @@ check("notes record the routes tried",
 
 for mod, tag in ((ba, "build_article"), (pt, "propose_topics")):
     di, ui, st = mod.load_source_registry()
-    check(f"{tag} loads 22 files / 2195 entries",
-          st["files_ok"] == 22 and st["loaded"] == 2195)
+    check(f"{tag} loads 23 files / 2200 entries",
+          st["files_ok"] == 23 and st["loaded"] == 2200)
     check(f"{tag} ensani indexed by domain", "ensani.ir" in di)
 
 # ------------------------------------------------------------- fixtures
