@@ -15,12 +15,13 @@ def check(label, cond):
     if cond: passed += 1; print(f"PASS {label}")
     else: failed += 1; print(f"FAIL {label}")
 
-# (a) all 5 files load (both scripts) — §23 added
-# arab_journals_registry.json (8 platform entries) to the original 4
+# (a) all 6 files load (both scripts) — §23 added
+# arab_journals_registry.json (8 platform entries) to the original 4,
+# §24 added asian_journals_registry.json (22 platform entries)
 for mod, tag in ((ba, "build_article"), (pt, "propose_topics")):
     di, ui, st = mod.load_source_registry()
-    check(f"{tag} (a) 5 files load", st["files_ok"] == 5 and st["loaded"] == 2008)
-    check(f"{tag} (c) dedupe drops duplicates", st["duplicates"] > 0 and st["unique_urls"] == 2008 - st["duplicates"])
+    check(f"{tag} (a) 6 files load", st["files_ok"] == 6 and st["loaded"] == 2030)
+    check(f"{tag} (c) dedupe drops duplicates", st["duplicates"] > 0 and st["unique_urls"] == 2030 - st["duplicates"])
     print(f"  {tag} stats: {st}")
     globals()[f"stats_{tag}"] = st
 
