@@ -32,7 +32,7 @@ like HTTP error statuses.
 Inputs come from the environment (set by .github/workflows/discovery.yml):
   FIELD, TOPIC, LANGUAGE (default "fa"), MODE (default "review"),
   SEARCH_SCOPE (default "full"; "new" restricts the candidate
-  search to the §§32–48 additions only — §43),
+  search to the §§32–49 additions only — §43),
   GEMINI_MODEL (default "gemini-3.5-flash")
   LLM_PROVIDER (default "gemini"; "github" selects GitHub Models,
   "glm" selects GLM on z.ai),
@@ -5223,8 +5223,273 @@ def search_islamweb(query):
 
 
 # --------------------------------------------------------------------------
+# §49 — RAFED LIBRARY (مكتبة رافد, books.rafed.net), registered
+# in rafed_registry.json (§17 wiring: credibility/priority
+# signal only, never verification). Rafed is the digital
+# library of مؤسسة آل البيت (ع) لإحياء التراث (Qom): the
+# platform reports 4,172 books, 305 of them collated against
+# printed editions, and it serves the FULL TEXT of its books
+# as page-based text through its reader — no login, no key.
+# Probed live on 2026-11-26 from the build sandbox under the
+# full-text-only law and the multi-route rule:
+#   home       GET / -> 200, server-rendered (Next.js) — the
+#       catalogue is genuinely open.
+#   search     GET /search?q=<q> -> 200 with a server-side
+#       FULL-TEXT result list in the page's React Flight (RSC)
+#       payload: a result count (عدد النتائج: الفلك -> 1291,
+#       البيروني -> 147, ابن سينا -> 632) and up to 15 items,
+#       each item naming one book, its author, the FIRST HIT
+#       PAGE inside the book, in how many of the book's pages
+#       the term was found, and a <mark>-marked snippet of the
+#       matched page. A no-match query answers count ٠ and no
+#       items.
+#   book page  GET /view/<id> -> 200 with schema.org Book
+#       metadata AND a structured book record (title, author,
+#       publisher, page count, the work's parts with their own
+#       ids) in the same payload.
+#   book text  GET /view/<id>/page/<n> -> 200; the page's real
+#       text sits in the payload's page_data field — either an
+#       inline HTML fragment (<div class="pgcontent">...) or
+#       a Flight back-reference ("$<row>") to a raw text row
+#       (<row>:T<hex length>,<raw HTML>) elsewhere in the
+#       payload. Verified verbatim: book 900 (من علم الفلك
+#       القرآني) pp. 10/100 and the Shifa parts below.
+#   file store lib.rafed.net/Books/<id>_<slug>/ — the reader's
+#       own files (cover images; a per-book DOC zip named in
+#       the book record's download_types): the reader route
+#       above is cleaner and complete, so the store is not
+#       fetched.
+#   sitemap    GET /sitemap -> a sitemapindex (robots.txt
+#       points to it); catalogue-only — not needed.
+#   OAI-PMH    GET /oai?verb=Identify -> 404 on
+#       books.rafed.net and on lib.rafed.net: no OAI route.
+#   No dedicated JSON API is exposed: the RSC payload IS the
+#   data route (the same class of route the §48 build verified
+#   for IslamWeb's JS-called endpoint).
+# SEARCH DISCIPLINE mirrors §48: hits are grouped by book;
+# per book up to RAFED_PAGES_PER_BOOK pages are fetched from
+# the first hit page onward; a page whose text fails the §46
+# bar (cover pages carry only an image + the page number;
+# some pages are scan-only) is skipped, and a book with no
+# real text yields NO candidate. Passages are extracted from
+# the fetched pages with the query terms, with the §46
+# fallback (the platform's own full-text index matched the
+# book — possibly through ى/ي or hamza variants the
+# exact-term extractor cannot see) when extraction misses.
+# PRIMARY SEEDS: the six parts of ابن سينا's الشفاء ـ
+# طبيعيّات in _RAFED_SEEDS — each part's id, title and
+# author attested by the platform's own book record (book
+# 3037's view page lists all parts with their author) and
+# one page of each part fetched and read during the probe
+# (3037 pp. 100/200; 3066/3068/3070/3072/3075 p. 50).
+# Candidates from them are marked primary, exactly like the
+# §46 Ganjeh seeds and the §41 shelf's primary books. The
+# work's introduction record (3036) is the modern edition's
+# front matter (the platform lists no author for it) and is
+# NOT seeded. NO BIRUNI SEEDS: al-Biruni's own books are NOT
+# hosted here (probed: searches for القانون المسعودي,
+# الآثار الباقية, تحقيق ما للهند and التفهيم return other
+# books MENTIONING them — الذريعة, كراتشكوفسكي's تاريخ
+# الأدب الجغرافي, الذهبي's تاريخ الإسلام among them).
+# --------------------------------------------------------------------------
+
+RAFED_CAP = 8
+RAFED_PAGES_PER_BOOK = 3
+_RAFED_BASE = "https://books.rafed.net"
+
+# The six parts of الشفاء ـ طبيعيّات hosted at Rafed (probe
+# 2026-11-26; ids, titles and the author copied verbatim from
+# the platform's own book record — the parts list on book
+# 3037's view page). These are the author's own works:
+# candidates from them are marked primary, exactly like the
+# §41 shelf's primary books.
+_RAFED_IBN_SINA = "أبو علي حسين بن عبد الله بن سينا [ شيخ الرئيس ابن سينا ]"
+_RAFED_SEEDS = {
+    "3037": ("الشفاء ـ طبيعيّات — جلد 1", _RAFED_IBN_SINA),
+    "3066": ("الشفاء ـ طبيعيّات — جلد 2 [2]", _RAFED_IBN_SINA),
+    "3068": ("الشفاء ـ طبيعيّات — جلد 2 [4]", _RAFED_IBN_SINA),
+    "3070": ("الشفاء ـ طبيعيّات — جلد 2 [6]", _RAFED_IBN_SINA),
+    "3072": ("الشفاء ـ طبيعيّات — جلد 2 [8]", _RAFED_IBN_SINA),
+    "3075": ("الشفاء ـ طبيعيّات — جلد 3", _RAFED_IBN_SINA),
+}
+
+
+def _rafed_payload(body):
+    """The decoded React Flight (RSC) payload of a Rafed page:
+    the concatenation, in document order, of the JSON string
+    chunks carried by its self.__next_f.push([1, "..."])
+    scripts. "" when the page carries no payload."""
+    if not body:
+        return ""
+    out = []
+    for m in re.finditer(
+            r'self\.__next_f\.push\(\[1,(.*?)\]\)</script>',
+            body, re.S):
+        try:
+            chunk = json.loads(m.group(1))
+        except ValueError:
+            continue
+        if isinstance(chunk, str):
+            out.append(chunk)
+    return "".join(out)
+
+
+def _rafed_flight_text(payload, rowid):
+    """A raw text row of the Flight payload: rows are written
+    <rowid>:T<hex length>,<raw text> and the text is
+    length-delimited — it is NOT escaped, so it may contain
+    anything, newlines included. The hex length counts UTF-8
+    BYTES, not characters (verified against a live row: the
+    byte slice ends exactly at the fragment's end, the
+    character slice overruns into the following rows).
+    "" when the row is absent."""
+    if not payload or not rowid:
+        return ""
+    m = re.search(r"(?:^|\n)" + re.escape(rowid) +
+                  r":T([0-9a-fA-F]+),", payload)
+    if not m:
+        return ""
+    try:
+        n = int(m.group(1), 16)
+    except ValueError:
+        return ""
+    raw = payload[m.end():].encode("utf-8", "ignore")[:n]
+    return raw.decode("utf-8", "ignore")
+
+
+def _rafed_page_text(book_id, page):
+    """One reader page's real prose, or "" when the page
+    carries none (cover/scan pages hold only an image + the
+    page number in page_data; transport failure — all
+    fail-soft)."""
+    status, body = _arab_fetch(
+        f"{_RAFED_BASE}/view/{book_id}/page/{page}")
+    if status != 200 or not body:
+        return ""
+    payload = _rafed_payload(body)
+    m = re.search(r'"page_data":("(?:[^"\\]|\\.)*")', payload)
+    if not m:
+        return ""
+    try:
+        frag = json.loads(m.group(1))
+    except ValueError:
+        return ""
+    if not isinstance(frag, str) or not frag:
+        return ""
+    if frag.startswith("$"):
+        frag = _rafed_flight_text(payload, frag[1:])
+    if not frag:
+        return ""
+    return _arab_strip_tags(frag)
+
+
+def _rafed_dec(text):
+    """Decode one JSON string body captured from the payload
+    (the capture excludes the surrounding quotes)."""
+    if not text:
+        return ""
+    try:
+        return json.loads('"' + text + '"')
+    except ValueError:
+        return text
+
+
+def _rafed_parse_results(payload):
+    """Hit items from a search payload, in response order:
+    [{book_id, page, title, author}] — one item per book,
+    naming its first hit page. The author is the item's
+    author-link TEXT (the platform's author href slug is
+    unreliable — it repeats the category name — so only the
+    link text is taken)."""
+    items = []
+    for m in re.finditer(
+            r'"href":"/view/(\d+)/page/(\d+)\?search=',
+            payload or ""):
+        win = payload[m.start():m.start() + 1600]
+        t = re.search(r'"children":"((?:[^"\\]|\\.)*)"', win)
+        a = re.search(r'"href":"author/(?:[^"\\]|\\.)*",'
+                      r'"children":"((?:[^"\\]|\\.)*)"', win)
+        items.append({
+            "book_id": m.group(1), "page": int(m.group(2)),
+            "title": _rafed_dec(t.group(1)) if t else "",
+            "author": _rafed_dec(a.group(1)) if a else ""})
+    return items
+
+
+def search_rafed(query):
+    """§49: search the Rafed library (مكتبة رافد) through its
+    own full-text search. Hits are grouped by book; for each
+    book the hit pages' real prose is fetched from the reader
+    route and passages extracted — a book whose hit pages
+    carry no real text yields NO candidate, per the
+    full-text-only law. Fail-soft, capped at RAFED_CAP."""
+    query = (query or "").strip()
+    if not query:
+        return []
+    qs = urllib.parse.urlencode({"q": query})
+    status, body = _arab_fetch(f"{_RAFED_BASE}/search?{qs}")
+    if status != 200 or not body:
+        return []
+    books, order = {}, []
+    for it in _rafed_parse_results(_rafed_payload(body)):
+        bid = it["book_id"]
+        if bid not in books:
+            books[bid] = {"title": it["title"],
+                          "author": it["author"], "pages": []}
+            order.append(bid)
+        if it["page"] not in books[bid]["pages"]:
+            books[bid]["pages"].append(it["page"])
+    terms = _shelf_query_terms(query)
+    out = []
+    for bid in order:
+        if len(out) >= RAFED_CAP:
+            break
+        info = books[bid]
+        first = info["pages"][0]
+        texts = []
+        for page in range(first, first + RAFED_PAGES_PER_BOOK):
+            text = _rafed_page_text(bid, page)
+            if text and _lib46_text_ok(text):
+                texts.append(text)
+        if not texts:
+            continue
+        joined = "\n".join(texts)
+        excerpt, hits = extract_passages(joined, terms)
+        if not excerpt:
+            # The platform's own full-text index matched this
+            # book for the query (possibly through ى/ي or
+            # hamza variants the exact-term extractor cannot
+            # see); the fetched pages are real prose, so they
+            # stand as the passage.
+            excerpt = joined[:FULLTEXT_EXCERPT_CHARS]
+            hits = len(texts)
+        seed = _RAFED_SEEDS.get(bid)
+        title = info["title"] or (seed[0] if seed else "")
+        if not title:
+            continue
+        author = info["author"] or (seed[1] if seed else "")
+        cand = _arab_candidate(
+            title, f"{_RAFED_BASE}/view/{bid}/page/{first}",
+            "rafed:books",
+            authors=[author] if author else [],
+            venue="Rafed Library — مكتبة رافد "
+                  "(مؤسسة آل البيت عليهم السلام لإحياء التراث)")
+        cand["fulltext"] = True
+        cand["fulltext_excerpt"] = excerpt[:FULLTEXT_EXCERPT_CHARS]
+        cand["fulltext_route"] = "rafed:books"
+        cand["passages"] = True
+        cand["passage_hits"] = hits
+        cand["language"] = "ar"
+        if seed:
+            cand["source_type"] = "primary"
+            cand["primary_relation"] = "author"
+        out.append(cand)
+    return out
+
+
+# --------------------------------------------------------------------------
 # Source registries (§17) — credibility / whitelist SIGNAL only.
-# Twenty-one curated registries sit beside this script in the repo:
+# Twenty-two curated registries sit beside this script in the repo:
 #   sources_registry.json        (registry 1, registry schema)
 #   sources_registry_500_more.json (500 DOAJ journals, compact schema:
 #                                   {id, name, url, type, fields,
@@ -5355,6 +5620,16 @@ def search_islamweb(query):
 #                                   schema — one platform entry +
 #                                   three page-verified book
 #                                   entries)
+#   rafed_registry.json          (§49: Rafed Library — مكتبة
+#                                   رافد of مؤسسة آل البيت (Qom),
+#                                   wired LIVE via its own
+#                                   full-text search + reader
+#                                   pages (the RSC payload's
+#                                   page_data), registry schema —
+#                                   one platform entry + the six
+#                                   page-verified parts of Ibn
+#                                   Sina's الشفاء ـ طبيعيّات,
+#                                   which are primary seeds)
 # Both schemas normalise into one record {name, url, domain, type,
 # fields, languages, registry}. A registry match is a ranking SIGNAL
 # ONLY: it never verifies a source (the DOI / Crossref / publisher
@@ -5383,7 +5658,8 @@ REGISTRY_FILES = ["sources_registry.json",
                   "ablibrary_registry.json",
                   "najaf_registry.json",
                   "image_sources_registry.json",
-                  "islamweb_registry.json"]
+                  "islamweb_registry.json",
+                  "rafed_registry.json"]
 _REGISTRY_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
@@ -5710,7 +5986,8 @@ SEARCHERS = [search_shelf, search_openalex, search_crossref, search_openaire,
              search_university_lectures, search_ensani, search_jihs,
              search_iran_math, search_tajik_journals, search_core,
              search_ganjeh, search_ablibrary, search_najaf,
-             search_qdl_images, search_loc_images, search_islamweb]
+             search_qdl_images, search_loc_images, search_islamweb,
+             search_rafed]
 
 # English-first retrieval (§18): wave 1 queries the abstract-rich
 # indexes ONLY — Crossref is held back because, queried with a
@@ -5729,7 +6006,7 @@ WAVE1_SEARCHERS = [search_shelf, search_openalex, search_europe_pmc, search_hal,
                    search_iran_math, search_tajik_journals, search_core,
                    search_ganjeh, search_ablibrary, search_najaf,
                    search_qdl_images, search_loc_images,
-                   search_islamweb]
+                   search_islamweb, search_rafed]
 CROSSREF_SEARCHERS = [search_crossref]
 
 
@@ -5743,7 +6020,7 @@ CROSSREF_SEARCHERS = [search_crossref]
 #       WAVE1_SEARCHERS, the Crossref top-up, wave 2 and the
 #       §19 primary lane all run as before.
 #   "new" — the candidate search runs ONLY the searchers added
-#       in the newest build wave (§§32–48), i.e. the shelf plus
+#       in the newest build wave (§§32–49), i.e. the shelf plus
 #       the new items:
 #         search_shelf               (§41 — the collected shelf;
 #                                     carries the primary books
@@ -5768,6 +6045,11 @@ CROSSREF_SEARCHERS = [search_crossref]
 #                                     its own full-text search
 #                                     endpoint + page-based HTML
 #                                     book text)
+#         search_rafed               (§49 — Rafed library: its
+#                                     own full-text search +
+#                                     reader-page text; the six
+#                                     Shifa parts are primary
+#                                     seeds)
 #       (§39 utihs and §40 are registry-only — they have no
 #       searcher to include; §33 is the review layer, §44 the
 #       parallel writer and §45 the review robustness pass —
@@ -5793,7 +6075,7 @@ NEW_ONLY_SEARCHERS = [search_shelf, search_university_lectures,
                       search_tajik_journals, search_core,
                       search_ganjeh, search_ablibrary, search_najaf,
                       search_qdl_images, search_loc_images,
-                      search_islamweb]
+                      search_islamweb, search_rafed]
 _NEW_ONLY_NAMES = {s.__name__ for s in NEW_ONLY_SEARCHERS}
 
 
@@ -5809,7 +6091,7 @@ def search_scope():
 def scoped_searchers(order):
     """The searcher order for one retrieval wave under the
     active scope (§43): unchanged in "full" mode; in "new" mode
-    only the §§32–48 searchers survive, in the caller's order."""
+    only the §§32–49 searchers survive, in the caller's order."""
     order = list(order)
     if search_scope() != "new":
         return order
@@ -5822,11 +6104,11 @@ def _scope_lines():
     if search_scope() != "new":
         return []
     return ["",
-            "دامنهٔ جستجو: فقط منابع تازه‌افزودهٔ §§32–48 "
+            "دامنهٔ جستجو: فقط منابع تازه‌افزودهٔ §§32–49 "
             "(قفسهٔ منابع گردآوری‌شده، CORE، سخنرانی‌های دانشگاهی، "
             "ensani، jihs، مجلات ریاضی ایران، مجلات تاجیکستان، "
             "گنجه، کتابخانهٔ اهل‌البیت، صحراء النجف، منابع تصویری "
-            "نسخه‌های خطی QDL و کتابخانهٔ کنگره، اسلام‌وب)"]
+            "نسخه‌های خطی QDL و کتابخانهٔ کنگره، اسلام‌وب، رافد)"]
 
 
 def search_scope_note(language):
@@ -5834,21 +6116,21 @@ def search_scope_note(language):
     naming the restricted search scope of this production."""
     if (language or "").strip().lower().startswith("fa"):
         return ("> یادداشت: دامنهٔ جستجو در این تولید فقط منابع "
-                "تازه‌افزودهٔ §§32–48 بوده است (قفسهٔ منابع "
+                "تازه‌افزودهٔ §§32–49 بوده است (قفسهٔ منابع "
                 "گردآوری‌شده، CORE، سخنرانی‌های دانشگاهی، ensani، "
                 "jihs، مجلات ریاضی ایران و مجلات تاجیکستان، گنجه، "
                 "کتابخانهٔ اهل‌البیت، صحراء النجف، منابع تصویری "
-                "نسخه‌های خطی QDL و کتابخانهٔ کنگره و کتابخانهٔ "
-                "اسلام‌وب)؛ همهٔ دروازه‌های کیفیت بدون تغییر "
-                "اعمال شده‌اند.")
+                "نسخه‌های خطی QDL و کتابخانهٔ کنگره، کتابخانهٔ "
+                "اسلام‌وب و کتابخانهٔ رافد)؛ همهٔ دروازه‌های کیفیت "
+                "بدون تغییر اعمال شده‌اند.")
     return ("> Note: this production searched ONLY the newly "
-            "added sources (§§32–48: the collected-material "
+            "added sources (§§32–49: the collected-material "
             "shelf, CORE, university lectures, ensani, jihs, "
             "Iranian mathematics journals, Tajik journals, "
             "Ganjeh, Ablibrary, the Najaf Desert Library, "
             "the QDL / Library of Congress manuscript image "
-            "sources and the IslamWeb library); all quality "
-            "gates applied unchanged.")
+            "sources, the IslamWeb library and the Rafed "
+            "library); all quality gates applied unchanged.")
 
 
 def normalise_title(t):
@@ -5897,6 +6179,7 @@ SEARCHER_LABEL = {
     "search_qdl_images": "QDL manuscript images (§47)",
     "search_loc_images": "LOC/WDL images (§47)",
     "search_islamweb": "IslamWeb library (§48)",
+    "search_rafed": "Rafed library (§49)",
 }
 
 VERIFY_CACHE_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)),
@@ -6157,9 +6440,9 @@ def retrieve_wave1(queries, rstate):
                                 searcher_order=WAVE1_SEARCHERS)
     if search_scope() == "new":
         print("search scope (§43): NEW-ONLY — wave 1 ran only the "
-              "§§32–48 searchers (shelf, lectures, ensani, jihs, "
+              "§§32–49 searchers (shelf, lectures, ensani, jihs, "
               "iran-math, tajik, CORE, ganjeh, ablibrary, najaf, "
-              "QDL/LOC images, islamweb); "
+              "QDL/LOC images, islamweb, rafed); "
               "Crossref top-up skipped")
         return verified
     if len(verified) < EARLY_STOP_VERIFIED:
