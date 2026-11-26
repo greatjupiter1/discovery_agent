@@ -34,8 +34,8 @@ check("ASJP + IMIST carry Arabic+French",
 
 for mod, tag in ((ba, "build_article"), (pt, "propose_topics")):
     di, ui, st = mod.load_source_registry()
-    check(f"{tag} loads 5 files / 2008 entries",
-          st["files_ok"] == 5 and st["loaded"] == 2008)
+    check(f"{tag} loads 6 files / 2030 entries",
+          st["files_ok"] == 6 and st["loaded"] == 2030)
     check(f"{tag} arab platforms indexed by domain",
           all(d in di for d in ("asjp.cerist.dz", "iasj.rdd.edu.iq",
                                 "dsr.ju.edu.jo", "journals.najah.edu",
