@@ -106,10 +106,10 @@ check("Saylor is registry-only with the probe contradiction recorded",
       "could not be" in by_url["https://learn.saylor.org"]["notes"])
 
 # ------------------------------------------------------------- registry load
-# §23+§24+§25+§26+§27+§32: ten registry files; totals updated count-only.
-EXPECTED_FILES_OK = 11
-EXPECTED_LOADED = 2122
-EXPECTED_UNIQUE = 2071
+# §23+§24+§25+§26+§27+§32+§34+§36: twelve registry files; totals updated count-only.
+EXPECTED_FILES_OK = 12
+EXPECTED_LOADED = 2123
+EXPECTED_UNIQUE = 2072
 for mod, label in ((ba, "build_article"), (pt, "propose_topics")):
     di, ui, st = mod.load_source_registry()
     check(f"{label}: all registry files load (files_ok)",
