@@ -404,6 +404,72 @@ def registry_tag(candidate):
 
 
 
+# --------------------------------------------------------------------------
+# §41 — the SHELF (قفسه; reuse law, mirrors build_article.py): works
+# verified once and stored as extracted text under shelves/<name>/
+# with a manifest.json. Topic proposals are grounded in the shelf
+# FIRST — already-collected material is reused, not re-searched.
+# Fail-soft: a missing/corrupt shelves/ tree yields no shelf titles
+# and grounding continues exactly as before §41.
+# --------------------------------------------------------------------------
+
+SHELF_ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                          "shelves")
+
+
+def load_shelves(base_dir=None):
+    """Shelf manifests: [{name, items}] — one entry per shelf work
+    (parts collapsed). Fail-soft per shelf/item."""
+    root = base_dir or SHELF_ROOT
+    shelves = []
+    try:
+        names = sorted(os.listdir(root))
+    except OSError:
+        names = []
+    for name in names:
+        mpath = os.path.join(root, name, "manifest.json")
+        if not os.path.isfile(mpath):
+            continue
+        try:
+            with open(mpath, encoding="utf-8") as f:
+                items = json.load(f).get("items")
+            if not isinstance(items, list):
+                continue
+        except Exception:
+            continue
+        works = {}
+        for it in items:
+            if isinstance(it, dict) and it.get("work_title"):
+                works.setdefault(it.get("work_id") or it["work_title"],
+                                 it)
+        shelves.append({"name": name, "items": list(works.values())})
+    return shelves
+
+
+def search_shelf_titles(query):
+    """Grounding titles from the shelves whose manifest metadata
+    (title/author/keywords) matches the query. No network, no text
+    loading — propose_topics grounds on titles only."""
+    q = (query or "").lower()
+    terms = [w for w in re.split(r"[^\w\u0600-\u06FF]+", q)
+             if len(w) >= 3]
+    if not terms and len(q) < 3:
+        return []
+    out = []
+    for shelf in load_shelves():
+        for it in shelf["items"]:
+            meta = " ".join([it.get("work_title") or "",
+                             it.get("author") or "",
+                             " ".join(it.get("keywords") or [])]).lower()
+            if any(t in meta for t in terms) or q in meta:
+                out.append({"title": it["work_title"],
+                            "year": it.get("year"),
+                            "registry_match":
+                                f"Shelf (§41) ({shelf['name']}, "
+                                f"shelves/{shelf['name']}/manifest.json)"})
+    return out
+
+
 def grounding_digest(field, idea, api_key, model):
     """Titles of what already exists around the idea (best effort)."""
     queries = []
@@ -419,11 +485,22 @@ def grounding_digest(field, idea, api_key, model):
     # when the digest cap forces a choice (stable sort, matched
     # first). Grounding only — nothing here verifies anything.
     domain_index, _url_index, _rstats = get_registry()
+    # §41: shelf works ground the proposal first (reuse law) — they
+    # enter the same digest pool, tagged, and the matched-first sort
+    # below prefers them like registry matches.
+    shelf_titles = []
+    for q in queries:
+        shelf_titles.extend(search_shelf_titles(q))
     searcher_domains = ((search_openalex, "openalex.org"),
                         (search_crossref, "crossref.org"),
                         (search_openaire, "openaire.eu"),
                         (search_europe_pmc, "europepmc.org"))
     seen, titles = set(), []
+    for t in shelf_titles:
+        key = normalise_title(t["title"])
+        if key not in seen:
+            seen.add(key)
+            titles.append(t)
     for q in queries:
         for searcher, sdomain in searcher_domains:
             try:
