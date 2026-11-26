@@ -41,8 +41,8 @@ check("no invented URLs for the no-platform countries",
 
 for mod, tag in ((ba, "build_article"), (pt, "propose_topics")):
     di, ui, st = mod.load_source_registry()
-    check(f"{tag} loads 14 files / 2160 entries",
-          st["files_ok"] == 14 and st["loaded"] == 2160)
+    check(f"{tag} loads 15 files / 2161 entries",
+          st["files_ok"] == 15 and st["loaded"] == 2161)
     check(f"{tag} asian platforms indexed by domain",
           all(d in di for d in ("garuda.kemdiktisaintek.go.id",
                                 "nepjol.info", "banglajol.info",
