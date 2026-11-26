@@ -70,9 +70,9 @@ check("LOC entry: WDL collection URL + re-probe recorded",
 
 for mod, tag in ((ba, "build_article"), (pt, "propose_topics")):
     di, ui, st = mod.load_source_registry()
-    check(f"{tag} loads 21 files / 2188 entries / 2135 unique",
-          st["files_ok"] == 21 and st["loaded"] == 2188
-          and st["unique_urls"] == 2135)
+    check(f"{tag} loads 22 files / 2195 entries / 2142 unique",
+          st["files_ok"] == 22 and st["loaded"] == 2195
+          and st["unique_urls"] == 2142)
     check(f"{tag} §47 witness URL indexed",
           "qdl.qa/en/archive/81055/vdc_100022880536.0x000001" in ui)
 
