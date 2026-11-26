@@ -1,0 +1,75 @@
+name: Smoke test one brain (§22)
+
+# Manual diagnostic: sends ONE tiny chat completion to the chosen free
+# brain using its repo secret and prints the HTTP status + a short
+# snippet of the reply. Never prints the key. Added 2026-11-26 so each
+# newly pasted key can be verified in under a minute.
+
+on:
+  workflow_dispatch:
+    inputs:
+      provider:
+        description: "Brain to test"
+        required: true
+        type: choice
+        options:
+          - groq
+          - openrouter
+          - cloudflare
+          - sambanova
+          - dashscope
+          - modelscope
+          - siliconflow
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Call the chosen brain once
+        env:
+          PROVIDER: ${{ inputs.provider }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CF_ACCOUNT_ID: ${{ vars.CF_ACCOUNT_ID }}
+          SAMBANOVA_API_KEY: ${{ secrets.SAMBANOVA_API_KEY }}
+          DASHSCOPE_API_KEY: ${{ secrets.DASHSCOPE_API_KEY }}
+          MODELSCOPE_API_KEY: ${{ secrets.MODELSCOPE_API_KEY }}
+          SILICONFLOW_API_KEY: ${{ secrets.SILICONFLOW_API_KEY }}
+        run: |
+          python3 - <<'PYEOF'
+          import json, os, urllib.request, urllib.error
+          P = {
+            "groq":       ("https://api.groq.com/openai/v1/chat/completions", "openai/gpt-oss-120b", "GROQ_API_KEY"),
+            "openrouter": ("https://openrouter.ai/api/v1/chat/completions", "meta-llama/llama-3.3-70b-instruct:free", "OPENROUTER_API_KEY"),
+            "cloudflare": ("https://api.cloudflare.com/client/v4/accounts/{CF_ACCOUNT_ID}/ai/v1/chat/completions", "@cf/meta/llama-3.3-70b-fp8-fast", "CLOUDFLARE_API_TOKEN"),
+            "sambanova":  ("https://api.sambanova.ai/v1/chat/completions", "Meta-Llama-3.3-70B-Instruct", "SAMBANOVA_API_KEY"),
+            "dashscope":  ("https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions", "qwen-plus", "DASHSCOPE_API_KEY"),
+            "modelscope": ("https://api-inference.modelscope.cn/v1/chat/completions", "Qwen/Qwen3-32B", "MODELSCOPE_API_KEY"),
+            "siliconflow":("https://api.siliconflow.cn/v1/chat/completions", "Qwen/Qwen2.5-7B-Instruct", "SILICONFLOW_API_KEY"),
+          }
+          name = os.environ["PROVIDER"]
+          url, model, keyvar = P[name]
+          key = (os.environ.get(keyvar) or "").strip()
+          if not key:
+              print(f"SMOKE {name}: NO KEY (secret {keyvar} is empty/missing)")
+              raise SystemExit(2)
+          url = url.replace("{CF_ACCOUNT_ID}", (os.environ.get("CF_ACCOUNT_ID") or "").strip())
+          body = json.dumps({"model": model,
+                             "messages": [{"role": "user", "content": "Reply with exactly: OK"}],
+                             "max_tokens": 64}).encode()
+          req = urllib.request.Request(url, data=body, method="POST",
+                                       headers={"Authorization": "Bearer " + key,
+                                                "Content-Type": "application/json"})
+          try:
+              with urllib.request.urlopen(req, timeout=120) as r:
+                  text = r.read().decode("utf-8", "replace")
+                  print(f"SMOKE {name}: HTTP {r.status} model={model}")
+                  print("BODY[:400]:", text[:400])
+          except urllib.error.HTTPError as e:
+              text = e.read().decode("utf-8", "replace")
+              print(f"SMOKE {name}: HTTP {e.code} model={model}")
+              print("BODY[:400]:", text[:400])
+              raise SystemExit(3)
+          PYEOF
