@@ -3132,10 +3132,119 @@ def search_university_lectures(query):
     return out
 
 
+# --------------------------------------------------------------------------
+# Ensani — پرتال جامع علوم انسانی (§34) — the Persian humanities
+# portal of the Institute for Humanities and Cultural Studies
+# (پژوهشگاه علوم انسانی و مطالعات فرهنگی), registered in
+# ensani_registry.json (§17 wiring: credibility/priority signal
+# only, never verification). The portal is the largest Persian
+# humanities article bank (hundreds of journals, hundreds of
+# thousands of articles). Probed from the build sandbox on
+# 2026-11-26 under the full-text-only law and the multi-route rule:
+#   SEARCH — the site's own search form
+#       GET ensani.ir/fa/article/search/index?term=<q>&searchType=0
+#           (302 -> /fa/article?ArticleSearch[title]=<q>&
+#            ArticleSearch[sortBy]=relevance; server-rendered
+#            list-view of <article class="article-item"> blocks)
+#       ANSWERS with real records, no login (بیرونی -> 410
+#       results; تاریخ علم -> 113; تاریخ نجوم -> 7; تاریخ
+#       ریاضیات -> 9). The search is portal-wide across ALL of
+#       its journals by default — no journal/subject filter is
+#       applied — so its history-of-science titles are searched
+#       too: the University of Tehran journal «تاریخ علم» was
+#       seen in the results (دوره ۱۹, ۱۴۰۰, شماره ۱; پاییز ۱۳۸۲,
+#       شماره ۱).
+#   FULL TEXT — the article page's own download route
+#       GET ensani.ir/fa/article/download/<article_id>
+#           (302 -> /file/download/article/*.pdf)
+#       probe-verified WITHOUT login or cookies: id 191665 ->
+#       170,911 B, %PDF-1.4, 6 pages; id 475321 (a «تاریخ علم»
+#       journal article) -> 495,753 B, %PDF-1.7. Candidates
+#       therefore carry oa_pdf_url = the download route, and
+#       attach_fulltexts_v2 fetches the PDF via its
+#       index-fulltext route.
+#   Routes also tried: journal-issue listing pages
+#   (/fa/article/journal-number/<id>/..., linked from every
+#   result — covered by the portal search, not queried
+#   separately); the results page's Excel export
+#   (/fa/article/excel?model=article&query[...] — exposed by the
+#   site, not needed); sitemap.xml -> the site's 404 page;
+#   robots.txt -> 404 page; OAI-PMH (/oai?verb=Identify) -> 404;
+#   RSS (/fa/article/rss) -> 404; alternate hosts www.ensani.ir
+#   and http://ensani.ir both answer 200 (same site); index
+#   fallbacks (Crossref/DOAJ/OpenAlex -> ensani PDFs) not
+#   needed — the portal's own routes passed both bars.
+# The fetch discipline is the §23 single-shot _arab_fetch and
+# candidates are shaped by _arab_candidate, exactly like §23.
+# --------------------------------------------------------------------------
+
+ENSANI_CAP = 8
+_ENSANI_BASE = "https://ensani.ir"
+_FA_DIGITS = "۰۱۲۳۴۵۶۷۸۹"
+
+
+def _ensani_year(text):
+    """Year from an ensani journal-issue string: a Persian-digit
+    year (۱۳۶۸, the Jalali year the portal prints) is converted
+    digit-by-digit; a Latin year passes through unchanged."""
+    s = str(text or "")
+    m = re.search(r"[۰-۹]{4}|(?:19|20)\d{2}", s)
+    if not m:
+        return None
+    tok = m.group(0)
+    if tok[0] in _FA_DIGITS:
+        return int("".join(str(_FA_DIGITS.index(c)) for c in tok))
+    return int(tok)
+
+
+def _parse_ensani_results(body):
+    """Parse one ensani search-results page: each hit is an
+    <article class="article-item"> block whose heading links
+    /fa/article/<id>/<slug>, with author links (rel="author") and
+    a journal-issue link (class="journal-title")."""
+    out = []
+    for block in re.findall(
+            r'<article class="article-item.*?</article>', body or "",
+            re.S):
+        m = re.search(r'href="(/fa/article/(\d+)/[^"]*)"[^>]*>'
+                      r"(.*?)</a>", block, re.S)
+        if not m:
+            continue
+        title = _arab_strip_tags(m.group(3))
+        if not title:
+            continue
+        art_id = m.group(2)
+        authors = [_arab_strip_tags(a) for a in re.findall(
+            r'rel="author">(.*?)</a>', block, re.S)]
+        jm = re.search(r'journal-title"[^>]*>(.*?)</a>', block, re.S)
+        venue = _arab_strip_tags(jm.group(1)) if jm else ""
+        cand = _arab_candidate(
+            title, _ENSANI_BASE + m.group(1), "persian:ensani",
+            authors=authors[:6], year=_ensani_year(venue),
+            venue=venue or "Ensani (پرتال جامع علوم انسانی)")
+        cand["oa_pdf_url"] = (
+            f"{_ENSANI_BASE}/fa/article/download/{art_id}")
+        out.append(cand)
+    return out
+
+
+def search_ensani(query):
+    """§34: search Ensani (پرتال جامع علوم انسانی) portal-wide —
+    every journal the portal carries, including its
+    history-of-science titles (مجلهٔ تاریخ علم دانشگاه تهران).
+    Fail-soft, capped at ENSANI_CAP."""
+    url = (_ENSANI_BASE + "/fa/article/search/index?"
+           + urllib.parse.urlencode({"term": query,
+                                     "searchType": "0"}))
+    status, body = _arab_fetch(url)
+    if status != 200 or not body:
+        return []
+    return _parse_ensani_results(body)[:ENSANI_CAP]
+
 
 # --------------------------------------------------------------------------
 # Source registries (§17) — credibility / whitelist SIGNAL only.
-# Ten curated registries sit beside this script in the repo:
+# Eleven curated registries sit beside this script in the repo:
 #   sources_registry.json        (registry 1, registry schema)
 #   sources_registry_500_more.json (500 DOAJ journals, compact schema:
 #                                   {id, name, url, type, fields,
@@ -3169,6 +3278,11 @@ def search_university_lectures(query):
 #                                   university lecture platforms of
 #                                   surveys §29-§31, registry schema —
 #                                   platform entries, not lectures)
+#   ensani_registry.json         (§34: the Ensani portal — پرتال
+#                                   جامع علوم انسانی, the Persian
+#                                   humanities article bank,
+#                                   registry schema — one platform
+#                                   entry, not journals)
 # Both schemas normalise into one record {name, url, domain, type,
 # fields, languages, registry}. A registry match is a ranking SIGNAL
 # ONLY: it never verifies a source (the DOI / Crossref / publisher
@@ -3186,7 +3300,8 @@ REGISTRY_FILES = ["sources_registry.json",
                   "arab_libraries_registry.json",
                   "european_journals_registry.json",
                   "world_libraries_registry.json",
-                  "lectures_registry.json"]
+                  "lectures_registry.json",
+                  "ensani_registry.json"]
 _REGISTRY_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
@@ -3340,7 +3455,7 @@ SEARCHERS = [search_openalex, search_crossref, search_openaire,
              search_semantic_scholar, search_arab_platforms,
              search_asian_platforms, search_arab_libraries,
              search_european_platforms, search_digital_libraries,
-             search_university_lectures]
+             search_university_lectures, search_ensani]
 
 # English-first retrieval (§18): wave 1 queries the abstract-rich
 # indexes ONLY — Crossref is held back because, queried with a
@@ -3355,7 +3470,7 @@ WAVE1_SEARCHERS = [search_openalex, search_europe_pmc, search_hal,
                    search_annas_archive, search_arab_platforms,
                    search_asian_platforms, search_arab_libraries,
                    search_european_platforms, search_digital_libraries,
-                   search_university_lectures]
+                   search_university_lectures, search_ensani]
 CROSSREF_SEARCHERS = [search_crossref]
 
 
