@@ -227,6 +227,10 @@ def search_europe_pmc(query):
 #                                   Asian-country journal platforms,
 #                                   registry schema — platform entries,
 #                                   not individual journals)
+#   arab_libraries_registry.json (§25: the great Arabic digital
+#                                   libraries + the Iraqi Journal of
+#                                   Science alternate route, registry
+#                                   schema — library/platform entries)
 # Both schemas normalise into one record {name, url, domain, type,
 # fields, languages, registry}. A registry match is a ranking SIGNAL
 # ONLY: it never verifies a source (the DOI / Crossref / publisher
@@ -240,7 +244,8 @@ REGISTRY_FILES = ["sources_registry.json",
                   "sources_registry_2.json",
                   "thesis_registry.json",
                   "arab_journals_registry.json",
-                  "asian_journals_registry.json"]
+                  "asian_journals_registry.json",
+                  "arab_libraries_registry.json"]
 _REGISTRY_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
