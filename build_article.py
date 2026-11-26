@@ -6455,11 +6455,12 @@ def topic_adaptation_note(original_topic, adapted_topic, reason,
 # Gemini writing
 # --------------------------------------------------------------------------
 
-def gemini(prompt, api_key, model):
+def gemini(prompt, api_key, model, max_tokens=None):
     url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
     body = json.dumps({
         "contents": [{"parts": [{"text": prompt}]}],
-        "generationConfig": {"temperature": 0.4, "maxOutputTokens": 8192},
+        "generationConfig": {"temperature": 0.4,
+                             "maxOutputTokens": max_tokens or 8192},
     }).encode("utf-8")
     status, raw = http_request(url, method="POST", data=body, headers={
         "Content-Type": "application/json", "x-goog-api-key": api_key})
@@ -6600,7 +6601,8 @@ def llm_model():
     return _brain_model(llm_provider())
 
 
-def _github_models_once(prompt, temperature=0.4, json_mode=False):
+def _github_models_once(prompt, temperature=0.4, json_mode=False,
+                        max_tokens=None):
     """One single GitHub Models chat completion attempt (no retries —
     call_llm's brain chain owns retrying and failover). Token:
     GH_MODELS_TOKEN if set, else GITHUB_TOKEN. A truncated reply
@@ -6611,11 +6613,12 @@ def _github_models_once(prompt, temperature=0.4, json_mode=False):
     if not token:
         raise Fail("GitHub Models brain has no model token available: "
                    "set the GH_MODELS_TOKEN repo secret or pass GITHUB_TOKEN.")
+    budget = max_tokens or GH_MODELS_MAX_TOKENS
     body = json.dumps({
         "model": _brain_model("github"),
         "messages": [{"role": "user", "content": prompt}],
         "temperature": temperature,
-        "max_tokens": GH_MODELS_MAX_TOKENS,
+        "max_tokens": budget,
         **({"response_format": {"type": "json_object"}} if json_mode else {}),
     }).encode("utf-8")
     status, raw = http_request(GH_MODELS_URL, method="POST", data=body,
@@ -6637,7 +6640,7 @@ def _github_models_once(prompt, temperature=0.4, json_mode=False):
         raise Fail(f"GitHub Models returned an unexpected shape: {raw[:300]!r}")
     if finish == "length":
         raise Fail(f"GitHub Models reply truncated at "
-                   f"{GH_MODELS_MAX_TOKENS} tokens (finish_reason=length)")
+                   f"{budget} tokens (finish_reason=length)")
     if not text:
         raise Fail("GitHub Models returned empty text")
     return text
@@ -6662,7 +6665,8 @@ def glm_max_tokens():
     return GLM_DEFAULT_MAX_TOKENS
 
 
-def _glm_once(prompt, temperature=0.4, json_mode=False):
+def _glm_once(prompt, temperature=0.4, json_mode=False,
+              max_tokens=None):
     """One single GLM (z.ai) chat completion attempt (no retries —
     call_llm's brain chain owns retrying and failover). Endpoint and
     auth verified against the official docs (docs.z.ai): POST
@@ -6682,7 +6686,7 @@ def _glm_once(prompt, temperature=0.4, json_mode=False):
     if not api_key:
         raise Fail("GLM brain has no GLM_API_KEY available: "
                    "set the GLM_API_KEY repo secret.")
-    max_tokens = glm_max_tokens()
+    max_tokens = max_tokens or glm_max_tokens()
     body = json.dumps({
         "model": _brain_model("glm"),
         "messages": [{"role": "user", "content": prompt}],
@@ -6716,7 +6720,8 @@ def _glm_once(prompt, temperature=0.4, json_mode=False):
     return text
 
 
-def _extra_brain_once(name, prompt, temperature=0.4, json_mode=False):
+def _extra_brain_once(name, prompt, temperature=0.4, json_mode=False,
+                      max_tokens=None):
     """One single attempt on a §22 OpenAI-compatible brain (Groq,
     OpenRouter, Cloudflare Workers AI, SambaNova, DashScope,
     ModelScope or SiliconFlow — no retries;
@@ -6734,11 +6739,12 @@ def _extra_brain_once(name, prompt, temperature=0.4, json_mode=False):
                    "set the CF_ACCOUNT_ID repo variable.")
     if not api_key:
         raise Fail(f"{label} brain has no API key available.")
+    budget = max_tokens or EXTRA_BRAINS_MAX_TOKENS
     body = json.dumps({
         "model": _brain_model(name),
         "messages": [{"role": "user", "content": prompt}],
         "temperature": temperature,
-        "max_tokens": EXTRA_BRAINS_MAX_TOKENS,
+        "max_tokens": budget,
         **({"response_format": {"type": "json_object"}} if json_mode else {}),
     }).encode("utf-8")
     status, raw = http_request(url, method="POST", data=body,
@@ -6760,7 +6766,7 @@ def _extra_brain_once(name, prompt, temperature=0.4, json_mode=False):
         raise Fail(f"{label} returned an unexpected shape: {raw[:300]!r}")
     if finish == "length":
         raise Fail(f"{label} reply truncated at "
-                   f"{EXTRA_BRAINS_MAX_TOKENS} tokens "
+                   f"{budget} tokens "
                    "(finish_reason=length)")
     if not text:
         raise Fail(f"{label} returned empty text")
@@ -6838,22 +6844,28 @@ def _brain_key_available(name, api_key):
     return False
 
 
-def _call_brain(name, prompt, api_key, model, temperature, json_mode):
+def _call_brain(name, prompt, api_key, model, temperature, json_mode,
+                max_tokens=None):
     """One single attempt on brain `name`. The Gemini path is the
     original gemini() above, unchanged (its temperature is built in);
     the GitHub Models and GLM paths honour the temperature / json_mode
-    of the call site."""
+    of the call site. `max_tokens` is an optional per-call output
+    budget (§45: only the §33 review layer passes one); None keeps
+    each brain's legacy default budget, so writer calls are
+    unchanged."""
     if name == "glm":
         return _glm_once(prompt, temperature=temperature,
-                         json_mode=json_mode)
+                         json_mode=json_mode, max_tokens=max_tokens)
     if name == "github":
         return _github_models_once(prompt, temperature=temperature,
-                                   json_mode=json_mode)
+                                   json_mode=json_mode,
+                                   max_tokens=max_tokens)
     if name in EXTRA_BRAINS:
         return _extra_brain_once(name, prompt,
                                  temperature=temperature,
-                                 json_mode=json_mode)
-    return gemini(prompt, api_key, model)
+                                 json_mode=json_mode,
+                                 max_tokens=max_tokens)
+    return gemini(prompt, api_key, model, max_tokens=max_tokens)
 
 
 # The brain that served the most recent successful call_llm()
@@ -6863,7 +6875,7 @@ _LAST_BRAIN = {"name": None}
 
 
 def call_llm(prompt, api_key, model, temperature=0.4, json_mode=False,
-             provider=None):
+             provider=None, max_tokens=None):
     """One logical LLM call, served by the brain chain (llm_chain()):
     brains are tried in order, each for up to CHAIN_ATTEMPTS attempts
     with a CHAIN_BACKOFF_SECONDS x attempt pause between attempts.
@@ -6874,7 +6886,10 @@ def call_llm(prompt, api_key, model, temperature=0.4, json_mode=False,
     path was. `provider` pins the call to ONE named brain (the
     relevance screen's second judge, §16.4): the pinned brain gets
     the same attempts, and a missing key is a Fail rather than a
-    skip, so the caller knows the pinned call never ran."""
+    skip, so the caller knows the pinned call never ran.
+    `max_tokens` (§45) is an optional per-call output budget passed
+    through to whichever brain serves the call; None (every caller
+    except the §33 review layer) keeps the brains' legacy budgets."""
     if provider is not None:
         provider = provider.strip().lower()
         if provider not in KNOWN_BRAINS:
@@ -6899,7 +6914,8 @@ def call_llm(prompt, api_key, model, temperature=0.4, json_mode=False,
         for attempt in range(1, CHAIN_ATTEMPTS + 1):
             try:
                 text = _call_brain(name, prompt, api_key, model,
-                                   temperature, json_mode)
+                                   temperature, json_mode,
+                                   max_tokens=max_tokens)
             except Exception as e:
                 last_error = e
                 print(f"WARNING: brain {name} failed attempt "
@@ -9175,9 +9191,41 @@ def _write_article_single(field, topic, language, sources, api_key, model,
 # threshold are untouched: this layer only ever sees a draft that
 # already passed them. GRIS does not inherit the layer (§33 design
 # note): it keeps its deterministic claim checker.
+#
+# Robustness (§45, Jupiter 2026-11-26, after the live local
+# production where the layer blocked three drafts in a row): a
+# single-brain parse failure used to mean "no verdict" at once.
+# Now every reviewer JSON call (a) parses tolerantly — code fences
+# stripped, the outermost balanced JSON span extracted, trailing
+# prose ignored; (b) on a parse failure re-asks the SAME role on
+# the SAME brain ONCE with a repair instruction (valid compact
+# JSON only, shortened texts); (c) on a continued failure FAILS
+# OVER to the next keyed brain in the chain and repeats (a)+(b) —
+# a role blocks only when EVERY keyed brain fails to yield a
+# parseable verdict, exactly the old law with the retries the old
+# code never made; (d) runs under REVIEW_MAX_TOKENS, a dedicated
+# reviewer output budget, instead of inheriting the writer
+# budgets (Gemini 8192 / GLM 8000 / extra brains 8000 / GitHub
+# Models 4000). The report records, per role, which brain
+# produced the verdict and how many attempts it took. And the
+# claims role must ANCHOR every unsupported flag with a verbatim
+# quote of the article span it flags plus the passage span it
+# contradicts (or an explicit "no passage covers this claim"):
+# a flag without the article quote is recorded as an UNEVIDENCED
+# flag — visible in the report, never counted as an issue — the
+# mirror of the fabrication law: an accusation without evidence
+# is not evidence. No verdict is weakened by any of this: the
+# deterministic gate, the no-verdict-blocks law and every
+# severity keep their full force.
 # --------------------------------------------------------------------------
 
 REVIEW_MAX_REPAIR_ROUNDS = 2
+# §45 reviewer output budget: a full verdict for a 6,000–8,000-word
+# article (per-sentence claims verdicts, issue lists with quoted
+# spans) must fit whole — a truncated verdict is an unparseable
+# one. Writer calls keep their own budgets; only §33 role calls
+# pass this through call_llm's max_tokens.
+REVIEW_MAX_TOKENS = 16000
 REVIEW_ROLES = ("citations", "numbers", "claims", "structure",
                 "language")
 REVIEW_ROLE_LABELS_FA = {
@@ -9203,10 +9251,18 @@ def _review_issue(role, where, problem, severity, fix_stage):
             "fix_stage": fix_stage or role}
 
 
-def _review_verdict(role, issues, available=True):
+def _review_verdict(role, issues, available=True, brain=None,
+                    attempts=0, unevidenced=None):
     return {"role": role, "available": bool(available),
             "ok": bool(available) and not issues,
-            "issues": list(issues or [])}
+            "issues": list(issues or []),
+            # §45 provenance: which keyed brain produced this
+            # verdict and how many calls it took (None/0 when the
+            # role never reached a brain); unevidenced flags are
+            # the claims role's unanchored accusations — recorded,
+            # never counted as issues.
+            "brain": brain, "attempts": int(attempts or 0),
+            "unevidenced": list(unevidenced or [])}
 
 
 def _review_issue_key(issue):
@@ -9258,35 +9314,132 @@ def _review_article_capped(article, cap=_REVIEW_ARTICLE_CAP):
             + a[-half:])
 
 
-def _review_llm_issues(role, prompt, api_key, model, fix_stage,
+def _review_parse_json(raw):
+    """Tolerant verdict parsing (§45): strip code fences, then try
+    the OUTERMOST BALANCED JSON span at each bracket position in
+    turn (string-aware scan, so trailing prose — even prose with
+    brackets of its own — is ignored). Falls back to the legacy
+    first-to-last-bracket extraction (_parse_json_value). Raises
+    ValueError when nothing parseable is present (e.g. a reply
+    truncated mid-object): the caller then makes its repair
+    retry."""
+    t = (raw or "").strip()
+    t = re.sub(r"^```(?:json)?\s*", "", t)
+    t = re.sub(r"\s*```$", "", t)
+    for start, ch in enumerate(t):
+        if ch not in "[{":
+            continue
+        depth = 0
+        in_str = False
+        esc = False
+        end = None
+        for i in range(start, len(t)):
+            c = t[i]
+            if in_str:
+                if esc:
+                    esc = False
+                elif c == "\\":
+                    esc = True
+                elif c == '"':
+                    in_str = False
+                continue
+            if c == '"':
+                in_str = True
+            elif c in "[{":
+                depth += 1
+            elif c in "]}":
+                depth -= 1
+                if depth == 0:
+                    end = i
+                    break
+        if end is None:
+            continue
+        try:
+            return json.loads(t[start:end + 1])
+        except Exception:
+            continue
+    return _parse_json_value(raw)
+
+
+_REVIEW_REPAIR_SUFFIX = (
+    "\n\nIMPORTANT: your previous reply could not be parsed as "
+    "JSON. Reply again with ONLY valid compact JSON — no prose, "
+    "no code fences, no commentary before or after — and keep "
+    "every text field as short as possible while preserving "
+    "every verdict.")
+
+
+def _review_call_json(role, prompt, context, validate=None):
+    """One reviewer JSON call, hardened (§45): for each keyed
+    brain in chain order — a fresh call, then, if its reply fails
+    tolerant parsing (or `validate`, e.g. the claims role's
+    completeness check), ONE repair retry on the SAME brain with
+    the repair instruction. A brain whose calls raise is abandoned
+    at once. Returns (data, brain, attempts); (None, None,
+    attempts) when EVERY keyed brain failed to yield a parseable
+    verdict — the role then has NO verdict and blocks publication,
+    exactly the pre-§45 law, now reached only after all retries
+    and failovers. Calls run under REVIEW_MAX_TOKENS."""
+    api_key = context["api_key"]
+    model = context["model"]
+    brains = _keyed_brains(api_key) or [None]
+    attempts = 0
+    for brain in brains:
+        for repair in (False, True):
+            p = prompt + (_REVIEW_REPAIR_SUFFIX if repair else "")
+            attempts += 1
+            try:
+                raw = call_llm(p, api_key, model, temperature=0.1,
+                               json_mode=True, provider=brain,
+                               max_tokens=REVIEW_MAX_TOKENS)
+            except Exception as e:
+                print(f"WARNING: review role {role}: call on brain "
+                      f"{brain} failed ({e}) — next brain")
+                break
+            try:
+                data = _review_parse_json(raw)
+                if validate is not None:
+                    validate(data)
+            except Exception as e:
+                print(f"WARNING: review role {role}: verdict from "
+                      f"brain {brain} unusable ({e})"
+                      + (" — repair retry" if not repair else
+                         " — next brain"))
+                continue
+            return data, brain, attempts
+    return None, None, attempts
+
+
+def _review_llm_issues(role, prompt, context, fix_stage,
                        allow_fatal=True):
-    """One reviewer LLM pass. Returns (issues, available): any brain
-    failure or unparseable reply means NO verdict (available=False)
-    — the supervisor then blocks publication rather than passing
-    the article silently. Items without a stated problem are not
-    issues and are dropped."""
-    try:
-        raw = call_llm(prompt, api_key, model, temperature=0.1,
-                       json_mode=True)
-        data = _parse_json_value(raw)
-        items = data.get("issues") if isinstance(data, dict) else data
-        issues = []
-        for it in items or []:
-            if not isinstance(it, dict):
-                continue
-            problem = str(it.get("problem") or "").strip()
-            if not problem:
-                continue
-            sev = str(it.get("severity") or "fixable").lower()
-            if sev not in ("fatal", "fixable") or not allow_fatal:
-                sev = "fixable"
-            issues.append(_review_issue(
-                role, it.get("where", ""), problem, sev, fix_stage))
-        return issues, True
-    except Exception as e:
-        print(f"WARNING: review role {role}: LLM pass failed ({e}) "
-              "— no verdict from this role")
-        return [], False
+    """One reviewer LLM pass. Returns (issues, available, meta):
+    the verdict now survives tolerant parsing, one repair retry
+    and failover across the keyed brains (§45); only when every
+    brain fails is there NO verdict (available=False) — the
+    supervisor then blocks publication rather than passing the
+    article silently. meta records the serving brain and the
+    attempt count for the review report. Items without a stated
+    problem are not issues and are dropped."""
+    data, brain, attempts = _review_call_json(role, prompt, context)
+    meta = {"brain": brain, "attempts": attempts}
+    if data is None:
+        print(f"WARNING: review role {role}: no verdict on any "
+              "brain — this role blocks publication")
+        return [], False, meta
+    items = data.get("issues") if isinstance(data, dict) else data
+    issues = []
+    for it in items or []:
+        if not isinstance(it, dict):
+            continue
+        problem = str(it.get("problem") or "").strip()
+        if not problem:
+            continue
+        sev = str(it.get("severity") or "fixable").lower()
+        if sev not in ("fatal", "fixable") or not allow_fatal:
+            sev = "fixable"
+        issues.append(_review_issue(
+            role, it.get("where", ""), problem, sev, fix_stage))
+    return issues, True, meta
 
 
 # --- Role 1: citations -----------------------------------------------------
@@ -9376,11 +9529,11 @@ def review_citations(article, counted, context):
         "GROUNDING (the counted sources, numbered as cited):\n"
         + _review_grounding_text(counted)
         + "\n\nARTICLE:\n" + _review_article_capped(body))
-    llm_issues, available = _review_llm_issues(
-        "citations", prompt, context["api_key"], context["model"],
-        "citations")
+    llm_issues, available, meta = _review_llm_issues(
+        "citations", prompt, context, "citations")
     return _review_verdict("citations", issues + llm_issues,
-                           available)
+                           available, brain=meta["brain"],
+                           attempts=meta["attempts"])
 
 
 # --- Role 2: numbers -------------------------------------------------------
@@ -9526,10 +9679,11 @@ def review_numbers(article, counted, context):
         '"fatal|fixable"}]}\n\n'
         "NUMERIC LINES:\n" + "\n".join(numeric_lines[:60])
         + "\n\nGROUNDING:\n" + _review_grounding_text(counted))
-    llm_issues, available = _review_llm_issues(
-        "numbers", prompt, context["api_key"], context["model"],
-        "numbers")
-    return _review_verdict("numbers", issues + llm_issues, available)
+    llm_issues, available, meta = _review_llm_issues(
+        "numbers", prompt, context, "numbers")
+    return _review_verdict("numbers", issues + llm_issues, available,
+                           brain=meta["brain"],
+                           attempts=meta["attempts"])
 
 
 # --- Role 3: claims --------------------------------------------------------
@@ -9575,6 +9729,40 @@ def _review_is_factual(sentence):
     return len(s.split()) >= 12
 
 
+def _claims_batch_judged(data, batch_len):
+    """The claims verdicts of one batch as {sentence number:
+    verdict}; raises ValueError when the batch is incompletely
+    judged — an unjudged sentence blocks publication, so an
+    incomplete reply is a failed attempt (§45: repair retry, then
+    failover), never a partial verdict."""
+    verdicts = data.get("verdicts") if isinstance(data, dict) \
+        else data
+    judged = {}
+    for v in verdicts or []:
+        if isinstance(v, dict) and v.get("i") is not None:
+            try:
+                judged[int(v["i"])] = v
+            except (TypeError, ValueError):
+                continue
+    if len(judged) < batch_len:
+        raise ValueError(f"brain judged {len(judged)}/{batch_len} "
+                         "sentences")
+    return judged
+
+
+def _review_quote_in(quote, sentence):
+    """True when `quote` is a verbatim span of `sentence`
+    (whitespace-tolerant, surrounding quote marks stripped): the
+    §45 anchor check for a claims flag. A paraphrase, a summary
+    or an invented span does not anchor a flag."""
+    q = re.sub(r"\s+", " ", (quote or "").strip())
+    q = q.strip(" \t\"'«»“”‘’")
+    if len(q) < 8:
+        return False
+    s = re.sub(r"\s+", " ", (sentence or "").strip())
+    return q in s
+
+
 def review_claims(article, counted, context):
     sentences = [s for s in _review_sentences(article)
                  if _review_is_factual(s)]
@@ -9582,6 +9770,9 @@ def review_claims(article, counted, context):
         return _review_verdict("claims", [], True)
     grounding = _review_grounding_text(counted)
     issues = []
+    unevidenced = []
+    brain = None
+    attempts = 0
     for start in range(0, len(sentences), _REVIEW_CLAIMS_BATCH):
         batch = sentences[start:start + _REVIEW_CLAIMS_BATCH]
         listing = "\n".join(f"SENTENCE {j}: {s[:400]}"
@@ -9602,41 +9793,61 @@ def review_claims(article, counted, context):
             "would lose its main point without this claim. You "
             "MUST return one verdict per sentence — an unjudged "
             "sentence blocks publication.\n"
+            "EVIDENCE RULE (§45): for every verdict with "
+            "\"supported\": false you MUST add \"quote\" — the "
+            "exact span of the sentence you are flagging, copied "
+            "verbatim — and \"evidence\" — either the exact span "
+            "of the GROUNDING passage the claim contradicts or "
+            "fails to match, or the exact words \"no passage "
+            "covers this claim\" when no supplied passage covers "
+            "it. A flag without its verbatim quote is discarded "
+            "as unevidenced and does not count.\n"
             'Reply with JSON only: {"verdicts": [{"i": 1, '
             '"supported": true, "central": false}]}\n\n'
             "GROUNDING:\n" + grounding + "\n\n" + listing)
-        try:
-            raw = call_llm(prompt, context["api_key"],
-                           context["model"], temperature=0.1,
-                           json_mode=True)
-            data = _parse_json_value(raw)
-            verdicts = data.get("verdicts") \
-                if isinstance(data, dict) else data
-            judged = {}
-            for v in verdicts or []:
-                if isinstance(v, dict) and v.get("i") is not None:
-                    judged[int(v["i"])] = v
-            if len(judged) < len(batch):
-                print("WARNING: review role claims: brain judged "
-                      f"{len(judged)}/{len(batch)} sentences — no "
-                      "complete verdict from this role")
-                return _review_verdict("claims", issues,
-                                       available=False)
-            for j, sent in enumerate(batch, 1):
-                v = judged[j]
-                if not v.get("supported"):
-                    central = bool(v.get("central"))
-                    issues.append(_review_issue(
-                        "claims", sent[:120],
-                        "factual claim not supported by any "
-                        "counted source passage",
-                        "fatal" if central else "fixable",
-                        "claims"))
-        except Exception as e:
-            print(f"WARNING: review role claims: LLM pass failed "
-                  f"({e}) — no verdict from this role")
-            return _review_verdict("claims", issues, available=False)
-    return _review_verdict("claims", issues, True)
+        data, b, n = _review_call_json(
+            "claims", prompt, context,
+            validate=lambda d: _claims_batch_judged(d, len(batch)))
+        attempts += n
+        if data is None:
+            print("WARNING: review role claims: no complete "
+                  "verdict on any brain — this role blocks "
+                  "publication")
+            return _review_verdict("claims", issues, available=False,
+                                   brain=brain, attempts=attempts,
+                                   unevidenced=unevidenced)
+        brain = b
+        judged = _claims_batch_judged(data, len(batch))
+        for j, sent in enumerate(batch, 1):
+            v = judged[j]
+            if v.get("supported"):
+                continue
+            central = bool(v.get("central"))
+            sev = "fatal" if central else "fixable"
+            quote = str(v.get("quote") or "").strip()
+            evidence = str(v.get("evidence") or "").strip()
+            if _review_quote_in(quote, sent):
+                problem = ("factual claim not supported by any "
+                           "counted source passage")
+                if evidence:
+                    problem += (" — reviewer evidence: "
+                                + evidence[:200])
+                issues.append(_review_issue(
+                    "claims", sent[:120], problem, sev, "claims"))
+            else:
+                flag = _review_issue(
+                    "claims", sent[:120],
+                    "reviewer flagged this claim as unsupported "
+                    "WITHOUT the required verbatim article quote "
+                    "(§45) — recorded as an unevidenced flag; it "
+                    "is not counted as an issue",
+                    sev, "claims")
+                flag["unevidenced"] = True
+                flag["quote"] = quote[:200]
+                flag["evidence"] = evidence[:200]
+                unevidenced.append(flag)
+    return _review_verdict("claims", issues, True, brain=brain,
+                           attempts=attempts, unevidenced=unevidenced)
 
 
 # --- Role 4: structure -----------------------------------------------------
@@ -9767,11 +9978,11 @@ def review_structure(article, counted, context):
         "OUTLINE:\n" + "\n".join(f"- {h}" for h in heads)
         + "\n\nOPENING OF THE ARTICLE:\n"
         + (article or "")[:2500])
-    llm_issues, available = _review_llm_issues(
-        "structure", prompt, context["api_key"], context["model"],
-        "structure", allow_fatal=False)
+    llm_issues, available, meta = _review_llm_issues(
+        "structure", prompt, context, "structure", allow_fatal=False)
     return _review_verdict("structure", issues + llm_issues,
-                           available)
+                           available, brain=meta["brain"],
+                           attempts=meta["attempts"])
 
 
 # --- Role 5: language ------------------------------------------------------
@@ -9830,11 +10041,11 @@ def review_language(article, counted, context):
         'Reply with JSON only: {"issues": [{"where": "short '
         'quote", "problem": "...", "severity": "fixable"}]}\n\n'
         "ARTICLE:\n" + _review_article_capped(article))
-    llm_issues, available = _review_llm_issues(
-        "language", prompt, context["api_key"], context["model"],
-        "language", allow_fatal=False)
+    llm_issues, available, meta = _review_llm_issues(
+        "language", prompt, context, "language", allow_fatal=False)
     return _review_verdict("language", issues + llm_issues,
-                           available)
+                           available, brain=meta["brain"],
+                           attempts=meta["attempts"])
 
 
 # --- Role 6: the supervisor ------------------------------------------------
@@ -9867,10 +10078,11 @@ def _review_coherence(article, counted, context):
         'involved", "problem": "...", "severity": '
         '"fatal|fixable"}]}\n\n'
         "ARTICLE:\n" + _review_article_capped(article))
-    issues, available = _review_llm_issues(
-        "supervisor", prompt, context["api_key"], context["model"],
-        "writing")
-    return _review_verdict("supervisor", issues, available)
+    issues, available, meta = _review_llm_issues(
+        "supervisor", prompt, context, "writing")
+    return _review_verdict("supervisor", issues, available,
+                           brain=meta["brain"],
+                           attempts=meta["attempts"])
 
 
 _REVIEWERS = {"citations": review_citations,
@@ -9989,8 +10201,16 @@ def run_review_layer(article, counted, context):
                 "issues_fixed": len(fixed_keys),
                 "roles": {r: {"ok": v["ok"],
                               "available": v["available"],
-                              "issues": v["issues"]}
+                              "issues": v["issues"],
+                              # §45 provenance for the report.
+                              "brain": v.get("brain"),
+                              "attempts": v.get("attempts", 0)}
                           for r, v in last.items()},
+                # §45: unanchored claims flags — visible in the
+                # report, never counted as issues, never blocking.
+                "unevidenced_flags": [
+                    f for v in last.values()
+                    for f in (v.get("unevidenced") or [])],
                 "issue_records": [
                     dict(found[k], fixed=k in fixed_keys)
                     for k in order],
@@ -10055,6 +10275,11 @@ def _review_lines(review):
         f"ایرادهای یافته‌شده: {review.get('issues_found', 0)}"
         f" — اصلاح‌شده: {review.get('issues_fixed', 0)}"
         f" — دورهای اصلاح: {review.get('rounds', 0)}")
+    unflag = review.get("unevidenced_flags") or []
+    if unflag:
+        lines.append(
+            f"پرچم‌های بدون شاهد (§45): {len(unflag)} مورد — "
+            "اتهامِ بدون نقل‌قولِ دقیق از متن مقاله شمرده نشد")
     verdict = review.get("verdict")
     if verdict == "pass":
         lines.append("نتیجهٔ بررسی چندرباته: قبول ✅")
@@ -10109,6 +10334,27 @@ def build_review_report(topic, review):
     if review.get("repair_failed"):
         lines.append("⚠️ یک دور اصلاح خروجی قابل استفاده نداد و "
                      "از دست رفت.")
+    roles_all = review.get("roles") or {}
+    if any((v or {}).get("attempts") for v in roles_all.values()):
+        lines.append("")
+        lines.append("مغز و تلاش هر داور (§45):")
+        for role in REVIEW_ROLES + ("supervisor",):
+            v = roles_all.get(role) or {}
+            if v.get("attempts"):
+                lines.append(
+                    f"• {REVIEW_ROLE_LABELS_FA[role]}: مغز "
+                    f"{v.get('brain') or '—'} — {v['attempts']} "
+                    "تلاش")
+    unflag = review.get("unevidenced_flags") or []
+    if unflag:
+        lines.append("")
+        lines.append(f"پرچم‌های بدون شاهد (§45) — {len(unflag)} "
+                     "مورد (شمرده نشدند؛ اتهام بدون نقل‌قول دقیق "
+                     "از متن، شاهد نیست):")
+        for f in unflag:
+            lines.append(f"• [{f.get('role', '')}] "
+                         f"{f.get('where', '')} — "
+                         f"{f.get('problem', '')}")
     records = review.get("issue_records") or []
     roles = review.get("roles") or {}
     for role in REVIEW_ROLES + ("supervisor",):
