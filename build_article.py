@@ -8255,6 +8255,13 @@ def topic_adaptation_note(original_topic, adapted_topic, reason,
 # --------------------------------------------------------------------------
 
 def gemini(prompt, api_key, model, max_tokens=None):
+    """One Gemini generateContent call. A truncated reply
+    (finishReason "MAX_TOKENS" — Gemini's equivalent of the
+    OpenAI-compatible finish_reason "length") raises Fail like
+    any other failed attempt (§57): the GLM, GitHub Models and
+    §22 extra-brain paths already enforce this, and truncated
+    text must never silently enter an article — or any other
+    stage's input."""
     url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
     body = json.dumps({
         "contents": [{"parts": [{"text": prompt}]}],
@@ -8269,8 +8276,13 @@ def gemini(prompt, api_key, model, max_tokens=None):
     try:
         parts = data["candidates"][0]["content"]["parts"]
         text = "".join(p.get("text", "") for p in parts).strip()
+        finish = data["candidates"][0].get("finishReason")
     except Exception:
         raise Fail(f"Gemini returned an unexpected shape: {raw[:300]!r}")
+    if finish == "MAX_TOKENS":
+        raise Fail(f"Gemini reply truncated at "
+                   f"{max_tokens or 8192} tokens "
+                   "(finishReason=MAX_TOKENS)")
     if not text:
         raise Fail("Gemini returned empty text")
     return text
@@ -9613,7 +9625,16 @@ def verify_work_in_catalogue(work):
     return True, ""
 
 
-def _source_card_text(i, s):
+def _source_card_text(i, s, excerpt_chars=None):
+    """One numbered source card. `excerpt_chars` caps the
+    full-text excerpt (§57: the writing-stage fit-or-skip ladder
+    rebuilds cards at smaller caps for small-capacity brains);
+    None keeps the legacy FULLTEXT_CARD_CHARS. Trimming shortens
+    only the excerpt — the card's numbering, title, authors and
+    abstract lines, and the excerpt's lead (its first passage),
+    survive at every size."""
+    cap = (FULLTEXT_CARD_CHARS if excerpt_chars is None
+           else excerpt_chars)
     authors = ", ".join(s["authors"][:6]) or "Unknown authors"
     card = (
         f"[{i}] {s['title']}\n"
@@ -9640,26 +9661,27 @@ def _source_card_text(i, s):
                      f"inside this source (located by the "
                      f"topic's keywords — the writing input for "
                      f"[{i}]):\n"
-                     + s["fulltext_excerpt"][:FULLTEXT_CARD_CHARS])
+                     + s["fulltext_excerpt"][:cap])
         else:
             card += (f"\n    Full-text excerpt from this verified "
                      f"source itself (grounding for [{i}]):\n"
-                     + s["fulltext_excerpt"][:FULLTEXT_CARD_CHARS])
+                     + s["fulltext_excerpt"][:cap])
     return card
 
 
-def source_cards_text(sources):
-    return "\n\n".join(_source_card_text(i, s)
+def source_cards_text(sources, excerpt_chars=None):
+    return "\n\n".join(_source_card_text(i, s, excerpt_chars)
                        for i, s in enumerate(sources, 1))
 
 
-def _source_cards_numbered(sources, numbers):
+def _source_cards_numbered(sources, numbers, excerpt_chars=None):
     """Cards for the subset `numbers` (1-based) of `sources`,
     keeping the ORIGINAL numbers: citation numbers are fixed by
     code for the whole article (§44), so a section writer's cards
     must carry the same numbers the reference list will use — a
     renumbered subset would corrupt every citation it writes."""
-    return "\n\n".join(_source_card_text(n, sources[n - 1])
+    return "\n\n".join(_source_card_text(n, sources[n - 1],
+                                         excerpt_chars)
                        for n in numbers)
 
 
@@ -10483,6 +10505,146 @@ PARALLEL_MIN_SECTIONS = 2
 PARALLEL_MAX_SECTIONS = 5
 PARALLEL_MIN_SECTION_WORDS = 30
 
+# ----------------------------------------------------------------------
+# Writing-stage brain capacity (§57, Jupiter 2026-11-26, after
+# production run 45853857495 PASSED the gate — 5 counted, 4
+# primary, 5 full-text — and then failed at this stage, nothing
+# published): a §44 payload must FIT the brain that serves it.
+# Run evidence (build log): Groq's free tier allows 8000 tokens
+# per minute TOTAL (input + output), while full-size section
+# payloads measured ~8,877–8,901 tokens, so every Groq attempt
+# died HTTP 413 and two sections exhausted their brain chains;
+# and a reply cut at the output budget must count as a FAILED
+# attempt, never as the section's text (truncation detection
+# lives in the provider paths: finish_reason "length" for the
+# OpenAI-compatible brains, finishReason "MAX_TOKENS" for
+# Gemini — both raise Fail inside call_llm, so a truncated
+# attempt fails over like any other failure).
+#
+# The rules below apply ONLY to §44 writing calls (the section
+# planner, the parallel section writers, the single-brain parts
+# and the unifier). Screening, the judges and the §33/§45 review
+# layer keep their own budgets (REVIEW_MAX_TOKENS untouched).
+#
+# WRITING_INPUT_TOKEN_CAPS is an INPUT budget per brain: the
+# estimated prompt size must not exceed it. Groq's 5,500 leaves
+# ~2,500 tokens of its 8,000 TPM for the reply. GLM and Gemini
+# get a generous ceiling — their contexts are far larger, so the
+# ceiling only guards against absurd payloads. Every other
+# brain (the §22 extras, GitHub Models, any future brain) gets
+# WRITING_INPUT_TOKEN_CAP_DEFAULT.
+#
+# Token estimation: the codebase carries no tokenizer, so
+# payloads are estimated at WRITING_CHARS_PER_TOKEN chars per
+# token. English prose tokenises near 4 chars/token; Arabic /
+# Persian script and dense scholarly text run closer to 2–3, so
+# 3.0 overestimates Latin text slightly and stays safe for
+# Arabic-script content — an overestimate only ever makes a
+# small brain trim or skip earlier, never sends a payload known
+# to exceed its cap.
+#
+# Fit-or-skip: for a given brain the prompt is first built at
+# the full FULLTEXT_CARD_CHARS excerpt size; while it estimates
+# over the brain's cap it is rebuilt down
+# WRITING_FIT_EXCERPT_CAPS (the §20.6 checkpoint ladder) —
+# trimming shortens only the full-text excerpt of each card, so
+# the source NUMBERING, the title/authors/abstract lines and
+# the excerpt's LEAD (its first passage) survive at every rung.
+# If even the smallest rung estimates over the cap, the brain is
+# SKIPPED for that call and the next brain is tried. Every
+# decision is logged (brain, estimated tokens, cap, action). A
+# payload known to exceed a brain's cap is never sent to it.
+# ----------------------------------------------------------------------
+
+WRITING_CHARS_PER_TOKEN = 3.0
+WRITING_INPUT_TOKEN_CAPS = {"glm": 100_000, "gemini": 100_000,
+                             "groq": 5_500}
+WRITING_INPUT_TOKEN_CAP_DEFAULT = 16_000
+WRITING_FIT_EXCERPT_CAPS = (FULLTEXT_CARD_CHARS, 6000, 3000, 1500,
+                            800, 400)
+
+
+def _estimate_tokens(text):
+    """Conservative token estimate for a §44 payload (§57) —
+    the chars-per-token heuristic documented above."""
+    return int(len(text or "") / WRITING_CHARS_PER_TOKEN) + 1
+
+
+def _writing_input_cap(brain):
+    """The §57 input-token budget for `brain`."""
+    return WRITING_INPUT_TOKEN_CAPS.get(
+        brain, WRITING_INPUT_TOKEN_CAP_DEFAULT)
+
+
+def _fit_writing_prompt(build_prompt, brain, label):
+    """Fit-or-skip for ONE brain (§57). `build_prompt` maps an
+    excerpt cap (chars per source card) to the full prompt text.
+    Returns (prompt, estimated_tokens, excerpt_chars) for the
+    first ladder rung that fits the brain's cap, or None when no
+    rung fits — the caller then skips this brain for the call.
+    Every decision is logged."""
+    cap = _writing_input_cap(brain)
+    prompt = est = None
+    for excerpt_chars in WRITING_FIT_EXCERPT_CAPS:
+        prompt = build_prompt(excerpt_chars)
+        est = _estimate_tokens(prompt)
+        if est <= cap:
+            if excerpt_chars < FULLTEXT_CARD_CHARS:
+                print(f"writing capacity (§57): {label} fitted "
+                      f"to brain {brain} by trimming excerpts "
+                      f"to {excerpt_chars} chars/card (est {est} "
+                      f"tokens, cap {cap})")
+            else:
+                print(f"writing capacity (§57): {label} fits "
+                      f"brain {brain} as-is (est {est} tokens, "
+                      f"cap {cap})")
+            return prompt, est, excerpt_chars
+    print(f"writing capacity (§57): {label} SKIPS brain {brain} "
+          f"— even the smallest excerpt size estimates {est} "
+          f"tokens > cap {cap}")
+    return None
+
+
+def _writing_chain_call(build_prompt, api_key, model, label,
+                        **call_kwargs):
+    """One §44 chain call (the section planner, the single-brain
+    parts) under §57 capacity. Legacy behaviour is preserved
+    exactly whenever it is safe: when no brain is keyed, or the
+    full-size prompt fits EVERY keyed brain's cap, the original
+    unpinned call_llm runs unchanged. Only when some keyed brain
+    could not take the full-size payload does the capacity walk
+    engage — keyed brains in chain order, fit-or-skip each,
+    pinned calls, failover on error (a truncation raises inside
+    the provider paths, so it fails over here like any other
+    failed attempt). Raises Fail when every keyed brain was
+    skipped or failed — the stage's existing fail-closed
+    behaviour."""
+    brains = _keyed_brains(api_key)
+    full_prompt = build_prompt(FULLTEXT_CARD_CHARS)
+    full_est = _estimate_tokens(full_prompt)
+    if not brains or all(full_est <= _writing_input_cap(b)
+                         for b in brains):
+        return call_llm(full_prompt, api_key, model, **call_kwargs)
+    print(f"writing capacity (§57): {label} full-size payload "
+          f"estimates {full_est} tokens — over at least one "
+          "keyed brain's cap; walking brains with fit-or-skip")
+    errors = []
+    for brain in brains:
+        fitted = _fit_writing_prompt(build_prompt, brain, label)
+        if fitted is None:
+            errors.append(f"{brain}: payload over capacity "
+                          "(§57 skip)")
+            continue
+        try:
+            return call_llm(fitted[0], api_key, model,
+                            provider=brain, **call_kwargs)
+        except Exception as e:
+            print(f"writing capacity (§57): {label} failed on "
+                  f"brain {brain} ({e}) — trying the next brain")
+            errors.append(f"{brain}: {e}")
+    raise Fail(f"writing capacity (§57): {label} failed on every "
+               "keyed brain — " + "; ".join(errors))
+
 
 def _keyed_brains(api_key):
     """The brain chain (llm_chain() order — GLM first in the
@@ -10543,24 +10705,29 @@ def _plan_sections(field, topic, language, sources, api_key, model):
     caller falls back to the single-brain writing path — planning
     is an optimisation, never a new failure mode."""
     lang_name = LANGUAGE_NAMES.get(language.lower(), language)
-    prompt = (
-        f"Field: {field}\nTopic: {topic}\n\n"
-        "You are planning a scholarly article that several writers "
-        "will draft IN PARALLEL, one writer per section. Using ONLY "
-        "the numbered sources below, design the BODY plan: 3 to 5 "
-        "thematic sections that together cover the sources' "
-        "evidence without overlap. For each section give a specific "
-        f"heading (in {lang_name}), a one-sentence focus, and the "
-        "numbers of the sources that section should work from "
-        "(assign each source to the ONE section where it fits "
-        "best). Do NOT plan the abstract, introduction, discussion "
-        "or conclusion — those are handled separately.\n"
-        'Reply with JSON only: {"sections": [{"heading": "...", '
-        '"focus": "...", "sources": [1, 2]}]}\n\n'
-        "THE NUMBERED SOURCES:\n" + source_cards_text(sources) + "\n")
+
+    def build_prompt(excerpt_chars):
+        return (
+            f"Field: {field}\nTopic: {topic}\n\n"
+            "You are planning a scholarly article that several writers "
+            "will draft IN PARALLEL, one writer per section. Using ONLY "
+            "the numbered sources below, design the BODY plan: 3 to 5 "
+            "thematic sections that together cover the sources' "
+            "evidence without overlap. For each section give a specific "
+            f"heading (in {lang_name}), a one-sentence focus, and the "
+            "numbers of the sources that section should work from "
+            "(assign each source to the ONE section where it fits "
+            "best). Do NOT plan the abstract, introduction, discussion "
+            "or conclusion — those are handled separately.\n"
+            'Reply with JSON only: {"sections": [{"heading": "...", '
+            '"focus": "...", "sources": [1, 2]}]}\n\n'
+            "THE NUMBERED SOURCES:\n"
+            + source_cards_text(sources, excerpt_chars) + "\n")
+
     try:
-        raw = call_llm(prompt, api_key, model, temperature=0.2,
-                       json_mode=True)
+        raw = _writing_chain_call(build_prompt, api_key, model,
+                                  "section planning (§44)",
+                                  temperature=0.2, json_mode=True)
         data = _parse_json_value(raw)
     except Exception as e:
         print(f"parallel writing (§44): section planning failed "
@@ -10609,16 +10776,29 @@ def _writer_hard_rules(lang_name, target_line):
 
 
 def _write_section(task, brains, api_key, model):
-    """One §44 section, written by ONE pinned brain. On failure or
-    unusable output the NEXT brain in the rotation serves the same
-    section. Raises Fail when every keyed brain failed the section
-    — the writing stage's existing fail behaviour."""
+    """One §44 section, written by ONE pinned brain. Each brain
+    in the rotation first goes through §57 fit-or-skip: a brain
+    whose input cap the section's payload cannot fit — even with
+    its source-card excerpts trimmed down the ladder — is
+    skipped for this section without a call. On failure (a
+    truncation raises inside the provider paths, so it lands
+    here like any other failure) or unusable output the NEXT
+    brain in the rotation serves the same section. Raises Fail
+    when every keyed brain was skipped or failed the section —
+    the writing stage's existing fail behaviour."""
     order = [brains[(task["start"] + j) % len(brains)]
              for j in range(len(brains))]
     errors = []
     for brain in order:
+        fitted = _fit_writing_prompt(
+            task["build_prompt"], brain,
+            f"section {task['key']} (§44)")
+        if fitted is None:
+            errors.append(f"{brain}: payload over capacity "
+                          "(§57 skip)")
+            continue
         try:
-            text = call_llm(task["prompt"], api_key, model,
+            text = call_llm(fitted[0], api_key, model,
                             provider=brain)
         except Exception as e:
             print(f"parallel writing (§44): section {task['key']} "
@@ -10648,7 +10828,11 @@ def _write_article_parallel(field, topic, language, sources, api_key,
     rotating through `brains`. Body writers see ONLY their own
     section's assigned sources (original numbers); front matter
     and closing see the full set, as the legacy parts did. The
-    title is generated after assembly, as in the legacy path."""
+    title is generated after assembly, as in the legacy path.
+    Each task carries a prompt BUILDER (§57): _write_section
+    rebuilds the task's prompt at the excerpt size that fits the
+    serving brain's input cap — at the full size the built
+    prompt is byte-identical to the legacy one."""
     lang_name = LANGUAGE_NAMES.get(language.lower(), language)
     if not word_target:
         word_target = (6000, 8000)
@@ -10656,81 +10840,89 @@ def _write_article_parallel(field, topic, language, sources, api_key,
     mid = (lo + hi) // 2
     all_numbers = list(range(1, len(sources) + 1))
 
-    def common(numbers, target_line):
+    def common(numbers, target_line, excerpt_chars):
         return (f"Field: {field}\nTopic: {topic}\n\n"
                 + _writer_hard_rules(lang_name, target_line) + "\n"
                 + (f"{guide}\n" if guide else "")
                 + "THE ONLY SOURCES YOU MAY USE:\n"
-                + _source_cards_numbered(sources, numbers) + "\n")
+                + _source_cards_numbered(sources, numbers,
+                                         excerpt_chars) + "\n")
 
     outline_text = "\n".join(
         f"- {s['heading']}"
         + (f" — {s['focus']}" if s["focus"] else "")
         for s in plan)
+    front_target = (f"TARGET LENGTH: this part must reach about "
+                    f"{int(mid * 0.18)} words (the complete article "
+                    f"targets {lo}–{hi} words).")
+    front_suffix = (
+        f"\nWrite PART 1 of a scholarly article (about "
+        f"{int(mid * 0.18)} words):\n"
+        "1) '## Abstract' — a structured abstract with labelled parts: "
+        "Background, Objective, Method, Findings, Conclusion — based only on "
+        "the sources. The Findings must state concrete results from the "
+        "sources (named methods, values, dates), never generalities.\n"
+        "2) '## Keywords' — 5 to 7 keywords on one line.\n"
+        "3) '## Introduction' — a funnel: broad context, narrowing to the "
+        "specific problem, the specific gap visible in these sources, and "
+        "this article's precise aim and claim. Do NOT write a title; the "
+        "title is chosen after the article is complete.")
     tasks = []
     tasks.append({
         "key": "front", "start": 0,
-        "prompt": common(
-            all_numbers,
-            f"TARGET LENGTH: this part must reach about "
-            f"{int(mid * 0.18)} words (the complete article "
-            f"targets {lo}–{hi} words).")
-        + f"\nWrite PART 1 of a scholarly article (about "
-          f"{int(mid * 0.18)} words):\n"
-          "1) '## Abstract' — a structured abstract with labelled parts: "
-          "Background, Objective, Method, Findings, Conclusion — based only on "
-          "the sources. The Findings must state concrete results from the "
-          "sources (named methods, values, dates), never generalities.\n"
-          "2) '## Keywords' — 5 to 7 keywords on one line.\n"
-          "3) '## Introduction' — a funnel: broad context, narrowing to the "
-          "specific problem, the specific gap visible in these sources, and "
-          "this article's precise aim and claim. Do NOT write a title; the "
-          "title is chosen after the article is complete."})
+        "build_prompt": (lambda ec, _n=all_numbers,
+                         _t=front_target, _s=front_suffix:
+                         common(_n, _t, ec) + _s)})
     body_words = max(1, int(mid * 0.52) // len(plan))
     for i, sec in enumerate(plan):
+        body_target = (f"TARGET LENGTH: this section must reach "
+                       f"about {body_words} words (the complete "
+                       f"article targets {lo}–{hi} words).")
+        body_suffix = (
+            "\nYou are writing ONE section of a scholarly "
+            "article whose other sections are being drafted in "
+            "parallel by other writers. The article's body plan "
+            f"is:\n{outline_text}\n\n"
+            f"Write ONLY your section, headed exactly "
+            f"'## {sec['heading']}' (about {body_words} words)."
+            + (f" Its focus: {sec['focus']}\n" if sec["focus"]
+               else "\n")
+            + "Present the specific evidence from YOUR sources "
+              "(data, formulas, numbers, named methods and "
+              "results), compare your sources with each other, "
+              "and analyse errors, uncertainties and "
+              "disagreements where they allow. Keep every claim "
+              "cited as [n], using ONLY your sources' numbers. "
+              "Do NOT write an abstract, introduction, "
+              "discussion or conclusion, and do NOT summarise "
+              "the other sections.")
         tasks.append({
             "key": f"body{i}", "start": len(tasks),
             "heading": sec["heading"],
-            "prompt": common(
-                sec["sources"],
-                f"TARGET LENGTH: this section must reach about "
-                f"{body_words} words (the complete article targets "
-                f"{lo}–{hi} words).")
-            + "\nYou are writing ONE section of a scholarly "
-              "article whose other sections are being drafted in "
-              "parallel by other writers. The article's body plan "
-              f"is:\n{outline_text}\n\n"
-              f"Write ONLY your section, headed exactly "
-              f"'## {sec['heading']}' (about {body_words} words)."
-              + (f" Its focus: {sec['focus']}\n" if sec["focus"]
-                 else "\n")
-              + "Present the specific evidence from YOUR sources "
-                "(data, formulas, numbers, named methods and "
-                "results), compare your sources with each other, "
-                "and analyse errors, uncertainties and "
-                "disagreements where they allow. Keep every claim "
-                "cited as [n], using ONLY your sources' numbers. "
-                "Do NOT write an abstract, introduction, "
-                "discussion or conclusion, and do NOT summarise "
-                "the other sections."})
+            "build_prompt": (lambda ec, _n=list(sec["sources"]),
+                             _t=body_target, _s=body_suffix:
+                             common(_n, _t, ec) + _s)})
+    closing_target = (f"TARGET LENGTH: this part must reach "
+                      f"about {int(mid * 0.30)} words (the "
+                      f"complete article targets {lo}–{hi} "
+                      "words).")
+    closing_suffix = (
+        f"\nWrite PART 3 of the same article (about "
+        f"{int(mid * 0.30)} words):\n"
+        "1) '## Discussion' — what the combined evidence means, how it "
+        "compares across the sources, and what the article's claim is "
+        "worth.\n"
+        "2) '## Conclusion' — the takeaways that the sources actually "
+        "support.\n"
+        "3) '## Limitations' — honest limits of this article (only "
+        "relevant, content-bearing sources were used; abstract/full-text "
+        "level; free-access only).\n"
+        "Do NOT write a reference list; it is added separately.")
     tasks.append({
         "key": "closing", "start": len(tasks),
-        "prompt": common(
-            all_numbers,
-            f"TARGET LENGTH: this part must reach about "
-            f"{int(mid * 0.30)} words (the complete article "
-            f"targets {lo}–{hi} words).")
-        + f"\nWrite PART 3 of the same article (about "
-          f"{int(mid * 0.30)} words):\n"
-          "1) '## Discussion' — what the combined evidence means, how it "
-          "compares across the sources, and what the article's claim is "
-          "worth.\n"
-          "2) '## Conclusion' — the takeaways that the sources actually "
-          "support.\n"
-          "3) '## Limitations' — honest limits of this article (only "
-          "relevant, content-bearing sources were used; abstract/full-text "
-          "level; free-access only).\n"
-          "Do NOT write a reference list; it is added separately."})
+        "build_prompt": (lambda ec, _n=all_numbers,
+                         _t=closing_target, _s=closing_suffix:
+                         common(_n, _t, ec) + _s)})
 
     progress_update(55, "✍️ نگارش موازی بخش‌ها (§44)")
     results = {}
@@ -10778,7 +10970,9 @@ def _write_article_parallel(field, topic, language, sources, api_key,
 
 def unify_article(article, api_key, model):
     """The §44 unification pass: ONE brain (the chain's main brain
-    when keyed) smooths the parallel-written article — wording,
+    when keyed — §57: the first keyed brain whose input cap fits
+    the whole-article payload) smooths the parallel-written
+    article — wording,
     transitions and consistency ONLY. The prompt forbids adding
     claims, sources, citations, numbers, formulas or quotes and
     forbids removing content. Returns the unified article, or
@@ -10812,10 +11006,38 @@ def unify_article(article, api_key, model):
         "- Reply with the COMPLETE edited article only — no "
         "commentary, no code fences.\n\n"
         "ARTICLE:\n" + article)
+    # §57 capacity: the unifier's payload is the whole article —
+    # it is never trimmed — so the serving brain is the first
+    # keyed brain (the chain's main brain first, as before) whose
+    # input cap the article fits; a brain it cannot fit is
+    # skipped, and when NO keyed brain can take it the pass
+    # cannot run and fails closed (None), exactly like an
+    # unusable unification output.
+    serving = None
+    if main_brain:
+        est = _estimate_tokens(prompt)
+        for brain in [main_brain] + [b for b in _keyed_brains(api_key)
+                                     if b != main_brain]:
+            if est <= _writing_input_cap(brain):
+                serving = brain
+                break
+            print(f"writing capacity (§57): unification SKIPS "
+                  f"brain {brain} — the article payload "
+                  f"estimates {est} tokens > cap "
+                  f"{_writing_input_cap(brain)}")
+        if serving is None:
+            print("WARNING: unification pass (§44) cannot run — "
+                  "the article payload exceeds every keyed "
+                  "brain's §57 input cap; failing closed")
+            return None
+        if serving != main_brain:
+            print(f"writing capacity (§57): unification served "
+                  f"by brain {serving} (the main brain "
+                  f"{main_brain} cannot fit the article payload)")
     try:
-        if main_brain:
+        if serving:
             out = call_llm(prompt, api_key, model, temperature=0.2,
-                           provider=main_brain)
+                           provider=serving)
         else:
             out = call_llm(prompt, api_key, model, temperature=0.2)
     except Exception as e:
@@ -10864,9 +11086,12 @@ def _write_article_single(field, topic, language, sources, api_key, model,
     """The original single-brain writing path (three sequential
     chain calls: front matter, body, closing). Unchanged by §44 —
     it is the fallback whenever fewer than two brains are keyed or
-    no usable §44 section plan exists."""
+    no usable §44 section plan exists. §57 routes its three part
+    calls through _writing_chain_call: byte-identical unpinned
+    chain calls whenever the payload fits every keyed brain, and
+    the fit-or-skip walk only when some keyed brain could not
+    take the full-size payload."""
     lang_name = LANGUAGE_NAMES.get(language.lower(), language)
-    cards = source_cards_text(sources)
     if not word_target:
         word_target = (6000, 8000)
     lo, hi = word_target
@@ -10900,11 +11125,13 @@ def _write_article_single(field, topic, language, sources, api_key, model,
         "derived value compared with the value the source itself reports.\n"
         f"- TARGET LENGTH: the complete article must reach {lo}–{hi} words.\n"
         f"- Write the ENTIRE output in {lang_name}.\n")
-    common = (f"Field: {field}\nTopic: {topic}\n\n{hard_rules}\n"
-              + (f"{guide}\n" if guide else "")
-              + f"THE ONLY SOURCES YOU MAY USE:\n{cards}\n")
+    def common_for(excerpt_chars):
+        return (f"Field: {field}\nTopic: {topic}\n\n{hard_rules}\n"
+                + (f"{guide}\n" if guide else "")
+                + "THE ONLY SOURCES YOU MAY USE:\n"
+                + source_cards_text(sources, excerpt_chars) + "\n")
 
-    part1 = call_llm(common +
+    part1_suffix = (
         f"\nWrite PART 1 of a scholarly article (about {int(mid * 0.18)} "
         "words):\n"
         "1) '## Abstract' — a structured abstract with labelled parts: "
@@ -10915,10 +11142,12 @@ def _write_article_single(field, topic, language, sources, api_key, model,
         "3) '## Introduction' — a funnel: broad context, narrowing to the "
         "specific problem, the specific gap visible in these sources, and "
         "this article's precise aim and claim. Do NOT write a title; the "
-        "title is chosen after the article is complete.",
-        api_key, model)
+        "title is chosen after the article is complete.")
+    part1 = _writing_chain_call(
+        lambda ec: common_for(ec) + part1_suffix, api_key, model,
+        "single-path part 1 (§44)")
     progress_update(55, "✍️ نگارش بخش اول")
-    part2 = call_llm(common +
+    part2_suffix = (
         f"\nWrite PART 2 of the same article: the body (about "
         f"{int(mid * 0.52)} words). Organise the synthesis into 3 to 5 "
         "thematic sections, each with a '## ' heading. In every section: "
@@ -10926,10 +11155,12 @@ def _write_article_single(field, topic, language, sources, api_key, model,
         "numbers, named methods and results), compare the sources with "
         "each other, and analyse errors, uncertainties and disagreements "
         "where the sources allow. Keep every claim cited as [n]. Do NOT "
-        "repeat the abstract or introduction.",
-        api_key, model)
+        "repeat the abstract or introduction.")
+    part2 = _writing_chain_call(
+        lambda ec: common_for(ec) + part2_suffix, api_key, model,
+        "single-path part 2 (§44)")
     progress_update(75, "✍️ نگارش بخش دوم")
-    part3 = call_llm(common +
+    part3_suffix = (
         f"\nWrite PART 3 of the same article (about {int(mid * 0.30)} "
         "words):\n"
         "1) '## Discussion' — what the combined evidence means, how it "
@@ -10940,8 +11171,10 @@ def _write_article_single(field, topic, language, sources, api_key, model,
         "3) '## Limitations' — honest limits of this article (only "
         "relevant, content-bearing sources were used; abstract/full-text "
         "level; free-access only).\n"
-        "Do NOT write a reference list; it is added separately.",
-        api_key, model)
+        "Do NOT write a reference list; it is added separately.")
+    part3 = _writing_chain_call(
+        lambda ec: common_for(ec) + part3_suffix, api_key, model,
+        "single-path part 3 (§44)")
     progress_update(90, "✍️ نگارش بخش پایانی")
 
     # Title law (§15): the title is generated AFTER the body, from the
