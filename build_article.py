@@ -2663,6 +2663,187 @@ def text_first_gate(counted):
 
 
 # --------------------------------------------------------------------------
+# Topic adaptation (§20.10, Jupiter 2026-11-26: «در چنین مواردی موضوع
+# رو طوری تغییر بده که بتونیم مقاله رو تولید کنیم») — when a requested
+# topic fails the text-first gate because genuinely relevant counted
+# sources are too few for THAT exact framing, the engine adapts the
+# topic instead of simply stopping: a brain proposes narrow adapted
+# topics grounded ONLY in the evidence already in hand (counted
+# sources + their passages, near-miss titles, the source map), each
+# candidate is re-screened through the SAME fresh pipeline and must
+# pass the SAME gate (thresholds never lowered), at most
+# MAX_TOPIC_ADAPTATIONS attempts. The change is visible in the log,
+# the funnel (§16.3), the §20.7 report, the article itself and
+# state.json. If no candidate passes — or candidate generation
+# fails — the run fails closed exactly as before, with the
+# adaptations tried listed in the final report.
+# --------------------------------------------------------------------------
+
+MAX_TOPIC_ADAPTATIONS = 2
+
+
+def propose_topic_adaptations(field, original_topic, language,
+                              counted, disagreement_titles, source_map,
+                              api_key, model):
+    """Brain-proposed adapted topics (§20.10), grounded ONLY in
+    evidence already in hand. Returns up to 3 candidates
+    [{'topic': ..., 'reason': ...}] ranked by expected source
+    support. Fail-soft: ANY brain/parse failure returns [] and the
+    caller fails closed exactly as before."""
+    counted = [s for s in (counted or [])
+               if s.get("source_type") != "video"]
+    evidence = []
+    for i, s in enumerate(counted, 1):
+        excerpt = (s.get("fulltext_excerpt")
+                   or s.get("abstract") or "").strip()
+        evidence.append(
+            f"{i}. {s.get('title') or '(untitled)'}"
+            f" [type={s.get('source_type') or 'article'}]"
+            + (f"\n   passage/abstract excerpt: {excerpt[:600]}"
+               if excerpt else ""))
+    near = [t for t in (disagreement_titles or []) if t]
+    try:
+        smap_text = json.dumps(source_map or {},
+                               ensure_ascii=False)[:3000]
+    except Exception:
+        smap_text = str(source_map or "")[:3000]
+    prompt = (
+        "The research topic below FAILED a strict text-first "
+        "quality gate: too few genuinely relevant, content-bearing "
+        "sources support that EXACT framing. Propose adapted topics "
+        "that the sources ALREADY FOUND can actually support.\n"
+        f"Field: {field}\n"
+        f"Original topic: {original_topic}\n"
+        f"Article output language code: {language} — write every "
+        "adapted topic string in the same language/style as the "
+        "original topic.\n\n"
+        "COUNTED SOURCES ALREADY IN HAND (the ONLY evidence you may "
+        "ground a candidate in):\n"
+        + ("\n".join(evidence) if evidence else "(none)")
+        + "\n\nNEAR-MISS TITLES (kept by one judge, dropped on "
+        "disagreement):\n"
+        + ("\n".join(f"- {t}" for t in near) if near else "(none)")
+        + f"\n\nSOURCE MAP:\n{smap_text}\n\n"
+        "Rules for every candidate:\n"
+        "- SAME field and SAME core subject/author as the original "
+        "topic — only the framing/angle/scope may shift (broaden, "
+        "narrow, or re-angle around the content the counted sources "
+        "actually support).\n"
+        "- NARROW and SPECIFIC title (title law): no broad "
+        "field-label titles.\n"
+        "- Each candidate carries an explicit one-line reason "
+        "naming which counted sources support it.\n"
+        "- Up to 3 candidates, ranked by expected source support, "
+        "best first.\n"
+        "Reply with ONLY a JSON array like: "
+        '[{"topic": "...", "reason": "..."}]')
+    try:
+        raw = call_llm(prompt, api_key, model, temperature=0.2)
+    except Exception as e:
+        print(f"topic adaptation (§20.10): candidate generation "
+              f"failed ({e}) — no candidates")
+        return []
+    candidates = []
+    try:
+        text = (raw or "").strip()
+        start = text.find("[")
+        end = text.rfind("]")
+        if start < 0 or end <= start:
+            raise ValueError("no JSON array in brain reply")
+        data = json.loads(text[start:end + 1])
+        if isinstance(data, dict):
+            data = data.get("candidates") or data.get("topics") or []
+        for item in data or []:
+            if isinstance(item, str):
+                topic_text, reason = item.strip(), ""
+            elif isinstance(item, dict):
+                topic_text = str(item.get("topic")
+                                 or item.get("title") or "").strip()
+                reason = str(item.get("reason") or "").strip()
+            else:
+                continue
+            if (topic_text and norm(topic_text) != norm(original_topic)
+                    and all(norm(c["topic"]) != norm(topic_text)
+                            for c in candidates)):
+                candidates.append({"topic": topic_text,
+                                   "reason": reason})
+            if len(candidates) >= 3:
+                break
+    except Exception as e:
+        print(f"topic adaptation (§20.10): candidate parse failed "
+              f"({e}) — no candidates")
+        return []
+    print(f"topic adaptation (§20.10): {len(candidates)} "
+          f"candidate(s) proposed for {original_topic!r}")
+    return candidates
+
+
+def attempt_topic_adaptation(field, original_topic, language,
+                             category, article_type, mode, api_key,
+                             model, tg_token, counted,
+                             disagreement_titles, source_map):
+    """§20.10 selection + re-screening. Each candidate (at most
+    MAX_TOPIC_ADAPTATIONS attempts) goes through the SAME
+    _fresh_screening pipeline and the SAME text_first_gate — no
+    threshold is ever lowered, and the original topic's counted set
+    is never reused as an adapted topic's. Returns
+    (adaptation_info, winning_fresh_or_None)."""
+    info = {"original_topic": original_topic, "adapted_topic": None,
+            "reason": "", "attempts": []}
+    candidates = propose_topic_adaptations(
+        field, original_topic, language, counted,
+        disagreement_titles, source_map, api_key, model)
+    for cand in candidates[:MAX_TOPIC_ADAPTATIONS]:
+        adapted, reason = cand["topic"], cand.get("reason", "")
+        print(f"topic adaptation (§20.10): trying adapted topic "
+              f"{adapted!r} (reason: {reason})")
+        fresh = _fresh_screening(field, adapted, language, category,
+                                 article_type, mode, api_key, model,
+                                 tg_token)
+        gate = fresh["gate"]
+        attempt = {"topic": adapted, "reason": reason,
+                   "counted": gate["counted"],
+                   "fulltext_passages": gate["fulltext_passages"],
+                   "primary_passages": gate["primary_passages"],
+                   "ok": bool(gate["ok"])}
+        info["attempts"].append(attempt)
+        print(f"topic adaptation (§20.10): adapted funnel for "
+              f"{adapted!r}: counted={gate['counted']}, "
+              f"full-text passages={gate['fulltext_passages']}, "
+              f"primary passages={gate['primary_passages']}, "
+              f"gate ok={gate['ok']}")
+        if gate["ok"]:
+            info["adapted_topic"] = adapted
+            info["reason"] = reason
+            print(f"topic adapted: {original_topic} -> {adapted} "
+                  f"(reason: {reason})")
+            return info, fresh
+    if info["attempts"]:
+        print("topic adaptation (§20.10): no candidate passed the "
+              "gate — failing closed as before")
+    return info, None
+
+
+def topic_adaptation_note(original_topic, adapted_topic, reason,
+                          language):
+    """The in-article §20.10 note (in the article's language)."""
+    if (language or "").strip().lower().startswith("fa"):
+        return ("> یادداشت: موضوع این مقاله تغییر یافته است. "
+                f"موضوع اولیه «{original_topic}» بود؛ چون برای آن "
+                "قاب‌بندی دقیق، منابع مرتبط و متن‌دار کافی پیدا نشد، "
+                f"موضوع به «{adapted_topic}» تغییر یافت تا مقاله بر "
+                "پایهٔ منابعی که واقعاً در دست است نوشته شود."
+                + (f" دلیل: {reason}" if reason else ""))
+    return ("> Note: this article's topic was adapted. The original "
+            f"topic was \"{original_topic}\"; because too few "
+            "genuinely relevant, full-text sources supported that "
+            f"exact framing, the topic was adapted to "
+            f"\"{adapted_topic}\" so the article rests on the "
+            "sources actually in hand."
+            + (f" Reason: {reason}" if reason else ""))
+
+
+# --------------------------------------------------------------------------
 # Gemini writing
 # --------------------------------------------------------------------------
 
@@ -4562,8 +4743,30 @@ def send_suggestions_dm(token, chat_id, title, candidates, next_topics):
 # like the suggestions DM; the same text is printed as log lines.
 # --------------------------------------------------------------------------
 
+def _adaptation_lines(adaptation):
+    """§20.10 visibility lines (Persian) for the funnel / §20.7
+    report. Empty when no adaptation was attempted."""
+    if not adaptation or not adaptation.get("attempts"):
+        return []
+    lines = ["",
+             f"موضوع اولیه: {adaptation.get('original_topic', '')}"]
+    if adaptation.get("adapted_topic"):
+        lines.append(f"موضوع تغییر‌یافته: "
+                     f"{adaptation['adapted_topic']}")
+        lines.append(f"دلیل تغییر موضوع: "
+                     f"{adaptation.get('reason', '')}")
+    else:
+        lines.append("موضوع تغییر‌یافته: هیچ‌کدام پذیرفته نشد")
+    lines.append("تلاش‌های تغییر موضوع (§20.10):")
+    for a in adaptation["attempts"]:
+        lines.append(f"• {a.get('topic', '')} — شمارش‌شده: "
+                     f"{a.get('counted', 0)}")
+    return lines
+
+
 def build_funnel_text(topic, funnel, success, stage=None,
-                      word_count=None, word_target=None):
+                      word_count=None, word_target=None,
+                      adaptation=None):
     lines = ["📊 گزارش کیفیت تولید مقاله",
              f"موضوع: {topic}",
              "",
@@ -4590,6 +4793,7 @@ def build_funnel_text(topic, funnel, success, stage=None,
     if funnel.get("drop_disagreement"):
         lines.append("• اختلاف دو داور ارتباط: "
                      f"{funnel['drop_disagreement']}")
+    lines += _adaptation_lines(adaptation)
     lines.append("")
     if success:
         lo, hi = word_target or (0, 0)
@@ -4601,12 +4805,13 @@ def build_funnel_text(topic, funnel, success, stage=None,
 
 
 def send_funnel_dm(token, chat_id, topic, funnel, success, stage=None,
-                   word_count=None, word_target=None):
+                   word_count=None, word_target=None, adaptation=None):
     """Fail-soft: print the funnel as log lines and DM it to the
     requester (ARTICLE_CHAT_ID). Never raises. Returns True if sent."""
     text = build_funnel_text(topic, funnel, success, stage=stage,
                              word_count=word_count,
-                             word_target=word_target)
+                             word_target=word_target,
+                             adaptation=adaptation)
     for line in text.splitlines():
         print(f"funnel: {line}")
     try:
@@ -4650,11 +4855,15 @@ def _source_type_label_fa(s):
 
 
 def build_detailed_source_report(topic, counted,
-                                 disagreement_titles=None):
+                                 disagreement_titles=None,
+                                 adaptation=None):
     """The §20.7 itemised report text (Persian). Pure builder —
     mocked-testable, no I/O."""
     lines = ["📚 گزارش ریز منابع و محتوای مرتبط (§20.7)",
              f"موضوع: {topic}", ""]
+    lines += _adaptation_lines(adaptation)
+    if _adaptation_lines(adaptation):
+        lines.append("")
     counted = list(counted or [])
     if counted:
         lines.append(f"✅ منابع شمرده‌شده ({len(counted)}):")
@@ -4700,13 +4909,15 @@ def build_detailed_source_report(topic, counted,
 
 
 def send_detailed_source_report_dm(token, chat_id, topic, counted,
-                                   disagreement_titles=None):
+                                   disagreement_titles=None,
+                                   adaptation=None):
     """Fail-soft: print the §20.7 report as log lines and DM it to
     the requester (ARTICLE_CHAT_ID) as its own message(s), split
     with the same 3900-char chunking as the funnel. Never raises,
     never fails the run. Returns True if sent."""
     text = build_detailed_source_report(topic, counted,
-                                        disagreement_titles)
+                                        disagreement_titles,
+                                        adaptation=adaptation)
     for line in text.splitlines():
         print(f"source-report: {line}")
     try:
@@ -5389,6 +5600,7 @@ def _fresh_screening(field, topic, language, category, article_type,
     return {"counted": counted, "funnel": funnel,
             "disagreement_titles": disagreement_titles,
             "queries": queries, "ft_keywords": ft_keywords,
+            "source_map": smap,
             "verified_count": len(verified), "gate": gate}
 
 
@@ -5442,6 +5654,8 @@ def main():
     # a matching stage checkpoint skips the whole retrieval /
     # screening pipeline and continues from the gate check with the
     # checkpointed counted sources. No valid checkpoint -> fresh.
+    original_topic = topic
+    adaptation = None
     resume_req = os.environ.get("RESUME", "").strip()
     ckpt = None
     if resume_req:
@@ -5454,6 +5668,7 @@ def main():
                                    or [])
         queries = list(ckpt.get("queries") or [])
         ft_keywords = list(ckpt.get("ft_keywords") or [])
+        source_map = ckpt.get("source_map") or {}
         verified_count = ckpt.get("verified_count",
                                   funnel.get("verified", 0))
         gate = text_first_gate(counted)
@@ -5471,8 +5686,37 @@ def main():
         disagreement_titles = fresh["disagreement_titles"]
         queries = fresh["queries"]
         ft_keywords = fresh["ft_keywords"]
+        source_map = fresh.get("source_map") or {}
         verified_count = fresh["verified_count"]
         gate = fresh["gate"]
+
+    if not gate["ok"]:
+        # §20.10 topic adaptation: before failing closed, propose
+        # adapted topics grounded in the evidence in hand and
+        # re-screen each through the SAME pipeline + gate (max
+        # MAX_TOPIC_ADAPTATIONS attempts, thresholds unchanged).
+        adaptation, adapted_fresh = attempt_topic_adaptation(
+            field, original_topic, language, category, article_type,
+            mode, api_key, model, tg_token, counted,
+            disagreement_titles, source_map)
+        if adapted_fresh is not None:
+            counted = adapted_fresh["counted"]
+            funnel = adapted_fresh["funnel"]
+            disagreement_titles = adapted_fresh[
+                "disagreement_titles"]
+            queries = adapted_fresh["queries"]
+            ft_keywords = adapted_fresh["ft_keywords"]
+            verified_count = adapted_fresh["verified_count"]
+            gate = adapted_fresh["gate"]
+            topic = adaptation["adapted_topic"]
+            # §20.6 checkpoint choice (§20.10): the adapted run's
+            # _fresh_screening already saved a checkpoint keyed by
+            # the ADAPTED topic's signature; the ORIGINAL topic's
+            # checkpoint is marked consumed below (at the success
+            # consume step, alongside the adapted one) so a later
+            # original-topic dispatch can never wrongly resume the
+            # failed-gate screening as if it belonged to a passing
+            # production.
 
     if not gate["ok"]:
         if gate["counted"] < MIN_SOURCES:
@@ -5501,9 +5745,10 @@ def main():
         # point whether the gate passes or fails — here it failed.
         send_detailed_source_report_dm(
             tg_token, os.environ.get("ARTICLE_CHAT_ID", ""), topic,
-            counted, disagreement_titles)
+            counted, disagreement_titles, adaptation=adaptation)
         send_funnel_dm(tg_token, os.environ.get("ARTICLE_CHAT_ID", ""),
-                       topic, funnel, False, stage=stage)
+                       topic, funnel, False, stage=stage,
+                       adaptation=adaptation)
         raise Fail(reason + " Try a broader or different topic.")
 
     # Writer input (§20.6): passage-bearing sources first; YouTube
@@ -5527,9 +5772,24 @@ def main():
             word_target=TYPE_WORD_TARGETS.get(article_type))
     except Fail:
         send_funnel_dm(tg_token, os.environ.get("ARTICLE_CHAT_ID", ""),
-                       topic, funnel, False, stage="نگارش مقاله")
+                       topic, funnel, False, stage="نگارش مقاله",
+                       adaptation=adaptation)
         raise
     print(f"timing: writing {time.monotonic() - _t0:.1f}s")
+
+    # §20.10: an adapted production carries the adaptation note
+    # near the top of the article itself, naming both topics.
+    if adaptation and adaptation.get("adapted_topic"):
+        note = topic_adaptation_note(original_topic,
+                                     adaptation["adapted_topic"],
+                                     adaptation.get("reason", ""),
+                                     language)
+        if article.startswith("# "):
+            first_nl = article.find("\n")
+            article = (article[:first_nl + 1] + "\n" + note + "\n"
+                       + article[first_nl + 1:])
+        else:
+            article = note + "\n\n" + article
 
     header = (f"📚 Scientific Discovery Agent — new article\n"
               f"Field: {field}\nTopic: {topic}\nLanguage: {language}\n"
@@ -5551,6 +5811,8 @@ def main():
     state.setdefault("productions", []).append({
         "category": category, "type": article_type,
         "field": field, "topic": topic, "language": language, "mode": mode,
+        "original_topic": original_topic,
+        "adapted_topic": (adaptation or {}).get("adapted_topic"),
         "title": title,
         "date": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "sources": len(counted),
@@ -5561,6 +5823,13 @@ def main():
     # checkpoint so a later dispatch never reuses stale sources.
     consume_stage_checkpoint(field, topic, language, category,
                              article_type, mode)
+    # §20.10 checkpoint choice: on an adapted success ALSO consume
+    # the ORIGINAL topic's checkpoint (see the adaptation block
+    # above) — it holds the failed-gate screening and must never be
+    # resumed by a later original-topic dispatch.
+    if adaptation and adaptation.get("adapted_topic"):
+        consume_stage_checkpoint(field, original_topic, language,
+                                 category, article_type, mode)
     progress_update(100, "انتشار در کانال")
     # Suggestions-visible law (§15): the requester SEES the bot's
     # title candidates (used one marked) + next-topic suggestions.
@@ -5571,13 +5840,14 @@ def main():
     # the requester alongside the funnel.
     send_detailed_source_report_dm(
         tg_token, os.environ.get("ARTICLE_CHAT_ID", ""), topic,
-        counted, disagreement_titles)
+        counted, disagreement_titles, adaptation=adaptation)
     # Funnel report (§16.3): every run ends with the quality funnel
     # in the requester's DM (and in the log).
     send_funnel_dm(tg_token, os.environ.get("ARTICLE_CHAT_ID", ""),
                    topic, funnel, True,
                    word_count=meta.get("word_count"),
-                   word_target=TYPE_WORD_TARGETS.get(article_type))
+                   word_target=TYPE_WORD_TARGETS.get(article_type),
+                   adaptation=adaptation)
     print(f"Done. Article delivered, message_ids={message_ids}")
     return 0
 
