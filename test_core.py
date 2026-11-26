@@ -337,9 +337,9 @@ for tag, m in (("build_article", ba), ("propose_topics", pt)):
     check(f"{tag}: core_registry.json in REGISTRY_FILES",
           "core_registry.json" in m.REGISTRY_FILES)
     dom, _urls, st = m.load_source_registry()
-    check(f"{tag}: pool is 19 files / 2181 loaded / 2128 unique",
-          st["files_ok"] == 19 and st["loaded"] == 2181
-          and st["unique_urls"] == 2128)
+    check(f"{tag}: pool is 20 files / 2184 loaded / 2131 unique",
+          st["files_ok"] == 20 and st["loaded"] == 2184
+          and st["unique_urls"] == 2131)
     check(f"{tag}: core.ac.uk present in the domain index",
           "core.ac.uk" in dom)
 
