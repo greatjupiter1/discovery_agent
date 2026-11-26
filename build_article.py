@@ -7115,7 +7115,7 @@ def _adaptation_lines(adaptation):
 
 def build_funnel_text(topic, funnel, success, stage=None,
                       word_count=None, word_target=None,
-                      adaptation=None):
+                      adaptation=None, review=None):
     lines = ["📊 گزارش کیفیت تولید مقاله",
              f"موضوع: {topic}",
              "",
@@ -7143,6 +7143,7 @@ def build_funnel_text(topic, funnel, success, stage=None,
         lines.append("• اختلاف دو داور ارتباط: "
                      f"{funnel['drop_disagreement']}")
     lines += _adaptation_lines(adaptation)
+    lines += _review_lines(review)
     lines.append("")
     if success:
         lo, hi = word_target or (0, 0)
@@ -7154,13 +7155,14 @@ def build_funnel_text(topic, funnel, success, stage=None,
 
 
 def send_funnel_dm(token, chat_id, topic, funnel, success, stage=None,
-                   word_count=None, word_target=None, adaptation=None):
+                   word_count=None, word_target=None, adaptation=None,
+                   review=None):
     """Fail-soft: print the funnel as log lines and DM it to the
     requester (ARTICLE_CHAT_ID). Never raises. Returns True if sent."""
     text = build_funnel_text(topic, funnel, success, stage=stage,
                              word_count=word_count,
                              word_target=word_target,
-                             adaptation=adaptation)
+                             adaptation=adaptation, review=review)
     for line in text.splitlines():
         print(f"funnel: {line}")
     try:
@@ -7425,6 +7427,1011 @@ def write_article(field, topic, language, sources, api_key, model, guide="",
     return title, article, {"title_candidates": candidates,
                             "next_topics": next_topics,
                             "word_count": word_count}
+
+
+# --------------------------------------------------------------------------
+# Multi-robot review layer (§33, Jupiter 2026-11-26: «بساز کلا» — build
+# the 6 missing roles of the 14-role roster) — AFTER a complete draft
+# exists and BEFORE channel delivery, five component reviewers check
+# the article in parallel and a content supervisor checks the
+# coherence of the whole:
+#   1. citations  — code first (every listed reference IS one of the
+#      numbered sources it claims to be; every in-text [n] resolves),
+#      then an LLM pass on whether the cited source's passages
+#      actually support the claim at the citation.
+#   2. numbers    — code first (every numeric claim must appear in,
+#      or be arithmetically derivable from, the counted sources'
+#      passages — the §20 numeric-derivation law), then an LLM pass
+#      on units/context sanity.
+#   3. claims     — an LLM pass grounded ONLY in the counted sources'
+#      passages (modelled on GRIS's check_claims, for Discovery's
+#      free-form article): unsupported central claims are fatal,
+#      peripheral ones fixable (remove or label as hypothesis).
+#   4. structure  — code (required sections per TYPE_GUIDE, word
+#      count in the type's target range, the TITLE LAW) + an LLM
+#      pass on section order/logic.
+#   5. language   — code (output-language script sanity) + an LLM
+#      fluency/terminology pass.
+#   6. supervisor — its own coherence LLM pass over the whole article
+#      (the same number/term/citation must mean the same thing in
+#      the abstract, the body and the conclusion; abstract claims
+#      must be a subset of body claims) + DETERMINISTIC aggregation
+#      of all six verdicts.
+# RED LINES: the publish decision is deterministic code over the
+# verdicts — no LLM vote publishes an article; reviewers and the
+# supervisor NEVER write article content, they only flag; repairs go
+# through the writer path, at most REVIEW_MAX_REPAIR_ROUNDS rounds,
+# each round re-running ONLY the failed roles + the supervisor; a
+# repair may never invent a source, number or quote; a reviewer whose
+# brain calls all fail gives NO verdict and BLOCKS publication (never
+# a silent pass) — its deterministic code checks still run and still
+# count. The text-first gate, the screening judges and every
+# threshold are untouched: this layer only ever sees a draft that
+# already passed them. GRIS does not inherit the layer (§33 design
+# note): it keeps its deterministic claim checker.
+# --------------------------------------------------------------------------
+
+REVIEW_MAX_REPAIR_ROUNDS = 2
+REVIEW_ROLES = ("citations", "numbers", "claims", "structure",
+                "language")
+REVIEW_ROLE_LABELS_FA = {
+    "citations": "منابع و ارجاع‌ها",
+    "numbers": "اعداد و محاسبات",
+    "claims": "ادعا و شاهد",
+    "structure": "ساختار و قالب",
+    "language": "زبان و ترجمه",
+    "supervisor": "ناظر — پیوستگی کل",
+}
+_REVIEW_GROUNDING_PER_SOURCE = 2200
+_REVIEW_GROUNDING_TOTAL = 30000
+_REVIEW_ARTICLE_CAP = 24000
+_REVIEW_CLAIMS_BATCH = 30
+
+
+def _review_issue(role, where, problem, severity, fix_stage):
+    if severity not in ("fatal", "fixable"):
+        severity = "fixable"
+    return {"role": role, "where": str(where or "")[:200],
+            "problem": str(problem or "")[:400],
+            "severity": severity,
+            "fix_stage": fix_stage or role}
+
+
+def _review_verdict(role, issues, available=True):
+    return {"role": role, "available": bool(available),
+            "ok": bool(available) and not issues,
+            "issues": list(issues or [])}
+
+
+def _review_issue_key(issue):
+    return (issue.get("role", "") + "|" + issue.get("where", "")
+            + "|" + issue.get("problem", "")).strip().lower()
+
+
+def _review_split_refs(article):
+    """Split the article into (body, references text) at the
+    References heading (English or Persian)."""
+    lines = (article or "").splitlines()
+    for i, line in enumerate(lines):
+        s = line.strip()
+        if s.startswith("## References") or s.startswith("## منابع"):
+            return "\n".join(lines[:i]), "\n".join(lines[i:])
+    return article or "", ""
+
+
+def _review_grounding_text(counted):
+    """Numbered grounding cards for the review LLM passes: ONLY the
+    counted sources (video support never grounds a claim), abstract
+    + extracted passages, capped per source and in total."""
+    out = []
+    total = 0
+    for i, s in enumerate(counted, 1):
+        parts = [f"[{i}] {s.get('title', '')}"]
+        abstract = (s.get("abstract") or "").strip()
+        if abstract:
+            parts.append("Abstract: " + abstract[:800])
+        excerpt = (s.get("fulltext_excerpt") or "").strip()
+        if excerpt:
+            label = "Passages" if s.get("passages") else "Excerpt"
+            parts.append(f"{label}: "
+                         + excerpt[:_REVIEW_GROUNDING_PER_SOURCE])
+        card = "\n".join(parts)
+        if out and total + len(card) > _REVIEW_GROUNDING_TOTAL:
+            break
+        out.append(card)
+        total += len(card)
+    return "\n\n".join(out)
+
+
+def _review_article_capped(article, cap=_REVIEW_ARTICLE_CAP):
+    a = article or ""
+    if len(a) <= cap:
+        return a
+    half = cap // 2
+    return (a[:half] + "\n[... middle elided for review ...]\n"
+            + a[-half:])
+
+
+def _review_llm_issues(role, prompt, api_key, model, fix_stage,
+                       allow_fatal=True):
+    """One reviewer LLM pass. Returns (issues, available): any brain
+    failure or unparseable reply means NO verdict (available=False)
+    — the supervisor then blocks publication rather than passing
+    the article silently. Items without a stated problem are not
+    issues and are dropped."""
+    try:
+        raw = call_llm(prompt, api_key, model, temperature=0.1,
+                       json_mode=True)
+        data = _parse_json_value(raw)
+        items = data.get("issues") if isinstance(data, dict) else data
+        issues = []
+        for it in items or []:
+            if not isinstance(it, dict):
+                continue
+            problem = str(it.get("problem") or "").strip()
+            if not problem:
+                continue
+            sev = str(it.get("severity") or "fixable").lower()
+            if sev not in ("fatal", "fixable") or not allow_fatal:
+                sev = "fixable"
+            issues.append(_review_issue(
+                role, it.get("where", ""), problem, sev, fix_stage))
+        return issues, True
+    except Exception as e:
+        print(f"WARNING: review role {role}: LLM pass failed ({e}) "
+              "— no verdict from this role")
+        return [], False
+
+
+# --- Role 1: citations -----------------------------------------------------
+
+def _citations_code_issues(article, sources):
+    """Deterministic citation checks (§33 role 1, code first): the
+    reference list must be exactly the numbered sources it claims
+    to list, and every in-text [n] must resolve to a listed,
+    matching source. A listed reference matching NO source, or a
+    citation pointing outside the source list, is fatal — that is
+    an invented or corrupted reference, the core fabrication the
+    whole engine exists to prevent."""
+    issues = []
+    body, refs = _review_split_refs(article)
+    listed = {}
+    for line in refs.splitlines():
+        m = re.match(r"\s*\[(\d+)\]\s*(.*)", line)
+        if m:
+            listed[int(m.group(1))] = line
+    if not listed:
+        issues.append(_review_issue(
+            "citations", "References",
+            "the article has no parseable numbered reference list",
+            "fatal", "citations"))
+        return issues
+    for n, line in sorted(listed.items()):
+        if n < 1 or n > len(sources):
+            issues.append(_review_issue(
+                "citations", f"reference [{n}]",
+                "listed reference has no corresponding source — "
+                "invented reference", "fatal", "citations"))
+            continue
+        s = sources[n - 1]
+        title_key = normalise_title(s.get("title", ""))
+        line_key = normalise_title(line)
+        doi = (s.get("doi") or "").strip().lower()
+        if title_key and title_key not in line_key \
+                and not (doi and doi in line.lower()):
+            issues.append(_review_issue(
+                "citations", f"reference [{n}]",
+                "listed reference does not match source "
+                f"[{n}] ('{(s.get('title') or '')[:80]}') — wrong "
+                "or invented reference", "fatal", "citations"))
+    cited = {int(x) for x in re.findall(r"\[(\d+)\]", body)}
+    for n in sorted(cited):
+        if n < 1 or n > len(sources):
+            issues.append(_review_issue(
+                "citations", f"in-text citation [{n}]",
+                "the text cites a source number that does not "
+                "exist", "fatal", "citations"))
+        elif n not in listed:
+            issues.append(_review_issue(
+                "citations", f"in-text citation [{n}]",
+                "cited in the text but missing from the reference "
+                "list", "fixable", "citations"))
+    for n in sorted(listed):
+        if n not in cited and 1 <= n <= len(sources):
+            issues.append(_review_issue(
+                "citations", f"reference [{n}]",
+                "listed in the references but never cited in the "
+                "text", "fixable", "citations"))
+    return issues
+
+
+def review_citations(article, counted, context):
+    sources = context.get("sources") or counted
+    issues = _citations_code_issues(article, sources)
+    body, _ = _review_split_refs(article)
+    prompt = (
+        "You are the CITATIONS REVIEWER in a scholarly article "
+        "review panel. You never rewrite text; you only flag "
+        "problems.\n"
+        f"Field: {context.get('field', '')}\n"
+        f"Topic: {context.get('topic', '')}\n\n"
+        "For each in-text citation [n] in the ARTICLE, judge from "
+        "the GROUNDING (the only sources that exist) whether the "
+        "cited source's abstract/passages actually support the "
+        "claim made in the sentence carrying [n]. Flag every "
+        "citation whose source does not support its claim: "
+        "severity \"fatal\" when the unsupported claim is central "
+        "to the article, \"fixable\" otherwise. Do not flag style, "
+        "grammar or structure. If everything is supported, return "
+        "an empty list.\n"
+        'Reply with JSON only: {"issues": [{"where": "[n] + a '
+        'short quote of the claim", "problem": "...", '
+        '"severity": "fatal|fixable"}]}\n\n'
+        "GROUNDING (the counted sources, numbered as cited):\n"
+        + _review_grounding_text(counted)
+        + "\n\nARTICLE:\n" + _review_article_capped(body))
+    llm_issues, available = _review_llm_issues(
+        "citations", prompt, context["api_key"], context["model"],
+        "citations")
+    return _review_verdict("citations", issues + llm_issues,
+                           available)
+
+
+# --- Role 2: numbers -------------------------------------------------------
+
+_REVIEW_DIGITS = str.maketrans(
+    "۰۱۲۳۴۵۶۷۸۹٠١٢٣٤٥٦٧٨٩",
+    "01234567890123456789")
+_REVIEW_NUMBER_RE = re.compile(
+    r"\d{1,3}(?:,\d{3})+(?:\.\d+)?|\d+\.\d+|\d+")
+_REVIEW_CENTRAL_SECTIONS = ("abstract", "چکیده", "conclusion",
+                            "نتیجه")
+
+
+def _review_number_tokens(text):
+    """(value, decimals) for every numeric token in text — Latin,
+    Persian and Arabic-Indic digits, thousands separators removed.
+    `decimals` is the precision the value is stated at, so a source
+    value rounded to that precision counts as the same number."""
+    t = (text or "").translate(_REVIEW_DIGITS)
+    out = []
+    for m in _REVIEW_NUMBER_RE.finditer(t):
+        tok = m.group(0).replace(",", "")
+        try:
+            value = float(tok)
+        except ValueError:
+            continue
+        decimals = len(tok.split(".")[1]) if "." in tok else 0
+        out.append((value, decimals))
+    return out
+
+
+def _review_article_numbers(article):
+    """The article BODY's numeric claims: the reference list, URLs
+    and citation markers are excluded, and heading/list numbering
+    is not a claim. Returns [(value, decimals, section)] so the
+    centrality of an unsupported number can be judged."""
+    body, _ = _review_split_refs(article)
+    body = re.sub(r"https?://\S+", " ", body)
+    body = re.sub(r"\[\d+\]", " ", body)
+    out = []
+    section = ""
+    for line in body.splitlines():
+        s = line.strip()
+        if s.startswith("#"):
+            section = s.lstrip("# ").strip().lower()
+            s = re.sub(r"^\d+[\.\)]\s*", "", s.lstrip("# "))
+        elif re.match(r"^\d+[\.\)]\s+", s):
+            s = re.sub(r"^\d+[\.\)]\s+", "", s)
+        for value, decimals in _review_number_tokens(s):
+            out.append((value, decimals, section))
+    return out
+
+
+def _review_source_number_pool(counted):
+    pool = set()
+    for s in counted:
+        for text in (s.get("title"), s.get("abstract"),
+                     s.get("fulltext_excerpt")):
+            for value, _ in _review_number_tokens(text or ""):
+                pool.add(value)
+        year = s.get("year")
+        if isinstance(year, (int, float)):
+            pool.add(float(year))
+        elif year:
+            for value, _ in _review_number_tokens(str(year)):
+                pool.add(value)
+    return pool
+
+
+def _review_number_supported(value, decimals, pool):
+    def matches(x):
+        return abs(round(x, decimals) - value) < 1e-9 \
+            or abs(x - value) < 1e-9
+
+    if any(matches(y) for y in pool):
+        return True
+    # Bounded arithmetic derivation from pairs of source numbers
+    # (sums, differences, products, ratios, percentages): the §20
+    # numeric-derivation law allows a number the article re-derives
+    # from the sources' stated inputs.
+    vals = sorted(pool)[:250]
+    for i, a in enumerate(vals):
+        for b in vals[i:]:
+            cands = (a + b, a - b, b - a, a * b,
+                     (a / b if b else None),
+                     (b / a if a else None),
+                     (a / b * 100 if b else None),
+                     ((a - b) / b * 100 if b else None))
+            for cand in cands:
+                if cand is not None and matches(cand):
+                    return True
+    return False
+
+
+def _numbers_code_issues(article, counted):
+    issues = []
+    pool = _review_source_number_pool(counted)
+    seen = set()
+    for value, decimals, section in _review_article_numbers(article):
+        if (value, decimals) in seen:
+            continue
+        seen.add((value, decimals))
+        if _review_number_supported(value, decimals, pool):
+            continue
+        central = any(k in section
+                      for k in _REVIEW_CENTRAL_SECTIONS)
+        issues.append(_review_issue(
+            "numbers",
+            f"number {value:g} (section: {section or 'body'})",
+            "numeric claim appears in no counted source passage "
+            "and is not derivable from their numbers",
+            "fatal" if central else "fixable", "numbers"))
+    return issues
+
+
+def review_numbers(article, counted, context):
+    issues = _numbers_code_issues(article, counted)
+    body, _ = _review_split_refs(article)
+    numeric_lines = []
+    for line in body.splitlines():
+        s = line.strip()
+        if s and any(ch.isdigit()
+                     for ch in s.translate(_REVIEW_DIGITS)):
+            numeric_lines.append(s[:300])
+    prompt = (
+        "You are the NUMBERS REVIEWER in a scholarly article "
+        "review panel. You never rewrite text; you only flag "
+        "problems.\n"
+        f"Field: {context.get('field', '')}\n"
+        f"Topic: {context.get('topic', '')}\n\n"
+        "Below are the article's lines that carry numbers, and the "
+        "GROUNDING (the counted sources' abstracts/passages — the "
+        "only numbers that exist). Flag ONLY unit/context problems "
+        "the deterministic check cannot see: a value quoted with "
+        "the wrong unit, a percentage stated against the wrong "
+        "base, the same quantity given two different values in "
+        "different lines, a value that is impossible for its "
+        "stated quantity. Severity \"fatal\" for a wrong central "
+        "result, \"fixable\" otherwise. If there is no such "
+        "problem, return an empty list.\n"
+        'Reply with JSON only: {"issues": [{"where": "short '
+        'quote", "problem": "...", "severity": '
+        '"fatal|fixable"}]}\n\n'
+        "NUMERIC LINES:\n" + "\n".join(numeric_lines[:60])
+        + "\n\nGROUNDING:\n" + _review_grounding_text(counted))
+    llm_issues, available = _review_llm_issues(
+        "numbers", prompt, context["api_key"], context["model"],
+        "numbers")
+    return _review_verdict("numbers", issues + llm_issues, available)
+
+
+# --- Role 3: claims --------------------------------------------------------
+
+_REVIEW_SENTENCE_SPLIT_RE = re.compile(r"(?<=[.!?؟۔])\s+")
+
+
+def _review_sentences(article):
+    """Body prose sentences: headings, the keywords line and the
+    reference list are structural, not claims (modelled on GRIS's
+    _checkable_lines)."""
+    body, _ = _review_split_refs(article)
+    out = []
+    for line in body.splitlines():
+        s = line.strip()
+        if not s or s.startswith("#"):
+            continue
+        if s.lower().startswith("keywords") \
+                or s.startswith("کلیدواژه"):
+            continue
+        for sent in _REVIEW_SENTENCE_SPLIT_RE.split(line):
+            sent = sent.strip()
+            if sent:
+                out.append(sent)
+    return out
+
+
+def _review_is_factual(sentence):
+    """The GRIS factual-claim heuristic: a sentence is a factual
+    claim when it carries a number/date, a citation marker, or is a
+    full declarative sentence (>= 12 words). Questions and
+    explicitly-labelled hypotheses are not factual claims."""
+    s = (sentence or "").strip()
+    if not s or s.endswith("?") or s.endswith("؟"):
+        return False
+    if s.lower().startswith("hypothesis") \
+            or s.startswith("پیشنهاد/فرضیه"):
+        return False
+    if re.search(r"\d", s.translate(_REVIEW_DIGITS)):
+        return True
+    if re.search(r"\[\d+\]", s):
+        return True
+    return len(s.split()) >= 12
+
+
+def review_claims(article, counted, context):
+    sentences = [s for s in _review_sentences(article)
+                 if _review_is_factual(s)]
+    if not sentences:
+        return _review_verdict("claims", [], True)
+    grounding = _review_grounding_text(counted)
+    issues = []
+    for start in range(0, len(sentences), _REVIEW_CLAIMS_BATCH):
+        batch = sentences[start:start + _REVIEW_CLAIMS_BATCH]
+        listing = "\n".join(f"SENTENCE {j}: {s[:400]}"
+                            for j, s in enumerate(batch, 1))
+        prompt = (
+            "You are the CLAIMS REVIEWER in a scholarly article "
+            "review panel. You never rewrite text; you only judge "
+            "support.\n"
+            f"Field: {context.get('field', '')}\n"
+            f"Topic: {context.get('topic', '')}\n\n"
+            "For EACH numbered sentence, decide whether the "
+            "GROUNDING (extracted passages/abstracts of the "
+            "counted sources — the only evidence that exists) "
+            "supports the sentence's factual claim. A claim is "
+            "supported when the grounding states it or directly "
+            "implies it; a citation marker alone is NOT support. "
+            "Also judge centrality: central=true when the article "
+            "would lose its main point without this claim. You "
+            "MUST return one verdict per sentence — an unjudged "
+            "sentence blocks publication.\n"
+            'Reply with JSON only: {"verdicts": [{"i": 1, '
+            '"supported": true, "central": false}]}\n\n'
+            "GROUNDING:\n" + grounding + "\n\n" + listing)
+        try:
+            raw = call_llm(prompt, context["api_key"],
+                           context["model"], temperature=0.1,
+                           json_mode=True)
+            data = _parse_json_value(raw)
+            verdicts = data.get("verdicts") \
+                if isinstance(data, dict) else data
+            judged = {}
+            for v in verdicts or []:
+                if isinstance(v, dict) and v.get("i") is not None:
+                    judged[int(v["i"])] = v
+            if len(judged) < len(batch):
+                print("WARNING: review role claims: brain judged "
+                      f"{len(judged)}/{len(batch)} sentences — no "
+                      "complete verdict from this role")
+                return _review_verdict("claims", issues,
+                                       available=False)
+            for j, sent in enumerate(batch, 1):
+                v = judged[j]
+                if not v.get("supported"):
+                    central = bool(v.get("central"))
+                    issues.append(_review_issue(
+                        "claims", sent[:120],
+                        "factual claim not supported by any "
+                        "counted source passage",
+                        "fatal" if central else "fixable",
+                        "claims"))
+        except Exception as e:
+            print(f"WARNING: review role claims: LLM pass failed "
+                  f"({e}) — no verdict from this role")
+            return _review_verdict("claims", issues, available=False)
+    return _review_verdict("claims", issues, True)
+
+
+# --- Role 4: structure -----------------------------------------------------
+
+_REVIEW_SECTION_ALIASES = {
+    "abstract": ("abstract", "چکیده"),
+    "keywords": ("keywords", "کلیدواژه", "واژه‌های کلیدی"),
+    "introduction": ("introduction", "مقدمه"),
+    "discussion": ("discussion", "بحث"),
+    "conclusion": ("conclusion", "نتیجه‌گیری", "نتیجه گیری"),
+    "references": ("references", "منابع"),
+}
+_REVIEW_ABSTRACT_LABELS = ("background", "objective", "method",
+                           "findings", "conclusion")
+
+
+def _review_headings(article):
+    heads = []
+    for line in (article or "").splitlines():
+        s = line.strip()
+        if s.startswith("#"):
+            heads.append(s.lstrip("#").strip())
+    return heads
+
+
+def _structure_code_issues(article, context):
+    issues = []
+    atype = context.get("article_type", "isi")
+    guide = TYPE_GUIDE.get(atype, "")
+    heads = _review_headings(article)
+    head_low = [h.lower() for h in heads]
+
+    def has_section(key):
+        return any(alias in h for alias
+                   in _REVIEW_SECTION_ALIASES[key]
+                   for h in head_low)
+
+    # Title law (§15): a title line must exist and be specific.
+    title = (context.get("title") or "").strip()
+    if not title and heads:
+        title = heads[0]
+    if not title:
+        issues.append(_review_issue(
+            "structure", "title", "the article has no title",
+            "fixable", "structure"))
+    elif not title_is_specific(title, context.get("field", ""),
+                               context.get("topic", "")):
+        issues.append(_review_issue(
+            "structure", "title",
+            "title is a broad field/topic label, not a specific "
+            "claim (TITLE LAW)", "fixable", "structure"))
+    # Required sections for every type.
+    for key in ("abstract", "keywords", "introduction",
+                "discussion", "conclusion", "references"):
+        if not has_section(key):
+            issues.append(_review_issue(
+                "structure", f"section: {key}",
+                f"required section '{key}' is missing",
+                "fatal" if key == "references" else "fixable",
+                "structure"))
+    # Structured abstract labels, when the type's guide asks for
+    # one (isi/scopus/pubmed per TYPE_GUIDE).
+    if "structured abstract" in guide:
+        body_low = (article or "").lower()
+        m = re.search(r"abstract", body_low)
+        block = body_low[m.start():m.start() + 2500] if m else ""
+        present = sum(1 for lab in _REVIEW_ABSTRACT_LABELS
+                      if lab in block)
+        if present < 4:
+            issues.append(_review_issue(
+                "structure", "section: abstract",
+                "structured abstract lacks its labelled parts "
+                "(Background/Objective/Method/Findings/Conclusion)",
+                "fixable", "structure"))
+    # IMRaD types: the body between Introduction and Discussion
+    # must carry at least two thematic sections.
+    if "IMRaD" in guide:
+        try:
+            i0 = next(i for i, h in enumerate(head_low)
+                      if any(a in h for a
+                             in _REVIEW_SECTION_ALIASES[
+                                 "introduction"]))
+            i1 = next(i for i, h in enumerate(head_low)
+                      if any(a in h for a
+                             in _REVIEW_SECTION_ALIASES[
+                                 "discussion"]))
+            body_heads = i1 - i0 - 1
+        except StopIteration:
+            body_heads = 0
+        if body_heads < 2:
+            issues.append(_review_issue(
+                "structure", "section: body",
+                "IMRaD body has fewer than two thematic sections "
+                "between Introduction and Discussion",
+                "fixable", "structure"))
+    # Word count within the type's target range (§15).
+    target = context.get("word_target") \
+        or TYPE_WORD_TARGETS.get(atype)
+    if target:
+        lo, hi = target
+        wc = len((article or "").split())
+        if wc < lo or wc > hi:
+            issues.append(_review_issue(
+                "structure", "word count",
+                f"article is {wc} words; the target for this type "
+                f"is {lo}–{hi}", "fixable", "structure"))
+    return issues
+
+
+def review_structure(article, counted, context):
+    issues = _structure_code_issues(article, context)
+    heads = _review_headings(article)
+    prompt = (
+        "You are the STRUCTURE REVIEWER in a scholarly article "
+        "review panel. You never rewrite text; you only flag "
+        "problems.\n"
+        f"Article type standard: "
+        f"{TYPE_GUIDE.get(context.get('article_type', ''), '')}\n\n"
+        "The article's section outline is below. Flag ONLY "
+        "order/logic problems: a section that belongs elsewhere, "
+        "results discussed before they are presented, a "
+        "conclusion that introduces a new topic, a discussion "
+        "that repeats the introduction instead of interpreting "
+        "the body. Do not flag missing sections (code checks "
+        "those) or style.\n"
+        'Reply with JSON only: {"issues": [{"where": "section '
+        'name", "problem": "...", "severity": "fixable"}]}\n\n'
+        "OUTLINE:\n" + "\n".join(f"- {h}" for h in heads)
+        + "\n\nOPENING OF THE ARTICLE:\n"
+        + (article or "")[:2500])
+    llm_issues, available = _review_llm_issues(
+        "structure", prompt, context["api_key"], context["model"],
+        "structure", allow_fatal=False)
+    return _review_verdict("structure", issues + llm_issues,
+                           available)
+
+
+# --- Role 5: language ------------------------------------------------------
+
+def _language_code_issues(article, context):
+    """Output-language script sanity: a Persian/Arabic article is
+    mostly Arabic-script; an English one is not. A draft in the
+    wrong language entirely is fatal — no repair round fixes a
+    whole-article language swap honestly."""
+    issues = []
+    language = (context.get("language") or "").lower()
+    body, _ = _review_split_refs(article)
+    letters = [ch for ch in body if ch.isalpha()]
+    if not letters:
+        return issues
+    arab = sum(1 for ch in letters if "\u0600" <= ch <= "\u06FF")
+    ratio = arab / len(letters)
+    if language in ("fa", "ar") and ratio < 0.35:
+        issues.append(_review_issue(
+            "language", "whole article",
+            f"article should be in {language} but only "
+            f"{ratio:.0%} of its letters are Arabic-script — "
+            "wrong output language", "fatal", "language"))
+    elif language == "en" and ratio > 0.10:
+        issues.append(_review_issue(
+            "language", "whole article",
+            "article should be in English but "
+            f"{ratio:.0%} of its letters are Arabic-script — "
+            "wrong output language", "fatal", "language"))
+    return issues
+
+
+def review_language(article, counted, context):
+    issues = _language_code_issues(article, context)
+    lang_name = LANGUAGE_NAMES.get(
+        (context.get("language") or "").lower(),
+        context.get("language", ""))
+    extra = ""
+    if (context.get("language") or "").lower() == "fa":
+        extra = (" The article is Persian: also flag Arabic "
+                 "loanwords used inconsistently, Latin technical "
+                 "terms left untranslated where a standard Persian "
+                 "term exists and is used elsewhere, and any "
+                 "right-to-left ordering breakage around numbers "
+                 "or Latin terms.")
+    prompt = (
+        "You are the LANGUAGE REVIEWER in a scholarly article "
+        "review panel. You never rewrite text; you only flag "
+        "problems.\n"
+        f"The article is written in {lang_name}.\n\n"
+        "Flag ONLY: grammar or fluency errors that impede a "
+        "scholarly reader, the same concept named by two "
+        "different terms in different sections (terminology "
+        "inconsistency), and sentences whose meaning is unclear."
+        + extra + " Do not flag style preferences.\n"
+        'Reply with JSON only: {"issues": [{"where": "short '
+        'quote", "problem": "...", "severity": "fixable"}]}\n\n'
+        "ARTICLE:\n" + _review_article_capped(article))
+    llm_issues, available = _review_llm_issues(
+        "language", prompt, context["api_key"], context["model"],
+        "language", allow_fatal=False)
+    return _review_verdict("language", issues + llm_issues,
+                           available)
+
+
+# --- Role 6: the supervisor ------------------------------------------------
+
+def _review_coherence(article, counted, context):
+    """The supervisor's own pass (§33 role 6): coherence of the
+    WHOLE — the same number, term or citation must mean the same
+    thing in the abstract, the body and the conclusion, and every
+    abstract claim must be a claim the body actually makes."""
+    prompt = (
+        "You are the SUPERVISOR of a scholarly article review "
+        "panel, checking the coherence of the WHOLE article. You "
+        "never rewrite text; you only flag problems.\n"
+        f"Field: {context.get('field', '')}\n"
+        f"Topic: {context.get('topic', '')}\n\n"
+        "Flag ONLY cross-section incoherence:\n"
+        "- the same quantity stated with different values in the "
+        "abstract, the body and the conclusion;\n"
+        "- the same term used with two different meanings, or a "
+        "key term renamed mid-article;\n"
+        "- a claim made in the abstract or conclusion that the "
+        "body never makes or supports;\n"
+        "- a citation [n] attached to different claims in "
+        "different sections in a way that contradicts itself.\n"
+        "Severity \"fatal\" when the abstract and the conclusion "
+        "contradict each other on the article's main result, "
+        "\"fixable\" otherwise. If the article is coherent, "
+        "return an empty list.\n"
+        'Reply with JSON only: {"issues": [{"where": "sections '
+        'involved", "problem": "...", "severity": '
+        '"fatal|fixable"}]}\n\n'
+        "ARTICLE:\n" + _review_article_capped(article))
+    issues, available = _review_llm_issues(
+        "supervisor", prompt, context["api_key"], context["model"],
+        "writing")
+    return _review_verdict("supervisor", issues, available)
+
+
+_REVIEWERS = {"citations": review_citations,
+              "numbers": review_numbers,
+              "claims": review_claims,
+              "structure": review_structure,
+              "language": review_language}
+
+
+def _run_reviewer(role, article, counted, context):
+    try:
+        return _REVIEWERS[role](article, counted, context)
+    except Exception as e:
+        print(f"WARNING: review role {role} crashed ({e}) — no "
+              "verdict from this role")
+        return _review_verdict(role, [], available=False)
+
+
+def _repair_article(article, issues, counted, context):
+    """Writer-path targeted repair (§33): the WRITER receives ONLY
+    the flagged issues and returns the full corrected article.
+    Reviewers never touch the text. Returns the repaired article,
+    or None when the repair failed or its output is unusable (too
+    short, references or title lost) — the round is then lost and
+    the layer fails closed. A repair may never invent a source, a
+    number or a quote: an unfixable claim must be removed or
+    explicitly labelled as a hypothesis."""
+    listing = "\n".join(
+        f"- [{i['role']}/{i['severity']}] at {i['where']}: "
+        f"{i['problem']}" for i in issues)
+    prompt = (
+        "You are the WRITER of the scholarly article below, "
+        "repairing the exact problems the review panel flagged.\n"
+        "RULES:\n"
+        "- Fix ONLY the listed problems; keep every other "
+        "sentence, heading and the reference list exactly as "
+        "they are.\n"
+        "- NEVER invent a source, a number, a quote or a "
+        "reference. The GROUNDING lists the only sources and "
+        "numbers that exist.\n"
+        "- A claim that cannot be supported from the grounding "
+        "must be REMOVED, or kept only when explicitly labelled "
+        "as a hypothesis.\n"
+        "- Keep the '# ' title line and every section heading.\n"
+        "- Reply with the COMPLETE corrected article only — no "
+        "commentary, no code fences.\n\n"
+        "FLAGGED PROBLEMS:\n" + listing + "\n\n"
+        "GROUNDING (the counted sources):\n"
+        + _review_grounding_text(counted)
+        + "\n\nARTICLE:\n" + article)
+    try:
+        out = call_llm(prompt, context["api_key"], context["model"],
+                       temperature=0.2)
+    except Exception as e:
+        print(f"WARNING: review repair round failed ({e})")
+        return None
+    out = (out or "").strip()
+    out = re.sub(r"^```(?:markdown|md)?\s*", "", out)
+    out = re.sub(r"\s*```$", "", out).strip()
+    if len(out) < 0.6 * len(article):
+        print("WARNING: review repair output unusable (too short "
+              "— truncated?); round lost")
+        return None
+    if not out.startswith("#"):
+        print("WARNING: review repair output unusable (title line "
+              "lost); round lost")
+        return None
+    _, refs = _review_split_refs(out)
+    if not refs:
+        print("WARNING: review repair output unusable (reference "
+              "list lost); round lost")
+        return None
+    return out
+
+
+def run_review_layer(article, counted, context):
+    """The §33 supervisor. Runs the five component reviewers in
+    parallel, then its own coherence pass; aggregates the six
+    verdicts with DETERMINISTIC code: a role with no verdict
+    BLOCKS publication; any fatal issue FAILS at once; fixable
+    issues go through targeted writer repairs (max
+    REVIEW_MAX_REPAIR_ROUNDS rounds, re-running only the failed
+    roles + the supervisor); fixable issues surviving the last
+    round FAIL. Returns the result dict consumed by main(), the
+    funnel (§16.3) and the §33 review report."""
+    current = article
+    rounds = 0
+    found = {}
+    order = []
+    last = {}
+    roles_filter = None
+    while True:
+        roles_now = [r for r in REVIEW_ROLES
+                     if roles_filter is None or r in roles_filter]
+        verdicts = {}
+        with ThreadPoolExecutor(
+                max_workers=max(1, len(roles_now))) as ex:
+            futs = {ex.submit(_run_reviewer, r, current, counted,
+                              context): r for r in roles_now}
+            for fut in as_completed(futs):
+                verdicts[futs[fut]] = fut.result()
+        last.update(verdicts)
+        last["supervisor"] = _review_coherence(current, counted,
+                                               context)
+        all_issues = [i for v in last.values()
+                      for i in v["issues"]]
+        for i in all_issues:
+            k = _review_issue_key(i)
+            if k not in found:
+                found[k] = i
+                order.append(k)
+        remaining = {_review_issue_key(i) for i in all_issues}
+        fixed_keys = [k for k in order if k not in remaining]
+        base = {"rounds": rounds,
+                "issues_found": len(order),
+                "issues_fixed": len(fixed_keys),
+                "roles": {r: {"ok": v["ok"],
+                              "available": v["available"],
+                              "issues": v["issues"]}
+                          for r, v in last.items()},
+                "issue_records": [
+                    dict(found[k], fixed=k in fixed_keys)
+                    for k in order],
+                "article": current,
+                "blocked_roles": []}
+        unavailable = [r for r, v in last.items()
+                       if not v["available"]]
+        if unavailable:
+            print("review layer (§33): BLOCKED — no verdict from: "
+                  + ", ".join(unavailable))
+            return dict(base, ok=False, verdict="blocked",
+                        blocked_roles=unavailable)
+        fatals = [i for i in all_issues
+                  if i["severity"] == "fatal"]
+        if fatals:
+            print(f"review layer (§33): FAIL — {len(fatals)} "
+                  "fatal issue(s)")
+            return dict(base, ok=False, verdict="fail")
+        if not all_issues:
+            print(f"review layer (§33): PASS after {rounds} repair "
+                  f"round(s); {len(order)} issue(s) found, "
+                  f"{len(fixed_keys)} fixed")
+            return dict(base, ok=True, verdict="pass")
+        if rounds >= REVIEW_MAX_REPAIR_ROUNDS:
+            print("review layer (§33): FAIL — fixable issues "
+                  "remain after the maximum repair rounds")
+            return dict(base, ok=False, verdict="fail")
+        rounds += 1
+        print(f"review layer (§33): repair round {rounds} for "
+              f"{len(all_issues)} fixable issue(s)")
+        repaired = _repair_article(current, all_issues, counted,
+                                   context)
+        if repaired is None:
+            return dict(base, ok=False, verdict="fail",
+                        rounds=rounds, repair_failed=True)
+        current = repaired
+        roles_filter = {i["role"] for i in all_issues
+                        if i["role"] in REVIEW_ROLES}
+
+
+# --- §33 reporting: funnel lines + the itemised review report --------------
+
+def _review_lines(review):
+    """§33 lines for the quality funnel (Persian). Empty when the
+    run carries no review result."""
+    if not review:
+        return []
+    lines = ["", "بررسی چندرباتهٔ پس از نگارش (§33):"]
+    roles = review.get("roles") or {}
+    for role in REVIEW_ROLES + ("supervisor",):
+        v = roles.get(role)
+        label = REVIEW_ROLE_LABELS_FA[role]
+        if v is None:
+            lines.append(f"• {label}: —")
+        elif not v.get("available", True):
+            lines.append(f"• {label}: در دسترس نبود (مسدودکننده)")
+        elif v.get("issues"):
+            lines.append(f"• {label}: {len(v['issues'])} ایراد")
+        else:
+            lines.append(f"• {label}: قبول")
+    lines.append(
+        f"ایرادهای یافته‌شده: {review.get('issues_found', 0)}"
+        f" — اصلاح‌شده: {review.get('issues_fixed', 0)}"
+        f" — دورهای اصلاح: {review.get('rounds', 0)}")
+    verdict = review.get("verdict")
+    if verdict == "pass":
+        lines.append("نتیجهٔ بررسی چندرباته: قبول ✅")
+    elif verdict == "blocked":
+        names = "، ".join(
+            REVIEW_ROLE_LABELS_FA.get(r, r)
+            for r in review.get("blocked_roles") or [])
+        lines.append("نتیجهٔ بررسی چندرباته: مسدود — داور در "
+                     f"دسترس نبود: {names}")
+    else:
+        lines.append("نتیجهٔ بررسی چندرباته: رد ❌")
+    return lines
+
+
+def build_review_report(topic, review):
+    """The §33 itemised review report (Persian), modelled on the
+    §20.7 source report: per role, the verdict and every issue
+    with its severity and whether a repair round fixed it. Pure
+    builder — no I/O."""
+    lines = ["🔎 گزارش بررسی چندرباتهٔ مقاله (§33)",
+             f"موضوع: {topic}", ""]
+    verdict = (review or {}).get("verdict")
+    head = {"pass": "قبول ✅", "blocked": "مسدود ⛔",
+            "fail": "رد ❌"}.get(verdict, str(verdict))
+    lines.append(
+        f"نتیجه: {head} — دورهای اصلاح: "
+        f"{review.get('rounds', 0)} — ایراد یافته‌شده: "
+        f"{review.get('issues_found', 0)} — اصلاح‌شده: "
+        f"{review.get('issues_fixed', 0)}")
+    if review.get("blocked_roles"):
+        names = "، ".join(
+            REVIEW_ROLE_LABELS_FA.get(r, r)
+            for r in review["blocked_roles"])
+        lines.append(f"داورانِ بدون verdict (مسدودکننده): {names}")
+    if review.get("repair_failed"):
+        lines.append("⚠️ یک دور اصلاح خروجی قابل استفاده نداد و "
+                     "از دست رفت.")
+    records = review.get("issue_records") or []
+    roles = review.get("roles") or {}
+    for role in REVIEW_ROLES + ("supervisor",):
+        v = roles.get(role) or {}
+        label = REVIEW_ROLE_LABELS_FA[role]
+        lines.append("")
+        if not v.get("available", True):
+            lines.append(f"⛔ {label}: در دسترس نبود — verdict "
+                         "ندارد")
+            continue
+        recs = [r for r in records if r.get("role") == role]
+        if not recs:
+            lines.append(f"✅ {label}: بدون ایراد")
+            continue
+        lines.append(f"⚠️ {label}: {len(recs)} ایراد")
+        for r in recs:
+            sev = "کشنده" if r.get("severity") == "fatal" \
+                else "قابل اصلاح"
+            state = "اصلاح شد" if r.get("fixed") else "باقی ماند"
+            lines.append(f"• [{sev}] {r.get('where', '')} — "
+                         f"{r.get('problem', '')} ({state})")
+    return "\n".join(lines)
+
+
+def send_review_report_dm(token, chat_id, topic, review):
+    """Fail-soft: print the §33 review report as log lines and DM
+    it to the requester (ARTICLE_CHAT_ID), split with the same
+    3900-char chunking as the funnel. Never raises, never fails
+    the run. Returns True if sent."""
+    text = build_review_report(topic, review)
+    for line in text.splitlines():
+        print(f"review-report: {line}")
+    try:
+        chat_id = (chat_id or "").strip()
+        if not chat_id or not token:
+            print("review-report DM skipped: no ARTICLE_CHAT_ID/"
+                  "token")
+            return False
+        for chunk in split_text(text, 3900):
+            tg_call("sendMessage", token,
+                    {"chat_id": chat_id, "text": chunk})
+        print(f"review-report DM sent to chat {chat_id}")
+        return True
+    except Exception as e:
+        print(f"WARNING: review-report DM failed (ignored): {e}")
+        return False
 
 
 # --------------------------------------------------------------------------
@@ -8140,6 +9147,39 @@ def main():
         else:
             article = note + "\n\n" + article
 
+    # §33: the multi-robot review layer — five component reviewers
+    # + the coherence supervisor, AFTER the complete draft and
+    # BEFORE channel delivery. The publish decision is
+    # deterministic code over the verdicts; reviewers never write;
+    # a reviewer with no verdict BLOCKS the article. On failure the
+    # itemised review report + the funnel go to the requester DM
+    # (fail-soft) and the run fails closed.
+    print("--- §33 review layer: starting ---")
+    review = run_review_layer(
+        article, counted,
+        {"field": field, "topic": topic, "language": language,
+         "article_type": article_type, "title": title,
+         "sources": write_sources,
+         "word_target": TYPE_WORD_TARGETS.get(article_type),
+         "api_key": api_key, "model": model})
+    if not review["ok"]:
+        print(f"review layer (§33): STOP — verdict "
+              f"{review['verdict']}; nothing is published")
+        send_review_report_dm(
+            tg_token, os.environ.get("ARTICLE_CHAT_ID", ""), topic,
+            review)
+        send_funnel_dm(tg_token, os.environ.get("ARTICLE_CHAT_ID", ""),
+                       topic, funnel, False,
+                       stage="بررسی چندرباتهٔ پس از نگارش (§33)",
+                       adaptation=adaptation, review=review)
+        raise Fail("review layer blocked publication "
+                   f"({review['verdict']}): "
+                   f"{review['issues_found']} issue(s) found, "
+                   f"{review['issues_fixed']} fixed, "
+                   f"{review['rounds']} repair round(s)")
+    article = review["article"]
+    print("review layer (§33): PASS — article cleared for delivery")
+
     header = (f"📚 Scientific Discovery Agent — new article\n"
               f"Field: {field}\nTopic: {topic}\nLanguage: {language}\n"
               f"Mode: {mode}\nVerified sources: {verified_count} "
@@ -8166,6 +9206,10 @@ def main():
         "date": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "sources": len(counted),
         "message_ids": message_ids,
+        "review": {"rounds": review.get("rounds", 0),
+                   "issues_found": review.get("issues_found", 0),
+                   "issues_fixed": review.get("issues_fixed", 0),
+                   "verdict": review.get("verdict")},
     })
     save_state(state)
     # §20.6: the production succeeded — consume the stage
@@ -8196,7 +9240,12 @@ def main():
                    topic, funnel, True,
                    word_count=meta.get("word_count"),
                    word_target=TYPE_WORD_TARGETS.get(article_type),
-                   adaptation=adaptation)
+                   adaptation=adaptation, review=review)
+    # §33: the itemised review report goes to the requester DM
+    # alongside the funnel (fail-soft).
+    send_review_report_dm(tg_token,
+                          os.environ.get("ARTICLE_CHAT_ID", ""),
+                          topic, review)
     print(f"Done. Article delivered, message_ids={message_ids}")
     return 0
 
