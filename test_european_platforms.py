@@ -35,8 +35,8 @@ check("no entries for the no-portal countries (BE/AT/IE/IT/RO/BG)",
 
 for mod, tag in ((ba, "build_article"), (pt, "propose_topics")):
     di, ui, st = mod.load_source_registry()
-    check(f"{tag} loads 20 files / 2184 entries",
-          st["files_ok"] == 20 and st["loaded"] == 2184)
+    check(f"{tag} loads 21 files / 2188 entries",
+          st["files_ok"] == 21 and st["loaded"] == 2188)
     check(f"{tag} european platforms indexed by domain",
           all(d in di for d in ("bibliotekanauki.pl", "persee.fr",
                                 "e-periodica.ch", "tidsskrift.dk",
