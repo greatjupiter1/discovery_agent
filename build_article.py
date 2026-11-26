@@ -2291,8 +2291,851 @@ def search_digital_libraries(query):
 
 
 # --------------------------------------------------------------------------
+# §32 — verified open-text UNIVERSITY LECTURE platforms (surveys §29,
+# §30 and §31: files/university-lectures.md, university-lectures-asia.md
+# and university-lectures-world.md in the goal workspace).
+#
+# Jupiter's FULL-TEXT-ONLY law applies exactly as in §§23-27: a
+# platform is wired live ONLY when probing proved BOTH (1) a
+# search/catalogue route answers with real lecture items for a query,
+# AND (2) a returned item's FULL TEXT is reachable (transcript / notes
+# PDF, full HTML text, or caption files). Every platform below was
+# re-probed from this sandbox on 2026-11-26 (multiple routes each:
+# site search, public API, sitemap/feeds, predictable URL patterns,
+# alternate hosts); the per-platform evidence and the routes tried for
+# the registry-only platforms are recorded in lectures_registry.json.
+#
+# LIVE-WIRED (12): MIT OCW (sitemap catalogue + resource-page
+# transcript PDFs), Open Yale Courses (catalogue + session transcript
+# HTML), Stanford SEE (course list + transcript HTML), Harvard CS50
+# (week catalogue + notes HTML), TU Delft OCW (WordPress search feed
+# + lecture pages), METU OCW (Moodle search + resource PDFs),
+# Wikiversity (MediaWiki API;
+# LOW-CREDIBILITY community source, flagged in the registry),
+# OpenStax (archive-JSON book trees + page JSON; TEXTBOOKS, flagged),
+# NYCU OCW (WP search + handout PDFs), Hokkaido OCW (WP search +
+# lecture-note PDFs), TÜBA Açık Ders (homepage catalogue + notes /
+# transcript PDFs), Bangladesh Open University (directory catalogue +
+# module PDFs).
+#
+# REGISTRY-ONLY (13, in lectures_registry.json with routes tried):
+# NPTEL (SPA; archive patterns 404), OpenLearn (Cloudflare 403),
+# KOCW (search answers; captions assembled by JS, no file route
+# proven), Oxford Podcasts (no query route; per-episode .srt only),
+# Collège de France (search returns a landing page, no results),
+# PostNauka (API search returns author themes; post detail 403),
+# Saylor Academy (Moodle search answers with real courses, but
+# the guest course page exposes no unit content — only the
+# syllabus and tool pages; unit text not reachable),
+# NTU OCW (Cloudflare 403 on all routes), Virtual University of
+# Pakistan (handouts 403; hosts unreachable), AIOU Soft Books (book
+# PDFs by code pattern but no search/catalogue route), NOUN
+# e-Courseware (PDF pattern but no courseware search route), Greek
+# Open Courses (stateful JSF portal; eClass chain unproven), Cantabria
+# OCW (host closes every connection).
+#
+# Every wired candidate's URL IS its full text (transcript/notes PDF,
+# transcript/notes HTML page, caption-bearing page, or the OpenStax
+# page JSON), so the §20 full-text layer fetches it through the
+# generic route and passages can be extracted. Lectures enter the
+# pipeline as ordinary content-bearing candidates (the §20 hierarchy's
+# lecture-transcript tier): caps of LEC_PER_PLATFORM_CAP per platform
+# and LEC_TOTAL_CAP per call, per-platform fail-soft, and the
+# verification, screening, judges and text-first gate are UNCHANGED.
+# Fetches reuse the §27 _wlib_fetch. GRIS inherits via ba.*.
+# --------------------------------------------------------------------------
+
+LEC_PER_PLATFORM_CAP = 8
+LEC_TOTAL_CAP = 24
+
+
+def _lec_tokens(query):
+    """Lowercase word tokens (len >= 3) of a query, order-preserving."""
+    out = []
+    for tok in re.findall(r"[^\W_]+", (query or "").lower()):
+        if len(tok) >= 3 and tok not in out:
+            out.append(tok)
+    return out
+
+
+def _lec_match(text, tokens):
+    """How many query tokens appear in the text (word-ish matching)."""
+    low = (text or "").lower()
+    return sum(1 for tok in tokens if tok in low)
+
+
+def _lec_anchors(page, href_re):
+    """(url, anchor-text) pairs for anchors whose href matches."""
+    out = []
+    for m in re.finditer(r'<a[^>]+href="([^"]+)"[^>]*>(.*?)</a>',
+                         page or "", re.S):
+        href = html_lib.unescape(m.group(1))
+        if re.search(href_re, href):
+            out.append((href, _arab_strip_tags(m.group(2))))
+    return out
+
+
+# ------------------------------------------------------------- MIT OCW
+def _parse_mit_sitemap_courses(index):
+    """MIT OCW sitemap index -> [(course slug, course sitemap URL)]."""
+    out = []
+    for url in re.findall(r"<loc>([^<]+)</loc>", index or ""):
+        m = re.search(r"/courses/([^/]+)/sitemap\.xml$", url)
+        if m:
+            out.append((m.group(1), url))
+    return out
+
+
+def _lec_mit_ocw(query):
+    tokens = _lec_tokens(query)
+    if not tokens:
+        return []
+    status, index = _wlib_fetch("https://ocw.mit.edu/sitemap.xml")
+    if status != 200 or not index:
+        return []
+    matched = [(slug, url) for slug, url in
+               _parse_mit_sitemap_courses(index)
+               if _lec_match(slug.replace("-", " "), tokens)]
+    # Collect the resource pages of the matched courses, then fetch
+    # them concurrently (they are large HTML pages; sequential
+    # fetching made this platform the wave's long pole).
+    jobs = []
+    for slug, smap_url in matched[:3]:
+        status, smap = _wlib_fetch(smap_url)
+        if status != 200 or not smap:
+            continue
+        resources = [u for u in re.findall(r"<loc>([^<]+)</loc>", smap)
+                     if "/resources/" in u]
+        resources.sort(key=lambda u: 0 if re.search(
+            r"lecture|lec[-_]?\d|session|class", u.lower()) else 1)
+        for rurl in resources[:10]:
+            jobs.append((slug, rurl))
+    jobs = jobs[:10]  # the pre-parallel fetch budget, kept
+    pages = {}
+    if jobs:
+        with ThreadPoolExecutor(max_workers=6) as ex:
+            futs = {ex.submit(_wlib_fetch, rurl): rurl
+                    for _slug, rurl in jobs}
+            for fut in as_completed(futs):
+                try:
+                    pages[futs[fut]] = fut.result()
+                except Exception:
+                    pages[futs[fut]] = (0, "")
+    out = []
+    for slug, rurl in jobs:
+        if len(out) >= LEC_PER_PLATFORM_CAP:
+            break
+        st2, page = pages.get(rurl) or (0, "")
+        if st2 != 200 or not page or "transcript" not in \
+                page.lower():
+            continue
+        tm = re.search(r'data-transcriptlink\s*=\s*"([^"]+\.pdf)"',
+                       page)
+        pick = tm.group(1) if tm else ""
+        if not pick:
+            pdfs = _lec_anchors(page, r"\.pdf$")
+            for href, text in pdfs:
+                if text.strip().lower() in ("english",) or \
+                        "transcript" in text.lower():
+                    pick = href
+                    break
+            if not pick and pdfs:
+                pick = pdfs[0][0]
+        if not pick:
+            continue
+        if pick.startswith("/"):
+            pick = "https://ocw.mit.edu" + pick
+        rslug = rurl.rstrip("/").rsplit("/", 1)[-1]
+        title = (slug.replace("-", " ") + " — " +
+                 rslug.replace("-", " "))
+        out.append(_arab_candidate(
+            title, pick, "lecture:mitocw",
+            venue="MIT OpenCourseWare (lecture transcript)"))
+    return out
+
+
+# ------------------------------------------------------------- Open Yale
+_YALE_COURSE_RE = r"^/[a-z\-]+/[a-z]+-\d+$"
+
+
+def _parse_yale_courses(page):
+    """OYC /courses catalogue table -> [(course URL, course title)].
+
+    Each course appears twice (course-number cell and title cell,
+    relative hrefs); the longest anchor text (the title) wins."""
+    best = {}
+    for href, text in _lec_anchors(page, _YALE_COURSE_RE):
+        if href not in best or len(text) > len(best[href]):
+            best[href] = text
+    return [("https://oyc.yale.edu" + href, title)
+            for href, title in best.items() if title]
+
+
+def _parse_yale_sessions(page):
+    """OYC course page -> [(session URL, session title)]."""
+    out, seen = [], set()
+    for href, text in _lec_anchors(page, r"^/[a-z\-]+/[a-z]+-\d+/"
+                                   r"lecture-\d+$"):
+        if href not in seen:
+            seen.add(href)
+            out.append(("https://oyc.yale.edu" + href, text))
+    return out
+
+
+_YALE_CACHE = None
+
+
+def _yale_courses():
+    """The OYC catalogue, parsed once and cached per process."""
+    global _YALE_CACHE
+    if _YALE_CACHE is None:
+        status, page = _wlib_fetch("https://oyc.yale.edu/courses")
+        _YALE_CACHE = _parse_yale_courses(page) \
+            if status == 200 and page else []
+    return _YALE_CACHE
+
+
+def _lec_yale(query):
+    tokens = _lec_tokens(query)
+    if not tokens:
+        return []
+    matched = [(u, t) for u, t in _yale_courses()
+               if _lec_match(t, tokens)]
+    out = []
+    for curl, ctitle in matched[:2]:
+        st2, cpage = _wlib_fetch(curl)
+        if st2 != 200 or not cpage:
+            continue
+        for surl, stitle in _parse_yale_sessions(cpage):
+            if len(out) >= LEC_PER_PLATFORM_CAP:
+                break
+            num = re.search(r"lecture-(\d+)$", surl)
+            title = ctitle + " — Lecture " + \
+                (num.group(1) if num else "")
+            if stitle:
+                title += ": " + stitle
+            out.append(_arab_candidate(
+                title, surl, "lecture:yale",
+                venue="Open Yale Courses (lecture transcript)"))
+    return out
+
+
+# ---------------------------------------------------------- Stanford SEE
+def _parse_see_courses(page):
+    """SEE /Course list -> [(course code, course title)]."""
+    out, seen = [], set()
+    for href, text in _lec_anchors(page, r"^/Course/[A-Za-z0-9]+$"):
+        code = href.rsplit("/", 1)[-1]
+        if code not in seen:
+            seen.add(code)
+            out.append((code, text or code))
+    return out
+
+
+def _parse_see_transcripts(page):
+    """SEE course page -> [(transcript HTML URL, title)]."""
+    out, seen = [], set()
+    for href, text in _lec_anchors(page, r"/transcripts/[^/]+\.html$"):
+        if href not in seen:
+            seen.add(href)
+            out.append((href, text))
+    return out
+
+
+_SEE_CACHE = None
+
+
+def _see_catalogue():
+    """SEE courses with their real titles (from each course page's
+    <title>) and transcript links — fetched once, cached per
+    process. The /Course list itself shows only course codes."""
+    global _SEE_CACHE
+    if _SEE_CACHE is not None:
+        return _SEE_CACHE
+    courses = []
+    status, page = _wlib_fetch("https://see.stanford.edu/Course")
+    if status == 200 and page:
+        codes = [code for code, _text in _parse_see_courses(page)]
+        pages = {}
+        with ThreadPoolExecutor(max_workers=6) as ex:
+            futs = {ex.submit(_wlib_fetch,
+                              "https://see.stanford.edu/Course/" + code):
+                    code for code in codes}
+            for fut in as_completed(futs):
+                try:
+                    pages[futs[fut]] = fut.result()
+                except Exception:
+                    pages[futs[fut]] = (0, "")
+        for code in codes:
+            st2, cpage = pages.get(code) or (0, "")
+            if st2 != 200 or not cpage:
+                continue
+            m = re.search(r"<title>(.*?)</title>", cpage, re.S)
+            title = _arab_strip_tags(m.group(1)) if m else code
+            title = title.split("|")[-1].strip()
+            title = re.sub(r"^[A-Z]{2}\d+[A-Z]?\s*-\s*", "", title) \
+                or title
+            courses.append((code, title,
+                            _parse_see_transcripts(cpage)))
+    _SEE_CACHE = courses
+    return courses
+
+
+def _lec_stanford_see(query):
+    tokens = _lec_tokens(query)
+    if not tokens:
+        return []
+    out = []
+    for code, ctitle, transcripts in _see_catalogue():
+        if not _lec_match(ctitle + " " + code, tokens):
+            continue
+        for href, _text in transcripts:
+            if len(out) >= LEC_PER_PLATFORM_CAP:
+                break
+            name = href.rsplit("/", 1)[-1].replace(".html", "")
+            out.append(_arab_candidate(
+                ctitle + " — " + name,
+                "https://see.stanford.edu" + href,
+                "lecture:stanford-see",
+                venue="Stanford SEE (lecture transcript)"))
+    return out
+
+
+# ------------------------------------------------------------ Harvard CS50
+_CS50_TOPICS_CACHE = None
+
+
+def _parse_cs50_index(page):
+    """CS50x index course-nav -> {week: topic} (the nav lists each
+    week with its lecture topic: 'Week 0 — Scratch', ...)."""
+    topics = {}
+    for m in re.finditer(r'href="weeks/(\d+)/"[^>]*>Week \d+</a>\s*'
+                         r"([^<]+)", page or ""):
+        topics[int(m.group(1))] = _arab_strip_tags(m.group(2))
+    return topics
+
+
+def _cs50_topics():
+    """CS50x 2025 week -> lecture topic map (one index fetch, cached
+    per process)."""
+    global _CS50_TOPICS_CACHE
+    if _CS50_TOPICS_CACHE is None:
+        status, index = _wlib_fetch("https://cs50.harvard.edu/x/2025/")
+        _CS50_TOPICS_CACHE = _parse_cs50_index(index) \
+            if status == 200 and index else {}
+    return _CS50_TOPICS_CACHE
+
+
+def _lec_cs50(query):
+    tokens = _lec_tokens(query)
+    if not tokens:
+        return []
+    out = []
+    for week, topic in sorted(_cs50_topics().items()):
+        if _lec_match(topic, tokens):
+            out.append(_arab_candidate(
+                f"CS50 Lecture {week}: {topic}",
+                f"https://cs50.harvard.edu/x/2025/notes/{week}/",
+                "lecture:cs50",
+                venue="Harvard CS50 (lecture notes)"))
+        if len(out) >= LEC_PER_PLATFORM_CAP:
+            break
+    return out
+
+
+# ------------------------------------------------------------ TU Delft OCW
+def _parse_tudelft_feed(feed):
+    """TU Delft WP search RSS -> [(title, item URL)] for course items."""
+    out = []
+    for block in re.findall(r"<item>(.*?)</item>", feed or "", re.S):
+        tm = re.search(r"<title>(?:<!\[CDATA\[)?(.*?)(?:\]\]>)?</title>",
+                       block, re.S)
+        lm = re.search(r"<link>([^<]+)</link>", block)
+        if not tm or not lm:
+            continue
+        url = html_lib.unescape(lm.group(1)).split("#")[0]
+        if not re.search(r"/(course-lectures|course-readings|courses)/",
+                         url):
+            continue
+        title = _arab_strip_tags(tm.group(1))
+        if title:
+            out.append((title, url))
+    return out
+
+
+def _lec_tudelft(query):
+    url = ("https://ocw.tudelft.nl/search/" +
+           urllib.parse.quote(query, safe="") + "/feed/rss2/")
+    status, feed = _wlib_fetch(url)
+    if status != 200 or not feed:
+        return []
+    out = []
+    for title, link in _parse_tudelft_feed(feed):
+        out.append(_arab_candidate(
+            title, link, "lecture:tudelft",
+            venue="TU Delft OCW (lecture)"))
+        if len(out) >= LEC_PER_PLATFORM_CAP:
+            break
+    return out
+
+
+# ---------------------------------------------------------------- METU OCW
+def _parse_moodle_courses(page, host):
+    """Moodle search results -> [(course URL, course title)]."""
+    out, seen = [], set()
+    pat = r"^https://" + re.escape(host) + r"/course/view\.php\?id=\d+$"
+    for href, text in _lec_anchors(page, pat):
+        if href not in seen and text:
+            seen.add(href)
+            out.append((href, text))
+    return out
+
+
+def _lec_metu(query):
+    url = ("https://ocw.metu.edu.tr/course/search.php?" +
+           urllib.parse.urlencode({"search": query}))
+    status, page = _wlib_fetch(url)
+    if status != 200 or not page:
+        return []
+    out = []
+    courses = _parse_moodle_courses(page, "ocw.metu.edu.tr")
+    for curl, ctitle in courses[:2]:
+        st2, cpage = _wlib_fetch(curl)
+        if st2 != 200 or not cpage:
+            continue
+        resources = _lec_anchors(
+            cpage, r"/mod/resource/view\.php\?id=\d+$")
+        for rurl, rtitle in resources:
+            if len(out) >= LEC_PER_PLATFORM_CAP:
+                break
+            st3, rpage = _wlib_fetch(rurl)
+            if st3 != 200 or not rpage:
+                continue
+            pm = re.search(r'href="(https://ocw\.metu\.edu\.tr/'
+                           r'pluginfile\.php/[^"]+\.pdf)"', rpage)
+            if not pm:
+                continue
+            out.append(_arab_candidate(
+                rtitle or ctitle, html_lib.unescape(pm.group(1)),
+                "lecture:metu", venue="METU OCW (lecture notes)"))
+    return out
+
+
+# -------------------------------------------------------------- Wikiversity
+def _parse_wikiversity_search(data):
+    """MediaWiki list=search JSON -> candidates (the page is the text).
+
+    Wikiversity is a LOW-CREDIBILITY community source (flagged in
+    lectures_registry.json); it passes the same screening as any
+    other candidate and is never trusted on its own."""
+    out = []
+    hits = ((data or {}).get("query") or {}).get("search") or []
+    for hit in hits:
+        if not isinstance(hit, dict):
+            continue
+        title = str(hit.get("title") or "").strip()
+        if not title:
+            continue
+        url = ("https://en.wikiversity.org/wiki/" +
+               urllib.parse.quote(title.replace(" ", "_"),
+                                  safe="/:_-,"))
+        out.append(_arab_candidate(
+            title, url, "lecture:wikiversity",
+            venue="Wikiversity (community course text)",
+            abstract=_arab_strip_tags(hit.get("snippet"))[:1000]))
+        if len(out) >= LEC_PER_PLATFORM_CAP:
+            break
+    return out
+
+
+def _lec_wikiversity(query):
+    url = ("https://en.wikiversity.org/w/api.php?" +
+           urllib.parse.urlencode({
+               "action": "query", "list": "search", "srsearch": query,
+               "srnamespace": "0",
+               "srlimit": str(LEC_PER_PLATFORM_CAP), "format": "json"}))
+    data = _wlib_json(url)
+    return _parse_wikiversity_search(data) if data else []
+
+
+# ----------------------------------------------------------------- OpenStax
+_OPENSTAX_CACHE = None
+
+
+def _openstax_walk(node, out):
+    """Collect (page id, clean title, slug) from an archive tree."""
+    if not isinstance(node, dict):
+        return
+    pid = str(node.get("id") or "").split("@")[0]
+    title = _arab_strip_tags(str(node.get("title") or ""))
+    slug = str(node.get("slug") or "")
+    if pid and slug:
+        out.append((pid, title, slug))
+    for child in node.get("contents") or []:
+        _openstax_walk(child, out)
+
+
+def _openstax_catalogue():
+    """{archive, books: [(book id, version, book title,
+    [(page id, section title, slug), ...]), ...]} — built once per
+    process from OpenStax's own embedded site config (the catalogue
+    of all books) plus each book's archive tree JSON."""
+    global _OPENSTAX_CACHE
+    if _OPENSTAX_CACHE is not None:
+        return _OPENSTAX_CACHE
+    cache = {"archive": "", "books": []}
+    status, page = _wlib_fetch(
+        "https://openstax.org/books/astronomy-2e/pages/preface")
+    if status == 200 and page:
+        m = re.search(r'"archiveUrl":\s*"/apps/archive/([^"]+)"', page)
+        archive = m.group(1) if m else ""
+        books = re.findall(
+            r'"([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-'
+            r'[0-9a-f]{12})":\s*\{\s*"defaultVersion":\s*"([^"]+)"',
+            page)
+        if archive and books:
+            cache["archive"] = archive
+
+            def _tree(item):
+                bid, ver = item
+                url = (f"https://openstax.org/apps/archive/{archive}"
+                       f"/contents/{bid}@{ver}.json")
+                # The archive is a public machine interface; fetch
+                # via the full-text layer's capped fetcher (the
+                # paced _wlib_fetch would serialise 127 book trees
+                # into a minute-plus stall).
+                data_bytes, _ctype = _fetch_capped_full(
+                    url, cap=1_000_000, timeout=30)
+                if not data_bytes:
+                    return None
+                try:
+                    data = json.loads(
+                        data_bytes.decode("utf-8", "replace"))
+                except ValueError:
+                    return None
+                nodes = []
+                _openstax_walk(data.get("tree") or {}, nodes)
+                title = _arab_strip_tags(str(data.get("title") or ""))
+                return (bid, ver, title, nodes)
+
+            with ThreadPoolExecutor(max_workers=16) as ex:
+                results = list(ex.map(_tree, books))
+            cache["books"] = [r for r in results if r]
+    _OPENSTAX_CACHE = cache
+    return cache
+
+
+def _lec_openstax(query):
+    tokens = _lec_tokens(query)
+    if not tokens:
+        return []
+    cat = _openstax_catalogue()
+    if not cat["archive"] or not cat["books"]:
+        return []
+    out = []
+    for bid, ver, btitle, nodes in cat["books"]:
+        book_hit = _lec_match(btitle, tokens) > 0
+        for pid, title, slug in nodes[1:]:
+            if len(out) >= LEC_PER_PLATFORM_CAP:
+                break
+            if book_hit or _lec_match(title, tokens):
+                url = (f"https://openstax.org/apps/archive/"
+                       f"{cat['archive']}/contents/{bid}@{ver}:{pid}"
+                       f".json")
+                out.append(_arab_candidate(
+                    (btitle + ": " + title) if title else btitle,
+                    url, "lecture:openstax",
+                    venue="OpenStax (textbook)"))
+        if len(out) >= LEC_PER_PLATFORM_CAP:
+            break
+    return out
+
+
+# ----------------------------------------------------------------- NYCU OCW
+def _parse_nycu_courses(page):
+    """NYCU WP search -> [(course page URL, slug-derived title)]."""
+    out, seen = [], set()
+    for href, _text in _lec_anchors(page, r"course_page=all-course/"):
+        href = href.replace("&#038;", "&")
+        if "all-course/" not in href or href in seen:
+            continue
+        seen.add(href)
+        slug = urllib.parse.unquote(
+            href.rstrip("/").rsplit("/", 1)[-1])
+        out.append((href, slug.replace("-", " ")))
+    return out
+
+
+def _lec_nycu(query):
+    url = ("https://ocw.nycu.edu.tw/?" +
+           urllib.parse.urlencode({"s": query}))
+    status, page = _wlib_fetch(url)
+    if status != 200 or not page:
+        return []
+    out = []
+    for curl, ctitle in _parse_nycu_courses(page)[:3]:
+        st2, cpage = _wlib_fetch(curl)
+        if st2 != 200 or not cpage:
+            continue
+        pdfs = sorted(set(re.findall(
+            r'href="(https://video\.ocw\.nycu\.edu\.tw/[^"]+\.pdf)"',
+            cpage)))
+        for pdf in pdfs:
+            if len(out) >= LEC_PER_PLATFORM_CAP:
+                break
+            name = pdf.rsplit("/", 1)[-1].replace(".pdf", "")
+            out.append(_arab_candidate(
+                ctitle + " — " + name.replace("-", " "), pdf,
+                "lecture:nycu", venue="NYCU OCW (lecture handouts)"))
+    return out
+
+
+# ------------------------------------------------------------- Hokkaido OCW
+def _parse_hokudai_lectures(page):
+    """Hokkaido WP search -> [(lecture URL, slug-derived title)]."""
+    out, seen = [], set()
+    for href, _text in _lec_anchors(
+            page, r"^https://ocw\.hokudai\.ac\.jp/lecture/[^/]+$"):
+        if href not in seen:
+            seen.add(href)
+            slug = href.rstrip("/").rsplit("/", 1)[-1]
+            out.append((href, slug.replace("-", " ")))
+    return out
+
+
+def _lec_hokudai(query):
+    url = ("https://ocw.hokudai.ac.jp/?" +
+           urllib.parse.urlencode({"s": query}))
+    status, page = _wlib_fetch(url)
+    if status != 200 or not page:
+        return []
+    out = []
+    for lurl, ltitle in _parse_hokudai_lectures(page)[:4]:
+        st2, lpage = _wlib_fetch(lurl)
+        if st2 != 200 or not lpage:
+            continue
+        pdfs = sorted(set(re.findall(
+            r'href="([^"]*wp-content/uploads/[^"]+\.pdf)"', lpage)))
+        pdfs.sort(key=lambda u: 0 if re.search(
+            r"note|lecture|slide|handout", u.lower()) else 1)
+        for pdf in pdfs:
+            if len(out) >= LEC_PER_PLATFORM_CAP:
+                break
+            if "poster" in pdf.lower():
+                continue
+            name = pdf.rsplit("/", 1)[-1].replace(".pdf", "")
+            out.append(_arab_candidate(
+                ltitle + " — " + name.replace("-", " "), pdf,
+                "lecture:hokudai",
+                venue="Hokkaido OCW (lecture notes)"))
+    return out
+
+
+# -------------------------------------------------------------- TÜBA Açık Ders
+def _parse_tuba_courses(page):
+    """TÜBA homepage catalogue -> [(course URL, course title)].
+
+    Each course card is one big anchor; the title is its <h3>."""
+    out, seen = [], set()
+    for m in re.finditer(r'<a[^>]+href="(/ders/[a-z0-9\-]+)"[^>]*>'
+                         r"(.*?)</a>", page or "", re.S):
+        href, inner = m.group(1), m.group(2)
+        if href in seen:
+            continue
+        seen.add(href)
+        hm = re.search(r"<h3[^>]*>(.*?)</h3>", inner, re.S)
+        title = _arab_strip_tags(hm.group(1)) if hm else ""
+        if not title:
+            title = href.rsplit("/", 1)[-1].replace("-", " ")
+        out.append(("https://acikders.tuba.gov.tr" + href, title))
+    return out
+
+
+_TUBA_CACHE = None
+
+
+def _tuba_courses():
+    """The TÜBA homepage catalogue, parsed once and cached per
+    process (the homepage is ~320 KB and static within a run)."""
+    global _TUBA_CACHE
+    if _TUBA_CACHE is None:
+        status, page = _wlib_fetch("https://acikders.tuba.gov.tr/")
+        _TUBA_CACHE = _parse_tuba_courses(page) \
+            if status == 200 and page else []
+    return _TUBA_CACHE
+
+
+def _lec_tuba(query):
+    tokens = _lec_tokens(query)
+    if not tokens:
+        return []
+    matched = [(u, t) for u, t in _tuba_courses()
+               if _lec_match(t + " " + u.rsplit("/", 1)[-1]
+                             .replace("-", " "), tokens)]
+    out = []
+    for curl, ctitle in matched[:2]:
+        st2, cpage = _wlib_fetch(curl)
+        if st2 != 200 or not cpage:
+            continue
+        pdfs = sorted(set(re.findall(
+            r'href="([^"]*ADUploads/[^"]+\.pdf)"', cpage)))
+        pdfs.sort(key=lambda u: 0 if "/notes/" in u or
+                    "metni" in u.lower() else 1)
+        for pdf in pdfs:
+            if len(out) >= LEC_PER_PLATFORM_CAP:
+                break
+            if pdf.startswith("/"):
+                pdf = "https://acikders.tuba.gov.tr" + pdf
+            name = pdf.rsplit("/", 1)[-1].replace(".pdf", "")
+            out.append(_arab_candidate(
+                ctitle + " — " + name, pdf, "lecture:tuba",
+                venue="TÜBA Açık Ders (lecture notes/transcript)"))
+    return out
+
+
+# ------------------------------------------------- Bangladesh Open University
+_BOU_CACHE = None
+_BOU_ROOT = "https://ebookbou.edu.bd/Books/Text/"
+
+
+def _bou_fetch(url):
+    """One autoindex listing via the capped fetcher (the paced
+    _wlib_fetch would serialise the 24-listing crawl into a
+    12-second floor; listings are small machine-generated pages)."""
+    data, _ctype = _fetch_capped_full(url, cap=400_000, timeout=30)
+    if not data:
+        return (0, "")
+    return (200, data.decode("utf-8", "replace"))
+
+
+def _bou_listings():
+    """Directory catalogue of ebookbou.edu.bd/Books/Text/: a BFS over
+    the Apache-style listings (depth <= 3, bounded fetches), cached
+    per process: [(dir URL, [(file name, file URL), ...]), ...]."""
+    global _BOU_CACHE
+    if _BOU_CACHE is not None:
+        return _BOU_CACHE
+    found = []
+    queue = [(_BOU_ROOT, 0)]
+    seen = {_BOU_ROOT}
+    fetches = 0
+    while queue and fetches < 24:
+        # One BFS level at a time; the level's listings are fetched
+        # concurrently (sequential listing fetches made this
+        # platform the wave's long pole).
+        level = []
+        while queue and len(level) < 24 - fetches:
+            level.append(queue.pop(0))
+        pages = {}
+        with ThreadPoolExecutor(max_workers=6) as ex:
+            futs = {ex.submit(_bou_fetch, u): u for u, _d in level}
+            for fut in as_completed(futs):
+                try:
+                    pages[futs[fut]] = fut.result()
+                except Exception:
+                    pages[futs[fut]] = (0, "")
+        fetches += len(level)
+        for durl, depth in level:
+            status, page = pages.get(durl) or (0, "")
+            if status != 200 or not page:
+                continue
+            pdfs, subdirs = [], []
+            for href in re.findall(r'href="([^"]+)"', page):
+                if href.startswith("?") or href in ("../", "/"):
+                    continue
+                full = urllib.parse.urljoin(durl, href)
+                if not full.startswith(_BOU_ROOT):
+                    continue
+                if href.lower().endswith(".pdf"):
+                    pdfs.append((urllib.parse.unquote(
+                        href.rsplit("/", 1)[-1]), full))
+                elif href.endswith("/") and full not in seen and \
+                        depth < 3:
+                    seen.add(full)
+                    subdirs.append(full)
+            if pdfs:
+                found.append((durl, pdfs))
+            queue.extend((u, depth + 1) for u in subdirs)
+    _BOU_CACHE = found
+    return found
+
+
+def _lec_bou(query):
+    tokens = _lec_tokens(query)
+    if not tokens:
+        return []
+    out = []
+    for durl, pdfs in _bou_listings():
+        dname = urllib.parse.unquote(
+            durl[len(_BOU_ROOT):]).replace("/", " ").replace(
+                "_", " ")
+        dir_hit = _lec_match(dname, tokens) > 0
+        modules = [(n, u) for n, u in pdfs
+                   if not n.lower().startswith("index")]
+        for name, url in (modules if dir_hit else pdfs):
+            if len(out) >= LEC_PER_PLATFORM_CAP:
+                break
+            title = name.replace(".pdf", "").replace("_", " ")
+            if dir_hit or _lec_match(title, tokens):
+                out.append(_arab_candidate(
+                    title, url, "lecture:bou",
+                    venue="Bangladesh Open University (course book)"))
+        if len(out) >= LEC_PER_PLATFORM_CAP:
+            break
+    return out
+
+
+_LECTURE_SEARCHERS = [
+    ("MIT OCW", _lec_mit_ocw),
+    ("Open Yale Courses", _lec_yale),
+    ("Stanford SEE", _lec_stanford_see),
+    ("Harvard CS50", _lec_cs50),
+    ("TU Delft OCW", _lec_tudelft),
+    ("METU OCW", _lec_metu),
+    ("Wikiversity", _lec_wikiversity),
+    ("OpenStax", _lec_openstax),
+    ("NYCU OCW", _lec_nycu),
+    ("Hokkaido OCW", _lec_hokudai),
+    ("TÜBA Açık Ders", _lec_tuba),
+    ("Bangladesh Open University", _lec_bou),
+]
+
+
+def search_university_lectures(query):
+    """§32: the wired open-text university lecture platforms, one
+    candidate pool. The platforms run concurrently (they are
+    independent hosts; the engine's own wave does the same across
+    searchers) and merge in registry order. Per-platform caps of
+    LEC_PER_PLATFORM_CAP and a LEC_TOTAL_CAP ceiling, exactly like
+    §27; every platform fails soft on its own."""
+    print(f"[university-lectures] query={query!r}")
+    results = {}
+    with ThreadPoolExecutor(max_workers=6) as ex:
+        fut_map = {ex.submit(fn, query): name
+                   for name, fn in _LECTURE_SEARCHERS}
+        for fut in as_completed(fut_map):
+            name = fut_map[fut]
+            try:
+                results[name] = fut.result() or []
+            except Exception as exc:
+                print(f"  {name}: failed {exc!r}")
+                results[name] = []
+    out = []
+    for name, _fn in _LECTURE_SEARCHERS:
+        if len(out) >= LEC_TOTAL_CAP:
+            break
+        cands = results.get(name) or []
+        print(f"  {name}: {len(cands)} candidates")
+        out.extend(cands[:LEC_PER_PLATFORM_CAP])
+    out = out[:LEC_TOTAL_CAP]
+    print(f"[university-lectures] total {len(out)} candidates")
+    return out
+
+
+
+# --------------------------------------------------------------------------
 # Source registries (§17) — credibility / whitelist SIGNAL only.
-# Nine curated registries sit beside this script in the repo:
+# Ten curated registries sit beside this script in the repo:
 #   sources_registry.json        (registry 1, registry schema)
 #   sources_registry_500_more.json (500 DOAJ journals, compact schema:
 #                                   {id, name, url, type, fields,
@@ -2322,6 +3165,10 @@ def search_digital_libraries(query):
 #                                   libraries, institutional and
 #                                   personal, registry schema —
 #                                   library entries, not books)
+#   lectures_registry.json       (§32: the verified open-text
+#                                   university lecture platforms of
+#                                   surveys §29-§31, registry schema —
+#                                   platform entries, not lectures)
 # Both schemas normalise into one record {name, url, domain, type,
 # fields, languages, registry}. A registry match is a ranking SIGNAL
 # ONLY: it never verifies a source (the DOI / Crossref / publisher
@@ -2338,7 +3185,8 @@ REGISTRY_FILES = ["sources_registry.json",
                   "asian_journals_registry.json",
                   "arab_libraries_registry.json",
                   "european_journals_registry.json",
-                  "world_libraries_registry.json"]
+                  "world_libraries_registry.json",
+                  "lectures_registry.json"]
 _REGISTRY_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
@@ -2491,7 +3339,8 @@ SEARCHERS = [search_openalex, search_crossref, search_openaire,
              search_annas_archive, search_doaj, search_arxiv,
              search_semantic_scholar, search_arab_platforms,
              search_asian_platforms, search_arab_libraries,
-             search_european_platforms, search_digital_libraries]
+             search_european_platforms, search_digital_libraries,
+             search_university_lectures]
 
 # English-first retrieval (§18): wave 1 queries the abstract-rich
 # indexes ONLY — Crossref is held back because, queried with a
@@ -2505,7 +3354,8 @@ WAVE1_SEARCHERS = [search_openalex, search_europe_pmc, search_hal,
                    search_google_books, search_arxiv,
                    search_annas_archive, search_arab_platforms,
                    search_asian_platforms, search_arab_libraries,
-                   search_european_platforms, search_digital_libraries]
+                   search_european_platforms, search_digital_libraries,
+                   search_university_lectures]
 CROSSREF_SEARCHERS = [search_crossref]
 
 
@@ -2548,6 +3398,7 @@ SEARCHER_LABEL = {
     "search_arab_libraries": "Arab libraries",
     "search_european_platforms": "European platforms",
     "search_digital_libraries": "Digital libraries",
+    "search_university_lectures": "University lectures",
 }
 
 VERIFY_CACHE_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)),
