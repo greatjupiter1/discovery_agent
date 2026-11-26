@@ -40,7 +40,7 @@ Inputs come from the environment (set by .github/workflows/discovery.yml):
   GLM_MODEL (default "glm-4.7-flash", the free z.ai Flash model)
   GLM_MAX_TOKENS (default 8000, the GLM path's output budget)
   GROQ_MODEL (default "openai/gpt-oss-120b"), OPENROUTER_MODEL
-  (default "meta-llama/llama-3.3-70b-instruct:free"),
+  (default "google/gemma-4-31b-it:free"),
   CLOUDFLARE_MODEL (default "@cf/meta/llama-3.3-70b-fp8-fast"),
   SAMBANOVA_MODEL (default "Meta-Llama-3.3-70B-Instruct"),
   DASHSCOPE_MODEL (default "qwen-plus"), MODELSCOPE_MODEL (default
@@ -8309,7 +8309,7 @@ GLM_DEFAULT_MAX_TOKENS = 8000
 GROQ_URL = "https://api.groq.com/openai/v1/chat/completions"
 GROQ_DEFAULT_MODEL = "openai/gpt-oss-120b"
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
-OPENROUTER_DEFAULT_MODEL = "meta-llama/llama-3.3-70b-instruct:free"
+OPENROUTER_DEFAULT_MODEL = "google/gemma-4-31b-it:free"
 CLOUDFLARE_DEFAULT_MODEL = "@cf/meta/llama-3.3-70b-fp8-fast"
 SAMBANOVA_URL = "https://api.sambanova.ai/v1/chat/completions"
 SAMBANOVA_DEFAULT_MODEL = "Meta-Llama-3.3-70B-Instruct"
