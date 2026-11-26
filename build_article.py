@@ -32,7 +32,7 @@ like HTTP error statuses.
 Inputs come from the environment (set by .github/workflows/discovery.yml):
   FIELD, TOPIC, LANGUAGE (default "fa"), MODE (default "review"),
   SEARCH_SCOPE (default "full"; "new" restricts the candidate
-  search to the §§32–49 additions only — §43),
+  search to the §§32–50 additions only — §43),
   GEMINI_MODEL (default "gemini-3.5-flash")
   LLM_PROVIDER (default "gemini"; "github" selects GitHub Models,
   "glm" selects GLM on z.ai),
@@ -5488,8 +5488,241 @@ def search_rafed(query):
 
 
 # --------------------------------------------------------------------------
+# §50 — KETABONLINE (جامع الكتب الإسلامية, ketabonline.com),
+# registered in ketabonline_registry.json (§17 wiring:
+# credibility/priority signal only, never verification).
+# KetabOnline is one of the largest Arabic text libraries on
+# the web — its own counts, verified in its server-rendered
+# home page: 29,365 text books, 15,076,177 pages, 2,637
+# authors, 46 sections — serving the FULL TEXT of its books
+# as page-based text through a public JSON API, no login, no
+# key. Probed live on 2026-11-26 from the build sandbox under
+# the full-text-only law and the multi-route rule:
+#   home       GET / -> 200, server-rendered (Nuxt) at /ar —
+#       the catalogue is genuinely open.
+#   search UI  three scopes (titles / contents / authors);
+#       it navigates to /ar/books?q=<q>&scope=<scope> — that
+#       SSR results page answers 200.
+#   API        the backend named in the site's own Nuxt
+#       bundles: base https://backend.ketabonline.com/api/v2
+#       title search  GET /books?is_active=1&is_deleted=0&
+#           limit=<n>&sort_field=_score&sort_direction=desc&
+#           q=<q>&scope=titles -> 200, paginated {data,
+#           meta.total} (الفلك -> 20 title hits).
+#       content search  GET /books/pages?limit=<n>&q=<q>&
+#           lang=ar -> 200, paginated PAGE hits (الفلك ->
+#           108,283 page hits; البيروني -> 4,721), each hit
+#           naming its book {id, title, lang}, its part and
+#           its page number, and carrying the page's HTML.
+#       book record  GET /books/<id> -> 200 (title, authors
+#           [{id, name}], pages_count, parts, publisher).
+#       author filter  GET /books?authors=<author_id> ->
+#           exactly that author's books (337 -> Biruni's 4).
+#   book text  GET /books/<id>/pages/<n> -> 200 JSON
+#       {id, page, book, part, content: the page's HTML} —
+#       read verbatim during the probe: book 992 (تحقيق ما
+#       للهند) pp. 100/200; book 102678 (الآثار الباقية)
+#       p. 50 (1,830 chars — its pp. 100/200 are heading /
+#       table pages and fail the §46 bar, as designed);
+#       book 165 (الجماهر) p. 50 (3,030 chars); book 55071
+#       (تحقيق ما للهند, second print) p. 100; book 57086
+#       (من علم الفلك القرآني) p. 10; book 16590 p. 487.
+#       GET /books/<id>/pages -> the book's page-number list.
+#   reader     GET /ar/books/<id>/read?page=<n> -> 200 SSR
+#       (the human route; the API route above is cleaner).
+#   sitemap    GET /sitemap.xml -> 200, catalogue-only —
+#       not needed; robots.txt -> 404.
+#   OAI-PMH    -> 404 on ketabonline.com, on
+#       backend.ketabonline.com and on /api/v2: no OAI route.
+#   Index fallbacks (Crossref/DOAJ/Unpaywall/OpenAlex/IA)
+#   were not needed — the direct route is proven.
+# SEARCH DISCIPLINE mirrors §§48–49: the CONTENT search is
+# the wired route (the platform's title-search scoring is
+# loose — hundreds of weak matches); hits are grouped by
+# book; per book up to KETABONLINE_PAGES_PER_BOOK pages are
+# fetched from the reader route (hit pages first, then the
+# pages following the first hit); a page whose text fails
+# the §46 bar (heading/table pages carry almost no prose)
+# is skipped, and a book with no real text yields NO
+# candidate. Passages are extracted from the fetched pages
+# with the query terms, with the §46 fallback (the
+# platform's own full-text index matched the book) when
+# extraction misses. Title/authors come from the book
+# record fetched once per candidate book.
+# PRIMARY SEEDS: the platform hosts FOUR of al-Biruni's own
+# works under its author record البيروني (author id 337,
+# books_count 4 — confirmed via GET /books?authors=337):
+# تحقيق ما للهند (992), الآثار الباقية عن القرون الخالية
+# (102678), تحقيق ما للهند ط أخرى (55071) and الجماهر في
+# معرفة الجواهر (165) — each part's id/title/author
+# attested by the platform's own records and one page of
+# each fetched and read during the probe; candidates from
+# them are marked primary, exactly like the §46 Ganjeh
+# seeds. NOT HOSTED: القانون المسعودي (a 66-hit title
+# scan shows only مسعود-name noise), التفهيم (title
+# search total 0) and تحديد نهايات الأماكن.
+# --------------------------------------------------------------------------
+
+KETABONLINE_CAP = 8
+KETABONLINE_PAGES_PER_BOOK = 3
+KETABONLINE_SEARCH_LIMIT = 25
+_KETABONLINE_BASE = "https://ketabonline.com"
+_KETABONLINE_API = "https://backend.ketabonline.com/api/v2"
+
+# The four works of al-Biruni hosted at KetabOnline (probe
+# 2026-11-26; ids, titles and the author copied from the
+# platform's own records — the author record البيروني,
+# id 337, lists exactly these four books). These are the
+# author's own works: candidates from them are marked
+# primary, exactly like the §41 shelf's primary books.
+_KETABONLINE_BIRUNI = "البيروني"
+_KETABONLINE_SEEDS = {
+    "992": ("تحقيق ما للهند من مقولة مقبولة في العقل أو مرذولة",
+            _KETABONLINE_BIRUNI),
+    "102678": ("الآثار الباقية عن القرون الخالية",
+               _KETABONLINE_BIRUNI),
+    "55071": ("تحقيق ما للهند من مقولة مقبولة في العقل أو مرذولة (ط. أخرى)",
+              _KETABONLINE_BIRUNI),
+    "165": ("الجماهر في معرفة الجواهر", _KETABONLINE_BIRUNI),
+}
+
+
+def _ketabonline_parse_hits(data):
+    """Hit items from a content-search response, in response
+    order: [{book_id, title, page}] — one item per hit PAGE,
+    naming its book and the page number inside the book."""
+    items = []
+    if not isinstance(data, dict):
+        return items
+    for it in data.get("data") or []:
+        if not isinstance(it, dict):
+            continue
+        book = it.get("book")
+        if not isinstance(book, dict):
+            continue
+        bid, page = book.get("id"), it.get("page", it.get("id"))
+        if not isinstance(bid, int) or not isinstance(page, int):
+            continue
+        items.append({"book_id": str(bid),
+                      "title": _arab_strip_tags(
+                          str(book.get("title") or "")),
+                      "page": page})
+    return items
+
+
+def _ketabonline_page_text(book_id, page):
+    """One reader page's real prose, or "" when the page
+    carries none (heading/table pages hold almost no text;
+    transport failure — all fail-soft)."""
+    data = _arab_json(
+        f"{_KETABONLINE_API}/books/{book_id}/pages/{page}")
+    if not isinstance(data, dict):
+        return ""
+    content = data.get("content")
+    if not isinstance(content, str) or not content:
+        return ""
+    return _arab_strip_tags(content)
+
+
+def _ketabonline_book_meta(book_id):
+    """(title, [author names]) from the book's own record:
+    the title (the record's <em> search highlights stripped)
+    and the authors list's names. ("", []) on absence."""
+    data = _arab_json(f"{_KETABONLINE_API}/books/{book_id}")
+    if not isinstance(data, dict):
+        return "", []
+    rec = data.get("data")
+    if not isinstance(rec, dict):
+        return "", []
+    title = _arab_strip_tags(str(rec.get("title") or ""))
+    authors = [str(a.get("name") or "").strip()
+               for a in rec.get("authors") or []
+               if isinstance(a, dict)]
+    return title, [a for a in authors if a]
+
+
+def search_ketabonline(query):
+    """§50: search KetabOnline (جامع الكتب الإسلامية) through
+    its own full-content search API. Hits are grouped by
+    book; for each book the hit pages' real prose is fetched
+    from the reader route and passages extracted — a book
+    whose pages carry no real text yields NO candidate, per
+    the full-text-only law. Fail-soft, capped at
+    KETABONLINE_CAP."""
+    query = (query or "").strip()
+    if not query:
+        return []
+    qs = urllib.parse.urlencode(
+        {"limit": KETABONLINE_SEARCH_LIMIT, "q": query,
+         "lang": "ar"})
+    data = _arab_json(f"{_KETABONLINE_API}/books/pages?{qs}")
+    if not isinstance(data, dict):
+        return []
+    books, order = {}, []
+    for it in _ketabonline_parse_hits(data):
+        bid = it["book_id"]
+        if bid not in books:
+            books[bid] = {"title": it["title"], "pages": []}
+            order.append(bid)
+        if it["page"] not in books[bid]["pages"]:
+            books[bid]["pages"].append(it["page"])
+    terms = _shelf_query_terms(query)
+    out = []
+    for bid in order:
+        if len(out) >= KETABONLINE_CAP:
+            break
+        info = books[bid]
+        first = info["pages"][0]
+        cand_pages = list(info["pages"])
+        for p in (first + 1, first + 2):
+            if p not in cand_pages:
+                cand_pages.append(p)
+        texts = []
+        for page in cand_pages[:KETABONLINE_PAGES_PER_BOOK + 2]:
+            if len(texts) >= KETABONLINE_PAGES_PER_BOOK:
+                break
+            text = _ketabonline_page_text(bid, page)
+            if text and _lib46_text_ok(text):
+                texts.append(text)
+        if not texts:
+            continue
+        joined = "\n".join(texts)
+        excerpt, hits = extract_passages(joined, terms)
+        if not excerpt:
+            # The platform's own full-text index matched this
+            # book for the query; the fetched pages are real
+            # prose, so they stand as the passage.
+            excerpt = joined[:FULLTEXT_EXCERPT_CHARS]
+            hits = len(texts)
+        title, authors = _ketabonline_book_meta(bid)
+        seed = _KETABONLINE_SEEDS.get(bid)
+        title = title or info["title"] or (seed[0] if seed else "")
+        if not title:
+            continue
+        if not authors and seed:
+            authors = [seed[1]]
+        cand = _arab_candidate(
+            title,
+            f"{_KETABONLINE_BASE}/ar/books/{bid}/read?page={first}",
+            "ketabonline:library",
+            authors=authors,
+            venue="KetabOnline — جامع الكتب الإسلامية")
+        cand["fulltext"] = True
+        cand["fulltext_excerpt"] = excerpt[:FULLTEXT_EXCERPT_CHARS]
+        cand["fulltext_route"] = "ketabonline:library"
+        cand["passages"] = True
+        cand["passage_hits"] = hits
+        cand["language"] = "ar"
+        if seed:
+            cand["source_type"] = "primary"
+            cand["primary_relation"] = "author"
+        out.append(cand)
+    return out
+
+
+# --------------------------------------------------------------------------
 # Source registries (§17) — credibility / whitelist SIGNAL only.
-# Twenty-two curated registries sit beside this script in the repo:
+# Twenty-three curated registries sit beside this script in the repo:
 #   sources_registry.json        (registry 1, registry schema)
 #   sources_registry_500_more.json (500 DOAJ journals, compact schema:
 #                                   {id, name, url, type, fields,
@@ -5630,6 +5863,15 @@ def search_rafed(query):
 #                                   page-verified parts of Ibn
 #                                   Sina's الشفاء ـ طبيعيّات,
 #                                   which are primary seeds)
+#   ketabonline_registry.json    (§50: KetabOnline — جامع
+#                                   الكتب الإسلامية, wired LIVE
+#                                   via its own backend JSON API
+#                                   (full-content search + the
+#                                   reader page route), registry
+#                                   schema — one platform entry
+#                                   + the four page-verified
+#                                   works of al-Biruni it hosts,
+#                                   which are primary seeds)
 # Both schemas normalise into one record {name, url, domain, type,
 # fields, languages, registry}. A registry match is a ranking SIGNAL
 # ONLY: it never verifies a source (the DOI / Crossref / publisher
@@ -5659,7 +5901,8 @@ REGISTRY_FILES = ["sources_registry.json",
                   "najaf_registry.json",
                   "image_sources_registry.json",
                   "islamweb_registry.json",
-                  "rafed_registry.json"]
+                  "rafed_registry.json",
+                  "ketabonline_registry.json"]
 _REGISTRY_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
@@ -5987,7 +6230,7 @@ SEARCHERS = [search_shelf, search_openalex, search_crossref, search_openaire,
              search_iran_math, search_tajik_journals, search_core,
              search_ganjeh, search_ablibrary, search_najaf,
              search_qdl_images, search_loc_images, search_islamweb,
-             search_rafed]
+             search_rafed, search_ketabonline]
 
 # English-first retrieval (§18): wave 1 queries the abstract-rich
 # indexes ONLY — Crossref is held back because, queried with a
@@ -6006,7 +6249,7 @@ WAVE1_SEARCHERS = [search_shelf, search_openalex, search_europe_pmc, search_hal,
                    search_iran_math, search_tajik_journals, search_core,
                    search_ganjeh, search_ablibrary, search_najaf,
                    search_qdl_images, search_loc_images,
-                   search_islamweb, search_rafed]
+                   search_islamweb, search_rafed, search_ketabonline]
 CROSSREF_SEARCHERS = [search_crossref]
 
 
@@ -6020,7 +6263,7 @@ CROSSREF_SEARCHERS = [search_crossref]
 #       WAVE1_SEARCHERS, the Crossref top-up, wave 2 and the
 #       §19 primary lane all run as before.
 #   "new" — the candidate search runs ONLY the searchers added
-#       in the newest build wave (§§32–49), i.e. the shelf plus
+#       in the newest build wave (§§32–50), i.e. the shelf plus
 #       the new items:
 #         search_shelf               (§41 — the collected shelf;
 #                                     carries the primary books
@@ -6050,6 +6293,12 @@ CROSSREF_SEARCHERS = [search_crossref]
 #                                     reader-page text; the six
 #                                     Shifa parts are primary
 #                                     seeds)
+#         search_ketabonline         (§50 — KetabOnline: its
+#                                     own full-content search
+#                                     API + reader-page text;
+#                                     the four hosted works of
+#                                     al-Biruni are primary
+#                                     seeds)
 #       (§39 utihs and §40 are registry-only — they have no
 #       searcher to include; §33 is the review layer, §44 the
 #       parallel writer and §45 the review robustness pass —
@@ -6075,7 +6324,8 @@ NEW_ONLY_SEARCHERS = [search_shelf, search_university_lectures,
                       search_tajik_journals, search_core,
                       search_ganjeh, search_ablibrary, search_najaf,
                       search_qdl_images, search_loc_images,
-                      search_islamweb, search_rafed]
+                      search_islamweb, search_rafed,
+                      search_ketabonline]
 _NEW_ONLY_NAMES = {s.__name__ for s in NEW_ONLY_SEARCHERS}
 
 
@@ -6091,7 +6341,7 @@ def search_scope():
 def scoped_searchers(order):
     """The searcher order for one retrieval wave under the
     active scope (§43): unchanged in "full" mode; in "new" mode
-    only the §§32–49 searchers survive, in the caller's order."""
+    only the §§32–50 searchers survive, in the caller's order."""
     order = list(order)
     if search_scope() != "new":
         return order
@@ -6104,11 +6354,11 @@ def _scope_lines():
     if search_scope() != "new":
         return []
     return ["",
-            "دامنهٔ جستجو: فقط منابع تازه‌افزودهٔ §§32–49 "
+            "دامنهٔ جستجو: فقط منابع تازه‌افزودهٔ §§32–50 "
             "(قفسهٔ منابع گردآوری‌شده، CORE، سخنرانی‌های دانشگاهی، "
             "ensani، jihs، مجلات ریاضی ایران، مجلات تاجیکستان، "
             "گنجه، کتابخانهٔ اهل‌البیت، صحراء النجف، منابع تصویری "
-            "نسخه‌های خطی QDL و کتابخانهٔ کنگره، اسلام‌وب، رافد)"]
+            "نسخه‌های خطی QDL و کتابخانهٔ کنگره، اسلام‌وب، رافد، کتاب‌آنلاین)"]
 
 
 def search_scope_note(language):
@@ -6116,21 +6366,22 @@ def search_scope_note(language):
     naming the restricted search scope of this production."""
     if (language or "").strip().lower().startswith("fa"):
         return ("> یادداشت: دامنهٔ جستجو در این تولید فقط منابع "
-                "تازه‌افزودهٔ §§32–49 بوده است (قفسهٔ منابع "
+                "تازه‌افزودهٔ §§32–50 بوده است (قفسهٔ منابع "
                 "گردآوری‌شده، CORE، سخنرانی‌های دانشگاهی، ensani، "
                 "jihs، مجلات ریاضی ایران و مجلات تاجیکستان، گنجه، "
                 "کتابخانهٔ اهل‌البیت، صحراء النجف، منابع تصویری "
                 "نسخه‌های خطی QDL و کتابخانهٔ کنگره، کتابخانهٔ "
-                "اسلام‌وب و کتابخانهٔ رافد)؛ همهٔ دروازه‌های کیفیت "
+                "اسلام‌وب، کتابخانهٔ رافد و کتاب‌آنلاین)؛ همهٔ دروازه‌های کیفیت "
                 "بدون تغییر اعمال شده‌اند.")
     return ("> Note: this production searched ONLY the newly "
-            "added sources (§§32–49: the collected-material "
+            "added sources (§§32–50: the collected-material "
             "shelf, CORE, university lectures, ensani, jihs, "
             "Iranian mathematics journals, Tajik journals, "
             "Ganjeh, Ablibrary, the Najaf Desert Library, "
             "the QDL / Library of Congress manuscript image "
-            "sources, the IslamWeb library and the Rafed "
-            "library); all quality gates applied unchanged.")
+            "sources, the IslamWeb library, the Rafed "
+            "library and KetabOnline); all quality gates "
+            "applied unchanged.")
 
 
 def normalise_title(t):
@@ -6180,6 +6431,7 @@ SEARCHER_LABEL = {
     "search_loc_images": "LOC/WDL images (§47)",
     "search_islamweb": "IslamWeb library (§48)",
     "search_rafed": "Rafed library (§49)",
+    "search_ketabonline": "KetabOnline library (§50)",
 }
 
 VERIFY_CACHE_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)),
@@ -6440,9 +6692,9 @@ def retrieve_wave1(queries, rstate):
                                 searcher_order=WAVE1_SEARCHERS)
     if search_scope() == "new":
         print("search scope (§43): NEW-ONLY — wave 1 ran only the "
-              "§§32–49 searchers (shelf, lectures, ensani, jihs, "
+              "§§32–50 searchers (shelf, lectures, ensani, jihs, "
               "iran-math, tajik, CORE, ganjeh, ablibrary, najaf, "
-              "QDL/LOC images, islamweb, rafed); "
+              "QDL/LOC images, islamweb, rafed, ketabonline); "
               "Crossref top-up skipped")
         return verified
     if len(verified) < EARLY_STOP_VERIFIED:
