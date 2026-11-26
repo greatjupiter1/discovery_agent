@@ -87,7 +87,7 @@ MAX_ATTEMPTS = 6
 MATRIX_MAX_QUERIES = 28
 MATRIX_PER_LANG = 6
 MATRIX_LANGUAGES = ("en", "ar", "fa", "de", "fr", "ru", "es", "tr",
-                    "it", "la", "ur", "uz")
+                    "it", "la", "ur", "uz", "zh", "ja", "ko")
 MIN_FULLTEXT_SOURCES = 3
 FULLTEXT_V2_MAX_SOURCES = 14
 FULLTEXT_FETCH_MAX_BYTES = 10 * 1024 * 1024
@@ -97,7 +97,8 @@ MIN_FETCHED_TEXT_CHARS = 3000
 LANGUAGE_NAMES = {
     "fa": "Persian (Farsi)", "en": "English", "ar": "Arabic", "zh": "Chinese",
     "fr": "French", "de": "German", "es": "Spanish", "ru": "Russian",
-    "tr": "Turkish", "ur": "Urdu",
+    "tr": "Turkish", "ur": "Urdu", "it": "Italian", "la": "Latin",
+    "uz": "Uzbek", "ja": "Japanese", "ko": "Korean",
 }
 
 
@@ -1170,8 +1171,170 @@ def search_arab_platforms(query):
 
 
 # --------------------------------------------------------------------------
+# Asian-country journal platforms (§24) — open access, no keys.
+# The verified national/regional platforms are registered in
+# asian_journals_registry.json (§17 wiring: credibility/priority
+# signal only, never verification). Five of them also have a live
+# keyword-search route that was probed from the build sandbox on
+# 2026-11-26 and seen answering with real results, AND a returned
+# item's FULL TEXT was verified reachable (Jupiter's full-text-only
+# law, 2026-11-26 — abstracts/metadata alone never count as wired);
+# only those five are searched here:
+#   GARUDA (Indonesia) — national portal documents search
+#       GET garuda.kemdiktisaintek.go.id/documents?q=<q>
+#           (title-article result blocks; full text via the detail
+#           page's publisher PDF link — verified %PDF 2026-11-26)
+#   NepJOL (Nepal), MongoliaJOL (Mongolia), VJOL (Vietnam,
+#   vjol.info.vn only) and the Kazakhstan National Academy of
+#   Sciences journals — OJS site-wide search
+#       GET <host>/index.php/index/search/search?query=<q>
+#           (shared _parse_ojs_search_results from §23; full text
+#           via the OJS galley download /article/download/<id>/<g>
+#           — verified application/pdf, %PDF magic, 2026-11-26)
+# Registry-only (no machine-usable keyword route answered the
+# probe, or full text could not be verified reachable): BanglaJOL
+# (Bangladesh — OJS search answers with real results, but its
+# galley PDFs repeatedly timed out / dropped from the probe
+# sandbox, so full-text reachability is UNVERIFIED and it stays
+# registry-only under the full-text-only law); J-STAGE (Japan —
+# JavaScript-built search form; plain GETs
+# answered HTTP 500 / an error redirect, no public API/OAI);
+# SciOpen and COAJ (China — JavaScript app shells, /search 404 /
+# 401); KoreaScience (South Korea — site answers but the search is
+# JavaScript-driven, candidate routes 404); CyberLeninka (Russia —
+# /api/search rejected plain GET 405 / form POST 400; its OAI-PMH
+# endpoint answers but is harvest-only, not keyword search);
+# DergiPark (Turkey — web search redirects to a human-verification
+# page; OAI-PMH answers but is harvest-only); SID (Iran — Cloudflare
+# challenge pages); NOPR (India), MyJurnal (Malaysia) and PhilJOL
+# (Philippines — servers closed every connection); PakMediNet
+# (Pakistan — HTTP 403 blocked) and SLJOL (Sri Lanka — HTTP 403);
+# ThaiJO (Thailand — JavaScript portal, per-journal OJS hosts, no
+# single site-wide endpoint answered); Tajikistan NAS (static
+# listing sites, no article search); the HEC list (Pakistan) and
+# the MSRT portal (Iran) are official lists, not article platforms.
+# Transport reuses the §23 single-shot fetch (a dead platform must
+# not eat the retrieval wave's budget) and the §23 candidate shape.
+# Every platform call is fail-soft; candidates flow through the
+# UNCHANGED verification, screening, judges and text-first gate,
+# and the §18 intake language gate applies as to every source.
+# --------------------------------------------------------------------------
+
+ASIA_PER_PLATFORM_CAP = 8
+ASIA_TOTAL_CAP = 24
+
+
+def _asia_ojs_search(base_url, query, index, venue):
+    """One OJS site-wide search (Journals Online family, VJOL,
+    Kazakhstan NAS): GET <base>/index.php/index/search/search."""
+    url = (base_url + "/index.php/index/search/search?query="
+           + urllib.parse.quote(query))
+    status, body = _arab_fetch(url)
+    if status != 200 or not body:
+        return []
+    return _parse_ojs_search_results(body, index, venue)
+
+
+def _parse_garuda_results(page):
+    """GARUDA result items: a title-article anchor (title inside an
+    <xmp>) followed by author-article anchors and a subtitle-article
+    source line carrying the journal, volume and year."""
+    out = []
+    for block in re.split(r'<a class="title-article"', page)[1:]:
+        m = re.match(r'\s+href="([^"]+)"[^>]*>\s*<xmp>(.*?)</xmp>',
+                     block, re.S)
+        if not m:
+            continue
+        url = urllib.parse.urljoin(
+            "https://garuda.kemdiktisaintek.go.id",
+            html_lib.unescape(m.group(1)))
+        title = _arab_strip_tags(m.group(2))
+        if not title:
+            continue
+        authors = []
+        for am in re.finditer(
+                r'<a class="author-article"[^>]*><xmp>(.*?)</xmp>',
+                block, re.S):
+            name = _arab_strip_tags(am.group(1))
+            if name and name not in authors:
+                authors.append(name)
+        venue = "GARUDA (Indonesia)"
+        year = None
+        sm = re.search(r'<xmp class="subtitle-article">(.*?)</xmp>',
+                       block, re.S)
+        if sm:
+            line = _arab_strip_tags(sm.group(1))
+            if line:
+                venue = line
+                year = _arab_year(line)
+        out.append(_arab_candidate(
+            title, url, "asia:garuda", authors=authors[:6],
+            year=year, venue=venue))
+        if len(out) >= ASIA_PER_PLATFORM_CAP:
+            break
+    return out
+
+
+def _asia_garuda(query):
+    """Indonesia GARUDA documents search (probed live 2026-11-26:
+    HTTP 200 with real title-article result items)."""
+    url = ("https://garuda.kemdiktisaintek.go.id/documents?q="
+           + urllib.parse.quote(query))
+    status, body = _arab_fetch(url)
+    if status != 200 or not body:
+        return []
+    return _parse_garuda_results(body)
+
+
+_ASIA_OJS_PLATFORMS = [
+    ("nepjol", "https://www.nepjol.info", "asia:nepjol",
+     "NepJOL (Nepal Journals Online)"),
+    ("mongoliajol", "https://www.mongoliajol.info", "asia:mongoliajol",
+     "MongoliaJOL (Mongolia Journals Online)"),
+    ("vjol", "https://vjol.info.vn", "asia:vjol",
+     "VJOL (Vietnam Journals Online)"),
+    ("kaznas", "https://journals.nauka-nanrk.kz", "asia:kaznas",
+     "National Academy of Sciences of Kazakhstan journals"),
+]
+
+
+def _asia_ojs_platform(name, base_url, index, venue):
+    def run(query):
+        return _asia_ojs_search(base_url, query, index, venue)
+    return run
+
+
+_ASIA_PLATFORM_SEARCHERS = (
+    [("garuda", _asia_garuda)]
+    + [(name, _asia_ojs_platform(name, base, index, venue))
+       for name, base, index, venue in _ASIA_OJS_PLATFORMS])
+
+
+def search_asian_platforms(query):
+    """§24: search the wired Asian-country journal platforms
+    (GARUDA + the OJS platforms NepJOL, MongoliaJOL, VJOL and the
+    Kazakhstan NAS journals — each with full text verified
+    reachable, see the §24 header comment). Per-platform fail-soft,
+    capped at ASIA_PER_PLATFORM_CAP per platform and
+    ASIA_TOTAL_CAP overall. The remaining verified platforms are
+    registry-only (see the §24 header comment) and are not queried
+    here."""
+    out = []
+    for name, fn in _ASIA_PLATFORM_SEARCHERS:
+        try:
+            found = fn(query) or []
+        except Exception as e:
+            print(f"asia:{name} failed for query {query!r}: {e}")
+            continue
+        out.extend(found)
+        if len(out) >= ASIA_TOTAL_CAP:
+            break
+    return out[:ASIA_TOTAL_CAP]
+
+
+# --------------------------------------------------------------------------
 # Source registries (§17) — credibility / whitelist SIGNAL only.
-# Five curated registries sit beside this script in the repo:
+# Six curated registries sit beside this script in the repo:
 #   sources_registry.json        (registry 1, registry schema)
 #   sources_registry_500_more.json (500 DOAJ journals, compact schema:
 #                                   {id, name, url, type, fields,
@@ -1183,6 +1346,10 @@ def search_arab_platforms(query):
 #                                   archives, not individual theses)
 #   arab_journals_registry.json  (§23: the eight open-access
 #                                   Arab-country journal platforms,
+#                                   registry schema — platform entries,
+#                                   not individual journals)
+#   asian_journals_registry.json (§24: the verified open-access
+#                                   Asian-country journal platforms,
 #                                   registry schema — platform entries,
 #                                   not individual journals)
 # Both schemas normalise into one record {name, url, domain, type,
@@ -1197,7 +1364,8 @@ REGISTRY_FILES = ["sources_registry.json",
                   "sources_registry_500_more.json",
                   "sources_registry_2.json",
                   "thesis_registry.json",
-                  "arab_journals_registry.json"]
+                  "arab_journals_registry.json",
+                  "asian_journals_registry.json"]
 _REGISTRY_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
@@ -1348,7 +1516,8 @@ SEARCHERS = [search_openalex, search_crossref, search_openaire,
              search_hal, search_zbmath, search_europe_pmc,
              search_internet_archive, search_google_books,
              search_annas_archive, search_doaj, search_arxiv,
-             search_semantic_scholar, search_arab_platforms]
+             search_semantic_scholar, search_arab_platforms,
+             search_asian_platforms]
 
 # English-first retrieval (§18): wave 1 queries the abstract-rich
 # indexes ONLY — Crossref is held back because, queried with a
@@ -1360,7 +1529,8 @@ WAVE1_SEARCHERS = [search_openalex, search_europe_pmc, search_hal,
                    search_openaire, search_semantic_scholar, search_doaj,
                    search_zbmath, search_internet_archive,
                    search_google_books, search_arxiv,
-                   search_annas_archive, search_arab_platforms]
+                   search_annas_archive, search_arab_platforms,
+                   search_asian_platforms]
 CROSSREF_SEARCHERS = [search_crossref]
 
 
@@ -1399,6 +1569,7 @@ SEARCHER_LABEL = {
     "search_annas_archive": "annas_archive", "search_doaj": "DOAJ",
     "search_arxiv": "arXiv", "search_semantic_scholar": "Semantic Scholar",
     "search_arab_platforms": "Arab platforms",
+    "search_asian_platforms": "Asian platforms",
 }
 
 VERIFY_CACHE_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)),
@@ -3831,7 +4002,7 @@ def multilingual_query_matrix(field, topic, api_key=None, model=None):
         "Islamic-science topics include ar, fa, de, fr, ru, es, tr; "
         "for other fields choose the languages that actually carry "
         "the literature. Allowed codes: en ar fa de fr ru es tr it "
-        "la ur uz.\n"
+        "la ur uz zh ja ko.\n"
         "Each query: 3-10 words, keywords only, no quotes, no "
         "Boolean operators, written in that language's own script.")
     try:
