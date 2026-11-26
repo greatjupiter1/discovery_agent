@@ -258,7 +258,10 @@ REGISTRY_FILES = ["sources_registry.json",
                   "iran_math_registry.json",
                   "tajik_journals_registry.json",
                   "utihs_registry.json",
-                  "core_registry.json"]
+                  "core_registry.json",
+                  "ganjeh_registry.json",
+                  "ablibrary_registry.json",
+                  "najaf_registry.json"]
 _REGISTRY_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
@@ -475,7 +478,7 @@ def search_scope():
     """The active search scope (§43, shared with build_article):
     "new" only when SEARCH_SCOPE says so; "full" otherwise.
     Proposals have no CORE/ensani/jihs searchers of their own —
-    the shelf is their only §§32–42 grounding source, so in
+    the shelf is their only §§32–46 grounding source, so in
     "new" mode grounding runs on the shelf alone and the four
     external grounding searchers stand down."""
     return "new" if (os.environ.get("SEARCH_SCOPE") or "") \
@@ -509,7 +512,7 @@ def grounding_digest(field, idea, api_key, model):
                         (search_europe_pmc, "europepmc.org"))
     if search_scope() == "new":
         # §43: new-only scope — the shelf (already collected
-        # above) is the only §§32–42 grounding source proposals
+        # above) is the only §§32–46 grounding source proposals
         # have; the external grounding searchers stand down.
         print("search scope (§43): NEW-ONLY — proposal grounding "
               "uses the §41 shelf only")
