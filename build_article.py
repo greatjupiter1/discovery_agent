@@ -827,8 +827,351 @@ def search_annas_archive(query):
 
 
 # --------------------------------------------------------------------------
+# Arab-country journal platforms (§23) — open access, no keys.
+# The eight verified national/regional platforms are registered in
+# arab_journals_registry.json (§17 wiring: credibility/priority signal
+# only, never verification). Four of them also have a live search
+# route that was probed from the build sandbox on 2026-11-26 and seen
+# answering with real results; only those four are searched here:
+#   IMIST/PRSM (Morocco) — JSON API on prsm.imist.ma
+#       GET /api/search?criteria_field=all_text&criteria_value=<q>
+#           &criteria_operator=OR&page=1&page_size=8
+#   KnE Publishing (UAE) — platform search API on kneopen.com
+#       POST /wp-admin/admin-ajax.php
+#           {action: search_publications_api, currentPage: 1,
+#            searchTerm: <q>}  (Solr-style JSON, Crossref DOIs)
+#   Dirasat (Jordan) — OJS site-wide search
+#       GET dsr.ju.edu.jo/index.php/index/search/search?query=<q>
+#   An-Najah (Palestine) — per-journal search (Django/Haystack)
+#       GET journals.najah.edu/journal/<slug>/search/?q=<q>
+#           for slugs anujr-a, anujr-b, pmpj
+# Registry-only (no machine-usable route answered the probe):
+#   ASJP (Algeria) and IASJ (Iraq) — servers closed every connection;
+#   EKB (Egypt) — HTTP 429 "Access Restricted" on journal subdomains;
+#   QScience (Qatar) — JavaScript SPA shell, no searchable content.
+# Every platform call is fail-soft: an error, timeout or empty parse
+# contributes nothing and never raises. Candidates carry the usual
+# shape and flow through the UNCHANGED verification, screening,
+# judges and text-first gate; the §18 intake language gate applies
+# to them exactly as to every other source.
+# --------------------------------------------------------------------------
+
+ARAB_PER_PLATFORM_CAP = 8
+ARAB_TOTAL_CAP = 20
+_ARAB_TIMEOUT = 10  # seconds, single attempt — a dead platform must
+                    # not eat the retrieval wave's source budget
+_ARAB_HEADERS = {
+    "User-Agent": ("Mozilla/5.0 (X11; Linux x86_64) "
+                   "AppleWebKit/537.36 (KHTML, like Gecko) "
+                   "Chrome/126.0 Safari/537.36"),
+    "Accept": "text/html,application/json,*/*",
+    "Accept-Language": "ar,en;q=0.8,fr;q=0.6",
+}
+_NAJAH_JOURNALS = ["anujr-a", "anujr-b", "pmpj"]
+
+
+def _arab_fetch(url, data=None):
+    """One single-shot HTTPS request for the Arab platforms (no
+    retries: http_request's 6 attempts x 180 s would stall the wave).
+    Returns (status, text); (None, "") on any transport error. A
+    truncated chunked body (http.client.IncompleteRead — seen live
+    from kneopen.com) is salvaged: the partial bytes usually still
+    carry a complete JSON document or result page."""
+    import http.client
+    try:
+        _pace(urllib.parse.urlparse(url).netloc)
+        req = urllib.request.Request(url, data=data, headers=_ARAB_HEADERS)
+        with urllib.request.urlopen(req, timeout=_ARAB_TIMEOUT) as resp:
+            try:
+                raw = resp.read(1_500_000)
+            except http.client.IncompleteRead as e:
+                raw = e.partial or b""
+            return resp.status, raw.decode("utf-8", "replace")
+    except urllib.error.HTTPError as e:
+        try:
+            return e.code, e.read(300_000).decode("utf-8", "replace")
+        except Exception:
+            return e.code, ""
+    except Exception:
+        return None, ""
+
+
+def _arab_json(url, data=None):
+    """Fetch + JSON-parse with ONE retry (the KnE endpoint was seen
+    truncating its chunked response mid-document; a second attempt
+    usually completes). Returns the parsed object or None."""
+    for _attempt in range(2):
+        status, body = _arab_fetch(url, data=data)
+        if status != 200 or not body:
+            continue
+        try:
+            return json.loads(body)
+        except ValueError:
+            continue
+    return None
+
+
+def _arab_candidate(title, url, index, authors=None, year=None,
+                    venue="", doi=None, abstract=""):
+    return {"title": (title or "").strip(),
+            "authors": [a for a in (authors or []) if a],
+            "year": year, "venue": venue or "", "doi": doi,
+            "url": url or "", "abstract": abstract or "",
+            "arxiv_id": None, "index": index}
+
+
+def _arab_year(text):
+    m = re.search(r"(19|20)\d{2}", str(text or ""))
+    return int(m.group(0)) if m else None
+
+
+def _arab_strip_tags(fragment):
+    text = re.sub(r"<[^>]+>", " ", fragment or "")
+    return re.sub(r"\s+", " ", html_lib.unescape(text)).strip()
+
+
+def _arab_imist(query):
+    """Morocco PRSM/IMIST JSON API (probed live 2026-11-26: HTTP 200,
+    {total, results:[{article_title, abstract, authors,
+    publication_date, article_url, journal_title}]})."""
+    qs = urllib.parse.urlencode(
+        [("criteria_field", "all_text"), ("criteria_value", query),
+         ("criteria_operator", "OR"), ("page", "1"),
+         ("page_size", str(ARAB_PER_PLATFORM_CAP))])
+    data = _arab_json("https://prsm.imist.ma/api/search?" + qs)
+    if not isinstance(data, dict):
+        return []
+    out = []
+    for r in data.get("results", []) or []:
+        if not isinstance(r, dict):
+            continue
+        authors = [a.strip() for a in
+                   str(r.get("authors") or "").split(";") if a.strip()]
+        out.append(_arab_candidate(
+            r.get("article_title"), r.get("article_url"), "arab:imist",
+            authors=authors[:6],
+            year=_arab_year(r.get("publication_date")),
+            venue=r.get("journal_title") or "PRSM (IMIST)",
+            abstract=str(r.get("abstract") or "")[:1500]))
+    return out
+
+
+def _kne_docs_from_body(body):
+    """KnE docs from a response body. Full JSON parse first; when the
+    body was truncated mid-stream (seen live: the endpoint cuts its
+    chunked response, sometimes at 8 KB), salvage every COMPLETE doc
+    object inside the "docs" array with a brace-matching scan."""
+    if not body:
+        return []
+    try:
+        data = json.loads(body)
+        docs = (((data.get("data") or {}).get("results") or {})
+                .get("docs")) or []
+        if docs:
+            return docs
+    except (ValueError, AttributeError):
+        pass
+    anchor = body.find('"docs"')
+    if anchor < 0:
+        return []
+    start = body.find("[", anchor)
+    if start < 0:
+        return []
+    docs, depth, in_str, esc, obj_start = [], 0, False, False, None
+    for i in range(start + 1, len(body)):
+        ch = body[i]
+        if in_str:
+            if esc:
+                esc = False
+            elif ch == "\\":
+                esc = True
+            elif ch == '"':
+                in_str = False
+            continue
+        if ch == '"':
+            in_str = True
+        elif ch == "{":
+            if depth == 0:
+                obj_start = i
+            depth += 1
+        elif ch == "}":
+            depth -= 1
+            if depth == 0 and obj_start is not None:
+                try:
+                    docs.append(json.loads(body[obj_start:i + 1]))
+                except ValueError:
+                    pass
+                obj_start = None
+        elif ch == "]" and depth == 0:
+            break
+    return docs
+
+
+def _arab_kne(query):
+    """UAE KnE Publishing search API (probed live 2026-11-26: POST
+    admin-ajax action search_publications_api -> {success, data:
+    {results: {numFound, docs: [{title (may carry <mark> tags),
+    abstract, authors, publicationYear, journalTitle, doi,
+    fullTextUrl}]}}})."""
+    payload = urllib.parse.urlencode(
+        {"action": "search_publications_api", "currentPage": "1",
+         "searchTerm": query}).encode("utf-8")
+    docs = []
+    for _attempt in range(2):
+        status, body = _arab_fetch(
+            "https://kneopen.com/wp-admin/admin-ajax.php", data=payload)
+        if status != 200 or not body:
+            continue
+        docs = _kne_docs_from_body(body)
+        if docs:
+            break
+    out = []
+    for d in docs[:ARAB_PER_PLATFORM_CAP]:
+        if not isinstance(d, dict):
+            continue
+        year = d.get("publicationYear")
+        try:
+            year = int(year) if year else None
+        except (TypeError, ValueError):
+            year = None
+        out.append(_arab_candidate(
+            _arab_strip_tags(d.get("title")),
+            d.get("fullTextUrl"), "arab:kne",
+            authors=[str(a).strip() for a in (d.get("authors") or [])
+                     if str(a).strip()],
+            year=year,
+            venue=d.get("journalTitle") or "KnE Publishing",
+            doi=(str(d.get("doi") or "").strip() or None),
+            abstract=_arab_strip_tags(d.get("abstract"))[:1500]))
+    return out
+
+
+def _parse_ojs_search_results(page, index, venue_fallback):
+    """OJS 3 search-results markup: one obj_article_summary block per
+    hit, title anchor -> /article/view/<id>, authors and publication
+    date in the meta divs that follow the anchor."""
+    out = []
+    for block in re.split(r'<div class="obj_article_summary">', page)[1:]:
+        m = re.search(r'<a[^>]+href="([^"]*/article/view/\d+[^"]*)"[^>]*>'
+                      r'(.*?)</a>', block, re.S)
+        if not m:
+            continue
+        url, inner = m.group(1), m.group(2)
+        inner = re.sub(r'<span class="subtitle">.*?</span>', " ", inner,
+                       flags=re.S)
+        title = _arab_strip_tags(inner)
+        if not title:
+            continue
+        authors = []
+        am = re.search(r'<div class="authors">(.*?)</div>', block, re.S)
+        if am:
+            authors = [a.strip() for a in re.split(
+                r"[,،]", _arab_strip_tags(am.group(1))) if a.strip()]
+        pm = re.search(r'<div class="published">(.*?)</div>', block, re.S)
+        venue = venue_fallback
+        sm = re.search(r'<span class="subtitle">(.*?)</span>',
+                       m.group(2), re.S)
+        if sm:
+            venue = _arab_strip_tags(sm.group(1)) or venue_fallback
+        out.append(_arab_candidate(
+            title, html_lib.unescape(url), index, authors=authors[:6],
+            year=_arab_year(_arab_strip_tags(pm.group(1))) if pm else None,
+            venue=venue))
+        if len(out) >= ARAB_PER_PLATFORM_CAP:
+            break
+    return out
+
+
+def _arab_dirasat(query):
+    """Jordan Dirasat OJS site-wide search (probed live 2026-11-26:
+    HTTP 200 with real obj_article_summary result blocks)."""
+    url = ("https://dsr.ju.edu.jo/index.php/index/search/search?query="
+           + urllib.parse.quote(query))
+    status, body = _arab_fetch(url)
+    if status != 200 or not body:
+        return []
+    return _parse_ojs_search_results(body, "arab:dirasat",
+                                     "Dirasat (University of Jordan)")
+
+
+def _parse_najah_results(page):
+    """An-Najah result cards: journal-article-card blocks whose title
+    anchor points at /journal/<slug>/.../article/<id>/; a date chip
+    (Online <span>YYYY-MM-DD</span>) and /authors/<id>/ links may
+    appear inside the same card."""
+    out = []
+    for block in re.split(r'<article class="journal-article-card">',
+                          page)[1:]:
+        m = re.search(r'<h3 class="journal-article-card-title">\s*'
+                      r'<a href="([^"]+)"[^>]*>(.*?)</a>', block, re.S)
+        if not m:
+            continue
+        url = urllib.parse.urljoin("https://journals.najah.edu/",
+                                   html_lib.unescape(m.group(1)))
+        title = _arab_strip_tags(m.group(2))
+        if not title:
+            continue
+        authors = []
+        for am in re.finditer(r'<a href="/authors/\d+/"[^>]*>(.*?)</a>',
+                              block, re.S):
+            name = _arab_strip_tags(am.group(1))
+            if name and name not in authors:
+                authors.append(name)
+        dm = re.search(r'(\d{4})-\d{2}-\d{2}', block)
+        out.append(_arab_candidate(
+            title, url, "arab:najah", authors=authors[:6],
+            year=int(dm.group(1)) if dm else None,
+            venue="An-Najah Journals"))
+        if len(out) >= 3:
+            break
+    return out
+
+
+def _arab_najah(query):
+    """Palestine An-Najah per-journal search (probed live 2026-11-26
+    on anujr-b: HTTP 200 with real journal-article-card results)."""
+    out = []
+    for slug in _NAJAH_JOURNALS:
+        url = (f"https://journals.najah.edu/journal/{slug}/search/?q="
+               + urllib.parse.quote(query))
+        try:
+            status, body = _arab_fetch(url)
+            if status == 200 and body:
+                out.extend(_parse_najah_results(body))
+        except Exception as e:
+            print(f"arab:najah {slug} failed: {e}")
+        if len(out) >= ARAB_PER_PLATFORM_CAP:
+            break
+    return out[:ARAB_PER_PLATFORM_CAP]
+
+
+_ARAB_PLATFORM_SEARCHERS = [("imist", _arab_imist), ("kne", _arab_kne),
+                            ("dirasat", _arab_dirasat),
+                            ("najah", _arab_najah)]
+
+
+def search_arab_platforms(query):
+    """§23: search the wired Arab-country journal platforms (IMIST,
+    KnE, Dirasat, An-Najah). Per-platform fail-soft, capped at
+    ARAB_PER_PLATFORM_CAP per platform and ARAB_TOTAL_CAP overall.
+    ASJP, IASJ, EKB and QScience are registry-only (see the §23
+    header comment) and are not queried here."""
+    out = []
+    for name, fn in _ARAB_PLATFORM_SEARCHERS:
+        try:
+            found = fn(query) or []
+        except Exception as e:
+            print(f"arab:{name} failed for query {query!r}: {e}")
+            continue
+        out.extend(found)
+        if len(out) >= ARAB_TOTAL_CAP:
+            break
+    return out[:ARAB_TOTAL_CAP]
+
+
+# --------------------------------------------------------------------------
 # Source registries (§17) — credibility / whitelist SIGNAL only.
-# Four curated registries sit beside this script in the repo:
+# Five curated registries sit beside this script in the repo:
 #   sources_registry.json        (registry 1, registry schema)
 #   sources_registry_500_more.json (500 DOAJ journals, compact schema:
 #                                   {id, name, url, type, fields,
@@ -838,6 +1181,10 @@ def search_annas_archive(query):
 #   thesis_registry.json         (thesis-HOSTING sources, registry
 #                                   schema — repositories and ETD
 #                                   archives, not individual theses)
+#   arab_journals_registry.json  (§23: the eight open-access
+#                                   Arab-country journal platforms,
+#                                   registry schema — platform entries,
+#                                   not individual journals)
 # Both schemas normalise into one record {name, url, domain, type,
 # fields, languages, registry}. A registry match is a ranking SIGNAL
 # ONLY: it never verifies a source (the DOI / Crossref / publisher
@@ -849,7 +1196,8 @@ def search_annas_archive(query):
 REGISTRY_FILES = ["sources_registry.json",
                   "sources_registry_500_more.json",
                   "sources_registry_2.json",
-                  "thesis_registry.json"]
+                  "thesis_registry.json",
+                  "arab_journals_registry.json"]
 _REGISTRY_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
@@ -1000,7 +1348,7 @@ SEARCHERS = [search_openalex, search_crossref, search_openaire,
              search_hal, search_zbmath, search_europe_pmc,
              search_internet_archive, search_google_books,
              search_annas_archive, search_doaj, search_arxiv,
-             search_semantic_scholar]
+             search_semantic_scholar, search_arab_platforms]
 
 # English-first retrieval (§18): wave 1 queries the abstract-rich
 # indexes ONLY — Crossref is held back because, queried with a
@@ -1012,7 +1360,7 @@ WAVE1_SEARCHERS = [search_openalex, search_europe_pmc, search_hal,
                    search_openaire, search_semantic_scholar, search_doaj,
                    search_zbmath, search_internet_archive,
                    search_google_books, search_arxiv,
-                   search_annas_archive]
+                   search_annas_archive, search_arab_platforms]
 CROSSREF_SEARCHERS = [search_crossref]
 
 
@@ -1050,6 +1398,7 @@ SEARCHER_LABEL = {
     "search_google_books": "Google Books",
     "search_annas_archive": "annas_archive", "search_doaj": "DOAJ",
     "search_arxiv": "arXiv", "search_semantic_scholar": "Semantic Scholar",
+    "search_arab_platforms": "Arab platforms",
 }
 
 VERIFY_CACHE_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)),
