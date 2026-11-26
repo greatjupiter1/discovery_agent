@@ -1,0 +1,458 @@
+[
+ {
+  "api": "https://ocw.mit.edu/sitemap.xml (course catalogue) + per-course sitemap.xml + /resources/ pages (transcript PDFs)",
+  "fields": [
+   "multidisciplinary",
+   "science",
+   "engineering",
+   "mathematics",
+   "humanities"
+  ],
+  "languages": [
+   "English"
+  ],
+  "name": "MIT OpenCourseWare",
+  "notes": "LIVE-WIRED §32 (probe 2026-11-26): sitemap index answers with 2,587 course sitemaps whose slugs carry the course titles (e.g. 8-282j-introduction-to-astronomy-spring-2006); a matched course's own sitemap lists its /resources/ pages, and a video resource page (5.111 Lecture 1) links its transcript PDF (anchor 'English', 200, %PDF). The site search UI is a JS app (api.learn.mit.edu / api/v0/search returned 404 in every form tried) — the sitemap is the machine catalogue route. Full text = transcript PDFs.",
+  "type": "lecture_platform",
+  "url": "https://ocw.mit.edu",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "https://oyc.yale.edu/courses (catalogue) + session pages (full transcript HTML)",
+  "fields": [
+   "multidisciplinary",
+   "science",
+   "humanities",
+   "social sciences"
+  ],
+  "languages": [
+   "English"
+  ],
+  "name": "Open Yale Courses",
+  "notes": "LIVE-WIRED §32 (probe 2026-11-26): the /courses catalogue lists every course with its department page; ASTR 160's page lists 24 session pages, and session pages carry the FULL lecture transcript in HTML (Lecture 1 page = 43,150 chars of text incl. the timed transcript body). Full text = session-page HTML.",
+  "type": "lecture_platform",
+  "url": "https://oyc.yale.edu",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "engineering",
+   "science",
+   "mathematics",
+   "humanities"
+  ],
+  "languages": [
+   "English"
+  ],
+  "name": "NPTEL (National Programme on Technology Enhanced Learning, India)",
+  "notes": "REGISTRY-ONLY §32 (probe 2026-11-26): transcript PDFs exist on archive.nptel.ac.in per the §29 survey, but no machine route was proven from the sandbox. Routes tried: archive.nptel.ac.in/courses/<id>/ (404), /noc/courses/ (404), /nptel/search.html (404), beta.archive.nptel.ac.in (connection closed), nptel.ac.in/courses/<id> (200 but a JS shell whose only PDF link is the template placeholder syllabus_pdf/undefined.pdf; course data loads via an unidentified API). Search/catalogue bar not met.",
+  "type": "lecture_platform",
+  "url": "https://nptel.ac.in",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "https://see.stanford.edu/Course (catalogue) + /materials/<course>/transcripts/*.html|pdf",
+  "fields": [
+   "computer science",
+   "electrical engineering",
+   "mathematics"
+  ],
+  "languages": [
+   "English"
+  ],
+  "name": "Stanford Engineering Everywhere (SEE)",
+  "notes": "LIVE-WIRED §32 (probe 2026-11-26): the /Course catalogue lists the SEE courses (CS106A/B, CS107, CS223A, CS229, EE261/263/364A/364B); the CS229 course page links 40 transcript files under /materials/aimlcs229/transcripts/ (HTML + PDF), and a transcript HTML fetched 200 (62,928 bytes). Full text = transcript HTML/PDF. CC BY-NC-SA per the §29 survey.",
+  "type": "lecture_platform",
+  "url": "https://see.stanford.edu",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "https://cs50.harvard.edu/x/2025/ (week catalogue) + /x/2025/notes/<n>/ (full notes HTML)",
+  "fields": [
+   "computer science"
+  ],
+  "languages": [
+   "English"
+  ],
+  "name": "Harvard CS50",
+  "notes": "LIVE-WIRED §32 (probe 2026-11-26): the CS50x 2025 index lists weeks 0-10 with their lecture topics (Scratch, C, Arrays, Algorithms, Memory, Data Structures, Python, SQL, HTML/CSS/JS, Flask, Cybersecurity/AI) and each week's notes page is full-text HTML (notes/1 = 105,312 bytes fetched 200). Scope is this one course only, per the §29 survey. Full text = notes HTML.",
+  "type": "lecture_platform",
+  "url": "https://cs50.harvard.edu",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "multidisciplinary",
+   "science",
+   "humanities",
+   "social sciences"
+  ],
+  "languages": [
+   "English"
+  ],
+  "name": "OpenLearn (Open University)",
+  "notes": "REGISTRY-ONLY §32 (probe 2026-11-26): every route from the sandbox — search (?query=), a course content page, and the site root — returned Cloudflare HTTP 403 'Just a moment...' (bot wall). The §29 survey verified full course text + printable PDFs in a browser environment, but no route answers from here, so neither bar can be proven. Routes tried: site search, course page, root.",
+  "type": "lecture_platform",
+  "url": "https://www.open.edu/openlearn",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "https://ocw.tudelft.nl/search/<q>/feed/rss2/ (WordPress search feed) + lecture/reading pages",
+  "fields": [
+   "engineering",
+   "science",
+   "architecture",
+   "water management"
+  ],
+  "languages": [
+   "English",
+   "Dutch"
+  ],
+  "name": "TU Delft OpenCourseWare",
+  "notes": "LIVE-WIRED §32 (probe 2026-11-26): the WordPress search feed for 'water' returned 10 real items (course-lectures, course-readings, courses); a lecture item page carried 26,408 chars of text. The WP REST API is login-restricted (401 rest_login_required), so the search feed is the machine route. Full text = lecture/reading page HTML (course pages also link notes PDFs).",
+  "type": "lecture_platform",
+  "url": "https://ocw.tudelft.nl",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "multidisciplinary",
+   "science",
+   "engineering",
+   "humanities"
+  ],
+  "languages": [
+   "Korean",
+   "English"
+  ],
+  "name": "KOCW (Korea Open Course Ware)",
+  "notes": "REGISTRY-ONLY §32 (probe 2026-11-26): the site search DOES answer (search.do?query=astronomy returned 12 real course pages at /home/cview.do?cid=...), and the §29 survey verified notes PDFs + WEBVTT/SRT caption files at predictable URLs in a browser session — but from static fetches the course page assembles its lecture list and subtitle data in JavaScript (no caption/.vtt/.srt file URL appears in the page HTML), so the full-text bar cannot be proven. Routes tried: site search, course page HTML, endpoint scan of the course page.",
+  "type": "lecture_platform",
+  "url": "http://www.kocw.net",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "multidisciplinary",
+   "science",
+   "humanities",
+   "social sciences"
+  ],
+  "languages": [
+   "English"
+  ],
+  "name": "Oxford Podcasts (University of Oxford)",
+  "notes": "REGISTRY-ONLY §32 (probe 2026-11-26): no query route answers — /search?query=, /search?search= and /search/node/<q> all return the 404 page. The /series catalogue browses (a series page fetched 200) and SOME episode pages carry caption files (a Simonyi lecture episode linked a media.podcasts.ox.ac.uk .srt), but transcripts are per-episode only and there is no search route, so bar 1 fails. Routes tried: three search URL forms, series catalogue, episode page, per-series RSS feeds exist but are not a query route.",
+  "type": "lecture_platform",
+  "url": "https://podcasts.ox.ac.uk",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "Moodle course search (course/search.php) + mod/resource pages resolving to pluginfile.php PDFs",
+  "fields": [
+   "multidisciplinary",
+   "engineering",
+   "science",
+   "mathematics"
+  ],
+  "languages": [
+   "English",
+   "Turkish"
+  ],
+  "name": "METU OpenCourseWare (Middle East Technical University)",
+  "notes": "LIVE-WIRED §32 (probe 2026-11-26): Moodle course search answers as guest ('mathematics' found course id 83, Elements of Probability and Statistics); the course page links mod/resource items, a resource page resolves to its pluginfile.php PDF, and that PDF fetched 200 (%PDF). Guest access works for the open courses. Full text = resource PDFs.",
+  "type": "lecture_platform",
+  "url": "https://ocw.metu.edu.tr",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "multidisciplinary",
+   "science",
+   "humanities"
+  ],
+  "languages": [
+   "French",
+   "English"
+  ],
+  "name": "Collège de France",
+  "notes": "REGISTRY-ONLY §32 (probe 2026-11-26): /search?query=astronomie returns the research landing page (node/64) with no server-rendered results — the search is not machine-readable from here. Per the §29 survey only the inaugural lectures carry full text (regular courses publish résumés only), on chair pages and via OpenEdition Books (bot-challenged in §26) and HAL (already wired as a general searcher). Routes tried: site search (EN+FR), result-link extraction, API/Algolia scan of the search page.",
+  "type": "lecture_platform",
+  "url": "https://www.college-de-france.fr",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "science",
+   "humanities",
+   "social sciences"
+  ],
+  "languages": [
+   "Russian"
+  ],
+  "name": "PostNauka",
+  "notes": "REGISTRY-ONLY §32 (probe 2026-11-26): the site search page is a JS app (no result links in HTML). The public API at postnauka.org/api/v4/search answers, but for 'astronomy' it returned only author 'theme' cards (people), not lecture posts; the post-detail endpoint /api/v4/post/<id> returned 403 'not authorised', and /api/v4/video/<id> 404. Full text of the professors' lecture transcripts (verified in the §29 survey) is therefore not reachable through a proven machine route. Routes tried: site search HTML, API v4 search, API post/video detail, sitemap.",
+  "type": "lecture_platform",
+  "url": "https://postnauka.ru",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "multidisciplinary",
+   "science",
+   "mathematics",
+   "humanities",
+   "business"
+  ],
+  "languages": [
+   "English"
+  ],
+  "name": "Saylor Academy",
+  "notes": "REGISTRY-ONLY §32 (probe 2026-11-26): the Moodle course search DOES answer with real courses ('biology' returned BIO101: Introduction to Molecular and Cellular Biology at /course/bio101), but the guest course page exposes NO unit content — its only mod/page items are the Course Syllabus (12,727 chars, a syllabus, not lecture text), a Translation FAQ and an AI Learning Zone page; no unit pages, no mod/url or mod/resource content links and no resources.saylor.org links appear. Unit full text is therefore not reachable through a proven static route, so bar 2 fails. This contradicts the §29 survey's 'unit text readable without login' note, which could not be reproduced from this sandbox. Routes tried: Moodle course search, course page, every mod/page item on the course page, external-link scan of the course page.",
+  "type": "lecture_platform",
+  "url": "https://learn.saylor.org",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "https://en.wikiversity.org/w/api.php",
+  "fields": [
+   "multidisciplinary",
+   "science",
+   "humanities"
+  ],
+  "languages": [
+   "English"
+  ],
+  "name": "Wikiversity (English)",
+  "notes": "LIVE-WIRED §32 (probe 2026-11-26) — LOW-CREDIBILITY COMMUNITY SOURCE: the MediaWiki API search answers with real learning-resource pages ('Astronomy', 'Introduction to astronomy', ...) and each page's full text is its wiki HTML, fetched like Wikisource in §27. Content is community-written and unrefereed — the weakest credibility in this registry (flagged per the §29 survey); it passes the same screening judges as every other source and is never trusted on its own.",
+  "type": "lecture_platform",
+  "url": "https://en.wikiversity.org",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "https://openstax.org/apps/archive/<archiveVersion>/contents/<book>@<version>.json (tree) + <book>@<version>:<page>.json (full text)",
+  "fields": [
+   "science",
+   "mathematics",
+   "humanities",
+   "social sciences",
+   "business"
+  ],
+  "languages": [
+   "English"
+  ],
+  "name": "OpenStax (Rice University)",
+  "notes": "LIVE-WIRED §32 (probe 2026-11-26): TEXTBOOKS, not lectures (flagged per the §29 survey). The web view is a JS app and archive.cnx.org closes connections from the sandbox, but the archive JSON on openstax.org answers: the book tree for Astronomy 2e (464 nodes) and a page JSON for §1.1 'The Nature of Astronomy' with its full content. The site config embedded in a book page lists all 127 books (id + defaultVersion) + the archive version — that config is the catalogue; section titles are matched against the query. Full text = page JSON content.",
+  "type": "textbook",
+  "url": "https://openstax.org",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "multidisciplinary",
+   "science",
+   "engineering",
+   "mathematics"
+  ],
+  "languages": [
+   "Chinese",
+   "English"
+  ],
+  "name": "NTU OpenCourseWare (National Taiwan University)",
+  "notes": "REGISTRY-ONLY §32 (probe 2026-11-26): Cloudflare HTTP 403 'Just a moment...' on every route from the sandbox — course page, /courses and the site root, over both https and http. The §30 survey verified full lecture-notes PDFs at the predictable /uploads/course_item_file/file/<id>/..._CS<unit>L01.pdf pattern (Calculus Ch.5 notes fetched) in another environment, but no route answers from here. Routes tried: course page, course index, root, http+https.",
+  "type": "lecture_platform",
+  "url": "https://ocw.aca.ntu.edu.tw",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "WordPress search (?s=<q>) + course pages (?course_page=...) linking video.ocw.nycu.edu.tw handout PDFs",
+  "fields": [
+   "multidisciplinary",
+   "science",
+   "engineering",
+   "mathematics"
+  ],
+  "languages": [
+   "Chinese",
+   "English"
+  ],
+  "name": "NYCU OpenCourseWare (National Yang Ming Chiao Tung University)",
+  "notes": "LIVE-WIRED §32 (probe 2026-11-26): the WP search for 'calculus' returned real course pages (?course_page=all-course/<college>/<slug>, bilingual slugs); a Calculus course page linked 16 complete handout PDFs at video.ocw.nycu.edu.tw/pub/<course>/<file>.pdf (the §30 survey fetched a 64-page LTI Systems handout, PDF 1.7). The WP REST search route 404s; the HTML search is the route. Full text = handout PDFs.",
+  "type": "lecture_platform",
+  "url": "https://ocw.nycu.edu.tw",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "WordPress search (?s=<q>) + /lecture/ pages linking wp-content/uploads note PDFs",
+  "fields": [
+   "multidisciplinary",
+   "science",
+   "economics",
+   "humanities"
+  ],
+  "languages": [
+   "Japanese",
+   "English"
+  ],
+  "name": "Hokkaido University OpenCourseWare",
+  "notes": "LIVE-WIRED §32 (probe 2026-11-26): the WP search returns /lecture/ course pages; a lecture page linked 7 note PDFs under /wp-content/uploads/2016/01/ (InternationalEconomics-2007-Note-00.pdf ...), each fetched 200 (%PDF) — the §30 survey's pattern confirmed live. The WP-JSON search covers news posts only, so the HTML search is the route. Archive runs 2003-2016. Full text = note PDFs.",
+  "type": "lecture_platform",
+  "url": "https://ocw.hokudai.ac.jp",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "Homepage course catalogue (/ders/<slug>) + course pages linking /ADUploads/courses/<slug>/lectures/<n>/notes|transcript PDFs",
+  "fields": [
+   "multidisciplinary",
+   "science",
+   "engineering",
+   "humanities"
+  ],
+  "languages": [
+   "Turkish",
+   "English"
+  ],
+  "name": "TÜBA Açık Ders (Turkish Academy of Sciences Open Courseware)",
+  "notes": "LIVE-WIRED §32 (probe 2026-11-26): the homepage IS the catalogue (80 /ders/<slug> course links — Turkish translations of MIT/Yale OCW plus Turkish courses, per the §30 survey); the MIT 'Introduction to Algorithms' course page linked 51 ADUploads PDFs (per-lecture Ders Notu notes and Video Metni transcripts at the documented pattern). West Asia's only verified open-text lecture source in the §30 survey. Full text = notes/transcript PDFs.",
+  "type": "lecture_platform",
+  "url": "https://acikders.tuba.gov.tr",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "multidisciplinary",
+   "computer science",
+   "mathematics",
+   "business"
+  ],
+  "languages": [
+   "English"
+  ],
+  "name": "Virtual University of Pakistan (VU / VULMS courseware)",
+  "notes": "REGISTRY-ONLY §32 (probe 2026-11-26): the §31 survey fetched complete lecture-handout PDFs from vulms.vu.edu.pk/Courses/<CODE>/Downloads/... (MTH622 handouts, modules 101-186), but from this sandbox the handout PDF returns HTTP 403 (WAF page) and both www.vu.edu.pk and ocw.vu.edu.pk close the connection. No route answers, so neither bar can be proven. Routes tried: handout PDF pattern (twice), ocw.vu.edu.pk root + course path, www.vu.edu.pk root.",
+  "type": "lecture_platform",
+  "url": "https://vulms.vu.edu.pk",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "multidisciplinary",
+   "education",
+   "science",
+   "humanities"
+  ],
+  "languages": [
+   "English",
+   "Urdu"
+  ],
+  "name": "AIOU Soft Books (Allama Iqbal Open University)",
+  "notes": "REGISTRY-ONLY §32 (probe 2026-11-26): complete course-book PDFs ARE reachable by the code pattern (LIVE_SITE/SoftBooks/9509.pdf fetched 200, %PDF — the §31 survey also fetched codes 481/5417 and 1427), but no search or catalogue route answers a query: the SoftBooks directory listing returns HTTP 500, online.aiou.edu.pk root 403, aiou.edu.pk/soft-books and /book-search 404, and aiou.edu.pk/?s= just returns the homepage. A code pattern is not a search route, so bar 1 fails. Routes tried: directory listing, two catalogue paths, site search parameter, host root.",
+  "type": "lecture_platform",
+  "url": "https://online.aiou.edu.pk",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "Directory catalogue under https://ebookbou.edu.bd/Books/Text/ (school -> programme -> course) + module PDFs",
+  "fields": [
+   "business",
+   "education",
+   "science",
+   "humanities"
+  ],
+  "languages": [
+   "English",
+   "Bengali"
+  ],
+  "name": "Bangladesh Open University eBook (BOU)",
+  "notes": "LIVE-WIRED §32 (probe 2026-11-26): the /Books/Text/ tree is a browsable directory catalogue — /Books/Text/SOB/CEMBA-CEMPA/ lists whole course-book PDFs with readable names (Human_Resource_Management.pdf, Strategic_Management.pdf, ...) and course directories (core_1601/, cemba_1602/, ...); a course directory lists its Module-N.pdf files, and Module-1.pdf of CORE-1601 fetched 200 (%PDF). The §31 survey also verified the DSpace OER side (CC BY 4.0). Full text = module/course PDFs.",
+  "type": "lecture_platform",
+  "url": "https://ebookbou.edu.bd",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "multidisciplinary",
+   "humanities",
+   "science",
+   "management"
+  ],
+  "languages": [
+   "English"
+  ],
+  "name": "NOUN e-Courseware (National Open University of Nigeria)",
+  "notes": "REGISTRY-ONLY §32 (probe 2026-11-26): one complete PDF per course IS reachable at nou.edu.ng/coursewarecontent/<CODE>.pdf (PHL101 fetched 200, %PDF; the site states no login/registration/payment is needed, per the §31 survey), but no search/catalogue route for the courseware files was found: the /e-courseware/ page is an information page with no course links, WP REST search returns news posts, and WP media search does not index the coursewarecontent files (search=PHL101 returned []). A file pattern is not a search route, so bar 1 fails. Routes tried: e-courseware page, WP REST search, WP media search.",
+  "type": "lecture_platform",
+  "url": "https://nou.edu.ng",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "multidisciplinary",
+   "science",
+   "humanities"
+  ],
+  "languages": [
+   "Greek",
+   "English"
+  ],
+  "name": "Greek Open Courses (opencourses.gr + Open eClass)",
+  "notes": "REGISTRY-ONLY §32 (probe 2026-11-26): the national portal is a stateful JSF/PrimeFaces application (jsessionid-bound forms — no machine search route). The Athens Open eClass instance (opencourses.uoa.gr) answers and its faculty catalogue page loads (/modules/auth/listfaculties.php, 200), and the §31 survey fetched real course files via /modules/document/file.php direct links — but the faculty -> course -> document chain could not be proven end-to-end to a fetched full text in this probe, so the platform stays registry-only. Routes tried: portal root/search surface, UoA eClass root, eClass faculty catalogue.",
+  "type": "lecture_platform",
+  "url": "https://opencourses.gr",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "multidisciplinary",
+   "engineering",
+   "science",
+   "mathematics"
+  ],
+  "languages": [
+   "Spanish"
+  ],
+  "name": "Universidad de Cantabria OpenCourseWare",
+  "notes": "REGISTRY-ONLY §32 (probe 2026-11-26): the host closed the connection on every attempt from the sandbox — Moodle course search, the site root over https, and the root over http all returned RemoteDisconnected. The §31 survey verified complete 'Apuntes' PDFs under CC BY-NC-SA in another environment, but no route answers from here. Routes tried: course/search.php, https root, http root.",
+  "type": "lecture_platform",
+  "url": "https://ocw.unican.es",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ }
+]
