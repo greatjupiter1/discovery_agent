@@ -1906,9 +1906,393 @@ def search_european_platforms(query):
     return out[:EURO_TOTAL_CAP]
 
 
+# ---------------------------------------------------------------------------
+# §27 — World free digital libraries (Jupiter 2026-11-26: «کتابخانه های
+# اینترنتی رایگان دنیا رو آنهایی را که نداریم پیدا کن و اضافه کن»).
+#
+# Probe-first, same laws as §23–§25: a library is wired LIVE only when a
+# live probe proved BOTH that its search answers with real results AND
+# that a returned item's FULL TEXT is reachable (plain text / full HTML /
+# page text / PDF); no key or registration anywhere; every other probed
+# library sits in world_libraries_registry.json as registry-only with the
+# evidence recorded in its notes. Full probe table:
+# files/world-digital-libraries.md.
+#
+# LIVE-WIRED (6):
+#   * Project Gutenberg — search via the public Gutendex catalogue API
+#     (no key); candidates carry the book's text/plain URL on
+#     gutenberg.org (the identical files are served by the official PG
+#     mirror network; gutenberg.org itself showed a maintenance 503
+#     during the probe window).
+#   * Wikisource (English edition) — MediaWiki API list=search (no key);
+#     the wiki page itself IS the full text.
+#   * SciELO Books — the site's own /search/?q= route (no key); book
+#     pages link full-text PDFs (%PDF verified in the probe).
+#   * MEK (Hungarian Electronic Library) — the site's full-search POST
+#     form (no key); item pages link full-text PDFs (%PDF verified).
+#   * Faded Page (personal/volunteer, DP Canada) — its catalogue JSON
+#     endpoint csearc2.php via POST (no key); candidates carry the
+#     book's plain-text file URL (whole-book .txt verified).
+#   * The Anarchist Library (volunteer collective) — /search HTML
+#     (no key); the text pages are the full text in HTML.
+# PERSONAL libraries registry-only: lib.ru (Moshkov — every search
+# route 404/500), sacred-texts.com (403), Project Gutenberg Australia
+# + Project Runeberg + Global Grey (search is Google site search /
+# CSE), Marxists Internet Archive (search page 404, external search),
+# Aozora Bunko (no web search route), Standard Ebooks (catalogue
+# query ignored server-side; EPUB downloads only). Shadow libraries
+# (LibGen / Z-Library / Sci-Hub class) are NOT registered and NOT
+# wired: they follow the Anna's Archive precedent — metadata-only
+# status, never cited, never a full-text source.
+# REGISTRY-ONLY (31 total, evidence in the registry notes): Gallica/BnF,
+# HathiTrust, Qatar Digital Library, Cervantes Virtual and BDH (403 from
+# the sandbox), Perseus (Hopper 403 + Scaife JS shell), Canadiana (search
+# answers but items are IIIF image viewers, no text route verified),
+# Library of Congress (unreachable from the sandbox), OAPEN + DOAB (OAI
+# harvest-only / JS search), NDL Japan (429 + restricted full text),
+# NDLI (unreachable + login wall), Russian Presidential Library (429 +
+# reading-room restrictions), Shodhganga (anti-bot wall), ANNO + dLOC
+# (JS-shell search), Project Runeberg (search is a Google site:
+# redirect), DigitalNZ (API answers without a key but its records are
+# metadata-only pointers), and the key-walled: Europeana, DPLA, Trove,
+# CORE, Deutsche Digitale Bibliothek, Chinese Text Project.
+#
+# Candidates reuse _arab_candidate and the §25 fetch discipline
+# (single-shot, short timeout, fail-soft per source). Gutendex can be
+# slow, so this section's fetches get a bounded 20s timeout.
+
+_WLIB_TIMEOUT = 20
+
+
+def _wlib_fetch(url, data=None, timeout=_WLIB_TIMEOUT):
+    """§27 single-shot fetch, mirroring _arab_fetch (including the
+    IncompleteRead salvage) with this section's bounded timeout.
+    Returns (status, text); (None, "") on any transport error."""
+    import http.client
+    try:
+        _pace(urllib.parse.urlparse(url).netloc)
+        req = urllib.request.Request(url, data=data,
+                                     headers=_ARAB_HEADERS)
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            try:
+                raw = resp.read(1_500_000)
+            except http.client.IncompleteRead as e:
+                raw = e.partial or b""
+            return resp.status, raw.decode("utf-8", "replace")
+    except urllib.error.HTTPError as e:
+        try:
+            return e.code, e.read(300_000).decode("utf-8", "replace")
+        except Exception:
+            return e.code, ""
+    except Exception:
+        return None, ""
+
+
+def _wlib_json(url):
+    """Fetch + JSON-parse with ONE retry, like _arab_json. Returns the
+    parsed object or None (fail-soft)."""
+    for _attempt in range(2):
+        status, body = _wlib_fetch(url)
+        if status != 200 or not body:
+            continue
+        try:
+            return json.loads(body)
+        except ValueError:
+            continue
+    return None
+
+
+def _parse_gutendex(data):
+    """Gutendex (Project Gutenberg catalogue) JSON -> candidates.
+
+    A book counts only when it carries a plain-text format: the
+    candidate URL is the book's whole text file on gutenberg.org.
+    """
+    out = []
+    for book in (data or {}).get("results") or []:
+        if not isinstance(book, dict):
+            continue
+        title = str(book.get("title") or "").strip()
+        formats = book.get("formats") or {}
+        url = ""
+        for key in ("text/plain; charset=utf-8",
+                    "text/plain; charset=us-ascii", "text/plain"):
+            if formats.get(key):
+                url = formats[key]
+                break
+        if not url:
+            for key, value in formats.items():
+                if key.startswith("text/plain") and value:
+                    url = value
+                    break
+        if not title or not url:
+            continue
+        authors = [str(a.get("name") or "").strip()
+                   for a in book.get("authors") or []
+                   if isinstance(a, dict)]
+        subjects = [str(s).strip() for s in book.get("subjects") or []
+                    if str(s).strip()]
+        out.append(_arab_candidate(
+            title, url, "library:gutenberg",
+            authors=[a for a in authors if a][:6],
+            venue="Project Gutenberg (book)",
+            abstract="; ".join(subjects)[:1000]))
+        if len(out) >= LIB_PER_SOURCE_CAP:
+            break
+    return out
+
+
+def _lib_gutenberg(query):
+    data = _wlib_json("https://gutendex.com/books/?" +
+                      urllib.parse.urlencode({"search": query}))
+    return _parse_gutendex(data) if data else []
+
+
+def _parse_wikisource_search(data):
+    """MediaWiki list=search JSON -> candidates (the page is the text)."""
+    out = []
+    hits = ((data or {}).get("query") or {}).get("search") or []
+    for hit in hits:
+        if not isinstance(hit, dict):
+            continue
+        title = str(hit.get("title") or "").strip()
+        if not title:
+            continue
+        url = ("https://en.wikisource.org/wiki/" +
+               urllib.parse.quote(title.replace(" ", "_"), safe="/:_-,"))
+        out.append(_arab_candidate(
+            title, url, "library:wikisource",
+            venue="Wikisource (book)",
+            abstract=_arab_strip_tags(hit.get("snippet"))[:1000]))
+        if len(out) >= LIB_PER_SOURCE_CAP:
+            break
+    return out
+
+
+def _lib_wikisource(query):
+    url = ("https://en.wikisource.org/w/api.php?" +
+           urllib.parse.urlencode({
+               "action": "query", "list": "search", "srsearch": query,
+               "srnamespace": "0", "srlimit": str(LIB_PER_SOURCE_CAP),
+               "format": "json"}))
+    data = _wlib_json(url)
+    return _parse_wikisource_search(data) if data else []
+
+
+def _parse_scielo_books(page):
+    """SciELO Books /search/ HTML -> candidates (record divs)."""
+    out = []
+    blocks = re.split(r'<div id="[a-z0-9]+" class="record">', page or "")
+    for block in blocks[1:]:
+        m = re.search(r'<h3 class="title">\s*<a href="([^"]+)">(.*?)</a>',
+                      block, re.S)
+        if not m:
+            continue
+        title = _arab_strip_tags(m.group(2))
+        if not title:
+            continue
+        authors = []
+        am = re.search(r"(?:Organizador\(es\)|Autor\(es\)|Editor\(es\))"
+                       r":</span>(.*?)</div>", block, re.S)
+        if am:
+            authors = [a.strip() for a in
+                       _arab_strip_tags(am.group(1)).split(";") if a.strip()]
+        ym = re.search(r"(?:Ano|Year):</span>\s*(\d{4})", block)
+        sm = re.search(r"(?:Sinopse|Synopsis):</span>(.*?)</div>",
+                       block, re.S)
+        out.append(_arab_candidate(
+            title, html_lib.unescape(m.group(1)), "library:scielo-books",
+            authors=authors[:6],
+            year=int(ym.group(1)) if ym else None,
+            venue="SciELO Books (book)",
+            abstract=_arab_strip_tags(sm.group(1))[:1500] if sm else ""))
+        if len(out) >= LIB_PER_SOURCE_CAP:
+            break
+    return out
+
+
+def _lib_scielo_books(query):
+    url = ("https://books.scielo.org/search/?" +
+           urllib.parse.urlencode({"q": query, "lang": "pt"}))
+    status, page = _wlib_fetch(url)
+    if status != 200 or not page:
+        return []
+    return _parse_scielo_books(page)
+
+
+def _parse_mek_results(page):
+    """MEK full-search results HTML -> candidates (itemlink anchors)."""
+    out = []
+    for block in re.split(r'<a class="itemlink"', page or "")[1:]:
+        m = re.match(r'\s+href="([^"]+)"[^>]*>\s*'
+                     r'<div class="dcauthor">(.*?)</div>\s*'
+                     r'<div class="dctitle">(.*?)</div>', block, re.S)
+        if not m:
+            continue
+        title = _arab_strip_tags(m.group(3))
+        if not title:
+            continue
+        author = _arab_strip_tags(m.group(2))
+        ym = re.search(r'class="rkdate">\s*(\d{4})', block)
+        out.append(_arab_candidate(
+            title, html_lib.unescape(m.group(1)), "library:mek",
+            authors=[author] if author else [],
+            year=int(ym.group(1)) if ym else None,
+            venue="MEK — Hungarian Electronic Library (book)"))
+        if len(out) >= LIB_PER_SOURCE_CAP:
+            break
+    return out
+
+
+def _lib_mek(query):
+    data = urllib.parse.urlencode({
+        "dc_creator": "", "dc_title": query, "dc_subject": "",
+        "from": "1", "size": str(LIB_PER_SOURCE_CAP + 2),
+        "sort": ""}).encode("utf-8")
+    status, page = _wlib_fetch("https://mek.oszk.hu/hu/search/elfull/",
+                               data=data)
+    if status != 200 or not page:
+        return []
+    return _parse_mek_results(page)
+
+
+def _parse_fadedpage(data):
+    """Faded Page csearc2.php JSON -> candidates.
+
+    A row counts only with a pid: the candidate URL is the book's
+    whole-text file (books/<pid>/<pid>.txt, verified live)."""
+    out = []
+    for row in (data or {}).get("rows") or []:
+        if not isinstance(row, dict):
+            continue
+        title = str(row.get("title") or "").strip()
+        pid = str(row.get("pid") or "").strip()
+        if not title or not pid:
+            continue
+        authors = []
+        raw = row.get("authors")
+        if isinstance(raw, list):
+            names = [str(a.get("realname") or "").strip()
+                     for a in raw if isinstance(a, dict)
+                     and a.get("type") == "author"]
+            if not names:
+                names = [str(a.get("realname") or "").strip()
+                         for a in raw if isinstance(a, dict)]
+            authors = [n for n in names if n]
+        elif isinstance(raw, str) and raw.strip().startswith("["):
+            names = re.findall(
+                r"'type': 'author', 'realname': '([^']+)'", raw)
+            if not names:
+                names = re.findall(r"'realname': '([^']+)'", raw)
+            authors = [n.strip() for n in names if n.strip()]
+        year = None
+        try:
+            year = int(str(row.get("first_publication") or "")[:4])
+        except (TypeError, ValueError):
+            year = None
+        out.append(_arab_candidate(
+            title,
+            f"https://www.fadedpage.com/books/{pid}/{pid}.txt",
+            "library:fadedpage",
+            authors=authors[:6], year=year,
+            venue="Faded Page (book)",
+            abstract=str(row.get("description") or "")[:1500]))
+        if len(out) >= LIB_PER_SOURCE_CAP:
+            break
+    return out
+
+
+def _lib_fadedpage(query):
+    payload = urllib.parse.urlencode({"title": query}).encode("utf-8")
+    for _attempt in range(2):
+        status, body = _wlib_fetch(
+            "https://www.fadedpage.com/csearc2.php", data=payload)
+        if status != 200 or not body:
+            continue
+        try:
+            return _parse_fadedpage(json.loads(body))
+        except ValueError:
+            continue
+    return []
+
+
+def _parse_anarchist_results(page):
+    """The Anarchist Library /search HTML -> candidates."""
+    out = []
+    blocks = re.split(r'<div class="amw-listing-item">', page or "")
+    for block in blocks[1:]:
+        m = re.search(
+            r'<a href="(https://theanarchistlibrary\.org/library/[^"]+)"'
+            r' class="list-group-item[^"]*">(.*?)</a>', block, re.S)
+        if not m:
+            continue
+        inner = m.group(2)
+        tm = re.search(r"<strong>(.*?)</strong>", inner, re.S)
+        title = _arab_strip_tags(tm.group(1)) if tm else ""
+        if not title:
+            continue
+        author = ""
+        if tm:
+            am = re.match(r"\s*—\s*(.*?)\s*<span",
+                          inner[tm.end():], re.S)
+            if am:
+                author = _arab_strip_tags(am.group(1))
+        ym = re.search(r"(\d{4})</small>", inner)
+        out.append(_arab_candidate(
+            title, m.group(1), "library:anarchist-library",
+            authors=[author] if author else [],
+            year=int(ym.group(1)) if ym else None,
+            venue="The Anarchist Library"))
+        if len(out) >= LIB_PER_SOURCE_CAP:
+            break
+    return out
+
+
+def _lib_anarchist(query):
+    url = ("https://theanarchistlibrary.org/search?" +
+           urllib.parse.urlencode({"query": query}))
+    status, page = _wlib_fetch(url)
+    if status != 200 or not page:
+        return []
+    return _parse_anarchist_results(page)
+
+
+_WLIB_SEARCHERS = [
+    ("Project Gutenberg", _lib_gutenberg),
+    ("Wikisource", _lib_wikisource),
+    ("SciELO Books", _lib_scielo_books),
+    ("MEK", _lib_mek),
+    ("Faded Page", _lib_fadedpage),
+    ("The Anarchist Library", _lib_anarchist),
+]
+
+
+def search_digital_libraries(query):
+    """§27: the wired world digital libraries, one candidate pool.
+
+    Per-source caps of LIB_PER_SOURCE_CAP and a LIB_TOTAL_CAP ceiling,
+    exactly like §25; every source fails soft on its own.
+    """
+    print(f"[digital-libraries] query={query!r}")
+    out = []
+    for name, fn in _WLIB_SEARCHERS:
+        if len(out) >= LIB_TOTAL_CAP:
+            break
+        try:
+            cands = fn(query) or []
+        except Exception as exc:
+            print(f"  {name}: failed {exc!r}")
+            continue
+        print(f"  {name}: {len(cands)} candidates")
+        out.extend(cands[:LIB_PER_SOURCE_CAP])
+    out = out[:LIB_TOTAL_CAP]
+    print(f"[digital-libraries] total {len(out)} candidates")
+    return out
+
+
 # --------------------------------------------------------------------------
 # Source registries (§17) — credibility / whitelist SIGNAL only.
-# Six curated registries sit beside this script in the repo:
+# Nine curated registries sit beside this script in the repo:
 #   sources_registry.json        (registry 1, registry schema)
 #   sources_registry_500_more.json (500 DOAJ journals, compact schema:
 #                                   {id, name, url, type, fields,
@@ -1934,6 +2318,10 @@ def search_european_platforms(query):
 #                                   European-country journal
 #                                   platforms, registry schema —
 #                                   platform entries, not journals)
+#   world_libraries_registry.json (§27: the world's free digital
+#                                   libraries, institutional and
+#                                   personal, registry schema —
+#                                   library entries, not books)
 # Both schemas normalise into one record {name, url, domain, type,
 # fields, languages, registry}. A registry match is a ranking SIGNAL
 # ONLY: it never verifies a source (the DOI / Crossref / publisher
@@ -1949,7 +2337,8 @@ REGISTRY_FILES = ["sources_registry.json",
                   "arab_journals_registry.json",
                   "asian_journals_registry.json",
                   "arab_libraries_registry.json",
-                  "european_journals_registry.json"]
+                  "european_journals_registry.json",
+                  "world_libraries_registry.json"]
 _REGISTRY_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
@@ -2102,7 +2491,7 @@ SEARCHERS = [search_openalex, search_crossref, search_openaire,
              search_annas_archive, search_doaj, search_arxiv,
              search_semantic_scholar, search_arab_platforms,
              search_asian_platforms, search_arab_libraries,
-             search_european_platforms]
+             search_european_platforms, search_digital_libraries]
 
 # English-first retrieval (§18): wave 1 queries the abstract-rich
 # indexes ONLY — Crossref is held back because, queried with a
@@ -2116,7 +2505,7 @@ WAVE1_SEARCHERS = [search_openalex, search_europe_pmc, search_hal,
                    search_google_books, search_arxiv,
                    search_annas_archive, search_arab_platforms,
                    search_asian_platforms, search_arab_libraries,
-                   search_european_platforms]
+                   search_european_platforms, search_digital_libraries]
 CROSSREF_SEARCHERS = [search_crossref]
 
 
@@ -2158,6 +2547,7 @@ SEARCHER_LABEL = {
     "search_asian_platforms": "Asian platforms",
     "search_arab_libraries": "Arab libraries",
     "search_european_platforms": "European platforms",
+    "search_digital_libraries": "Digital libraries",
 }
 
 VERIFY_CACHE_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)),
