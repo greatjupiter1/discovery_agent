@@ -107,9 +107,9 @@ check("Saylor is registry-only with the probe contradiction recorded",
 
 # ------------------------------------------------------------- registry load
 # §23+§24+§25+§26+§27+§32+§34+§36+§37+§38+§39: fifteen registry files; totals updated count-only.
-EXPECTED_FILES_OK = 20
-EXPECTED_LOADED = 2184
-EXPECTED_UNIQUE = 2131
+EXPECTED_FILES_OK = 21
+EXPECTED_LOADED = 2188
+EXPECTED_UNIQUE = 2135
 for mod, label in ((ba, "build_article"), (pt, "propose_topics")):
     di, ui, st = mod.load_source_registry()
     check(f"{label}: all registry files load (files_ok)",
