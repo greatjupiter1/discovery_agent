@@ -60,6 +60,7 @@ Secrets (names only, set in the repo's Actions secrets):
   retrieval automatically when its secret exists)
 """
 
+import base64
 import email.utils
 import hashlib
 import html as html_lib
@@ -4521,8 +4522,460 @@ def search_najaf(query):
 
 
 # --------------------------------------------------------------------------
+# §47 — IMAGE SOURCES (منابع تصویری, the witness class; Jupiter
+# 2026-11-26, the IMAGE-SOURCE AMENDMENT, confirmed with «بله
+# اصلاح کن»): a source need NOT be machine-readable text. A page
+# IMAGE of the actual content (manuscript / rare-book scans —
+# the WDL/LOC and QDL class) IS acceptable as a witness-class
+# source, because for a manuscript the image is the full content
+# itself, not an abstract. The conditions are strict:
+#   * a passage counts ONLY when genuinely TRANSCRIBED from the
+#     actual fetched page image (vision reading by the keyed
+#     Gemini brain) — never from metadata, catalogue records,
+#     curatorial descriptions or summaries; those NEVER count;
+#   * every image-derived passage is cited by collection +
+#     folio/page and tagged image-derived (candidate fields
+#     image_derived / image_citation / image_pages) in the
+#     funnel AND the §20.7 report;
+#   * the deterministic gate, screening, judges, §33 review and
+#     the fabrication law are UNCHANGED — a transcribed passage
+#     is a real passage, held to the same bar as any other.
+#
+# One shared pipeline serves both routes: fetch image bytes ->
+# verify the image magic (an HTML challenge page is NOT an
+# image) -> transcribe -> passage with citation + tag. Caps are
+# tight (IMG47_CAP candidates per query per source, at most
+# IMG47_PAGES_PER_CANDIDATE transcribed pages per candidate,
+# bounded fetch attempts), every step fail-soft, and no host is
+# hammered: fetches are single-attempt with a browser UA.
+#
+# QDL (Qatar Digital Library) — British Library Or 1997, the
+# complete القانون المسعودي (11 treatises; copied Baghdad,
+# Rabīʿ I 570 AH / 1174 CE; ff. iii+262+iii; 544 IIIF images).
+# The witness note (qanun-manuscript-witnesses.md) registers
+# treatise V (geodesy), ff. 91v–109r, above all. PROBE
+# (2026-11-26, from the build sandbox): the IIIF presentation
+# manifest (www.qdl.qa/en/iiif/81055/vdc_100022880536.0x000001/
+# manifest) is real — fetched via the Wayback Machine's archived
+# copy (the live www.qdl.qa and iiif.qdl.qa hosts answer this
+# egress with a Cloudflare "Just a moment..." challenge on
+# every route) — 544 canvases whose OWN labels carry the folio
+# marks; the folio<->image-file map is exactly linear across
+# six anchors spanning the codex (f. 5v = file 23, f. 84v =
+# 181, f. 91v = 195, f. 100r = 212, f. 109r = 230, f. 262r =
+# 536): file = 2n + 12 (recto), 2n + 13 (verso). Treatise V =
+# files 195–230. Page images were verified end to end: file
+# 0196 (f. 92r, treatise V) fetched as a real JPEG (303,950 B,
+# JPEG magic) through the Wayback snapshot of the very same
+# IIIF response (350 of the 544 files hold at least one
+# archived image response, treatise V among them at
+# transcription grade !1200,1200) — so the fetcher tries the
+# live IIIF service first and falls back to the archived copy
+# of the same response; both routes deliver THE page image,
+# nothing else. The searcher serves the registered witness for
+# queries naming the work or its author, sampling the
+# treatise-V range. ENGINE SMOKE (2026-11-26, the shipped
+# code, keyed Gemini vision): search_qdl_images on the
+# Earth-radius topic returned the witness candidate with
+# ff. 99r and 102r transcribed — treatise V's own chapter on
+# the longitudes and latitudes of localities.
+#
+# LOC / WDL (Library of Congress) — the §27 registry held LOC
+# registry-only ("unreachable from the sandbox egress": the
+# API timed out under the engine's research UA and short
+# timeouts). RE-PROBED 2026-11-26: with a browser UA and an
+# honest timeout the no-key JSON API answers (search "biruni"
+# -> 200, real results, WDL manuscript items first), item JSON
+# carries iiif_manifest_url + per-page IIIF file variants on
+# tile.loc.gov, and a page image fetched + verified (JPEG,
+# 174,320 B) was TRANSCRIBED by the keyed Gemini vision brain
+# into the page's real Arabic text (a Tahqiq ma li'l-Hind page
+# on the five elements, Homer and Porphyry — content no
+# catalogue record contains). LIVE-WIRED as an image source;
+# the §27 verdict is superseded by this probe and the registry
+# notes say so. ENGINE SMOKE (2026-11-26, the shipped code):
+# search_loc_images("biruni") returned 4 candidates with real
+# transcribed passages — the Tahdid (item 2021666157, digital
+# pp. 19 + 55), the Tahqiq (2021666170, p. 577), the Treatise
+# on Drawing Chords in a Circle (2021666191, pp. 113 + 188),
+# and a Latin medicine commentary (2021666861, p. 134).
+# --------------------------------------------------------------------------
+
+IMG47_CAP = 8
+IMG47_PAGES_PER_CANDIDATE = 3
+IMG47_MAX_FETCHES_PER_CANDIDATE = 8
+IMG47_IMAGE_MAX_BYTES = 8_000_000
+IMG47_MIN_TRANSCRIPTION_CHARS = 200
+_IMG47_BROWSER_UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                     "AppleWebKit/537.36 (KHTML, like Gecko) "
+                     "Chrome/124.0 Safari/537.36")
+_IMG47_TRANSCRIBE_PROMPT = (
+    "Transcribe ALL the text visible on this page image, exactly "
+    "as written, line by line, in the original language and "
+    "script. Output ONLY the transcription: no translation, no "
+    "summary, no commentary, no description of the image. Mark "
+    "any illegible word as [?].")
+_IMG47_REFUSALS = ("i cannot", "i can't", "i am unable",
+                   "unable to transcribe", "cannot transcribe",
+                   "no readable text", "لا أستطيع", "لا يمكنني")
+
+
+def _img47_image_mime(body):
+    """The image MIME type from magic bytes, or None — an HTML
+    challenge/error page is NOT an image and never passes."""
+    if not body:
+        return None
+    if body[:3] == b"\xff\xd8\xff":
+        return "image/jpeg"
+    if body[:4] == b"\x89PNG":
+        return "image/png"
+    if body[:4] in (b"II*\x00", b"MM\x00*"):
+        return "image/tiff"
+    if body[:4] == b"GIF8":
+        return "image/gif"
+    if body[:4] == b"RIFF" and body[8:12] == b"WEBP":
+        return "image/webp"
+    return None
+
+
+def _img47_fetch_bytes(url, timeout=45, cap=IMG47_IMAGE_MAX_BYTES):
+    """One single-attempt fetch (bytes) with a browser UA, or
+    None on any failure. §47 fetches never use the engine's
+    retrying research client: the image hosts punish it, and a
+    witness source must fail soft, not hammer."""
+    if not url:
+        return None
+    try:
+        req = urllib.request.Request(
+            url, headers={"User-Agent": _IMG47_BROWSER_UA,
+                          "Accept": "*/*"})
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            body = resp.read(cap + 1)
+        return body if len(body) <= cap else None
+    except Exception:
+        return None
+
+
+def _img47_wayback_url(url):
+    """The closest Wayback Machine snapshot (raw id_ form) of a
+    URL, or None — one availability-API call, fail-soft."""
+    try:
+        api = ("https://archive.org/wayback/available?url="
+               + urllib.parse.quote(url, safe=""))
+        body = _img47_fetch_bytes(api, timeout=30, cap=100_000)
+        if not body:
+            return None
+        data = json.loads(body.decode("utf-8", "replace"))
+        snap = ((data.get("archived_snapshots") or {})
+                .get("closest") or {})
+        if not snap.get("available"):
+            return None
+        raw = str(snap.get("url") or "")
+        m = re.match(r"(https?://web\.archive\.org/web/\d+)(/.*)$",
+                     raw)
+        if m:
+            return m.group(1) + "id_" + m.group(2)
+        return raw or None
+    except Exception:
+        return None
+
+
+def _img47_fetch_image(url):
+    """Fetch one page image: (bytes, mime) or (None, None).
+    Route 1: the live IIIF service. Route 2, when the live host
+    is walled from this egress: the Wayback Machine's archived
+    copy of the very same IIIF response. Either way the bytes
+    must carry a real image magic before anything is read."""
+    body = _img47_fetch_bytes(url, timeout=45)
+    mime = _img47_image_mime(body)
+    if mime:
+        return body, mime
+    archived = _img47_wayback_url(url)
+    if archived:
+        body = _img47_fetch_bytes(archived, timeout=60)
+        mime = _img47_image_mime(body)
+        if mime:
+            return body, mime
+    return None, None
+
+
+def _gemini_vision(image_bytes, mime):
+    """One vision call to the keyed Gemini brain — the SAME
+    GEMINI_API_KEY / model the text chain uses (no new secret):
+    the page image rides as an inline_data part beside the
+    transcription instruction. Raw reply text, or "" on ANY
+    failure (no key, HTTP error, odd shape) — fail-soft."""
+    api_key = (os.environ.get("GEMINI_API_KEY") or "").strip()
+    if not api_key or not image_bytes:
+        return ""
+    model = _brain_model("gemini")
+    url = (f"https://generativelanguage.googleapis.com/v1beta/"
+           f"models/{model}:generateContent")
+    body = json.dumps({
+        "contents": [{"parts": [
+            {"text": _IMG47_TRANSCRIBE_PROMPT},
+            {"inline_data": {
+                "mime_type": mime or "image/jpeg",
+                "data": base64.b64encode(image_bytes)
+                .decode("ascii")}}]}],
+        "generationConfig": {"temperature": 0.1,
+                             "maxOutputTokens": 6000},
+    }).encode("utf-8")
+    try:
+        req = urllib.request.Request(
+            url, data=body, method="POST",
+            headers={"Content-Type": "application/json",
+                     "x-goog-api-key": api_key})
+        with urllib.request.urlopen(req, timeout=90) as resp:
+            data = json.loads(resp.read().decode("utf-8",
+                                                 "replace"))
+        parts = data["candidates"][0]["content"]["parts"]
+        return "".join(p.get("text", "") for p in parts).strip()
+    except Exception:
+        return ""
+
+
+def _img47_transcription_ok(text):
+    """The §47 passage bar for one transcription: long enough to
+    be a page's real text, letter-bearing (not a number table or
+    a hallucinated symbol stream), and not a refusal."""
+    t = (text or "").strip()
+    if len(t) < IMG47_MIN_TRANSCRIPTION_CHARS:
+        return False
+    if any(r in t.lower()[:300] for r in _IMG47_REFUSALS):
+        return False
+    tokens = re.findall(r"[\w\u0600-\u06FF]+", t)
+    if len(tokens) < 30:
+        return False
+    letters = [w for w in tokens
+               if re.search(r"[A-Za-z\u0600-\u06FF]", w)]
+    return len(letters) >= 20 and len(letters) >= 0.4 * len(tokens)
+
+
+def _img47_transcribe(image_bytes, mime):
+    """A page image's genuine transcription, or "" — the ONLY
+    way an image becomes a passage (§47 law)."""
+    text = _gemini_vision(image_bytes, mime)
+    return text if _img47_transcription_ok(text) else ""
+
+
+def _img47_candidate(title, url, index, route, pages, query,
+                     authors=None, year=None, venue="",
+                     language=None, primary=False):
+    """One image-source candidate from REAL transcribed pages:
+    pages = [(citation, transcription), ...], never empty (the
+    caller emits nothing when no page transcribed). The excerpt
+    carries each page under its folio/page citation header, so
+    the writer and the §33 reviewers see exactly which witness
+    page every passage stands on."""
+    blocks, hits = [], 0
+    terms = _shelf_query_terms(query)
+    for citation, text in pages:
+        blocks.append(f"[{citation}]\n{text}")
+        low = text.lower()
+        hits += sum(low.count(t.lower()) for t in terms
+                    if len(t) >= 3)
+    cand = _arab_candidate(title, url, index, authors=authors,
+                           year=year, venue=venue)
+    cand["fulltext"] = True
+    cand["fulltext_excerpt"] = "\n\n".join(blocks)[
+        :FULLTEXT_EXCERPT_CHARS]
+    cand["fulltext_route"] = route
+    cand["passages"] = True
+    cand["passage_hits"] = max(hits, len(pages))
+    cand["image_derived"] = True
+    cand["image_pages"] = [c for c, _ in pages]
+    cand["image_citation"] = "; ".join(c for c, _ in pages)
+    if language:
+        cand["language"] = language
+    if primary:
+        cand["source_type"] = "primary"
+        cand["primary_relation"] = "author"
+    return cand
+
+
+# --- QDL: British Library Or 1997, the Qanun witness (§47) ---
+_QDL_ITEM_ID = "vdc_100022880536.0x000001"
+_QDL_IMAGE_BASE = ("https://iiif.qdl.qa/iiif/images/81055/"
+                   + _QDL_ITEM_ID)
+_QDL_ITEM_URL = ("https://www.qdl.qa/en/archive/81055/"
+                 + _QDL_ITEM_ID)
+# Treatise V (geodesy), ff. 91v–109r = image files 195–230 —
+# the witness note's registered range; the folio<->file map is
+# the manifest's own (see the §47 header).
+_QDL_TREATISE_V_FILES = (195, 230)
+_QDL_GATE_TERMS = ("القانون المسعودي", "قانون مسعودي", "qanun",
+                   "masudi", "مسعودی", "biruni", "بيروني",
+                   "البيروني", "بیرونی", "ابوریحان", "or 1997")
+
+
+def _qdl_folio_label(file_no):
+    """Folio label of an Or 1997 image file, from the manifest's
+    linear map: file = 2n + 12 (recto), 2n + 13 (verso)."""
+    n, odd = divmod(int(file_no) - 12, 2)
+    return f"{n}{'v' if odd else 'r'}"
+
+
+def search_qdl_images(query):
+    """§47: the Qanun manuscript witness (British Library
+    Or 1997, complete, Baghdad 570 AH) via Qatar Digital
+    Library IIIF — an IMAGE source. For a query naming the work
+    or its author, folios of the registered treatise-V range
+    are fetched as page images and transcribed; only real
+    transcriptions become passages, each cited by folio.
+    Fail-soft, capped (one manuscript = at most one candidate)."""
+    q = (query or "").strip()
+    if not q:
+        return []
+    low = q.lower()
+    if not any(t in low for t in _QDL_GATE_TERMS):
+        return []
+    first, last = _QDL_TREATISE_V_FILES
+    pages, attempts = [], 0
+    for fno in range(first, last + 1, 3):
+        if len(pages) >= IMG47_PAGES_PER_CANDIDATE \
+                or attempts >= IMG47_MAX_FETCHES_PER_CANDIDATE:
+            break
+        attempts += 1
+        url = (f"{_QDL_IMAGE_BASE}/Or%201997_{fno:04d}.jp2"
+               "/full/!1200,1200/0/default.jpg")
+        body, mime = _img47_fetch_image(url)
+        if not body:
+            continue
+        text = _img47_transcribe(body, mime)
+        if text:
+            pages.append(
+                (f"British Library, Or 1997, "
+                 f"f. {_qdl_folio_label(fno)}", text))
+    if not pages:
+        return []
+    return [_img47_candidate(
+        "القانون المسعودي — مخطوطة المكتبة البريطانية Or 1997 "
+        "(نسخة بغداد، ٥٧٠ هـ)",
+        _QDL_ITEM_URL, "qdl:iiif-image", "qdl:iiif-image",
+        pages, q,
+        authors=["أبو ريحان البيروني"], year=1174,
+        venue=("Qatar Digital Library — British Library: "
+               "Oriental Manuscripts, Or 1997"),
+        language="ar", primary=True)]
+
+
+# --- LOC / WDL: Library of Congress image items (§47) --------
+_LOC_SEARCH_URL = "https://www.loc.gov/search/"
+_LOC_ITEM_ATTEMPTS = 5
+_LOC_PRIMARY_ALIASES = ("bīrūnī", "biruni", "بيروني", "بیرونی")
+
+
+def _loc_json(url):
+    """One LOC JSON-API document (browser UA, honest timeout),
+    or None — fail-soft."""
+    body = _img47_fetch_bytes(url, timeout=60,
+                              cap=4_000_000)
+    if not body:
+        return None
+    try:
+        data = json.loads(body.decode("utf-8", "replace"))
+    except ValueError:
+        return None
+    return data if isinstance(data, dict) else None
+
+
+def _loc_page_variant(variants):
+    """A page's transcription-grade JPEG variant: the widest at
+    most ~1600 px, else the narrowest available; None when the
+    page carries no JPEG variant."""
+    jpegs = [v for v in (variants or []) if isinstance(v, dict)
+             and (v.get("mimetype") or "") == "image/jpeg"
+             and v.get("url")]
+    if not jpegs:
+        return None
+    jpegs.sort(key=lambda v: v.get("width") or 0)
+    within = [v for v in jpegs if (v.get("width") or 0) <= 1600]
+    return within[-1] if within else jpegs[0]
+
+
+def search_loc_images(query):
+    """§47: Library of Congress digital collections (including
+    the World Digital Library items now served from loc.gov) —
+    an IMAGE source. The no-key JSON API finds digitised items;
+    their IIIF page images (tile.loc.gov) are fetched and
+    transcribed; only real transcriptions become passages, each
+    cited by item + digital page. Items the API marks
+    access-restricted are never touched. Fail-soft, capped at
+    IMG47_CAP."""
+    q = (query or "").strip()
+    if not q:
+        return []
+    data = _loc_json(_LOC_SEARCH_URL + "?" + urllib.parse
+                     .urlencode({"q": q, "fo": "json", "c": 20}))
+    if not data:
+        return []
+    out, examined = [], 0
+    for r in data.get("results") or []:
+        if len(out) >= IMG47_CAP or examined >= _LOC_ITEM_ATTEMPTS:
+            break
+        if not isinstance(r, dict):
+            continue
+        item_url = (r.get("url") or r.get("id") or "").strip()
+        if "/item/" not in item_url:
+            continue
+        examined += 1
+        idata = _loc_json(item_url.rstrip("/") + "/?fo=json")
+        if not idata:
+            continue
+        item = idata.get("item") or {}
+        if item.get("access_restricted"):
+            continue
+        files = []
+        for res in idata.get("resources") or []:
+            if isinstance(res, dict):
+                files.extend(res.get("files") or [])
+        if len(files) < 3:
+            continue
+        item_id = (item_url.rstrip("/").rsplit("/", 1)[-1])
+        idxs = sorted({max(0, len(files) // 6), len(files) // 2,
+                       max(0, 5 * len(files) // 6)})
+        pages = []
+        for ix in idxs[:IMG47_PAGES_PER_CANDIDATE]:
+            var = _loc_page_variant(files[ix])
+            if not var:
+                continue
+            body, mime = _img47_fetch_image(var["url"])
+            if not body:
+                continue
+            text = _img47_transcribe(body, mime)
+            if text:
+                pages.append(
+                    (f"Library of Congress, item {item_id}, "
+                     f"digital page {ix + 1} of {len(files)}",
+                     text))
+        if not pages:
+            continue
+        names = " ".join(str(a) for a in
+                         (item.get("contributor_names") or []))
+        primary = any(a in names.lower()
+                      for a in _LOC_PRIMARY_ALIASES)
+        authors = [re.sub(r"\s+author\.?$", "", str(a),
+                          flags=re.I).strip()
+                   for a in (item.get("contributor_names") or [])]
+        langs = [str(x).lower()
+                 for x in (item.get("language") or [])]
+        out.append(_img47_candidate(
+            (item.get("title") or r.get("title") or "").strip(),
+            item_url, "loc:iiif-image", "loc:iiif-image",
+            pages, q,
+            authors=[a for a in authors if a][:3],
+            year=_arab_year(item.get("date")),
+            venue=("Library of Congress — Digital Collections "
+                   "(World Digital Library)"),
+            language="ar" if "arabic" in langs else None,
+            primary=primary))
+    return out
+
+
+# --------------------------------------------------------------------------
 # Source registries (§17) — credibility / whitelist SIGNAL only.
-# Nineteen curated registries sit beside this script in the repo:
+# Twenty curated registries sit beside this script in the repo:
 #   sources_registry.json        (registry 1, registry schema)
 #   sources_registry_500_more.json (500 DOAJ journals, compact schema:
 #                                   {id, name, url, type, fields,
@@ -4633,6 +5086,16 @@ def search_najaf(query):
 #                                   schema — one platform entry
 #                                   + four Biruni book entries
 #                                   from its own sitemap)
+#   image_sources_registry.json  (§47: the IMAGE sources — the
+#                                   witness class of the
+#                                   IMAGE-SOURCE AMENDMENT:
+#                                   QDL/British Library Or 1997
+#                                   and the Library of Congress
+#                                   / WDL IIIF image routes,
+#                                   registry schema — platform +
+#                                   witness entries; passages
+#                                   exist only as transcriptions
+#                                   of fetched page images)
 # Both schemas normalise into one record {name, url, domain, type,
 # fields, languages, registry}. A registry match is a ranking SIGNAL
 # ONLY: it never verifies a source (the DOI / Crossref / publisher
@@ -4659,7 +5122,8 @@ REGISTRY_FILES = ["sources_registry.json",
                   "core_registry.json",
                   "ganjeh_registry.json",
                   "ablibrary_registry.json",
-                  "najaf_registry.json"]
+                  "najaf_registry.json",
+                  "image_sources_registry.json"]
 _REGISTRY_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
@@ -4985,7 +5449,8 @@ SEARCHERS = [search_shelf, search_openalex, search_crossref, search_openaire,
              search_european_platforms, search_digital_libraries,
              search_university_lectures, search_ensani, search_jihs,
              search_iran_math, search_tajik_journals, search_core,
-             search_ganjeh, search_ablibrary, search_najaf]
+             search_ganjeh, search_ablibrary, search_najaf,
+             search_qdl_images, search_loc_images]
 
 # English-first retrieval (§18): wave 1 queries the abstract-rich
 # indexes ONLY — Crossref is held back because, queried with a
@@ -5002,7 +5467,8 @@ WAVE1_SEARCHERS = [search_shelf, search_openalex, search_europe_pmc, search_hal,
                    search_european_platforms, search_digital_libraries,
                    search_university_lectures, search_ensani, search_jihs,
                    search_iran_math, search_tajik_journals, search_core,
-                   search_ganjeh, search_ablibrary, search_najaf]
+                   search_ganjeh, search_ablibrary, search_najaf,
+                   search_qdl_images, search_loc_images]
 CROSSREF_SEARCHERS = [search_crossref]
 
 
@@ -5016,7 +5482,7 @@ CROSSREF_SEARCHERS = [search_crossref]
 #       WAVE1_SEARCHERS, the Crossref top-up, wave 2 and the
 #       §19 primary lane all run as before.
 #   "new" — the candidate search runs ONLY the searchers added
-#       in the newest build wave (§§32–46), i.e. the shelf plus
+#       in the newest build wave (§§32–47), i.e. the shelf plus
 #       the new items:
 #         search_shelf               (§41 — the collected shelf;
 #                                     carries the primary books
@@ -5032,6 +5498,11 @@ CROSSREF_SEARCHERS = [search_crossref]
 #         search_ganjeh              (§46)
 #         search_ablibrary           (§46)
 #         search_najaf               (§46)
+#         search_qdl_images          (§47 — image sources: the
+#                                     QDL Or 1997 witness, passages
+#                                     transcribed from page images)
+#         search_loc_images          (§47 — image sources: LOC /
+#                                     WDL IIIF items, likewise)
 #       (§39 utihs and §40 are registry-only — they have no
 #       searcher to include; §33 is the review layer, §44 the
 #       parallel writer and §45 the review robustness pass —
@@ -5055,7 +5526,8 @@ CROSSREF_SEARCHERS = [search_crossref]
 NEW_ONLY_SEARCHERS = [search_shelf, search_university_lectures,
                       search_ensani, search_jihs, search_iran_math,
                       search_tajik_journals, search_core,
-                      search_ganjeh, search_ablibrary, search_najaf]
+                      search_ganjeh, search_ablibrary, search_najaf,
+                      search_qdl_images, search_loc_images]
 _NEW_ONLY_NAMES = {s.__name__ for s in NEW_ONLY_SEARCHERS}
 
 
@@ -5071,7 +5543,7 @@ def search_scope():
 def scoped_searchers(order):
     """The searcher order for one retrieval wave under the
     active scope (§43): unchanged in "full" mode; in "new" mode
-    only the §§32–46 searchers survive, in the caller's order."""
+    only the §§32–47 searchers survive, in the caller's order."""
     order = list(order)
     if search_scope() != "new":
         return order
@@ -5084,10 +5556,11 @@ def _scope_lines():
     if search_scope() != "new":
         return []
     return ["",
-            "دامنهٔ جستجو: فقط منابع تازه‌افزودهٔ §§32–46 "
+            "دامنهٔ جستجو: فقط منابع تازه‌افزودهٔ §§32–47 "
             "(قفسهٔ منابع گردآوری‌شده، CORE، سخنرانی‌های دانشگاهی، "
             "ensani، jihs، مجلات ریاضی ایران، مجلات تاجیکستان، "
-            "گنجه، کتابخانهٔ اهل‌البیت، صحراء النجف)"]
+            "گنجه، کتابخانهٔ اهل‌البیت، صحراء النجف، منابع تصویری "
+            "نسخه‌های خطی QDL و کتابخانهٔ کنگره)"]
 
 
 def search_scope_note(language):
@@ -5095,17 +5568,19 @@ def search_scope_note(language):
     naming the restricted search scope of this production."""
     if (language or "").strip().lower().startswith("fa"):
         return ("> یادداشت: دامنهٔ جستجو در این تولید فقط منابع "
-                "تازه‌افزودهٔ §§32–46 بوده است (قفسهٔ منابع "
+                "تازه‌افزودهٔ §§32–47 بوده است (قفسهٔ منابع "
                 "گردآوری‌شده، CORE، سخنرانی‌های دانشگاهی، ensani، "
                 "jihs، مجلات ریاضی ایران و مجلات تاجیکستان، گنجه، "
-                "کتابخانهٔ اهل‌البیت و صحراء النجف)؛ همهٔ "
+                "کتابخانهٔ اهل‌البیت، صحراء النجف و منابع تصویری "
+                "نسخه‌های خطی QDL و کتابخانهٔ کنگره)؛ همهٔ "
                 "دروازه‌های کیفیت بدون تغییر اعمال شده‌اند.")
     return ("> Note: this production searched ONLY the newly "
-            "added sources (§§32–46: the collected-material "
+            "added sources (§§32–47: the collected-material "
             "shelf, CORE, university lectures, ensani, jihs, "
             "Iranian mathematics journals, Tajik journals, "
-            "Ganjeh, Ablibrary and the Najaf Desert Library); "
-            "all quality gates applied unchanged.")
+            "Ganjeh, Ablibrary, the Najaf Desert Library and "
+            "the QDL / Library of Congress manuscript image "
+            "sources); all quality gates applied unchanged.")
 
 
 def normalise_title(t):
@@ -5151,6 +5626,8 @@ SEARCHER_LABEL = {
     "search_shelf": "Shelf (§41)",
     "search_ganjeh": "Ganjeh (§46)", "search_ablibrary": "Ablibrary (§46)",
     "search_najaf": "Najaf Desert Library (§46)",
+    "search_qdl_images": "QDL manuscript images (§47)",
+    "search_loc_images": "LOC/WDL images (§47)",
 }
 
 VERIFY_CACHE_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)),
@@ -8747,6 +9224,8 @@ def screen_sources(field, topic, sources, api_key, model):
         1 for s in counted if s.get("source_type") == "primary")
     stats["fulltext_counted"] = sum(1 for s in counted
                                     if s.get("fulltext"))
+    stats["image_derived_counted"] = sum(
+        1 for s in counted if s.get("image_derived"))
     stats["counted"] = len(counted)
     print(f"Relevance + content screen: {len(sources)} verified -> "
           f"{len(kept)} relevant -> {len(counted)} counted "
@@ -8946,6 +9425,10 @@ def build_funnel_text(topic, funnel, success, stage=None,
     if funnel.get("drop_disagreement"):
         lines.append("• اختلاف دو داور ارتباط: "
                      f"{funnel['drop_disagreement']}")
+    if funnel.get("image_derived_counted"):
+        lines.append("منابع تصویریِ شمرده‌شده (قطعات رونویسی‌شده "
+                     "از تصویر صفحهٔ نسخهٔ خطی): "
+                     f"{funnel['image_derived_counted']}")
     lines += _scope_lines()
     lines += _adaptation_lines(adaptation)
     lines += _review_lines(review)
@@ -9045,6 +9528,11 @@ def build_detailed_source_report(topic, counted,
             if s.get("passage_hits"):
                 lines.append(f"   • یافته‌های کلیدواژه در متن: "
                              f"{s['passage_hits']}")
+            if s.get("image_derived"):
+                lines.append("   • منبع تصویری (شاهد): قطعات این "
+                             "منبع از تصویر صفحه‌های نسخهٔ خطی "
+                             "رونویسی شده‌اند — "
+                             + (s.get("image_citation") or ""))
             if s.get("source_type") == "primary":
                 via = (s.get("catalogue_via") or "").strip()
                 if via:
@@ -11098,7 +11586,8 @@ CHECKPOINT_SOURCE_KEYS = (
     "source_type", "primary_relation", "index", "registry_match",
     "fulltext", "fulltext_route", "fulltext_excerpt", "passages",
     "passage_hits", "mapped_title", "catalogue_via",
-    "catalogue_title", "catalogue_id")
+    "catalogue_title", "catalogue_id", "image_derived",
+    "image_citation", "image_pages")
 # Writer-prompt caps (source_cards_text): the checkpoint never
 # stores more of a text than the writer itself would be shown.
 CHECKPOINT_ABSTRACT_CHARS = 1500
@@ -11284,7 +11773,7 @@ def _merge_funnel(funnel, sstats):
     for k in ("verified", "with_content", "relevant", "counted",
               "drop_irrelevant", "drop_tradition", "drop_disagreement",
               "drop_no_content", "registry_matched", "primary_counted",
-              "fulltext_counted"):
+              "fulltext_counted", "image_derived_counted"):
         funnel[k] = funnel.get(k, 0) + sstats.get(k, 0)
 
 
