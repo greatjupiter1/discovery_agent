@@ -54,6 +54,8 @@ Secrets (names only, set in the repo's Actions secrets):
   CLOUDFLARE_API_TOKEN, DASHSCOPE_API_KEY, MODELSCOPE_API_KEY,
   SILICONFLOW_API_KEY (optional §22 free-tier brains; each joins the
   chain automatically when its secret exists)
+  CORE_API_KEY (optional §42; the CORE aggregator searcher joins
+  retrieval automatically when its secret exists)
 """
 
 import email.utils
@@ -3687,8 +3689,348 @@ def search_tajik_journals(query):
 
 
 # --------------------------------------------------------------------------
+# CORE — Connecting Repositories (§42) — the Open University's
+# global open-access aggregator (core.ac.uk), registered in
+# core_registry.json (§17 wiring: credibility/priority signal
+# only, never verification). CORE was already present in the
+# pool as a plain index entry (sources_registry_2), a thesis
+# archive (thesis_registry) and a §27 digital library —
+# registry-only there under the no-key law, after the §27 probe
+# of the unkeyed API answered HTTP 429. The §40 survey classed
+# it A (wireable after a free email-only registration) and
+# Jupiter registered himself on 2026-11-26; the key was emailed
+# to him. This section wires the API live. API shape verified
+# on 2026-11-26 against the OFFICIAL OpenAPI specification
+# (https://api.core.ac.uk/swagger/v3.json — the document behind
+# the Swagger UI at https://api.core.ac.uk/docs/v3):
+#   SEARCH — POST /v3/search/{entityType} with a JSON
+#       SearchParameters body {q, limit, offset} (the documented
+#       twin GET /v3/search/{entityType}/ takes the same
+#       parameters in the query string) answers a SearchResponse
+#       {totalHits, limit, offset, results: [Work]}. A Work
+#       carries id, doi, title, authors, abstract,
+#       yearPublished, language, journals, publisher, links —
+#       and the full-text fields the spec names verbatim:
+#       downloadUrl ("The URL from where you can download the
+#       full text of the work"), fullText ("plain text
+#       extraction of the full text document") and
+#       sourceFulltextUrls ("A list of all the URLs where this
+#       document can be downloaded from"). The spec prints
+#       snake_case names; the live API answers camelCase — the
+#       parser accepts both spellings of every field.
+#   DISCOVERY — the operation Jupiter pointed at (docs tag
+#       "Discovery", operation post_discovery): POST
+#       /v3/discover with a DiscoveryParameters body
+#       {doi, title, year, eprints_id, plugin_id, referrer}
+#       answers a DiscoveryResponse {fullTextLink, source} —
+#       the free full-text link for ONE known paper. The tag
+#       and both schemas are verified in the OpenAPI document;
+#       the path string is the one recorded by the official
+#       documentation's write-ups of the Discovery API. It is
+#       used here ONLY to resolve a full-text link for a search
+#       hit that carries a DOI but no download URL, fail-soft,
+#       under a small per-call budget.
+#   DOWNLOAD — GET /v3/works/{identifier}/download is the
+#       spec's own file route; a hit's own downloadUrl is
+#       preferred (it is the provider/CORE PDF directly).
+#   AUTH — the spec's security schemes offer the key as an
+#       api_key query parameter or as the header
+#       "Authorization: Bearer [API_KEY]"; the header is used.
+#       The key is read from the CORE_API_KEY environment
+#       variable (a repo Actions secret, pasted ONCE by Jupiter
+#       — the cross-service paste law). With NO key configured
+#       the searcher returns nothing and makes NO request: the
+#       unkeyed API is rate-limited to uselessness (§27 probe:
+#       HTTP 429) and withholds fullText from public users, so
+#       an unkeyed call could not satisfy the full-text law
+#       anyway. Exactly the optional-brain-key discipline.
+#   FULL TEXT — a hit is emitted ONLY when it carries a
+#       downloadUrl or a sourceFulltextUrls entry (or the
+#       Discovery call resolves one for its DOI): candidates
+#       carry oa_pdf_url = that URL and attach_fulltexts_v2
+#       fetches it via its index-fulltext route, exactly like
+#       §34/§36. Metadata-only hits are skipped, per the
+#       full-text-only law. The query is first biased with the
+#       documented _exists_:fullText clause (CORE API v3
+#       announcement) so the top of the result list is
+#       full-text-bearing; if that returns nothing at all, one
+#       plain-query retry runs and the client-side filter still
+#       enforces the law.
+#   HONEST CAVEAT — no KEYED live smoke has run yet: the key
+#       exists only in Jupiter's mailbox (registration
+#       2026-11-26). Until he pastes CORE_API_KEY into the repo
+#       secrets the searcher stays dormant (fail-soft empty)
+#       and this wiring rests on the official spec + the
+#       mocked-shape tests in test_core.py.
+# The fetch discipline is a single-shot _core_fetch (the §23
+# pattern, with the Authorization header) and candidates are
+# shaped by _arab_candidate, exactly like §36.
+# --------------------------------------------------------------------------
+
+CORE_CAP = 8
+CORE_FETCH_LIMIT = 25  # results requested per search; the
+                       # full-text filter + CORE_CAP cut them
+CORE_DISCOVERY_BUDGET = 4  # discovery resolves per search call
+_CORE_BASE = "https://api.core.ac.uk"
+_CORE_SEARCH_URL = _CORE_BASE + "/v3/search/works"
+_CORE_DISCOVER_URL = _CORE_BASE + "/v3/discover"
+_CORE_TIMEOUT = 15  # seconds, single attempt
+
+
+def _core_api_key():
+    """The CORE API key from the environment, or "" — the
+    searcher is dormant without it (see the §42 note above)."""
+    return (os.environ.get("CORE_API_KEY") or "").strip()
+
+
+def _core_fetch(url, data=None):
+    """One single-shot HTTPS request to the CORE API carrying
+    the Bearer key (no retries: http_request's 6 attempts x
+    180 s would stall the wave, and a 401/429 here is definitive
+    until the key exists). Returns (status, text); (None, "")
+    on any transport error. A truncated chunked body is
+    salvaged, as in _arab_fetch."""
+    import http.client
+    headers = {"User-Agent": _ARAB_HEADERS["User-Agent"],
+               "Accept": "application/json",
+               "Authorization": "Bearer " + _core_api_key()}
+    if data is not None:
+        headers["Content-Type"] = "application/json"
+    try:
+        _pace(urllib.parse.urlparse(url).netloc)
+        req = urllib.request.Request(url, data=data,
+                                     headers=headers)
+        with urllib.request.urlopen(req,
+                                    timeout=_CORE_TIMEOUT) as resp:
+            try:
+                raw = resp.read(2_000_000)
+            except http.client.IncompleteRead as e:
+                raw = e.partial or b""
+            return resp.status, raw.decode("utf-8", "replace")
+    except urllib.error.HTTPError as e:
+        try:
+            return e.code, e.read(300_000).decode("utf-8",
+                                                  "replace")
+        except Exception:
+            return e.code, ""
+    except Exception:
+        return None, ""
+
+
+def _core_field(item, *names):
+    """First non-empty value among the given field spellings
+    (the spec prints snake_case, the live API answers
+    camelCase)."""
+    for n in names:
+        v = item.get(n)
+        if v not in (None, "", []):
+            return v
+    return None
+
+
+def _core_authors(raw):
+    """CORE authors: plain strings in the spec's Work schema,
+    {name} / {fullName} objects in live answers — accept all."""
+    out = []
+    for a in raw or []:
+        if isinstance(a, str):
+            name = a
+        elif isinstance(a, dict):
+            name = a.get("name") or a.get("fullName") or ""
+        else:
+            name = ""
+        name = str(name).strip()
+        if name:
+            out.append(name)
+    return out[:6]
+
+
+def _core_work_candidate(work):
+    """One CORE Work -> (candidate, has_fulltext), or
+    (None, False) when the record is unusable. The candidate's
+    oa_pdf_url is set only when the record itself names a
+    reachable full text (downloadUrl first, then the first
+    sourceFulltextUrls entry); a DOI-only record comes back
+    with has_fulltext False so search_core can try the
+    Discovery resolution for it."""
+    if not isinstance(work, dict):
+        return None, False
+    title = str(_core_field(work, "title") or "").strip()
+    if not title:
+        return None, False
+    doi = _core_field(work, "doi")
+    doi = str(doi).strip() if doi else None
+    if doi and doi.startswith("https://doi.org/"):
+        doi = doi[len("https://doi.org/"):]
+    if doi and not doi.startswith("10."):
+        doi = None
+    ft_url = _core_field(work, "downloadUrl", "download_url")
+    if not ft_url:
+        srcs = _core_field(work, "sourceFulltextUrls",
+                           "source_fulltext_urls") or []
+        if isinstance(srcs, list):
+            for u in srcs:
+                if isinstance(u, str) and u.startswith("http"):
+                    ft_url = u
+                    break
+    year = _core_field(work, "yearPublished", "year_published")
+    if isinstance(year, str):
+        year = _arab_year(year)
+    if not isinstance(year, int):
+        year = None
+    venue = ""
+    journals = _core_field(work, "journals") or []
+    if isinstance(journals, list) and journals:
+        j0 = journals[0]
+        venue = (j0.get("title") or "") if isinstance(j0, dict) \
+            else str(j0)
+    if not venue:
+        pub = _core_field(work, "publisher")
+        if isinstance(pub, dict):
+            venue = pub.get("name") or ""
+        elif pub:
+            venue = str(pub)
+    url = ""
+    if doi:
+        url = "https://doi.org/" + doi
+    else:
+        links = _core_field(work, "links") or []
+        if isinstance(links, list):
+            for lnk in links:
+                if isinstance(lnk, str) and lnk.startswith("http"):
+                    url = lnk
+                    break
+                if isinstance(lnk, dict) \
+                        and lnk.get("type") == "display" \
+                        and str(lnk.get("url") or "").startswith(
+                                "http"):
+                    url = lnk["url"]
+                    break
+        if not url and ft_url:
+            url = ft_url
+    abstract = str(_core_field(work, "abstract") or "")
+    cand = _arab_candidate(
+        title, url, "core:api",
+        authors=_core_authors(_core_field(work, "authors")),
+        year=year, venue=str(venue or "").strip(), doi=doi,
+        abstract=re.sub(r"\s+", " ", abstract).strip()[:1500])
+    lang = _core_field(work, "language")
+    if isinstance(lang, dict):
+        lang = lang.get("code")
+    if isinstance(lang, str) and lang.strip():
+        cand["language"] = lang.strip().lower()
+    if ft_url:
+        cand["oa_pdf_url"] = ft_url
+        cand["fulltext_url"] = ft_url
+        return cand, True
+    return cand, False
+
+
+def _parse_core_results(data):
+    """Parse one CORE works SearchResponse: returns
+    (candidates_with_fulltext, doi_only_candidates). Records
+    with neither a full-text URL nor a DOI are dropped — no
+    route to their full text exists, per the full-text-only
+    law."""
+    out, pending = [], []
+    if not isinstance(data, dict):
+        return out, pending
+    for work in data.get("results") or []:
+        cand, has_ft = _core_work_candidate(work)
+        if cand is None:
+            continue
+        if has_ft:
+            out.append(cand)
+        elif cand.get("doi"):
+            pending.append(cand)
+    return out, pending
+
+
+def _core_discover_fulltext(doi, title, year):
+    """§42: the CORE Discovery operation (POST /v3/discover,
+    DiscoveryParameters {doi, title, year}) -> the free
+    full-text link for one known paper, or "". Fail-soft on
+    every failure shape."""
+    if not doi and not title:
+        return ""
+    payload = {}
+    if doi:
+        payload["doi"] = doi
+    if title:
+        payload["title"] = title
+    if isinstance(year, int):
+        payload["year"] = year
+    status, body = _core_fetch(
+        _CORE_DISCOVER_URL,
+        data=json.dumps(payload).encode("utf-8"))
+    if status != 200 or not body:
+        return ""
+    try:
+        data = json.loads(body)
+    except ValueError:
+        return ""
+    if not isinstance(data, dict):
+        return ""
+    link = _core_field(data, "fullTextLink", "full_text_link")
+    return str(link) if link else ""
+
+
+def _core_search_once(q):
+    """One POST /v3/search/works call -> _parse_core_results
+    output, or None on any failure (fail-soft upstream)."""
+    payload = json.dumps({"q": q, "limit": CORE_FETCH_LIMIT,
+                          "offset": 0}).encode("utf-8")
+    status, body = _core_fetch(_CORE_SEARCH_URL, data=payload)
+    if status != 200 or not body:
+        return None
+    try:
+        data = json.loads(body)
+    except ValueError:
+        return None
+    if not isinstance(data, dict):
+        return None
+    return _parse_core_results(data)
+
+
+def search_core(query):
+    """§42: search CORE (Connecting Repositories) — the global
+    open-access aggregator — through its API v3 works search.
+    Dormant (returns [], no request made) while CORE_API_KEY is
+    not configured. Fail-soft, capped at CORE_CAP full-text
+    candidates per query."""
+    if not _core_api_key():
+        return []
+    query = (query or "").strip()
+    if not query:
+        return []
+    parsed = _core_search_once(
+        f"({query}) AND _exists_:fullText")
+    if parsed is None:
+        return []
+    cands, pending = parsed
+    if not cands and not pending:
+        parsed = _core_search_once(query)
+        if parsed is None:
+            return []
+        cands, pending = parsed
+    budget = CORE_DISCOVERY_BUDGET
+    for cand in pending:
+        if len(cands) >= CORE_CAP or budget <= 0:
+            break
+        budget -= 1
+        link = _core_discover_fulltext(cand.get("doi"),
+                                       cand.get("title"),
+                                       cand.get("year"))
+        if link:
+            cand["oa_pdf_url"] = link
+            cand["fulltext_url"] = link
+            cands.append(cand)
+    return cands[:CORE_CAP]
+
+
+# --------------------------------------------------------------------------
 # Source registries (§17) — credibility / whitelist SIGNAL only.
-# Fourteen curated registries sit beside this script in the repo:
+# Sixteen curated registries sit beside this script in the repo:
 #   sources_registry.json        (registry 1, registry schema)
 #   sources_registry_500_more.json (500 DOAJ journals, compact schema:
 #                                   {id, name, url, type, fields,
@@ -3762,6 +4104,15 @@ def search_tajik_journals(query):
 #                                   routes tried recorded in the
 #                                   registry notes, registry
 #                                   schema — one platform entry)
+#   core_registry.json           (§42: CORE — Connecting
+#                                   Repositories, the Open
+#                                   University's global
+#                                   open-access aggregator,
+#                                   wired LIVE via its API v3
+#                                   works search + Discovery
+#                                   full-text resolution, keyed
+#                                   by CORE_API_KEY, registry
+#                                   schema — one platform entry)
 # Both schemas normalise into one record {name, url, domain, type,
 # fields, languages, registry}. A registry match is a ranking SIGNAL
 # ONLY: it never verifies a source (the DOI / Crossref / publisher
@@ -3784,7 +4135,8 @@ REGISTRY_FILES = ["sources_registry.json",
                   "jihs_registry.json",
                   "iran_math_registry.json",
                   "tajik_journals_registry.json",
-                  "utihs_registry.json"]
+                  "utihs_registry.json",
+                  "core_registry.json"]
 _REGISTRY_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
@@ -4109,7 +4461,7 @@ SEARCHERS = [search_shelf, search_openalex, search_crossref, search_openaire,
              search_asian_platforms, search_arab_libraries,
              search_european_platforms, search_digital_libraries,
              search_university_lectures, search_ensani, search_jihs,
-             search_iran_math, search_tajik_journals]
+             search_iran_math, search_tajik_journals, search_core]
 
 # English-first retrieval (§18): wave 1 queries the abstract-rich
 # indexes ONLY — Crossref is held back because, queried with a
@@ -4125,7 +4477,7 @@ WAVE1_SEARCHERS = [search_shelf, search_openalex, search_europe_pmc, search_hal,
                    search_asian_platforms, search_arab_libraries,
                    search_european_platforms, search_digital_libraries,
                    search_university_lectures, search_ensani, search_jihs,
-                   search_iran_math, search_tajik_journals]
+                   search_iran_math, search_tajik_journals, search_core]
 CROSSREF_SEARCHERS = [search_crossref]
 
 
