@@ -7781,42 +7781,54 @@ def verify_work_in_catalogue(work):
     return True, ""
 
 
+def _source_card_text(i, s):
+    authors = ", ".join(s["authors"][:6]) or "Unknown authors"
+    card = (
+        f"[{i}] {s['title']}\n"
+        f"    Authors: {authors}\n"
+        f"    Year: {s['year'] or 'n.d.'} | Venue: {s['venue'] or 'n/a'} | "
+        f"DOI: {s['doi'] or 'none'} | URL: {s['url']}\n"
+        f"    Abstract: {(s['abstract'] or '(no abstract available)')[:1500]}")
+    if s.get("source_type") == "primary":
+        card += ("\n    PRIMARY SOURCE (the author's own work / "
+                 "a foundational document for this topic; the "
+                 "excerpt below is from the work itself)")
+    if s.get("source_type") == "video":
+        card += ("\n    SUPPORTING LECTURE TRANSCRIPT (YouTube) — "
+                 "cite ONLY as support for an explanation; never "
+                 "as the sole evidence for a claim, and never as "
+                 "a primary source.")
+    if s.get("registry_match"):
+        card += (f"\n    Registry match (curated open-access "
+                 f"registry, credibility signal): "
+                 f"{s['registry_match']}")
+    if s.get("fulltext_excerpt"):
+        if s.get("passages"):
+            card += (f"\n    Full-text PASSAGES extracted from "
+                     f"inside this source (located by the "
+                     f"topic's keywords — the writing input for "
+                     f"[{i}]):\n"
+                     + s["fulltext_excerpt"][:FULLTEXT_CARD_CHARS])
+        else:
+            card += (f"\n    Full-text excerpt from this verified "
+                     f"source itself (grounding for [{i}]):\n"
+                     + s["fulltext_excerpt"][:FULLTEXT_CARD_CHARS])
+    return card
+
+
 def source_cards_text(sources):
-    lines = []
-    for i, s in enumerate(sources, 1):
-        authors = ", ".join(s["authors"][:6]) or "Unknown authors"
-        card = (
-            f"[{i}] {s['title']}\n"
-            f"    Authors: {authors}\n"
-            f"    Year: {s['year'] or 'n.d.'} | Venue: {s['venue'] or 'n/a'} | "
-            f"DOI: {s['doi'] or 'none'} | URL: {s['url']}\n"
-            f"    Abstract: {(s['abstract'] or '(no abstract available)')[:1500]}")
-        if s.get("source_type") == "primary":
-            card += ("\n    PRIMARY SOURCE (the author's own work / "
-                     "a foundational document for this topic; the "
-                     "excerpt below is from the work itself)")
-        if s.get("source_type") == "video":
-            card += ("\n    SUPPORTING LECTURE TRANSCRIPT (YouTube) — "
-                     "cite ONLY as support for an explanation; never "
-                     "as the sole evidence for a claim, and never as "
-                     "a primary source.")
-        if s.get("registry_match"):
-            card += (f"\n    Registry match (curated open-access "
-                     f"registry, credibility signal): "
-                     f"{s['registry_match']}")
-        if s.get("fulltext_excerpt"):
-            if s.get("passages"):
-                card += (f"\n    Full-text PASSAGES extracted from "
-                         f"inside this source (located by the "
-                         f"topic's keywords — the writing input for "
-                         f"[{i}]):\n"
-                         + s["fulltext_excerpt"][:FULLTEXT_CARD_CHARS])
-            else:
-                card += (f"\n    Full-text excerpt from this verified "
-                         f"source itself (grounding for [{i}]):\n"
-                         + s["fulltext_excerpt"][:FULLTEXT_CARD_CHARS])
-        lines.append(card)
-    return "\n\n".join(lines)
+    return "\n\n".join(_source_card_text(i, s)
+                       for i, s in enumerate(sources, 1))
+
+
+def _source_cards_numbered(sources, numbers):
+    """Cards for the subset `numbers` (1-based) of `sources`,
+    keeping the ORIGINAL numbers: citation numbers are fixed by
+    code for the whole article (§44), so a section writer's cards
+    must carry the same numbers the reference list will use — a
+    renumbered subset would corrupt every citation it writes."""
+    return "\n\n".join(_source_card_text(n, sources[n - 1])
+                       for n in numbers)
 
 
 def format_reference(i, s):
@@ -8578,8 +8590,438 @@ TYPE_WORD_TARGETS = {
 
 
 
-def write_article(field, topic, language, sources, api_key, model, guide="",
-                  word_target=None):
+# --------------------------------------------------------------------------
+# Parallel section writing + double review (§44, Jupiter 2026-11-26:
+# «میتونه چند مغز همزمان بنویسه» — «بعد نوشتن دوباره بازبینی هر دو»):
+# when at least two brains are keyed, the article is no longer
+# written by one brain in three sequential calls. Instead:
+#   1. PLAN — one chain call (GLM first) designs the body plan:
+#      3–5 thematic sections, each assigned the counted sources it
+#      works from. Code validates the plan (numbers in range,
+#      deduplicated, capped) and sweeps every unassigned source
+#      into the smallest section, so each source is reachable by
+#      at least one body writer — the legacy path's coverage.
+#   2. WRITE — the front matter (abstract/keywords/introduction),
+#      each body section and the closing (discussion/conclusion/
+#      limitations) are written CONCURRENTLY (ThreadPoolExecutor),
+#      each task pinned to a different brain, rotating through the
+#      keyed chain (chain head first). A body writer receives ONLY
+#      its own section's assigned sources, under the ORIGINAL
+#      numbers code fixed for the article — it cannot cite or
+#      invent a source outside its assignment. Front matter and
+#      closing synthesise the whole evidence base, so their
+#      assignment is the full counted set (exactly what the legacy
+#      parts received). If a section's brain fails or returns
+#      unusable text, the NEXT brain in the rotation serves that
+#      section; if every keyed brain fails a section, the writing
+#      stage fails closed, exactly as before.
+#   3. REVIEW #1 — main() runs the §33 layer on the assembled
+#      draft, unchanged.
+#   4. UNIFY — ONE brain (the chain's main brain when keyed) makes
+#      a wording-only pass over the whole article: transitions,
+#      terminology, consistency. Its prompt forbids adding claims,
+#      sources, citations, numbers, formulas or quotes and forbids
+#      removing content; an unusable output fails the run closed
+#      (the §33-repair precedent).
+#   5. REVIEW #2 — main() runs the FULL §33 layer AGAIN on the
+#      unified text, so the exact text that would be published is
+#      the text that was reviewed. Each layer run keeps its own
+#      REVIEW_MAX_REPAIR_ROUNDS budget — the double pass is
+#      bounded (at most 2× the rounds of a single pass), never a
+#      loop. The deterministic gate stays the only publisher; a
+#      reviewer with no verdict still BLOCKS, in either pass.
+# With fewer than two keyed brains — or when planning yields no
+# usable plan — write_article falls back to the single-brain path
+# unchanged (one §33 pass, as before). The text-first gate, the
+# screening judges, §20.10, §43 and delivery are untouched.
+# --------------------------------------------------------------------------
+
+PARALLEL_MIN_SECTIONS = 2
+PARALLEL_MAX_SECTIONS = 5
+PARALLEL_MIN_SECTION_WORDS = 30
+
+
+def _keyed_brains(api_key):
+    """The brain chain (llm_chain() order — GLM first in the
+    default chain) restricted to brains that actually hold a key
+    this run: the §44 rotation pool."""
+    return [b for b in llm_chain()
+            if b in KNOWN_BRAINS and _brain_key_available(b, api_key)]
+
+
+def _validate_section_plan(data, n_sources):
+    """Deterministic validation of the §44 section plan: keep
+    well-formed sections (non-empty heading, source numbers in
+    range, deduplicated), cap the count, then sweep every source
+    the planner left unassigned into the currently smallest
+    section. Returns the validated plan, or None when it cannot
+    ground a parallel write (fewer than PARALLEL_MIN_SECTIONS
+    sections, or a section still sourceless after the sweep)."""
+    if not isinstance(data, dict):
+        return None
+    raw_sections = data.get("sections")
+    if not isinstance(raw_sections, list):
+        return None
+    sections = []
+    for item in raw_sections:
+        if not isinstance(item, dict):
+            continue
+        heading = str(item.get("heading") or "").strip()
+        if not heading:
+            continue
+        nums = []
+        for v in item.get("sources") or []:
+            try:
+                n = int(v)
+            except (TypeError, ValueError):
+                continue
+            if 1 <= n <= n_sources and n not in nums:
+                nums.append(n)
+        sections.append({"heading": heading,
+                         "focus": str(item.get("focus") or "").strip(),
+                         "sources": nums})
+    sections = sections[:PARALLEL_MAX_SECTIONS]
+    if len(sections) < PARALLEL_MIN_SECTIONS:
+        return None
+    assigned = {n for s in sections for n in s["sources"]}
+    for n in range(1, n_sources + 1):
+        if n not in assigned:
+            target = min(sections, key=lambda s: len(s["sources"]))
+            target["sources"].append(n)
+            assigned.add(n)
+    if any(not s["sources"] for s in sections):
+        return None
+    return sections
+
+
+def _plan_sections(field, topic, language, sources, api_key, model):
+    """One chain call (GLM first) designing the §44 body plan.
+    Fail-soft: any failure or unusable plan returns None and the
+    caller falls back to the single-brain writing path — planning
+    is an optimisation, never a new failure mode."""
+    lang_name = LANGUAGE_NAMES.get(language.lower(), language)
+    prompt = (
+        f"Field: {field}\nTopic: {topic}\n\n"
+        "You are planning a scholarly article that several writers "
+        "will draft IN PARALLEL, one writer per section. Using ONLY "
+        "the numbered sources below, design the BODY plan: 3 to 5 "
+        "thematic sections that together cover the sources' "
+        "evidence without overlap. For each section give a specific "
+        f"heading (in {lang_name}), a one-sentence focus, and the "
+        "numbers of the sources that section should work from "
+        "(assign each source to the ONE section where it fits "
+        "best). Do NOT plan the abstract, introduction, discussion "
+        "or conclusion — those are handled separately.\n"
+        'Reply with JSON only: {"sections": [{"heading": "...", '
+        '"focus": "...", "sources": [1, 2]}]}\n\n'
+        "THE NUMBERED SOURCES:\n" + source_cards_text(sources) + "\n")
+    try:
+        raw = call_llm(prompt, api_key, model, temperature=0.2,
+                       json_mode=True)
+        data = _parse_json_value(raw)
+    except Exception as e:
+        print(f"parallel writing (§44): section planning failed "
+              f"({e}) — falling back to single-brain writing")
+        return None
+    plan = _validate_section_plan(data, len(sources))
+    if plan is None:
+        print("parallel writing (§44): planner returned no usable "
+              "plan — falling back to single-brain writing")
+    return plan
+
+
+def _writer_hard_rules(lang_name, target_line):
+    """The writer's hard rules for a §44 section prompt — the same
+    laws the single-brain path enforces, with the target-length
+    line scoped to this part instead of the whole article."""
+    return (
+        "HARD RULES — follow exactly:\n"
+        "- Use ONLY the numbered sources below. Never mention any work, author, "
+        "number, journal or result that is not in these sources.\n"
+        "- Every factual claim must carry its source number like [3] at the end "
+        "of the sentence.\n"
+        "- Synthesise in your own words; never copy a sentence from an abstract.\n"
+        "- If the sources do not answer something, say so plainly instead of "
+        "filling the gap.\n"
+        "- DEPTH (§15): work with the sources' ACTUAL content — specific data, "
+        "formulas, numerical values, named methods and named results exactly "
+        "as the source cards give them. Compare the sources head-to-head: "
+        "where they agree, where they contradict, and by how much. Include "
+        "error, uncertainty and limitation analysis wherever the sources "
+        "support it.\n"
+        "- NO GENERIC FILLER: any paragraph that could be pasted unchanged "
+        "into an article on a different topic is forbidden. If a source card "
+        "carries no usable detail on a point, say so in one sentence and "
+        "move on — never invent detail.\n"
+        "- CLAIM MAPPING (§20): every main claim must rest on an extracted "
+        "full-text PASSAGE of a cited source (the cards mark passage-bearing "
+        "sources). A claim supported only by an abstract must be hedged as "
+        "such ('as reported in the abstract of [n]') or omitted.\n"
+        "- NUMERIC DERIVATION (§20): any numeric or formula-based claim must "
+        "be RE-DERIVED step by step in the article text from the source's "
+        "stated inputs — show the substitution and the arithmetic — and the "
+        "derived value compared with the value the source itself reports.\n"
+        f"- {target_line}\n"
+        f"- Write the ENTIRE output in {lang_name}.\n")
+
+
+def _write_section(task, brains, api_key, model):
+    """One §44 section, written by ONE pinned brain. On failure or
+    unusable output the NEXT brain in the rotation serves the same
+    section. Raises Fail when every keyed brain failed the section
+    — the writing stage's existing fail behaviour."""
+    order = [brains[(task["start"] + j) % len(brains)]
+             for j in range(len(brains))]
+    errors = []
+    for brain in order:
+        try:
+            text = call_llm(task["prompt"], api_key, model,
+                            provider=brain)
+        except Exception as e:
+            print(f"parallel writing (§44): section {task['key']} "
+                  f"failed on brain {brain} ({e}) — trying the "
+                  "next brain")
+            errors.append(f"{brain}: {e}")
+            continue
+        text = (text or "").strip()
+        if len(text.split()) < PARALLEL_MIN_SECTION_WORDS:
+            print(f"parallel writing (§44): section {task['key']} "
+                  f"unusable from brain {brain} (too short) — "
+                  "trying the next brain")
+            errors.append(f"{brain}: unusable output (too short)")
+            continue
+        print(f"parallel writing (§44): section {task['key']} "
+              f"written by brain {brain}")
+        return text, brain
+    raise Fail(f"parallel writing (§44): section {task['key']} "
+               "failed on every keyed brain — "
+               + "; ".join(errors))
+
+
+def _write_article_parallel(field, topic, language, sources, api_key,
+                            model, guide, word_target, brains, plan):
+    """The §44 writing path: front matter, body sections and
+    closing written concurrently, one pinned brain per task,
+    rotating through `brains`. Body writers see ONLY their own
+    section's assigned sources (original numbers); front matter
+    and closing see the full set, as the legacy parts did. The
+    title is generated after assembly, as in the legacy path."""
+    lang_name = LANGUAGE_NAMES.get(language.lower(), language)
+    if not word_target:
+        word_target = (6000, 8000)
+    lo, hi = word_target
+    mid = (lo + hi) // 2
+    all_numbers = list(range(1, len(sources) + 1))
+
+    def common(numbers, target_line):
+        return (f"Field: {field}\nTopic: {topic}\n\n"
+                + _writer_hard_rules(lang_name, target_line) + "\n"
+                + (f"{guide}\n" if guide else "")
+                + "THE ONLY SOURCES YOU MAY USE:\n"
+                + _source_cards_numbered(sources, numbers) + "\n")
+
+    outline_text = "\n".join(
+        f"- {s['heading']}"
+        + (f" — {s['focus']}" if s["focus"] else "")
+        for s in plan)
+    tasks = []
+    tasks.append({
+        "key": "front", "start": 0,
+        "prompt": common(
+            all_numbers,
+            f"TARGET LENGTH: this part must reach about "
+            f"{int(mid * 0.18)} words (the complete article "
+            f"targets {lo}–{hi} words).")
+        + f"\nWrite PART 1 of a scholarly article (about "
+          f"{int(mid * 0.18)} words):\n"
+          "1) '## Abstract' — a structured abstract with labelled parts: "
+          "Background, Objective, Method, Findings, Conclusion — based only on "
+          "the sources. The Findings must state concrete results from the "
+          "sources (named methods, values, dates), never generalities.\n"
+          "2) '## Keywords' — 5 to 7 keywords on one line.\n"
+          "3) '## Introduction' — a funnel: broad context, narrowing to the "
+          "specific problem, the specific gap visible in these sources, and "
+          "this article's precise aim and claim. Do NOT write a title; the "
+          "title is chosen after the article is complete."})
+    body_words = max(1, int(mid * 0.52) // len(plan))
+    for i, sec in enumerate(plan):
+        tasks.append({
+            "key": f"body{i}", "start": len(tasks),
+            "heading": sec["heading"],
+            "prompt": common(
+                sec["sources"],
+                f"TARGET LENGTH: this section must reach about "
+                f"{body_words} words (the complete article targets "
+                f"{lo}–{hi} words).")
+            + "\nYou are writing ONE section of a scholarly "
+              "article whose other sections are being drafted in "
+              "parallel by other writers. The article's body plan "
+              f"is:\n{outline_text}\n\n"
+              f"Write ONLY your section, headed exactly "
+              f"'## {sec['heading']}' (about {body_words} words)."
+              + (f" Its focus: {sec['focus']}\n" if sec["focus"]
+                 else "\n")
+              + "Present the specific evidence from YOUR sources "
+                "(data, formulas, numbers, named methods and "
+                "results), compare your sources with each other, "
+                "and analyse errors, uncertainties and "
+                "disagreements where they allow. Keep every claim "
+                "cited as [n], using ONLY your sources' numbers. "
+                "Do NOT write an abstract, introduction, "
+                "discussion or conclusion, and do NOT summarise "
+                "the other sections."})
+    tasks.append({
+        "key": "closing", "start": len(tasks),
+        "prompt": common(
+            all_numbers,
+            f"TARGET LENGTH: this part must reach about "
+            f"{int(mid * 0.30)} words (the complete article "
+            f"targets {lo}–{hi} words).")
+        + f"\nWrite PART 3 of the same article (about "
+          f"{int(mid * 0.30)} words):\n"
+          "1) '## Discussion' — what the combined evidence means, how it "
+          "compares across the sources, and what the article's claim is "
+          "worth.\n"
+          "2) '## Conclusion' — the takeaways that the sources actually "
+          "support.\n"
+          "3) '## Limitations' — honest limits of this article (only "
+          "relevant, content-bearing sources were used; abstract/full-text "
+          "level; free-access only).\n"
+          "Do NOT write a reference list; it is added separately."})
+
+    progress_update(55, "✍️ نگارش موازی بخش‌ها (§44)")
+    results = {}
+    section_brains = {}
+    with ThreadPoolExecutor(max_workers=max(1, len(tasks))) as ex:
+        futs = {ex.submit(_write_section, t, brains, api_key,
+                          model): t["key"] for t in tasks}
+        for fut in as_completed(futs):
+            text, brain = fut.result()
+            results[futs[fut]] = text
+            section_brains[futs[fut]] = brain
+    part1 = results["front"]
+    body_parts = []
+    for i, sec in enumerate(plan):
+        text = results[f"body{i}"]
+        if "##" not in text:
+            # Deterministic guard: the plan's heading exists in
+            # the assembled article even when a writer dropped it.
+            text = f"## {sec['heading']}\n\n" + text
+        body_parts.append(text)
+    part2 = "\n\n".join(body_parts)
+    part3 = results["closing"]
+    progress_update(90, "✍️ نگارش بخش پایانی")
+
+    # Title law (§15): the title is generated AFTER the body, from
+    # the article's actual claim — unchanged from the legacy path.
+    candidates, best, next_topics = generate_titles(
+        field, topic, language, part1, part3, api_key, model)
+    title = select_title(candidates, best, field, topic)
+    references = "\n".join(format_reference(i, s)
+                           for i, s in enumerate(sources, 1))
+    article = (f"# {title}\n\n{part1}\n\n{part2}\n\n{part3}\n\n"
+               f"## References\n\n{references}\n")
+    word_count = len(article.split())
+    print(f"word count: {word_count} (target {lo}–{hi})")
+    print("parallel writing (§44): section brains — "
+          + ", ".join(f"{k}={section_brains[k]}"
+                      for k in sorted(section_brains)))
+    return title, article, {"title_candidates": candidates,
+                            "next_topics": next_topics,
+                            "word_count": word_count,
+                            "parallel_writing": True,
+                            "section_brains": section_brains}
+
+
+def unify_article(article, api_key, model):
+    """The §44 unification pass: ONE brain (the chain's main brain
+    when keyed) smooths the parallel-written article — wording,
+    transitions and consistency ONLY. The prompt forbids adding
+    claims, sources, citations, numbers, formulas or quotes and
+    forbids removing content. Returns the unified article, or
+    None when the pass failed or its output is unusable (too
+    short, title line or reference list lost) — main() then fails
+    closed, exactly as an unusable §33 repair output does."""
+    main_brain = None
+    for name in llm_chain():
+        if name in KNOWN_BRAINS and _brain_key_available(name,
+                                                         api_key):
+            main_brain = name
+            break
+    prompt = (
+        "You are the EDITOR of the scholarly article below, doing "
+        "a final UNIFICATION pass over sections that were drafted "
+        "in parallel by different writers.\n"
+        "YOUR JOB IS WORDING ONLY: smooth the transitions between "
+        "sections, unify terminology, spelling and tense, and "
+        "remove a sentence only when it repeats another sentence "
+        "verbatim.\n"
+        "HARD RULES:\n"
+        "- NEVER add a new claim, fact, source, citation [n], "
+        "number, formula, date or quote — nothing may enter the "
+        "text that is not already in it.\n"
+        "- NEVER remove a claim, citation, number or section, and "
+        "never change the meaning of a sentence.\n"
+        "- Keep the '# ' title line, every '## ' heading, any note "
+        "lines directly under the title, and the reference list "
+        "EXACTLY as they are.\n"
+        "- Keep the article's language throughout.\n"
+        "- Reply with the COMPLETE edited article only — no "
+        "commentary, no code fences.\n\n"
+        "ARTICLE:\n" + article)
+    try:
+        if main_brain:
+            out = call_llm(prompt, api_key, model, temperature=0.2,
+                           provider=main_brain)
+        else:
+            out = call_llm(prompt, api_key, model, temperature=0.2)
+    except Exception as e:
+        print(f"WARNING: unification pass (§44) failed ({e})")
+        return None
+    out = (out or "").strip()
+    out = re.sub(r"^```(?:markdown|md)?\s*", "", out)
+    out = re.sub(r"\s*```$", "", out).strip()
+    if len(out) < 0.6 * len(article):
+        print("WARNING: unification output unusable (too short "
+              "— truncated?); failing closed")
+        return None
+    if not out.startswith("#"):
+        print("WARNING: unification output unusable (title line "
+              "lost); failing closed")
+        return None
+    _, refs = _review_split_refs(out)
+    if not refs:
+        print("WARNING: unification output unusable (reference "
+              "list lost); failing closed")
+        return None
+    return out
+
+
+def write_article(field, topic, language, sources, api_key, model,
+                  guide="", word_target=None):
+    """Write the article (§44 dispatcher): with at least two keyed
+    brains and a usable section plan, the parallel path writes the
+    sections concurrently; otherwise the original single-brain
+    path runs, unchanged."""
+    brains = _keyed_brains(api_key)
+    if len(brains) >= 2:
+        plan = _plan_sections(field, topic, language, sources,
+                              api_key, model)
+        if plan is not None:
+            return _write_article_parallel(
+                field, topic, language, sources, api_key, model,
+                guide, word_target, brains, plan)
+    return _write_article_single(field, topic, language, sources,
+                                 api_key, model, guide=guide,
+                                 word_target=word_target)
+
+
+def _write_article_single(field, topic, language, sources, api_key, model,
+                          guide="", word_target=None):
+    """The original single-brain writing path (three sequential
+    chain calls: front matter, body, closing). Unchanged by §44 —
+    it is the fallback whenever fewer than two brains are keyed or
+    no usable §44 section plan exists."""
     lang_name = LANGUAGE_NAMES.get(language.lower(), language)
     cards = source_cards_text(sources)
     if not word_target:
@@ -8672,7 +9114,8 @@ def write_article(field, topic, language, sources, api_key, model, guide="",
     print(f"word count: {word_count} (target {lo}–{hi})")
     return title, article, {"title_candidates": candidates,
                             "next_topics": next_topics,
-                            "word_count": word_count}
+                            "word_count": word_count,
+                            "parallel_writing": False}
 
 
 # --------------------------------------------------------------------------
@@ -9606,6 +10049,14 @@ def _review_lines(review):
                      f"دسترس نبود: {names}")
     else:
         lines.append("نتیجهٔ بررسی چندرباته: رد ❌")
+    fp = review.get("first_pass")
+    if fp:
+        lines.append(
+            "نگارش موازی و بازبینی دوم (§44): پیش‌نویس بخشی هم "
+            f"بازبینی شد ({fp.get('issues_found', 0)} ایراد، "
+            f"{fp.get('issues_fixed', 0)} اصلاح، "
+            f"{fp.get('rounds', 0)} دور اصلاح)؛ نتیجهٔ بالا "
+            "مربوط به بازبینی دوم روی متن یکدست‌شده است.")
     return lines
 
 
@@ -9629,6 +10080,15 @@ def build_review_report(topic, review):
             REVIEW_ROLE_LABELS_FA.get(r, r)
             for r in review["blocked_roles"])
         lines.append(f"داورانِ بدون verdict (مسدودکننده): {names}")
+    if review.get("first_pass"):
+        fp = review["first_pass"]
+        lines.append(
+            "نگارش موازی (§44): بازبینی نخست روی پیش‌نویس بخشی — "
+            f"{fp.get('issues_found', 0)} ایراد، "
+            f"{fp.get('issues_fixed', 0)} اصلاح، "
+            f"{fp.get('rounds', 0)} دور اصلاح؛ پس از یکدست‌سازی، "
+            "متن نهایی دوباره از کل لایهٔ §33 گذشت و نتیجهٔ بالا "
+            "مربوط به همان متن نهایی است.")
     if review.get("repair_failed"):
         lines.append("⚠️ یک دور اصلاح خروجی قابل استفاده نداد و "
                      "از دست رفت.")
@@ -10412,13 +10872,13 @@ def main():
     # itemised review report + the funnel go to the requester DM
     # (fail-soft) and the run fails closed.
     print("--- §33 review layer: starting ---")
-    review = run_review_layer(
-        article, counted,
-        {"field": field, "topic": topic, "language": language,
-         "article_type": article_type, "title": title,
-         "sources": write_sources,
-         "word_target": TYPE_WORD_TARGETS.get(article_type),
-         "api_key": api_key, "model": model})
+    review_ctx = {"field": field, "topic": topic,
+                  "language": language,
+                  "article_type": article_type, "title": title,
+                  "sources": write_sources,
+                  "word_target": TYPE_WORD_TARGETS.get(article_type),
+                  "api_key": api_key, "model": model}
+    review = run_review_layer(article, counted, review_ctx)
     if not review["ok"]:
         print(f"review layer (§33): STOP — verdict "
               f"{review['verdict']}; nothing is published")
@@ -10436,6 +10896,65 @@ def main():
                    f"{review['rounds']} repair round(s)")
     article = review["article"]
     print("review layer (§33): PASS — article cleared for delivery")
+
+    # §44: a parallel-written article is now unified by ONE brain
+    # (wording only — no new claims, sources, numbers or quotes)
+    # and then reviewed AGAIN: the full §33 layer runs a second
+    # time on the unified text, so the exact text that would be
+    # published is the text that was reviewed. Each layer run
+    # keeps its own REVIEW_MAX_REPAIR_ROUNDS budget, so the
+    # double pass is bounded and cannot loop. A failed
+    # unification or a failed second review fails closed, like
+    # any §33 stop; single-brain productions skip this block and
+    # keep the one-pass behaviour.
+    if meta.get("parallel_writing"):
+        first_pass = {"rounds": review.get("rounds", 0),
+                      "issues_found": review.get("issues_found", 0),
+                      "issues_fixed": review.get("issues_fixed", 0),
+                      "verdict": review.get("verdict")}
+        print("--- §44 unification pass: starting ---")
+        _t1 = time.monotonic()
+        unified = unify_article(article, api_key, model)
+        print(f"timing: unification (§44) "
+              f"{time.monotonic() - _t1:.1f}s")
+        if unified is None:
+            send_review_report_dm(
+                tg_token, os.environ.get("ARTICLE_CHAT_ID", ""),
+                topic, review)
+            send_funnel_dm(tg_token,
+                           os.environ.get("ARTICLE_CHAT_ID", ""),
+                           topic, funnel, False,
+                           stage="یکدست‌سازی متن (§44)",
+                           adaptation=adaptation, review=review)
+            raise Fail("unification pass (§44) produced no usable "
+                       "text — failing closed; nothing is "
+                       "published")
+        article = unified
+        print("--- §33 review layer (§44 second pass, on the "
+              "unified text): starting ---")
+        review = run_review_layer(article, counted, review_ctx)
+        if not review["ok"]:
+            print(f"review layer (§33, §44 second pass): STOP — "
+                  f"verdict {review['verdict']}; nothing is "
+                  "published")
+            send_review_report_dm(
+                tg_token, os.environ.get("ARTICLE_CHAT_ID", ""),
+                topic, review)
+            send_funnel_dm(tg_token,
+                           os.environ.get("ARTICLE_CHAT_ID", ""),
+                           topic, funnel, False,
+                           stage="بازبینی دوم پس از یکدست‌سازی (§44)",
+                           adaptation=adaptation, review=review)
+            raise Fail("second review (§44) blocked publication "
+                       f"({review['verdict']}): "
+                       f"{review['issues_found']} issue(s) found, "
+                       f"{review['issues_fixed']} fixed, "
+                       f"{review['rounds']} repair round(s)")
+        article = review["article"]
+        review["first_pass"] = first_pass
+        review["unification"] = True
+        print("review layer (§33): PASS (second pass, §44) — "
+              "unified article cleared for delivery")
 
     header = (f"📚 Scientific Discovery Agent — new article\n"
               f"Field: {field}\nTopic: {topic}\nLanguage: {language}\n"
