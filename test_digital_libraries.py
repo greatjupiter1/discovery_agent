@@ -68,9 +68,9 @@ for url in ("https://www.europeana.eu", "https://dp.la",
     check(f"key-walled library registered: {url}", url in by_url)
 
 # ------------------------------------------------------------- registry load
-# §23+§24+§25+§26+§27+§32+§34+§36+§37: thirteen registry files; totals updated count-only.
-EXPECTED_FILES_OK = 14
-EXPECTED_LOADED = 2160
+# §23+§24+§25+§26+§27+§32+§34+§36+§37+§38+§39: fifteen registry files; totals updated count-only.
+EXPECTED_FILES_OK = 15
+EXPECTED_LOADED = 2161
 for mod, label in ((ba, "build_article"), (pt, "propose_topics")):
     di, ui, st = mod.load_source_registry()
     check(f"{label}: all registry files load (files_ok)",
