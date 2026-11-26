@@ -3930,8 +3930,178 @@ def registry_tag(candidate):
     return rec
 
 
+# --------------------------------------------------------------------------
+# §41 — the SHELF (قفسه; Jupiter's reuse law, 2026-11-26: «previously
+# collected material + new finds — don't redo work»). Until now every
+# production re-searched and re-downloaded everything from zero. The
+# shelf stores material that was verified ONCE — in past runs or in a
+# one-time verified fetch — as extracted text only (<=200 KB per item,
+# the same cap as the fulltext storage law; this is the one deliberate
+# exception to the no-persistent-files rule, approved by Jupiter),
+# under shelves/<name>/ with a manifest.json per shelf. The shelf is
+# the BASE layer: search_shelf runs FIRST in wave 1 and the open waves
+# top up exactly as before. Shelf candidates carry their stored
+# extracted passages directly (no re-download) and then flow through
+# the SAME verification, deterministic screen, LLM judges and §20 gate
+# as every other candidate — the shelf gives no free pass. Loading is
+# fail-soft: a missing/corrupt shelves/ tree logs one line and the run
+# continues exactly as before §41.
+# --------------------------------------------------------------------------
 
-SEARCHERS = [search_openalex, search_crossref, search_openaire,
+SHELF_ROOT = os.path.join(_REGISTRY_DIR, "shelves")
+SHELF_MAX_CANDIDATES = 8  # per query, like the other searchers' caps
+_SHELF_CACHE = None
+
+
+def load_shelves(base_dir=None):
+    """Load every shelf under shelves/: returns a list of
+    {name, items: [manifest item, ...]}. Fail-soft per shelf and per
+    item: anything unreadable is skipped with one log line. Cached
+    after the first load (the shelf does not change mid-run)."""
+    global _SHELF_CACHE
+    if _SHELF_CACHE is not None and base_dir is None:
+        return _SHELF_CACHE
+    root = base_dir or SHELF_ROOT
+    shelves = []
+    try:
+        names = sorted(os.listdir(root))
+    except OSError:
+        names = []
+    for name in names:
+        sdir = os.path.join(root, name)
+        mpath = os.path.join(sdir, "manifest.json")
+        if not os.path.isdir(sdir) or not os.path.isfile(mpath):
+            continue
+        try:
+            with open(mpath, encoding="utf-8") as f:
+                manifest = json.load(f)
+            items = manifest.get("items")
+            if not isinstance(items, list):
+                raise ValueError("manifest items is not a list")
+        except Exception as e:
+            print(f"shelf: {name} manifest unavailable ({e}) — "
+                  "continuing without it")
+            continue
+        good = []
+        for it in items:
+            if not isinstance(it, dict):
+                continue
+            if not it.get("id") or not it.get("work_title") \
+                    or not it.get("text_file"):
+                continue
+            it = dict(it)
+            it["_shelf_dir"] = sdir
+            good.append(it)
+        shelves.append({"name": name, "items": good})
+    if base_dir is None:
+        _SHELF_CACHE = shelves
+    return shelves
+
+
+_SHELF_STOPWORDS = {
+    "the", "for", "and", "with", "from", "that", "this", "its",
+    "against", "between", "در", "از", "به", "برای", "که", "را",
+    "آن", "این", "في", "من", "إلى", "على", "أن", "ما", "لا",
+}
+
+
+def _shelf_query_terms(query):
+    """Search terms from a query string: the whole phrase plus each
+    content word of >=3 chars (function words dropped — otherwise a
+    word like 'the' floods the passage extraction; Arabic-script
+    words match as-is)."""
+    q = (query or "").strip()
+    terms = []
+    if len(q) >= 3:
+        terms.append(q)
+    for w in re.split(r"[^\w\u0600-\u06FF]+", q):
+        w = w.strip().lower()
+        if len(w) >= 3 and w not in _SHELF_STOPWORDS and w not in terms:
+            terms.append(w)
+    return terms
+
+
+def _shelf_work_text(items):
+    """The full stored text of one work: its parts concatenated in
+    order. None when any part is unreadable (fail-soft per work)."""
+    parts = []
+    for it in sorted(items, key=lambda x: x.get("part") or 1):
+        path = os.path.join(it["_shelf_dir"], it["text_file"])
+        try:
+            with open(path, encoding="utf-8") as f:
+                parts.append(f.read())
+        except OSError:
+            return None
+    return "\n".join(parts)
+
+
+def search_shelf(query):
+    """§41 shelf searcher: match the query against every shelf's
+    manifests (title/author/keywords) and grep the stored texts at
+    passage level. Emits ONE candidate per matching WORK, carrying
+    passages extracted from the stored text — zero network fetches.
+    A work is emitted only when real passages hit (query terms first,
+    the work's own manifest keywords as the fallback term set)."""
+    terms = _shelf_query_terms(query)
+    if not terms:
+        return []
+    out = []
+    for shelf in load_shelves():
+        works = {}
+        for it in shelf["items"]:
+            works.setdefault(it.get("work_id") or it["id"],
+                             []).append(it)
+        scored = []
+        for work_id, items in works.items():
+            head = items[0]
+            meta = " ".join([
+                head.get("work_title") or "",
+                head.get("author") or "",
+                " ".join(head.get("keywords") or []),
+            ]).lower()
+            meta_hit = any(t.lower() in meta for t in terms)
+            text = _shelf_work_text(items)
+            if text is None:
+                continue
+            excerpt, hits = extract_passages(text, terms)
+            if not excerpt and meta_hit:
+                excerpt, hits = extract_passages(
+                    text, head.get("keywords") or [])
+            if not excerpt:
+                continue
+            scored.append((hits, head, excerpt))
+        scored.sort(key=lambda x: -x[0])
+        for hits, head, excerpt in scored[:SHELF_MAX_CANDIDATES]:
+            kind = (head.get("kind") or "").strip()
+            cand = {
+                "title": head.get("work_title") or "",
+                "authors": [head["author"]] if head.get("author")
+                           else [],
+                "year": head.get("year"),
+                "venue": head.get("source_platform") or "Shelf",
+                "doi": head.get("doi"),
+                "url": head.get("source_url") or "",
+                "abstract": excerpt[:1500],
+                "arxiv_id": None,
+                "index": f"shelf:{shelf['name']}",
+                "language": head.get("language"),
+                "fulltext": True,
+                "fulltext_excerpt": excerpt[:FULLTEXT_EXCERPT_CHARS],
+                "fulltext_route": f"shelf:{shelf['name']}",
+                "passages": True,
+                "passage_hits": hits,
+                "shelf_item": True,
+                "shelf": shelf["name"],
+                "shelf_work": head.get("work_id") or head["id"],
+            }
+            if kind == "primary book":
+                cand["source_type"] = "primary"
+                cand["primary_relation"] = "author"
+            out.append(cand)
+    return out
+
+
+SEARCHERS = [search_shelf, search_openalex, search_crossref, search_openaire,
              search_hal, search_zbmath, search_europe_pmc,
              search_internet_archive, search_google_books,
              search_annas_archive, search_doaj, search_arxiv,
@@ -3947,7 +4117,7 @@ SEARCHERS = [search_openalex, search_crossref, search_openaire,
 # (Persian/Afghan matches) that crowds out the genuine EN/FR/DE
 # scholarship before the relevance screen ever sees it. Crossref runs
 # as a top-up only when wave 1 yields too few verified candidates.
-WAVE1_SEARCHERS = [search_openalex, search_europe_pmc, search_hal,
+WAVE1_SEARCHERS = [search_shelf, search_openalex, search_europe_pmc, search_hal,
                    search_openaire, search_semantic_scholar, search_doaj,
                    search_zbmath, search_internet_archive,
                    search_google_books, search_arxiv,
@@ -3999,6 +4169,7 @@ SEARCHER_LABEL = {
     "search_european_platforms": "European platforms",
     "search_digital_libraries": "Digital libraries",
     "search_university_lectures": "University lectures",
+    "search_shelf": "Shelf (§41)",
 }
 
 VERIFY_CACHE_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)),
@@ -4112,6 +4283,14 @@ def language_gate_drop(candidate):
     its metadata language is Persian/Arabic/Urdu, or its title is
     Arabic-script dominant — unless it is a primary text in a
     scholarly edition/translation."""
+    # §41: shelf items are a closed, human-verified set whose full
+    # text is already in hand — the primary text itself, admissible
+    # under the same principle as the primary lane's own-text
+    # exemption. The gate's target (unverified fa/ar keyword noise
+    # flooding intake) is unaffected: nothing enters the shelf
+    # without one-time verification and real extracted text.
+    if candidate.get("shelf_item"):
+        return False
     lang = (candidate.get("language") or "").strip().lower()
     if lang in _GATE_LANGUAGES:
         return not _is_scholarly_edition(candidate)
