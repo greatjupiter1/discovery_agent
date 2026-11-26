@@ -3749,6 +3749,19 @@ def search_tajik_journals(query):
 #                                   tried recorded, registry
 #                                   schema — journal entries, not
 #                                   articles)
+#   utihs_registry.json          (§39: the portal of the
+#                                   Institute for the History of
+#                                   Science, University of Tehran —
+#                                   پژوهشکدهٔ تاریخ علم, whose
+#                                   journal is wired directly in
+#                                   §36; the portal itself is
+#                                   REGISTRY-ONLY: the whole host
+#                                   sits behind an ArvanCloud
+#                                   JavaScript bot wall that no
+#                                   keyless machine route passes,
+#                                   routes tried recorded in the
+#                                   registry notes, registry
+#                                   schema — one platform entry)
 # Both schemas normalise into one record {name, url, domain, type,
 # fields, languages, registry}. A registry match is a ranking SIGNAL
 # ONLY: it never verifies a source (the DOI / Crossref / publisher
@@ -3770,7 +3783,8 @@ REGISTRY_FILES = ["sources_registry.json",
                   "ensani_registry.json",
                   "jihs_registry.json",
                   "iran_math_registry.json",
-                  "tajik_journals_registry.json"]
+                  "tajik_journals_registry.json",
+                  "utihs_registry.json"]
 _REGISTRY_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
