@@ -31,6 +31,8 @@ like HTTP error statuses.
 
 Inputs come from the environment (set by .github/workflows/discovery.yml):
   FIELD, TOPIC, LANGUAGE (default "fa"), MODE (default "review"),
+  SEARCH_SCOPE (default "full"; "new" restricts the candidate
+  search to the §§32–42 additions only — §43),
   GEMINI_MODEL (default "gemini-3.5-flash")
   LLM_PROVIDER (default "gemini"; "github" selects GitHub Models,
   "glm" selects GLM on z.ai),
@@ -4481,6 +4483,100 @@ WAVE1_SEARCHERS = [search_shelf, search_openalex, search_europe_pmc, search_hal,
 CROSSREF_SEARCHERS = [search_crossref]
 
 
+# --------------------------------------------------------------------------
+# Search scope (§43, Jupiter 2026-11-26: «یعنی قفسه بعلاوه موارد
+# جدید» — for the article, examine ONLY the newly added items).
+# The SEARCH_SCOPE environment variable selects the candidate
+# pool for a run:
+#   "full" (default; also any unrecognised value) — today's
+#       behaviour, byte-for-byte: every searcher in SEARCHERS /
+#       WAVE1_SEARCHERS, the Crossref top-up, wave 2 and the
+#       §19 primary lane all run as before.
+#   "new" — the candidate search runs ONLY the searchers added
+#       in the newest build wave (§§32–42), i.e. the shelf plus
+#       the new items:
+#         search_shelf               (§41 — the collected shelf;
+#                                     carries the primary books
+#                                     WITH passages, so the
+#                                     text-first gate's primary
+#                                     leg stays satisfiable)
+#         search_university_lectures (§32)
+#         search_ensani              (§34)
+#         search_jihs                (§36)
+#         search_iran_math           (§37)
+#         search_tajik_journals      (§38)
+#         search_core                (§42)
+#       (§39 utihs and §40 are registry-only — they have no
+#       searcher to include; §33 is the review layer, not a
+#       searcher.) Every older searcher is skipped: the filter
+#       sits in collect_verified, the single choke point every
+#       retrieval wave flows through, so wave 1, the wave-2
+#       broader wave and any other collect_verified call are
+#       scoped alike; the Crossref top-up is skipped outright
+#       and the §19 primary lane (IA + Google Books catalogue
+#       searches — pre-§32 searchers) stands down, its role
+#       taken by the shelf. EVERYTHING downstream is unchanged:
+#       the same screening, the same judges, the same fail-closed
+#       text-first gate (MIN_SOURCES counted, MIN_FULLTEXT_SOURCES
+#       with passages, >= 1 primary with passages), §20.10 topic
+#       adaptation, the §33 review layer and delivery. The scope
+#       is VISIBLE: a line in the funnel (§16.3), a line in the
+#       §20.7 report, and a note at the head of the article
+#       itself (search_scope_note), all only in "new" mode.
+# --------------------------------------------------------------------------
+
+NEW_ONLY_SEARCHERS = [search_shelf, search_university_lectures,
+                      search_ensani, search_jihs, search_iran_math,
+                      search_tajik_journals, search_core]
+_NEW_ONLY_NAMES = {s.__name__ for s in NEW_ONLY_SEARCHERS}
+
+
+def search_scope():
+    """The active search scope (§43): "new" only when the
+    SEARCH_SCOPE environment variable says so; "full" otherwise
+    (unset, "full", or anything unrecognised — fail-safe to the
+    established behaviour)."""
+    return "new" if (os.environ.get("SEARCH_SCOPE") or "") \
+        .strip().lower() == "new" else "full"
+
+
+def scoped_searchers(order):
+    """The searcher order for one retrieval wave under the
+    active scope (§43): unchanged in "full" mode; in "new" mode
+    only the §§32–42 searchers survive, in the caller's order."""
+    order = list(order)
+    if search_scope() != "new":
+        return order
+    return [s for s in order if s.__name__ in _NEW_ONLY_NAMES]
+
+
+def _scope_lines():
+    """§43 visibility lines (Persian) for the funnel / §20.7
+    report. Empty in "full" mode."""
+    if search_scope() != "new":
+        return []
+    return ["",
+            "دامنهٔ جستجو: فقط منابع تازه‌افزودهٔ §§32–42 "
+            "(قفسهٔ منابع گردآوری‌شده، CORE، سخنرانی‌های دانشگاهی، "
+            "ensani، jihs، مجلات ریاضی ایران، مجلات تاجیکستان)"]
+
+
+def search_scope_note(language):
+    """The in-article §43 note (in the article's language),
+    naming the restricted search scope of this production."""
+    if (language or "").strip().lower().startswith("fa"):
+        return ("> یادداشت: دامنهٔ جستجو در این تولید فقط منابع "
+                "تازه‌افزودهٔ §§32–42 بوده است (قفسهٔ منابع "
+                "گردآوری‌شده، CORE، سخنرانی‌های دانشگاهی، ensani، "
+                "jihs، مجلات ریاضی ایران و مجلات تاجیکستان)؛ همهٔ "
+                "دروازه‌های کیفیت بدون تغییر اعمال شده‌اند.")
+    return ("> Note: this production searched ONLY the newly "
+            "added sources (§§32–42: the collected-material "
+            "shelf, CORE, university lectures, ensani, jihs, "
+            "Iranian mathematics journals and Tajik journals); "
+            "all quality gates applied unchanged.")
+
+
 def normalise_title(t):
     return re.sub(r"[^a-z0-9\u0600-\u06FF]+", " ", (t or "").lower()).strip()
 
@@ -4676,7 +4772,8 @@ def collect_verified(queries, state=None, searcher_order=None):
     if state.get("cache") is None:
         state["cache"] = load_verify_cache()
     cache = state["cache"]
-    order = list(searcher_order) if searcher_order else list(SEARCHERS)
+    order = scoped_searchers(searcher_order if searcher_order
+                             else SEARCHERS)
     verified, verified_by = [], {}
     found_by, kept_by = {}, {}
     total_candidates = state["total_candidates"]
@@ -4779,6 +4876,11 @@ def retrieve_wave1(queries, rstate):
     wave 1's dedupe set, bench decisions and language-gate count."""
     verified = collect_verified(queries, state=rstate,
                                 searcher_order=WAVE1_SEARCHERS)
+    if search_scope() == "new":
+        print("search scope (§43): NEW-ONLY — wave 1 ran only the "
+              "§§32–42 searchers (shelf, lectures, ensani, jihs, "
+              "iran-math, tajik, CORE); Crossref top-up skipped")
+        return verified
     if len(verified) < EARLY_STOP_VERIFIED:
         print(f"wave 1 (§18): {len(verified)} verified from the "
               f"abstract-rich indexes (< {EARLY_STOP_VERIFIED}) — "
@@ -5100,6 +5202,15 @@ def retrieve_primary_sources(smap, rstate, extra_keywords=None,
     re-run must respect the same global cap)."""
     if max_new is None:
         max_new = PRIMARY_MAX_VERIFIED
+    if search_scope() == "new":
+        # §43: the primary lane's catalogue searches (IA + Google
+        # Books) are pre-§32 searchers — in new-only mode the lane
+        # stands down; the §41 shelf carries the primary books
+        # (with passages) through the main pool instead.
+        print("primary sources (§19): lane skipped — search "
+              "scope (§43) is new-only; primaries come from the "
+              "§41 shelf")
+        return []
     works = (smap or {}).get("primary_works") or []
     if not works or max_new <= 0:
         if works:
@@ -8273,6 +8384,7 @@ def build_funnel_text(topic, funnel, success, stage=None,
     if funnel.get("drop_disagreement"):
         lines.append("• اختلاف دو داور ارتباط: "
                      f"{funnel['drop_disagreement']}")
+    lines += _scope_lines()
     lines += _adaptation_lines(adaptation)
     lines += _review_lines(review)
     lines.append("")
@@ -8345,6 +8457,9 @@ def build_detailed_source_report(topic, counted,
              f"موضوع: {topic}", ""]
     lines += _adaptation_lines(adaptation)
     if _adaptation_lines(adaptation):
+        lines.append("")
+    lines += _scope_lines()
+    if _scope_lines():
         lines.append("")
     counted = list(counted or [])
     if counted:
@@ -10271,6 +10386,17 @@ def main():
                                      adaptation["adapted_topic"],
                                      adaptation.get("reason", ""),
                                      language)
+        if article.startswith("# "):
+            first_nl = article.find("\n")
+            article = (article[:first_nl + 1] + "\n" + note + "\n"
+                       + article[first_nl + 1:])
+        else:
+            article = note + "\n\n" + article
+
+    # §43: a new-only production carries the scope note near the
+    # top of the article itself, naming the restricted pool.
+    if search_scope() == "new":
+        note = search_scope_note(language)
         if article.startswith("# "):
             first_nl = article.find("\n")
             article = (article[:first_nl + 1] + "\n" + note + "\n"
