@@ -144,7 +144,7 @@ SCRIPT = {"citations": [], "numbers": [], "structure": [],
 
 
 def fake_llm(prompt, api_key, model, temperature=0.4,
-             json_mode=False, provider=None):
+             json_mode=False, provider=None, max_tokens=None):
     def role_of(marker):
         return marker in prompt
 
@@ -175,10 +175,18 @@ def fake_llm(prompt, api_key, model, temperature=0.4,
         for line in prompt.splitlines():
             if line.startswith("SENTENCE "):
                 i = int(line.split(":", 1)[0].split()[1])
-                verdicts.append({
-                    "i": i,
-                    "supported": SCRIPT["claims_supported"],
-                    "central": SCRIPT["claims_central"]})
+                v = {"i": i,
+                     "supported": SCRIPT["claims_supported"],
+                     "central": SCRIPT["claims_central"]}
+                if not SCRIPT["claims_supported"] \
+                        and SCRIPT.get("claims_evidenced", True):
+                    # §45 evidence anchors: a verbatim span of the
+                    # flagged sentence + the no-coverage statement.
+                    sent = line.split(": ", 1)[1] \
+                        if ": " in line else ""
+                    v["quote"] = sent[:50]
+                    v["evidence"] = "no passage covers this claim"
+                verdicts.append(v)
         return json.dumps({"verdicts": verdicts})
     raise AssertionError("unexpected prompt: " + prompt[:120])
 
@@ -187,6 +195,7 @@ def reset_script(**over):
     SCRIPT.update({"citations": [], "numbers": [], "structure": [],
                    "language": [], "supervisor": [],
                    "claims_supported": True, "claims_central": False,
+                   "claims_evidenced": True,
                    "fail_roles": set(), "repair": None})
     SCRIPT.update(over)
 
