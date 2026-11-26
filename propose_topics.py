@@ -209,7 +209,7 @@ def search_europe_pmc(query):
 
 # --------------------------------------------------------------------------
 # Source registries (§17) — credibility / whitelist SIGNAL only.
-# Four curated registries sit beside this script in the repo:
+# Five curated registries sit beside this script in the repo:
 #   sources_registry.json        (registry 1, registry schema)
 #   sources_registry_500_more.json (500 DOAJ journals, compact schema:
 #                                   {id, name, url, type, fields,
@@ -219,6 +219,10 @@ def search_europe_pmc(query):
 #   thesis_registry.json         (thesis-HOSTING sources, registry
 #                                   schema — repositories and ETD
 #                                   archives, not individual theses)
+#   arab_journals_registry.json  (§23: the eight open-access
+#                                   Arab-country journal platforms,
+#                                   registry schema — platform entries,
+#                                   not individual journals)
 # Both schemas normalise into one record {name, url, domain, type,
 # fields, languages, registry}. A registry match is a ranking SIGNAL
 # ONLY: it never verifies a source (the DOI / Crossref / publisher
@@ -230,7 +234,8 @@ def search_europe_pmc(query):
 REGISTRY_FILES = ["sources_registry.json",
                   "sources_registry_500_more.json",
                   "sources_registry_2.json",
-                  "thesis_registry.json"]
+                  "thesis_registry.json",
+                  "arab_journals_registry.json"]
 _REGISTRY_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
