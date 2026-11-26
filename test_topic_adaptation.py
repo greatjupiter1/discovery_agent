@@ -150,6 +150,14 @@ ba.send_detailed_source_report_dm = (
     lambda *a, **k: DM["report"].append((a, k)))
 ba.send_suggestions_dm = lambda *a, **k: DM["suggestions"].append((a, k))
 ba.fetch_youtube_support = lambda q, k: []
+# §33: the review layer is stubbed to a clean pass — these tests
+# exercise main()'s checkpoint/adaptation behaviour, not the
+# reviewers (test_review_layer.py covers them).
+ba.run_review_layer = lambda a, c, ctx: {
+    "ok": True, "verdict": "pass", "rounds": 0,
+    "issues_found": 0, "issues_fixed": 0, "roles": {},
+    "blocked_roles": [], "issue_records": [], "article": a}
+ba.send_review_report_dm = lambda *a, **k: True
 ba._fresh_screening = fake_fresh
 ba.call_llm = fake_llm
 ba.write_article = fake_write
