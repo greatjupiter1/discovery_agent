@@ -3752,18 +3752,23 @@ def search_tajik_journals(query):
 #       carry oa_pdf_url = that URL and attach_fulltexts_v2
 #       fetches it via its index-fulltext route, exactly like
 #       §34/§36. Metadata-only hits are skipped, per the
-#       full-text-only law. The query is first biased with the
-#       documented _exists_:fullText clause (CORE API v3
-#       announcement) so the top of the result list is
-#       full-text-bearing; if that returns nothing at all, one
-#       plain-query retry runs and the client-side filter still
-#       enforces the law.
-#   HONEST CAVEAT — no KEYED live smoke has run yet: the key
-#       exists only in Jupiter's mailbox (registration
-#       2026-11-26). Until he pastes CORE_API_KEY into the repo
-#       secrets the searcher stays dormant (fail-soft empty)
-#       and this wiring rests on the official spec + the
-#       mocked-shape tests in test_core.py.
+#       full-text-only law. The query is the PLAIN query: an
+#       earlier version biased it with an _exists_:fullText
+#       clause (from a CORE API v3 announcement), but the live
+#       API rejects that clause outright — probed 2026-11-26:
+#       HTTP 500, "Invalid expression: Could not find a
+#       property named 'fullText' on type 'search.document'"
+#       — and the old code's plain retry ran only on a
+#       successful-but-empty biased call, so the failure was
+#       terminal and silent: that is exactly why run
+#       45802869465 (the first keyed run) got ZERO CORE
+#       candidates with no error in its log. The client-side
+#       filter enforces the law without the bias.
+#   HONEST CAVEAT — no KEYED live smoke has run yet: the
+#       2026-11-26 probes above were unkeyed (the plain query
+#       answered 200 with real results; the biased one 500).
+#       A keyed smoke remains owed to confirm rate limits and
+#       the Discovery path end to end.
 # The fetch discipline is a single-shot _core_fetch (the §23
 # pattern, with the Authorization header) and candidates are
 # shaped by _arab_candidate, exactly like §36.
@@ -3979,11 +3984,15 @@ def _core_discover_fulltext(doi, title, year):
 
 def _core_search_once(q):
     """One POST /v3/search/works call -> _parse_core_results
-    output, or None on any failure (fail-soft upstream)."""
+    output, or None on any failure (fail-soft upstream). A
+    failure is PRINTED: the first version failed silently, so
+    run 45802869465's all-500 wave left no trace in the log."""
     payload = json.dumps({"q": q, "limit": CORE_FETCH_LIMIT,
                           "offset": 0}).encode("utf-8")
     status, body = _core_fetch(_CORE_SEARCH_URL, data=payload)
     if status != 200 or not body:
+        print(f"WARNING: CORE search failed (status={status}) "
+              f"for query {q[:60]!r}")
         return None
     try:
         data = json.loads(body)
@@ -4005,16 +4014,24 @@ def search_core(query):
     query = (query or "").strip()
     if not query:
         return []
-    parsed = _core_search_once(
-        f"({query}) AND _exists_:fullText")
+    # The plain query ONLY. The first version biased it with
+    # "AND _exists_:fullText" — a clause taken from a CORE
+    # announcement that the LIVE API rejects: probed
+    # 2026-11-26, it answers HTTP 500 ("Azure search failed
+    # ... Invalid expression: Could not find a property named
+    # 'fullText' on type 'search.document'"), while the plain
+    # query answers 200. Because the old code treated that
+    # failure as terminal (the plain retry ran only on a
+    # successful-but-empty biased call), EVERY query in run
+    # 45802869465 died on the biased call and CORE silently
+    # contributed zero candidates despite the key being
+    # present. The client-side full-text filter in
+    # _parse_core_results enforces the full-text-only law on
+    # its own, so the bias bought nothing anyway.
+    parsed = _core_search_once(query)
     if parsed is None:
         return []
     cands, pending = parsed
-    if not cands and not pending:
-        parsed = _core_search_once(query)
-        if parsed is None:
-            return []
-        cands, pending = parsed
     budget = CORE_DISCOVERY_BUDGET
     for cand in pending:
         if len(cands) >= CORE_CAP or budget <= 0:
