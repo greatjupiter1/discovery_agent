@@ -32,7 +32,7 @@ like HTTP error statuses.
 Inputs come from the environment (set by .github/workflows/discovery.yml):
   FIELD, TOPIC, LANGUAGE (default "fa"), MODE (default "review"),
   SEARCH_SCOPE (default "full"; "new" restricts the candidate
-  search to the §§32–42 additions only — §43),
+  search to the §§32–46 additions only — §43),
   GEMINI_MODEL (default "gemini-3.5-flash")
   LLM_PROVIDER (default "gemini"; "github" selects GitHub Models,
   "glm" selects GLM on z.ai),
@@ -70,6 +70,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import threading
 import time
 import unicodedata
 import urllib.error
@@ -4048,8 +4049,480 @@ def search_core(query):
 
 
 # --------------------------------------------------------------------------
+# Three more Arabic book libraries (§46) — Ganjeh (the Najm
+# Reader), Ablibrary (مكتبة أهل البيت) and the Najaf Desert
+# Library (مكتبة صحراء النجف), registered in
+# ganjeh_registry.json / ablibrary_registry.json /
+# najaf_registry.json (§17 wiring: credibility/priority signal
+# only, never verification). All three were verified live on
+# 2026-11-26 under the full-text-only law and the multi-route
+# rule; each keeps the §23 fetch discipline (single-shot
+# _arab_fetch) and the _arab_candidate shape, and every
+# candidate is emitted ONLY with real fetched page text as its
+# passages (the shelf §41 shape: fulltext / fulltext_excerpt /
+# passages set at emission, so the unchanged full-text layer
+# accepts them as already-carrying text).
+#
+# GANJEH (reader.najm.ac) — LIVE via its own JSON API. The
+# reader is an Angular SPA (page HTML is a shell); its main
+# bundle exposes apiUrl=/api, and every route below was probed
+# from the build sandbox WITHOUT login or key:
+#   catalogue  GET /api/books/search?q=<term> -> book records
+#       with real book_identifiers (البيروني -> the nine seed
+#       books in _GANJEH_SEEDS, copied verbatim, none invented)
+#   details    GET /api/books/<id> -> {metadata (Arabic field
+#       names), toc [{text, page}]}
+#   page text  GET /api/books/<id>/pages/<n> -> {content: HTML
+#       fragment}; p. 200 of book 27050 returned the page's
+#       real Arabic prose, matching the browser deep-read of
+#       the same page word for word
+#   full-text  GET /api/search?q=<q>&page=1&size=<n> ->
+#       {results: {items: [{book_identifier, book_name,
+#       main_book_label, part_number, page, snippet}], total}}
+#       (انحطاط الأفق -> 13 hits, the Qanun itself among them);
+#       in-book twin GET /api/books/<id>/search (same items)
+#   PLACEHOLDER LAW: the API's content for numeric TABLE pages
+#   is a literal ". . ." placeholder (probe: book 27050 p. 309,
+#   a sine-table page — 5 visible chars). _lib46_text_ok
+#   rejects such pages; they are never emitted as passages.
+#
+# ABLIBRARY (ablibrary.net) — page route LIVE, NO machine
+# search route. GET /book_content/b/<id>/<page> answers 200
+# with the page's real prose server-side in the HTML (Qanun
+# vol. 1 pp. 1/200/320 fetched and read; pp. 200/320 match the
+# Ganjeh copy of the SAME Dar al-Kutub al-Ilmiyya edition word
+# for word). Routes tried for search: the site's declared
+# /search?query=<term> is a client-side shell (67 visible
+# chars); its full JS chunk set (55 files) carries no data API
+# for search (only Next.js framework '/api' internals), guessed
+# /api/search and /api/books return the SPA shell, and an
+# external index fallback (DuckDuckGo html) answered 202.
+# Wired as a SEED-BOOK source: the three Qanun volumes
+# (12098/12099/12100) are scanned page by page — bounded and
+# progressive across a run — only for queries matching the
+# seeds' metadata. (The /book_content/11337/ route named as a
+# second Qanun copy proved to be الكافي ج 14 of al-Kulayni —
+# a different book; it is not used.)
+#
+# NAJAF DESERT LIBRARY (najafdesertlibrary.com) — full text
+# verified BY BROWSER (the Qanun complete, 3 vols / 1,262 pp,
+# at /book/القانون-المسعودي/v/<vol>/p/<page>; التفهيم, تحقيق
+# ما للهند and الآثار الباقية also hosted), but every machine
+# route from the build sandbox meets a Cloudflare "Just a
+# moment..." wall: apex, www, http->https, full browser
+# headers, TLS-1.2-capped context — all HTTP 403. The wall is
+# egress-based, not absence: robots.txt and the sitemaps are
+# NOT walled, and /sitemaps/sitemap-books.xml (4,920 books)
+# supplied the four Biruni slugs verbatim. Wired as a
+# SEED-BOOK source on the verified pattern, fail-soft: it
+# contributes only from an egress Cloudflare admits (the
+# SID §24 position) and returns [] behind the wall.
+#
+# The seed-book mechanism (Ablibrary + Najaf) mirrors the
+# shelf: a query whose terms match a seed's title/author/
+# keywords triggers a bounded page scan of that seed; fetched
+# pages are cached per run and the scan frontier advances
+# across calls, so a run's successive queries read deeper
+# into the book instead of re-reading its opening. Passages
+# are extracted from the fetched text with the query terms
+# (the seed's own keywords as fallback, exactly like §41);
+# no metadata-only candidate is ever emitted.
+# --------------------------------------------------------------------------
+
+GANJEH_CAP = 8
+GANJEH_SEARCH_SIZE = 24
+GANJEH_PAGES_PER_BOOK = 3
+_GANJEH_BASE = "https://reader.najm.ac"
+
+# The Biruni books the Ganjeh catalogue search returned for
+# البيروني (probe 2026-11-26; ids copied verbatim from the
+# API's own answer — the same list ganjeh_registry.json
+# records). These are the author's own works: candidates from
+# them are marked primary, exactly like the §41 shelf's
+# primary books.
+_GANJEH_SEEDS = {
+    "27050": ("القانون المسعودي — جلد 1", "أبو ريحان البيروني", "ar"),
+    "27060": ("القانون المسعودي — جلد 2", "أبو ريحان البيروني", "ar"),
+    "27070": ("القانون المسعودي — جلد 3", "أبو ريحان البيروني", "ar"),
+    "27030": ("الآثار الباقية عن القرون الخالية",
+              "أبو ريحان البيروني", "ar"),
+    "27081": ("آثار الباقيه (فارسى)", "ابوریحان بیرونی", "fa"),
+    "27040": ("التفهیم لاوائل صناعة التنجیم",
+              "أبو ريحان البيروني", "ar"),
+    "27083": ("تحديد نهايات الأماكن لتصحيح مسافات المساكن (فارسى)",
+              "أبو ريحان البيروني", "fa"),
+    "27080": ("تحقیق ما للهند", "أبو ريحان البيروني", "ar"),
+    "27082": ("الصيدنة في الطب (فارسى)", "ابوریحان بیرونی", "fa"),
+}
+_GANJEH_META_CACHE = {}
+
+
+def _lib46_html_to_text(body):
+    """Visible text of an HTML page/fragment (§46): script and
+    style blocks removed first (ablibrary's pages carry an RSC
+    payload whose escaped text must not leak in), the <main>
+    region preferred when present, then the shared tag
+    stripper."""
+    if not body:
+        return ""
+    main = re.search(r"<main\b.*?</main>", body, re.S | re.I)
+    frag = main.group(0) if main else body
+    frag = re.sub(r"<script\b.*?</script>", " ", frag,
+                  flags=re.S | re.I)
+    frag = re.sub(r"<style\b.*?</style>", " ", frag,
+                  flags=re.S | re.I)
+    return _arab_strip_tags(frag)
+
+
+def _lib46_text_ok(text):
+    """The §46 full-text bar for one fetched page: real prose
+    or nothing. Rejects empty/short pages, Cloudflare challenge
+    pages, the Ganjeh ". . ." table placeholder, and
+    number-only table pages (a page whose tokens are mostly
+    digits is a table, not a passage)."""
+    t = (text or "").strip()
+    if len(t) < 200:
+        return False
+    low = t.lower()
+    if "just a moment" in low or "challenges.cloudflare.com" in low:
+        return False
+    tokens = re.findall(r"[\w\u0600-\u06FF]+", t)
+    if len(tokens) < 30:
+        return False
+    letters = [w for w in tokens
+               if re.search(r"[A-Za-z\u0600-\u06FF]", w)]
+    if len(letters) < 20 or len(letters) < 0.4 * len(tokens):
+        return False
+    return True
+
+
+def _lib46_year(text):
+    """Gregorian year from an edition string: a 19xx/20xx year
+    passes through; a Hijri year (1200-1599 range, e.g. the
+    Ganjeh metadata's سنة الطبع 1422 ه . ق) is converted
+    approximately (AH + 622 - AH/33)."""
+    s = str(text or "")
+    m = re.search(r"(?:19|20)\d{2}", s)
+    if m:
+        return int(m.group(0))
+    m = re.search(r"(?<!\d)(1[2-5]\d{2})(?!\d)", s)
+    if m:
+        ah = int(m.group(1))
+        return ah + 622 - ah // 33
+    return None
+
+
+def _ganjeh_page_text(book_id, page):
+    """One Ganjeh page's real prose via the reader API, or ""
+    when the page carries no usable text (placeholder, table,
+    transport failure — all fail-soft)."""
+    data = _arab_json(
+        f"{_GANJEH_BASE}/api/books/{book_id}/pages/{page}")
+    if not isinstance(data, dict):
+        return ""
+    text = _lib46_html_to_text(str(data.get("content") or ""))
+    return text if _lib46_text_ok(text) else ""
+
+
+def _ganjeh_book_meta(book_id):
+    """Book details (metadata dict) for one Ganjeh book, cached
+    per run; {} on any failure (fail-soft — the candidate is
+    then shaped from the search item alone)."""
+    if book_id in _GANJEH_META_CACHE:
+        return _GANJEH_META_CACHE[book_id]
+    data = _arab_json(f"{_GANJEH_BASE}/api/books/{book_id}")
+    meta = {}
+    if isinstance(data, dict) and isinstance(
+            data.get("metadata"), dict):
+        meta = data["metadata"]
+    _GANJEH_META_CACHE[book_id] = meta
+    return meta
+
+
+def search_ganjeh(query):
+    """§46: search Ganjeh (گنجه, the Najm Institute's reader)
+    through its site-wide full-text API. Hits are grouped by
+    book; for each book the hit pages' real prose is fetched
+    and passages extracted — a book whose hit pages carry no
+    real text (table placeholders) yields NO candidate, per
+    the full-text-only law. Fail-soft, capped at GANJEH_CAP."""
+    query = (query or "").strip()
+    if not query:
+        return []
+    url = (_GANJEH_BASE + "/api/search?" + urllib.parse.urlencode(
+        {"q": query, "page": 1, "size": GANJEH_SEARCH_SIZE}))
+    data = _arab_json(url)
+    if not isinstance(data, dict):
+        return []
+    items = ((data.get("results") or {}).get("items")) or []
+    books, order = {}, []
+    for it in items:
+        if not isinstance(it, dict):
+            continue
+        bid = str(it.get("book_identifier") or "").strip()
+        try:
+            page = int(it.get("page"))
+        except (TypeError, ValueError):
+            continue
+        if not bid:
+            continue
+        if bid not in books:
+            books[bid] = {
+                "name": str(it.get("book_name") or "").strip(),
+                "label": str(it.get("main_book_label") or "").strip(),
+                "part": str(it.get("part_number") or "").strip(),
+                "pages": []}
+            order.append(bid)
+        if page not in books[bid]["pages"]:
+            books[bid]["pages"].append(page)
+    terms = _shelf_query_terms(query)
+    out = []
+    for bid in order:
+        if len(out) >= GANJEH_CAP:
+            break
+        info = books[bid]
+        texts = []
+        for page in info["pages"][:GANJEH_PAGES_PER_BOOK]:
+            text = _ganjeh_page_text(bid, page)
+            if text:
+                texts.append(text)
+        if not texts:
+            continue
+        joined = "\n".join(texts)
+        excerpt, hits = extract_passages(joined, terms)
+        if not excerpt:
+            # The platform's own full-text index matched this
+            # book for the query (possibly through OCR variants
+            # the exact-term extractor cannot see); the fetched
+            # pages are real prose, so they stand as the passage.
+            excerpt = joined[:FULLTEXT_EXCERPT_CHARS]
+            hits = len(info["pages"])
+        meta = _ganjeh_book_meta(bid)
+        seed = _GANJEH_SEEDS.get(bid)
+        title = info["label"] or info["name"] \
+            or str(meta.get("اسم الكتاب") or "").strip()
+        if not title:
+            continue
+        if info["part"] and "جلد" not in title and \
+                "ج " not in title:
+            title = f"{title} — جلد {info['part']}"
+        author = str(meta.get("اسم المؤلف") or "").strip() \
+            or (seed[1] if seed else "")
+        venue = str(meta.get("الناشر") or "").strip()
+        cand = _arab_candidate(
+            title,
+            f"{_GANJEH_BASE}/book/{bid}?page={info['pages'][0]}",
+            "ganjeh:reader",
+            authors=[author] if author else [],
+            year=_lib46_year(meta.get("سنة الطبع")),
+            venue=(f"Ganjeh — Najm Reader (گنجه)"
+                   + (f"; {venue}" if venue else "")))
+        cand["fulltext"] = True
+        cand["fulltext_excerpt"] = excerpt[:FULLTEXT_EXCERPT_CHARS]
+        cand["fulltext_route"] = "ganjeh:reader"
+        cand["passages"] = True
+        cand["passage_hits"] = hits
+        if seed:
+            cand["language"] = seed[2]
+            cand["source_type"] = "primary"
+            cand["primary_relation"] = "author"
+        elif "( فارسى )" in (info["name"] + info["label"]) or \
+                "( فارسی )" in (info["name"] + info["label"]):
+            cand["language"] = "fa"
+        else:
+            cand["language"] = "ar"
+        out.append(cand)
+    return out
+
+
+# --- Seed-book libraries (§46): Ablibrary + Najaf ------------
+# A seed searcher holds a short list of known books (ids/slugs
+# verified live, mirrored in its registry file). A query whose
+# terms match a seed's metadata advances a bounded, per-run
+# progressive scan of that book's pages; passages are
+# extracted from the fetched text. Behind a bot wall or at a
+# dead host the scan stalls and the searcher returns [] —
+# fail-soft, never a metadata-only candidate.
+
+SEED_LIBRARY_CAP = 8
+SEED_SCAN_PAGES_PER_CALL = 8
+_SEED_SCAN_LOCK = threading.Lock()
+_SEED_SCAN = {}
+
+
+def _seed_scan_text(lib_key, seed, page_url):
+    """The text fetched so far for one seed book: advances the
+    progressive scan by up to SEED_SCAN_PAGES_PER_CALL new
+    pages (cached per run), then returns every fetched page's
+    text in page order. A non-200 answer ends the scan (wall
+    or book end); a 200 page with no real prose is skipped,
+    three in a row end the scan."""
+    key = (lib_key, seed["key"])
+    with _SEED_SCAN_LOCK:
+        state = _SEED_SCAN.setdefault(
+            key, {"next": 1, "pages": {}, "duds": 0, "done": False})
+        budget = SEED_SCAN_PAGES_PER_CALL
+        while budget > 0 and not state["done"]:
+            page = state["next"]
+            if seed.get("pages") and page > seed["pages"]:
+                state["done"] = True
+                break
+            status, body = _arab_fetch(page_url(seed, page))
+            if status != 200 or not body:
+                state["done"] = True
+                break
+            text = _lib46_html_to_text(body)
+            state["next"] = page + 1
+            budget -= 1
+            if not _lib46_text_ok(text):
+                state["duds"] += 1
+                if state["duds"] >= 3:
+                    state["done"] = True
+                continue
+            state["duds"] = 0
+            state["pages"][page] = text
+        return "\n".join(state["pages"][p]
+                         for p in sorted(state["pages"]))
+
+
+def _seed_library_search(query, lib_key, seeds, page_url,
+                         index_tag, venue):
+    """Shared seed-book search (§46): metadata gate, bounded
+    progressive scan, passage extraction (query terms first,
+    the seed's own keywords as fallback — §41 semantics)."""
+    terms = _shelf_query_terms(query)
+    if not terms:
+        return []
+    out = []
+    for seed in seeds:
+        if len(out) >= SEED_LIBRARY_CAP:
+            break
+        meta = " ".join([seed.get("title") or "",
+                         seed.get("author") or "",
+                         " ".join(seed.get("keywords") or [])]).lower()
+        if not any(t.lower() in meta for t in terms):
+            continue
+        text = _seed_scan_text(lib_key, seed, page_url)
+        if not text:
+            continue
+        excerpt, hits = extract_passages(text, terms)
+        if not excerpt:
+            excerpt, hits = extract_passages(
+                text, seed.get("keywords") or [])
+        if not excerpt:
+            continue
+        cand = _arab_candidate(
+            seed["title"], page_url(seed, 1), index_tag,
+            authors=[seed["author"]] if seed.get("author") else [],
+            venue=venue)
+        cand["fulltext"] = True
+        cand["fulltext_excerpt"] = excerpt[:FULLTEXT_EXCERPT_CHARS]
+        cand["fulltext_route"] = index_tag
+        cand["passages"] = True
+        cand["passage_hits"] = hits
+        cand["language"] = seed.get("language")
+        if seed.get("primary"):
+            cand["source_type"] = "primary"
+            cand["primary_relation"] = "author"
+        out.append(cand)
+    return out
+
+
+_QANUN_KEYWORDS = ["القانون المسعودي", "المسعودي", "بيروني",
+                   "البيروني", "biruni", "qanun", "masudi",
+                   "انحطاط الأفق", "قطر الأرض", "أبعاد الأرض",
+                   "الجيوب", "الفلك", "الارتفاع", "المطالع"]
+
+_ABLIBRARY_SEEDS = [
+    {"key": "12098", "book_id": "12098",
+     "title": "القانون المسعودي — ج 1",
+     "author": "أبو ريحان البيروني", "language": "ar",
+     "pages": 472, "primary": True, "keywords": _QANUN_KEYWORDS},
+    {"key": "12099", "book_id": "12099",
+     "title": "القانون المسعودي — ج 2",
+     "author": "أبو ريحان البيروني", "language": "ar",
+     "primary": True, "keywords": _QANUN_KEYWORDS},
+    {"key": "12100", "book_id": "12100",
+     "title": "القانون المسعودي — ج 3",
+     "author": "أبو ريحان البيروني", "language": "ar",
+     "primary": True, "keywords": _QANUN_KEYWORDS},
+]
+
+
+def _ablibrary_page_url(seed, page):
+    return (f"https://ablibrary.net/book_content/b/"
+            f"{seed['book_id']}/{page}")
+
+
+def search_ablibrary(query):
+    """§46: Ablibrary (مكتبة أهل البيت, ablibrary.net) as a
+    seed-book source — no machine search route exists (see
+    the §46 header), so the three verified Qanun volumes are
+    scanned progressively for matching queries and candidates
+    carry passages extracted from the fetched pages.
+    Fail-soft, capped at SEED_LIBRARY_CAP."""
+    return _seed_library_search(
+        query, "ablibrary", _ABLIBRARY_SEEDS, _ablibrary_page_url,
+        "ablibrary:books",
+        "Ablibrary — مكتبة أهل البيت (ع) (Dar al-Kutub "
+        "al-Ilmiyya ed.)")
+
+
+_NAJAF_SEEDS = [
+    {"key": "qanun-v1", "slug": "القانون-المسعودي", "volume": 1,
+     "title": "القانون المسعودي — ج 1",
+     "author": "أبو ريحان البيروني", "language": "ar",
+     "pages": 472, "primary": True, "keywords": _QANUN_KEYWORDS},
+    {"key": "qanun-v2", "slug": "القانون-المسعودي", "volume": 2,
+     "title": "القانون المسعودي — ج 2",
+     "author": "أبو ريحان البيروني", "language": "ar",
+     "pages": 368, "primary": True, "keywords": _QANUN_KEYWORDS},
+    {"key": "qanun-v3", "slug": "القانون-المسعودي", "volume": 3,
+     "title": "القانون المسعودي — ج 3",
+     "author": "أبو ريحان البيروني", "language": "ar",
+     "pages": 422, "primary": True, "keywords": _QANUN_KEYWORDS},
+    {"key": "tafhim", "slug": "التفهيم-لاوايل-صناعة-التنجيم",
+     "volume": 1, "title": "التفهيم لاوائل صناعة التنجيم",
+     "author": "أبو ريحان البيروني", "language": "ar",
+     "primary": True,
+     "keywords": ["التفهيم", "التنجيم", "بيروني", "البيروني",
+                  "biruni", "tafhim", "الفلك", "النجوم"]},
+    {"key": "tahqiq", "slug": "تحقيق-ما-للهند", "volume": 1,
+     "title": "تحقيق ما للهند",
+     "author": "أبو ريحان البيروني", "language": "ar",
+     "primary": True,
+     "keywords": ["تحقيق ما للهند", "الهند", "بيروني",
+                  "البيروني", "biruni", "india"]},
+    {"key": "athar", "slug": "الآثار-الباقية-عن-القرون-الخالية",
+     "volume": 1, "title": "الآثار الباقية عن القرون الخالية",
+     "author": "أبو ريحان البيروني", "language": "ar",
+     "primary": True,
+     "keywords": ["الآثار الباقية", "القرون الخالية", "بيروني",
+                  "البيروني", "biruni", "chronology", "الأعياد"]},
+]
+
+
+def _najaf_page_url(seed, page):
+    return ("https://najafdesertlibrary.com/book/"
+            + urllib.parse.quote(seed["slug"], safe="")
+            + f"/v/{seed['volume']}/p/{page}")
+
+
+def search_najaf(query):
+    """§46: the Najaf Desert Library (مكتبة صحراء النجف) as a
+    seed-book source on its browser-verified page pattern.
+    Machine fetches currently meet a Cloudflare wall from the
+    build sandbox (see the §46 header), so the scan stalls and
+    this returns [] until an egress is admitted — fail-soft,
+    capped at SEED_LIBRARY_CAP."""
+    return _seed_library_search(
+        query, "najaf", _NAJAF_SEEDS, _najaf_page_url,
+        "najaf:desert", "Najaf Desert Library — مكتبة صحراء النجف")
+
+
+# --------------------------------------------------------------------------
 # Source registries (§17) — credibility / whitelist SIGNAL only.
-# Sixteen curated registries sit beside this script in the repo:
+# Nineteen curated registries sit beside this script in the repo:
 #   sources_registry.json        (registry 1, registry schema)
 #   sources_registry_500_more.json (500 DOAJ journals, compact schema:
 #                                   {id, name, url, type, fields,
@@ -4132,6 +4605,34 @@ def search_core(query):
 #                                   full-text resolution, keyed
 #                                   by CORE_API_KEY, registry
 #                                   schema — one platform entry)
+#   ganjeh_registry.json         (§46: Ganjeh — the Najm
+#                                   Reader (گنجه) of the Najm
+#                                   Institute, wired LIVE via
+#                                   its own JSON API (catalogue,
+#                                   details, page text and
+#                                   site-wide full-text search),
+#                                   registry schema — one
+#                                   platform entry + the nine
+#                                   Biruni seed books its
+#                                   catalogue search returned)
+#   ablibrary_registry.json      (§46: Ablibrary — مكتبة أهل
+#                                   البيت (ع); its page route is
+#                                   full-text-verified but no
+#                                   machine search route exists,
+#                                   so it is wired as a seed-book
+#                                   source, registry schema —
+#                                   one platform entry + the
+#                                   three Qanun volume entries)
+#   najaf_registry.json          (§46: the Najaf Desert
+#                                   Library — مكتبة صحراء النجف;
+#                                   full text browser-verified,
+#                                   machine fetches Cloudflare-
+#                                   walled from the sandbox, so
+#                                   it is wired as a fail-soft
+#                                   seed-book source, registry
+#                                   schema — one platform entry
+#                                   + four Biruni book entries
+#                                   from its own sitemap)
 # Both schemas normalise into one record {name, url, domain, type,
 # fields, languages, registry}. A registry match is a ranking SIGNAL
 # ONLY: it never verifies a source (the DOI / Crossref / publisher
@@ -4155,7 +4656,10 @@ REGISTRY_FILES = ["sources_registry.json",
                   "iran_math_registry.json",
                   "tajik_journals_registry.json",
                   "utihs_registry.json",
-                  "core_registry.json"]
+                  "core_registry.json",
+                  "ganjeh_registry.json",
+                  "ablibrary_registry.json",
+                  "najaf_registry.json"]
 _REGISTRY_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
@@ -4480,7 +4984,8 @@ SEARCHERS = [search_shelf, search_openalex, search_crossref, search_openaire,
              search_asian_platforms, search_arab_libraries,
              search_european_platforms, search_digital_libraries,
              search_university_lectures, search_ensani, search_jihs,
-             search_iran_math, search_tajik_journals, search_core]
+             search_iran_math, search_tajik_journals, search_core,
+             search_ganjeh, search_ablibrary, search_najaf]
 
 # English-first retrieval (§18): wave 1 queries the abstract-rich
 # indexes ONLY — Crossref is held back because, queried with a
@@ -4496,7 +5001,8 @@ WAVE1_SEARCHERS = [search_shelf, search_openalex, search_europe_pmc, search_hal,
                    search_asian_platforms, search_arab_libraries,
                    search_european_platforms, search_digital_libraries,
                    search_university_lectures, search_ensani, search_jihs,
-                   search_iran_math, search_tajik_journals, search_core]
+                   search_iran_math, search_tajik_journals, search_core,
+                   search_ganjeh, search_ablibrary, search_najaf]
 CROSSREF_SEARCHERS = [search_crossref]
 
 
@@ -4510,7 +5016,7 @@ CROSSREF_SEARCHERS = [search_crossref]
 #       WAVE1_SEARCHERS, the Crossref top-up, wave 2 and the
 #       §19 primary lane all run as before.
 #   "new" — the candidate search runs ONLY the searchers added
-#       in the newest build wave (§§32–42), i.e. the shelf plus
+#       in the newest build wave (§§32–46), i.e. the shelf plus
 #       the new items:
 #         search_shelf               (§41 — the collected shelf;
 #                                     carries the primary books
@@ -4523,9 +5029,13 @@ CROSSREF_SEARCHERS = [search_crossref]
 #         search_iran_math           (§37)
 #         search_tajik_journals      (§38)
 #         search_core                (§42)
+#         search_ganjeh              (§46)
+#         search_ablibrary           (§46)
+#         search_najaf               (§46)
 #       (§39 utihs and §40 are registry-only — they have no
-#       searcher to include; §33 is the review layer, not a
-#       searcher.) Every older searcher is skipped: the filter
+#       searcher to include; §33 is the review layer, §44 the
+#       parallel writer and §45 the review robustness pass —
+#       none of them is a searcher.) Every older searcher is skipped: the filter
 #       sits in collect_verified, the single choke point every
 #       retrieval wave flows through, so wave 1, the wave-2
 #       broader wave and any other collect_verified call are
@@ -4544,7 +5054,8 @@ CROSSREF_SEARCHERS = [search_crossref]
 
 NEW_ONLY_SEARCHERS = [search_shelf, search_university_lectures,
                       search_ensani, search_jihs, search_iran_math,
-                      search_tajik_journals, search_core]
+                      search_tajik_journals, search_core,
+                      search_ganjeh, search_ablibrary, search_najaf]
 _NEW_ONLY_NAMES = {s.__name__ for s in NEW_ONLY_SEARCHERS}
 
 
@@ -4560,7 +5071,7 @@ def search_scope():
 def scoped_searchers(order):
     """The searcher order for one retrieval wave under the
     active scope (§43): unchanged in "full" mode; in "new" mode
-    only the §§32–42 searchers survive, in the caller's order."""
+    only the §§32–46 searchers survive, in the caller's order."""
     order = list(order)
     if search_scope() != "new":
         return order
@@ -4573,9 +5084,10 @@ def _scope_lines():
     if search_scope() != "new":
         return []
     return ["",
-            "دامنهٔ جستجو: فقط منابع تازه‌افزودهٔ §§32–42 "
+            "دامنهٔ جستجو: فقط منابع تازه‌افزودهٔ §§32–46 "
             "(قفسهٔ منابع گردآوری‌شده، CORE، سخنرانی‌های دانشگاهی، "
-            "ensani، jihs، مجلات ریاضی ایران، مجلات تاجیکستان)"]
+            "ensani، jihs، مجلات ریاضی ایران، مجلات تاجیکستان، "
+            "گنجه، کتابخانهٔ اهل‌البیت، صحراء النجف)"]
 
 
 def search_scope_note(language):
@@ -4583,14 +5095,16 @@ def search_scope_note(language):
     naming the restricted search scope of this production."""
     if (language or "").strip().lower().startswith("fa"):
         return ("> یادداشت: دامنهٔ جستجو در این تولید فقط منابع "
-                "تازه‌افزودهٔ §§32–42 بوده است (قفسهٔ منابع "
+                "تازه‌افزودهٔ §§32–46 بوده است (قفسهٔ منابع "
                 "گردآوری‌شده، CORE، سخنرانی‌های دانشگاهی، ensani، "
-                "jihs، مجلات ریاضی ایران و مجلات تاجیکستان)؛ همهٔ "
+                "jihs، مجلات ریاضی ایران و مجلات تاجیکستان، گنجه، "
+                "کتابخانهٔ اهل‌البیت و صحراء النجف)؛ همهٔ "
                 "دروازه‌های کیفیت بدون تغییر اعمال شده‌اند.")
     return ("> Note: this production searched ONLY the newly "
-            "added sources (§§32–42: the collected-material "
+            "added sources (§§32–46: the collected-material "
             "shelf, CORE, university lectures, ensani, jihs, "
-            "Iranian mathematics journals and Tajik journals); "
+            "Iranian mathematics journals, Tajik journals, "
+            "Ganjeh, Ablibrary and the Najaf Desert Library); "
             "all quality gates applied unchanged.")
 
 
@@ -4635,6 +5149,8 @@ SEARCHER_LABEL = {
     "search_digital_libraries": "Digital libraries",
     "search_university_lectures": "University lectures",
     "search_shelf": "Shelf (§41)",
+    "search_ganjeh": "Ganjeh (§46)", "search_ablibrary": "Ablibrary (§46)",
+    "search_najaf": "Najaf Desert Library (§46)",
 }
 
 VERIFY_CACHE_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)),
@@ -4895,8 +5411,9 @@ def retrieve_wave1(queries, rstate):
                                 searcher_order=WAVE1_SEARCHERS)
     if search_scope() == "new":
         print("search scope (§43): NEW-ONLY — wave 1 ran only the "
-              "§§32–42 searchers (shelf, lectures, ensani, jihs, "
-              "iran-math, tajik, CORE); Crossref top-up skipped")
+              "§§32–46 searchers (shelf, lectures, ensani, jihs, "
+              "iran-math, tajik, CORE, ganjeh, ablibrary, najaf); "
+              "Crossref top-up skipped")
         return verified
     if len(verified) < EARLY_STOP_VERIFIED:
         print(f"wave 1 (§18): {len(verified)} verified from the "
