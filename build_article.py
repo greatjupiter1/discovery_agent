@@ -3556,9 +3556,14 @@ def search_iran_math(query):
 # got a keyword answer (GET /api/search -> 405, form POST ->
 # 400/empty, JSON without "mode" -> found:0): the missing
 # piece was mode:"articles" (the web app's own transport).
-# The platform occasionally truncates its chunked responses
-# (IncompleteRead, seen live); the §23 _arab_json retry
-# absorbs most of it and fail-soft the rest.
+# Transport honesty: from the build sandbox the platform
+# intermittently closes the body stream to Python clients
+# (HTTP 200, empty body) for stretches of time, while curl —
+# and urllib in other windows — succeed (the first live smoke
+# returned real candidates through this very path); the
+# per-journal fetch retries up to three times and fail-soft
+# absorbs a wholly bad window. The engine's production runs
+# execute on GitHub's runners, a different egress.
 # Registry-only (7, routes tried in the registry notes): the
 # Academy's Известия series (физико-математических — classic
 # and 2023 series — биологических и медицинских, общественных
@@ -3570,9 +3575,10 @@ def search_iran_math(query):
 # publish mainly in Russian (ru, in the matrix) and Tajik,
 # several with English abstracts, and the platform also
 # indexes English titles/abstracts.
-# The fetch discipline is the §23 _arab_json (single-shot
-# _arab_fetch + one retry) and candidates are shaped by
-# _arab_candidate, exactly like §23/§37.
+# The fetch discipline is the §23 single-shot _arab_fetch
+# (up to three attempts per journal, see _tajik_cl_journal)
+# and candidates are shaped by _arab_candidate, exactly like
+# §23/§37.
 # --------------------------------------------------------------------------
 
 TAJIK_PER_JOURNAL_CAP = 8
@@ -3633,14 +3639,28 @@ def _parse_tajik_cl_results(data, venue_fallback):
 
 def _tajik_cl_journal(journal_id, venue_name, query):
     """One Tajik journal on CyberLeninka: the platform's search
-    API filtered to the journal, fail-soft, capped per
-    journal."""
+    API filtered to the journal, fail-soft, capped per journal.
+    Up to three attempts: the platform intermittently closes
+    the body stream to Python clients (HTTP 200 with an empty
+    body, or a dropped connection) for stretches of time —
+    curl, and urllib in other windows, succeed (the same
+    transport behaviour §25 recorded for Shamela) — so a later
+    attempt in the same call often lands in a better window,
+    and fail-soft absorbs a wholly bad one."""
     payload = json.dumps(
         {"mode": "articles", "q": query,
          "size": TAJIK_PER_JOURNAL_CAP, "from": 0,
          "journal": journal_id}).encode("utf-8")
-    data = _arab_json(_CL_API, data=payload)
-    return _parse_tajik_cl_results(data, venue_name)
+    for _attempt in range(3):
+        status, body = _arab_fetch(_CL_API, data=payload)
+        if status != 200 or not body:
+            continue
+        try:
+            data = json.loads(body)
+        except ValueError:
+            continue
+        return _parse_tajik_cl_results(data, venue_name)
+    return []
 
 
 def search_tajik_journals(query):
