@@ -54,8 +54,8 @@ check("no entry registers the cyberleninka.ru root (already in "
 
 for mod, tag in ((ba, "build_article"), (pt, "propose_topics")):
     di, ui, st = mod.load_source_registry()
-    check(f"{tag} loads 19 files / 2181 entries",
-          st["files_ok"] == 19 and st["loaded"] == 2181)
+    check(f"{tag} loads 20 files / 2184 entries",
+          st["files_ok"] == 20 and st["loaded"] == 2184)
     check(f"{tag} vestnik-tnu.com indexed by domain",
           "vestnik-tnu.com" in di)
     check(f"{tag} cyberleninka.ru indexed by domain",
