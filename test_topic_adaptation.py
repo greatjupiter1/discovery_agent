@@ -201,8 +201,15 @@ SCREEN_PLAN[TOPIC] = passing_counted()
 BRAIN["reply"] = json.dumps([{"topic": ADAPTED, "reason": "unused"}])
 rc, err = run_main()
 check("(a1) original pass -> run succeeds", rc == 0 and err is None)
-check("(a2) adaptation never called (no brain call, one screening)",
-      CALLS["llm_prompts"] == [] and CALLS["fresh"] == [TOPIC])
+check("(a2) adaptation never called (no adaptation brain call, "
+      "one screening; the only brain call is the §70 novelty "
+      "assessment, which runs on every production)",
+      CALLS["fresh"] == [TOPIC]
+      and all("FAILED a strict text-first" not in p
+              for p in CALLS["llm_prompts"])
+      and all("novelty assessor" in p
+              for p in CALLS["llm_prompts"])
+      and len(CALLS["llm_prompts"]) == 1)
 prod = SAVED_STATE["productions"][0]
 check("(a3) state record: adapted_topic is null, original kept",
       prod["adapted_topic"] is None

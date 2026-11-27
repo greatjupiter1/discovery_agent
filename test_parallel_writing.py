@@ -157,9 +157,22 @@ LEGACY_BODY_TEXT = (
     "and the refraction together in one continuous synthesis "
     "drawn from all of the numbered sources at once [1][2].")
 
+PRIORWORK_TEXT = (
+    "## Prior Work\n\n"
+    "The primary commentary reports the original observation "
+    "and its setting in full [4]. The modern study of the dip "
+    "confirms the reported angle against the observational "
+    "record [1]. The treatise on the mountain height gives the "
+    "measurement procedure step by step [2]. The refraction "
+    "analysis compares several reported values against one "
+    "another [3]. The instrument survey describes the sighting "
+    "devices and their practical limits [5]. The notes on error "
+    "bounds quantify how those limits propagate into the final "
+    "value [6]. Together these six works fix the evidence base "
+    "on which the present reconstruction rests.")
+
 SECTION_TEXTS = {
-    H1: ("## " + H1 + "\n\n"
-         "The dip of the horizon was observed from the mountain "
+    H1: ("## " + H1 + "\n\n"         "The dip of the horizon was observed from the mountain "
          "and recorded with care in the primary commentary [4]. "
          "The modern study confirms the reported angle and its "
          "observational setting in detail [1]. Together the two "
@@ -228,6 +241,11 @@ def fake_llm(prompt, api_key, model, temperature=0.4,
         if (heading, provider) in FAIL_ON:
             raise ba.Fail(f"brain {provider} down (scripted)")
         return SECTION_TEXTS[heading]
+    if "headed exactly '## Prior Work'" in prompt:
+        # §70: the fixed Prior Work task of the parallel path.
+        if ("Prior Work", provider) in FAIL_ON:
+            raise ba.Fail(f"brain {provider} down (scripted)")
+        return PRIORWORK_TEXT
     if "Write PART 1 of a scholarly article" in prompt:
         return FRONT_TEXT
     if "Write PART 2 of the same article" in prompt:
@@ -563,9 +581,21 @@ def test_main_double_review():
           "reviews", rc == 0, f"rc={rc}")
     check("(h2) the §33 layer ran exactly twice",
           len(calls) == 2, str(len(calls)))
-    check("(h3) pass 1 reviewed the assembled draft, pass 2 the "
-          "unified text",
-          len(calls) == 2 and calls[0] == ARTICLE_TEXT
+    # §70: pass 1 reviews the assembled draft WITH the
+    # novelty-boundary block inserted (the scripted brain gives
+    # no novelty verdict, so the block is the UNCONFIRMED
+    # fallback for topic "T" with closest counted title "S0").
+    fb = ba._novelty_fallback(
+        "F", "T", [{"title": "S0", "in_counted": True}])
+    expected1 = ba.insert_novelty_block(
+        ARTICLE_TEXT, ba.format_novelty_block(
+            fb, "en",
+            evidence={"verified": 7, "relevant": 5,
+                      "prior_work": 5, "full_text_checked": 5,
+                      "bib_only": 0}))
+    check("(h3) pass 1 reviewed the assembled draft (+ §70 "
+          "novelty block), pass 2 the unified text",
+          len(calls) == 2 and calls[0] == expected1
           and calls[1] == UNIFIED_TEXT)
     texts = "".join(str(p.get("text", ""))
                     for m, p in sent if m == "sendMessage")
@@ -619,9 +649,10 @@ def test_invariants():
           ba.text_first_gate(mk(5, 2, 1))["ok"] is False)
     check("(i5) gate fails below 5 counted sources",
           ba.text_first_gate(mk(4, 3, 1))["ok"] is False)
-    check("(i6) §33 roles + repair budget unchanged",
+    check("(i6) §33 roles (§70 adds the novelty reviewer) + "
+          "repair budget unchanged",
           ba.REVIEW_ROLES == ("citations", "numbers", "claims",
-                              "structure", "language")
+                              "structure", "language", "novelty")
           and ba.REVIEW_MAX_REPAIR_ROUNDS == 2)
     set_env()
     check("(i7) §43 scope default unchanged (full)",

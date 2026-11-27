@@ -8070,6 +8070,579 @@ def text_first_gate(counted):
 
 
 # --------------------------------------------------------------------------
+# §70 — Prior-work sweep, full bibliography, novelty boundary
+# (Jupiter 2026-11-27: «چرا این در مقاله قبلی نیاوردی منابعت کم بود
+# ... برای اینکه ساختار قبلی دیسکاوری مثل چت جی پی تی کنی اصلاح کن»)
+#
+# The failure this fixes: the Biruni Earth-radius article published
+# 2026-11-27 cited ONLY the 5 gate-counted sources. The wider
+# directly relevant literature the funnel had in hand (Baloch 1987,
+# Maslikov, Mercier 1992, Colman 2011, Mahony 2013, Gomez) was never
+# cited, and a directly relevant Iranian article (Keramati 1404, in
+# a journal already live-wired since §37) never surfaced in the
+# article at all — because the article's universe was the counted
+# list, not the relevant literature.
+#
+# The law: BEFORE writing, the engine builds the PRIOR-WORK SET =
+# every verified, relevant source the funnel found (the screen's
+# keeps, before the content filter) — not only the counted >= 5.
+# The article must then (a) carry a Prior Work section discussing
+# each directly relevant prior work, (b) carry a COMPLETE
+# bibliography of the prior-work set, and (c) carry a
+# novelty-boundary statement in the 4-part form: claim / closest
+# direct prior work / exact novelty boundary / credibility status
+# (confirmed vs unconfirmed — an unjudgeable novelty is reported
+# «تأییدنشده», never as proven novel; the NOVELTY CRITERION,
+# Jupiter 2026-11-27). If the prior-work set shows the WHOLE claim
+# is already done, the run fails closed with a report instead of
+# publishing; if PART is done, the claim is narrowed to the part
+# not yet done and the narrowing is visible (guide + the block in
+# the article + the funnel + state.json), never silent — the
+# §20.10 reporting discipline applied to claims, not topics.
+#
+# Prior-work members that are relevant but NOT counted split by
+# what the funnel actually obtained for them (Jupiter 2026-11-27
+# ~21:24: «هدف ما اینه که از تمام منابع موجود استفاده کنیم» —
+# USE ALL EXISTING SOURCES; the counted >= 5 gate is a FLOOR, not
+# a ceiling):
+#   * CONTENT POOL (flagged prior_work_content): their full text
+#     or abstract WAS obtained. They join the writers' source list
+#     with FULL cards (passages included), and the Prior Work
+#     section must ENGAGE their content — use it, build on it, or
+#     explicitly position against it. Never bibliography-only
+#     decoration.
+#   * BIBLIOGRAPHY-ONLY (flagged prior_work_only): existence
+#     verified, full text NOT obtained. Their cards carry
+#     bibliographic data only, the writer hard rules forbid
+#     attributing any finding to them, and they exist in the
+#     article for exactly two purposes — the Prior Work section's
+#     bibliographic identification and the complete bibliography.
+# Every member also carries a VERIFICATION STATUS (consultant
+# condition 1): a title record is never treated as content-
+# checked. The gate, the thresholds and the counted evidence
+# base are UNCHANGED.
+#
+# UNIVERSAL (Jupiter ~21:18): this is a standing law for EVERY
+# production — any field, topic or language; nothing in this
+# stage is topic-specific.
+#
+# The five consultant strengthening conditions (cooperation
+# group, 2026-11-27 ~21:20) are built in: (1) the verification
+# status above, with the two relevance gradations assignable by
+# the assessor to bibliography-only members only; (2) the sweep
+# itself is inherited from the §20 multilingual query matrix —
+# the set is built from the whole funnel, all languages and
+# source types the funnel returns (articles, books, chapters,
+# theses, catalogues, reports), and the assessor's listing names
+# each member's type; (3) 'not done' is a search result, not a
+# default — the in-article block carries a search-evidence line,
+# and a 'confirmed' credibility is honoured only when the named
+# closest work is a content-bearing member (deterministic
+# guard); (4) a COMPARISON MATRIX is mandatory — an assessor
+# verdict without at least one complete row (data / method /
+# output / scope / difference) is unusable and falls back to
+# UNCONFIRMED, and the validated matrix is printed in the
+# article; (5) the §33 panel gains a NOVELTY reviewer that can
+# reject the claim (already done = fatal; too broad / method
+# difference not real / no new data / not significant =
+# fixable), feeding the existing deterministic publish decision.
+#
+# AUDIT RULE (consultant addition ~21:27): for every relevant
+# FULL-TEXT-CHECKED member, the production record states the
+# place and type of its use (data / method / result / critique /
+# novelty-boundary) — or the article explicitly states why it is
+# not usable. Enforced three ways: the writer hard rules require
+# the statement in the Prior Work section; the §33 novelty role
+# flags a checked-but-unengaged source as a FIXABLE defect; and
+# build_prior_work_audit records place/type per member on the
+# final text (state.json + funnel). Bibliography-only members
+# carry their limitation (full text not obtained) in the same
+# record — never presented as content-checked.
+# --------------------------------------------------------------------------
+
+PRIOR_WORK_STATUSES = (
+    "full-text checked",
+    "bibliographic record verified but full text NOT checked",
+    "indirectly relevant",
+    "method-similar but different topic",
+    "unverified")
+
+# The two relevance gradations the novelty assessor may assign to
+# a bibliography-only member (never to a content-checked one).
+_PRIOR_WORK_GRADATIONS = ("indirectly relevant",
+                          "method-similar but different topic")
+
+
+def prior_work_status(source):
+    """The §70 verification status of one source (consultant
+    condition 1). Deterministic, from what the funnel actually
+    obtained: extracted passages or a full-text excerpt mean the
+    CONTENT was checked; anything less (a verified record, an
+    abstract alone) is a bibliographic record whose full text was
+    NOT checked — never upgraded, never presented otherwise."""
+    if (source.get("passages")
+            or (source.get("fulltext_excerpt") or "").strip()):
+        return "full-text checked"
+    return ("bibliographic record verified but full text NOT "
+            "checked")
+
+
+def build_prior_work_set(counted, relevant_sources):
+    """The §70 prior-work set, in three tiers: the counted sources
+    (the gate evidence base, flagged in_counted); then every OTHER
+    verified, relevant source the funnel found whose content WAS
+    obtained (flagged prior_work_content — full writer material);
+    interleaved in the screen's relevant order, every relevant
+    source with NO content obtained (flagged prior_work_only —
+    bibliography only). Deduplicated by the §20.5 key. Video
+    support never joins — it is not literature. Every member is
+    stamped with its §70 verification status."""
+    counted = [s for s in (counted or [])
+               if s.get("source_type") != "video"]
+    out = []
+    seen = set()
+    for s in counted:
+        seen.add(_dedupe_key(s))
+        s["in_counted"] = True
+        s["prior_work_status"] = prior_work_status(s)
+        out.append(s)
+    for s in (relevant_sources or []):
+        if s.get("source_type") == "video":
+            continue
+        key = _dedupe_key(s)
+        if key in seen:
+            continue
+        seen.add(key)
+        s["in_counted"] = False
+        if has_content(s):
+            s["prior_work_content"] = True
+        else:
+            s["prior_work_only"] = True
+        s["prior_work_status"] = prior_work_status(s)
+        out.append(s)
+    return out
+
+
+def prior_work_bib_only(prior_work):
+    """The prior-work members that are NOT part of the counted
+    evidence base and carry no obtained content (bibliography-only
+    entries, §70)."""
+    return [s for s in (prior_work or []) if s.get("prior_work_only")]
+
+
+def prior_work_content_pool(prior_work):
+    """The prior-work members outside the counted evidence base
+    whose content WAS obtained (§70, use-all-sources): full writer
+    material for the Prior Work section's engagement, not part of
+    the gate's counted base."""
+    return [s for s in (prior_work or [])
+            if s.get("prior_work_content")]
+
+
+def _novelty_fallback(field, topic, prior_work):
+    """The deterministic §70 assessment used when no brain verdict
+    is available: the claim is the topic, the closest prior work is
+    the first counted prior work (else the first prior work), and
+    the status is UNKNOWN with credibility UNCONFIRMED — the group
+    rule is that an unconfirmable novelty is «تأییدنشده», never
+    'proven novel', and never a fabricated 'novel'."""
+    closest = ""
+    for s in (prior_work or []):
+        if s.get("in_counted"):
+            closest = s.get("title") or ""
+            break
+    if not closest and prior_work:
+        closest = prior_work[0].get("title") or ""
+    return {"claim": topic,
+            "closest": closest or "—",
+            "boundary": ("Not assessed — no novelty verdict was "
+                         "available from any brain; the claim is "
+                         "reported UNCONFIRMED, not as proven "
+                         "novel."),
+            "status": "unknown",
+            "credibility": "unconfirmed",
+            "matrix": []}
+
+
+def assess_novelty(field, topic, language, prior_work, api_key,
+                   model):
+    """One brain-chain call judging the run's claim against the
+    §70 prior-work set. Returns the 4-part assessment dict
+    {claim, closest, boundary, status, credibility} with status in
+    {novel, partial, done, unknown}. 'done' ONLY when the prior
+    work already does the WHOLE claim; 'partial' when part is done
+    — boundary must then name exactly the part NOT yet done.
+    Fail-soft: any brain/parse/validation failure returns the
+    deterministic UNCONFIRMED fallback — a missing judgement never
+    fabricates novelty and never blocks the run by itself."""
+    fallback = _novelty_fallback(field, topic, prior_work)
+    if not prior_work:
+        return fallback
+    lang_name = LANGUAGE_NAMES.get((language or "").lower(),
+                                   language)
+    listing = []
+    for i, s in enumerate(prior_work, 1):
+        if s.get("in_counted"):
+            tag = "COUNTED — gate evidence base"
+        elif s.get("prior_work_content"):
+            tag = ("PRIOR-WORK CONTENT — text obtained, not "
+                   "gate-counted")
+        else:
+            tag = ("BIBLIOGRAPHY-ONLY — existence verified; full "
+                   "text NOT obtained")
+        line = (f"{i}. [{tag}; type: "
+                f"{s.get('source_type') or 'article'}; "
+                f"verification: "
+                f"{s.get('prior_work_status') or prior_work_status(s)}] "
+                f"{s.get('title') or '(untitled)'}"
+                f" — {s.get('venue') or 'n/a'}"
+                f" ({s.get('year') or 'n.d.'})")
+        if not s.get("prior_work_only"):
+            snippet = ((s.get("fulltext_excerpt")
+                        or s.get("abstract") or "").strip())[:300]
+            if snippet:
+                line += f"\n   Content: {snippet}"
+        listing.append(line)
+    prompt = (
+        "You are the novelty assessor of a scholarly article "
+        "engine. The CLAIM below is what the planned article "
+        "intends to contribute. The PRIOR WORK lists every "
+        "verified, relevant work the engine's search found, each "
+        "with its verification status — a bibliography-only entry "
+        "was never content-checked, so never treat its title as "
+        "evidence of its content.\n\n"
+        f"Field: {field}\nClaim (the planned article's topic): "
+        f"{topic}\n\nPRIOR WORK:\n" + "\n".join(listing) + "\n\n"
+        "Judge whether this claim has already been done by the "
+        "prior work:\n"
+        "- status \"done\": a prior work (or the set together) "
+        "already does the WHOLE claim.\n"
+        "- status \"partial\": part of the claim is already done; "
+        "\"boundary\" must then state EXACTLY the part that has "
+        "NOT been done yet — the only part the article may claim "
+        "as its contribution.\n"
+        "- status \"novel\": no prior work does the claim; "
+        "\"boundary\" states what exactly is new.\n"
+        "\"closest\" names the single closest direct prior work "
+        "(its title). \"credibility\" is \"confirmed\" only when "
+        "the judgement rests on the CONTENT of the closest work "
+        "(a COUNTED or PRIOR-WORK CONTENT entry); when it rests "
+        "on titles or bibliography-only entries, it is "
+        "\"unconfirmed\". Absence of a found prior work is a "
+        "search result, not proof that none exists.\n"
+        "\"matrix\": 1 to 3 rows for the CLOSEST prior works, "
+        "each {\"source\": its title, \"data\": same data used? "
+        "\"method\": same method?, \"output\": same result "
+        "produced?, \"scope\": same part of the problem?, "
+        "\"difference\": exactly what remains new} — every field "
+        "filled, from the listed content only.\n"
+        "\"relations\": optional object mapping the 1-based "
+        "numbers of BIBLIOGRAPHY-ONLY entries to \"indirectly "
+        "relevant\" or \"method-similar but different topic\" "
+        "when the listing supports that gradation.\n"
+        f"Write claim, closest, boundary and the matrix fields "
+        f"in {lang_name}. Base the judgement ONLY on the listed "
+        "prior work — never invent a work, a result or a "
+        "coverage the list does not show.\n"
+        'Reply with JSON only: {"claim": "...", "closest": "...", '
+        '"boundary": "...", "status": "novel|partial|done", '
+        '"credibility": "confirmed|unconfirmed", '
+        '"matrix": [{"source": "...", "data": "...", '
+        '"method": "...", "output": "...", "scope": "...", '
+        '"difference": "..."}], "relations": {}}')
+    try:
+        raw = call_llm(prompt, api_key, model, temperature=0.2,
+                       json_mode=True)
+        data = _parse_json_value(raw)
+        if not isinstance(data, dict):
+            raise ValueError("novelty reply is not an object")
+        status = str(data.get("status") or "").strip().lower()
+        credibility = str(
+            data.get("credibility") or "").strip().lower()
+        claim = str(data.get("claim") or "").strip()
+        closest = str(data.get("closest") or "").strip()
+        boundary = str(data.get("boundary") or "").strip()
+        if status not in ("novel", "partial", "done") \
+                or not claim or not closest or not boundary:
+            raise ValueError("novelty reply failed validation")
+        if credibility not in ("confirmed", "unconfirmed"):
+            credibility = "unconfirmed"
+        # Consultant condition 4: the comparison matrix is
+        # MANDATORY — a verdict without at least one complete row
+        # (all six fields, from the listed works) is unusable.
+        matrix = []
+        for row in (data.get("matrix") or []):
+            if not isinstance(row, dict):
+                continue
+            clean = {k: str(row.get(k) or "").strip()
+                     for k in ("source", "data", "method", "output",
+                               "scope", "difference")}
+            if all(clean.values()):
+                matrix.append(clean)
+            if len(matrix) >= 3:
+                break
+        if not matrix:
+            raise ValueError("novelty reply has no complete "
+                             "comparison-matrix row")
+        # Consultant condition 3 (deterministic guard): a
+        # "confirmed" credibility is honoured only when the named
+        # closest work is a CONTENT-BEARING member of the set —
+        # a judgement resting on bibliography-only entries, or on
+        # a work the set does not contain, stays UNCONFIRMED.
+        if credibility == "confirmed":
+            key = _norm_title_key(closest)
+            grounded = False
+            for s in prior_work:
+                if s.get("prior_work_only"):
+                    continue
+                tk = _norm_title_key(s.get("title") or "")
+                if tk and key and (tk in key or key in tk):
+                    grounded = True
+                    break
+            if not grounded:
+                credibility = "unconfirmed"
+        # Consultant condition 1: relevance gradations apply ONLY
+        # to bibliography-only members — a content-checked entry
+        # is never downgraded by a title-level judgement.
+        relations = data.get("relations") or {}
+        if isinstance(relations, dict):
+            for k, v in relations.items():
+                try:
+                    idx = int(k) - 1
+                except (TypeError, ValueError):
+                    continue
+                grad = str(v or "").strip().lower()
+                if 0 <= idx < len(prior_work) \
+                        and grad in _PRIOR_WORK_GRADATIONS \
+                        and prior_work[idx].get("prior_work_only"):
+                    prior_work[idx]["prior_work_status"] = grad
+        return {"claim": claim, "closest": closest,
+                "boundary": boundary, "status": status,
+                "credibility": credibility, "matrix": matrix}
+    except Exception as e:
+        print(f"novelty assessment (§70): no usable verdict ({e}) "
+              "— reporting the claim UNCONFIRMED")
+        return fallback
+
+
+_NOVELTY_STATUS_FA = {
+    "novel": "نو — در پیشینهٔ یافت‌شده انجام نشده است",
+    "partial": "بخشی قبلاً انجام شده است — ادعا به بخش انجام‌نشده "
+               "محدود می‌شود",
+    "done": "قبلاً به‌طور کامل انجام شده است",
+    "unknown": "نامشخص — داوری نوآوری در دسترس نبود",
+}
+
+
+def format_novelty_block(novelty, language, evidence=None):
+    """The §70 novelty-boundary statement as it appears IN the
+    article, in the 4-part form: claim / closest direct prior work
+    / exact novelty boundary / credibility status. Deterministic —
+    built by code from the assessment, never re-worded by a
+    writer, so the published statement is exactly the assessed
+    one. When `evidence` (the funnel's search numbers) is given, a
+    search-evidence line is appended: 'not done' is a SEARCH
+    RESULT, not a default (consultant condition 3) — the claim
+    shows what was actually searched and found."""
+    fa = (language or "").lower().startswith("fa")
+    if fa:
+        heading = "مرز نوآوری (§70)"
+        labels = ("ادعا", "نزدیک‌ترین پیشینهٔ مستقیم",
+                  "مرز دقیق نوآوری", "وضعیت اعتبار داوری")
+        status = _NOVELTY_STATUS_FA.get(novelty.get("status"),
+                                        novelty.get("status", ""))
+        credibility = ("تأییدشده" if novelty.get("credibility")
+                       == "confirmed" else "تأییدنشده")
+    else:
+        heading = "Novelty boundary (§70)"
+        labels = ("Claim", "Closest direct prior work",
+                  "Exact novelty boundary", "Credibility status")
+        status = novelty.get("status", "")
+        credibility = novelty.get("credibility", "")
+    lines = [f"## {heading}", "",
+             f"- {labels[0]}: {novelty.get('claim', '')}",
+             f"- {labels[1]}: {novelty.get('closest', '')}",
+             f"- {labels[2]}: {novelty.get('boundary', '')}",
+             f"- {labels[3]}: {status} / {credibility}"]
+    if evidence:
+        if fa:
+            lines.append(
+                "- شواهد جست‌وجو (§70): "
+                f"{evidence.get('verified', 0)} منبع "
+                "راستی‌آزمایی‌شده بررسی شد؛ "
+                f"{evidence.get('relevant', 0)} مرتبط؛ مجموعهٔ "
+                f"پیشینه {evidence.get('prior_work', 0)} اثر "
+                f"({evidence.get('full_text_checked', 0)} با متن "
+                "کامل بررسی‌شده، "
+                f"{evidence.get('bib_only', 0)} فقط کتاب‌شناختی). "
+                "نیافتنِ پیشینه، اثباتِ نبودنِ آن نیست.")
+        else:
+            lines.append(
+                "- Search evidence (§70): "
+                f"{evidence.get('verified', 0)} verified sources "
+                f"screened; {evidence.get('relevant', 0)} "
+                "relevant; prior-work set of "
+                f"{evidence.get('prior_work', 0)} works "
+                f"({evidence.get('full_text_checked', 0)} "
+                "full-text checked, "
+                f"{evidence.get('bib_only', 0)} bibliography-only). "
+                "Not finding a prior work does not prove none "
+                "exists.")
+    return "\n".join(lines)
+
+
+def format_comparison_matrix(novelty, language):
+    """The §70 comparison matrix (consultant condition 4),
+    rendered into the article next to the novelty-boundary block:
+    per close prior work — same data? / same method? / same
+    output? / same scope? / exactly what remains new.
+    Deterministic rendering of the assessor's validated rows;
+    empty when the assessment carries no row (the UNCONFIRMED
+    fallback), so a missing matrix is itself visible."""
+    rows = (novelty or {}).get("matrix") or []
+    if not rows:
+        return ""
+    fa = (language or "").lower().startswith("fa")
+    if fa:
+        heading = "مقایسه با پیشینهٔ نزدیک (§70)"
+        cols = ("پیشینه", "همان داده؟", "همان روش؟", "همان خروجی؟",
+                "همان دامنه؟", "چه چیزی تازه می‌ماند")
+    else:
+        heading = "Prior-work comparison (§70)"
+        cols = ("Prior work", "Same data?", "Same method?",
+                "Same output?", "Same scope?", "What remains new")
+
+    def cell(v):
+        return str(v or "").replace("|", "/").strip()
+
+    lines = [f"## {heading}", "",
+             "| " + " | ".join(cols) + " |",
+             "|" + "---|" * len(cols)]
+    for r in rows:
+        lines.append("| " + " | ".join(
+            cell(r.get(k)) for k in ("source", "data", "method",
+                                     "output", "scope",
+                                     "difference")) + " |")
+    return "\n".join(lines)
+
+
+def insert_novelty_block(article, block):
+    """Place the §70 novelty-boundary block at the end of the
+    article body, immediately before the reference list (or at
+    the very end when the draft carries no parseable References
+    heading)."""
+    marker = "\n## References"
+    idx = article.find(marker)
+    if idx >= 0:
+        return (article[:idx] + "\n\n" + block + "\n"
+                + article[idx:])
+    return article.rstrip() + "\n\n" + block + "\n"
+
+
+def _article_region(text, markers):
+    """The text of one article region: from the first matching
+    heading marker to the next '## ' heading (or the end)."""
+    start = -1
+    for m in markers:
+        i = (text or "").find(m)
+        if i >= 0 and (start < 0 or i < start):
+            start = i
+    if start < 0:
+        return ""
+    nxt = (text or "").find("\n## ", start + 1)
+    return (text or "")[start:] if nxt < 0 else (text or "")[start:nxt]
+
+
+def build_prior_work_audit(article, sources, prior_work, novelty):
+    """The §70 AUDIT record (consultant addition, 2026-11-27):
+    built by deterministic code on the FINAL article text. For
+    every prior-work member it states the verification status,
+    the PLACE of its use (novelty block / Prior Work section /
+    body) and the TYPE of use (novelty-boundary / critique /
+    data-method-result), so no checked source is left without a
+    stated relation to the article's claim and no bibliography
+    is decorative. A full-text-checked member engaged nowhere
+    outside the reference list is named in `not_engaged`; a
+    bibliography-only member carries its limitation explicitly
+    (full text not obtained — never presented as content-
+    checked). Place/type are region-derived: which of data,
+    method or result a body citation carries is stated in the
+    article text itself (the writer rule) and is not machine-
+    distinguishable — recorded as the combined type."""
+    body, _refs = _review_split_refs(article or "")
+    novelty_region = _article_region(
+        body, ("## Novelty boundary (§70)", "## مرز نوآوری (§70)",
+               "## Prior-work comparison (§70)",
+               "## مقایسه با پیشینهٔ نزدیک (§70)"))
+    pw_region = _article_region(
+        body, ("## Prior Work", "## پیشینه"))
+    cited_pw = {int(x) for x in re.findall(r"\[(\d+)\]", pw_region)}
+    rest = body
+    for region in (novelty_region, pw_region):
+        if region:
+            rest = rest.replace(region, "", 1)
+    cited_body = {int(x) for x in re.findall(r"\[(\d+)\]", rest)}
+    closest_key = _norm_title_key((novelty or {}).get("closest")
+                                  or "")
+    index = {}
+    for n, s in enumerate(sources or [], 1):
+        index.setdefault(_dedupe_key(s), n)
+    entries = []
+    not_engaged = []
+    for s in (prior_work or []):
+        n = index.get(_dedupe_key(s))
+        status = (s.get("prior_work_status")
+                  or prior_work_status(s))
+        title_key = _norm_title_key(s.get("title") or "")
+        places = []
+        use_types = []
+        if title_key and closest_key and (
+                title_key in closest_key
+                or closest_key in title_key
+                or (n is not None
+                    and f"[{n}]" in novelty_region)):
+            places.append("novelty block")
+            use_types.append("novelty-boundary")
+        if n is not None and n in cited_pw:
+            places.append("prior-work section")
+            if "critique" not in use_types:
+                use_types.append("critique")
+        if n is not None and n in cited_body:
+            places.append("body")
+            use_types.append("data/method/result")
+        bib_only = bool(s.get("prior_work_only"))
+        if bib_only and places:
+            # A record-only work is never engaged for content:
+            # its stated relation is bibliographic identification
+            # (plus the novelty boundary when it is the closest).
+            use_types = (["novelty-boundary"]
+                         if "novelty block" in places else []) \
+                + ["bibliographic identification"]
+        entries.append({
+            "n": n, "title": s.get("title") or "",
+            "status": status, "places": places,
+            "use_types": use_types,
+            "limitation": ("full text not obtained"
+                           if bib_only else "")})
+        if status == "full-text checked" and not places:
+            not_engaged.append(s.get("title") or "")
+    return {
+        "entries": entries,
+        "full_text_checked": sum(
+            1 for e in entries if e["status"] == "full-text checked"),
+        "engaged": sum(
+            1 for e in entries
+            if e["status"] == "full-text checked" and e["places"]),
+        "not_engaged": not_engaged,
+        "content_pool": sum(
+            1 for s in (prior_work or [])
+            if s.get("prior_work_content")),
+        "bibliography_only": sum(
+            1 for s in (prior_work or [])
+            if s.get("prior_work_only"))}
+
+
+# --------------------------------------------------------------------------
 # Topic adaptation (§20.10, Jupiter 2026-11-26: «در چنین مواردی موضوع
 # رو طوری تغییر بده که بتونیم مقاله رو تولید کنیم») — when a requested
 # topic fails the text-first gate because genuinely relevant counted
@@ -9651,6 +10224,24 @@ def _source_card_text(i, s, excerpt_chars=None):
                  "cite ONLY as support for an explanation; never "
                  "as the sole evidence for a claim, and never as "
                  "a primary source.")
+    if s.get("prior_work_only"):
+        card += ("\n    PRIOR-WORK ONLY (§70): this work is "
+                 "verified to exist and is directly relevant, "
+                 "but its full text was NOT obtained. Cite it "
+                 "ONLY for bibliographic facts (that it exists, "
+                 "its authors, venue and year) in the Prior Work "
+                 "section and the reference list. NEVER attribute "
+                 "a finding, number, method or result to it.")
+    if s.get("prior_work_content"):
+        card += ("\n    PRIOR-WORK CONTENT (§70): this work is "
+                 "directly relevant and its text WAS obtained "
+                 "(the abstract/passages on this card), but it is "
+                 "not part of the counted gate evidence base. The "
+                 "Prior Work section MUST engage its content — "
+                 "use it, build on it, or explicitly position "
+                 "against it, stating the type of use (data / "
+                 "method / result / critique) — never merely "
+                 "list it.")
     if s.get("registry_match"):
         card += (f"\n    Registry match (curated open-access "
                  f"registry, credibility signal): "
@@ -10054,6 +10645,11 @@ def screen_sources(field, topic, sources, api_key, model):
     stats["image_derived_counted"] = sum(
         1 for s in counted if s.get("image_derived"))
     stats["counted"] = len(counted)
+    # §70: the full relevant set (kept by the screen BEFORE the
+    # content filter) rides along for the prior-work set — the
+    # counted list alone is only the evidence base, not the whole
+    # directly relevant literature the funnel found.
+    stats["relevant_sources"] = kept
     print(f"Relevance + content screen: {len(sources)} verified -> "
           f"{len(kept)} relevant -> {len(counted)} counted "
           f"(registry-matched: {stats['registry_matched']})")
@@ -10256,6 +10852,27 @@ def build_funnel_text(topic, funnel, success, stage=None,
         lines.append("منابع تصویریِ شمرده‌شده (قطعات رونویسی‌شده "
                      "از تصویر صفحهٔ نسخهٔ خطی): "
                      f"{funnel['image_derived_counted']}")
+    if funnel.get("prior_work"):
+        lines.append("مجموعهٔ پیشینهٔ پژوهش (§70): "
+                     f"{funnel['prior_work']} منبع "
+                     f"(فقط کتاب‌شناختی، بدون متن کامل: "
+                     f"{funnel.get('prior_work_bib_only', 0)})")
+        if funnel.get("prior_work_content"):
+            lines.append("استخر محتوای پیشینه (§70): "
+                         f"{funnel['prior_work_content']} منبع "
+                         "با متن/چکیدهٔ به‌دست‌آمده، خارج از پایهٔ "
+                         "شمرده‌شده — محتوایشان در بخش پیشینه به کار "
+                         "رفته است")
+        audit = funnel.get("prior_work_audit") or {}
+        if audit:
+            lines.append(
+                "حسابرسی پیشینه (§70): "
+                f"{audit.get('full_text_checked', 0)} منبع با متن "
+                f"کامل بررسی‌شده — به‌کاررفته: "
+                f"{audit.get('engaged', 0)}، بدون کاربردِ "
+                f"تصریح‌شده: {audit.get('not_engaged', 0)}؛ "
+                f"{audit.get('bibliography_only', 0)} منبع فقط "
+                "کتاب‌شناختی (متن کامل به دست نیامد)")
     lines += _scope_lines()
     lines += _adaptation_lines(adaptation)
     lines += _review_lines(review)
@@ -10771,6 +11388,18 @@ def _writer_hard_rules(lang_name, target_line):
         "be RE-DERIVED step by step in the article text from the source's "
         "stated inputs — show the substitution and the arithmetic — and the "
         "derived value compared with the value the source itself reports.\n"
+        "- PRIOR-WORK-ONLY SOURCES (§70): a source marked PRIOR-WORK ONLY "
+        "may be cited ONLY for bibliographic facts (that it exists, its "
+        "authors, venue and year). NEVER attribute a finding, number, "
+        "method or result to it — its full text was not obtained.\n"
+        "- PRIOR-WORK AUDIT (§70): for EVERY content-bearing source "
+        "(counted or marked PRIOR-WORK CONTENT), the Prior Work section "
+        "must state the place and type of its use in this article "
+        "(data / method / result / critique / novelty-boundary) — or "
+        "explicitly state why, despite its relevance, it is not usable "
+        "in the argument. A full-text-checked source must never be left "
+        "without a stated relation to the claim, and a source known "
+        "only by record must never be presented as content-checked.\n"
         f"- {target_line}\n"
         f"- Write the ENTIRE output in {lang_name}.\n")
 
@@ -10923,6 +11552,36 @@ def _write_article_parallel(field, topic, language, sources, api_key,
         "build_prompt": (lambda ec, _n=all_numbers,
                          _t=closing_target, _s=closing_suffix:
                          common(_n, _t, ec) + _s)})
+    # §70: the Prior Work section is a fixed task of its own (not
+    # part of the planner's thematic plan): one writer, ALL the
+    # numbered sources, assembled as the first body section. It is
+    # appended LAST so the §44 tasks keep their established
+    # rotation starts; assembly below is by task key, not order.
+    priorwork_target = (f"TARGET LENGTH: this section must reach "
+                        f"about {max(200, int(mid * 0.10))} words "
+                        f"(the complete article targets {lo}–{hi} "
+                        f"words).")
+    priorwork_suffix = (
+        "\nYou are writing ONE section of a scholarly article "
+        "whose other sections are being drafted in parallel by "
+        "other writers. Write ONLY the section headed exactly "
+        "'## Prior Work'. Discuss EVERY numbered source in turn: "
+        "what it is and what it contributes to this topic. For "
+        "every content-bearing source, state the type of its use "
+        "in this article (data / method / result / critique / "
+        "novelty-boundary) or explicitly why, despite its "
+        "relevance, it is not usable in the argument (§70 "
+        "audit). For a source marked PRIOR-WORK ONLY, identify "
+        "it bibliographically only (existence, authors, venue, "
+        "year) and state plainly that its full text was not "
+        "obtained — never attribute a finding to it. Keep every "
+        "claim cited as [n]. Do NOT write an abstract, "
+        "introduction, discussion or conclusion.")
+    tasks.append({
+        "key": "priorwork", "start": len(tasks),
+        "build_prompt": (lambda ec, _n=all_numbers,
+                         _t=priorwork_target, _s=priorwork_suffix:
+                         common(_n, _t, ec) + _s)})
 
     progress_update(55, "✍️ نگارش موازی بخش‌ها (§44)")
     results = {}
@@ -10936,6 +11595,11 @@ def _write_article_parallel(field, topic, language, sources, api_key,
             section_brains[futs[fut]] = brain
     part1 = results["front"]
     body_parts = []
+    priorwork_text = (results.get("priorwork") or "").strip()
+    if priorwork_text:
+        if "##" not in priorwork_text:
+            priorwork_text = "## Prior Work\n\n" + priorwork_text
+        body_parts.append(priorwork_text)
     for i, sec in enumerate(plan):
         text = results[f"body{i}"]
         if "##" not in text:
@@ -11123,6 +11787,18 @@ def _write_article_single(field, topic, language, sources, api_key, model,
         "be RE-DERIVED step by step in the article text from the source's "
         "stated inputs — show the substitution and the arithmetic — and the "
         "derived value compared with the value the source itself reports.\n"
+        "- PRIOR-WORK-ONLY SOURCES (§70): a source marked PRIOR-WORK ONLY "
+        "may be cited ONLY for bibliographic facts (that it exists, its "
+        "authors, venue and year). NEVER attribute a finding, number, "
+        "method or result to it — its full text was not obtained.\n"
+        "- PRIOR-WORK AUDIT (§70): for EVERY content-bearing source "
+        "(counted or marked PRIOR-WORK CONTENT), the Prior Work section "
+        "must state the place and type of its use in this article "
+        "(data / method / result / critique / novelty-boundary) — or "
+        "explicitly state why, despite its relevance, it is not usable "
+        "in the argument. A full-text-checked source must never be left "
+        "without a stated relation to the claim, and a source known "
+        "only by record must never be presented as content-checked.\n"
         f"- TARGET LENGTH: the complete article must reach {lo}–{hi} words.\n"
         f"- Write the ENTIRE output in {lang_name}.\n")
     def common_for(excerpt_chars):
@@ -11149,8 +11825,17 @@ def _write_article_single(field, topic, language, sources, api_key, model,
     progress_update(55, "✍️ نگارش بخش اول")
     part2_suffix = (
         f"\nWrite PART 2 of the same article: the body (about "
-        f"{int(mid * 0.52)} words). Organise the synthesis into 3 to 5 "
-        "thematic sections, each with a '## ' heading. In every section: "
+        f"{int(mid * 0.52)} words). BEGIN the body with a "
+        "'## Prior Work' section (§70) discussing EVERY numbered "
+        "source in turn: what it is and what it contributes to "
+        "this topic; for every content-bearing source, state the "
+        "type of its use in this article (data / method / result "
+        "/ critique / novelty-boundary) or explicitly why it is "
+        "not usable in the argument (§70 audit); for a source "
+        "marked PRIOR-WORK ONLY, identify it bibliographically "
+        "only and state plainly that its full text was not "
+        "obtained. Then organise the synthesis "
+        "into 3 to 5 thematic sections, each with a '## ' heading. In every section: "
         "present the specific evidence from the cards (data, formulas, "
         "numbers, named methods and results), compare the sources with "
         "each other, and analyse errors, uncertainties and disagreements "
@@ -11197,7 +11882,7 @@ def _write_article_single(field, topic, language, sources, api_key, model,
 # --------------------------------------------------------------------------
 # Multi-robot review layer (§33, Jupiter 2026-11-26: «بساز کلا» — build
 # the 6 missing roles of the 14-role roster) — AFTER a complete draft
-# exists and BEFORE channel delivery, five component reviewers check
+# exists and BEFORE channel delivery, six component reviewers check
 # the article in parallel and a content supervisor checks the
 # coherence of the whole:
 #   1. citations  — code first (every listed reference IS one of the
@@ -11217,11 +11902,18 @@ def _write_article_single(field, topic, language, sources, api_key, model,
 #      pass on section order/logic.
 #   5. language   — code (output-language script sanity) + an LLM
 #      fluency/terminology pass.
-#   6. supervisor — its own coherence LLM pass over the whole article
+#   6. novelty    — (§70) code first (the novelty-boundary block is
+#      present; the AUDIT rule — every full-text-checked prior-work
+#      source is engaged outside the reference list), then an LLM
+#      pass that can REJECT the novelty claim (already done =
+#      fatal; too broad / method difference not real / no new data
+#      / not significant = fixable). Inert (available, no issues,
+#      no brain call) when the context carries no prior-work set.
+#   7. supervisor — its own coherence LLM pass over the whole article
 #      (the same number/term/citation must mean the same thing in
 #      the abstract, the body and the conclusion; abstract claims
 #      must be a subset of body claims) + DETERMINISTIC aggregation
-#      of all six verdicts.
+#      of all seven verdicts.
 # RED LINES: the publish decision is deterministic code over the
 # verdicts — no LLM vote publishes an article; reviewers and the
 # supervisor NEVER write article content, they only flag; repairs go
@@ -11270,13 +11962,14 @@ REVIEW_MAX_REPAIR_ROUNDS = 2
 # pass this through call_llm's max_tokens.
 REVIEW_MAX_TOKENS = 16000
 REVIEW_ROLES = ("citations", "numbers", "claims", "structure",
-                "language")
+                "language", "novelty")
 REVIEW_ROLE_LABELS_FA = {
     "citations": "منابع و ارجاع‌ها",
     "numbers": "اعداد و محاسبات",
     "claims": "ادعا و شاهد",
     "structure": "ساختار و قالب",
     "language": "زبان و ترجمه",
+    "novelty": "نوآوری و مرز آن (§70)",
     "supervisor": "ناظر — پیوستگی کل",
 }
 _REVIEW_GROUNDING_PER_SOURCE = 2200
@@ -11547,9 +12240,48 @@ def _citations_code_issues(article, sources):
     return issues
 
 
+def _bibliography_completeness_issues(article, sources, prior_work):
+    """Deterministic §70 check (citations role): every directly
+    relevant prior-work source must appear in the article's
+    reference list — the complete-bibliography law. A missing
+    entry is FIXABLE, routed back to the writer repair with the
+    exact reference line to add verbatim (so the repair never has
+    to invent bibliographic data); it is never fatal and never a
+    no-verdict block. When the draft has no parseable reference
+    list at all, the base citation check already flags that
+    fatally — this check stays silent to avoid duplicate noise."""
+    if not prior_work:
+        return []
+    _, refs = _review_split_refs(article)
+    if not (refs or "").strip():
+        return []
+    listed = set()
+    for line in refs.splitlines():
+        m = re.match(r"\s*\[(\d+)\]", line)
+        if m:
+            listed.add(int(m.group(1)))
+    by_key = {}
+    for i, s in enumerate(sources, 1):
+        by_key.setdefault(_dedupe_key(s), i)
+    issues = []
+    for s in prior_work:
+        n = by_key.get(_dedupe_key(s))
+        if n is None or n in listed:
+            continue
+        issues.append(_review_issue(
+            "citations", f"reference [{n}]",
+            "directly relevant prior work (§70) is missing from "
+            "the reference list — add exactly this line to the "
+            "References: " + format_reference(n, s),
+            "fixable", "citations"))
+    return issues
+
+
 def review_citations(article, counted, context):
     sources = context.get("sources") or counted
     issues = _citations_code_issues(article, sources)
+    issues += _bibliography_completeness_issues(
+        article, sources, context.get("prior_work"))
     body, _ = _review_split_refs(article)
     prompt = (
         "You are the CITATIONS REVIEWER in a scholarly article "
@@ -12091,7 +12823,120 @@ def review_language(article, counted, context):
                            attempts=meta["attempts"])
 
 
-# --- Role 6: the supervisor ------------------------------------------------
+# --- Role 6: novelty (§70) ---------------------------------------------------
+
+def review_novelty(article, counted, context):
+    """§33 novelty reviewer (§70, consultant condition 5): the
+    panel CAN reject the novelty claim. Deterministic checks
+    first — (1) the code-inserted novelty-boundary block must
+    still be in the article (a later stage dropping it is a
+    fixable defect, repaired by re-inserting the assessed
+    statement); (2) the AUDIT rule: every full-text-checked
+    prior-work source must be engaged somewhere outside the
+    reference list, else the repair must state its use (data /
+    method / result / critique / novelty-boundary) or why it is
+    not usable. Then one LLM pass judging the claim against the
+    prior-work set: 'already done' is FATAL; 'too broad',
+    'method difference not real', 'no new data' and 'novelty not
+    significant' are fixable. The verdict feeds the layer's
+    existing deterministic publish decision — the reviewer
+    judges, the code decides.
+    When the context carries NO prior-work set (legacy or
+    non-§70 callers), the role returns an available, issue-free
+    verdict WITHOUT any brain call — it must never become a
+    no-verdict block there."""
+    prior_work = context.get("prior_work") or []
+    if not prior_work:
+        return _review_verdict("novelty", [], True)
+    issues = []
+    if "Novelty boundary (§70)" not in article \
+            and "مرز نوآوری (§70)" not in article:
+        nov = context.get("novelty") or {}
+        issues.append(_review_issue(
+            "novelty", "novelty boundary (§70)",
+            "the §70 novelty-boundary statement is missing from "
+            "the article — re-insert it verbatim before the "
+            "References: Claim: "
+            f"{nov.get('claim', '')} | Closest direct prior "
+            f"work: {nov.get('closest', '')} | Exact novelty "
+            f"boundary: {nov.get('boundary', '')} | Status: "
+            f"{nov.get('status', '')} / "
+            f"{nov.get('credibility', '')}",
+            "fixable", "novelty"))
+    sources = context.get("sources") or counted
+    body, _refs = _review_split_refs(article)
+    cited = {int(x) for x in re.findall(r"\[(\d+)\]", body)}
+    index = {}
+    for n, s in enumerate(sources, 1):
+        index.setdefault(_dedupe_key(s), n)
+    for s in prior_work:
+        if (s.get("prior_work_status")
+                or prior_work_status(s)) != "full-text checked":
+            continue
+        n = index.get(_dedupe_key(s))
+        if n is not None and n not in cited:
+            issues.append(_review_issue(
+                "novelty", f"prior-work audit [{n}]",
+                f"AUDIT (§70): source [{n}] "
+                f"('{(s.get('title') or '')[:80]}') is full-text "
+                "checked but never engaged outside the reference "
+                "list. In the Prior Work section, state the place "
+                "and type of its use (data / method / result / "
+                "critique / novelty-boundary), or explicitly "
+                "state why it is not usable in this article's "
+                "argument.",
+                "fixable", "novelty"))
+    listing = []
+    for i, s in enumerate(prior_work, 1):
+        listing.append(
+            f"{i}. [{s.get('prior_work_status') or prior_work_status(s)}] "
+            f"{s.get('title') or '(untitled)'}"
+            f" — {s.get('venue') or 'n/a'}"
+            f" ({s.get('year') or 'n.d.'})")
+    prompt = (
+        "You are the NOVELTY REVIEWER in a scholarly article "
+        "review panel (§70). You never rewrite text; you only "
+        "flag problems. Judge the article's novelty claim — "
+        "stated in its novelty-boundary block and reflected in "
+        "its title and argument — against the PRIOR WORK below "
+        "(each with its verification status; a bibliography-only "
+        "work was never content-checked).\n\n"
+        "Flag ONLY:\n"
+        "- the claim is already done by a listed prior work: "
+        "severity \"fatal\", and the problem must begin with "
+        "\"already done:\";\n"
+        "- the claim as stated is broader than the assessed "
+        "novelty boundary: problem begins \"too broad:\" "
+        "(fixable);\n"
+        "- a claimed method difference from the closest work is "
+        "not real on the listed content: \"method difference "
+        "not real:\" (fixable);\n"
+        "- the article presents no new data, computation or "
+        "analysis beyond the prior work: \"no new data:\" "
+        "(fixable);\n"
+        "- the remaining novelty is trivial: \"novelty not "
+        "significant:\" (fixable);\n"
+        "- a full-text-checked prior-work source whose type of "
+        "use (data / method / result / critique / "
+        "novelty-boundary), or whose reason for non-use, is "
+        "nowhere stated in the article: \"audit:\" (fixable).\n"
+        "Base every flag ONLY on the listed prior work and the "
+        "article itself; never invent a work or a result.\n"
+        'Reply with JSON only: {"issues": [{"where": "short '
+        'quote or section", "problem": "...", "severity": '
+        '"fatal|fixable"}]}\n\n'
+        "PRIOR WORK:\n" + "\n".join(listing) + "\n\n"
+        "GROUNDING (the counted sources):\n"
+        + _review_grounding_text(counted)
+        + "\n\nARTICLE:\n" + _review_article_capped(article))
+    llm_issues, available, meta = _review_llm_issues(
+        "novelty", prompt, context, "novelty")
+    return _review_verdict("novelty", issues + llm_issues,
+                           available, brain=meta["brain"],
+                           attempts=meta["attempts"])
+
+
+# --- Role 7: the supervisor ------------------------------------------------
 
 def _review_coherence(article, counted, context):
     """The supervisor's own pass (§33 role 6): coherence of the
@@ -12132,7 +12977,8 @@ _REVIEWERS = {"citations": review_citations,
               "numbers": review_numbers,
               "claims": review_claims,
               "structure": review_structure,
-              "language": review_language}
+              "language": review_language,
+              "novelty": review_novelty}
 
 
 def _run_reviewer(role, article, counted, context):
@@ -12202,8 +13048,8 @@ def _repair_article(article, issues, counted, context):
 
 
 def run_review_layer(article, counted, context):
-    """The §33 supervisor. Runs the five component reviewers in
-    parallel, then its own coherence pass; aggregates the six
+    """The §33 supervisor. Runs the six component reviewers in
+    parallel, then its own coherence pass; aggregates the seven
     verdicts with DETERMINISTIC code: a role with no verdict
     BLOCKS publication; any fatal issue FAILS at once; fixable
     issues go through targeted writer repairs (max
@@ -12665,7 +13511,8 @@ def _checkpoint_source(source, excerpt_cap):
 def save_stage_checkpoint(field, topic, language, category,
                           article_type, mode, queries, smap, matrix,
                           ft_keywords, counted, funnel,
-                          disagreement_titles, verified_count):
+                          disagreement_titles, verified_count,
+                          prior_work_extra=None):
     """Persist the post-screening checkpoint; returns the signature.
     Raises on I/O or serialisation errors — the CALLER wraps this
     fail-soft (a checkpoint problem must never fail the run)."""
@@ -12699,6 +13546,14 @@ def save_stage_checkpoint(field, topic, language, category,
     for cap in CHECKPOINT_EXCERPT_LADDER:
         payload["counted"] = [_checkpoint_source(s, cap)
                               for s in (counted or [])]
+        # §70: the non-counted prior-work members ride along so a
+        # resumed run rebuilds the SAME prior-work set — the
+        # content-pool members with their excerpts (through this
+        # same ladder), the bibliography-only ones with their
+        # bibliographic fields only (they carry no text).
+        payload["prior_work_extra"] = [
+            _checkpoint_source(s, cap)
+            for s in (prior_work_extra or [])]
         text = json.dumps(payload, ensure_ascii=False, indent=1)
         if len(text.encode("utf-8")) <= CHECKPOINT_MAX_BYTES:
             if cap < FULLTEXT_CARD_CHARS:
@@ -12907,6 +13762,7 @@ def _fresh_screening(field, topic, language, category, article_type,
                                         api_key, model,
                                         keywords=ft_keywords)
     _merge_funnel(funnel, sstats)
+    relevant_sources = list(sstats.get("relevant_sources") or [])
     disagreement_titles = list(sstats.get("disagreement_titles")
                                or [])
     progress_update(45, "🎯 گزینش منابع مرتبط")
@@ -12941,6 +13797,8 @@ def _fresh_screening(field, topic, language, category, article_type,
                                               api_key, model,
                                               keywords=ft_keywords)
         _merge_funnel(funnel, sstats2)
+        relevant_sources += list(
+            sstats2.get("relevant_sources") or [])
         disagreement_titles += list(
             sstats2.get("disagreement_titles") or [])
         verified = verified + verified2
@@ -12962,7 +13820,11 @@ def _fresh_screening(field, topic, language, category, article_type,
         save_stage_checkpoint(field, topic, language, category,
                               article_type, mode, queries, smap,
                               matrix, ft_keywords, counted, funnel,
-                              disagreement_titles, len(verified))
+                              disagreement_titles, len(verified),
+                              prior_work_extra=[
+                                  s for s in build_prior_work_set(
+                                      counted, relevant_sources)
+                                  if not s.get("in_counted")])
     except Exception as exc:
         print(f"WARNING: stage checkpoint save failed (ignored): "
               f"{exc}")
@@ -12970,6 +13832,7 @@ def _fresh_screening(field, topic, language, category, article_type,
             "disagreement_titles": disagreement_titles,
             "queries": queries, "ft_keywords": ft_keywords,
             "source_map": smap,
+            "relevant_sources": relevant_sources,
             "verified_count": len(verified), "gate": gate}
 
 
@@ -13038,6 +13901,11 @@ def main():
         queries = list(ckpt.get("queries") or [])
         ft_keywords = list(ckpt.get("ft_keywords") or [])
         source_map = ckpt.get("source_map") or {}
+        # §70: rebuild the screening's relevant set from the
+        # counted sources + the checkpointed bibliography-only
+        # prior-work members.
+        relevant_sources = counted + list(
+            ckpt.get("prior_work_extra") or [])
         verified_count = ckpt.get("verified_count",
                                   funnel.get("verified", 0))
         gate = text_first_gate(counted)
@@ -13056,6 +13924,7 @@ def main():
         queries = fresh["queries"]
         ft_keywords = fresh["ft_keywords"]
         source_map = fresh.get("source_map") or {}
+        relevant_sources = fresh.get("relevant_sources") or []
         verified_count = fresh["verified_count"]
         gate = fresh["gate"]
 
@@ -13075,6 +13944,8 @@ def main():
                 "disagreement_titles"]
             queries = adapted_fresh["queries"]
             ft_keywords = adapted_fresh["ft_keywords"]
+            relevant_sources = adapted_fresh.get(
+                "relevant_sources") or []
             verified_count = adapted_fresh["verified_count"]
             gate = adapted_fresh["gate"]
             topic = adaptation["adapted_topic"]
@@ -13120,8 +13991,51 @@ def main():
                        adaptation=adaptation)
         raise Fail(reason + " Try a broader or different topic.")
 
+    # §70: prior-work sweep + novelty boundary. The prior-work set
+    # (every verified, relevant source the funnel found — not only
+    # the counted) is built and the claim is judged against it
+    # BEFORE writing. A claim the prior work already does IN FULL
+    # fails closed here, with the reports, instead of publishing a
+    # duplicate; a PARTIALLY done claim is narrowed to the part
+    # not yet done (the narrowing rides the writer guide, the
+    # in-article novelty block, the funnel and state.json).
+    prior_work = build_prior_work_set(counted, relevant_sources)
+    novelty = assess_novelty(field, topic, language, prior_work,
+                             api_key, model)
+    bib_only = prior_work_bib_only(prior_work)
+    content_pool = prior_work_content_pool(prior_work)
+    funnel["prior_work"] = len(prior_work)
+    funnel["prior_work_bib_only"] = len(bib_only)
+    funnel["prior_work_content"] = len(content_pool)
+    print(f"prior-work set (§70): {len(prior_work)} source(s) "
+          f"({len(counted)} counted + {len(content_pool)} "
+          f"content pool + {len(bib_only)} bibliography-only); "
+          f"novelty: {novelty['status']} "
+          f"({novelty['credibility']}) — closest: "
+          f"{novelty['closest'][:80]}")
+    if novelty["status"] == "done":
+        send_detailed_source_report_dm(
+            tg_token, os.environ.get("ARTICLE_CHAT_ID", ""), topic,
+            counted, disagreement_titles, adaptation=adaptation)
+        send_funnel_dm(tg_token, os.environ.get("ARTICLE_CHAT_ID", ""),
+                       topic, funnel, False,
+                       stage="مرز نوآوری (§70): ادعا قبلاً به‌طور "
+                             "کامل انجام شده است",
+                       adaptation=adaptation)
+        raise Fail(
+            "novelty boundary (§70): the claim of this article is "
+            "already fully done by prior work — closest: "
+            f"{novelty['closest']}. Refusing to publish a "
+            "duplicate; narrow the topic to the part not yet "
+            f"done: {novelty['boundary']}")
+
     # Writer input (§20.6): passage-bearing sources first; YouTube
-    # lecture transcripts join as SUPPORT only (never counted).
+    # lecture transcripts join as SUPPORT only (never counted);
+    # §70: the prior-work CONTENT POOL joins with full cards (the
+    # use-all-sources law — their content must be engaged, not
+    # merely listed), and bibliography-only prior work joins LAST
+    # (bibliographic identification + the complete bibliography
+    # only).
     counted.sort(key=lambda s: 0 if s.get("passages")
                  else (1 if s.get("fulltext") else 2))
     en_queries = [q for q in queries]
@@ -13131,13 +14045,22 @@ def main():
     except Exception as e:
         print(f"youtube support (§20): failed ({e}) — continuing "
               "without")
-    write_sources = counted + videos
+    write_sources = counted + videos + content_pool + bib_only
+    guide = TYPE_GUIDE[article_type]
+    if novelty["status"] == "partial":
+        guide += (
+            "\nNOVELTY BOUNDARY (§70): part of this claim is "
+            "already done by prior work. The article's claim is "
+            "NARROWED to exactly this part, which prior work has "
+            f"NOT done: {novelty['boundary']} Write only within "
+            "this boundary; present the already-done part strictly "
+            "as prior work, never as this article's contribution.")
 
     _t0 = time.monotonic()
     try:
         title, article, meta = write_article(
             field, topic, language, write_sources, api_key, model,
-            guide=TYPE_GUIDE[article_type],
+            guide=guide,
             word_target=TYPE_WORD_TARGETS.get(article_type))
     except Fail:
         send_funnel_dm(tg_token, os.environ.get("ARTICLE_CHAT_ID", ""),
@@ -13171,7 +14094,29 @@ def main():
         else:
             article = note + "\n\n" + article
 
-    # §33: the multi-robot review layer — five component reviewers
+    # §70: the novelty-boundary statement (4-part form + the
+    # search-evidence line) and the comparison matrix are part of
+    # the article itself, placed before the reference list by
+    # deterministic code — the published statement is exactly the
+    # assessed one, and the §33 layer below reviews it in place.
+    novelty_block_text = format_novelty_block(
+        novelty, language,
+        evidence={"verified": funnel.get("verified",
+                                         verified_count),
+                  "relevant": funnel.get("relevant",
+                                         len(relevant_sources)),
+                  "prior_work": len(prior_work),
+                  "full_text_checked": sum(
+                      1 for s in prior_work
+                      if s.get("prior_work_status")
+                      == "full-text checked"),
+                  "bib_only": len(bib_only)})
+    matrix_text = format_comparison_matrix(novelty, language)
+    if matrix_text:
+        novelty_block_text += "\n\n" + matrix_text
+    article = insert_novelty_block(article, novelty_block_text)
+
+    # §33: the multi-robot review layer — six component reviewers
     # + the coherence supervisor, AFTER the complete draft and
     # BEFORE channel delivery. The publish decision is
     # deterministic code over the verdicts; reviewers never write;
@@ -13183,6 +14128,9 @@ def main():
                   "language": language,
                   "article_type": article_type, "title": title,
                   "sources": write_sources,
+                  "prior_work": prior_work,
+                  "novelty": novelty,
+                  "novelty_block": novelty_block_text,
                   "word_target": TYPE_WORD_TARGETS.get(article_type),
                   "api_key": api_key, "model": model}
     review = run_review_layer(article, counted, review_ctx)
@@ -13263,6 +14211,24 @@ def main():
         print("review layer (§33): PASS (second pass, §44) — "
               "unified article cleared for delivery")
 
+    # §70 AUDIT (consultant addition): on the FINAL article text,
+    # every prior-work member's verification status, place and
+    # type of use — recorded in state.json and summarised in the
+    # funnel. A full-text-checked source engaged nowhere is named
+    # loudly here (the §33 novelty role already had the chance to
+    # route it to repair as a fixable defect).
+    prior_work_audit = build_prior_work_audit(
+        article, write_sources, prior_work, novelty)
+    funnel["prior_work_audit"] = {
+        "full_text_checked": prior_work_audit["full_text_checked"],
+        "engaged": prior_work_audit["engaged"],
+        "not_engaged": len(prior_work_audit["not_engaged"]),
+        "bibliography_only": prior_work_audit["bibliography_only"]}
+    if prior_work_audit["not_engaged"]:
+        print("prior-work audit (§70): full-text-checked source(s) "
+              "with NO stated use: "
+              + "; ".join(prior_work_audit["not_engaged"]))
+
     header = (f"📚 Scientific Discovery Agent — new article\n"
               f"Field: {field}\nTopic: {topic}\nLanguage: {language}\n"
               f"Mode: {mode}\nVerified sources: {verified_count} "
@@ -13288,6 +14254,14 @@ def main():
         "title": title,
         "date": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "sources": len(counted),
+        "prior_work": len(prior_work),
+        "prior_work_content": len(content_pool),
+        "prior_work_audit": prior_work_audit,
+        "novelty": {"status": novelty["status"],
+                    "credibility": novelty["credibility"],
+                    "closest": novelty["closest"],
+                    "boundary": novelty["boundary"],
+                    "matrix": novelty.get("matrix") or []},
         "message_ids": message_ids,
         "review": {"rounds": review.get("rounds", 0),
                    "issues_found": review.get("issues_found", 0),

@@ -323,9 +323,9 @@ def test_clean_passes_zero_rounds():
     check("(g2) zero rounds, zero issues",
           res["rounds"] == 0 and res["issues_found"] == 0,
           str((res["rounds"], res["issues_found"])))
-    check("(g3) all six roles reported ok",
+    check("(g3) all seven roles reported ok",
           set(res["roles"]) == {"citations", "numbers", "claims",
-                                "structure", "language",
+                                "structure", "language", "novelty",
                                 "supervisor"}
           and all(v["ok"] for v in res["roles"].values()),
           str(res["roles"].keys()))

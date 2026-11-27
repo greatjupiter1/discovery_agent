@@ -1,1 +1,372 @@
-[{"api":"","fields":["multidisciplinary"],"languages":["Japanese","English"],"name":"J-STAGE — Japan Science and Technology Agency journal platform","notes":"Japan's national journal platform (JST): 4,514 titles, ~6.09M articles of which ~5.88M free/open. Registry-only for now: the article search is a JavaScript-built multi-row form — plain GET probes of the search endpoint answered HTTP 500 / an error redirect from the build sandbox on 2026-11-26, and no public API or OAI route is offered; its articles remain reachable via Crossref/DOAJ.","type":"platform","url":"https://www.jstage.jst.go.jp","verified":true,"verified_date":"2026-11-26"},{"api":"","fields":["multidisciplinary"],"languages":["Chinese","English"],"name":"SciOpen — Tsinghua University Press open-access platform (China)","notes":"Open-access publishing platform of Tsinghua University Press hosting Chinese and international journals, free full text. Registry-only for now: the site is a JavaScript single-page app and /search answered a 404 shell from the build sandbox on 2026-11-26, so no machine-usable search route could be verified live.","type":"platform","url":"https://www.sciopen.com","verified":true,"verified_date":"2026-11-26"},{"api":"","fields":["multidisciplinary"],"languages":["Chinese","English"],"name":"COAJ — China Open Access Journals","notes":"Non-profit database of Chinese open-access journals (China Science Publishing & Media): 341 Chinese journals, 90,000+ articles (end of 2025). Registry-only for now: the homepage is a JavaScript app shell with no server-rendered search form and /search answered HTTP 401 from the build sandbox on 2026-11-26.","type":"platform","url":"https://www.coaj.cn","verified":true,"verified_date":"2026-11-26"},{"api":"","fields":["multidisciplinary"],"languages":["Korean","English"],"name":"KoreaScience — Korean Federation of Science and Technology Societies platform","notes":"Platform of the Korean Federation of Science and Technology Societies (KOFST): hundreds of Korean society journals, open-access full text, alongside the national KCI index. Registry-only for now: the site and article pages answer, but the search is JavaScript-driven and every candidate search route probed on 2026-11-26 answered 404 or timed out, so no machine-usable keyword route could be verified live.","type":"platform","url":"https://www.koreascience.kr","verified":true,"verified_date":"2026-11-26"},{"api":"https://www.mongoliajol.info/index.php/index/search/search","fields":["multidisciplinary"],"languages":["Mongolian","English"],"name":"MongoliaJOL — Mongolia Journals Online","notes":"Mongolian member of the Journals Online family (INASP/Ubiquity), free to view and search. Live search wired in build_article.py (search_asian_platforms) via the OJS site-wide search (probed 2026-11-26: 20 result blocks for a test query).","type":"platform","url":"https://www.mongoliajol.info","verified":true,"verified_date":"2026-11-26"},{"api":"","fields":["multidisciplinary"],"languages":["English","Hindi"],"name":"NOPR — NIScPR Online Periodicals Repository (India)","notes":"Repository of CSIR-NIScPR (India): free full text of 19 research journals, ~61,000 records (DSpace). Registry-only for now: the server closed every connection from the build sandbox during the 2026-11-26 probe (simple-search, discover and the DSpace REST API all dropped), so no search route could be verified live.","type":"platform","url":"https://nopr.niscpr.res.in","verified":true,"verified_date":"2026-11-26"},{"api":"","fields":["multidisciplinary"],"languages":["English"],"name":"PakMediNet — Medical Journals of Pakistan","notes":"Index of Pakistan's medical journals with HEC/PMDC categories; Pakistan has no single national journal platform. Registry-only for now: the site answered HTTP 403 'Your request was blocked' from the build sandbox on 2026-11-26.","type":"platform","url":"https://www.pakmedinet.com","verified":true,"verified_date":"2026-11-26"},{"api":"","fields":["multidisciplinary"],"languages":["English","Urdu"],"name":"HEC Recognised Journals List — Higher Education Commission (Pakistan)","notes":"Official list of HEC-recognised Pakistani journals (W/X/Y/Z categories, published as documents on hec.gov.pk). A credibility list, not a searchable article platform; most listed journals are open-access OJS sites reached individually.","type":"platform","url":"https://www.hec.gov.pk","verified":true,"verified_date":"2026-11-26"},{"api":"","fields":["multidisciplinary"],"languages":["Bengali","English"],"name":"BanglaJOL — Bangladesh Journals Online","notes":"Bangladeshi member of the Journals Online family (INASP/Ubiquity); all material free to view, search and browse. Registry-only under Jupiter's full-text-only law (2026-11-26): the OJS site-wide search answered with real results during the 2026-11-26 probe, but a returned item's full text (OJS galley PDF) could NOT be verified reachable — galley downloads repeatedly timed out / dropped connections from the probe sandbox — so the search route is not wired live until a probe confirms its PDFs. Routes tried: OJS site search, article view pages, galley view and /article/download/<id>/<galley> for two articles.","type":"platform","url":"https://www.banglajol.info","verified":true,"verified_date":"2026-11-26"},{"api":"https://www.nepjol.info/index.php/index/search/search","fields":["multidisciplinary"],"languages":["Nepali","English"],"name":"NepJOL — Nepal Journals Online","notes":"Nepalese member of the Journals Online family (INASP/Ubiquity), the largest JOL (about 45% of the family's 695 journals); abstracts and mostly full text free. Live search wired in build_article.py (search_asian_platforms) via the OJS site-wide search (probed 2026-11-26: 25 result blocks for a test query).","type":"platform","url":"https://www.nepjol.info","verified":true,"verified_date":"2026-11-26"},{"api":"","fields":["multidisciplinary"],"languages":["Sinhala","Tamil","English"],"name":"SLJOL — Sri Lanka Journals Online","notes":"Sri Lankan member of the Journals Online family (INASP/Ubiquity); ~97% of articles full text. Registry-only for now: the OJS search answered HTTP 403 Forbidden from the build sandbox on 2026-11-26 (both probes), so no search route could be verified live.","type":"platform","url":"https://www.sljol.info","verified":true,"verified_date":"2026-11-26"},{"api":"https://garuda.kemdiktisaintek.go.id/documents","fields":["multidisciplinary"],"languages":["Indonesian","English"],"name":"GARUDA — Garba Rujukan Digital (Indonesia)","notes":"Indonesia's national reference portal (Ministry of Higher Education, Science and Technology): thousands of Indonesian journals under the SINTA accreditation system, full text via the publisher. Live search wired in build_article.py (search_asian_platforms) via the documents search (probed 2026-11-26: real article items with titles, authors and source lines).","type":"platform","url":"https://garuda.kemdiktisaintek.go.id","verified":true,"verified_date":"2026-11-26"},{"api":"","fields":["multidisciplinary"],"languages":["Thai","English"],"name":"ThaiJO — Thai Journals Online (TCI)","notes":"Central journal platform of the Thai-Journal Citation Index Centre (TCI); Thai journals are hosted on per-journal OJS instances and TCI ranks ~1,000 titles (Tier 1-3). Registry-only for now: the portal itself is a JavaScript single-page app and no single site-wide search endpoint answered from the build sandbox on 2026-11-26.","type":"platform","url":"https://www.tci-thaijo.org","verified":true,"verified_date":"2026-11-26"},{"api":"https://vjol.info.vn/index.php/index/search/search","fields":["multidisciplinary"],"languages":["Vietnamese","English"],"name":"VJOL — Vietnam Journals Online","notes":"Vietnam's national journal aggregation platform (NASTIS, Ministry of Science and Technology), several hundred journals. The official domain is vjol.info.vn ONLY (vjol.info is unrelated). Live search wired in build_article.py (search_asian_platforms) via the OJS site-wide search (probed 2026-11-26: 25 result blocks for a test query).","type":"platform","url":"https://vjol.info.vn","verified":true,"verified_date":"2026-11-26"},{"api":"","fields":["multidisciplinary"],"languages":["Filipino","English"],"name":"PhilJOL — Philippine Journals Online","notes":"Philippine member of the Journals Online family (INASP/Ubiquity). Registry-only for now: the server closed every connection from the build sandbox during the 2026-11-26 probe, so its OJS search route could not be verified live (its JOL siblings BanglaJOL/NepJOL/MongoliaJOL are wired).","type":"platform","url":"https://www.philjol.info","verified":true,"verified_date":"2026-11-26"},{"api":"","fields":["multidisciplinary"],"languages":["Malay","English"],"name":"MyJurnal — Malaysian Citation Centre platform","notes":"Platform of the Citation and Infometrics Centre (Ministry of Higher Education, Malaysia) collecting and indexing all Malaysian journals; full text free where copyright permits. Registry-only for now: the server closed every connection from the build sandbox during the 2026-11-26 probe, so no search route could be verified live.","type":"platform","url":"https://www.myjurnal.my","verified":true,"verified_date":"2026-11-26"},{"api":"https://journals.nauka-nanrk.kz/index.php/index/search/search","fields":["multidisciplinary"],"languages":["Kazakh","Russian","English"],"name":"National Academy of Sciences of Kazakhstan — Academy journals","notes":"Journal platform of the National Academy of Sciences of Kazakhstan (Bulletin and News series across all fields, OJS, trilingual); Kazakhstan has no single unified journals portal — the Academy list also sits at qazscience.gov.kz. Live search wired in build_article.py (search_asian_platforms) via the OJS site-wide search (probed 2026-11-26: real result blocks).","type":"platform","url":"https://journals.nauka-nanrk.kz","verified":true,"verified_date":"2026-11-26"},{"api":"","fields":["multidisciplinary"],"languages":["Tajik","Russian","English"],"name":"National Academy of Sciences of Tajikistan — Academy periodicals","notes":"Periodicals of the National Academy of Sciences of Tajikistan (Reports and News of the Academy in four departments); the VAK journal list is at journals.vak.tj. Registry-only: both are static journal-listing sites with no article search, Tajikistan has no DOAJ-indexed journals and its open access is weak (some full texts sit on eLIBRARY.RU, which is subscription-based and excluded).","type":"platform","url":"https://journals.anrt.tj","verified":true,"verified_date":"2026-11-26"},{"api":"https://dergipark.org.tr/api/public/oai/","fields":["multidisciplinary"],"languages":["Turkish","English"],"name":"DergiPark — TÜBİTAK ULAKBİM national journal platform (Turkey)","notes":"Turkey's national journal platform (TÜBİTAK ULAKBİM): 3,000+ journals, 800,000+ articles, free full text. Registry-only for search: the web search redirects to a human-verification page, and the public OAI-PMH endpoint (in the api field) answers but is harvest-only, not keyword search — both probed 2026-11-26.","type":"platform","url":"https://dergipark.org.tr","verified":true,"verified_date":"2026-11-26"},{"api":"","fields":["multidisciplinary"],"languages":["Persian","English"],"name":"SID — Scientific Information Database (Iran)","notes":"Iran's open-access scientific information database (ACECR): free full text of approved Iranian journals from 2000 to today. Registry-only for now: home and search pages answered a Cloudflare static-challenge page from the build sandbox on 2026-11-26, so no machine-usable search route could be verified live.","type":"platform","url":"https://www.sid.ir","verified":true,"verified_date":"2026-11-26"},{"api":"","fields":["multidisciplinary"],"languages":["Persian","English"],"name":"MSRT Journals Portal — Ministry of Science, Research and Technology (Iran)","notes":"Official portal and ranking list of Iranian scientific journals approved by the Ministry of Science, Research and Technology. A credibility list only — it carries no article full text itself (Iranian full text sits on SID and the journals' own OJS sites).","type":"platform","url":"https://journals.msrt.ir","verified":true,"verified_date":"2026-11-26"},{"api":"https://cyberleninka.ru/oai","fields":["multidisciplinary"],"languages":["Russian","English"],"name":"CyberLeninka — Russian open-access scientific library","notes":"The largest Russian-language open-access scholarly library: thousands of journals from Russia and the post-Soviet states (incl. Kazakhstan, Uzbekistan, Ukraine, Belarus), millions of CC BY full-text articles, no registration. Registry-only for search: the search UI is a JavaScript app whose /api/search endpoint rejected every plain probe on 2026-11-26 (GET 405, form POST 400), and the OAI-PMH endpoint (in the api field) answers but is harvest-only, not keyword search.","type":"platform","url":"https://cyberleninka.ru","verified":true,"verified_date":"2026-11-26"}]
+[
+ {
+  "api": "",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Japanese",
+   "English"
+  ],
+  "name": "J-STAGE — Japan Science and Technology Agency journal platform",
+  "notes": "Japan's national journal platform (JST): 4,514 titles, ~6.09M articles of which ~5.88M free/open. Registry-only for now: the article search is a JavaScript-built multi-row form — plain GET probes of the search endpoint answered HTTP 500 / an error redirect from the build sandbox on 2026-11-26, and no public API or OAI route is offered; its articles remain reachable via Crossref/DOAJ.",
+  "type": "platform",
+  "url": "https://www.jstage.jst.go.jp",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Chinese",
+   "English"
+  ],
+  "name": "SciOpen — Tsinghua University Press open-access platform (China)",
+  "notes": "Open-access publishing platform of Tsinghua University Press hosting Chinese and international journals, free full text. Registry-only for now: the site is a JavaScript single-page app and /search answered a 404 shell from the build sandbox on 2026-11-26, so no machine-usable search route could be verified live.",
+  "type": "platform",
+  "url": "https://www.sciopen.com",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Chinese",
+   "English"
+  ],
+  "name": "COAJ — China Open Access Journals",
+  "notes": "Non-profit database of Chinese open-access journals (China Science Publishing & Media): 341 Chinese journals, 90,000+ articles (end of 2025). Registry-only for now: the homepage is a JavaScript app shell with no server-rendered search form and /search answered HTTP 401 from the build sandbox on 2026-11-26.",
+  "type": "platform",
+  "url": "https://www.coaj.cn",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Korean",
+   "English"
+  ],
+  "name": "KoreaScience — Korean Federation of Science and Technology Societies platform",
+  "notes": "Platform of the Korean Federation of Science and Technology Societies (KOFST): hundreds of Korean society journals, open-access full text, alongside the national KCI index. Registry-only for now: the site and article pages answer, but the search is JavaScript-driven and every candidate search route probed on 2026-11-26 answered 404 or timed out, so no machine-usable keyword route could be verified live.",
+  "type": "platform",
+  "url": "https://www.koreascience.kr",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "https://www.mongoliajol.info/index.php/index/search/search",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Mongolian",
+   "English"
+  ],
+  "name": "MongoliaJOL — Mongolia Journals Online",
+  "notes": "Mongolian member of the Journals Online family (INASP/Ubiquity), free to view and search. Live search wired in build_article.py (search_asian_platforms) via the OJS site-wide search (probed 2026-11-26: 20 result blocks for a test query).",
+  "type": "platform",
+  "url": "https://www.mongoliajol.info",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English",
+   "Hindi"
+  ],
+  "name": "NOPR — NIScPR Online Periodicals Repository (India)",
+  "notes": "Repository of CSIR-NIScPR (India): free full text of 19 research journals, ~61,000 records (DSpace). Registry-only for now: the server closed every connection from the build sandbox during the 2026-11-26 probe (simple-search, discover and the DSpace REST API all dropped), so no search route could be verified live.",
+  "type": "platform",
+  "url": "https://nopr.niscpr.res.in",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English"
+  ],
+  "name": "PakMediNet — Medical Journals of Pakistan",
+  "notes": "Index of Pakistan's medical journals with HEC/PMDC categories; Pakistan has no single national journal platform. Registry-only for now: the site answered HTTP 403 'Your request was blocked' from the build sandbox on 2026-11-26.",
+  "type": "platform",
+  "url": "https://www.pakmedinet.com",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "English",
+   "Urdu"
+  ],
+  "name": "HEC Recognised Journals List — Higher Education Commission (Pakistan)",
+  "notes": "Official list of HEC-recognised Pakistani journals (W/X/Y/Z categories, published as documents on hec.gov.pk). A credibility list, not a searchable article platform; most listed journals are open-access OJS sites reached individually.",
+  "type": "platform",
+  "url": "https://www.hec.gov.pk",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Bengali",
+   "English"
+  ],
+  "name": "BanglaJOL — Bangladesh Journals Online",
+  "notes": "Bangladeshi member of the Journals Online family (INASP/Ubiquity); all material free to view, search and browse. Registry-only under Jupiter's full-text-only law (2026-11-26): the OJS site-wide search answered with real results during the 2026-11-26 probe, but a returned item's full text (OJS galley PDF) could NOT be verified reachable — galley downloads repeatedly timed out / dropped connections from the probe sandbox — so the search route is not wired live until a probe confirms its PDFs. Routes tried: OJS site search, article view pages, galley view and /article/download/<id>/<galley> for two articles.",
+  "type": "platform",
+  "url": "https://www.banglajol.info",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "https://www.nepjol.info/index.php/index/search/search",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Nepali",
+   "English"
+  ],
+  "name": "NepJOL — Nepal Journals Online",
+  "notes": "Nepalese member of the Journals Online family (INASP/Ubiquity), the largest JOL (about 45% of the family's 695 journals); abstracts and mostly full text free. Live search wired in build_article.py (search_asian_platforms) via the OJS site-wide search (probed 2026-11-26: 25 result blocks for a test query).",
+  "type": "platform",
+  "url": "https://www.nepjol.info",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Sinhala",
+   "Tamil",
+   "English"
+  ],
+  "name": "SLJOL — Sri Lanka Journals Online",
+  "notes": "Sri Lankan member of the Journals Online family (INASP/Ubiquity); ~97% of articles full text. Registry-only for now: the OJS search answered HTTP 403 Forbidden from the build sandbox on 2026-11-26 (both probes), so no search route could be verified live.",
+  "type": "platform",
+  "url": "https://www.sljol.info",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "https://garuda.kemdiktisaintek.go.id/documents",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Indonesian",
+   "English"
+  ],
+  "name": "GARUDA — Garba Rujukan Digital (Indonesia)",
+  "notes": "Indonesia's national reference portal (Ministry of Higher Education, Science and Technology): thousands of Indonesian journals under the SINTA accreditation system, full text via the publisher. Live search wired in build_article.py (search_asian_platforms) via the documents search (probed 2026-11-26: real article items with titles, authors and source lines).",
+  "type": "platform",
+  "url": "https://garuda.kemdiktisaintek.go.id",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Thai",
+   "English"
+  ],
+  "name": "ThaiJO — Thai Journals Online (TCI)",
+  "notes": "Central journal platform of the Thai-Journal Citation Index Centre (TCI); Thai journals are hosted on per-journal OJS instances and TCI ranks ~1,000 titles (Tier 1-3). Registry-only for now: the portal itself is a JavaScript single-page app and no single site-wide search endpoint answered from the build sandbox on 2026-11-26.",
+  "type": "platform",
+  "url": "https://www.tci-thaijo.org",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "https://vjol.info.vn/index.php/index/search/search",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Vietnamese",
+   "English"
+  ],
+  "name": "VJOL — Vietnam Journals Online",
+  "notes": "Vietnam's national journal aggregation platform (NASTIS, Ministry of Science and Technology), several hundred journals. The official domain is vjol.info.vn ONLY (vjol.info is unrelated). Live search wired in build_article.py (search_asian_platforms) via the OJS site-wide search (probed 2026-11-26: 25 result blocks for a test query).",
+  "type": "platform",
+  "url": "https://vjol.info.vn",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Filipino",
+   "English"
+  ],
+  "name": "PhilJOL — Philippine Journals Online",
+  "notes": "Philippine member of the Journals Online family (INASP/Ubiquity). Registry-only for now: the server closed every connection from the build sandbox during the 2026-11-26 probe, so its OJS search route could not be verified live (its JOL siblings BanglaJOL/NepJOL/MongoliaJOL are wired).",
+  "type": "platform",
+  "url": "https://www.philjol.info",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Malay",
+   "English"
+  ],
+  "name": "MyJurnal — Malaysian Citation Centre platform",
+  "notes": "Platform of the Citation and Infometrics Centre (Ministry of Higher Education, Malaysia) collecting and indexing all Malaysian journals; full text free where copyright permits. Registry-only for now: the server closed every connection from the build sandbox during the 2026-11-26 probe, so no search route could be verified live.",
+  "type": "platform",
+  "url": "https://www.myjurnal.my",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "https://journals.nauka-nanrk.kz/index.php/index/search/search",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Kazakh",
+   "Russian",
+   "English"
+  ],
+  "name": "National Academy of Sciences of Kazakhstan — Academy journals",
+  "notes": "Journal platform of the National Academy of Sciences of Kazakhstan (Bulletin and News series across all fields, OJS, trilingual); Kazakhstan has no single unified journals portal — the Academy list also sits at qazscience.gov.kz. Live search wired in build_article.py (search_asian_platforms) via the OJS site-wide search (probed 2026-11-26: real result blocks).",
+  "type": "platform",
+  "url": "https://journals.nauka-nanrk.kz",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Tajik",
+   "Russian",
+   "English"
+  ],
+  "name": "National Academy of Sciences of Tajikistan — Academy periodicals",
+  "notes": "Periodicals of the National Academy of Sciences of Tajikistan (Reports and News of the Academy in four departments); the VAK journal list is at journals.vak.tj. Registry-only: both are static journal-listing sites with no article search, Tajikistan has no DOAJ-indexed journals and its open access is weak (some full texts sit on eLIBRARY.RU, which is subscription-based and excluded).",
+  "type": "platform",
+  "url": "https://journals.anrt.tj",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "https://dergipark.org.tr/api/public/oai/",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Turkish",
+   "English"
+  ],
+  "name": "DergiPark — TÜBİTAK ULAKBİM national journal platform (Turkey)",
+  "notes": "Turkey's national journal platform (TÜBİTAK ULAKBİM): 3,000+ journals, 800,000+ articles, free full text. Registry-only for search: the web search redirects to a human-verification page, and the public OAI-PMH endpoint (in the api field) answers but is harvest-only, not keyword search — both probed 2026-11-26.",
+  "type": "platform",
+  "url": "https://dergipark.org.tr",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Persian",
+   "English"
+  ],
+  "name": "SID — Scientific Information Database (Iran)",
+  "notes": "Iran's open-access scientific information database (ACECR): free full text of approved Iranian journals from 2000 to today. Registry-only for now: home and search pages answered a Cloudflare static-challenge page from the build sandbox on 2026-11-26, so no machine-usable search route could be verified live.",
+  "type": "platform",
+  "url": "https://www.sid.ir",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Persian",
+   "English"
+  ],
+  "name": "MSRT Journals Portal — Ministry of Science, Research and Technology (Iran)",
+  "notes": "Official portal and ranking list of Iranian scientific journals approved by the Ministry of Science, Research and Technology. A credibility list only — it carries no article full text itself (Iranian full text sits on SID and the journals' own OJS sites).",
+  "type": "platform",
+  "url": "https://journals.msrt.ir",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "https://cyberleninka.ru/oai",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Russian",
+   "English"
+  ],
+  "name": "CyberLeninka — Russian open-access scientific library",
+  "notes": "The largest Russian-language open-access scholarly library: thousands of journals from Russia and the post-Soviet states (incl. Kazakhstan, Uzbekistan, Ukraine, Belarus), millions of CC BY full-text articles, no registration. Registry-only for search: the search UI is a JavaScript app whose /api/search endpoint rejected every plain probe on 2026-11-26 (GET 405, form POST 400), and the OAI-PMH endpoint (in the api field) answers but is harvest-only, not keyword search.",
+  "type": "platform",
+  "url": "https://cyberleninka.ru",
+  "verified": true,
+  "verified_date": "2026-11-26"
+ },
+ {
+  "api": "",
+  "fields": [
+   "multidisciplinary"
+  ],
+  "languages": [
+   "Persian",
+   "English"
+  ],
+  "name": "IranJournals / MSRT national journals portal (Iran)",
+  "notes": "REGISTRY-ONLY (§70 probe 2026-11-27): the ministry's national journals portal. The live Iranian journal system is the per-journal Yektaweb subdomains (e.g. mct.iranjournals.ir), already LIVE-wired per journal (§36/§37); the apex portal itself offers no article search. Routes tried: (1) https://iranjournals.ir/ and https://www.iranjournals.ir/ — no answer from the build sandbox (empty reply); (2) http://iranjournals.ir/ — HTTP 200 but a Sinaweb placeholder page ('Please contact sinaweb to activate this domain'), no search and no records; (3) https://journals.msrt.ir/ (the ministry portal host) — no answer from the sandbox; (4) /sitemap.xml on the apex — no answer. No machine search + reachable full text exists at the portal level, so it stays registry-only under the full-text-only law; journal-level coverage flows through the §37 wired subdomains (probe 2026-11-27: the §37 MCT route returns Keramati 1404, 'نگاه دانشوران کهن به مسئلهٔ دقت در محاسبه و اندازه‌گیری', with a direct PDF, %PDF- magic verified).",
+  "type": "platform",
+  "url": "https://iranjournals.ir",
+  "verified": true,
+  "verified_date": "2026-11-27"
+ }
+]

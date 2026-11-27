@@ -331,9 +331,14 @@ def test_budget_and_provenance():
     res = ba.run_review_layer(clean_article(), make_sources(),
                               make_context())
     check("(f1) clean run passes", res["ok"], str(res.get("verdict")))
-    check("(f2) every role verdict names its brain + attempts",
+    check("(f2) every role verdict names its brain + attempts "
+          "(the §70 novelty role is inert here — this context "
+          "carries no prior-work set, so it names no brain and "
+          "makes no call by design)",
           all(v.get("brain") == "glm" and v.get("attempts") == 1
-              for v in res["roles"].values()),
+              for r, v in res["roles"].items() if r != "novelty")
+          and res["roles"]["novelty"]["available"]
+          and res["roles"]["novelty"]["brain"] is None,
           str({r: (v.get("brain"), v.get("attempts"))
                for r, v in res["roles"].items()}))
     check("(f3) reviewer calls ran under REVIEW_MAX_TOKENS",
