@@ -11123,6 +11123,576 @@ PARALLEL_MAX_SECTIONS = 5
 PARALLEL_MIN_SECTION_WORDS = 30
 
 # ----------------------------------------------------------------------
+# Article-structure template (§71, Jupiter 2026-11-28: «الان بساز:
+# §۷۱ + §۶۸ بخش ۱، با مقالهٔ بیرونی به‌عنوان نمونهٔ مرجع» — adopting
+# ChatGPT's "Master Manuscript Architecture", goal files
+# chatgpt-article-structure-standard-2026-11-27.md, with the final
+# Proposal-1 article as the reference sample). THREE concepts are
+# kept strictly separate (ChatGPT's acceptance criteria, adopted):
+#
+#   article_type        — WHAT the article is: research / review /
+#                         historical(-textual) / methodological /
+#                         theoretical. The type fixes the STRUCTURE
+#                         (the fixed scientific core below) FIRST.
+#   publication_profile — WHERE it is headed: the engine's existing
+#                         ARTICLE_TYPE key (isi / scopus / pubmed /
+#                         ieee / isc / res / promo / conf /
+#                         intlconf / review) with its TYPE_GUIDE
+#                         line and TYPE_WORD_TARGETS range. "ISI"
+#                         is a profile, NOT an article type.
+#   word_budget         — HOW LONG, resolved in three layers: the
+#                         TYPE budget (ARTICLE_TYPE_BUDGETS — the
+#                         6,000–8,000 range belongs to the RESEARCH
+#                         type only and never leaks into review /
+#                         historical / short forms), the PROFILE
+#                         target (TYPE_WORD_TARGETS, §15), and an
+#                         optional destination JOURNAL limit
+#                         (ARTICLE_JOURNAL_WORD_LIMIT env) which,
+#                         when set, is FINAL.
+#
+# SIZE-MATCHES-TYPE LAW (Jupiter 2026-11-27): length follows the
+# type; there is no single fixed budget. Budgets are PLANNING
+# ranges: drifting outside a type/profile range is a WARNING in
+# validation, never a content defect. Only a supplied journal
+# limit is a hard bound, and breaching it is a DESTINATION
+# ADAPTATION task at submission prep (trim to the journal's rule
+# there) — scientific content is NEVER auto-deleted from the core
+# text to fit a number. The reference sample proves the rule: its
+# raw count is 8,032 words, yet under the standard's COUNTING
+# RULE (title page, abstract, references and appendices excluded)
+# its main text is ~7,300 words — inside the research budget.
+#
+# §70 vs the standard — RESOLVED FOR §70 (Jupiter's law outranks
+# the consultant's proposal): the standard would park
+# reviewed-but-uncited sources in a separate register OUTSIDE the
+# References. §70 law says the article carries the COMPLETE
+# prior-work bibliography. §71 therefore keeps TWO distinct data
+# sets, both preserved: (a) the reviewed-background REGISTER —
+# every prior-work member with its verification status and its
+# recorded place/type of use or reason for non-use (the §70 audit
+# record in state.json); and (b) the article BIBLIOGRAPHY, which
+# per §70 IS the complete prior-work bibliography. §71 validation
+# NEVER flags a reviewed-but-uncited source for deletion, and no
+# stage may auto-delete one.
+#
+# The template is a CONFORMANCE standard, not a mould: the
+# reference article must PASS its fixed-core checks (required
+# sections present, in order) and then adapt to a journal layer;
+# it is not rewritten to match the template.
+# ----------------------------------------------------------------------
+
+ARTICLE_TYPES = ("research", "review", "historical",
+                 "methodological", "theoretical")
+
+# Type-level word budgets (planning ranges, main-text words under
+# the counting rule below). The 6,000–8,000 range is the RESEARCH
+# type's (ChatGPT's standard, §5) — it must not leak into the
+# other types.
+ARTICLE_TYPE_BUDGETS = {
+    "research": (6000, 8000),
+    "review": (8000, 10000),
+    "historical": (6000, 9000),
+    "methodological": (4000, 7000),
+    "theoretical": (5000, 8000),
+}
+
+# Counting rule (the standard, §5): the word budget counts the
+# MAIN TEXT only — title page, abstract, keywords, references and
+# appendices are excluded; the abstract is counted separately
+# against its own budget.
+ARTICLE_COUNT_EXCLUDED_SLOTS = ("title_page", "abstract",
+                                "keywords", "references",
+                                "appendix")
+
+_ABSTRACT_ALIASES = ("abstract", "چکیده")
+_KEYWORDS_ALIASES = ("keywords", "keyword", "کلیدواژه",
+                     "واژه‌های کلیدی", "واژه هاي كليدي")
+_INTRODUCTION_ALIASES = ("introduction", "مقدمه")
+_PRIOR_WORK_ALIASES = ("prior work", "novelty", "literature",
+                       "previous work", "پیشینه", "مرور منابع",
+                       "مرور ادبیات", "مرور پژوهش")
+_METHODOLOGY_ALIASES = ("method", "materials", "روش تحقیق",
+                        "روش‌شناسی", "روش شناسی", "متدولوژی",
+                        "روش پژوهش")
+_SOURCES_ALIASES = ("source criticism", "the texts", "collation",
+                    "textual criticism", "نقد منابع", "نقد متن",
+                    "نسخه‌ها", "نسخه ها", "بررسی متون")
+_RESULTS_ALIASES = ("results", "findings", "reconstruction",
+                    "نتایج", "یافته‌ها", "یافته ها")
+_RECONSTRUCTION_ALIASES = ("reconstruction", "geometric",
+                           "analysis", "بازسازی", "تحلیل")
+_DISCUSSION_ALIASES = ("discussion", "بحث و بررسی", "بحث")
+_LIMITATIONS_ALIASES = ("limitation", "محدودیت")
+_CONCLUSION_ALIASES = ("conclusion", "نتیجه‌گیری", "نتیجه گیری",
+                       "جمع‌بندی", "جمع بندی")
+_REFERENCES_ALIASES = ("references", "bibliography", "منابع",
+                       "مراجع", "کتاب‌شناسی", "کتاب شناسی")
+_APPENDIX_ALIASES = ("appendix", "appendices", "reproducibility",
+                     "پیوست", "ضمیمه", "ضمایم")
+
+
+def _template_slot(key, label, required, aliases, budget=None):
+    return {"slot": key, "label": label, "required": bool(required),
+            "aliases": tuple(aliases), "budget": budget}
+
+
+# The fixed scientific core per article type: ordered slots.
+# A slot is satisfied by the first article section (in order)
+# whose heading carries one of its aliases; a merged heading
+# (e.g. "Discussion, limitations, and conclusion" — the standard
+# expressly allows the merge in the submission version) satisfies
+# every slot it names. The appendix slot is satisfiable ONLY by a
+# section placed after the References.
+ARTICLE_TEMPLATE_SLOTS = {
+    "research": [
+        _template_slot("title_page", "Title page", True, ()),
+        _template_slot("abstract", "Abstract", True,
+                       _ABSTRACT_ALIASES, (200, 250)),
+        _template_slot("keywords", "Keywords", True,
+                       _KEYWORDS_ALIASES),
+        _template_slot("introduction", "Introduction", True,
+                       _INTRODUCTION_ALIASES, (600, 800)),
+        _template_slot("prior_work",
+                       "Prior work and the novelty boundary (§70)",
+                       True, _PRIOR_WORK_ALIASES, (1000, 1600)),
+        _template_slot("methodology", "Methodology", True,
+                       _METHODOLOGY_ALIASES + ("texts", "collation"),
+                       (700, 1100)),
+        _template_slot("results_body", "Results / main body", True,
+                       _RESULTS_ALIASES, (1500, 2200)),
+        _template_slot("discussion", "Discussion", True,
+                       _DISCUSSION_ALIASES, (1100, 1500)),
+        _template_slot("limitations", "Limitations", False,
+                       _LIMITATIONS_ALIASES, (150, 250)),
+        _template_slot("conclusion", "Conclusion", True,
+                       _CONCLUSION_ALIASES, (250, 350)),
+        _template_slot("references", "References", True,
+                       _REFERENCES_ALIASES),
+        _template_slot("appendix", "Appendices", False,
+                       _APPENDIX_ALIASES),
+    ],
+    "review": [
+        _template_slot("title_page", "Title page", True, ()),
+        _template_slot("abstract", "Abstract", True,
+                       _ABSTRACT_ALIASES, (200, 300)),
+        _template_slot("keywords", "Keywords", True,
+                       _KEYWORDS_ALIASES),
+        _template_slot("introduction", "Introduction and scope",
+                       True, _INTRODUCTION_ALIASES),
+        _template_slot("methodology",
+                       "Search and selection method", True,
+                       _METHODOLOGY_ALIASES + ("search strategy",
+                                                "selection",
+                                                "روش جستجو")),
+        _template_slot("results_body", "Thematic synthesis", True,
+                       _RESULTS_ALIASES + ("thematic", "synthesis",
+                                            "ترکیب")),
+        _template_slot("discussion", "Discussion", True,
+                       _DISCUSSION_ALIASES),
+        _template_slot("limitations", "Limitations", False,
+                       _LIMITATIONS_ALIASES),
+        _template_slot("conclusion", "Conclusion", True,
+                       _CONCLUSION_ALIASES),
+        _template_slot("references", "References", True,
+                       _REFERENCES_ALIASES),
+        _template_slot("appendix", "Appendices", False,
+                       _APPENDIX_ALIASES),
+    ],
+    "historical": [
+        _template_slot("title_page", "Title page", True, ()),
+        _template_slot("abstract", "Abstract", True,
+                       _ABSTRACT_ALIASES, (200, 250)),
+        _template_slot("keywords", "Keywords", True,
+                       _KEYWORDS_ALIASES),
+        _template_slot("introduction", "Introduction", True,
+                       _INTRODUCTION_ALIASES, (800, 1200)),
+        _template_slot("prior_work",
+                       "Prior work and the novelty boundary (§70)",
+                       True, _PRIOR_WORK_ALIASES),
+        _template_slot("methodology",
+                       "Sources and textual criticism", True,
+                       _SOURCES_ALIASES, (1500, 2500)),
+        _template_slot("results_body",
+                       "Reconstruction / analysis", True,
+                       _RECONSTRUCTION_ALIASES, (2500, 3500)),
+        _template_slot("discussion", "Discussion", True,
+                       _DISCUSSION_ALIASES, (800, 1200)),
+        _template_slot("limitations", "Limitations", False,
+                       _LIMITATIONS_ALIASES),
+        _template_slot("conclusion", "Conclusion", True,
+                       _CONCLUSION_ALIASES, (300, 500)),
+        _template_slot("references", "References", True,
+                       _REFERENCES_ALIASES),
+        _template_slot("appendix", "Appendices", False,
+                       _APPENDIX_ALIASES),
+    ],
+    "methodological": [
+        _template_slot("title_page", "Title page", True, ()),
+        _template_slot("abstract", "Abstract", True,
+                       _ABSTRACT_ALIASES, (200, 250)),
+        _template_slot("keywords", "Keywords", True,
+                       _KEYWORDS_ALIASES),
+        _template_slot("introduction", "Introduction", True,
+                       _INTRODUCTION_ALIASES),
+        _template_slot("prior_work",
+                       "Prior work and the novelty boundary (§70)",
+                       False, _PRIOR_WORK_ALIASES),
+        _template_slot("methodology", "The method", True,
+                       _METHODOLOGY_ALIASES),
+        _template_slot("results_body",
+                       "Validation / application", True,
+                       _RESULTS_ALIASES + ("validation",
+                                            "application",
+                                            "اعتبارسنجی")),
+        _template_slot("discussion", "Discussion", True,
+                       _DISCUSSION_ALIASES),
+        _template_slot("limitations", "Limitations", False,
+                       _LIMITATIONS_ALIASES),
+        _template_slot("conclusion", "Conclusion", True,
+                       _CONCLUSION_ALIASES),
+        _template_slot("references", "References", True,
+                       _REFERENCES_ALIASES),
+        _template_slot("appendix", "Appendices", False,
+                       _APPENDIX_ALIASES),
+    ],
+}
+# The theoretical type shares the historical/textual architecture
+# (the standard treats them as one family).
+ARTICLE_TEMPLATE_SLOTS["theoretical"] = \
+    ARTICLE_TEMPLATE_SLOTS["historical"]
+
+# The standard's 17-point QC checklist (§9), encoded as data: the
+# §33 structure reviewer and any future submission-prep stage
+# check against exactly this list.
+ARTICLE_QC_CHECKLIST = (
+    "Title states the exact claim or question — no broad "
+    "field-label title.",
+    "Abstract follows Background/Aim/Method/Results/Conclusion "
+    "and adds no claim the body does not make.",
+    "Keywords (5–7) match the article's actual terminology.",
+    "Introduction moves general → gap → question → contribution "
+    "→ roadmap, in that order.",
+    "The §70 prior-work section and novelty-boundary statement "
+    "are present, with the complete prior-work bibliography.",
+    "Method is reproducible: sources, editions, data and steps "
+    "named so another researcher can repeat the work.",
+    "Every result is traceable to a table, figure or numbered "
+    "derivation.",
+    "Discussion interprets the results; it does not repeat them.",
+    "Limitations are stated explicitly and honestly.",
+    "Conclusion answers the research question and names the "
+    "remaining open problem.",
+    "Every in-text citation resolves to the reference list; no "
+    "reference is invented.",
+    "Numbers are identical in the abstract, the body, the tables "
+    "and the conclusion.",
+    "Historical terms are defined at first use; modern terms are "
+    "never projected onto historical ones.",
+    "No absolute priority claim ('first', 'proves') beyond the "
+    "assessed §70 novelty boundary.",
+    "Word count follows the counting rule (title page, abstract, "
+    "references and appendices excluded) and the type budget.",
+    "The journal layer (format, reference style, limits) is "
+    "applied at submission prep only — the scientific core text "
+    "is untouched by it.",
+    "Reviewed-but-uncited sources stay in the complete prior-work "
+    "bibliography (§70); nothing reviewed is silently deleted.",
+)
+
+# §70's two data sets, named so no stage confuses them (§71).
+PRIOR_WORK_REGISTER_POLICY = (
+    "Two distinct sets are preserved (§70/§71): the "
+    "reviewed-background REGISTER (every prior-work member with "
+    "its verification status and its recorded place/type of use "
+    "or reason for non-use) and the article BIBLIOGRAPHY, which "
+    "per §70 is the COMPLETE prior-work bibliography. A "
+    "reviewed-but-uncited source is never auto-deleted from "
+    "either set.")
+
+
+def article_structure_type(profile, architecture=None):
+    """Resolve the §71 article TYPE (structure family) for a
+    production. An explicit ARTICLE_ARCHITECTURE wins; otherwise
+    the review profile maps to the review type and every other
+    profile to the research type. The publication profile itself
+    is never an article type."""
+    arch = (architecture if architecture is not None
+            else os.environ.get("ARTICLE_ARCHITECTURE") or "")
+    arch = arch.strip().lower()
+    aliases = {"imrad": "research", "research": "research",
+               "review": "review", "historical": "historical",
+               "historical-textual": "historical",
+               "textual": "historical",
+               "methodological": "methodological",
+               "method": "methodological",
+               "theoretical": "theoretical"}
+    if arch in aliases:
+        return aliases[arch]
+    if (profile or "").strip().lower() == "review":
+        return "review"
+    return "research"
+
+
+def article_template_for(profile, architecture=None,
+                         journal_word_limit=None):
+    """The §71 template for one production: article type +
+    publication profile + the three-layer word budget + the
+    fixed core slots + the policies. `journal_word_limit` (or the
+    ARTICLE_JOURNAL_WORD_LIMIT env) is the destination journal's
+    own limit — FINAL when set, applied by destination adaptation
+    at submission prep, never by deleting core content."""
+    profile = (profile or "isi").strip().lower()
+    atype = article_structure_type(profile, architecture)
+    if journal_word_limit is None:
+        raw = (os.environ.get("ARTICLE_JOURNAL_WORD_LIMIT")
+               or "").strip()
+        try:
+            journal_word_limit = int(raw) if raw else None
+        except ValueError:
+            journal_word_limit = None
+    return {
+        "article_type": atype,
+        "publication_profile": profile,
+        "word_budget": {
+            "type": ARTICLE_TYPE_BUDGETS[atype],
+            "profile": TYPE_WORD_TARGETS.get(profile),
+            "journal": journal_word_limit,
+        },
+        "counting_rule": (
+            "main text only — title page, abstract, keywords, "
+            "references and appendices excluded"),
+        "slots": ARTICLE_TEMPLATE_SLOTS[atype],
+        "qc_checklist": ARTICLE_QC_CHECKLIST,
+        "bibliography_policy": PRIOR_WORK_REGISTER_POLICY,
+        "adaptation_policy": (
+            "a journal limit is met by destination adaptation at "
+            "submission prep; scientific content is never "
+            "auto-deleted from the core text"),
+    }
+
+
+def _article_sections(article):
+    """Split an article into headed sections: a list of dicts
+    {heading, level, body} in document order. The block before
+    the first heading (if any) has heading ''. A bold Keywords
+    line counts as its own section (the standard's title-page
+    block carries keywords outside a heading in some styles)."""
+    sections = []
+    cur = {"heading": "", "level": 0, "lines": []}
+    for line in (article or "").splitlines():
+        m = re.match(r"^(#{1,6})\s+(.*)$", line)
+        kw = re.match(r"^\s*\*\*\s*(keywords|کلیدواژه)", line,
+                      re.IGNORECASE)
+        if m:
+            sections.append(cur)
+            cur = {"heading": m.group(2).strip(),
+                   "level": len(m.group(1)), "lines": []}
+        elif kw and "keyword" not in cur["heading"].lower() \
+                and "کلیدواژه" not in cur["heading"]:
+            sections.append(cur)
+            cur = {"heading": "Keywords", "level": 2,
+                   "lines": [line]}
+        else:
+            cur["lines"].append(line)
+    sections.append(cur)
+    out = [{"heading": s["heading"], "level": s["level"],
+            "body": "\n".join(s["lines"])} for s in sections]
+    if out and not out[0]["heading"] \
+            and not out[0]["body"].strip():
+        out.pop(0)  # nothing precedes the first heading
+    return out
+
+
+def _slot_matches(slot, heading_low):
+    return any(a.lower() in heading_low for a in slot["aliases"])
+
+
+def validate_article_structure(article, template):
+    """Deterministic §71 conformance check. Returns {ok, errors,
+    warnings, found, counts}: ERRORS are fixed-core violations
+    only (a required section missing or out of order, or a breach
+    of a supplied journal limit — the last is a destination
+    adaptation task, never a licence to delete content); size
+    drift against the type budget or a section budget is a
+    WARNING. Reviewed-but-uncited bibliography entries are never
+    flagged (§70)."""
+    sections = _article_sections(article)
+    slots = template["slots"]
+    errors = []
+    warnings = []
+    # title_page: the first section must be the level-1 title.
+    found = {}
+    if sections and sections[0]["level"] == 1 \
+            and sections[0]["heading"]:
+        found["title_page"] = 0
+    # references position gates the appendix slot.
+    ref_pos = None
+    ref_slot = next(k for k in slots if k["slot"] == "references")
+    for i, s in enumerate(sections):
+        if _slot_matches(ref_slot, s["heading"].lower()):
+            ref_pos = i
+            break
+    last_pos = -1
+    for slot in slots:
+        key = slot["slot"]
+        if key == "title_page":
+            pos = found.get("title_page")
+        else:
+            pos = None
+            for i, s in enumerate(sections):
+                if i == found.get("title_page"):
+                    continue  # the title line is not a section
+                if key == "appendix" and ref_pos is not None \
+                        and i <= ref_pos:
+                    continue
+                if _slot_matches(slot, s["heading"].lower()):
+                    pos = i
+                    break
+            if pos is not None:
+                found[key] = pos
+        if pos is None:
+            if slot["required"]:
+                errors.append({
+                    "slot": key,
+                    "problem": f"required section missing: "
+                               f"{slot['label']}"})
+            continue
+        if pos < last_pos:
+            errors.append({
+                "slot": key,
+                "problem": f"section out of order: {slot['label']} "
+                           f"appears before an earlier core "
+                           f"section"})
+        last_pos = max(last_pos, pos)
+    # Word counts under the counting rule. A slot's SPAN runs
+    # from its matched section to the next matched section, so
+    # subsections roll up into the core section that heads them.
+    # A merged heading's span belongs to its first slot; the
+    # other slots it satisfies are marked merged (no separate
+    # budget warning — their words are inside the shared span).
+    counts = {"total_words": len((article or "").split()),
+              "main_words": 0, "abstract_words": 0,
+              "sections": {}}
+    matched = sorted(set(found.values()))
+    span_of = {}
+    for n, pos in enumerate(matched):
+        end = matched[n + 1] if n + 1 < len(matched) \
+            else len(sections)
+        span_of[pos] = sum(len(sections[i]["body"].split())
+                           for i in range(pos, end))
+    owner_of_pos = {}
+    merged = set()
+    for slot in slots:
+        key = slot["slot"]
+        if key not in found:
+            continue
+        pos = found[key]
+        if pos in owner_of_pos:
+            merged.add(key)
+            counts["sections"][key] = span_of[pos]
+            continue
+        owner_of_pos[pos] = key
+        counts["sections"][key] = span_of[pos]
+    if "abstract" in counts["sections"]:
+        counts["abstract_words"] = counts["sections"]["abstract"]
+    for i, s in enumerate(sections):
+        owner = None
+        for pos in matched:
+            if pos <= i:
+                owner = owner_of_pos.get(pos)
+            else:
+                break
+        if owner in ARTICLE_COUNT_EXCLUDED_SLOTS:
+            continue
+        if owner is None:
+            continue  # matter before the first core section
+        counts["main_words"] += len(s["body"].split())
+    budget = template["word_budget"]
+    main_words = counts["main_words"]
+    if budget.get("journal") is not None \
+            and main_words > budget["journal"]:
+        errors.append({
+            "slot": "word_budget",
+            "problem": f"main text is {main_words} words, over "
+                       f"the destination journal's limit of "
+                       f"{budget['journal']} — resolve by "
+                       f"destination adaptation at submission "
+                       f"prep, never by deleting scientific "
+                       f"content from the core text"})
+    lo, hi = budget["type"]
+    if not (lo <= main_words <= hi):
+        warnings.append(
+            f"main text {main_words} words is outside the "
+            f"{template['article_type']} type budget {lo}–{hi} "
+            f"(planning range — warning only)")
+    for slot in slots:
+        if slot["budget"] is None or slot["slot"] in merged:
+            continue
+        words = counts["sections"].get(slot["slot"])
+        if words is None:
+            continue
+        slo, shi = slot["budget"]
+        if not (slo <= words <= shi):
+            warnings.append(
+                f"section '{slot['label']}' is {words} words, "
+                f"outside its budget {slo}–{shi} (warning only)")
+    return {"ok": not errors, "errors": errors,
+            "warnings": warnings,
+            "found": sorted(found), "counts": counts}
+
+
+def render_structure_guide(template, language=""):
+    """The §71 structure text appended to the writer's guide:
+    the fixed core for the article's TYPE, its budgets under the
+    counting rule, and the §70/§71 policies. The journal layer is
+    deliberately NOT baked in — it is applied at submission
+    prep."""
+    lines = [
+        "",
+        f"ARTICLE STRUCTURE (§71) — article type: "
+        f"{template['article_type']} (publication profile: "
+        f"{template['publication_profile']}). Write the fixed "
+        f"scientific core in this order:",
+    ]
+    for slot in template["slots"]:
+        req = "required" if slot["required"] else "optional"
+        bud = (f", budget {slot['budget'][0]}–{slot['budget'][1]}"
+               f" words" if slot["budget"] else "")
+        lines.append(f"- {slot['label']} ({req}{bud})")
+    lo, hi = template["word_budget"]["type"]
+    lines.append(
+        f"Total size follows the TYPE (size-matches-type law): "
+        f"{lo}–{hi} main-text words for a "
+        f"{template['article_type']} article, counted under the "
+        f"counting rule ({template['counting_rule']}). Budgets "
+        f"are planning ranges, not licences to pad or cut "
+        f"content.")
+    if template["word_budget"].get("journal") is not None:
+        lines.append(
+            f"Destination journal limit: "
+            f"{template['word_budget']['journal']} words — "
+            f"applied at submission prep by adaptation; do not "
+            f"delete scientific content from the core to fit it.")
+    lines.append(template["bibliography_policy"])
+    return "\n".join(lines)
+
+
+# Extra §33 structure-role instructions, used ONLY when the run
+# carries a §71 template (context["structure_template"]) — legacy
+# contexts keep the role's exact previous behaviour.
+STRUCTURE_TEMPLATE_ROLE_EXTRA = (
+    "\n\n§71 TEMPLATE: this article follows the {article_type} "
+    "structure template. Its fixed core, in order, is: "
+    "{slot_list}. Judge order/logic against THIS core. The "
+    "article's bibliography is the complete §70 prior-work "
+    "bibliography: a reviewed source listed but not cited in "
+    "the body is NOT a defect and must never be flagged for "
+    "deletion (§70/§71).")
+
+
+
+
+# ----------------------------------------------------------------------
 # Writing-stage brain capacity (§57, Jupiter 2026-11-26, after
 # production run 45853857495 PASSED the gate — 5 counted, 4
 # primary, 5 full-text — and then failed at this stage, nothing
@@ -12017,10 +12587,15 @@ def _review_split_refs(article):
     return article or "", ""
 
 
-def _review_grounding_text(counted):
+def _review_grounding_text(counted, total_cap=_REVIEW_GROUNDING_TOTAL):
     """Numbered grounding cards for the review LLM passes: ONLY the
     counted sources (video support never grounds a claim), abstract
-    + extracted passages, capped per source and in total."""
+    + extracted passages, capped per source and in total. §68 part
+    1: `total_cap` is a parameter so a review prompt can be rebuilt
+    with a smaller grounding along the fit ladder; the default
+    preserves the exact pre-§68 behaviour."""
+    if total_cap is not None and total_cap <= 0:
+        return ""
     out = []
     total = 0
     for i, s in enumerate(counted, 1):
@@ -12034,7 +12609,7 @@ def _review_grounding_text(counted):
             parts.append(f"{label}: "
                          + excerpt[:_REVIEW_GROUNDING_PER_SOURCE])
         card = "\n".join(parts)
-        if out and total + len(card) > _REVIEW_GROUNDING_TOTAL:
+        if out and total + len(card) > total_cap:
             break
         out.append(card)
         total += len(card)
@@ -12048,6 +12623,481 @@ def _review_article_capped(article, cap=_REVIEW_ARTICLE_CAP):
     half = cap // 2
     return (a[:half] + "\n[... middle elided for review ...]\n"
             + a[-half:])
+
+
+# ----------------------------------------------------------------------
+# Review-call size caps + text preservation (§68 part 1, Jupiter
+# 2026-11-28; acceptance criteria from ChatGPT's review of the
+# build, adopted — see DESIGN.md §68). THE DEFECT: §57 capped the
+# WRITING calls, but the §33 review calls sent one fixed oversized
+# prompt (grounding up to 30,000 chars + the article capped at
+# 24,000 chars ≈ 18,000+ tokens) to EVERY brain, small ones
+# included. In run 45870399091 the numbers / citations / language
+# roles got no verdict on any brain (GLM 429, Gemini 429, Groq
+# 413), the layer blocked — and because the engine saved a written
+# article only after §33 passed, the 8,130-word text was LOST.
+#
+# The fix, mirroring §57's fit-or-skip discipline:
+#   * REVIEW_INPUT_TOKEN_CAPS — the same per-brain input budgets
+#     as §57, applied to review calls. _review_call_json now also
+#     accepts a CALLABLE prompt (cap -> prompt text): for each
+#     brain the prompt is built for that brain's cap and a brain
+#     whose cap the fitted prompt still exceeds is SKIPPED
+#     without a call — a payload known to exceed a cap is never
+#     sent. String prompts keep the exact pre-§68 behaviour.
+#   * The grounding ladder (REVIEW_FIT_GROUNDING_CAPS): a prompt
+#     builder first tries the full grounding, then smaller totals
+#     down to none; the first rung that fits the brain serves.
+#   * Segmentation (_review_segments): the citations and language
+#     roles review the article in deterministic segments cut at
+#     section → subsection → paragraph boundaries (inside a
+#     paragraph only when unavoidable), each segment carrying its
+#     section title. Per-role verdicts aggregate the segment
+#     issues in segment order, deduplicated; ANY segment without
+#     a verdict leaves the role without a verdict — it still
+#     BLOCKS (the no-verdict-blocks law is unchanged).
+#   * The supervisor judges an ANCHOR view (title + abstract +
+#     conclusion) instead of a middle-elided whole.
+#   * PRESERVATION (ChatGPT's criteria): before any reviewer call
+#     the layer persists a review RECORD (runs/review-<text_id>/)
+#     holding the full text, the chunk plan and, as they complete,
+#     each chunk's own output; statuses are honest —
+#     in_progress / completed / incomplete / locked_preserved /
+#     failed_preserved — and a review is never recorded complete
+#     unless every planned chunk has a stored output and no save
+#     failed. Re-running a review of the SAME text reuses the
+#     same record (same text_id, same chunk keys — no duplication,
+#     no deletion). Independently, main() preserves article
+#     drafts on disk (and DMs them) at every §33 stop, so a
+#     blocked or failed review can never lose the text again.
+# ----------------------------------------------------------------------
+
+REVIEW_INPUT_TOKEN_CAPS = dict(WRITING_INPUT_TOKEN_CAPS)
+REVIEW_INPUT_TOKEN_CAP_DEFAULT = WRITING_INPUT_TOKEN_CAP_DEFAULT
+REVIEW_FIT_GROUNDING_CAPS = (30000, 20000, 12000, 6000, 3000,
+                             1200, 0)
+REVIEW_SEGMENT_CHAR_CAP = 12000
+REVIEW_ANCHOR_CHAR_CAP = 6000
+
+# Terminal review-record statuses (§68): a verdict-bearing end
+# (completed / failed_preserved), a blocked end whose text is
+# preserved and locked (locked_preserved), and the honest
+# middle state when recoverability itself degraded (incomplete).
+REVIEW_RECORD_STATUSES = ("not_started", "in_progress",
+                          "completed", "incomplete",
+                          "locked_preserved", "failed_preserved")
+
+
+def _review_input_cap(brain):
+    """The §68 input-token budget for `brain` on review calls."""
+    return REVIEW_INPUT_TOKEN_CAPS.get(
+        brain, REVIEW_INPUT_TOKEN_CAP_DEFAULT)
+
+
+def _review_prompt_for_cap(build, counted, cap):
+    """Build a review prompt for one brain's cap: `build` maps a
+    grounding text to the full prompt; the LARGEST grounding rung
+    whose prompt estimates within `cap` wins. When no rung fits,
+    the smallest (empty-grounding) prompt is returned and the
+    caller's own estimate check skips the brain."""
+    best = None
+    for rung in REVIEW_FIT_GROUNDING_CAPS:
+        prompt = build(_review_grounding_text(counted,
+                                              total_cap=rung))
+        if _estimate_tokens(prompt) <= cap:
+            return prompt
+        best = prompt
+    return best
+
+
+def _review_segments(article, cap=REVIEW_SEGMENT_CHAR_CAP):
+    """Deterministic §68 segmentation of an article for review:
+    cut at section → subsection heading boundaries first, then at
+    paragraph boundaries, and inside a paragraph only when a
+    single paragraph exceeds the cap. Returns [{title, text}] in
+    document order; each segment's text keeps its heading lines,
+    and `title` names the section the segment starts in (context
+    for formulas, tables, references and conclusions, which stay
+    intact inside their own segments whenever they fit)."""
+    text = article or ""
+    if not text.strip():
+        return []
+    blocks = []
+    cur_title = "Article opening"
+    cur = []
+
+    def flush():
+        if cur:
+            blocks.append((cur_title, "\n".join(cur)))
+
+    for line in text.splitlines():
+        m = re.match(r"^#{1,3}\s+(.*)$", line)
+        if m:
+            flush()
+            cur = [line]
+            cur_title = m.group(1).strip()
+        else:
+            cur.append(line)
+    flush()
+    pieces = []
+    for title, block in blocks:
+        if len(block) <= cap:
+            pieces.append((title, block))
+            continue
+        buf = ""
+        for para in re.split(r"\n\s*\n", block):
+            if len(para) > cap:
+                if buf:
+                    pieces.append((title, buf))
+                    buf = ""
+                for i in range(0, len(para), cap):
+                    pieces.append((title, para[i:i + cap]))
+                continue
+            cand = (buf + "\n\n" + para) if buf else para
+            if len(cand) > cap:
+                pieces.append((title, buf))
+                buf = para
+            else:
+                buf = cand
+        if buf:
+            pieces.append((title, buf))
+    segments = []
+    cur_title = None
+    cur_sections = []
+    cur_text = ""
+    for title, piece in pieces:
+        if not piece.strip():
+            continue
+        if cur_text and len(cur_text) + 1 + len(piece) > cap:
+            segments.append({"title": cur_title,
+                             "sections": cur_sections,
+                             "text": cur_text})
+            cur_text = ""
+            cur_title = None
+            cur_sections = []
+        if not cur_text:
+            cur_title = title
+            cur_sections = [title]
+            cur_text = piece
+        else:
+            if title not in cur_sections:
+                cur_sections.append(title)
+            cur_text += "\n" + piece
+    if cur_text:
+        segments.append({"title": cur_title,
+                         "sections": cur_sections,
+                         "text": cur_text})
+    return segments
+
+
+def _review_anchor_text(article, cap=REVIEW_ANCHOR_CHAR_CAP):
+    """The supervisor's anchor view (§68): title + abstract +
+    conclusion — the parts whose mutual coherence the supervisor
+    judges — instead of a middle-elided whole article. Returns
+    None when no abstract or no conclusion section is found (the
+    caller then falls back to the capped article)."""
+    sections = _article_sections(article)
+    if not sections:
+        return None
+    title = next((s for s in sections if s["level"] == 1), None)
+    abstract = next(
+        (s for s in sections
+         if _slot_matches({"aliases": _ABSTRACT_ALIASES},
+                          s["heading"].lower())), None)
+    conclusion = None
+    for s in sections:
+        if _slot_matches({"aliases": _CONCLUSION_ALIASES},
+                         s["heading"].lower()):
+            conclusion = s
+    if abstract is None or conclusion is None:
+        return None
+    head = ""
+    if title is not None:
+        head = "# " + title["heading"] + "\n" + title["body"]
+    abs_text = ("## " + abstract["heading"] + "\n"
+                + abstract["body"])
+    conc_text = ("## " + conclusion["heading"] + "\n"
+                 + conclusion["body"])
+    anchor = "\n\n[...]\n\n".join(
+        p for p in (head, abs_text) if p)
+    room = cap - len(anchor) - len("\n\n[...]\n\n")
+    if room <= 0:
+        return anchor[:cap]
+    return anchor + "\n\n[...]\n\n" + conc_text[:room]
+
+
+def _issues_from_review_data(role, data, fix_stage,
+                             allow_fatal=True):
+    """Parse a reviewer reply's issue list into §33 issue dicts
+    (shared by the single-call and segmented paths). Items
+    without a stated problem are not issues and are dropped."""
+    items = data.get("issues") if isinstance(data, dict) else data
+    issues = []
+    for it in items or []:
+        if not isinstance(it, dict):
+            continue
+        problem = str(it.get("problem") or "").strip()
+        if not problem:
+            continue
+        sev = str(it.get("severity") or "fixable").lower()
+        if sev not in ("fatal", "fixable") or not allow_fatal:
+            sev = "fixable"
+        issues.append(_review_issue(
+            role, it.get("where", ""), problem, sev, fix_stage))
+    return issues
+
+
+def _record_review_chunk(context, entry):
+    """Append one chunk's output to the run's chunk collector
+    (context["_review_chunks"], drained into the persisted review
+    record by run_review_layer). Fail-soft by construction: with
+    no collector (legacy callers) this is a no-op."""
+    try:
+        chunks = (context or {}).get("_review_chunks")
+        if isinstance(chunks, list):
+            chunks.append(entry)
+    except Exception:
+        pass
+
+
+def _review_llm_issues_segmented(role, build_prompt, article,
+                                 counted, context, fix_stage,
+                                 allow_fatal=True,
+                                 use_grounding=True):
+    """§68 segmented reviewer pass: the role judges the article
+    segment by segment (each segment prompt fitted per brain via
+    the grounding ladder when `use_grounding`). Returns
+    (issues, available, meta) exactly like _review_llm_issues:
+    issues aggregate in segment order, deduplicated by the §33
+    issue key; ANY segment without a verdict makes the role
+    unavailable (it blocks — the law is unchanged), while the
+    completed segments' outputs stay in the review record."""
+    segments = _review_segments(article)
+    if not segments:
+        return [], False, {"brain": None, "attempts": 0}
+    all_issues = []
+    seen = set()
+    attempts = 0
+    brain = None
+    for idx, seg in enumerate(segments):
+        seg_text = f"[Section: {seg['title']}]\n{seg['text']}"
+        if use_grounding:
+            def prompt_for(cap, st=seg_text):
+                return _review_prompt_for_cap(
+                    lambda g: build_prompt(st, g), counted, cap)
+        else:
+            def prompt_for(cap, st=seg_text):
+                return build_prompt(st, "")
+        data, b, n = _review_call_json(role, prompt_for, context)
+        attempts += n
+        if data is None:
+            _record_review_chunk(context, {
+                "key": f"{role}:{idx}", "role": role, "index": idx,
+                "section": seg["title"], "available": False,
+                "brain": b, "attempts": n, "issues": []})
+            print(f"WARNING: review role {role}: segment "
+                  f"{idx + 1}/{len(segments)} ('{seg['title']}') "
+                  "got no verdict on any brain — this role blocks "
+                  "publication (§68)")
+            return [], False, {"brain": brain, "attempts": attempts}
+        seg_issues = _issues_from_review_data(
+            role, data, fix_stage, allow_fatal)
+        _record_review_chunk(context, {
+            "key": f"{role}:{idx}", "role": role, "index": idx,
+            "section": seg["title"], "available": True,
+            "brain": b, "attempts": n, "issues": seg_issues})
+        brain = b or brain
+        for issue in seg_issues:
+            k = _review_issue_key(issue)
+            if k not in seen:
+                seen.add(k)
+                all_issues.append(issue)
+    return all_issues, True, {"brain": brain, "attempts": attempts}
+
+
+def _review_chain_call(build_prompt, context, label):
+    """§68 fit-or-skip walk for the review layer's one NON-JSON
+    call (the §33 writer repair): brains in chain order, each
+    receiving the prompt built for its own cap (the grounding
+    ladder inside `build_prompt`); a brain whose cap the fitted
+    prompt still exceeds is SKIPPED without a call; failover on
+    error. Raises Fail when every keyed brain was skipped or
+    failed — the repair's existing fail-closed outcome."""
+    api_key = context["api_key"]
+    model = context["model"]
+    brains = _keyed_brains(api_key) or [None]
+    errors = []
+    for brain in brains:
+        cap = _review_input_cap(brain)
+        prompt = build_prompt(cap)
+        est = _estimate_tokens(prompt)
+        if est > cap:
+            print(f"review capacity (§68): {label} SKIPS brain "
+                  f"{brain} — prompt estimates {est} tokens > "
+                  f"cap {cap}")
+            errors.append(f"{brain}: payload over capacity "
+                          "(§68 skip)")
+            continue
+        try:
+            return call_llm(prompt, api_key, model,
+                            temperature=0.2, provider=brain)
+        except Exception as e:
+            print(f"review capacity (§68): {label} failed on "
+                  f"brain {brain} ({e}) — trying the next brain")
+            errors.append(f"{brain}: {e}")
+    raise Fail(f"review capacity (§68): {label} failed on every "
+               "keyed brain — " + "; ".join(errors))
+
+
+# --- §68 review record: preservation before, during, after -----------
+
+def _review_record_path(text_id):
+    return os.path.join(RUNS_DIR, f"review-{text_id}",
+                        "record.json")
+
+
+def new_review_record(article, context):
+    """Create (or REUSE, for a re-run of the same text) the §68
+    review record: the full text + the chunk plan, persisted
+    BEFORE any reviewer call. The text_id is a content hash, so
+    re-running the same review lands on the same record and the
+    same chunk keys — no duplication, no deletion."""
+    text_id = hashlib.sha256(
+        (article or "").encode("utf-8")).hexdigest()[:16]
+    now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    try:
+        with open(_review_record_path(text_id),
+                  encoding="utf-8") as f:
+            existing = json.load(f)
+    except Exception:
+        existing = None
+    if existing and existing.get("text_id") == text_id \
+            and existing.get("article") == article:
+        existing["status"] = "in_progress"
+        existing["updated_at"] = now
+        return existing
+    body, _refs = _review_split_refs(article)
+    plan = {"citations": len(_review_segments(body)),
+            "numbers": 1,
+            "claims": 1, "structure": 1,
+            "language": len(_review_segments(article)),
+            "novelty": 1 if (context or {}).get("prior_work")
+            else 0,
+            "supervisor": 1}
+    try:
+        factual = [s for s in _review_sentences(article)
+                   if _review_is_factual(s)]
+        plan["claims"] = max(
+            1, -(-len(factual) // _REVIEW_CLAIMS_BATCH))
+    except Exception:
+        pass
+    return {"version": 1, "kind": "§33 review record (§68 part 1)",
+            "text_id": text_id, "status": "in_progress",
+            "complete": False, "verdict": None,
+            "article": article,
+            "article_chars": len(article or ""),
+            "field": (context or {}).get("field", ""),
+            "topic": (context or {}).get("topic", ""),
+            "language": (context or {}).get("language", ""),
+            "article_type": (context or {}).get("article_type", ""),
+            "plan": plan, "chunks": {}, "save_failures": 0,
+            "created_at": now, "updated_at": now}
+
+
+def save_review_record(record):
+    """Persist the review record atomically (tmp + os.replace,
+    the §20.6 checkpoint pattern). Raises on failure — callers
+    use the soft wrapper."""
+    path = _review_record_path(record["text_id"])
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    record["updated_at"] = datetime.now(
+        timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    tmp = path + ".tmp"
+    with open(tmp, "w", encoding="utf-8") as f:
+        json.dump(record, f, ensure_ascii=False, indent=1)
+    os.replace(tmp, path)
+    return path
+
+
+def _save_review_record_soft(record):
+    """Fail-soft record save: a failed save never fails the run,
+    but it is COUNTED on the record — a review whose outputs
+    could not all be saved is never recorded 'complete'."""
+    try:
+        return save_review_record(record)
+    except Exception as e:
+        record["save_failures"] = \
+            int(record.get("save_failures") or 0) + 1
+        print(f"WARNING: review record save failed (ignored): "
+              f"{e}")
+        return None
+
+
+def _drain_review_chunks(context, record, rounds=0):
+    """Move the roles' collected chunk outputs into the record
+    (keyed role:index — a re-run overwrites its own chunks, never
+    duplicates) and persist. Runs on the layer's main thread
+    only, after the role futures complete."""
+    chunks = (context or {}).get("_review_chunks")
+    if not isinstance(chunks, list) or not chunks:
+        return
+    while chunks:
+        entry = chunks.pop(0)
+        entry.setdefault("round", rounds)
+        record["chunks"][entry["key"]] = entry
+    _save_review_record_soft(record)
+
+
+# --- §68 draft preservation: the text survives any review outcome ----
+
+def save_article_draft(article, field, topic, language, category,
+                       article_type, mode, stage):
+    """Persist a written article under its run signature
+    (runs/<signature>/article-draft-<stage>.md) BEFORE the stage
+    that could lose it. Fail-soft: returns the path, or None —
+    preservation must never fail the run it protects."""
+    try:
+        sig = run_signature(field, topic, language, category,
+                            article_type, mode)
+        d = os.path.join(RUNS_DIR, sig)
+        os.makedirs(d, exist_ok=True)
+        path = os.path.join(d, f"article-draft-{stage}.md")
+        tmp = path + ".tmp"
+        with open(tmp, "w", encoding="utf-8") as f:
+            f.write(article)
+        os.replace(tmp, path)
+        print(f"article draft preserved (§68): {path} "
+              f"(stage {stage}, {len(article)} chars)")
+        return path
+    except Exception as e:
+        print(f"WARNING: article draft preservation failed "
+              f"(ignored): {e}")
+        return None
+
+
+def send_article_draft_dm(token, chat_id, article, topic, stage):
+    """Fail-soft: DM the preserved draft document to the
+    requester (ARTICLE_CHAT_ID), so a blocked/failed review
+    leaves the full text in the requester's hands as well as on
+    disk. Never raises. Returns True if sent."""
+    try:
+        chat_id = (chat_id or "").strip()
+        if not chat_id or not token:
+            print("article draft DM skipped: no ARTICLE_CHAT_ID/"
+                  "token")
+            return False
+        safe = re.sub(r"[^A-Za-z0-9_-]+", "-", topic or "")[:40] \
+            .strip("-") or "article"
+        tg_send_document(
+            token, chat_id, f"article-draft-{safe}-{stage}.md",
+            article.encode("utf-8"),
+            caption=f"پیش‌نویس حفظ‌شدهٔ مقاله (§۶۸) — مرحله: "
+                    f"{stage} — {topic}")
+        print(f"article draft DM sent (§68, stage {stage})")
+        return True
+    except Exception as e:
+        print(f"WARNING: article draft DM failed (ignored): {e}")
+        return False
 
 
 def _review_parse_json(raw):
@@ -12115,14 +13165,31 @@ def _review_call_json(role, prompt, context, validate=None):
     attempts) when EVERY keyed brain failed to yield a parseable
     verdict — the role then has NO verdict and blocks publication,
     exactly the pre-§45 law, now reached only after all retries
-    and failovers. Calls run under REVIEW_MAX_TOKENS."""
+    and failovers. Calls run under REVIEW_MAX_TOKENS.
+    §68 part 1: `prompt` may be a CALLABLE (cap -> prompt text).
+    For each brain the prompt is then built for that brain's
+    review input cap and a brain whose cap the fitted prompt
+    still exceeds is SKIPPED without a call (never sent a payload
+    known to exceed its cap). A plain string keeps the exact
+    pre-§68 behaviour."""
     api_key = context["api_key"]
     model = context["model"]
     brains = _keyed_brains(api_key) or [None]
     attempts = 0
     for brain in brains:
+        if callable(prompt):
+            cap = _review_input_cap(brain)
+            fitted = prompt(cap)
+            est = _estimate_tokens(fitted)
+            if est > cap:
+                print(f"review capacity (§68): role {role} SKIPS "
+                      f"brain {brain} — fitted prompt estimates "
+                      f"{est} tokens > cap {cap}")
+                continue
+        else:
+            fitted = prompt
         for repair in (False, True):
-            p = prompt + (_REVIEW_REPAIR_SUFFIX if repair else "")
+            p = fitted + (_REVIEW_REPAIR_SUFFIX if repair else "")
             attempts += 1
             try:
                 raw = call_llm(p, api_key, model, temperature=0.1,
@@ -12161,20 +13228,17 @@ def _review_llm_issues(role, prompt, context, fix_stage,
     if data is None:
         print(f"WARNING: review role {role}: no verdict on any "
               "brain — this role blocks publication")
+        _record_review_chunk(context, {
+            "key": f"{role}:0", "role": role, "index": 0,
+            "section": "", "available": False, "brain": brain,
+            "attempts": attempts, "issues": []})
         return [], False, meta
-    items = data.get("issues") if isinstance(data, dict) else data
-    issues = []
-    for it in items or []:
-        if not isinstance(it, dict):
-            continue
-        problem = str(it.get("problem") or "").strip()
-        if not problem:
-            continue
-        sev = str(it.get("severity") or "fixable").lower()
-        if sev not in ("fatal", "fixable") or not allow_fatal:
-            sev = "fixable"
-        issues.append(_review_issue(
-            role, it.get("where", ""), problem, sev, fix_stage))
+    issues = _issues_from_review_data(role, data, fix_stage,
+                                      allow_fatal)
+    _record_review_chunk(context, {
+        "key": f"{role}:0", "role": role, "index": 0,
+        "section": "", "available": True, "brain": brain,
+        "attempts": attempts, "issues": issues})
     return issues, True, meta
 
 
@@ -12283,29 +13347,35 @@ def review_citations(article, counted, context):
     issues += _bibliography_completeness_issues(
         article, sources, context.get("prior_work"))
     body, _ = _review_split_refs(article)
-    prompt = (
+    head = (
         "You are the CITATIONS REVIEWER in a scholarly article "
         "review panel. You never rewrite text; you only flag "
         "problems.\n"
         f"Field: {context.get('field', '')}\n"
         f"Topic: {context.get('topic', '')}\n\n"
-        "For each in-text citation [n] in the ARTICLE, judge from "
-        "the GROUNDING (the only sources that exist) whether the "
-        "cited source's abstract/passages actually support the "
-        "claim made in the sentence carrying [n]. Flag every "
-        "citation whose source does not support its claim: "
-        "severity \"fatal\" when the unsupported claim is central "
-        "to the article, \"fixable\" otherwise. Do not flag style, "
-        "grammar or structure. If everything is supported, return "
-        "an empty list.\n"
+        "For each in-text citation [n] in the ARTICLE SEGMENT, "
+        "judge from the GROUNDING (the only sources that exist) "
+        "whether the cited source's abstract/passages actually "
+        "support the claim made in the sentence carrying [n]. "
+        "Flag every citation whose source does not support its "
+        "claim: severity \"fatal\" when the unsupported claim is "
+        "central to the article, \"fixable\" otherwise. Do not "
+        "flag style, grammar or structure. If everything is "
+        "supported, return an empty list.\n"
         'Reply with JSON only: {"issues": [{"where": "[n] + a '
         'short quote of the claim", "problem": "...", '
         '"severity": "fatal|fixable"}]}\n\n'
-        "GROUNDING (the counted sources, numbered as cited):\n"
-        + _review_grounding_text(counted)
-        + "\n\nARTICLE:\n" + _review_article_capped(body))
-    llm_issues, available, meta = _review_llm_issues(
-        "citations", prompt, context, "citations")
+        "GROUNDING (the counted sources, numbered as cited):\n")
+
+    def build_prompt(article_text, grounding):
+        return head + grounding + "\n\nARTICLE SEGMENT:\n" \
+            + article_text
+
+    # §68 part 1: the body is reviewed in fitted segments, never
+    # as one oversized (and middle-elided) payload.
+    llm_issues, available, meta = _review_llm_issues_segmented(
+        "citations", build_prompt, body, counted, context,
+        "citations")
     return _review_verdict("citations", issues + llm_issues,
                            available, brain=meta["brain"],
                            attempts=meta["attempts"])
@@ -12453,9 +13523,17 @@ def review_numbers(article, counted, context):
         'quote", "problem": "...", "severity": '
         '"fatal|fixable"}]}\n\n'
         "NUMERIC LINES:\n" + "\n".join(numeric_lines[:60])
-        + "\n\nGROUNDING:\n" + _review_grounding_text(counted))
+        + "\n\nGROUNDING:\n")
+
+    # §68 part 1: the prompt is built per brain along the
+    # grounding ladder — a small brain gets a smaller grounding
+    # instead of an error.
+    def prompt_for(cap):
+        return _review_prompt_for_cap(
+            lambda g: prompt + g, counted, cap)
+
     llm_issues, available, meta = _review_llm_issues(
-        "numbers", prompt, context, "numbers")
+        "numbers", prompt_for, context, "numbers")
     return _review_verdict("numbers", issues + llm_issues, available,
                            brain=meta["brain"],
                            attempts=meta["attempts"])
@@ -12543,16 +13621,17 @@ def review_claims(article, counted, context):
                  if _review_is_factual(s)]
     if not sentences:
         return _review_verdict("claims", [], True)
-    grounding = _review_grounding_text(counted)
     issues = []
     unevidenced = []
     brain = None
     attempts = 0
     for start in range(0, len(sentences), _REVIEW_CLAIMS_BATCH):
         batch = sentences[start:start + _REVIEW_CLAIMS_BATCH]
+        batch_index = start // _REVIEW_CLAIMS_BATCH
+        issues_before = len(issues)
         listing = "\n".join(f"SENTENCE {j}: {s[:400]}"
                             for j, s in enumerate(batch, 1))
-        prompt = (
+        head = (
             "You are the CLAIMS REVIEWER in a scholarly article "
             "review panel. You never rewrite text; you only judge "
             "support.\n"
@@ -12579,12 +13658,27 @@ def review_claims(article, counted, context):
             "as unevidenced and does not count.\n"
             'Reply with JSON only: {"verdicts": [{"i": 1, '
             '"supported": true, "central": false}]}\n\n'
-            "GROUNDING:\n" + grounding + "\n\n" + listing)
+            "GROUNDING:\n")
+
+        # §68 part 1: each batch's prompt is fitted per brain
+        # along the grounding ladder.
+        def prompt_for(cap, _head=head, _listing=listing):
+            return _review_prompt_for_cap(
+                lambda g: _head + g + "\n\n" + _listing,
+                counted, cap)
+
         data, b, n = _review_call_json(
-            "claims", prompt, context,
+            "claims", prompt_for, context,
             validate=lambda d: _claims_batch_judged(d, len(batch)))
         attempts += n
         if data is None:
+            _record_review_chunk(context, {
+                "key": f"claims:{batch_index}", "role": "claims",
+                "index": batch_index,
+                "section": f"sentences {start + 1}–"
+                           f"{start + len(batch)}",
+                "available": False, "brain": b, "attempts": n,
+                "issues": []})
             print("WARNING: review role claims: no complete "
                   "verdict on any brain — this role blocks "
                   "publication")
@@ -12621,6 +13715,13 @@ def review_claims(article, counted, context):
                 flag["quote"] = quote[:200]
                 flag["evidence"] = evidence[:200]
                 unevidenced.append(flag)
+        _record_review_chunk(context, {
+            "key": f"claims:{batch_index}", "role": "claims",
+            "index": batch_index,
+            "section": f"sentences {start + 1}–"
+                       f"{start + len(batch)}",
+            "available": True, "brain": b, "attempts": n,
+            "issues": issues[issues_before:]})
     return _review_verdict("claims", issues, True, brain=brain,
                            attempts=attempts, unevidenced=unevidenced)
 
@@ -12753,8 +13854,27 @@ def review_structure(article, counted, context):
         "OUTLINE:\n" + "\n".join(f"- {h}" for h in heads)
         + "\n\nOPENING OF THE ARTICLE:\n"
         + (article or "")[:2500])
+    # §71: when the run carries a structure template, its
+    # deterministic conformance errors join this role as FATAL
+    # issues (a missing core section is not a wording problem)
+    # and the LLM pass judges order/logic against the template's
+    # core. Legacy contexts (no template) keep the exact
+    # previous behaviour of this role.
+    template = context.get("structure_template")
+    if template:
+        validation = validate_article_structure(article, template)
+        for err in validation["errors"]:
+            issues.append(_review_issue(
+                "structure", err["slot"],
+                f"§71 template: {err['problem']}",
+                "fatal", "structure"))
+        prompt += STRUCTURE_TEMPLATE_ROLE_EXTRA.format(
+            article_type=template["article_type"],
+            slot_list=", ".join(s["label"]
+                                for s in template["slots"]))
     llm_issues, available, meta = _review_llm_issues(
-        "structure", prompt, context, "structure", allow_fatal=False)
+        "structure", lambda cap, p=prompt: p, context, "structure",
+        allow_fatal=False)
     return _review_verdict("structure", issues + llm_issues,
                            available, brain=meta["brain"],
                            attempts=meta["attempts"])
@@ -12803,7 +13923,7 @@ def review_language(article, counted, context):
                  "term exists and is used elsewhere, and any "
                  "right-to-left ordering breakage around numbers "
                  "or Latin terms.")
-    prompt = (
+    head = (
         "You are the LANGUAGE REVIEWER in a scholarly article "
         "review panel. You never rewrite text; you only flag "
         "problems.\n"
@@ -12815,9 +13935,16 @@ def review_language(article, counted, context):
         + extra + " Do not flag style preferences.\n"
         'Reply with JSON only: {"issues": [{"where": "short '
         'quote", "problem": "...", "severity": "fixable"}]}\n\n'
-        "ARTICLE:\n" + _review_article_capped(article))
-    llm_issues, available, meta = _review_llm_issues(
-        "language", prompt, context, "language", allow_fatal=False)
+        "ARTICLE SEGMENT:\n")
+
+    def build_prompt(article_text, _grounding):
+        return head + article_text
+
+    # §68 part 1: the whole article is reviewed in fitted
+    # segments — no middle is ever elided from this role again.
+    llm_issues, available, meta = _review_llm_issues_segmented(
+        "language", build_prompt, article, counted, context,
+        "language", allow_fatal=False, use_grounding=False)
     return _review_verdict("language", issues + llm_issues,
                            available, brain=meta["brain"],
                            attempts=meta["attempts"])
@@ -12926,11 +14053,16 @@ def review_novelty(article, counted, context):
         'quote or section", "problem": "...", "severity": '
         '"fatal|fixable"}]}\n\n'
         "PRIOR WORK:\n" + "\n".join(listing) + "\n\n"
-        "GROUNDING (the counted sources):\n"
-        + _review_grounding_text(counted)
-        + "\n\nARTICLE:\n" + _review_article_capped(article))
+        "GROUNDING (the counted sources):\n")
+    tail = "\n\nARTICLE:\n" + _review_article_capped(article)
+
+    # §68 part 1: fitted per brain along the grounding ladder.
+    def prompt_for(cap):
+        return _review_prompt_for_cap(
+            lambda g: prompt + g + tail, counted, cap)
+
     llm_issues, available, meta = _review_llm_issues(
-        "novelty", prompt, context, "novelty")
+        "novelty", prompt_for, context, "novelty")
     return _review_verdict("novelty", issues + llm_issues,
                            available, brain=meta["brain"],
                            attempts=meta["attempts"])
@@ -12943,6 +14075,11 @@ def _review_coherence(article, counted, context):
     WHOLE — the same number, term or citation must mean the same
     thing in the abstract, the body and the conclusion, and every
     abstract claim must be a claim the body actually makes."""
+    # §68 part 1: judge the ANCHOR view (title + abstract +
+    # conclusion) instead of a middle-elided whole; fall back to
+    # the capped article when no anchor can be extracted.
+    view = _review_anchor_text(article) \
+        or _review_article_capped(article)
     prompt = (
         "You are the SUPERVISOR of a scholarly article review "
         "panel, checking the coherence of the WHOLE article. You "
@@ -12965,9 +14102,9 @@ def _review_coherence(article, counted, context):
         'Reply with JSON only: {"issues": [{"where": "sections '
         'involved", "problem": "...", "severity": '
         '"fatal|fixable"}]}\n\n'
-        "ARTICLE:\n" + _review_article_capped(article))
+        "ARTICLE:\n" + view)
     issues, available, meta = _review_llm_issues(
-        "supervisor", prompt, context, "writing")
+        "supervisor", lambda cap, p=prompt: p, context, "writing")
     return _review_verdict("supervisor", issues, available,
                            brain=meta["brain"],
                            attempts=meta["attempts"])
@@ -13019,12 +14156,19 @@ def _repair_article(article, issues, counted, context):
         "- Reply with the COMPLETE corrected article only — no "
         "commentary, no code fences.\n\n"
         "FLAGGED PROBLEMS:\n" + listing + "\n\n"
-        "GROUNDING (the counted sources):\n"
-        + _review_grounding_text(counted)
-        + "\n\nARTICLE:\n" + article)
+        "GROUNDING (the counted sources):\n")
+    tail = "\n\nARTICLE:\n" + article
+
+    # §68 part 1: the repair call walks the brains fit-or-skip
+    # (the article itself is never trimmed — only the grounding
+    # ladder shrinks).
+    def build_prompt(cap):
+        return _review_prompt_for_cap(
+            lambda g: prompt + g + tail, counted, cap)
+
     try:
-        out = call_llm(prompt, context["api_key"], context["model"],
-                       temperature=0.2)
+        out = _review_chain_call(build_prompt, context,
+                                 "review repair (§33)")
     except Exception as e:
         print(f"WARNING: review repair round failed ({e})")
         return None
@@ -13057,6 +14201,41 @@ def run_review_layer(article, counted, context):
     roles + the supervisor); fixable issues surviving the last
     round FAIL. Returns the result dict consumed by main(), the
     funnel (§16.3) and the §33 review report."""
+    # §68 part 1: preservation BEFORE any reviewer call — the
+    # review record (full text + chunk plan) is persisted first,
+    # and each chunk's output is drained into it as the roles
+    # complete, so the text and the partial review survive ANY
+    # outcome of this layer.
+    record = new_review_record(article, context)
+    context["_review_chunks"] = []
+    _save_review_record_soft(record)
+
+    def _finish(status, verdict):
+        record["status"] = status
+        record["verdict"] = verdict
+        planned = sum((record.get("plan") or {}).values())
+        done = len(record.get("chunks") or {})
+        record["chunks_planned"] = planned
+        record["chunks_completed"] = done
+        record["complete"] = bool(
+            status in ("completed", "failed_preserved")
+            and done >= planned
+            and not record.get("save_failures"))
+        if status in ("completed", "failed_preserved") \
+                and not record["complete"]:
+            # A verdict was reached but recoverability degraded
+            # (a chunk output is missing or a save failed): the
+            # review is NOT recorded complete (§68).
+            record["status"] = "incomplete"
+        path = _save_review_record_soft(record)
+        print(f"review record (§68): {record['status']} — "
+              f"{done}/{planned} chunks stored, text_id "
+              f"{record['text_id']}")
+        return {"text_id": record["text_id"], "path": path,
+                "status": record["status"],
+                "chunks_planned": planned,
+                "chunks_completed": done}
+
     current = article
     rounds = 0
     found = {}
@@ -13076,6 +14255,7 @@ def run_review_layer(article, counted, context):
         last.update(verdicts)
         last["supervisor"] = _review_coherence(current, counted,
                                                context)
+        _drain_review_chunks(context, record, rounds)
         all_issues = [i for v in last.values()
                       for i in v["issues"]]
         for i in all_issues:
@@ -13111,22 +14291,29 @@ def run_review_layer(article, counted, context):
             print("review layer (§33): BLOCKED — no verdict from: "
                   + ", ".join(unavailable))
             return dict(base, ok=False, verdict="blocked",
-                        blocked_roles=unavailable)
+                        blocked_roles=unavailable,
+                        review_record=_finish("locked_preserved",
+                                              "blocked"))
         fatals = [i for i in all_issues
                   if i["severity"] == "fatal"]
         if fatals:
             print(f"review layer (§33): FAIL — {len(fatals)} "
                   "fatal issue(s)")
-            return dict(base, ok=False, verdict="fail")
+            return dict(base, ok=False, verdict="fail",
+                        review_record=_finish("failed_preserved",
+                                              "fail"))
         if not all_issues:
             print(f"review layer (§33): PASS after {rounds} repair "
                   f"round(s); {len(order)} issue(s) found, "
                   f"{len(fixed_keys)} fixed")
-            return dict(base, ok=True, verdict="pass")
+            return dict(base, ok=True, verdict="pass",
+                        review_record=_finish("completed", "pass"))
         if rounds >= REVIEW_MAX_REPAIR_ROUNDS:
             print("review layer (§33): FAIL — fixable issues "
                   "remain after the maximum repair rounds")
-            return dict(base, ok=False, verdict="fail")
+            return dict(base, ok=False, verdict="fail",
+                        review_record=_finish("failed_preserved",
+                                              "fail"))
         rounds += 1
         print(f"review layer (§33): repair round {rounds} for "
               f"{len(all_issues)} fixable issue(s)")
@@ -13134,7 +14321,9 @@ def run_review_layer(article, counted, context):
                                    context)
         if repaired is None:
             return dict(base, ok=False, verdict="fail",
-                        rounds=rounds, repair_failed=True)
+                        rounds=rounds, repair_failed=True,
+                        review_record=_finish("failed_preserved",
+                                              "fail"))
         current = repaired
         roles_filter = {i["role"] for i in all_issues
                         if i["role"] in REVIEW_ROLES}
@@ -14046,7 +15235,13 @@ def main():
         print(f"youtube support (§20): failed ({e}) — continuing "
               "without")
     write_sources = counted + videos + content_pool + bib_only
+    # §71: the article-structure template — article type fixed
+    # first, size follows the type; the writer's guide carries
+    # the fixed core, and the same template later gates the §33
+    # structure reviewer via the review context.
+    template = article_template_for(article_type)
     guide = TYPE_GUIDE[article_type]
+    guide += render_structure_guide(template, language)
     if novelty["status"] == "partial":
         guide += (
             "\nNOVELTY BOUNDARY (§70): part of this claim is "
@@ -14116,6 +15311,12 @@ def main():
         novelty_block_text += "\n\n" + matrix_text
     article = insert_novelty_block(article, novelty_block_text)
 
+    # §68 part 1: the complete written text is preserved on disk
+    # BEFORE the review layer runs — from here on, no review
+    # outcome (blocked, failed, crashed) can lose it.
+    save_article_draft(article, field, topic, language, category,
+                       article_type, mode, "pre-review")
+
     # §33: the multi-robot review layer — six component reviewers
     # + the coherence supervisor, AFTER the complete draft and
     # BEFORE channel delivery. The publish decision is
@@ -14132,11 +15333,21 @@ def main():
                   "novelty": novelty,
                   "novelty_block": novelty_block_text,
                   "word_target": TYPE_WORD_TARGETS.get(article_type),
+                  "category": category, "mode": mode,
+                  "structure_template": template,
                   "api_key": api_key, "model": model}
     review = run_review_layer(article, counted, review_ctx)
     if not review["ok"]:
         print(f"review layer (§33): STOP — verdict "
               f"{review['verdict']}; nothing is published")
+        # §68 part 1: the reviewed text is preserved (disk +
+        # requester DM) before the run fails closed.
+        draft_path = save_article_draft(
+            review["article"], field, topic, language, category,
+            article_type, mode, "review-blocked")
+        send_article_draft_dm(
+            tg_token, os.environ.get("ARTICLE_CHAT_ID", ""),
+            review["article"], topic, "review-blocked")
         send_review_report_dm(
             tg_token, os.environ.get("ARTICLE_CHAT_ID", ""), topic,
             review)
@@ -14148,7 +15359,8 @@ def main():
                    f"({review['verdict']}): "
                    f"{review['issues_found']} issue(s) found, "
                    f"{review['issues_fixed']} fixed, "
-                   f"{review['rounds']} repair round(s)")
+                   f"{review['rounds']} repair round(s); "
+                   f"article draft preserved at {draft_path}")
     article = review["article"]
     print("review layer (§33): PASS — article cleared for delivery")
 
@@ -14173,6 +15385,13 @@ def main():
         print(f"timing: unification (§44) "
               f"{time.monotonic() - _t1:.1f}s")
         if unified is None:
+            # §68 part 1: preserve the pass-1 reviewed text.
+            save_article_draft(
+                article, field, topic, language, category,
+                article_type, mode, "unification-failed")
+            send_article_draft_dm(
+                tg_token, os.environ.get("ARTICLE_CHAT_ID", ""),
+                article, topic, "unification-failed")
             send_review_report_dm(
                 tg_token, os.environ.get("ARTICLE_CHAT_ID", ""),
                 topic, review)
@@ -14183,8 +15402,11 @@ def main():
                            adaptation=adaptation, review=review)
             raise Fail("unification pass (§44) produced no usable "
                        "text — failing closed; nothing is "
-                       "published")
+                       "published; article draft preserved (§68)")
         article = unified
+        save_article_draft(article, field, topic, language,
+                           category, article_type, mode,
+                           "post-unification")
         print("--- §33 review layer (§44 second pass, on the "
               "unified text): starting ---")
         review = run_review_layer(article, counted, review_ctx)
@@ -14192,6 +15414,13 @@ def main():
             print(f"review layer (§33, §44 second pass): STOP — "
                   f"verdict {review['verdict']}; nothing is "
                   "published")
+            # §68 part 1: preserve the unified reviewed text.
+            draft_path = save_article_draft(
+                review["article"], field, topic, language,
+                category, article_type, mode, "review2-blocked")
+            send_article_draft_dm(
+                tg_token, os.environ.get("ARTICLE_CHAT_ID", ""),
+                review["article"], topic, "review2-blocked")
             send_review_report_dm(
                 tg_token, os.environ.get("ARTICLE_CHAT_ID", ""),
                 topic, review)
@@ -14204,7 +15433,8 @@ def main():
                        f"({review['verdict']}): "
                        f"{review['issues_found']} issue(s) found, "
                        f"{review['issues_fixed']} fixed, "
-                       f"{review['rounds']} repair round(s)")
+                       f"{review['rounds']} repair round(s); "
+                       f"article draft preserved at {draft_path}")
         article = review["article"]
         review["first_pass"] = first_pass
         review["unification"] = True
