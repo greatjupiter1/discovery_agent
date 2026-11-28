@@ -610,16 +610,46 @@ def test_main_double_review():
           "(§44)",
           bool(final.get("first_pass"))
           and final.get("unification") is True, str(final.keys()))
+    # §68 part 1 note: on a §33/§44 failure the engine now also
+    # DMs the PRESERVED DRAFT to the REQUESTER (ARTICLE_CHAT_ID
+    # "42") — preservation, not publication. The invariant below
+    # is therefore asserted on the CHANNEL ("-1001") exactly:
+    # nothing may be published there on these paths.
+    def channel_sends(sent):
+        out = []
+        for m, p in sent:
+            if m == "document":
+                if str(p[1]) == "-1001":
+                    out.append((m, p))
+            elif isinstance(p, dict) \
+                    and str(p.get("chat_id")) == "-1001":
+                out.append((m, p))
+        return out
+
+    def draft_dms(sent):
+        return [(m, p) for m, p in sent if m == "document"
+                and str(p[1]) == "42"]
+
     rc2, calls2, sent2, _, _ = run_main(
         [PASS_REVIEW, FAIL_REVIEW], UNIFIED_TEXT)
     check("(h6) a failed SECOND review publishes nothing",
-          rc2 == -1 and len(calls2) == 2 and sent2 == [],
+          rc2 == -1 and len(calls2) == 2
+          and channel_sends(sent2) == [],
           f"rc={rc2} calls={len(calls2)} sent={len(sent2)}")
+    check("(h6b) §68: the blocked text is preserved to the "
+          "requester DM, not lost",
+          len(draft_dms(sent2)) == 1,
+          f"draft_dms={len(draft_dms(sent2))}")
     rc3, calls3, sent3, _, _ = run_main([PASS_REVIEW], None)
     check("(h7) a failed unification publishes nothing and no "
           "second review runs",
-          rc3 == -1 and len(calls3) == 1 and sent3 == [],
+          rc3 == -1 and len(calls3) == 1
+          and channel_sends(sent3) == [],
           f"rc={rc3} calls={len(calls3)} sent={len(sent3)}")
+    check("(h7b) §68: the pass-1 text is preserved to the "
+          "requester DM when unification fails",
+          len(draft_dms(sent3)) == 1,
+          f"draft_dms={len(draft_dms(sent3))}")
 
 
 # ----------------------------------------------------------------------
